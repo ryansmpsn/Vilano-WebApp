@@ -1,0 +1,4 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow: / 
+#For now disallow. If we want to allow robots on, we can comment that line out
