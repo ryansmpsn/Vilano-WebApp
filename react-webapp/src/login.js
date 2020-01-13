@@ -22,6 +22,13 @@ export default class Login extends React.Component {
     .catch(err => {
       console.log(err)
     });
+    await Send.get('/hello')
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err)
+    });
   }
 
   render() {

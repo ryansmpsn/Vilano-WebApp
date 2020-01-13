@@ -5,8 +5,8 @@ const Send = new class send extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      testURL: 'http://localhost:3888',
-      liveURL: 'https://pfsi-centcom.appspot.com',
+      testURL: 'http://VMS-MOBILE-243.POSTALFLEET.local:8080',
+      liveURL: 'https://centcom-dot-pfsi-centcom.appspot.com',
       URL: '',
       SessionID: '',
     };
@@ -21,6 +21,7 @@ const Send = new class send extends React.Component {
   update_auth = () => {
     this.state.SessionID = sessionStorage.getItem('SessionID');
     axios.defaults.headers.common['SessionID'] = this.state.SessionID;
+    axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
   }
 
   parse_json = (data) => {
