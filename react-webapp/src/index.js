@@ -1,16 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
-import Login from './login';
+/*import Login from './login-proofconcept';
 import Car from './car';
 import LoggedINTest from './loggedin_test';
 import Footer from './Footer';
 import Load from './load_page';
-import Send from './send';
+import Send from './send';*/
 //import GetTest from './GetTest';
 import * as serviceWorker from './serviceWorker';
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import App  from './App';
 
+
+ReactDOM.render(
+    <Router>
+      <App />
+    </Router>,
+    document.getElementById('root')
+  );
 
 
 /*
@@ -25,12 +34,12 @@ Send.get('/Loggedin')
 }).catch(err =>{console.log(err)});*/
 
  
-Load.first_load();
+//Load.first_load();
 
 
 
-ReactDOM.render(<Login />, document.getElementById('RightNav'));
-ReactDOM.render(<Footer />, document.getElementById('Footer'));
+//ReactDOM.render(<Login />, document.getElementById('RightNav'));
+//ReactDOM.render(<Footer />, document.getElementById('Footer'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

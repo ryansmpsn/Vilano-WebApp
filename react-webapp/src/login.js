@@ -1,5 +1,5 @@
 import React from 'react';
-import Send from './send';
+import Send from './components/send';
 
 export default class Login extends React.Component {
   state = {
@@ -18,13 +18,6 @@ export default class Login extends React.Component {
     .then(res => {
       console.log(res);
       sessionStorage.setItem('SessionID', res.data.SessionID);
-    })
-    .catch(err => {
-      console.log(err)
-    });
-    await Send.get('/hello')
-    .then(res => {
-      console.log(res);
     })
     .catch(err => {
       console.log(err)

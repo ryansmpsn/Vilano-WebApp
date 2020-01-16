@@ -18,6 +18,7 @@ const Send = new class send extends React.Component {
 
   }
 
+
   update_auth = () => {
     this.state.SessionID = sessionStorage.getItem('SessionID');
     axios.defaults.headers.common['SessionID'] = this.state.SessionID;
