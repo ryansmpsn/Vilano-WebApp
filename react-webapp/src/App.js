@@ -45,7 +45,7 @@ function App(props) {
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">Velono Command</Link>
+            <Link to="/">Vilano Command</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
