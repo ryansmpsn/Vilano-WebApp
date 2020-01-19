@@ -25,9 +25,9 @@ function ContractList(props) {
         <div className="contract">
             
                 <PanelGroup accordion>
-                    {contracts.filter(c => c.contract_id == idFilter || idFilter == "").map(c => 
+                    {contracts.map((c, index) => 
                         //<ListGroupItem>
-                        <Contract appProps={props} contract={c}/>
+                        <Contract appProps={props} contract={c} eventKeyIndex={index}/>
                         //</ListGroupItem>
                     )}
                 </PanelGroup>
