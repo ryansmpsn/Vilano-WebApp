@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs, Tab, ListGroup, ListGroupItem, Panel, ButtonGroup, Button, Table} from "react-bootstrap";
+import { Tabs, Tab, ListGroup, ListGroupItem, Panel, ButtonGroup, Button, Table, tbody, thead} from "react-bootstrap";
 //import "./Contract.css";
                         
 
@@ -30,8 +30,42 @@ function Contract(props) {
                             {props.contract.contract_tabs.map((c, index) =>
                             <Tab eventKey={index} title={c.Name}>
                                 <ListGroup>
-                                    {c.Information.map(i => 
-                                        <ListGroupItem header={i[0] + ": " + i[1]} />
+                                    {c.Information.map(i => {
+                                        if (i[2] === 'undefined') {
+                                            return (<ListGroupItem header={i[0] + ": " + i[1]} />)
+                                        } else {
+                                            console.log("WAT!!!");
+                                            return (
+                                                <ListGroupItem header={i[0]}>
+                                                    <Panel>
+                                                        <Panel.Heading>
+                                                            <Panel.Title toggle>
+                                                                {i[0]}
+                                                            </Panel.Title>
+                                                        </Panel.Heading>
+                                                        <Panel.Body collapsible>
+                                                            <Table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        {i[1].map(h => { return (<th>{h}</th>)})}
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {i[2].map(b => {
+                                                                        return (
+                                                                        <td>
+                                                                            {b.map(bc => <tr>{bc}</tr>)}    
+                                                                        </td>
+                                                                        );
+                                                                    })}
+                                                                </tbody>
+                                                            </Table>
+                                                        </Panel.Body>
+                                                    </Panel>
+                                                </ListGroupItem>
+                                                );
+                                        }
+                                    }
                                     )}
                                 </ListGroup>
                             </Tab>
