@@ -12,13 +12,20 @@ function ContractList(props) {
     }, contracts);
 
     function onLoad() {
-        Send.post('/ViewContracts', '')
+        /*Send.post('/ViewContracts', '')
         .then(res => {
             console.log(res);
             setContracts(res.data.data);
         }).catch(err => {
             console.log(err);
-        })
+        });
+        */
+        Send.post("/testDB", '')
+        .then(res => {
+             console.log(res);
+        }).catch(err => {
+        console.log(err);
+        });
     }
 
     return (

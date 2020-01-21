@@ -35,6 +35,8 @@ export default function Login(props) {
         setIsLoading(false);
         props.userHasAuthenticated(false);
     });
+
+    
   }
 
   return (

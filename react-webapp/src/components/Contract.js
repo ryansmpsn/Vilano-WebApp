@@ -1,5 +1,6 @@
 import React from "react";
 import { Tabs, Tab, ListGroup, ListGroupItem, Panel, ButtonGroup, Button, Table, tbody, thead, PanelGroup} from "react-bootstrap";
+import ContractTable from "./ContractTable";
 //import "./Contract.css";
                         
 
@@ -73,44 +74,7 @@ function Contract(props) {
                                                                     </Panel.Title>
                                                                 </Panel.Heading>
                                                                 <Panel.Body collapsible>
-                                                                    <Table>
-                                                                        <thead>
-                                                                            <tr>
-                                                                                {i[1].map(h => { return (<th>{h}</th>)})}
-                                                                            </tr>
-                                                                        </thead>  
-                                                                                                                                             
-                                                                        <tbody>
-                                                                            {i[2].map(b => {
-                                                                                return (
-                                                                                        <>
-                                                                                        <tr>{b.map(bc =><td>{bc}</td>)}
-                                                                                        
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td colSpan={b.length}>
-                                                                                            <Panel>
-                                                                                                <Panel.Heading>
-                                                                                                    
-                                                                                                    <Panel.Toggle>
-                                                                                                        ->
-                                                                                                    </Panel.Toggle>
-                                                                                                    
-                                                                                                </Panel.Heading>
-                                                                                                <Panel.Collapse>
-                                                                                                    <Panel.Body collapsible>
-                                                                                                        
-                                                                                                    </Panel.Body>
-                                                                                                </Panel.Collapse>
-                                                                                            </Panel>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        </>
-                                                                                    );
-                                                                            })}
-                                                                        </tbody>
-                                                                    </Table> 
-                                                                    
+                                                                    <ContractTable info={i} />
                                                                 </Panel.Body>
                                                             </Panel>
                                                         
@@ -132,3 +96,218 @@ function Contract(props) {
 }
 
 export default Contract;
+
+
+/*
+{
+  "data": [
+    {
+      "contract_header": [
+        [
+          "HCR Number",
+          "1S3L5"
+        ],
+        [
+          "Company Name",
+          "PFS"
+        ],
+        [
+          "Administration Office",
+          "Address At Address Rd"
+        ]
+      ],
+      "contract_tabs": [
+        {
+          "Name": "Gas Miles and Maintenance",
+          "Information": [
+            [
+              "Second Table same info different columnnames",
+              [
+                "PIN",
+                "Animaniac Character",
+                "Fake PhoneNumber"
+              ],
+              [
+                [
+                  1245,
+                  "Yacko",
+                  23409583240
+                ],
+                [
+                  2344,
+                  "Wacko",
+                  242553240
+                ],
+                [
+                  5353,
+                  "Dot",
+                  23409583240
+                ]
+              ]
+            ],
+            [
+              "Gas",
+              23
+            ],
+            [
+              "Miles",
+              32
+            ],
+            [
+              "A Table",
+              [
+                "ID",
+                "Name",
+                "Some Number"
+              ],
+              [
+                [
+                  1245,
+                  "Yacko",
+                  23409583240
+                ],
+                [
+                  2344,
+                  "Wacko",
+                  242553240
+                ],
+                [
+                  5353,
+                  "Dot",
+                  23409583240
+                ]
+              ]
+            ],
+            [
+              "Maintenance",
+              5
+            ]
+          ]
+        },
+        {
+          "Name": "Income, Start, and End",
+          "Information": [
+            [
+              "Income",
+              119000
+            ],
+            [
+              "Start",
+              "1/2/2020"
+            ],
+            [
+              "End",
+              "11/30/2020"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "contract_tabs": [
+        {
+          "Name": "Gas Miles and Maintenance",
+          "Information": [
+            [
+              "Gas",
+              23
+            ],
+            [
+              "Miles",
+              32
+            ],
+            [
+              "Maintenance",
+              5
+            ]
+          ]
+        },
+        {
+          "Name": "Income, Start, and End",
+          "Information": [
+            [
+              "Income",
+              19000
+            ],
+            [
+              "Start",
+              "1/2/2020"
+            ],
+            [
+              "End",
+              "1/30/2020"
+            ]
+          ]
+        }
+      ],
+      "contract_header": [
+        [
+          "HCR Number",
+          "4P2F3"
+        ],
+        [
+          "Company Name",
+          "PFS"
+        ],
+        [
+          "Administration Office",
+          "Address At Address Rd"
+        ]
+      ]
+    },
+    {
+      "contract_tabs": [
+        {
+          "Name": "Gas Miles and Maintenance",
+          "Information": [
+            [
+              "Gas",
+              230
+            ],
+            [
+              "Miles",
+              333
+            ],
+            [
+              "Maintenance",
+              52
+            ]
+          ]
+        },
+        {
+          "Name": "Income, Start, and End",
+          "Information": [
+            [
+              "Income",
+              1219000
+            ],
+            [
+              "Start",
+              "1/2/2020"
+            ],
+            [
+              "End",
+              "12/20/2020"
+            ]
+          ]
+        }
+      ],
+      "contract_header": [
+        [
+          "ID Number",
+          "2S5R2"
+        ],
+        [
+          "Company Name",
+          "Vilano"
+        ],
+        [
+          "Administration Office",
+          "Address At Addresses Rd"
+        ]
+      ]
+    }
+  ]
+}      
+
+*/
