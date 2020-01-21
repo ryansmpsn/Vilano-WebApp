@@ -1,0 +1,9 @@
+dispatch:
+- url: "my.vilanomanagementsvs.com/"
+  service: webapp
+
+- url: "api.vilanomanagementsvs.com/"
+  service: centcom
+
+- url: "vilanomanagementsvs.com/"
+  service: default
