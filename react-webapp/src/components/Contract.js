@@ -1,101 +1,62 @@
-import React from "react";
-import { Tabs, Tab, ListGroup, ListGroupItem, Panel, ButtonGroup, Button, Table, tbody, thead, PanelGroup} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import { Tabs, Tab, ListGroup, ListGroupItem, Panel, ButtonGroup, Button, Table, tbody, thead, PanelGroup, Col, Well, Overlay, Tooltip, Badge, Label} from "react-bootstrap";
 import ContractTable from "./ContractTable";
+import EditModal from "./EditModal";
 //import "./Contract.css";
                         
 
 
 function Contract(props) {
-    //const [contract, setContract] = useState([]);
-    //console.log(props);
-/*
+    const [contract, setContract] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const [accessLevel, setAccessLevel] = useState("None");
+
 
     useEffect(() => {
         onLoad();
-    }, contract);
+    }, []);
 
     function onLoad() {
-        Send.post('/ViewContracts', '')
-        .then(res => {
-            console.log(res);
-            setContracts(res.data.data);
-        }).catch(err => {
-            console.log(err);
-        })
-    }*/
+        console.log(props.appProps);
+        setAccessLevel(sessionStorage.getItem('Contracts'));
+        setContract(props.contract);
+        setIsLoading(false);
+    }
+
+    function openModal() {
+        setShowModal(true);
+    }
+
+    function closeModal() {
+        setShowModal(false);
+    }
 
     return (
         //<div className="contract">
-            <Panel eventKey={props.eventKeyIndex}>
-                <Panel.Heading>
-                    <Panel.Title toggle>
-                       
-                            <Table striped bordered condensed hover>
-                                <tbody>
-                                    <tr>
-                                    {props.contract.contract_header.map(h =><td>{h[0] + ": " + h[1]}</td>)} 
-                                    </tr>
-                                </tbody>
-                            </Table>
-                           
-
-                        
-                    </Panel.Title>
-                </Panel.Heading>
-                <Panel.Collapse>
-                    <Panel.Body collapsible>
-                        {/*<Tabs>*/}
-                            {props.contract.contract_tabs.map((c, index) =>
-                            /*<Tab eventKey={index} title={c.Name}>*/
-                                <ListGroup>
-                                    <PanelGroup>
-                                        {c.Information.map(i => {
-                                            if (i.length <= 2) {
-                                                return (
-                                                    <ListGroupItem>
-                                                        
-                                                            <Panel>
-                                                                <Panel.Heading>
-                                                                    <Panel.Title toggle>
-                                                                        {i[0] + ": " + i[1]}
-                                                                    </Panel.Title>
-                                                                </Panel.Heading>
-                                                            </Panel>
-                                                    </ListGroupItem>)
-                                                    //<ListGroupItem header={i[0] + ": " + i[1]} />)
-                                            } else if (i.length >= 3) { 
-                                                return (
-                                                    <ListGroupItem>
-                                                        
-                                                            <Panel>
-                                                                <Panel.Heading>
-                                                                    <Panel.Title toggle>
-                                                                        {" - " + i[0]}
-                                                                    </Panel.Title>
-                                                                </Panel.Heading>
-                                                                <Panel.Body collapsible>
-                                                                    <ContractTable info={i} />
-                                                                </Panel.Body>
-                                                            </Panel>
-                                                        
-                                                    </ListGroupItem>
-                                                    );
-                                            }
-                                        }
-                                        )}
-                                    </PanelGroup>
-                                </ListGroup>
-                            /*</Tab>*/
-                            )}
-                        {/*</Tabs>*/}
-                    </Panel.Body>
-                </Panel.Collapse>
-            </Panel>
+        !isLoading && (
+            <Col xs={6} md={3} key={props.eventKeyIndex}>
+            <Button onClick={openModal}>
+                {contract.view_Data.map((h, index )=>
+                    h[0] != "DONOTSHOW" &&
+                    <div key={index}>
+                    <Label>{h[0]}</Label>    
+                    <Badge>{h[1]}</Badge>
+                    
+                    </div>
+                )} 
+                    
+            </Button>
+            <EditModal modalName="Contract" content={contract} show={showModal} closeModal={closeModal} accessLevel={accessLevel}/>
+                
+            </Col>
+        )
         //</div>
     );  
 }
 
 export default Contract;
+
 
 
 /*

@@ -10,6 +10,7 @@ import Send from "./components/send";
 function App(props) {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [contractAccess, setContractAccess] = useState("None");
 
   
   useEffect(() => {
@@ -21,6 +22,10 @@ function App(props) {
     .then(res => {
       if (res.data.match == "true"){
         userHasAuthenticated(true);
+        sessionStorage.setItem('SessionID', res.data.SessionID);
+        res.data.PagePermissions.map(a =>{
+          sessionStorage.setItem(a[0], a[1]);
+        });
       }
     })
     .catch(err => {

@@ -25,9 +25,13 @@ export default function Login(props) {
     //var lgn = JSON.parse('{"username" : "' + username + '", "password" : "' + password + '"}');
     Send.post("/Login", fields)
     .then(res => {
+      console.log(res);
         setIsLoading(false);
         props.userHasAuthenticated(true);
         sessionStorage.setItem('SessionID', res.data.SessionID);
+        res.data.PagePermissions.map(a =>{
+          sessionStorage.setItem(a[0], a[1]);
+        });
         props.history.push("/");
     })
     .catch(err => {
@@ -47,14 +51,14 @@ export default function Login(props) {
           <FormControl
             autoFocus
             type="text"
-            value={fields.username}
+            value={fields.username.replace(/[*|\":<>[\]{}`\\()';@&$]/, "")}
             onChange={handleFieldChange}
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
           <ControlLabel>Password</ControlLabel>
           <FormControl
-            value={fields.password}
+            value={fields.password.replace(/[*|\":<>[\]{}`\\()';@&$]/, "")}
             onChange={handleFieldChange}
             type="password"
           />
