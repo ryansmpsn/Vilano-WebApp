@@ -20,27 +20,46 @@ function App(props) {
   async function onLoad() {
     Send.get('/Loggedin')
     .then(res => {
-      if (res.data.match == "true"){
-        userHasAuthenticated(true);
-        sessionStorage.setItem('SessionID', res.data.SessionID);
-        res.data.PagePermissions.map(a =>{
-          sessionStorage.setItem(a[0], a[1]);
-        });
-      }
+      console.log(res);
+      console.log(res.data.our_session);
+      console.log(res.data.our_session.match);
+      //if (res.our_session.match === "true"){
+      //console.log("let me in!!!");
+      handleLogin(res.data.our_session);
+      //}
     })
     .catch(err => {
-      console.log(err)
-      handleLogout();
+      console.log(err);
+      //console.log(err);
+      console.log("Logging Out");
+      //handleLogout();
     });
   
     setIsAuthenticating(false);
+  }
+
+  function handleLogin(sess){
+    console.log(sess);
+    console.log(sess.match);
+    console.log(sess.match === "true");
+    if (sess.match === "true"){
+      sessionStorage.setItem('SessionID', sess.SessionID);
+      sessionStorage.setItem('IDSession', sess.IDSession);
+      sess.PagePermissions.map(a =>{
+        sessionStorage.setItem(a[0], a[1]);
+      });
+      userHasAuthenticated(true);
+      setContractAccess(sessionStorage.getItem("Contracts"));
+    }
+    console.log(sess)
   }
 
   
 
   function handleLogout() {
     userHasAuthenticated(false);
-    sessionStorage.clear();//('SessionID', res.data.SessionID);
+    setContractAccess("None");
+    sessionStorage.clear();
     props.history.push("/login");
   }
   
@@ -65,9 +84,10 @@ function App(props) {
                 <LinkContainer to="/home">
                   <NavItem>Home</NavItem>
                 </LinkContainer>
+                {contractAccess != "None" && (
                 <LinkContainer to="/ContractList">
                   <NavItem>Contracts</NavItem>
-                </LinkContainer>
+                </LinkContainer>)}
                 </>
             
             : 
@@ -82,9 +102,9 @@ function App(props) {
           {isAuthenticated
             ? <NavItem onClick={handleLogout}>Logout</NavItem>
             : <>
-                <LinkContainer to="/signup">
+                {/* <LinkContainer to="/signup">
                   <NavItem>Signup</NavItem>
-                </LinkContainer>
+                </LinkContainer> */}
                 <LinkContainer to="/login">
                   <NavItem>Login</NavItem>
                 </LinkContainer>
@@ -93,7 +113,7 @@ function App(props) {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
+      <Routes appProps={{handleLogout, handleLogin, isAuthenticated, userHasAuthenticated, contractAccess }} />
     </div>
     )
   );

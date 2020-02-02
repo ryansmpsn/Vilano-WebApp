@@ -1,6 +1,5 @@
-import React, {useState, useEffect}  from "react";
-import { Button, Tabs, Tab, ListGroup, ListGroupItem, PanelGroup, Table, Grid, Row, Modal, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
-import Contract from "./Contract";
+import React  from "react";
+import { Button, Modal, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import LoaderButton from "./LoaderButton";
 import Send from "./send";
 
@@ -36,7 +35,11 @@ export default class EditModal extends React.Component {
     this.setState({submitting: true});
     Send.post("/UpdateContract", this.state.editContent)
     .then(res =>{
+      //bla bla update our contract to reflect DB. 
       console.log(res);
+    })
+    .error(err => {
+      console.log(err);
     });
     //.then()
   }

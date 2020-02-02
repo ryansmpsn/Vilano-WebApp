@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Tabs, Tab, ListGroup, ListGroupItem, Panel, ButtonGroup, Button, Table, tbody, thead, PanelGroup, Col, Well, Overlay, Tooltip, Badge, Label} from "react-bootstrap";
-import ContractTable from "./ContractTable";
+import {Button, Col, Well, Overlay, Tooltip, Badge, Label} from "react-bootstrap";
 import EditModal from "./EditModal";
 //import "./Contract.css";
                         

@@ -25,19 +25,16 @@ export default function Login(props) {
     //var lgn = JSON.parse('{"username" : "' + username + '", "password" : "' + password + '"}');
     Send.post("/Login", fields)
     .then(res => {
-      console.log(res);
+        console.log(res);
         setIsLoading(false);
-        props.userHasAuthenticated(true);
-        sessionStorage.setItem('SessionID', res.data.SessionID);
-        res.data.PagePermissions.map(a =>{
-          sessionStorage.setItem(a[0], a[1]);
-        });
+        props.handleLogin(res.data);
         props.history.push("/");
     })
     .catch(err => {
         console.log(err);
         setIsLoading(false);
-        props.userHasAuthenticated(false);
+        props.handleLogout();
+        //props.userHasAuthenticated(false);
     });
 
     

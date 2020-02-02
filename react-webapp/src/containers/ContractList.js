@@ -13,7 +13,7 @@ function ContractList(props) {
     }, []);
 
     function onLoad() {
-        Send.post('/ViewContracts', '')
+        Send.post('/ViewContracts', '', true)
         .then(res => {
             console.log(res);
             var array = [];
@@ -22,7 +22,7 @@ function ContractList(props) {
                 
             }*/
             //setContractData(array);//res.data);
-            setContractData(res.data);
+            setContractData(res.data.data);
             setIsLoading(false);
         }).catch(err => {
             console.log(err);

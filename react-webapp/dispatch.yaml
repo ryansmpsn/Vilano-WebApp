@@ -1,9 +1,16 @@
 dispatch:
-- url: "my.vilanomanagementsvs.com/"
+- url: "www.vilanomanagementsvs.com/"
+  service: default
+
+- url: "*my.vilanomanagementsvs.com/*"
   service: webapp
 
-- url: "api.vilanomanagementsvs.com/"
+- url: "*api.vilanomanagementsvs.com/*"
   service: centcom
 
-- url: "vilanomanagementsvs.com/"
-  service: default
+  
+- url: "*postalfleetsvs.vilanomanagementsvs.com/*"
+  service: postalfleetsvs
+  
+
+
