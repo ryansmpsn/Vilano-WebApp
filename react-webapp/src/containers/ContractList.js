@@ -15,14 +15,7 @@ function ContractList(props) {
     function onLoad() {
         Send.post('/ViewContracts', '', true)
         .then(res => {
-            console.log(res);
-            var array = [];
-            /*for (let index = 0; index < 3; index++) {
-                array.push(res.data[0])
-                
-            }*/
-            //setContractData(array);//res.data);
-            setContractData(res.data.data);
+            setContractData(res.data);
             setIsLoading(false);
         }).catch(err => {
             console.log(err);

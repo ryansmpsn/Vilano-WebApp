@@ -12,7 +12,7 @@ export default class EditModal extends React.Component {
       show: props.show,
       content: props.content,
       Permissions: props.accessLevel,
-      editContent: props.content.view_Data,
+      editContent: props.content,
       submitting: false,
     }
   }
@@ -36,6 +36,7 @@ export default class EditModal extends React.Component {
     Send.post("/UpdateContract", this.state.editContent)
     .then(res =>{
       //bla bla update our contract to reflect DB. 
+      //TODO UPDATE CONTRACT TO REFLECT DB. 
       console.log(res);
     })
     .error(err => {
@@ -63,7 +64,7 @@ export default class EditModal extends React.Component {
                     value={item[3]}
                     onChange={(e) => {
                       var object = this.state.editContent;
-                      var specials=/[*|\":<>[\]{}`\\()';@&$]/;
+                      var specials=/[*|\":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
                       object[index][3] = e.target.value.replace(specials, "");
                       this.setState({ editContent: object });
                     }}

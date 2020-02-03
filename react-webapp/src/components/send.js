@@ -21,13 +21,11 @@ const Send = new class send extends React.Component {
   }
 
   set_our_session = (sess) => {
-    console.log(sess);
     if (sess) {
       if (sess.match != "false")
         this.props.handleLogin(sess);
       else 
-        console.log(sess);
-        //this.props.handleLogout();
+        this.props.handleLogout();
     }
   }
 
@@ -41,8 +39,9 @@ const Send = new class send extends React.Component {
     axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
   }
 
-  parse_json = (data) => {
+  parse_json = (data) => { //I believe this parse_json function is useless now, but not removing it just yet. yyyy/mm/dd(2020/02/03 )
     var array = [];
+    console.log(data);
     data.forEach(e => {
       let x = JSON.parse(e);
       array.push(x);
@@ -52,78 +51,62 @@ const Send = new class send extends React.Component {
   }
 
   post = async (route, data, parsejson = false) => {
-    var send = this;
     this.update_auth();
+    var send = this;
+
     var url = this.state.URL + route;
-    var our_session = null;
+    var our_session = null; //Set our_session variable so we can reference it. 
+
     return new Promise(function(resolve, reject) {
       axios.post(url, data)
-      .then(res => { //send.set_our_session(res.data, send);
-        var data = res;
-        if (data.data.our_session){
-          our_session = JSON.parse(data.data.our_session);
-          data.data.our_session = our_session;
+      .then(res => {
+        var data = res.data; // Set a custom variable as our actual return data which contains data and our_session
+        if (data.our_session){ // Because we're inside of a promise, we cannot reference this.set_our_session properly.
+          our_session = data.our_session; // So we are forced to set the variable here so we can set our session. 
         }
         if (parsejson) 
-          data.data = send.parse_json(res.data.data);
-
-        console.log(data);
+          data.data = JSON.parse(res.data.data);
         resolve(data);
       })
       .catch(err => {
-        console.log(err);
         reject(err);
       });
     });
+
     if (our_session != null){
       this.set_our_session(our_session);
     }
   }
 
   get = async (route, parsejson = false) => {
-    var send = this;
     this.update_auth();
+    var send = this;
+
     var url = this.state.URL + route;
-    var our_session = null;
+    var our_session = null; //Set our_session variable so we can reference it. 
+
     return new Promise(function(resolve, reject) {
       axios.get(url)
-      .then(res => { 
-        var data = res;
-        if (data.data.our_session){
-          our_session = JSON.parse(data.data.our_session);
-          data.data.our_session = our_session;
+      .then(res => {
+        var data = res.data; // Set a custom variable as our actual return data which contains data and our_session
+        if (data.our_session){ // Because we're inside of a promise, we cannot reference this.set_our_session properly.
+          our_session = data.our_session; // So we are forced to set the variable here so we can set our session. 
         }
         if (parsejson) 
-          data.data = send.parse_json(res.data.data);
+          data.data = JSON.parse(res.data.data);
         resolve(data);
       })
       .catch(err => {
         reject(err);
       });
     });
+
     if (our_session != null){
       this.set_our_session(our_session);
     }
   }
 
-  put = async (route, data, parsejson = false) => {
-    var send = this;
-    this.update_auth();
-    var url = this.state.URL + route;
-    return new Promise(function(resolve, reject) {
-      axios.put(url, data)
-      .then(res => { send.set_our_session(res.data, send);
-        var data = res.data;
-        if (parsejson) 
-          data.data = send.parse_json(res.data.data);;
-        resolve(data);
-      })
-      .catch(err => {
-        console.log(err);
-        reject(err);
-      });
-    });
-  }
+  //will add put/delete as needed
   
 }
 

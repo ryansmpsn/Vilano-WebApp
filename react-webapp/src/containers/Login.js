@@ -25,9 +25,8 @@ export default function Login(props) {
     //var lgn = JSON.parse('{"username" : "' + username + '", "password" : "' + password + '"}');
     Send.post("/Login", fields)
     .then(res => {
-        console.log(res);
         setIsLoading(false);
-        props.handleLogin(res.data);
+        props.handleLogin(res.our_session);
         props.history.push("/");
     })
     .catch(err => {

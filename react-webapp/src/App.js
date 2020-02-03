@@ -20,28 +20,16 @@ function App(props) {
   async function onLoad() {
     Send.get('/Loggedin')
     .then(res => {
-      console.log(res);
-      console.log(res.data.our_session);
-      console.log(res.data.our_session.match);
-      //if (res.our_session.match === "true"){
-      //console.log("let me in!!!");
-      handleLogin(res.data.our_session);
-      //}
+      handleLogin(res.headers);
     })
     .catch(err => {
-      console.log(err);
-      //console.log(err);
-      console.log("Logging Out");
-      //handleLogout();
+      //console.log("Logging Out");
     });
   
     setIsAuthenticating(false);
   }
 
   function handleLogin(sess){
-    console.log(sess);
-    console.log(sess.match);
-    console.log(sess.match === "true");
     if (sess.match === "true"){
       sessionStorage.setItem('SessionID', sess.SessionID);
       sessionStorage.setItem('IDSession', sess.IDSession);
@@ -51,7 +39,6 @@ function App(props) {
       userHasAuthenticated(true);
       setContractAccess(sessionStorage.getItem("Contracts"));
     }
-    console.log(sess)
   }
 
   

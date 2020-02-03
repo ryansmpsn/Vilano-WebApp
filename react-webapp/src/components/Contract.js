@@ -17,7 +17,6 @@ function Contract(props) {
     }, []);
 
     function onLoad() {
-        console.log(props.appProps);
         setAccessLevel(sessionStorage.getItem('Contracts'));
         setContract(props.contract);
         setIsLoading(false);
@@ -36,7 +35,7 @@ function Contract(props) {
         !isLoading && (
             <Col xs={6} md={3} key={props.eventKeyIndex}>
             <Button onClick={openModal}>
-                {contract.view_Data.map((h, index )=>
+                {contract.map((h, index )=>
                     h[0] != "DONOTSHOW" &&
                     <div key={index}>
                     <Label>{h[0]}</Label>    
