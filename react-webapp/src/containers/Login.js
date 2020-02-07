@@ -23,19 +23,17 @@ export default function Login(props) {
     event.preventDefault();
     setIsLoading(true);
     Send.post("/Login", fields, props)
-    .then(res => {
+      .then(res => {
         setIsLoading(false);
         props.handleLogin(res.our_session);
         props.history.push("/");
-    })
-    .catch(err => {
+      })
+      .catch(err => {
         console.log(err);
         setIsLoading(false);
         props.handleLogout();
         props.userHasAuthenticated(false);
-    });
-
-    
+      });
   }
 
   return (
@@ -59,13 +57,13 @@ export default function Login(props) {
           />
         </FormGroup>
         <LoaderButton
-            block
-            type="submit"
-            bsSize="large"
-            isLoading={isLoading}
-            disabled={!validateForm()}
+          block
+          type="submit"
+          bsSize="large"
+          isLoading={isLoading}
+          disabled={!validateForm()}
         >
-        Login
+          Login
         </LoaderButton>
       </form>
     </div>

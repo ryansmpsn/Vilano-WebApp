@@ -7,8 +7,7 @@ export default function Home() {
       <div className="lander">
         <h1>Vilano Management Services App</h1>
         <p>In Progress</p>
-        <p>Under Development
-        </p>
+        <p>Under Development</p>
       </div>
     </div>
   );
