@@ -18,12 +18,13 @@ function App(props) {
   }, []);
   
   async function onLoad() {
-    Send.get('/Loggedin')
+    Send.get('/Loggedin', {handleLogout, handleLogin})
     .then(res => {
-      handleLogin(res.headers);
+      //handleLogin(res.headers);
     })
     .catch(err => {
-      //console.log("Logging Out");
+      console.log(err);
+      console.log("Logging Out");
     });
   
     setIsAuthenticating(false);

@@ -22,8 +22,7 @@ export default function Login(props) {
   async function handleSubmit(event) {
     event.preventDefault();
     setIsLoading(true);
-    //var lgn = JSON.parse('{"username" : "' + username + '", "password" : "' + password + '"}');
-    Send.post("/Login", fields)
+    Send.post("/Login", fields, props)
     .then(res => {
         setIsLoading(false);
         props.handleLogin(res.our_session);
@@ -33,7 +32,7 @@ export default function Login(props) {
         console.log(err);
         setIsLoading(false);
         props.handleLogout();
-        //props.userHasAuthenticated(false);
+        props.userHasAuthenticated(false);
     });
 
     
