@@ -33,7 +33,7 @@ export default class EditModal extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     this.setState({submitting: true});
-    Send.post("/UpdateContract", this.state.editContent)
+    Send.post("/UpdateContract", this.state.editContent, this.props)
     .then(res =>{
       //bla bla update our contract to reflect DB. 
       //TODO UPDATE CONTRACT TO REFLECT DB. 

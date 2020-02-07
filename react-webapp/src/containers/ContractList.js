@@ -6,6 +6,7 @@ import Send from "./../components/send";
 
 function ContractList(props) {
     const [contractData, setContractData] = useState([]);
+    const [inputRestrictions, setInputRestrictions] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -13,9 +14,12 @@ function ContractList(props) {
     }, []);
 
     function onLoad() {
-        Send.post('/ViewContracts', '', true)
+        Send.post('/ViewContracts', '', props)
         .then(res => {
-            setContractData(res.data);
+            console.log(res);
+            setContractData(JSON.parse(res.data.contracts));
+            setInputRestrictions(JSON.parse(res.data.restricted_input));
+            console.log(inputRestrictions);
             setIsLoading(false);
         }).catch(err => {
             console.log(err);
@@ -30,7 +34,7 @@ function ContractList(props) {
             <Grid>
             <Row key="topRow" className="show-grid">
                 {contractData.map((c, index) => 
-                    <Contract key={index} appProps={props} contract={c} eventKeyIndex={index}/>
+                    <Contract key={index} appProps={props} contract={c} specialInputs={inputRestrictions} eventKeyIndex={index}/>
                 )}
             </Row>
             </Grid>

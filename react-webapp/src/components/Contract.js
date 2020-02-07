@@ -45,7 +45,7 @@ function Contract(props) {
                 )} 
                     
             </Button>
-            <EditModal modalName="Contract" content={contract} show={showModal} closeModal={closeModal} accessLevel={accessLevel}/>
+            <EditModal modalName="Contract" content={contract} specialInput={props.specialInput} show={showModal} closeModal={closeModal} accessLevel={accessLevel}/>
                 
             </Col>
         )

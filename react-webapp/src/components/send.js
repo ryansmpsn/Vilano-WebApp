@@ -4,6 +4,7 @@ import axios from 'axios';
 const Send = new class send extends React.Component {
   constructor(props) {
     super(props)
+    this.props = props;
     this.state = {
       testURL: 'http://VMS-MOBILE-243.POSTALFLEET.local:8080',
       //testURL: 'http://Hand-Of-God:8080',
@@ -20,12 +21,13 @@ const Send = new class send extends React.Component {
     axios.defaults.headers.common['our_session'] = '';
   }
 
-  set_our_session = (sess) => {
+  set_our_session = (sess, props) => {
     if (sess) {
       if (sess.match != "false")
-        this.props.handleLogin(sess);
+        props.handleLogin(sess);
       else 
-        this.props.handleLogout();
+        props.handleLogout(); // Still not refreshing page for loggout... Get 401 denieds, but no user display change. 
+        // Oh yeah I need to handle 401s to loggout. Will do this later. 
     }
   }
 
@@ -50,19 +52,18 @@ const Send = new class send extends React.Component {
     return array;  
   }
 
-  post = async (route, data, parsejson = false) => {
+  post = async (route, data, props, parsejson = false) => {
     this.update_auth();
-    var send = this;
+    var send = this; // Must set this here, as when we enter promise, it will disappear.
 
     var url = this.state.URL + route;
-    var our_session = null; //Set our_session variable so we can reference it. 
 
     return new Promise(function(resolve, reject) {
       axios.post(url, data)
       .then(res => {
         var data = res.data; // Set a custom variable as our actual return data which contains data and our_session
-        if (data.our_session){ // Because we're inside of a promise, we cannot reference this.set_our_session properly.
-          our_session = data.our_session; // So we are forced to set the variable here so we can set our session. 
+        if (data.our_session){ 
+          send.set_our_session(data.our_session, props); 
         }
         if (parsejson) 
           data.data = JSON.parse(res.data.data);
@@ -72,25 +73,20 @@ const Send = new class send extends React.Component {
         reject(err);
       });
     });
-
-    if (our_session != null){
-      this.set_our_session(our_session);
-    }
   }
 
-  get = async (route, parsejson = false) => {
+  get = async (route, props, parsejson = false) => {
     this.update_auth();
     var send = this;
 
     var url = this.state.URL + route;
-    var our_session = null; //Set our_session variable so we can reference it. 
 
     return new Promise(function(resolve, reject) {
       axios.get(url)
       .then(res => {
         var data = res.data; // Set a custom variable as our actual return data which contains data and our_session
-        if (data.our_session){ // Because we're inside of a promise, we cannot reference this.set_our_session properly.
-          our_session = data.our_session; // So we are forced to set the variable here so we can set our session. 
+        if (data.our_session){ 
+          send.set_our_session(data.our_session, props);
         }
         if (parsejson) 
           data.data = JSON.parse(res.data.data);
@@ -100,10 +96,6 @@ const Send = new class send extends React.Component {
         reject(err);
       });
     });
-
-    if (our_session != null){
-      this.set_our_session(our_session);
-    }
   }
 
   //will add put/delete as needed
