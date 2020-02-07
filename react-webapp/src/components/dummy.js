@@ -48,10 +48,10 @@
                 </Panel.Collapse>
 
 
-
             <Table>
                 <thead>
                     <tr>
                         {contractData[0].view_Data.map((h, index) => { return (<th key={index}>{h[0]}</th>)})}
                     </tr>
                 </thead> 
+                </Table>
