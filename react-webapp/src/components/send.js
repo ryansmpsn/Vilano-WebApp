@@ -26,14 +26,14 @@ const Send = new (class send extends React.Component {
 
   set_our_session = (sess, props) => {
     if (sess) {
-      if (sess.match != "false") props.handleLogin(sess);
+      if (sess.match !== "false") props.handleLogin(sess);
       else props.handleLogout(); // Still not refreshing page for loggout... Get 401 denieds, but no user display change.
       // Oh yeah I need to handle 401s to loggout. Will do this later.
     }
   };
 
   update_auth = () => {
-    this.state.SessionID = sessionStorage.getItem("SessionID");
+    this.state.SessionID = sessionStorage.getItem("SessionID"); //will make it set state later
     this.state.IDSession = sessionStorage.getItem("IDSession");
     axios.defaults.headers.common["SessionID"] = this.state.SessionID;
     axios.defaults.headers.common["IDSession"] = this.state.IDSession;
@@ -45,12 +45,10 @@ const Send = new (class send extends React.Component {
   parse_json = data => {
     //I believe this parse_json function is useless now, but not removing it just yet. yyyy/mm/dd(2020/02/03 )
     var array = [];
-    console.log(data);
     data.forEach(e => {
       let x = JSON.parse(e);
       array.push(x);
     });
-    console.log(array);
     return array;
   };
 

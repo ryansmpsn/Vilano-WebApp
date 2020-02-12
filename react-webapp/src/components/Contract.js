@@ -36,13 +36,12 @@ function Contract(props) {
   }
 
   return (
-    //<div className="contract">
     !isLoading && (
       <Col xs={6} md={3} key={props.eventKeyIndex}>
         <Button onClick={openModal}>
           {contract.map(
             (h, index) =>
-              h[0] != "DONOTSHOW" && (
+              h[0] !== "DONOTSHOW" && (
                 <div key={index}>
                   <Label>{h[0]}</Label>
                   <Badge>{h[1]}</Badge>
@@ -53,14 +52,13 @@ function Contract(props) {
         <EditModal
           modalName="Contract"
           content={contract}
-          specialInput={props.specialInput}
+          inputRestrictions={props.inputRestrictions}
           show={showModal}
           closeModal={closeModal}
           accessLevel={accessLevel}
         />
       </Col>
     )
-    //</div>
   );
 }
 

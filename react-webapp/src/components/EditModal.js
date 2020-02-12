@@ -1,4 +1,5 @@
 import React from "react";
+import Calendar from "react-calendar";
 import {
   Button,
   Modal,
@@ -7,6 +8,7 @@ import {
   ControlLabel
 } from "react-bootstrap";
 import LoaderButton from "./LoaderButton";
+import InputFormControl from "./InputFormControl";
 import Send from "./send";
 
 export default class EditModal extends React.Component {
@@ -18,6 +20,7 @@ export default class EditModal extends React.Component {
       content: props.content,
       Permissions: props.accessLevel,
       editContent: props.content,
+      inputRestrictions: props.inputRestrictions,
       submitting: false
     };
   }
@@ -42,10 +45,26 @@ export default class EditModal extends React.Component {
         //TODO UPDATE CONTRACT TO REFLECT DB.
         console.log(res);
       })
-      .error(err => {
+      .catch(err => {
         console.log(err);
       });
     //.then()
+  }
+
+  set_variable_id(object, variable_key, value) {
+    var variable =
+      variable_key.substring(0, variable_key.lastIndexOf("_")) + "_id";
+    var set = false;
+    object.forEach(item => {
+      if (item[2] === variable) {
+        item[3] = value;
+        set = true;
+      }
+    });
+    if (set === false) {
+      object.push(["DONOTSHOW", value, variable, "", "None"]);
+    }
+    return object;
   }
 
   render() {
@@ -58,26 +77,75 @@ export default class EditModal extends React.Component {
           <form onSubmit={this.handleSubmit.bind(this)}>
             {this.state.editContent.map(
               (item, index) =>
-                item[0] != "DONOTSHOW" && (
+                item[0] !== "DONOTSHOW" && (
                   <FormGroup key={index}>
                     <ControlLabel>{item[0] + ": " + item[1]} </ControlLabel>
-                    {/* Make this formcontrol tie to values for editing */}
-                    {this.state.Permissions === "Write" && (
-                      <FormControl
-                        type="text"
-                        value={item[3]}
-                        onChange={e => {
-                          var object = this.state.editContent;
-                          var specials = /[*|\":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
-                          object[index][3] = e.target.value.replace(
-                            specials,
-                            ""
-                          );
-                          this.setState({ editContent: object });
-                        }}
-                        placeholder={item[1]}
-                      />
-                    )}
+                    {/* Make this formcontrol tie to values for editing-- Done I think?  */}
+                    {this.state.Permissions === "Write" &&
+                      ((item[4] === "text" && (
+                        <FormControl
+                          type="text"
+                          value={item[3]}
+                          onChange={e => {
+                            var object = this.state.editContent;
+                            var specials = /[*|\":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
+                            object[index][3] = e.target.value.replace(
+                              specials,
+                              ""
+                            );
+                            this.setState({ editContent: object });
+                          }}
+                          placeholder={item[1]}
+                        />
+                      )) ||
+                        (item[4] === "select" && (
+                          <InputFormControl
+                            index={index}
+                            input={item[4]}
+                            onChange={e => {
+                              var object = this.set_variable_id(
+                                this.state.editContent,
+                                item[2],
+                                e.value
+                              );
+                              var specials = /[*|\":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
+                              object[index][3] = e.label
+                                .toString()
+                                .replace(specials, "");
+                              this.setState({ editContent: object });
+                            }}
+                            content={item}
+                            inputRestrictions={this.state.inputRestrictions}
+                          />
+                        )) ||
+                        (item[4] === "date" && (
+                          <Calendar
+                            onChange={e => {
+                              var object = this.state.editContent;
+                              var date = new Date(e);
+                              var return_date =
+                                date.getUTCFullYear() +
+                                "-" +
+                                (date.getUTCMonth() + 1) +
+                                "-" +
+                                date.getUTCDate();
+                              object[index][3] = return_date;
+                              this.setState({ editContent: object });
+                            }}
+                            value={
+                              item[1] !== null
+                                ? new Date(item[1])
+                                : new Date(
+                                    new Date().getUTCMonth() +
+                                      1 +
+                                      "/" +
+                                      new Date().getUTCDate() +
+                                      "/" +
+                                      new Date().getUTCFullYear()
+                                  )
+                            }
+                          />
+                        )))}
                   </FormGroup>
                 )
             )}
