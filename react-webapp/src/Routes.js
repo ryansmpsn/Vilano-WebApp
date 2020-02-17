@@ -6,7 +6,7 @@ import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
 
 import testpage from "./containers/testpage";
-import ContractList from "./containers/ContractList";
+import ContractPage from "./containers/ContractPage";
 
 export default function Routes({ appProps }) {
   return (
@@ -21,10 +21,10 @@ export default function Routes({ appProps }) {
       <AppliedRoute path="/home" exact component={Home} appProps={appProps} />
       <ModuleRoute
         exact
-        component={ContractList}
+        component={ContractPage}
         appProps={appProps}
-        cModule={appProps.contractAccess}
-        path="/ContractList"
+        //accessLevel={appProps.contractAccess}
+        path="/Contract/Dashboard"
       />
       <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
       <AppliedRoute

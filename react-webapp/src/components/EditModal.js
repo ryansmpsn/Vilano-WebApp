@@ -9,7 +9,6 @@ import {
 } from "react-bootstrap";
 import LoaderButton from "./LoaderButton";
 import InputFormControl from "./InputFormControl";
-import Send from "./send";
 
 export default class EditModal extends React.Component {
   constructor(props) {
@@ -21,7 +20,12 @@ export default class EditModal extends React.Component {
       Permissions: props.accessLevel,
       editContent: props.content,
       inputRestrictions: props.inputRestrictions,
-      submitting: false
+      submitting: false,
+      extraButtonContent: props.extraButtonContent || null,
+      submitAction: editcontent => {
+        return props.submitAction(editcontent);
+      },
+      props: props.appProps
     };
   }
 
@@ -36,19 +40,60 @@ export default class EditModal extends React.Component {
     return null;
   }
 
-  async handleSubmit(event) {
-    event.preventDefault();
-    this.setState({ submitting: true });
-    Send.post("/UpdateContract", this.state.editContent, this.props)
+  has_changed() {
+    var hasChanged = false;
+    var object = this.state.content;
+    object.forEach(item => {
+      if (item[3] !== "" && item[3] !== item[1]) {
+        hasChanged = true;
+      }
+    });
+    return hasChanged;
+  }
+
+  update_content(newContent) {
+    var object = this.state.content;
+    object.forEach(item => {
+      var new_val = newContent[item[2]];
+      item[1] = new_val;
+      item[3] = "";
+    });
+  }
+  /*
+  async get_history() {
+    Send.get("/ViewContractHistory?contract_id=" + 851, this.state.props)
       .then(res => {
-        //bla bla update our contract to reflect DB.
-        //TODO UPDATE CONTRACT TO REFLECT DB.
         console.log(res);
       })
       .catch(err => {
         console.log(err);
       });
-    //.then()
+  }
+  */
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    var hand = this;
+    var newContent = null;
+
+    this.setState({ submitting: true });
+    hand.state
+      .submitAction(this.state.editContent)
+      .then(res => {
+        newContent = JSON.parse(res.data);
+
+        if (newContent !== null) {
+          console.log(newContent);
+          hand.update_content(newContent);
+          hand.setState({ submitting: false });
+        } else {
+          hand.setState({ submitting: false });
+        }
+      })
+      .catch(err => {
+        hand.setState({ submitting: false });
+        console.log(err);
+      });
   }
 
   set_variable_id(object, variable_key, value) {
@@ -149,17 +194,31 @@ export default class EditModal extends React.Component {
                   </FormGroup>
                 )
             )}
-            {this.state.Permissions === "Write" && (
+            {this.state.Permissions === "Write" && this.has_changed() && (
               <LoaderButton
                 block
                 type="submit"
                 bsSize="large"
-                //isLoading={this.state.submitting}
+                isLoading={this.state.submitting}
                 disabled={this.state.submitting}
               >
                 Save
               </LoaderButton>
             )}
+
+            {/*this.state.extraButtonContent !== null && this.state.extraButtonContent.map((e, index){
+              <LoaderButton
+              block
+              onClick={() => {
+                this.get_history();
+              }}
+              bsSize="large"
+              //isLoading={this.state.submitting}
+              //disabled={this.state.submitting}
+            >
+              Edit History
+            </LoaderButton>
+            })*/}
           </form>
         </Modal.Body>
         <Modal.Footer>

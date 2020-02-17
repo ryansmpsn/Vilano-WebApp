@@ -5,6 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import "./App.css";
 import Routes from "./Routes";
 import Send from "./components/send";
+import nav_perm_check from "./components/NavPerms";
 
 function App(props) {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -14,6 +15,11 @@ function App(props) {
   useEffect(() => {
     onLoad();
   }, []);
+
+  /*function nav_perm_check(route) {
+    var perm = sessionStorage.getItem(route);
+    return perm;
+  }*/
 
   async function onLoad() {
     Send.get("/Loggedin", { handleLogout, handleLogin })
@@ -32,7 +38,7 @@ function App(props) {
     if (sess.match === "true") {
       sessionStorage.setItem("SessionID", sess.SessionID);
       sessionStorage.setItem("IDSession", sess.IDSession);
-      sess.PagePermissions.map(a => {
+      sess.NavPermissions.map(a => {
         sessionStorage.setItem(a[0], a[1]);
       });
       userHasAuthenticated(true);
@@ -67,8 +73,8 @@ function App(props) {
                   <LinkContainer to="/home">
                     <NavItem>Home</NavItem>
                   </LinkContainer>
-                  {contractAccess != "None" && (
-                    <LinkContainer to="/ContractList">
+                  {nav_perm_check("/Contract/Dashboard") !== "NA" && (
+                    <LinkContainer to="/Contract/Dashboard">
                       <NavItem>Contracts</NavItem>
                     </LinkContainer>
                   )}
