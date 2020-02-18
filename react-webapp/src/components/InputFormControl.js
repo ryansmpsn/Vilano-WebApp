@@ -1,12 +1,6 @@
 import React from "react";
 import Select from "react-select";
-import {
-  Button,
-  Modal,
-  FormGroup,
-  FormControl,
-  ControlLabel
-} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export default class InputFormControl extends React.Component {
   constructor(props) {

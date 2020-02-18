@@ -5,9 +5,8 @@ import {
   Modal,
   FormGroup,
   FormControl,
-  ControlLabel
+  FormLabel
 } from "react-bootstrap";
-import LoaderButton from "./LoaderButton";
 import InputFormControl from "./InputFormControl";
 import Send from "./send";
 
@@ -79,7 +78,7 @@ export default class EditModal extends React.Component {
               (item, index) =>
                 item[0] !== "DONOTSHOW" && (
                   <FormGroup key={index}>
-                    <ControlLabel>{item[0] + ": " + item[1]} </ControlLabel>
+                    <FormLabel>{item[0] + ": " + item[1]} </FormLabel>
                     {/* Make this formcontrol tie to values for editing-- Done I think?  */}
                     {this.state.Permissions === "Write" &&
                       ((item[4] === "text" && (
@@ -149,20 +148,20 @@ export default class EditModal extends React.Component {
                   </FormGroup>
                 )
             )}
-            {this.state.Permissions === "Write" && (
-              <LoaderButton
-                block
-                type="submit"
-                bsSize="large"
-                //isLoading={this.state.submitting}
-                disabled={this.state.submitting}
-              >
-                Save
-              </LoaderButton>
-            )}
           </form>
         </Modal.Body>
         <Modal.Footer>
+          {this.state.Permissions === "Write" && (
+            <Button
+              className="btn btn-primary mr-auto"
+              type="submit"
+              bsSize="large"
+              //isLoading={this.state.submitting}
+              disabled={this.state.submitting}
+            >
+              Save
+            </Button>
+          )}
           <Button onClick={this.props.closeModal}>Close</Button>
         </Modal.Footer>
       </Modal>

@@ -1,15 +1,34 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
-  Col,
-  Well,
-  Overlay,
-  Tooltip,
-  Badge,
-  Label
-} from "react-bootstrap";
+  MDBCard,
+  MDBCardTitle,
+  MDBCardText,
+  MDBContainer,
+  MDBBtn
+} from "mdbreact";
 import EditModal from "./EditModal";
-//import "./Contract.css";
+import styled from "styled-components";
+import { Button } from "react-bootstrap";
+
+const Styles = styled.div`
+  .card {
+    padding: 10px;
+    margin: 10px;
+    margin-right: 0px;
+    height: 1050px;
+    width: 270px;
+  }
+  .card-body {
+    padding: 15px;
+    width: 250px;
+  }
+  .card-title {
+    height: 20px;
+  }
+  .card-text {
+    height: 15px;
+  }
+`;
 
 function Contract(props) {
   const [contract, setContract] = useState([]);
@@ -37,27 +56,31 @@ function Contract(props) {
 
   return (
     !isLoading && (
-      <Col xs={6} md={3} key={props.eventKeyIndex}>
-        <Button onClick={openModal}>
-          {contract.map(
-            (h, index) =>
-              h[0] !== "DONOTSHOW" && (
-                <div key={index}>
-                  <Label>{h[0]}</Label>
-                  <Badge>{h[1]}</Badge>
-                </div>
-              )
-          )}
-        </Button>
-        <EditModal
-          modalName="Contract"
-          content={contract}
-          inputRestrictions={props.inputRestrictions}
-          show={showModal}
-          closeModal={closeModal}
-          accessLevel={accessLevel}
-        />
-      </Col>
+      <Styles>
+        <MDBContainer>
+          <MDBCard>
+            {contract.map(
+              (h, index) =>
+                h[0] !== "DONOTSHOW" && (
+                  <div key={index}>
+                    <MDBCardTitle>{h[0]}:</MDBCardTitle>
+                    <MDBCardText>{h[1]}</MDBCardText>
+                    <hr />
+                  </div>
+                )
+            )}
+            <Button onClick={openModal}>Edit Contract</Button>
+          </MDBCard>
+          <EditModal
+            modalName="Contract"
+            content={contract}
+            inputRestrictions={props.inputRestrictions}
+            show={showModal}
+            closeModal={closeModal}
+            accessLevel={accessLevel}
+          />
+        </MDBContainer>
+      </Styles>
     )
   );
 }

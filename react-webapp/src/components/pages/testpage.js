@@ -1,16 +1,12 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { Panel } from "react-bootstrap";
+import { Jumbotron } from "react-bootstrap";
 
 export default class Car extends React.Component {
   render() {
     return (
-      <Panel>
-        <Panel.Heading as="h5">TestPage</Panel.Heading>
-        <Panel.Body>
-          <Panel.Title>
-            Welcome to the PostalFleetSVS Beta WebSoftware
-          </Panel.Title>
+      <Jumbotron>
+        <h1>Welcome to the PostalFleetSVS Beta WebSoftware</h1>
+        <p>
           We are ever working on making this site a useful tool for you, so that
           you can more easily take care of things like adding/updating
           contracts, task management, submitting tickets and many more things to
@@ -24,8 +20,8 @@ export default class Car extends React.Component {
           <br />
           At the end of the day, it would probably take the same amount of time
           to grab random text as it would to just type this anyway.
-        </Panel.Body>
-      </Panel>
+        </p>
+      </Jumbotron>
     );
   }
 }

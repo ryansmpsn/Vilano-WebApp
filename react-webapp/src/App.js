@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { Nav, Navbar, NavItem } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import "./App.css";
+import { Nav, Navbar } from "react-bootstrap";
+import styled from "styled-components";
 import Routes from "./Routes";
 import Send from "./components/send";
+import SideBar from "./components/layout/SideBar";
+import Footer from "./components/layout/Footer";
+import Clock from "./components/layout/Clock";
+
+const Styles = styled.div`
+  .sticky-bottom {
+    min-height: calc(100vh - 38px);
+  }
+`;
 
 function App(props) {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -49,63 +56,60 @@ function App(props) {
 
   return (
     !isAuthenticating && (
-      <div className="App container">
-        <Navbar fluid collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">Vilano Command</Link>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav pullLeft>
-              {isAuthenticated ? (
-                <>
-                  <LinkContainer to="/testpage">
-                    <NavItem>testpage</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to="/home">
-                    <NavItem>Home</NavItem>
-                  </LinkContainer>
-                  {contractAccess != "None" && (
-                    <LinkContainer to="/ContractList">
-                      <NavItem>Contracts</NavItem>
-                    </LinkContainer>
-                  )}
-                </>
-              ) : (
-                <LinkContainer to="/home">
-                  <NavItem>Home</NavItem>
-                </LinkContainer>
-              )}
-            </Nav>
-            <Nav pullRight>
-              {isAuthenticated ? (
-                <NavItem onClick={handleLogout}>Logout</NavItem>
-              ) : (
-                <>
-                  {/* <LinkContainer to="/signup">
+      <React.Fragment>
+        <div className="flexible-content">
+          <SideBar />
+          <Styles>
+            <div id="content" className="sticky-bottom">
+              <Navbar fluid inverse>
+                <Navbar.Brand href="/">
+                  <Clock />
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="ml-auto">
+                    {isAuthenticated ? (
+                      <>
+                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/testpage">TestPage</Nav.Link>
+                        {contractAccess != "None" && (
+                          <Nav.Link href="/ContractList">Contracts</Nav.Link>
+                        )}
+                      </>
+                    ) : (
+                      <Nav.Link href="/">Home</Nav.Link>
+                    )}
+                    {isAuthenticated ? (
+                      <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                    ) : (
+                      <>
+                        {/* <LinkContainer to="/signup">
                   <NavItem>Signup</NavItem>
                 </LinkContainer> */}
-                  <LinkContainer to="/login">
-                    <NavItem>Login</NavItem>
-                  </LinkContainer>
-                </>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-        <Routes
-          appProps={{
-            handleLogout,
-            handleLogin,
-            isAuthenticated,
-            userHasAuthenticated,
-            contractAccess
-          }}
-        />
-      </div>
+                        <Nav.Link href="/Login">Login</Nav.Link>
+                      </>
+                    )}
+                  </Nav>
+                </Navbar.Collapse>
+              </Navbar>
+              <div className="p-5">
+                <Routes
+                  appProps={{
+                    handleLogout,
+                    handleLogin,
+                    isAuthenticated,
+                    userHasAuthenticated,
+                    contractAccess
+                  }}
+                />
+              </div>
+            </div>
+          </Styles>
+          <Footer />
+        </div>
+      </React.Fragment>
     )
   );
 }
-export default withRouter(App);
+
+export default App;

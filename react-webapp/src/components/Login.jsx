@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FormGroup, FormControl, FormLabel, Button } from "react-bootstrap";
 import { useFormFields } from "./../libs/hookslib";
 import Send from "../components/send";
+//import "./Login.css";
 //import { Link } from "react-router";
 
 export default function Login(props) {
@@ -13,6 +14,46 @@ export default function Login(props) {
     password: ""
   });
 
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [contractAccess, setContractAccess] = useState("None");
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  async function onLoad() {
+    Send.get("/Loggedin", { handleLogout, handleLogin })
+      .then(res => {
+        //handleLogin(res.headers);
+      })
+      .catch(err => {
+        console.log(err);
+        console.log("Logging Out");
+      });
+
+    setIsAuthenticating(false);
+  }
+
+  function handleLogin(sess) {
+    if (sess.match === "true") {
+      sessionStorage.setItem("SessionID", sess.SessionID);
+      sessionStorage.setItem("IDSession", sess.IDSession);
+      sess.PagePermissions.map(a => {
+        sessionStorage.setItem(a[0], a[1]);
+      });
+      userHasAuthenticated(true);
+      setContractAccess(sessionStorage.getItem("Contracts"));
+    }
+  }
+
+  function handleLogout() {
+    userHasAuthenticated(false);
+    setContractAccess("None");
+    sessionStorage.clear();
+    props.history.push("/login");
+  }
+
   function validateForm() {
     return fields.username.length > 0 && fields.password.length > 0;
   }
@@ -23,19 +64,26 @@ export default function Login(props) {
     Send.post("/Login", fields, props)
       .then(res => {
         setIsLoading(false);
-        props.handleLogin(res.our_session);
-        props.history.push("/");
+        handleLogin(res.our_session);
+        this.history.push("/");
       })
       .catch(err => {
         console.log(err);
         setIsLoading(false);
-        props.handleLogout();
-        props.userHasAuthenticated(false);
+        handleLogout();
+        userHasAuthenticated(false);
       });
   }
 
   return (
-    <div className="Login">
+    <div>
+      <form onSubmit={handleSubmit}>
+        <FormGroup>
+          <FormLabel>This is a Form Label</FormLabel>
+          <Button>Click mE</Button>
+        </FormGroup>
+      </form>
+
       <form onSubmit={handleSubmit}>
         {/*ControlID must match useFormFields value!!!*/}
         <FormGroup controlId="username" bsSize="large">
@@ -56,6 +104,7 @@ export default function Login(props) {
           />
         </FormGroup>
         <Button
+          block
           type="submit"
           bsSize="large"
           isLoading={isLoading}
