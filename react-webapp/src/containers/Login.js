@@ -4,11 +4,8 @@ import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "./../libs/hookslib";
 import Send from "../components/send";
 import "./Login.css";
-//import { Link } from "react-router";
 
 export default function Login(props) {
-  //const [username, setUsername] = useState("");
-  //const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     username: "",
@@ -39,7 +36,7 @@ export default function Login(props) {
   return (
     <div className="Login">
       <form onSubmit={handleSubmit}>
-        {/*ControlID must match useFormFields value!!!*/}
+        {/*ControlID must match useFormFields value*/}
         <FormGroup controlId="username" bsSize="large">
           <ControlLabel>Username</ControlLabel>
           <FormControl

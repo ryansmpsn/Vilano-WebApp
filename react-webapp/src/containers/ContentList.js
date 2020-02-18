@@ -70,11 +70,11 @@ function ContentList(props) {
       <form onSubmit={handleSearch}>
         {json_array(contentSearch).map((item, index) => (
           /*ControlID must match useFormFields value*/
-          <FormGroup controlId={item[0]}>
+          <FormGroup key={"ContentSearch" + index} controlId={item[0]}>
             <FormControl
               autoFocus
               type="text"
-              placeholder="Search for contract by ID"
+              placeholder="Search for contract by ID" //TODO make display text based on contentsearch or something
               value={item[1].replace(/[*|\":<>[\]{}`\\()';@&$]/, "")}
               onChange={setContentSearch}
             />

@@ -16,15 +16,10 @@ function App(props) {
     onLoad();
   }, []);
 
-  /*function nav_perm_check(route) {
-    var perm = sessionStorage.getItem(route);
-    return perm;
-  }*/
-
   async function onLoad() {
     Send.get("/Loggedin", { handleLogout, handleLogin })
       .then(res => {
-        //handleLogin(res.headers);
+        console.log("logging in");
       })
       .catch(err => {
         console.log(err);

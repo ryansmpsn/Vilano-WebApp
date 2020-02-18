@@ -23,7 +23,6 @@ export default function Routes({ appProps }) {
         exact
         component={ContractPage}
         appProps={appProps}
-        //accessLevel={appProps.contractAccess}
         path="/Contract/Dashboard"
       />
       <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
