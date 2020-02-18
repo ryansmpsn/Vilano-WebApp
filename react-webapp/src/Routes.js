@@ -1,9 +1,13 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Route, Switch } from "react-router-dom";
 import AppliedRoute, { ModuleRoute } from "./components/AppliedRoute";
-import Home from "./containers/Home";
-import NotFound from "./containers/NotFound";
+import Home from "./components/pages/Home";
+import NotFoundPage from "./components/pages/NotFoundPage";
+import About from "./components/pages/About";
 import Login from "./containers/Login";
+import testpage from "./components/pages/testpage";
+import ContractList from "./components/pages/ContractList";
+import MapsPage from "./components/pages/MapsPage";
 
 import testpage from "./containers/testpage";
 import ContractPage from "./containers/ContractPage";
@@ -11,20 +15,14 @@ import ContractPage from "./containers/ContractPage";
 export default function Routes({ appProps }) {
   return (
     <Switch>
-      <Redirect
-        from="/"
-        to="/home"
-        exact
-        component={Home}
-        appProps={appProps}
-      />
-      <AppliedRoute path="/home" exact component={Home} appProps={appProps} />
+      <AppliedRoute path="/" exact component={Home} appProps={appProps} />
       <ModuleRoute
         exact
         component={ContractPage}
         appProps={appProps}
         path="/Contract/Dashboard"
       />
+
       <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
       <AppliedRoute
         path="/testpage"
@@ -32,8 +30,11 @@ export default function Routes({ appProps }) {
         component={testpage}
         appProps={appProps}
       />
+      <Route path="/maps" component={MapsPage} />
+
+      <Route path="/about" component={About} />
       {/* Finally, catch all unmatched routes */}
-      <Route component={NotFound} />
+      <Route component={NotFoundPage} />
     </Switch>
   );
 }
