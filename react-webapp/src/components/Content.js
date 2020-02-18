@@ -47,7 +47,7 @@ function Content(props) {
   }
 
   function closeModal() {
-    window.location.hash = "";
+    window.history.replaceState(null, null, " ");
     setShowModal(false);
   }
 

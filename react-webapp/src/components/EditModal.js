@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import LoaderButton from "./LoaderButton";
 import InputFormControl from "./InputFormControl";
+import NavPerm from "./NavPerms";
 
 export default class EditModal extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ export default class EditModal extends React.Component {
       modalName: props.modalName,
       show: props.show,
       content: props.content,
-      Permissions: props.accessLevel,
+      Permissions: NavPerm.nav_hash_perm_check(),
       editContent: props.content,
       inputRestrictions: props.inputRestrictions,
       submitting: false,

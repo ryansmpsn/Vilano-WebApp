@@ -5,7 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import "./App.css";
 import Routes from "./Routes";
 import Send from "./components/send";
-import nav_perm_check from "./components/NavPerms";
+import NavPerm from "./components/NavPerms";
 
 function App(props) {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -73,7 +73,7 @@ function App(props) {
                   <LinkContainer to="/home">
                     <NavItem>Home</NavItem>
                   </LinkContainer>
-                  {nav_perm_check("/Contract/Dashboard") !== "NA" && (
+                  {NavPerm.nav_perm_check("/Contract/Dashboard") !== "NA" && (
                     <LinkContainer to="/Contract/Dashboard">
                       <NavItem>Contracts</NavItem>
                     </LinkContainer>
