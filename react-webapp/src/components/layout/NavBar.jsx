@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component } from "react";
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -6,16 +6,19 @@ import {
   MDBNavbarToggler,
   MDBCollapse,
   MDBNavItem,
-  MDBNavLink,
-  MDBIcon
+  MDBNavLink
 } from "mdbreact";
-import { NavbarBrand } from "react-bootstrap";
 import Clock from "./Clock";
+import Auth from "./NavBarAuth";
 
 class NavBar extends Component {
-  state = {
-    collapse: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      collapse: false,
+      props: props
+    };
+  }
 
   onClick = () => {
     this.setState({
@@ -31,32 +34,31 @@ class NavBar extends Component {
 
   render() {
     return (
-      <MDBNavbar className="flexible-navbar" light expand="md" scrolling>
-        <MDBNavbarBrand href="/">
-          <strong>
-            <Clock />
-          </strong>
-        </MDBNavbarBrand>
-        <MDBNavbarToggler onClick={this.onClick} />
-        <MDBCollapse isOpen={this.state.collapse} navbar>
-          <MDBNavbarNav left>
-            <MDBNavItem active>
-              <MDBNavLink to="/">Home</MDBNavLink>
-            </MDBNavItem>
-          </MDBNavbarNav>
-          <MDBNavbarNav right>
-            <MDBNavItem>
-              <a
-                rel="noopener noreferrer"
-                className="nav-link Ripple-parent"
-                href="/login"
-              >
-                Login
-              </a>
-            </MDBNavItem>
-          </MDBNavbarNav>
-        </MDBCollapse>
-      </MDBNavbar>
+      <div>
+        <MDBNavbar
+          className="navbar fixed-top flexible-navbar"
+          light
+          expand="md"
+          scrolling
+        >
+          <MDBNavbarBrand href="/">
+            <strong>
+              <Clock />
+            </strong>
+          </MDBNavbarBrand>
+          <MDBNavbarToggler onClick={this.onClick} />
+          <MDBCollapse isOpen={this.state.collapse} navbar>
+            <MDBNavbarNav left>
+              <MDBNavItem active>
+                <MDBNavLink to="/testpage">TestPage</MDBNavLink>
+              </MDBNavItem>
+            </MDBNavbarNav>
+            <MDBNavbarNav right>
+              <Auth appProps={this.state.props} />
+            </MDBNavbarNav>
+          </MDBCollapse>
+        </MDBNavbar>
+      </div>
     );
   }
 }

@@ -124,7 +124,18 @@ export default class EditModal extends React.Component {
               (item, index) =>
                 item[0] !== "DONOTSHOW" && (
                   <FormGroup key={index}>
-                    <FormLabel>{item[0] + ": " + item[1]} </FormLabel>
+                    <FormLabel>
+                      {item[0] +
+                        ": " +
+                        (item[4] != "date"
+                          ? item[1]
+                          : new Date(item[1]).getUTCMonth() +
+                            1 +
+                            "/" +
+                            new Date(item[1]).getUTCDate() +
+                            "/" +
+                            new Date(item[1]).getUTCFullYear())}
+                    </FormLabel>
                     {/* Make this formcontrol tie to values for editing-- Done I think?  */}
                     {this.state.Permissions === "Write" &&
                       ((item[4] === "text" && (
@@ -133,7 +144,7 @@ export default class EditModal extends React.Component {
                           value={item[3]}
                           onChange={e => {
                             var object = this.state.editContent;
-                            var specials = /[*|\":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
+                            var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
                             object[index][3] = e.target.value.replace(
                               specials,
                               ""
@@ -153,7 +164,7 @@ export default class EditModal extends React.Component {
                                 item[2],
                                 e.value
                               );
-                              var specials = /[*|\":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
+                              var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
                               object[index][3] = e.label
                                 .toString()
                                 .replace(specials, "");
@@ -195,7 +206,7 @@ export default class EditModal extends React.Component {
                 )
             )}
             {this.state.Permissions === "Write" && this.has_changed() && (
-              <LoaderButton
+              <Button
                 block
                 type="submit"
                 bsSize="large"
@@ -203,11 +214,11 @@ export default class EditModal extends React.Component {
                 disabled={this.state.submitting}
               >
                 Save
-              </LoaderButton>
+              </Button>
             )}
 
             {/*this.state.extraButtonContent !== null && this.state.extraButtonContent.map((e, index){
-              <LoaderButton
+              <Button
               block
               onClick={() => {
                 this.get_history();
@@ -217,7 +228,7 @@ export default class EditModal extends React.Component {
               //disabled={this.state.submitting}
             >
               Edit History
-            </LoaderButton>
+            </Button>
             })*/}
           </form>
         </Modal.Body>
@@ -226,7 +237,6 @@ export default class EditModal extends React.Component {
             <Button
               className="btn btn-primary mr-auto"
               type="submit"
-              bsSize="large"
               //isLoading={this.state.submitting}
               disabled={this.state.submitting}
             >

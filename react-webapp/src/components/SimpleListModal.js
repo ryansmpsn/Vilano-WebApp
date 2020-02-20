@@ -9,7 +9,6 @@ import {
   ListGroup,
   ListGroupItem
 } from "react-bootstrap";
-import LoaderButton from "./LoaderButton";
 import InputFormControl from "./InputFormControl";
 import Send from "./send";
 
@@ -37,7 +36,6 @@ export default class SimpleListModal extends React.Component {
     return null;
   }
 
-
   render() {
     return (
       <Modal show={this.state.show} onHide={this.props.closeModal}>
@@ -46,7 +44,7 @@ export default class SimpleListModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <ListGroup>
-          {this.state.content.map((item, index){
+            {/* {this.state.content.map((item, index){
             <ListGroupItem key={index + "listGroupItem451"}>
             {item[0]} 
             {this.state.accessLevel === "Write" && <Button onClick={() =>{
@@ -55,7 +53,7 @@ export default class SimpleListModal extends React.Component {
               Edit
             </Button>}
             </ListGroupItem>
-          })}
+          })}*/}
           </ListGroup>
         </Modal.Body>
         <Modal.Footer>

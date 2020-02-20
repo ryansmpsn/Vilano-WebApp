@@ -28,12 +28,15 @@ const SideBar = () => {
             About
           </MDBListGroupItem>
         </NavLink>
+        {/* Future Development Idea!!!!!
+        
         <NavLink to="/maps" activeClassName="activeClass">
           <MDBListGroupItem>
-            <MDBIcon icon="map" className="mr-3" />
+           <MDBIcon icon="map" className="mr-3" />
             Maps
           </MDBListGroupItem>
-        </NavLink>
+  </NavLink>
+  */}
         <NavLink to="/404" activeClassName="activeClass">
           <MDBListGroupItem>
             <MDBIcon icon="exclamation" className="mr-3" />

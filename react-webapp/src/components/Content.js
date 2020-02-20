@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Col,
-  Well,
-  Overlay,
-  Tooltip,
-  Badge,
-  Label
-} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import EditModal from "./EditModal";
-import Send from "./send";
-//import "./Content.css";
+import { MDBCard, MDBCardTitle, MDBCardText, MDBContainer } from "mdbreact";
+import styled from "styled-components";
 
 function Content(props) {
   const [content, setContent] = useState([]);
@@ -50,34 +42,57 @@ function Content(props) {
     window.history.replaceState(null, null, " ");
     setShowModal(false);
   }
-
+  const Styles = styled.div`
+    .card {
+      padding: 10px;
+      margin: 10px;
+      margin-right: 0px;
+      height: 1050px;
+      width: 278px;
+    }
+    .card-body {
+      padding: 15px;
+      width: 250px;
+    }
+    .card-title {
+      height: 20px;
+    }
+    .card-text {
+      height: 15px;
+      margin: 10px;
+    }
+  `;
   return (
     !isLoading && (
-      <Col xs={6} md={3} key={props.eventKeyIndex}>
-        <Button onClick={openModal}>
-          {content.map(
-            (h, index) =>
-              h[0] !== "DONOTSHOW" && (
-                <div key={index}>
-                  <Label>{h[0]}</Label>
-                  <Badge>{h[1]}</Badge>
-                </div>
-              )
-          )}
-        </Button>
-        <EditModal
-          modalName="Set This Properly"
-          content={content}
-          inputRestrictions={props.inputRestrictions}
-          show={showModal}
-          closeModal={closeModal}
-          accessLevel={accessLevel}
-          appProps={props.appProps}
-          submitAction={editContent => {
-            return props.submitAction(editContent);
-          }}
-        />
-      </Col>
+      <Styles>
+        <MDBContainer key={props.eventKeyIndex}>
+          <MDBCard>
+            {content.map(
+              (h, index) =>
+                h[0] !== "DONOTSHOW" && (
+                  <div key={index}>
+                    <MDBCardTitle>{h[0]}:</MDBCardTitle>
+                    <MDBCardText>{h[1]}</MDBCardText>
+                    <hr />
+                  </div>
+                )
+            )}
+            <Button onClick={openModal}>Edit</Button>
+          </MDBCard>
+          <EditModal
+            modalName="Set This Properly"
+            content={content}
+            inputRestrictions={props.inputRestrictions}
+            show={showModal}
+            closeModal={closeModal}
+            accessLevel={accessLevel}
+            appProps={props.appProps}
+            submitAction={editContent => {
+              return props.submitAction(editContent);
+            }}
+          />
+        </MDBContainer>
+      </Styles>
     )
   );
 }

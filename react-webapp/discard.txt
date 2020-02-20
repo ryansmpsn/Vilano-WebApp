@@ -67,6 +67,7 @@ class Login extends React.Component {
             <p className="h5 text-center mb-4">Sign in</p>
             <div className="grey-text">
               <MDBInput
+              controlID="username"
                 label="Type your email"
                 icon="envelope"
                 group
@@ -98,4 +99,3 @@ class Login extends React.Component {
 }
 
 export default withRouter(Login);
-
