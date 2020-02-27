@@ -9,6 +9,11 @@ import {
 } from "react-bootstrap";
 import styled from "styled-components";
 import ModalSection from "./sections/ModalSection";
+import AdminCardSection1 from "./sections/AdminCardSection1";
+import AdminCardSection2 from "./sections/AdminCardSection2";
+import ChartSection1 from "./sections/ChartSection1";
+import ChartSection2 from "./sections/ChartSection2";
+import MapsPage from "./MapsPage";
 
 const Styles = styled.div`
   .col {
@@ -91,6 +96,7 @@ export default class Car extends React.Component {
           <p class="font-weight-light">Light weight text.</p>
           <p class="font-italic">Italic text.</p>
         </Jumbotron>
+
         <Container>
           <h1>Alerts:</h1>
           <div class="alert alert-primary" role="alert">
@@ -288,9 +294,15 @@ export default class Car extends React.Component {
               style={{ width: 75 }}
             ></div>
           </div>
-          <h1>Modals</h1>
-          <ModalSection />
+          <hr />
+          <br />
         </Container>
+        <AdminCardSection1 />
+        <AdminCardSection2 />
+        <ChartSection1 />
+        <ChartSection2 />
+        <ModalSection />
+        <MapsPage />
         <Container>
           <h1>This is the Grid System</h1>
           <h3> Auto Layout Grids:</h3>

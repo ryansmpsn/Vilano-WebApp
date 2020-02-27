@@ -1,14 +1,6 @@
 import React from "react";
 import Calendar from "react-calendar";
-import {
-  Button,
-  Modal,
-  FormGroup,
-  FormControl,
-  ControlLabel,
-  ListGroup,
-  ListGroupItem
-} from "react-bootstrap";
+import { Button, Modal, ListGroup, ListGroupItem } from "react-bootstrap";
 import InputFormControl from "./InputFormControl";
 import Send from "./send";
 

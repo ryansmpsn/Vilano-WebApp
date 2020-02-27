@@ -6,7 +6,7 @@ const Send = new (class send extends React.Component {
     super(props);
     this.props = props;
     this.state = {
-      testURL: "http://PFSI-DESK-3024.POSTALFLEET.local:8080",
+      testURL: "http://localhost:3888",
       //testURL: 'http://Hand-Of-God:8080',
       liveURL: "https://centcom-dot-pfsi-centcom.appspot.com",
       URL: "",

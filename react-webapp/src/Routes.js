@@ -5,6 +5,7 @@ import Home from "./components/pages/HomePage";
 import Login from "./components/pages/LoginPage";
 import About from "./components/pages/AboutPage";
 import MapsPage from "./components/pages/MapsPage";
+import ProfilePage from "./components/pages/ProfilePage";
 import testpage from "./components/pages/TestPage";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import ContractPage from "./components/pages/ContractPage";
@@ -34,6 +35,7 @@ class Routes extends React.Component {
           appProps={this.props}
         />
         <Route path="/maps" component={MapsPage} />
+        <Route path="/profile" component={ProfilePage} />
 
         <Route path="/about" component={About} />
 

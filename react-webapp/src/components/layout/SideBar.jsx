@@ -1,43 +1,51 @@
 import React from "react";
 import { MDBListGroup, MDBListGroupItem, MDBIcon } from "mdbreact";
-import { Navbar } from "react-bootstrap";
+import logo from "../../img/logo.jpg";
 import { NavLink } from "react-router-dom";
 
 const SideBar = () => {
   return (
     <div className="sidebar-fixed position-fixed">
-      <a href="/" className="logo-wrapper waves-effect">
-        <Navbar.Brand>Vilano Management</Navbar.Brand>
+      <a href="/" className="mt-3 mb-3 waves-effect">
+        <img
+          alt="Vilano Management Services Inc."
+          className="img-fluid"
+          src={logo}
+        />
       </a>
-      <MDBListGroup className="list-group-flush">
+      <MDBListGroup className="list-group list-group-flush">
         <NavLink exact={true} to="/" activeClassName="activeClass">
+          <br />
           <MDBListGroupItem>
             <MDBIcon icon="chart-pie" className="mr-3" />
             Dashboard
           </MDBListGroupItem>
         </NavLink>
         <NavLink to="/profile" activeClassName="activeClass">
+          <div />
           <MDBListGroupItem>
             <MDBIcon icon="user" className="mr-3" />
             Profile
           </MDBListGroupItem>
         </NavLink>
         <NavLink to="/About" activeClassName="activeClass">
+          <div />
           <MDBListGroupItem>
             <MDBIcon icon="question" className="mr-3" />
             About
           </MDBListGroupItem>
         </NavLink>
-        {/* Future Development Idea!!!!!
-        
-        <NavLink to="/maps" activeClassName="activeClass">
+        {/* 
+        <NavLink to="/testpage" activeClassName="activeClass">
+          <div />
           <MDBListGroupItem>
-           <MDBIcon icon="map" className="mr-3" />
-            Maps
+            <MDBIcon className="fas fa-vial mr-3" />
+            Test Page
           </MDBListGroupItem>
-  </NavLink>
-  */}
+        </NavLink>
+*/}
         <NavLink to="/404" activeClassName="activeClass">
+          <div />
           <MDBListGroupItem>
             <MDBIcon icon="exclamation" className="mr-3" />
             404

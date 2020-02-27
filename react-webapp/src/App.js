@@ -45,6 +45,7 @@ function App(props) {
     sessionStorage.clear();
     //props.history.push("/login");
   }
+
   class Content extends Component {
     render() {
       return (

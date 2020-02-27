@@ -7,7 +7,6 @@ function Auth(props) {
       {!props.appProps.isAuthenticating &&
         (props.appProps.isAuthenticated ? (
           <>
-            <Nav.Link href="/testpage">TestPage</Nav.Link>
             {props.appProps.contractAccess != "None" && (
               <Nav.Link href="/Contract/Dashboard">Contracts</Nav.Link>
             )}

@@ -30,6 +30,7 @@ function ContractPage(props) {
       <MDBCard className="m-2">
         <MDBCardHeader>
           <h2 className="m-3">Contract Dashboard</h2>
+          <h4>{sessionStorage.getItem("Contracts")}</h4>
         </MDBCardHeader>
       </MDBCard>
 
