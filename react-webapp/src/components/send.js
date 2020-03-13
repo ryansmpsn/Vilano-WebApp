@@ -33,8 +33,6 @@ const Send = new (class send extends React.Component {
   };
 
   update_auth = () => {
-    this.state.SessionID = sessionStorage.getItem("SessionID"); //will make it set state later
-    this.state.IDSession = sessionStorage.getItem("IDSession");
     axios.defaults.headers.common["SessionID"] = this.state.SessionID;
     axios.defaults.headers.common["IDSession"] = this.state.IDSession;
 
@@ -53,6 +51,8 @@ const Send = new (class send extends React.Component {
   };
 
   post = async (route, data, props, parsejson = false) => {
+    this.state.SessionID = sessionStorage.getItem("SessionID");
+    this.state.IDSession = sessionStorage.getItem("IDSession");
     this.update_auth();
     var send = this; // Must set this here, as when we enter promise, it will disappear.
 
@@ -76,6 +76,8 @@ const Send = new (class send extends React.Component {
   };
 
   get = async (route, props, parsejson = false) => {
+    this.state.SessionID = sessionStorage.getItem("SessionID");
+    this.state.IDSession = sessionStorage.getItem("IDSession");
     this.update_auth();
     var send = this;
 

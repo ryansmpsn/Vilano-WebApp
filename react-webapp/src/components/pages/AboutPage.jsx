@@ -1,8 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import { Jumbotron } from "react-bootstrap";
 
-const About = () => (
+const About = props => (
   <Jumbotron>
     <h1>Welcome to the PostalFleetSVS Beta WebSoftware</h1>
     <p>
@@ -14,7 +13,7 @@ const About = () => (
       this little informative area to tell you exactly what we are doing. At the
       moment this little space right here is just so the developer has some
       white space to fill in the page. If he didn't feel weird about grabbing
-      random text from the internet and putting it here, he totally would.{" "}
+      random text from the internet and putting it here, he totally would.
       <br />
       <br />
       At the end of the day, it would probably take the same amount of time to

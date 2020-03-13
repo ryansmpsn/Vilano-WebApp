@@ -27,6 +27,14 @@ main {
   background-color: #ededee;
 }
 
+.card-title {
+  height: 20px;
+}
+.card-text {
+  height: 10px;
+  margin: 5px;
+}
+
 .navbar-brand {
   margin-left: 15px;
   color: #2196f3 !important;

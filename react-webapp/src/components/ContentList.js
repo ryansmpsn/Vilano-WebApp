@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useFormFields } from "../libs/hookslib";
-import {
-  Row,
-  FormGroup,
-  FormControl,
-  Button,
-  Container,
-  Spinner
-} from "react-bootstrap";
+import { Row, FormGroup, Button, Container, Spinner } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Content from "./Content";
+import CreateModal from "./CreateModal";
+import Select from "react-select";
 
 function ContentList(props) {
   const [contentData, setContentData] = useState([]);
@@ -16,11 +11,15 @@ function ContentList(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [isSearching, setSearching] = useState(false);
   const [isGetAll, setGetAll] = useState(false);
-  const [contentSearch, setContentSearch] = useFormFields(props.contentSearch);
+  const [contentSearch, setContentSearch] = useState(props.contentSearch);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     //Can put stuff that needs to happen on load here.
-  }, []);
+    props.showAll().then(res => {
+      setContentInputRestrictions(res.data.restricted_input);
+    });
+  }, [props, contentInputRestrictions]);
 
   function search() {
     props
@@ -50,6 +49,17 @@ function ContentList(props) {
       });
   }
 
+  function doSetContentSearch(newContent, keyValue) {
+    let getValue = [];
+    newContent !== null &&
+      newContent.map((item, index) => {
+        return getValue.push(item.label);
+      });
+    let tempCon = contentSearch;
+    tempCon[keyValue] = getValue;
+    setContentSearch(tempCon);
+  }
+
   function handleSearch(event, all = false) {
     event.preventDefault();
     setIsLoading(true);
@@ -71,37 +81,50 @@ function ContentList(props) {
     return result;
   }
 
+  function openModal() {
+    setShowModal(true);
+    window.location.hash = "edit";
+    console.log(window.location.hash);
+  }
+
+  function closeModal() {
+    window.history.replaceState(null, null, " ");
+    setShowModal(false);
+  }
+
   return (
     <>
       <Container className="container-sm pl-5 pr-5 pt-2">
         <form onSubmit={handleSearch}>
+          <Select
+            autoFocus
+            options={props.selectOptions}
+            isMulti
+            placeholder={"Search for Contracts by ID"}
+            onChange={x => {
+              doSetContentSearch(x, "external_contract_code");
+            }}
+            isLoading={isLoading & isSearching}
+            isDisabled={isGetAll | (isSearching & isLoading)}
+          />
+
           {json_array(contentSearch).map((item, index) => (
             /*ControlID must match useFormFields value*/
 
-            <FormGroup key={"ContentSearch" + index} controlId={item[0]}>
-              <FormControl
-                autoFocus
-                type="text"
-                placeholder="Search for contract by ID" //TODO make display text based on contentsearch or something
-                value={item[1].replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
-                onChange={setContentSearch}
-              />
-            </FormGroup>
+            <FormGroup
+              key={"ContentSearch" + index}
+              controlId={item[0]}
+            ></FormGroup>
           ))}
 
           {(isLoading & isSearching) | isGetAll ? (
             <Spinner animation="border" variant="primary" />
           ) : (
             <>
-              <Button
-                type="submit"
-                isLoading={isLoading && isSearching}
-                disabled={isGetAll}
-              >
+              <Button type="submit" disabled={isGetAll}>
                 Search
               </Button>
               <Button
-                isLoading={isLoading && isGetAll}
                 disabled={isGetAll && isSearching}
                 onClick={e => {
                   handleSearch(e, true);
@@ -109,6 +132,10 @@ function ContentList(props) {
               >
                 Show All
               </Button>
+              <Button onClick={openModal}>Create New Contract</Button>
+              <Link to="/Contract/Trips" className="btn btn-primary">
+                View Trips
+              </Link>
             </>
           )}
         </form>
@@ -119,7 +146,9 @@ function ContentList(props) {
           <Row key="topRow" className="show-grid">
             {contentData.map((c, index) => (
               <Content
-                key={index}
+                onClick={props.onClick}
+                modalName={props.modalName}
+                key={index + "content"}
                 appProps={props.appProps}
                 Content={c}
                 inputRestrictions={contentInputRestrictions}
@@ -133,6 +162,18 @@ function ContentList(props) {
           </Row>
         </div>
       )}
+      <CreateModal
+        modalName={"Create New Contract"}
+        content={contentData}
+        inputRestrictions={contentInputRestrictions}
+        show={showModal}
+        closeModal={closeModal}
+        accessLevel={props.accessLevel}
+        appProps={props.appProps}
+        submitAction={editContent => {
+          return props.contentEditSubmitAction(editContent);
+        }}
+      />
     </>
   );
 }

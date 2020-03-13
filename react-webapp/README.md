@@ -1,3 +1,8 @@
+How to run this project:
+
+1. Download Visual Studio and Visual Studio Code.
+2.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

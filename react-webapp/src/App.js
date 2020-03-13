@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import Routes from "./Routes";
 import NavBar from "./components/layout/NavBar";
 import SideBar from "./components/layout/SideBar";
@@ -11,32 +12,46 @@ function App(props) {
   const [contractAccess, setContractAccess] = useState("None");
 
   useEffect(() => {
-    onLoad();
-  }, []);
+    if (isAuthenticated) {
+      Send.get("/Loggedin", { handleLogout, handleLogin })
+        .then(res => {
+          console.log("Logged in Successfuly");
+        }, userHasAuthenticated(true))
+        .catch(err => {
+          props.history.push("/");
+          console.log(err);
+          console.log("Logging Out");
+        });
+      console.log("Logging In");
+      setIsAuthenticating(false);
+    } else {
+      Send.get("/Loggedin", { handleLogin })
+        .then(res => {
+          handleRedirect();
+        })
+        .catch(err => {
+          console.log("You are not Logged in. Please Login.");
+        });
 
-  async function onLoad() {
-    Send.get("/Loggedin", { handleLogout, handleLogin })
-      .then(res => {
-        console.log("logging in");
-      })
-      .catch(err => {
-        console.log(err);
-        console.log("Logging Out");
-      });
-
-    setIsAuthenticating(false);
-  }
+      userHasAuthenticated(false);
+      setIsAuthenticating(false);
+    }
+  }, [isAuthenticated, props.history]);
 
   function handleLogin(sess) {
     if (sess.match === "true") {
       sessionStorage.setItem("SessionID", sess.SessionID);
       sessionStorage.setItem("IDSession", sess.IDSession);
       sess.NavPermissions.map(a => {
-        sessionStorage.setItem(a[0], a[1]);
+        return sessionStorage.setItem(a[0], a[1]);
       });
       userHasAuthenticated(true);
       setContractAccess(sessionStorage.getItem("Contracts"));
     }
+  }
+
+  function handleRedirect() {
+    return <Redirect to="/" />;
   }
 
   function handleLogout() {
@@ -57,8 +72,12 @@ function App(props) {
             userHasAuthenticated={userHasAuthenticated}
             contractAccess={contractAccess}
             isAuthenticating={isAuthenticating}
+            setContractAccess={setContractAccess}
           />
-          <SideBar />
+          <SideBar
+            contractAccess={contractAccess}
+            isAuthenticated={isAuthenticated}
+          />
           <main
             id="content"
             className="p-5"

@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Button, Card } from "react-bootstrap";
 import EditModal from "./EditModal";
-import { MDBCard, MDBCardTitle, MDBCardText, MDBContainer } from "mdbreact";
-import styled from "styled-components";
+import { MDBContainer } from "mdbreact";
 
 function Content(props) {
   const [content, setContent] = useState([]);
-  const [contentID, setContentID] = useState(0); //TODO would be contract_id and the like.
+  //TODO would be contract_id and the like.  const [contentID, setContentID] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [accessLevel, setAccessLevel] = useState("None");
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     onLoad();
-  }, []);
+  });
 
   function onLoad() {
     setAccessLevel(props.accessLevel);
@@ -42,45 +43,76 @@ function Content(props) {
     window.history.replaceState(null, null, " ");
     setShowModal(false);
   }
-  const Styles = styled.div`
-    .card {
-      padding: 10px;
-      margin: 10px;
-      margin-right: 0px;
-      height: 1050px;
-      width: 278px;
-    }
-    .card-body {
-      padding: 15px;
-      width: 250px;
-    }
-    .card-title {
-      height: 20px;
-    }
-    .card-text {
-      height: 15px;
-      margin: 10px;
-    }
-  `;
+
+  var cardClass =
+    "card border-primary mb-3" + (showContent ? "cardContent" : null);
+
   return (
     !isLoading && (
-      <Styles>
+      <div>
         <MDBContainer key={props.eventKeyIndex}>
-          <MDBCard>
+          <Card
+            className={cardClass}
+            style={{
+              padding: "10px",
+              margin: "10px",
+              marginRight: "0px",
+              width: "278px"
+            }}
+          >
             {content.map(
               (h, index) =>
                 h[0] !== "DONOTSHOW" && (
                   <div key={index}>
-                    <MDBCardTitle>{h[0]}:</MDBCardTitle>
-                    <MDBCardText>{h[1]}</MDBCardText>
-                    <hr />
+                    {h[0] === "Contract No." ||
+                    h[0] === "Company" ||
+                    h[0] === "Start City" ? (
+                      <>
+                        <Card.Title>{h[0]}:</Card.Title>
+                        <Card.Text>{h[1]}</Card.Text>
+                        <hr />
+                      </>
+                    ) : (
+                      <div hidden={!showContent}>
+                        <Card.Title>{h[0]}:</Card.Title>
+                        <Card.Text>{h[1]}</Card.Text>
+                        <hr />
+                      </div>
+                    )}
                   </div>
                 )
             )}
+            <Link
+              onClick={e => props.onClick(content[18][1])}
+              to="/Contract/Trips"
+              className="btn btn-primary"
+            >
+              View Trips
+            </Link>
+            <Button
+              hidden={showContent}
+              className=" btn btn-primary"
+              onClick={() => setShowContent(true)}
+              data-target="#collapseExample"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+            >
+              Show Contract
+            </Button>
+            <Button
+              hidden={!showContent}
+              className=" btn btn-primary"
+              onClick={() => setShowContent(false)}
+              data-target="#collapseExample"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+            >
+              Hide Contract
+            </Button>
             <Button onClick={openModal}>Edit</Button>
-          </MDBCard>
+          </Card>
           <EditModal
-            modalName="Set This Properly"
+            modalName={props.modalName}
             content={content}
             inputRestrictions={props.inputRestrictions}
             show={showModal}
@@ -92,7 +124,7 @@ function Content(props) {
             }}
           />
         </MDBContainer>
-      </Styles>
+      </div>
     )
   );
 }

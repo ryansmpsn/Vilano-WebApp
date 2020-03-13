@@ -82,10 +82,15 @@ class ProfilePage extends Component {
                   </MDBRow>
                   <MDBRow>
                     <MDBCol md="6">
-                      <MDBInput type="text" label="Email address" />
+                      <MDBInput type="email" label="Email address" />
                     </MDBCol>
                     <MDBCol md="6">
-                      <MDBInput type="text" label="Website address" />
+                      <MDBInput
+                        type="text"
+                        label="Department"
+                        value="Sofware Development"
+                        disabled
+                      />
                     </MDBCol>
                   </MDBRow>
                   <MDBRow>

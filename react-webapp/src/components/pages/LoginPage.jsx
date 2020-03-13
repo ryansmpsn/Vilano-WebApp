@@ -3,13 +3,12 @@ import {
   FormGroup,
   FormControl,
   FormLabel,
-  Button,
   Col,
   Spinner
 } from "react-bootstrap";
 import { useFormFields } from "../../libs/hookslib";
 import Send from "../send";
-import { MDBInput, MDBBtn, MDBCard } from "mdbreact";
+import { MDBBtn, MDBCard } from "mdbreact";
 
 export default function Login(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +26,6 @@ export default function Login(props) {
     setIsLoading(true);
     Send.post("/Login", fields, props)
       .then(res => {
-        setIsLoading(false);
         props.handleLogin(res.our_session);
         props.history.push("/");
       })
@@ -69,7 +67,7 @@ export default function Login(props) {
           ) : (
             <MDBBtn
               type="submit"
-              isloading={isLoading}
+              active={!isLoading}
               disabled={!validateForm()}
               gradient="blue"
             >
