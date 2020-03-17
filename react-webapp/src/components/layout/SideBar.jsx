@@ -14,7 +14,7 @@ class SideBar extends Component {
   }
   render() {
     return (
-      <div className="sidebar-fixed position-fixed">
+      <div className="sidebar-fixed position-fixed side-nav">
         <a href="/" className="mt-3 mb-3 waves-effect">
           <img
             alt="Vilano Management Services Inc."

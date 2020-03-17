@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
+import "./App.css";
 import { Redirect } from "react-router-dom";
 import Routes from "./Routes";
 import NavBar from "./components/layout/NavBar";

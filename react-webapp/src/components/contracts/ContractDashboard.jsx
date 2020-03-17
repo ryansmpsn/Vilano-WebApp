@@ -11,9 +11,7 @@ import {
   MDBIcon,
   MDBBadge,
   MDBListGroup,
-  MDBListGroupItem,
-  MDBNotification,
-  MDBContainer
+  MDBListGroupItem
 } from "mdbreact";
 import NavPerm from "../NavPerms";
 import Send from "../send";
@@ -27,7 +25,7 @@ class ContractDashboard extends Component {
       accessLevel: NavPerm.nav_perm_check(),
       selectOptions: [],
       selectedContract: "",
-      selectedTrip: "123"
+      selectedTrip: ""
     };
     this.setSelectedContract = this.setSelectedContract.bind(this);
     this.setSelectedTrip = this.setSelectedTrip.bind(this);
@@ -48,8 +46,8 @@ class ContractDashboard extends Component {
     return Send.post("/ViewContracts", "", this.props);
   }
 
-  contentEditSubmitAction = editContent => {
-    return Send.post("/UpdateContract", editContent, this.props);
+  contractEditSubmitAction = editContract => {
+    return Send.post("/UpdateContract", editContract, this.props);
   };
 
   componentDidMount() {
@@ -66,19 +64,6 @@ class ContractDashboard extends Component {
     });
   }
 
-  testToast() {
-    return (
-      <MDBNotification
-        show
-        fade
-        icon="envelope"
-        iconClassName="green-text"
-        title="New Message"
-        message="Hello, user! You have a new message."
-        text="just now"
-      />
-    );
-  }
   render() {
     return (
       <Router>
@@ -145,18 +130,16 @@ class ContractDashboard extends Component {
                     <Link className="btn btn-primary" to="/contracts/dashboard">
                       View Contracts
                     </Link>
-                    <Link to="/fixthis" className="btn btn-primary">
+                    <Link to="/contracts/trips" className="btn btn-primary">
                       View Trips
                     </Link>
-                    <Link to="contracts/routes" className="btn btn-primary">
+                    <Link to="/contracts/routes" className="btn btn-primary">
                       View Routes
                     </Link>
                     <Link className="btn btn-primary" to="/topics">
                       Test Nested Trips
                     </Link>
-                    <Button onClick={this.testToast()}>
-                      Contract Bid Management
-                    </Button>
+                    <Button href="/bids">Contract Bid Management</Button>
                   </ButtonGroup>
                 </div>
               </MDBCardBody>
@@ -173,7 +156,7 @@ class ContractDashboard extends Component {
           contractID
           modalName="Edit Contract"
           accessLevel={this.state.accessLevel}
-          contentEditSubmitAction={this.contentEditSubmitAction}
+          contractEditSubmitAction={this.contractEditSubmitAction}
           SearchFunction={contractSearch => {
             return this.search(contractSearch);
           }}
@@ -181,32 +164,13 @@ class ContractDashboard extends Component {
             return this.show_all();
           }}
           appProps={this.props}
-          contentSearch={{
+          contractSearch={{
             external_contract_code: []
           }}
           getContracts={() => {
             return this.getContracts();
           }}
         />
-        <MDBContainer
-          style={{
-            width: "auto",
-            position: "fixed",
-            bottom: "10px",
-            right: "10px",
-            zIndex: 9999
-          }}
-        >
-          <MDBNotification
-            show
-            fade
-            icon="exclamation"
-            iconClassName="green-text"
-            title="Contract Notification"
-            message="Contract has been succesfully saved."
-            text="just now"
-          />
-        </MDBContainer>
       </Router>
     );
   }

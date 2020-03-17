@@ -7,92 +7,26 @@ import {
   FormLabel,
   Spinner
 } from "react-bootstrap";
-import InputFormControl from "./InputFormControl";
-import NavPerm from "./NavPerms";
+import { MDBNotification } from "mdbreact";
+import InputFormControl from "../../InputFormControl";
+import NavPerm from "../../NavPerms";
 import DatePicker from "react-date-picker";
 
-export default class CreateModal extends React.Component {
+export default class EditModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      date: new Date(),
       modalName: props.modalName,
       show: props.show,
-      content: [
-        ["DONOTSHOW", null, "status_id", "", "None"],
-        ["DONOTSHOW", null, "company_id", "", "None"],
-        ["DONOTSHOW", null, "contract_id", "", "None"],
-        ["DONOTSHOW", null, "end_city_id", "", "None"],
-        [
-          "Company",
-          "Vilano Management Systems, Inc.",
-          "company_name",
-          "",
-          "select"
-        ],
-        ["Contract Status", "New", "status_value", "", "select"],
-        ["Administration Office", null, "facility_name", "", "select"],
-        ["DONOTSHOW", null, "start_city_id", "", "None"],
-        ["DONOTSHOW", null, "contract_type_id", "", "None"],
-        ["End Contract Term", "2020-01-01", "end_contract_date", "", "date"],
-        ["Date of Solicitation", "2020-01-01", "solicitation_date", "", "date"],
-        ["Contract Type Code", null, "contract_type_code", "", "select"],
-        [
-          "Begin Contract Term",
-          "2020-01-10",
-          "begin_contract_date",
-          "",
-          "date"
-        ],
-        ["Solicitation No.", null, "solicitation_number", "", "text"],
-        ["DONOTSHOW", null, "contract_division_id", "", "None"],
-        ["DONOTSHOW", null, "end_state_province_id", "", "None"],
-        ["Division", null, "contract_division_code", "", "select"],
-        ["End City", null, "custom_end_destination", "", "text"],
-        ["Contract No.", "Test007", "external_contract_code", "", "text"],
-        ["DONOTSHOW", null, "start_state_province_id", "", "None"],
-        ["Start City", null, "custom_start_destination", "", "text"]
-      ],
+      content: props.content,
       Permissions: NavPerm.nav_hash_perm_check(),
-      editContent: [
-        ["DONOTSHOW", null, "status_id", "", "None"],
-        ["DONOTSHOW", null, "company_id", "", "None"],
-        ["DONOTSHOW", null, "contract_id", "", "None"],
-        ["DONOTSHOW", null, "end_city_id", "", "None"],
-        [
-          "Company",
-          "Vilano Management Systems, Inc.",
-          "company_name",
-          "",
-          "select"
-        ],
-        ["Contract Status", "New", "status_value", "", "select"],
-        ["Administration Office", null, "facility_name", "", "select"],
-        ["DONOTSHOW", null, "start_city_id", "", "None"],
-        ["DONOTSHOW", null, "contract_type_id", "", "None"],
-        ["End Contract Term", "2020-01-01", "end_contract_date", "", "date"],
-        ["Date of Solicitation", "2020-01-01", "solicitation_date", "", "date"],
-        ["Contract Type Code", null, "contract_type_code", "", "select"],
-        [
-          "Begin Contract Term",
-          "2020-01-10",
-          "begin_contract_date",
-          "",
-          "date"
-        ],
-        ["Solicitation No.", null, "solicitation_number", "", "text"],
-        ["DONOTSHOW", null, "contract_division_id", "", "None"],
-        ["DONOTSHOW", null, "end_state_province_id", "", "None"],
-        ["Division", null, "contract_division_code", "", "select"],
-        ["End City", null, "custom_end_destination", "", "text"],
-        ["Contract No.", "Test007", "external_contract_code", "", "text"],
-        ["DONOTSHOW", null, "start_state_province_id", "", "None"],
-        ["Start City", null, "custom_start_destination", "", "text"]
-      ],
+      editContent: props.content,
       inputRestrictions: props.inputRestrictions,
       submitting: false,
       extraButtonContent: props.extraButtonContent || null,
-      submitAction: editContent => {
-        return props.submitAction(editContent);
+      submitAction: editcontent => {
+        return props.submitAction(editcontent);
       },
       props: props.appProps
     };
@@ -162,7 +96,17 @@ export default class CreateModal extends React.Component {
         hand.setState({ submitting: false });
         console.log(err);
       });
-    this.props.closeModal();
+    return (
+      <MDBNotification
+        show
+        fade
+        icon="envelope"
+        iconClassName="green-text"
+        title="New Message"
+        message="Hello, user! You have a new message."
+        text="just now"
+      />
+    );
   }
 
   set_variable_id(object, variable_key, value) {
@@ -184,6 +128,7 @@ export default class CreateModal extends React.Component {
   render() {
     return (
       <Modal show={this.state.show} onHide={this.props.closeModal}>
+        {console.log(this.state.Permissions)}
         <Modal.Header closeButton>
           <Modal.Title>{this.state.modalName}</Modal.Title>
         </Modal.Header>
@@ -240,7 +185,7 @@ export default class CreateModal extends React.Component {
                               this.setState({ editContent: object });
                             }}
                             content={item}
-                            inputRestrictions={this.props.inputRestrictions}
+                            inputRestrictions={this.state.inputRestrictions}
                           />
                         )) ||
                         (item[4] === "date" && (

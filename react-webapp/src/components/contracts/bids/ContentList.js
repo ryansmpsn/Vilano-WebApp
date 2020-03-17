@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Row, FormGroup, Button, Container, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import Content from "./Content";
 import CreateModal from "./CreateModal";
 import Select from "react-select";
@@ -14,12 +13,25 @@ function ContentList(props) {
   const [contentSearch, setContentSearch] = useState(props.contentSearch);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    //Can put stuff that needs to happen on load here.
-    props.showAll().then(res => {
-      setContentInputRestrictions(res.data.restricted_input);
-    });
-  }, [props, contentInputRestrictions]);
+  function getSelect() {
+    contentInputRestrictions === [] &&
+      props.showAll().then(res => {
+        setContentInputRestrictions(res.data.restricted_input);
+      });
+    return (
+      <Select
+        autoFocus
+        options={props.selectOptions}
+        isMulti
+        placeholder={"Search for Contracts by ID"}
+        onChange={x => {
+          doSetContentSearch(x, "external_contract_code");
+        }}
+        isLoading={isLoading & isSearching}
+        isDisabled={isGetAll | (isSearching & isLoading)}
+      />
+    );
+  }
 
   function search() {
     props
@@ -83,7 +95,7 @@ function ContentList(props) {
 
   function openModal() {
     setShowModal(true);
-    window.location.hash = "edit";
+    window.location.hash = "create";
     console.log(window.location.hash);
   }
 
@@ -96,17 +108,7 @@ function ContentList(props) {
     <>
       <Container className="container-sm pl-5 pr-5 pt-2">
         <form onSubmit={handleSearch}>
-          <Select
-            autoFocus
-            options={props.selectOptions}
-            isMulti
-            placeholder={"Search for Contracts by ID"}
-            onChange={x => {
-              doSetContentSearch(x, "external_contract_code");
-            }}
-            isLoading={isLoading & isSearching}
-            isDisabled={isGetAll | (isSearching & isLoading)}
-          />
+          {getSelect()}
 
           {json_array(contentSearch).map((item, index) => (
             /*ControlID must match useFormFields value*/
@@ -133,9 +135,6 @@ function ContentList(props) {
                 Show All
               </Button>
               <Button onClick={openModal}>Create New Contract</Button>
-              <Link to="/Contract/Trips" className="btn btn-primary">
-                View Trips
-              </Link>
             </>
           )}
         </form>

@@ -1,6 +1,5 @@
 import React from "react";
 import { Jumbotron } from "react-bootstrap";
-
 const About = props => (
   <Jumbotron>
     <h1>Welcome to the PostalFleetSVS Beta WebSoftware</h1>

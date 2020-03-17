@@ -9,21 +9,26 @@ import ProfilePage from "./components/pages/ProfilePage";
 import testpage from "./components/pages/TestPage";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import ContractDashboard from "./components/contracts/ContractDashboard";
-import BidContractDashboard from "./components/contracts/bids/BidContractDashboard";
+import BidDashboard from "./components/contracts/bids/BidDashboard";
 
 class Routes extends React.Component {
   render() {
     return (
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/about" component={About} />
+        <Route
+          exact
+          path="/about"
+          render={props => <About {...this.props} />}
+        />
+
         <Route
           path="/contracts"
           render={appProps => <ContractDashboard {...this.props} />}
         />
         <Route
-          path="/contracts/bids"
-          render={appProps => <BidContractDashboard {...this.props} />}
+          path="/bids"
+          render={appProps => <BidDashboard {...this.props} />}
         />
         <AppliedRoute
           path="/login"

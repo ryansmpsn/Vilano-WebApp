@@ -1,7 +1,12 @@
 How to run this project:
 
-1. Download Visual Studio and Visual Studio Code.
-2.
+1. Download and setup Visual Studio, Visual Studio Code, and Google Cloud SDK.
+2. Run 'gcloud init' in the Google Cloud SDK.
+3. Clone respository using Google Cloud SDK.
+4. Open VSCode and select the branch you'd like to run.
+5. Press 'CTRL + `' to open the terminal in VSCode.
+6. cd to react-webapp & Run 'npm install'.
+7. Run 'npm start'.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -1,33 +1,29 @@
 import React, { Component } from "react";
-import ContentList from "../ContentList";
 import { Jumbotron } from "react-bootstrap";
 import { MDBCard, MDBCardHeader, MDBCardBody } from "mdbreact";
+import ContentList from "./ContentList";
 
-class ContractManagement extends Component {
-  state = {
-    selectOptions: [],
-    accessLevel: sessionStorage.getItem("Contracts")
-  };
+class ViewBids extends Component {
+  state = {};
   render() {
     return (
       <MDBCard className="m-2">
         <MDBCardHeader>
-          <h4>Contract Statistics</h4>
+          <h4>Contract Information</h4>
         </MDBCardHeader>
         <MDBCardBody>
           <Jumbotron>
             <ContentList
-              selectOptions={this.state.selectOptions}
+              onClick={this.props.onClick}
+              selectOptions={this.props.selectOptions}
               contractID
               modalName="Edit Contract"
-              accessLevel={this.state.accessLevel}
+              accessLevel={this.props.accessLevel}
               contentEditSubmitAction={this.props.contentEditSubmitAction}
               SearchFunction={contractSearch => {
-                return this.props.search(contractSearch);
+                return this.props.SearchFunction(contractSearch);
               }}
-              showAll={() => {
-                return this.props.show_all();
-              }}
+              showAll={this.props.showAll}
               appProps={this.props}
               contentSearch={{
                 external_contract_code: []
@@ -43,4 +39,4 @@ class ContractManagement extends Component {
   }
 }
 
-export default ContractManagement;
+export default ViewBids;

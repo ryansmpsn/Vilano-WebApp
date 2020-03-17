@@ -16,16 +16,16 @@ import {
 import NavPerm from "../../NavPerms";
 import Send from "../../send";
 
-import ContractRoutes from "./BidContractRoutes";
+import BidRoutes from "./BidRoutes";
 
-class BidContractDashboard extends Component {
+class BidDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       accessLevel: NavPerm.nav_perm_check(),
       selectOptions: [],
       selectedContract: "",
-      selectedTrip: "123"
+      selectedTrip: ""
     };
     this.setSelectedContract = this.setSelectedContract.bind(this);
     this.setSelectedTrip = this.setSelectedTrip.bind(this);
@@ -63,6 +63,7 @@ class BidContractDashboard extends Component {
       this.setState({ selectOptions: getSelectOptions });
     });
   }
+
   render() {
     return (
       <Router>
@@ -126,13 +127,13 @@ class BidContractDashboard extends Component {
               <MDBCardBody>
                 <div className="d-flex flex-column">
                   <ButtonGroup size="lg">
-                    <Link className="btn btn-primary" to="/Contract/Dashboard">
+                    <Link className="btn btn-primary" to="/bids">
                       View Contracts
                     </Link>
-                    <Link to="/fixthis" className="btn btn-primary">
+                    <Link to="/bids/trips" className="btn btn-primary">
                       View Trips
                     </Link>
-                    <Link to="/Contract/routes" className="btn btn-primary">
+                    <Link to="/bids/routes" className="btn btn-primary">
                       View Routes
                     </Link>
                     <Link className="btn btn-primary" to="/topics">
@@ -148,7 +149,7 @@ class BidContractDashboard extends Component {
           </MDBCol>
         </MDBRow>
 
-        <ContractRoutes
+        <BidRoutes
           setSelectedTrip={this.setSelectedTrip}
           onClick={this.setSelectedContract}
           selectedTrip={this.state.selectedTrip}
@@ -177,4 +178,4 @@ class BidContractDashboard extends Component {
   }
 }
 
-export default BidContractDashboard;
+export default BidDashboard;

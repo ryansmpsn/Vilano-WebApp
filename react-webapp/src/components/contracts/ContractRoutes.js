@@ -24,7 +24,8 @@ class ContractRoutes extends React.Component {
         />
         <Route
           exact
-          path="/fixthis"
+          path="/contracts/trips
+          "
           render={props => <ViewTrips {...props} {...this.props} />}
         />
       </Switch>
