@@ -18,7 +18,6 @@ function Content(props) {
 
   function onLoad() {
     setAccessLevel(props.accessLevel);
-
     setContent(props.Content);
     setIsLoading(false);
   }
@@ -83,8 +82,8 @@ function Content(props) {
                 )
             )}
             <Link
-              onClick={e => props.onClick(content[18][1])}
-              to="/Contract/Trips"
+              onClick={e => props.onClick(content[16][1])}
+              to="/bids/trips"
               className="btn btn-primary"
             >
               View Trips

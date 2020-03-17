@@ -1,22 +1,15 @@
-      {contract.map(
-        (h, index) =>
-          h[0] !== "DONOTSHOW" && (
-            <div key={index}>
-              {h[0] === "Contract No." ||
-              h[0] === "Company" ||
-              h[0] === "Start City" ? (
-                <>
-                  <Card.Title>{h[0]}:</Card.Title>
-                  <Card.Text>{h[1]}</Card.Text>
-                  <hr />
-                </>
-              ) : (
-                <div hidden>
-                  <Card.Title>{h[0]}:</Card.Title>
-                  <Card.Text>{h[1]}</Card.Text>
-                  <hr />
-                </div>
-              )}
-            </div>
-          )
-      )}
+
+
+        let columnData = contractData[0];
+  columnData = columnData.map(
+    (c, index) =>
+      c[0] !== "DONOTSHOW" && {
+        label: c[0],
+        field: c[0],
+        sort: "asc"
+      },
+    {
+      label: "View Trips",
+      field: "viewTrips"
+    }
+  );

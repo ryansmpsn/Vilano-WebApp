@@ -66,7 +66,7 @@ class ViewTrips extends Component {
                   </MDBCardBody>
                   <Link
                     onClick={e => this.props.setSelectedTrip("Trip 326")}
-                    to="/Contract/Routes"
+                    to="/contracts/routes"
                     className="btn btn-primary"
                   >
                     View Routes

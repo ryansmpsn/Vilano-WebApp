@@ -1,6 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import Topics from "./Topics";
+import { Route, Switch, Redirect } from "react-router-dom";
 import ViewTrips from "./ViewTrips";
 import ViewContracts from "./ViewContracts";
 import ViewRoutes from "./ViewRoutes";
@@ -14,9 +13,7 @@ class ContractRoutes extends React.Component {
           path="/contracts/dashboard"
           render={props => <ViewContracts {...props} {...this.props} />}
         />
-        <Route path="/topics">
-          <Topics />
-        </Route>
+
         <Route
           exact
           path="/contracts/routes"
@@ -24,10 +21,10 @@ class ContractRoutes extends React.Component {
         />
         <Route
           exact
-          path="/contracts/trips
-          "
+          path="/contracts/trips"
           render={props => <ViewTrips {...props} {...this.props} />}
         />
+        <Redirect from="/contracts" to="/contracts/dashboard" />
       </Switch>
     );
   }

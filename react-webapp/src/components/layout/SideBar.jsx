@@ -30,21 +30,7 @@ class SideBar extends Component {
               Dashboard
             </MDBListGroupItem>
           </NavLink>
-          <NavLink to="/profile" activeClassName="activeClass">
-            <div />
-            <MDBListGroupItem>
-              <MDBIcon icon="user" className="mr-3" />
-              Profile
-            </MDBListGroupItem>
-          </NavLink>
           <SideBarAuth appProps={this.state.props} />
-          <NavLink to="/About" activeClassName="activeClass">
-            <div />
-            <MDBListGroupItem>
-              <MDBIcon icon="question" className="mr-3" />
-              About
-            </MDBListGroupItem>
-          </NavLink>
           <NavLink to="/testpage" activeClassName="activeClass">
             <div />
             <MDBListGroupItem>

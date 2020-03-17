@@ -1,22 +1,17 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { Button, ButtonGroup } from "react-bootstrap";
-import CountUp from "react-countup";
+import { ButtonGroup } from "react-bootstrap";
 import {
   MDBCard,
   MDBCardHeader,
   MDBCardBody,
   MDBRow,
   MDBCol,
-  MDBIcon,
-  MDBBadge,
-  MDBListGroup,
-  MDBListGroupItem
+  MDBIcon
 } from "mdbreact";
 import NavPerm from "../../NavPerms";
 import Send from "../../send";
-
-import BidRoutes from "./BidRoutes";
+import ViewBids from "./ViewBids";
 
 class BidDashboard extends Component {
   constructor(props) {
@@ -76,51 +71,6 @@ class BidDashboard extends Component {
                     icon="file-invoice-dollar"
                     className="primary-color"
                   />
-                  <MDBRow style={{ margin: -20 }}>
-                    <MDBCol md="4" className="ml-auto mb-4">
-                      <MDBCard className="mb-4">
-                        <MDBCardHeader>Important Statistics</MDBCardHeader>
-                        <MDBCardBody>
-                          <MDBListGroup className="list-group-flush">
-                            <MDBListGroupItem>
-                              Current Active Contracts
-                              <MDBBadge
-                                color="primary-color"
-                                pill
-                                className="float-right"
-                              >
-                                <CountUp
-                                  start={0}
-                                  end={this.state.selectOptions.length}
-                                  duration={5}
-                                />
-                              </MDBBadge>
-                            </MDBListGroupItem>
-                            <MDBListGroupItem>
-                              Total Trips
-                              <MDBBadge
-                                color="default-color-dark"
-                                pill
-                                className="float-right"
-                              >
-                                <CountUp start={0} end={123} duration={5} />
-                              </MDBBadge>
-                            </MDBListGroupItem>
-                            <MDBListGroupItem>
-                              Total Routes
-                              <MDBBadge
-                                color="unique-color"
-                                pill
-                                className="float-right"
-                              >
-                                <CountUp start={0} end={321} duration={8} />
-                              </MDBBadge>
-                            </MDBListGroupItem>
-                          </MDBListGroup>
-                        </MDBCardBody>
-                      </MDBCard>
-                    </MDBCol>
-                  </MDBRow>
                 </div>
                 <h1 className="m-3 text-center">Contract Bid Dashboard</h1>
               </MDBCardHeader>
@@ -128,7 +78,7 @@ class BidDashboard extends Component {
                 <div className="d-flex flex-column">
                   <ButtonGroup size="lg">
                     <Link className="btn btn-primary" to="/bids">
-                      View Contracts
+                      View Bids
                     </Link>
                     <Link to="/bids/trips" className="btn btn-primary">
                       View Trips
@@ -136,12 +86,6 @@ class BidDashboard extends Component {
                     <Link to="/bids/routes" className="btn btn-primary">
                       View Routes
                     </Link>
-                    <Link className="btn btn-primary" to="/topics">
-                      Test Nested Trips
-                    </Link>
-                    <Button disabled>Contract Management</Button>
-                    <Button disabled>Trip Management</Button>
-                    <Button disabled>Route Management</Button>
                   </ButtonGroup>
                 </div>
               </MDBCardBody>
@@ -149,7 +93,7 @@ class BidDashboard extends Component {
           </MDBCol>
         </MDBRow>
 
-        <BidRoutes
+        <ViewBids
           setSelectedTrip={this.setSelectedTrip}
           onClick={this.setSelectedContract}
           selectedTrip={this.state.selectedTrip}

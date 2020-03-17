@@ -3,6 +3,7 @@ import { Row, FormGroup, Button, Container, Spinner } from "react-bootstrap";
 import Content from "./Content";
 import CreateModal from "./CreateModal";
 import Select from "react-select";
+import ContractTable from "../ContractTable";
 
 function ContentList(props) {
   const [contentData, setContentData] = useState([]);
@@ -12,6 +13,7 @@ function ContentList(props) {
   const [isGetAll, setGetAll] = useState(false);
   const [contentSearch, setContentSearch] = useState(props.contentSearch);
   const [showModal, setShowModal] = useState(false);
+  const [tableView, setTableView] = useState(false);
 
   function getSelect() {
     contentInputRestrictions === [] &&
@@ -34,6 +36,7 @@ function ContentList(props) {
   }
 
   function search() {
+    setTableView(false);
     props
       .SearchFunction(contentSearch)
       .then(res => {
@@ -47,6 +50,7 @@ function ContentList(props) {
   }
 
   function show_all() {
+    setTableView(true);
     props
       .showAll()
       .then(res => {
@@ -94,8 +98,8 @@ function ContentList(props) {
   }
 
   function openModal() {
-    setShowModal(true);
     window.location.hash = "create";
+    setShowModal(true);
     console.log(window.location.hash);
   }
 
@@ -139,28 +143,32 @@ function ContentList(props) {
           )}
         </form>
       </Container>
-      <br />
-      {!isLoading && (
-        <div className="content">
-          <Row key="topRow" className="show-grid">
-            {contentData.map((c, index) => (
-              <Content
-                onClick={props.onClick}
-                modalName={props.modalName}
-                key={index + "content"}
-                appProps={props.appProps}
-                Content={c}
-                inputRestrictions={contentInputRestrictions}
-                eventKeyIndex={index}
-                submitAction={editContent => {
-                  return props.contentEditSubmitAction(editContent);
-                }}
-                accessLevel={props.accessLevel}
-              />
-            ))}
-          </Row>
-        </div>
-      )}
+      <hr />
+      {tableView
+        ? !isLoading && (
+            <ContractTable onClick={props.onClick} contractData={contentData} />
+          )
+        : !isLoading && (
+            <div className="content">
+              <Row key="topRow" className="show-grid">
+                {contentData.map((c, index) => (
+                  <Content
+                    onClick={props.onClick}
+                    modalName={props.modalName}
+                    key={index + "content"}
+                    appProps={props.appProps}
+                    Content={c}
+                    inputRestrictions={contentInputRestrictions}
+                    eventKeyIndex={index}
+                    submitAction={editContent => {
+                      return props.contentEditSubmitAction(editContent);
+                    }}
+                    accessLevel={props.accessLevel}
+                  />
+                ))}
+              </Row>
+            </div>
+          )}
       <CreateModal
         modalName={"Create New Contract"}
         content={contentData}

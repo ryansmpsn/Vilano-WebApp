@@ -4,9 +4,7 @@ import {
   MDBNavbarBrand,
   MDBNavbarNav,
   MDBNavbarToggler,
-  MDBCollapse,
-  MDBNavItem,
-  MDBNavLink
+  MDBCollapse
 } from "mdbreact";
 import Clock from "./Clock";
 import Auth from "./NavBarAuth";
@@ -48,11 +46,6 @@ class NavBar extends Component {
           </MDBNavbarBrand>
           <MDBNavbarToggler onClick={this.onClick} />
           <MDBCollapse isOpen={this.state.collapse} navbar>
-            <MDBNavbarNav left>
-              <MDBNavItem active>
-                <MDBNavLink to="/">Home</MDBNavLink>
-              </MDBNavItem>
-            </MDBNavbarNav>
             <MDBNavbarNav right>
               <Auth appProps={this.state.props} />
             </MDBNavbarNav>

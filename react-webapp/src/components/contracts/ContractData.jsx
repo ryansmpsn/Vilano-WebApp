@@ -122,8 +122,12 @@ function ContractData(props) {
       </Container>
       <hr />
       {tableView
-        ? !isLoading && <ContractTable                     onClick={props.onClick}
-        contractData={contractData} />
+        ? !isLoading && (
+            <ContractTable
+              onClick={props.onClick}
+              contractData={contractData}
+            />
+          )
         : !isLoading && (
             <div className="contract">
               <Row key="topRow" className="show-grid">

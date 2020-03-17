@@ -128,7 +128,6 @@ export default class EditModal extends React.Component {
   render() {
     return (
       <Modal show={this.state.show} onHide={this.props.closeModal}>
-        {console.log(this.state.Permissions)}
         <Modal.Header closeButton>
           <Modal.Title>{this.state.modalName}</Modal.Title>
         </Modal.Header>

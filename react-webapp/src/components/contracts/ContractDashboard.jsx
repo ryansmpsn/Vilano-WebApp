@@ -27,16 +27,14 @@ class ContractDashboard extends Component {
       selectedContract: "",
       selectedTrip: ""
     };
-    this.setSelectedContract = this.setSelectedContract.bind(this);
-    this.setSelectedTrip = this.setSelectedTrip.bind(this);
   }
 
-  setSelectedContract(e) {
+  setSelectedContract = e => {
     return this.setState({ selectedContract: e });
-  }
-  setSelectedTrip(e) {
+  };
+  setSelectedTrip = e => {
     return this.setState({ selectedTrip: e });
-  }
+  };
 
   search = contractSearch => {
     return Send.post("/ViewContracts", contractSearch, this.props);
@@ -103,7 +101,7 @@ class ContractDashboard extends Component {
                                 pill
                                 className="float-right"
                               >
-                                <CountUp start={0} end={123} duration={5} />
+                                <CountUp start={0} end={1234} duration={5} />
                               </MDBBadge>
                             </MDBListGroupItem>
                             <MDBListGroupItem>
@@ -113,7 +111,7 @@ class ContractDashboard extends Component {
                                 pill
                                 className="float-right"
                               >
-                                <CountUp start={0} end={321} duration={8} />
+                                <CountUp start={0} end={2371} duration={8} />
                               </MDBBadge>
                             </MDBListGroupItem>
                           </MDBListGroup>
@@ -135,9 +133,6 @@ class ContractDashboard extends Component {
                     </Link>
                     <Link to="/contracts/routes" className="btn btn-primary">
                       View Routes
-                    </Link>
-                    <Link className="btn btn-primary" to="/topics">
-                      Test Nested Trips
                     </Link>
                     <Button href="/bids">Contract Bid Management</Button>
                   </ButtonGroup>
