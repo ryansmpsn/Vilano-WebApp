@@ -18,49 +18,19 @@ function ContractTable(props) {
     )
   }));
 
+  let columnData = contractData[0]
+    .filter(labelFilter)
+    .map((c, index) => ({ label: c[0], field: c[0], sort: "asc" }));
+  columnData = [...columnData, { label: "View Trips", field: "viewTrips" }];
+
+  function labelFilter(tableData) {
+    return tableData[0] !== "DONOTSHOW";
+  }
   const data = {
-    columns: [
-      { label: "Company", field: "Company", sort: "asc" },
-      { label: "Contract Status", field: "Contract Status", sort: "asc" },
-      {
-        label: "Administraction Office",
-        field: "Administraction Office",
-        sort: "asc"
-      },
-      {
-        label: "End Contract Term",
-        field: "End Contract Term",
-        sort: "asc"
-      },
-      {
-        label: "Date of Solicitation",
-        field: "Date of Solicitation",
-        sort: "asc"
-      },
-      {
-        label: "Contract Type Code",
-        field: "Contract Type Code",
-        sort: "asc"
-      },
-      {
-        label: "Begin Contract Term",
-        field: "Begin Contract Term",
-        sort: "asc"
-      },
-      { label: "Solicitation No.", field: "Solicitation No.", sort: "asc" },
-      { label: "Division", field: "Division", sort: "asc" },
-      { label: "End City", field: "End City", sort: "asc" },
-      { label: "Contract No.", field: "Contract No.", sort: "asc" },
-      { label: "Start City", field: "Start City", sort: "asc" },
-      { label: "View Trips", field: "viewTrips" }
-    ],
+    columns: columnData,
     rows: rowData
   };
-  return (
-    <>
-      <MDBDataTable striped bordered hover responsive data={data} />
-    </>
-  );
+  return <MDBDataTable striped bordered hover responsive data={data} />;
 }
 
 export default ContractTable;

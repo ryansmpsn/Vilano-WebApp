@@ -4,7 +4,7 @@ import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer } from "mdbreact";
 import { Spinner, Card } from "react-bootstrap";
 
 class ViewTrips extends Component {
-  state = { isLoading: false, route: "" };
+  state = { isLoading: false, route: "null" };
 
   setRoute(e) {
     this.setState({ route: e });

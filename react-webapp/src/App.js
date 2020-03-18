@@ -66,12 +66,6 @@ function App(props) {
     render() {
       return (
         <React.Fragment>
-          {/* 
-          <Notifications
-            header="Alert! Alert!"
-            body="Hello, world! This is a toast message.It comes from App.js."
-        /> 
-*/}
           <NavBar
             handleLogout={handleLogout}
             handleLogin={handleLogin}

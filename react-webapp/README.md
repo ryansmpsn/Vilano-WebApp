@@ -1,3 +1,11 @@
+How to deploy this project:
+
+1. Run 'gcloud init' in the Google Cloud SDK.
+2. run 'npm run build'
+3. navigate to app.yaml
+4. run 'gcloud app deploy'
+5. delete old version on google console
+
 How to run this project:
 
 1. Download and setup Visual Studio, Visual Studio Code, and Google Cloud SDK.

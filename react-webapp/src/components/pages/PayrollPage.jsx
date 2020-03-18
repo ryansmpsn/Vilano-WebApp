@@ -15,11 +15,7 @@ function PayrollPage() {
         <MDBCard className="cascading-admin-card">
           <MDBCardHeader>
             <div className="admin-up">
-              <MDBIcon
-                icon="toilet-paper"
-                chart-line
-                className="primary-color"
-              />
+              <MDBIcon icon="toilet-paper" className="primary-color" />
             </div>
             <h1 className="m-3 text-center">Payroll</h1>
           </MDBCardHeader>

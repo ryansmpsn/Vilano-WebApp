@@ -2,7 +2,7 @@ import React from "react";
 import { Jumbotron } from "react-bootstrap";
 const About = props => (
   <Jumbotron>
-    <h1>Welcome to the PostalFleetSVS Beta WebSoftware</h1>
+    <h1>Welcome to the PostalFleetSVS Alpha WebSoftware</h1>
     <p>
       We are ever working on making this site a useful tool for you, so that you
       can more easily take care of things like adding/updating contracts, task

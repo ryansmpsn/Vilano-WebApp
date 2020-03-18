@@ -23,21 +23,25 @@ class Routes extends React.Component {
           path="/about"
           render={props => <About {...this.props} />}
         />
-
-        <Route
-          path="/contracts"
-          render={appProps => <ContractDashboard {...this.props} />}
-        />
-        <Route
-          path="/bids"
-          render={appProps => <BidDashboard {...this.props} />}
-        />
         <AppliedRoute
           path="/login"
           exact
           component={Login}
           appProps={this.props}
         />
+        {this.props.isAuthenticated && (
+          <Route
+            path="/contracts"
+            render={appProps => <ContractDashboard {...this.props} />}
+          />
+        )}
+        {this.props.isAuthenticated && (
+          <Route
+            path="/bids"
+            render={appProps => <BidDashboard {...this.props} />}
+          />
+        )}
+
         <AppliedRoute
           path="/testpage"
           exact
@@ -48,8 +52,7 @@ class Routes extends React.Component {
         <Route path="/performance" component={PerformancePage} />
         <Route path="/financials" component={FinancialsPage} />
         <Route path="/profile" component={ProfilePage} />
-
-        {/* Finally, catch all unmatched routes */}
+        {/* Catch all unmatched routes */}
         <Route component={NotFoundPage} />
       </Switch>
     );

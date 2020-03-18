@@ -24,8 +24,8 @@ class ContractDashboard extends Component {
     this.state = {
       accessLevel: NavPerm.nav_perm_check(),
       selectOptions: [],
-      selectedContract: "",
-      selectedTrip: ""
+      selectedContract: "null",
+      selectedTrip: "null"
     };
   }
 

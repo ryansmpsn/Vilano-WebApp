@@ -15,7 +15,7 @@ function FinancialsPage() {
         <MDBCard className="cascading-admin-card">
           <MDBCardHeader>
             <div className="admin-up">
-              <MDBIcon icon="money-bill" chart-line className="primary-color" />
+              <MDBIcon icon="money-bill" className="primary-color" />
             </div>
             <h1 className="m-3 text-center">Financials</h1>
           </MDBCardHeader>
