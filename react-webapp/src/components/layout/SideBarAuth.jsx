@@ -30,7 +30,7 @@ function SideBarAuth(props) {
               </MDBListGroupItem>
             </NavLink>
           )}
-
+          {/* 
           <NavLink to="/performance" activeClassName="activeClass">
             <div />
             <MDBListGroupItem>
@@ -52,6 +52,7 @@ function SideBarAuth(props) {
               Payroll
             </MDBListGroupItem>
           </NavLink>
+          */}
         </>
       )}
     </>

@@ -6,7 +6,6 @@ import NavBar from "./components/layout/NavBar";
 import SideBar from "./components/layout/SideBar";
 import Footer from "./components/layout/Footer";
 import Send from "./components/send";
-import Notifications from "./components/Notifications";
 
 function App(props) {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -67,11 +66,12 @@ function App(props) {
     render() {
       return (
         <React.Fragment>
+          {/* 
           <Notifications
             header="Alert! Alert!"
             body="Hello, world! This is a toast message.It comes from App.js."
-          />
-
+        /> 
+*/}
           <NavBar
             handleLogout={handleLogout}
             handleLogin={handleLogin}
