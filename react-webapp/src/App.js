@@ -5,9 +5,12 @@ import Routes from "./Routes";
 import NavBar from "./components/layout/NavBar";
 import SideBar from "./components/layout/SideBar";
 import Footer from "./components/layout/Footer";
+import { useToasts } from "react-toast-notifications";
+
 import Send from "./components/send";
 
 function App(props) {
+  const { addToast } = useToasts();
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [contractAccess, setContractAccess] = useState("None");
@@ -16,14 +19,17 @@ function App(props) {
     if (isAuthenticated) {
       Send.get("/Loggedin", { handleLogout, handleLogin })
         .then(res => {
-          console.log("Logged in Successfuly");
+          addToast("Logged in Successfuly", {
+            appearance: "success",
+            autoDismiss: true
+          });
         }, userHasAuthenticated(true))
         .catch(err => {
           props.history.push("/");
           console.log(err);
-          console.log("Logging Out");
+          /* loggin out */
         });
-      console.log("Logging In");
+      /* loggin in */
       setIsAuthenticating(false);
     } else {
       Send.get("/Loggedin", { handleLogin })
@@ -31,13 +37,16 @@ function App(props) {
           handleRedirect();
         })
         .catch(err => {
-          console.log("You are not Logged in. Please Login.");
+          addToast("Please Login", {
+            appearance: "warning",
+            autoDismiss: true
+          });
         });
 
       userHasAuthenticated(false);
       setIsAuthenticating(false);
     }
-  }, [isAuthenticated, props.history]);
+  }, [isAuthenticated, props.history, addToast]);
 
   function handleLogin(sess) {
     if (sess.match === "true") {

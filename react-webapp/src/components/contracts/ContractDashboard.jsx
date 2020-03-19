@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { Button, ButtonGroup } from "react-bootstrap";
+import { ButtonGroup } from "react-bootstrap";
 import CountUp from "react-countup";
 import {
   MDBCard,
@@ -16,7 +16,7 @@ import {
 import NavPerm from "../NavPerms";
 import Send from "../send";
 
-import ContractRoutes from "./ContractRoutes";
+import ContractRoutes from "./Routes";
 
 class ContractDashboard extends Component {
   constructor(props) {
@@ -134,14 +134,15 @@ class ContractDashboard extends Component {
                     <Link to="/contracts/routes" className="btn btn-primary">
                       View Routes
                     </Link>
-                    <Button href="/bids">Contract Bid Management</Button>
+                    <Link to="/bids" className="btn btn-primary">
+                      Contract Bid Management
+                    </Link>
                   </ButtonGroup>
                 </div>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
         </MDBRow>
-
         <ContractRoutes
           setSelectedTrip={this.setSelectedTrip}
           onClick={this.setSelectedContract}

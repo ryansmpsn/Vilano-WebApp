@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 function Auth(props) {
   function handleLogout() {
@@ -12,16 +12,16 @@ function Auth(props) {
     <>
       {!props.appProps.isAuthenticating &&
         (props.appProps.isAuthenticated ? (
-          <Nav.Link onClick={handleLogout} href="/">
+          <NavLink onClick={handleLogout} to="/">
             Logout
-          </Nav.Link>
+          </NavLink>
         ) : (
           <>
             {/*
            <LinkContainer to="/signup">
                     <NavItem>Signup</NavItem>
                   </LinkContainer> */}
-            <Nav.Link href="/Login">Login</Nav.Link>
+            <NavLink to="/Login">Login</NavLink>
           </>
         ))}
     </>

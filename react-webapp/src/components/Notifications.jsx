@@ -1,38 +1,22 @@
 import React, { Component } from "react";
-import { Toast } from "react-bootstrap";
-import Clock from "./layout/Clock";
+import { DefaultToast } from "react-toast-notifications";
 
 class Notification extends Component {
   state = {
-    show: true
+    show: true,
+    date: new Date()
   };
 
   render() {
     return (
-      <Toast
-        show={this.state.show}
-        onClose={() => this.setState({ show: false })}
-        style={{
-          width: 800,
-          position: "fixed",
-          bottom: 40,
-          right: 20,
-          zIndex: 999
-        }}
-      >
-        <Toast.Header>
-          <img
-            src="https://picsum.photos/20/20"
-            className="rounded mr-2"
-            alt=""
-          />
-          <strong className="mr-auto">{this.props.header}</strong>
-          <small>
-            <Clock />
-          </small>
-        </Toast.Header>
-        <Toast.Body>{this.props.body}</Toast.Body>
-      </Toast>
+      <DefaultToast {...this.props}>
+        <strong className="text-capitalize">{this.props.appearance}</strong>
+        <small className="float-right">
+          {this.state.date.toLocaleTimeString()}
+        </small>
+        <hr className="mt-1 mb-2" />
+        {this.props.children}
+      </DefaultToast>
     );
   }
 }

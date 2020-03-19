@@ -7,15 +7,13 @@ import {
   MDBCardBody,
   MDBIcon
 } from "mdbreact";
-import Notification from "../Notifications";
+import { Button } from "react-bootstrap";
+import { useToasts } from "react-toast-notifications";
 
 function PerformancePage() {
+  const { addToast } = useToasts();
   return (
     <MDBRow className="mb-4">
-      <Notification
-        header="Alert! Alert!"
-        body="Hello, world! This is a toast message.It comes from the Performance page"
-      />
       <MDBCol xl="12" md="12" className="mb-r">
         <MDBCard className="cascading-admin-card">
           <MDBCardHeader>
@@ -26,6 +24,16 @@ function PerformancePage() {
           </MDBCardHeader>
           <MDBCardBody>
             <div className="d-flex flex-column">Hello Performance Content</div>
+            <Button
+              onClick={() =>
+                addToast("Message Here", {
+                  appearance: "warning",
+                  autoDismiss: true
+                })
+              }
+            >
+              Add Toast
+            </Button>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>

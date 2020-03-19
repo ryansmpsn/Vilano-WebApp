@@ -9,8 +9,10 @@ import {
 import { useFormFields } from "../../libs/hookslib";
 import Send from "../send";
 import { MDBBtn, MDBCard } from "mdbreact";
+import { useToasts } from "react-toast-notifications";
 
 export default function Login(props) {
+  const { addToast } = useToasts();
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     username: "",
@@ -30,7 +32,10 @@ export default function Login(props) {
         props.history.push("/");
       })
       .catch(err => {
-        console.log(err);
+        addToast("Invalid Credentials! Please Try Again.", {
+          appearance: "error",
+          autoDismiss: true
+        });
         setIsLoading(false);
         props.handleLogout();
         props.userHasAuthenticated(false);
