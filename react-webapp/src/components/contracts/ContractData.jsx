@@ -124,7 +124,8 @@ function ContractData(props) {
       {tableView
         ? !isLoading && (
             <ContractTable
-              onClick={props.onClick}
+              url={props.url}
+              setSelectedContract={props.setSelectedContract}
               contractData={contractData}
             />
           )
@@ -133,7 +134,8 @@ function ContractData(props) {
               <Row key="topRow" className="show-grid">
                 {contractData.map((c, index) => (
                   <ContractCards
-                    onClick={props.onClick}
+                    url={props.url}
+                    setSelectedContract={props.setSelectedContract}
                     modalName={props.modalName}
                     key={index + "contract"}
                     appProps={props.appProps}

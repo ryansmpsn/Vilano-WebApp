@@ -14,7 +14,8 @@ class ViewContracts extends Component {
         <MDBCardBody>
           <Jumbotron>
             <ContractData
-              onClick={this.props.onClick}
+              url={this.props.url}
+              setSelectedContract={this.props.setSelectedContract}
               selectOptions={this.props.selectOptions}
               contractID
               accessLevel={this.props.accessLevel}

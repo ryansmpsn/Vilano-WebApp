@@ -1,15 +1,50 @@
 import React, { useState } from "react";
-import {
-  FormGroup,
-  FormControl,
-  FormLabel,
-  Col,
-  Spinner
-} from "react-bootstrap";
+import { FormGroup, FormControl, Spinner } from "react-bootstrap";
 import { useFormFields } from "../../libs/hookslib";
 import Send from "../send";
-import { MDBBtn, MDBCard } from "mdbreact";
+import { MDBBtn } from "mdbreact";
 import { useToasts } from "react-toast-notifications";
+import styled from "styled-components";
+
+const LoginPage = styled.div`
+  .box {
+    border-radius: 24px;
+    background: #34495e;
+    width: 390px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .box h1 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .box input[type="text"],
+  .box input[type="password"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+  }
+  .box input[type="text"]:focus,
+  .box input[type="password"]:focus {
+    width: 280px;
+    border-color: #2ecc71;
+  }
+`;
 
 export default function Login(props) {
   const { addToast } = useToasts();
@@ -43,13 +78,12 @@ export default function Login(props) {
   }
 
   return (
-    <Col className="mt-5" md={{ span: 4, offset: 4 }} size="5">
-      <MDBCard className="p-5">
-        <p className="h5 text-center mb-4">Sign in</p>
+    <LoginPage>
+      <div className="box">
+        <h1>Sign in</h1>
         <form onSubmit={handleSubmit}>
           {/*ControlID must match useFormFields value*/}
           <FormGroup controlId="username">
-            <FormLabel>Username</FormLabel>
             <FormControl
               autoFocus
               placeholder="Enter Username"
@@ -59,7 +93,6 @@ export default function Login(props) {
             />
           </FormGroup>
           <FormGroup controlId="password">
-            <FormLabel>Password</FormLabel>
             <FormControl
               placeholder="Enter Password"
               value={fields.password.replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
@@ -74,13 +107,13 @@ export default function Login(props) {
               type="submit"
               active={!isLoading}
               disabled={!validateForm()}
-              gradient="blue"
+              gradient="aqua"
             >
               Login
             </MDBBtn>
           )}
         </form>
-      </MDBCard>
-    </Col>
+      </div>
+    </LoginPage>
   );
 }

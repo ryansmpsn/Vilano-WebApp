@@ -9,7 +9,6 @@ import ProfilePage from "./components/pages/ProfilePage";
 import testpage from "./components/pages/TestPage";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import ContractDashboard from "./components/contracts/ContractDashboard";
-import BidDashboard from "./components/contracts/bids/BidDashboard";
 import PerformancePage from "./components/pages/PerformancePage";
 import FinancialsPage from "./components/pages/FinancialsPage";
 
@@ -35,13 +34,6 @@ class Routes extends React.Component {
             render={appProps => <ContractDashboard {...this.props} />}
           />
         )}
-        {this.props.isAuthenticated && (
-          <Route
-            path="/bids"
-            render={appProps => <BidDashboard {...this.props} />}
-          />
-        )}
-
         <AppliedRoute
           path="/testpage"
           exact

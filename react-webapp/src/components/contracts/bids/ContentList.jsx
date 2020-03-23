@@ -146,14 +146,17 @@ function ContentList(props) {
       <hr />
       {tableView
         ? !isLoading && (
-            <ContractTable onClick={props.onClick} contractData={contentData} />
+            <ContractTable
+              onClick={props.setSelectedContract}
+              contractData={contentData}
+            />
           )
         : !isLoading && (
             <div className="content">
               <Row key="topRow" className="show-grid">
                 {contentData.map((c, index) => (
                   <Content
-                    onClick={props.onClick}
+                    setSelectedContract={props.setSelectedContract}
                     modalName={props.modalName}
                     key={index + "content"}
                     appProps={props.appProps}

@@ -14,7 +14,7 @@ class ViewBids extends Component {
         <MDBCardBody>
           <Jumbotron>
             <ContentList
-              onClick={this.props.onClick}
+              setSelectedContract={this.props.setSelectedContract}
               selectOptions={this.props.selectOptions}
               contractID
               modalName="Edit Contract"

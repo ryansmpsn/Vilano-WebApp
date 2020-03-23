@@ -82,7 +82,7 @@ function Content(props) {
                 )
             )}
             <Link
-              onClick={e => props.onClick(content[16][1])}
+              onClick={e => props.setSelectedContract(content[16][1])}
               to="/bids/trips"
               className="btn btn-primary"
             >

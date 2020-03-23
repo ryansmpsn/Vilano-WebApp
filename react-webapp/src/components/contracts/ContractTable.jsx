@@ -9,7 +9,7 @@ function ContractTable(props) {
     ...c,
     viewTrips: (
       <Link
-        onClick={e => props.onClick(contractData[index][16][1])}
+        onClick={e => props.setSelectedContract(contractData[index][16][1])}
         to="/contracts/trips"
         className="btn btn-primary btn-sm"
       >

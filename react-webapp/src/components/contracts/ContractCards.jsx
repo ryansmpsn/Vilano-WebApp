@@ -67,8 +67,8 @@ function ContractCards(props) {
                 )
             )}
             <Link
-              onClick={e => props.onClick(contract[16][1])}
-              to="/contracts/trips"
+              onClick={e => props.setSelectedContract(contract[16][1])}
+              to={`${props.url}/${contract[16][1]}`}
               className="btn btn-primary"
             >
               View Trips

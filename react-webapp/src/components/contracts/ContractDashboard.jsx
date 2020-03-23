@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link, withRouter } from "react-router-dom";
 import { ButtonGroup } from "react-bootstrap";
 import CountUp from "react-countup";
 import {
@@ -63,6 +63,8 @@ class ContractDashboard extends Component {
   }
 
   render() {
+    let { url, path } = this.props.match;
+
     return (
       <Router>
         <MDBRow className="mb-4">
@@ -121,6 +123,17 @@ class ContractDashboard extends Component {
                   </MDBRow>
                 </div>
                 <h1 className="m-3 text-center">Contract Dashboard</h1>
+                <ul>
+                  <li>
+                    <Link to={`${url}/rendering`}>Rendering with React</Link>
+                  </li>
+                  <li>
+                    <Link to={`${url}/components`}>Components</Link>
+                  </li>
+                  <li>
+                    <Link to={`${url}/props-v-state`}>Props v. State</Link>
+                  </li>
+                </ul>
               </MDBCardHeader>
               <MDBCardBody>
                 <div className="d-flex flex-column">
@@ -134,8 +147,8 @@ class ContractDashboard extends Component {
                     <Link to="/contracts/routes" className="btn btn-primary">
                       View Routes
                     </Link>
-                    <Link to="/bids" className="btn btn-primary">
-                      Contract Bid Management
+                    <Link to="/contracts/bids" className="btn btn-primary">
+                      View Bids
                     </Link>
                   </ButtonGroup>
                 </div>
@@ -144,8 +157,10 @@ class ContractDashboard extends Component {
           </MDBCol>
         </MDBRow>
         <ContractRoutes
+          url={url}
+          path={path}
           setSelectedTrip={this.setSelectedTrip}
-          onClick={this.setSelectedContract}
+          setSelectedContract={this.setSelectedContract}
           selectedTrip={this.state.selectedTrip}
           selectedContract={this.state.selectedContract}
           selectOptions={this.state.selectOptions}
@@ -172,4 +187,4 @@ class ContractDashboard extends Component {
   }
 }
 
-export default ContractDashboard;
+export default withRouter(ContractDashboard);
