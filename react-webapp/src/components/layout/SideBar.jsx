@@ -30,6 +30,13 @@ class SideBar extends Component {
               Dashboard
             </MDBListGroupItem>
           </NavLink>
+          <NavLink to="/resources" activeClassName="activeClass">
+            <div />
+            <MDBListGroupItem>
+              <div className="fas fa-accessible-icon mr-3" />
+              Resources
+            </MDBListGroupItem>
+          </NavLink>
           <SideBarAuth appProps={this.state.props} />
           <NavLink to="/testpage" activeClassName="activeClass">
             <div />

@@ -11,12 +11,14 @@ import NotFoundPage from "./components/pages/NotFoundPage";
 import ContractDashboard from "./components/contracts/ContractDashboard";
 import PerformancePage from "./components/pages/PerformancePage";
 import FinancialsPage from "./components/pages/FinancialsPage";
+import ResourcesPage from "./components/pages/ResourcesPage";
 
 class Routes extends React.Component {
   render() {
     return (
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/resources" component={ResourcesPage} />
         <Route
           exact
           path="/about"
