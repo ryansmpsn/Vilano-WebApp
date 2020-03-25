@@ -8,10 +8,10 @@ function ResourcesPage() {
   fetch("https://apis.google.com/js/platform.js");
 
   function signOut() {
-    gapi.auth2
-      .getAuthInstance()
-      .disconnect()
-      .then(console.log("Notification here You have been Signed Out"));
+    //gapi.auth2
+    //.getAuthInstance()
+    //.disconnect()
+    //.then(console.log("Notification here You have been Signed Out"));
   }
   function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
