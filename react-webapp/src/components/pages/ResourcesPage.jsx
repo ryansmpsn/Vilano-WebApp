@@ -1,32 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
+import { GoogleLogin } from "react-google-login";
 import PortalPage from "./PortalPage";
 
-useEffect(() => {
-  fetch("https://apis.google.com/js/platform.js");
-}, []);
 function ResourcesPage() {
-  fetch("https://apis.google.com/js/platform.js");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  function signOut() {
-    //gapi.auth2
-    //.getAuthInstance()
-    //.disconnect()
-    //.then(console.log("Notification here You have been Signed Out"));
-  }
-  function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    if (googleUser.getHostedDomain() === "postalfleetsvs.com")
-      return <PortalPage />;
-    else if (googleUser.getHostedDomain() === "omega-mile.com")
-      return <PortalPage />;
-    else if (googleUser.getHostedDomain() === "stagelinecompany.com")
-      return <PortalPage />;
-    else {
-      console.log("Put Warning Notification Here -not authorized-");
-      signOut();
-    }
-  }
-  return <h1> Hello People</h1>;
+  const responseGoogle = response => {
+    let hostedDomain = response.profileObj.email.split("@")[1];
+    if (hostedDomain === "postalfleetsvs.com") {
+      setIsAuthenticated(true);
+    } else if (hostedDomain === "omega-mile.com") {
+      setIsAuthenticated(true);
+    } else if (hostedDomain === "stagelinecompany.com") {
+      setIsAuthenticated(true);
+    } else setIsAuthenticated(false);
+  };
+
+  return (
+    <>
+      {!isAuthenticated ? (
+        <PortalPage />
+      ) : (
+        <div>
+          <h1> I am not Authenticated</h1>
+          <GoogleLogin
+            clientId="464534557184-sd8anr6skkb7r1pe0l2e3qd0eepgu9c1.apps.googleusercontent.com"
+            buttonText="Login"
+            isSignedIn={true}
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
+        </div>
+      )}
+    </>
+  );
 }
 
 export default ResourcesPage;

@@ -33,7 +33,7 @@ class SideBar extends Component {
           <NavLink to="/resources" activeClassName="activeClass">
             <div />
             <MDBListGroupItem>
-              <div className="fas fa-accessible-icon mr-3" />
+              <div className="fas fa-paperclip mr-3" />
               Resources
             </MDBListGroupItem>
           </NavLink>
