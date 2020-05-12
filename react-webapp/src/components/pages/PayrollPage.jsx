@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardHeader,
-  MDBCardBody,
-  MDBIcon
-} from "mdbreact";
+import { MDBRow, MDBCol, MDBCard, MDBCardHeader, MDBCardBody, MDBIcon } from "mdbreact";
 
 function PayrollPage() {
   return (
@@ -20,7 +13,7 @@ function PayrollPage() {
             <h1 className="m-3 text-center">Payroll</h1>
           </MDBCardHeader>
           <MDBCardBody>
-            <div className="d-flex flex-column">Hello Payroll Content</div>
+            <div className="d-flex flex-column">Payroll Content</div>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>

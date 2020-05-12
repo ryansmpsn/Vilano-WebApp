@@ -8,19 +8,13 @@ function ContractTable(props) {
   rowData = rowData.map((c, index) => ({
     ...c,
     viewTrips: (
-      <Link
-        onClick={e => props.setSelectedContract(contractData[index][16][1])}
-        to="/contracts/trips"
-        className="btn btn-primary btn-sm"
-      >
+      <Link onClick={(e) => props.setSelectedContract(contractData[index][16][1])} to="/contracts/trips" className="btn btn-primary btn-sm">
         View Trips
       </Link>
-    )
+    ),
   }));
 
-  let columnData = contractData[0]
-    .filter(labelFilter)
-    .map((c, index) => ({ label: c[0], field: c[0], sort: "asc" }));
+  let columnData = contractData[0].filter(labelFilter).map((c, index) => ({ label: c[0], field: c[0], sort: "asc" }));
   columnData = [...columnData, { label: "View Trips", field: "viewTrips" }];
 
   function labelFilter(tableData) {
@@ -28,7 +22,7 @@ function ContractTable(props) {
   }
   const data = {
     columns: columnData,
-    rows: rowData
+    rows: rowData,
   };
   return <MDBDataTable striped bordered hover responsive data={data} />;
 }

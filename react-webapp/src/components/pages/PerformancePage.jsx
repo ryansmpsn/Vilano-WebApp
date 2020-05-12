@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardHeader,
-  MDBCardBody,
-  MDBIcon
-} from "mdbreact";
+import { MDBRow, MDBCol, MDBCard, MDBCardHeader, MDBCardBody, MDBIcon } from "mdbreact";
 import { Button } from "react-bootstrap";
 import { useToasts } from "react-toast-notifications";
 
@@ -23,12 +16,12 @@ function PerformancePage() {
             <h1 className="m-3 text-center">Performance</h1>
           </MDBCardHeader>
           <MDBCardBody>
-            <div className="d-flex flex-column">Hello Performance Content</div>
+            <div className="d-flex flex-column">Performance Content</div>
             <Button
               onClick={() =>
                 addToast("Message Here", {
                   appearance: "warning",
-                  autoDismiss: true
+                  autoDismiss: true,
                 })
               }
             >

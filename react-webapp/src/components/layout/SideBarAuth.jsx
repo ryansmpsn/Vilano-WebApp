@@ -8,13 +8,22 @@ function SideBarAuth(props) {
       {!props.appProps.isAuthenticating && props.appProps.isAuthenticated && (
         <>
           {props.appProps.contractAccess !== "None" && (
-            <NavLink to="/contracts" activeClassName="activeClass">
-              <div />
-              <MDBListGroupItem>
-                <MDBIcon icon="file-invoice-dollar" className="mr-3" />
-                Contracts
-              </MDBListGroupItem>
-            </NavLink>
+            <>
+              <NavLink to="/contracts" activeClassName="activeClass">
+                <div />
+                <MDBListGroupItem>
+                  <MDBIcon icon="file-invoice-dollar" className="mr-3" />
+                  Contracts
+                </MDBListGroupItem>
+              </NavLink>
+              <NavLink to="/bids" activeClassName="activeClass">
+                <div />
+                <MDBListGroupItem>
+                  <MDBIcon icon="file-signature" className="mr-3" />
+                  Bids
+                </MDBListGroupItem>
+              </NavLink>
+            </>
           )}
           <NavLink to="/performance" activeClassName="activeClass">
             <div />

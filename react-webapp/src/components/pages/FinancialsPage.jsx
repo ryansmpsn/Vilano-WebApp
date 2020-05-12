@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardHeader,
-  MDBCardBody,
-  MDBIcon
-} from "mdbreact";
+import { MDBRow, MDBCol, MDBCard, MDBCardHeader, MDBCardBody, MDBIcon } from "mdbreact";
 
 function FinancialsPage() {
   return (
@@ -20,7 +13,7 @@ function FinancialsPage() {
             <h1 className="m-3 text-center">Financials</h1>
           </MDBCardHeader>
           <MDBCardBody>
-            <div className="d-flex flex-column">Hello Financials Content</div>
+            <div className="d-flex flex-column">Financials Content</div>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>

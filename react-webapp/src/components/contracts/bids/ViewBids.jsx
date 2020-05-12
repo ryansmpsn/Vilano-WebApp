@@ -9,7 +9,7 @@ class ViewBids extends Component {
     return (
       <MDBCard className="m-2">
         <MDBCardHeader>
-          <h4>Contract Information</h4>
+          <h4>Contract Bid Information</h4>
         </MDBCardHeader>
         <MDBCardBody>
           <Jumbotron>
@@ -20,13 +20,13 @@ class ViewBids extends Component {
               modalName="Edit Contract"
               accessLevel={this.props.accessLevel}
               contentEditSubmitAction={this.props.contentEditSubmitAction}
-              SearchFunction={contractSearch => {
+              SearchFunction={(contractSearch) => {
                 return this.props.SearchFunction(contractSearch);
               }}
               showAll={this.props.showAll}
               appProps={this.props}
               contentSearch={{
-                external_contract_code: []
+                external_contract_code: [],
               }}
               getContracts={() => {
                 return this.props.getContracts();
