@@ -16,13 +16,7 @@ function Auth(props) {
             Logout
           </NavLink>
         ) : (
-          <>
-            {/*
-           <LinkContainer to="/signup">
-                    <NavItem>Signup</NavItem>
-                  </LinkContainer> */}
-            <NavLink to="/Login">Login</NavLink>
-          </>
+          <NavLink to="/Login">Login</NavLink>
         ))}
     </>
   );

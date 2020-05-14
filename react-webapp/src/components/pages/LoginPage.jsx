@@ -51,7 +51,7 @@ export default function Login(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     username: "",
-    password: ""
+    password: "",
   });
 
   function validateForm() {
@@ -62,14 +62,14 @@ export default function Login(props) {
     event.preventDefault();
     setIsLoading(true);
     Send.post("/Login", fields, props)
-      .then(res => {
+      .then((res) => {
         props.handleLogin(res.our_session);
         props.history.push("/");
       })
-      .catch(err => {
+      .catch((err) => {
         addToast("Invalid Credentials! Please Try Again.", {
           appearance: "error",
-          autoDismiss: true
+          autoDismiss: true,
         });
         setIsLoading(false);
         props.handleLogout();
@@ -84,31 +84,15 @@ export default function Login(props) {
         <form onSubmit={handleSubmit}>
           {/*ControlID must match useFormFields value*/}
           <FormGroup controlId="username">
-            <FormControl
-              autoFocus
-              placeholder="Enter Username"
-              type="text"
-              value={fields.username.replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
-              onChange={handleFieldChange}
-            />
+            <FormControl autoFocus placeholder="Enter Username" type="text" value={fields.username.replace(/[*|":<>[\]{}`\\()';@&$]/, "")} onChange={handleFieldChange} />
           </FormGroup>
           <FormGroup controlId="password">
-            <FormControl
-              placeholder="Enter Password"
-              value={fields.password.replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
-              onChange={handleFieldChange}
-              type="password"
-            />
+            <FormControl placeholder="Enter Password" value={fields.password.replace(/[*|":<>[\]{}`\\()';@&$]/, "")} onChange={handleFieldChange} type="password" />
           </FormGroup>
           {isLoading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-            <MDBBtn
-              type="submit"
-              active={!isLoading}
-              disabled={!validateForm()}
-              gradient="aqua"
-            >
+            <MDBBtn type="submit" active={!isLoading} disabled={!validateForm()} gradient="aqua">
               Login
             </MDBBtn>
           )}
