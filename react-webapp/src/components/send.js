@@ -6,7 +6,7 @@ const Send = new (class send extends React.Component {
     super(props);
     this.props = props;
     this.state = {
-      testURL: "http://localhost:3888",
+      testURL: "http://localhost:5000",
       //testURL: 'http://Hand-Of-God:8080',
       liveURL: "https://centcom-dot-pfsi-centcom.appspot.com",
       URL: "",
@@ -35,7 +35,7 @@ const Send = new (class send extends React.Component {
   update_auth = () => {
     axios.defaults.headers.common["SessionID"] = this.state.SessionID;
     axios.defaults.headers.common["IDSession"] = this.state.IDSession;
-
+    axios.defaults.headers.common["Content-Type"] = "application/json";
     axios.defaults.headers.common["Application"] = "WebApp";
     axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
   };

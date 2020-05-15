@@ -49,7 +49,7 @@ function App(props) {
   }, [isAuthenticated, props.history, addToast]);
 
   function handleLogin(sess) {
-    if (sess.match === "true") {
+    if (sess.match === true) {
       sessionStorage.setItem("SessionID", sess.SessionID);
       sessionStorage.setItem("IDSession", sess.IDSession);
       sess.NavPermissions.map(a => {
