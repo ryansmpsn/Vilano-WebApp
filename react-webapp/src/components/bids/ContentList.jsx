@@ -3,7 +3,7 @@ import { Row, FormGroup, Button, Container, Spinner } from "react-bootstrap";
 import Content from "./Content";
 import CreateModal from "./CreateModal";
 import Select from "react-select";
-import ContractTable from "../ContractTable";
+import ContractTable from "../contracts/ContractTable";
 
 function ContentList(props) {
   const [contentData, setContentData] = useState([]);
@@ -17,7 +17,7 @@ function ContentList(props) {
 
   function getSelect() {
     contentInputRestrictions === [] &&
-      props.showAll().then(res => {
+      props.showAll().then((res) => {
         setContentInputRestrictions(res.data.restricted_input);
       });
     return (
@@ -26,7 +26,7 @@ function ContentList(props) {
         options={props.selectOptions}
         isMulti
         placeholder={"Search for Contracts by ID"}
-        onChange={x => {
+        onChange={(x) => {
           doSetContentSearch(x, "external_contract_code");
         }}
         isLoading={isLoading & isSearching}
@@ -39,12 +39,12 @@ function ContentList(props) {
     setTableView(false);
     props
       .SearchFunction(contentSearch)
-      .then(res => {
+      .then((res) => {
         setContentData(JSON.parse(res.data.contentList));
         setContentInputRestrictions(res.data.restricted_input);
         setIsLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
@@ -53,14 +53,14 @@ function ContentList(props) {
     setTableView(true);
     props
       .showAll()
-      .then(res => {
+      .then((res) => {
         setContentData(JSON.parse(res.data.contentList));
         setContentInputRestrictions(res.data.restricted_input);
         setIsLoading(false);
         setSearching(false);
         setGetAll(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
@@ -91,7 +91,7 @@ function ContentList(props) {
   function json_array(json) {
     var result = [];
     var keys = Object.keys(json);
-    keys.forEach(function(key) {
+    keys.forEach(function (key) {
       result.push([key, json[key]]);
     });
     return result;
@@ -117,10 +117,7 @@ function ContentList(props) {
           {json_array(contentSearch).map((item, index) => (
             /*ControlID must match useFormFields value*/
 
-            <FormGroup
-              key={"ContentSearch" + index}
-              controlId={item[0]}
-            ></FormGroup>
+            <FormGroup key={"ContentSearch" + index} controlId={item[0]}></FormGroup>
           ))}
 
           {(isLoading & isSearching) | isGetAll ? (
@@ -132,7 +129,7 @@ function ContentList(props) {
               </Button>
               <Button
                 disabled={isGetAll && isSearching}
-                onClick={e => {
+                onClick={(e) => {
                   handleSearch(e, true);
                 }}
               >
@@ -145,12 +142,7 @@ function ContentList(props) {
       </Container>
       <hr />
       {tableView
-        ? !isLoading && (
-            <ContractTable
-              onClick={props.setSelectedContract}
-              contractData={contentData}
-            />
-          )
+        ? !isLoading && <ContractTable onClick={props.setSelectedContract} contractData={contentData} />
         : !isLoading && (
             <div className="content">
               <Row key="topRow" className="show-grid">
@@ -163,7 +155,7 @@ function ContentList(props) {
                     Content={c}
                     inputRestrictions={contentInputRestrictions}
                     eventKeyIndex={index}
-                    submitAction={editContent => {
+                    submitAction={(editContent) => {
                       return props.contentEditSubmitAction(editContent);
                     }}
                     accessLevel={props.accessLevel}
@@ -180,7 +172,7 @@ function ContentList(props) {
         closeModal={closeModal}
         accessLevel={props.accessLevel}
         appProps={props.appProps}
-        submitAction={editContent => {
+        submitAction={(editContent) => {
           return props.contentEditSubmitAction(editContent);
         }}
       />

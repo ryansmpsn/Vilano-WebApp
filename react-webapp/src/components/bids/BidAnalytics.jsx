@@ -3,27 +3,33 @@ import { MDBCol, MDBCard, MDBCardBody, MDBCardHeader, MDBRow, MDBListGroup, MDBL
 import { Bar, Pie } from "react-chartjs-2";
 import { ProgressBar } from "react-bootstrap";
 
-class ChartSection1 extends Component {
+class BidAnalytics extends Component {
   render() {
     const dataBar = {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+      labels: ["Eastern", "Southern", "Central"],
       datasets: [
         {
-          label: "#1",
-          data: [12, 39, 3, 50, 2, 32, 84],
+          label: "Postal Fleet",
+          data: [112, 58, 48],
           backgroundColor: "rgba(245, 74, 85, 0.5)",
           borderWidth: 1,
         },
         {
-          label: "#2",
-          data: [56, 24, 5, 16, 45, 24, 8],
+          label: "Stage Line",
+          data: [32, 2, 38],
           backgroundColor: "rgba(90, 173, 246, 0.5)",
           borderWidth: 1,
         },
         {
-          label: "#3",
-          data: [12, 25, 54, 3, 15, 44, 3],
-          backgroundColor: "rgba(245, 192, 50, 0.5)",
+          label: "Postal FLeet Revenue",
+          data: [134145986.86, 81333465.09, 5116486.44],
+          backgroundColor: "rgba(245, 74, 85, 0.5)",
+          borderWidth: 1,
+        },
+        {
+          label: "Stage Line Revenue",
+          data: [48435826.52, 1886802.22, 5633366.35],
+          backgroundColor: "rgba(90, 173, 246, 0.5)",
           borderWidth: 1,
         },
       ],
@@ -56,11 +62,35 @@ class ChartSection1 extends Component {
       },
     };
 
+    //   211929497.34,      15233923.77,     386852480.70,     72317912.19,      6994797.65,      6163179.33,      55525652.46,     106378019.48,      4382487.04,146984621.56,4603807.62,4191624.78,90913748.18,96323705.46,42286598.18,49478274.35,35883080.48,2209458.63,14263535.95,59112956.14,2003899.13,
+
     const dataPie = {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+      labels: [
+        "POSTAL FLEET SERVICES INC",
+        "AMERITRANS EXPRESS LLC",
+        "EAGLE EXPRESS LINES INC",
+        "THUNDER RIDGE TRANS INC",
+        "PONY EXPRESS DELIVERY INC",
+        "R L TRUCKING INC",
+        "THE STAGELINE COMPANY",
+        "MAIL CONTRACTORS OF AMERICA INC",
+        "TNSTUMPFF ENTERPRISES LLC",
+        "PAT SALMON & SONS INC",
+        "ZETRICK LLC",
+        "CHRISTIAN D GOHN",
+        "SOUTHERN MAIL SERVICE INC",
+        "MIDWEST TRANSPORT INC",
+        "DAVIS MAIL SERVICES INC",
+        "URSA MAJOR CORPORATION",
+        "DAVENPORT TRANSPORTATION INC",
+        "LEE A ERICKSON",
+        "SALANGER TRUCKING LLC",
+        "PAT SALMON & SONS OF FLORIDA INC",
+        "NOBLE BAY EQUITIES LLC",
+      ],
       datasets: [
         {
-          data: [300, 50, 100, 40, 120, 24, 52],
+          data: [198, 185, 129, 124, 102, 94, 71, 69, 60, 59, 54, 44, 39, 39, 38, 35, 34, 31, 30, 28, 28],
           backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#ac64ad"],
           hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774", "#da92db"],
         },
@@ -80,7 +110,7 @@ class ChartSection1 extends Component {
             <MDBCardBody>
               <MDBListGroup className="list-group-flush">
                 <MDBListGroupItem>
-                  Cost Margin 1
+                  Postal fleet
                   <ProgressBar>
                     <ProgressBar striped variant="success" animated now={35} key={1} />
                     <ProgressBar variant="warning" animated now={20} key={2} />
@@ -90,8 +120,12 @@ class ChartSection1 extends Component {
               </MDBListGroup>
               <MDBListGroup className="list-group-flush">
                 <MDBListGroupItem>
-                  Cost Margin 2
-                  <ProgressBar striped variant="success" animated now={40} />
+                  Stageline
+                  <ProgressBar>
+                    <ProgressBar striped variant="success" animated now={35} key={1} />
+                    <ProgressBar variant="warning" animated now={20} key={2} />
+                    <ProgressBar striped variant="danger" animated now={10} key={3} />
+                  </ProgressBar>
                 </MDBListGroupItem>
               </MDBListGroup>
               <MDBListGroup className="list-group-flush">
@@ -117,7 +151,7 @@ class ChartSection1 extends Component {
         </MDBCol>
         <MDBCol md="4" className="mb-4">
           <MDBCard className="mb-4">
-            <MDBCardHeader>Pie chart</MDBCardHeader>
+            <MDBCardHeader>Market Value</MDBCardHeader>
             <MDBCardBody>
               <Pie data={dataPie} height={330} options={{ responsive: true }} />
             </MDBCardBody>
@@ -174,4 +208,4 @@ class ChartSection1 extends Component {
   }
 }
 
-export default ChartSection1;
+export default BidAnalytics;
