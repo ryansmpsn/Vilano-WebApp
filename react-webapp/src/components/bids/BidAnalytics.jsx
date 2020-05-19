@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { MDBCol, MDBCard, MDBCardBody, MDBCardHeader, MDBRow, MDBListGroup, MDBListGroupItem, MDBBadge, MDBIcon } from "mdbreact";
 import { Bar, Pie } from "react-chartjs-2";
 import { ProgressBar } from "react-bootstrap";
+import CountUp from "react-countup";
 
 class BidAnalytics extends Component {
   render() {
@@ -9,25 +10,13 @@ class BidAnalytics extends Component {
       labels: ["Eastern", "Southern", "Central"],
       datasets: [
         {
-          label: "Postal Fleet",
-          data: [112, 58, 48],
-          backgroundColor: "rgba(245, 74, 85, 0.5)",
-          borderWidth: 1,
-        },
-        {
-          label: "Stage Line",
-          data: [32, 2, 38],
-          backgroundColor: "rgba(90, 173, 246, 0.5)",
-          borderWidth: 1,
-        },
-        {
-          label: "Postal FLeet Revenue",
+          label: "POSTAL FLEET SERVICES INC Total Revenue: $220,595,938.40",
           data: [134145986.86, 81333465.09, 5116486.44],
           backgroundColor: "rgba(245, 74, 85, 0.5)",
           borderWidth: 1,
         },
         {
-          label: "Stage Line Revenue",
+          label: "THE STAGELINE COMPANY Total Revenue: $55,955,995.09",
           data: [48435826.52, 1886802.22, 5633366.35],
           backgroundColor: "rgba(90, 173, 246, 0.5)",
           borderWidth: 1,
@@ -100,7 +89,7 @@ class BidAnalytics extends Component {
       <MDBRow className="mb-4">
         <MDBCol md="8" className="mb-4">
           <MDBCard className="mb-4">
-            <MDBCardHeader>Bar Chart</MDBCardHeader>
+            <MDBCardHeader>Revenue By Region</MDBCardHeader>
             <MDBCardBody>
               <Bar data={dataBar} height={500} options={barChartOptions} />
             </MDBCardBody>
@@ -110,40 +99,64 @@ class BidAnalytics extends Component {
             <MDBCardBody>
               <MDBListGroup className="list-group-flush">
                 <MDBListGroupItem>
-                  Postal fleet
+                  POSTAL FLEET SERVICES INC
                   <ProgressBar>
-                    <ProgressBar striped variant="success" animated now={35} key={1} />
-                    <ProgressBar variant="warning" animated now={20} key={2} />
-                    <ProgressBar striped variant="danger" animated now={10} key={3} />
+                    <ProgressBar striped variant="danger" animated now={61} key={1} />
+                    <ProgressBar variant="success" animated now={37} key={2} />
+                    <ProgressBar striped variant="info" animated now={2} key={3} />
                   </ProgressBar>
                 </MDBListGroupItem>
               </MDBListGroup>
               <MDBListGroup className="list-group-flush">
                 <MDBListGroupItem>
-                  Stageline
+                  Eastern Revenue:
+                  <CountUp start={0} end={134145986.86} duration={8} decimals={2} prefix=" $" separator="," suffix=" / 61%" />
+                  <ProgressBar striped variant="danger" animated now={61} />
+                </MDBListGroupItem>
+              </MDBListGroup>
+              <MDBListGroup className="list-group-flush">
+                <MDBListGroupItem>
+                  Southern Revenue:
+                  <CountUp start={0} end={81333465.09} duration={8} decimals={2} prefix=" $" separator="," suffix=" / 37%" />
+                  <ProgressBar striped variant="success" animated now={37} />
+                </MDBListGroupItem>
+              </MDBListGroup>
+              <MDBListGroup className="list-group-flush">
+                <MDBListGroupItem>
+                  Central Revenue:
+                  <CountUp start={0} end={5116486.44} duration={8} decimals={2} prefix=" $" separator="," suffix=" / 2%" />
+                  <ProgressBar striped variant="info" animated now={2} />
+                </MDBListGroupItem>
+              </MDBListGroup>
+              <MDBListGroup className="list-group-flush">
+                <MDBListGroupItem>
+                  THE STAGELINE COMPANY
                   <ProgressBar>
-                    <ProgressBar striped variant="success" animated now={35} key={1} />
-                    <ProgressBar variant="warning" animated now={20} key={2} />
-                    <ProgressBar striped variant="danger" animated now={10} key={3} />
+                    <ProgressBar striped variant="danger" animated now={87} key={1} />
+                    <ProgressBar variant="success" animated now={10} key={2} />
+                    <ProgressBar striped variant="info" animated now={3} key={3} />
                   </ProgressBar>
                 </MDBListGroupItem>
               </MDBListGroup>
               <MDBListGroup className="list-group-flush">
                 <MDBListGroupItem>
-                  Cost Margin 3
-                  <ProgressBar striped variant="info" animated now={20} />
+                  Eastern Revenue:
+                  <CountUp start={0} end={48435826.52} duration={8} decimals={2} prefix=" $" separator="," suffix=" / 87%" />
+                  <ProgressBar striped variant="danger" animated now={87} />
                 </MDBListGroupItem>
               </MDBListGroup>
               <MDBListGroup className="list-group-flush">
                 <MDBListGroupItem>
-                  Cost Margin 4
-                  <ProgressBar striped variant="warning" animated now={60} />
+                  Southern Revenue:
+                  <CountUp start={0} end={1886802.22} duration={8} decimals={2} prefix=" $" separator="," suffix=" / 10%" />
+                  <ProgressBar striped variant="success" animated now={10} />
                 </MDBListGroupItem>
               </MDBListGroup>
               <MDBListGroup className="list-group-flush">
                 <MDBListGroupItem>
-                  Cost Margin 5
-                  <ProgressBar striped variant="danger" animated now={80} />
+                  Central Revenue:
+                  <CountUp start={0} end={5633366.35} duration={8} decimals={2} prefix=" $" separator="," suffix=" / 3%" />
+                  <ProgressBar striped variant="info" animated now={3} />
                 </MDBListGroupItem>
               </MDBListGroup>
             </MDBCardBody>
@@ -151,52 +164,71 @@ class BidAnalytics extends Component {
         </MDBCol>
         <MDBCol md="4" className="mb-4">
           <MDBCard className="mb-4">
-            <MDBCardHeader>Market Value</MDBCardHeader>
+            <MDBCardHeader>Market Share</MDBCardHeader>
             <MDBCardBody>
               <Pie data={dataPie} height={330} options={{ responsive: true }} />
             </MDBCardBody>
           </MDBCard>
           <MDBCard className="mb-4">
-            <MDBCardHeader>Important Statistics</MDBCardHeader>
+            <MDBCardHeader>Postal Fleet Services Location Count By Region</MDBCardHeader>
             <MDBCardBody>
               <MDBListGroup className="list-group-flush">
                 <MDBListGroupItem>
-                  Sales
-                  <MDBBadge color="success-color" pill className="float-right">
-                    22%
-                    <MDBIcon icon="arrow-up" className="ml-1" />
-                  </MDBBadge>
-                </MDBListGroupItem>
-                <MDBListGroupItem>
-                  Traffic
-                  <MDBBadge color="danger-color" pill className="float-right">
-                    5%
-                    <MDBIcon icon="arrow-down" className="ml-1" />
-                  </MDBBadge>
-                </MDBListGroupItem>
-                <MDBListGroupItem>
-                  Orders
+                  Total Locations
                   <MDBBadge color="default-color-dark" pill className="float-right">
-                    14
+                    <CountUp start={0} end={218} duration={5} />
+                    <MDBIcon icon="city" className="ml-1" />
                   </MDBBadge>
                 </MDBListGroupItem>
                 <MDBListGroupItem>
-                  Issues
+                  Eastern
+                  <MDBBadge color="danger-color" pill className="float-right">
+                    <CountUp start={0} end={112} duration={5} />
+                  </MDBBadge>
+                </MDBListGroupItem>
+                <MDBListGroupItem>
+                  Southern
+                  <MDBBadge color="success-color" pill className="float-right">
+                    <CountUp start={0} end={58} duration={5} />
+                  </MDBBadge>
+                </MDBListGroupItem>
+                <MDBListGroupItem>
+                  Central
                   <MDBBadge color="primary-color" pill className="float-right">
-                    123
+                    <CountUp start={0} end={48} duration={5} />
+                  </MDBBadge>
+                </MDBListGroupItem>
+              </MDBListGroup>
+            </MDBCardBody>
+          </MDBCard>
+          <MDBCard className="mb-4">
+            <MDBCardHeader>The Stageline Company Location Count By Region</MDBCardHeader>
+            <MDBCardBody>
+              <MDBListGroup className="list-group-flush">
+                <MDBListGroupItem>
+                  Total Locations
+                  <MDBBadge color="default-color-dark" pill className="float-right">
+                    <CountUp start={0} end={72} duration={5} />
+
+                    <MDBIcon icon="city" className="ml-1" />
                   </MDBBadge>
                 </MDBListGroupItem>
                 <MDBListGroupItem>
-                  Messages
-                  <MDBBadge color="unique-color" pill className="float-right">
-                    8
+                  Eastern
+                  <MDBBadge color="danger-color" pill className="float-right">
+                    <CountUp start={0} end={32} duration={5} />
                   </MDBBadge>
                 </MDBListGroupItem>
                 <MDBListGroupItem>
-                  Notifications
-                  <MDBBadge color="warning-color-dark" pill className="float-right">
-                    <MDBIcon icon="exclamation-circle" className="ml-1" />
-                    15
+                  Southern
+                  <MDBBadge color="success-color" pill className="float-right">
+                    <CountUp start={0} end={2} duration={5} />
+                  </MDBBadge>
+                </MDBListGroupItem>
+                <MDBListGroupItem>
+                  Central
+                  <MDBBadge color="primary-color" pill className="float-right">
+                    <CountUp start={0} end={38} duration={5} />
                   </MDBBadge>
                 </MDBListGroupItem>
               </MDBListGroup>
