@@ -39,7 +39,7 @@ class ContractDashboard extends Component {
   };
 
   componentDidMount() {
-    Send.get("/GetContractIDs", this.props, "").then((res) => {
+    Send.get("/contract/ids", this.props, "").then((res) => {
       let contractData = JSON.parse(res.data);
       let getSelectOptions = [];
 
@@ -107,6 +107,9 @@ class ContractDashboard extends Component {
                     </Link>
                     <Link to="/contracts/routes" className="btn btn-primary">
                       View Routes
+                    </Link>
+                    <Link to="/contracts/add" className="btn btn-primary">
+                      Add Contract
                     </Link>
                   </ButtonGroup>
                 </div>
