@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link, withRouter } from "react-router-dom";
 import { ButtonGroup } from "react-bootstrap";
 import CountUp from "react-countup";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
-import NavPerm from "../NavPerms";
+import NavPerm from "../../libs/NavPerms";
 import Send from "../send";
 
 import ContractRoutes from "./ContractRoutes";
@@ -16,15 +16,10 @@ class ContractDashboard extends Component {
       selectOptions: [],
       selectedContract: "null",
       selectedTrip: "null",
-      searchContract: {
-        external_contract_code: ["test006"],
-      },
     };
   }
 
   setSelectedContract = (e) => {
-    console.log(this.state.selectedContract);
-
     return this.setState({ selectedContract: e });
   };
   setSelectedTrip = (e) => {
@@ -32,7 +27,7 @@ class ContractDashboard extends Component {
   };
 
   search = (contractSearch) => {
-    return Send.post("/Contract/Search", this.state.searchContract, this.props);
+    return Send.post("/Contract/Search", contractSearch, this.props);
   };
 
   show_all() {
@@ -42,11 +37,13 @@ class ContractDashboard extends Component {
   contractEditSubmitAction = (editContract) => {
     return Send.post("/UpdateContract", editContract, this.props);
   };
+  getSelectOptions() {
+    return Send.get("/Contract/Dropdowns/All", this.props);
+  }
 
   componentDidMount() {
     return Send.get("/Contract/Ids", this.props).then((res) => {
       let contractData = res.data;
-      console.log(contractData);
       let getSelectOptions = [];
       contractData.map((item, index) => {
         return getSelectOptions.push({
@@ -134,6 +131,9 @@ class ContractDashboard extends Component {
           modalName="Edit Contract"
           accessLevel={this.state.accessLevel}
           contractEditSubmitAction={this.contractEditSubmitAction}
+          getSelectOptions={() => {
+            return this.getSelectOptions();
+          }}
           SearchFunction={(contractSearch) => {
             return this.search(contractSearch);
           }}

@@ -2,22 +2,35 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
 import { MDBContainer } from "mdbreact";
+import EditContractModal from "./EditContractModal";
 
 function ContractCards(props) {
   const [contract, setContract] = useState([]);
-  //TODO would be contract_id and the like.  const [contractID, setContractID] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [showContract, setShowContract] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [accessLevel, setAccessLevel] = useState("None");
+  //TODO would be contract_id and the like.  const [contractID, setContractID] = useState(0);
 
   useEffect(() => {
     onLoad();
   });
 
   function onLoad() {
+    setAccessLevel(props.accessLevel);
     setContract(props.Contract);
     setIsLoading(false);
   }
+  function openModal() {
+    setShowModal(true);
+    window.location.hash = "edit";
+    console.log(window.location.hash);
+  }
 
+  function closeModal() {
+    window.history.replaceState(null, null, " ");
+    setShowModal(false);
+  }
   // function get_history() {
   //   Send.get("/ViewContractHistory?Contract_id=" + 851, this.state.props)
   //     .then(res => {
@@ -43,7 +56,6 @@ function ContractCards(props) {
               width: "278px",
             }}
           >
-            {console.log(contract)}
             {contract.map(
               (h, index) =>
                 h.label !== null && (
@@ -87,7 +99,20 @@ function ContractCards(props) {
             >
               Hide Contract
             </Button>
+            <Button onClick={openModal}>Edit</Button>
           </Card>
+          <EditContractModal
+            modalName={props.modalName}
+            contract={contract}
+            inputRestrictions={props.inputRestrictions}
+            show={showModal}
+            closeModal={closeModal}
+            accessLevel={accessLevel}
+            appProps={props.appProps}
+            submitAction={(editContent) => {
+              return props.submitAction(editContent);
+            }}
+          />
         </MDBContainer>
       </div>
     )

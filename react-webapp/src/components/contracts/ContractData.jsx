@@ -11,6 +11,7 @@ function ContractData(props) {
   const [isGetAll, setGetAll] = useState(false);
   const [tableView, setTableView] = useState(false);
   const [contractSearch, setContractSearch] = useState(props.contractSearch);
+  const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
 
   useEffect(() => {
     //Can put stuff that needs to happen on load here.
@@ -21,13 +22,16 @@ function ContractData(props) {
     props
       .SearchFunction(contractSearch)
       .then((res) => {
-        console.log(res);
         setContractData(res.data);
         setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
+    props.getSelectOptions().then((res) => {
+      console.log(res);
+      setContentInputRestrictions(res.data);
+    });
   }
 
   function show_all() {
@@ -43,6 +47,10 @@ function ContractData(props) {
       .catch((err) => {
         console.log(err);
       });
+    props.getSelectOptions().then((res) => {
+      console.log(res);
+      setContentInputRestrictions(res.data);
+    });
   }
 
   function doSetContractSearch(newContract, keyValue) {
@@ -131,6 +139,7 @@ function ContractData(props) {
                     modalName={props.modalName}
                     key={index + "contract"}
                     appProps={props.appProps}
+                    inputRestrictions={contentInputRestrictions}
                     Contract={c}
                     eventKeyIndex={index}
                     submitAction={(editContract) => {

@@ -20,16 +20,19 @@ class ViewContracts extends Component {
               contractID
               accessLevel={this.props.accessLevel}
               contractEditSubmitAction={this.props.contractEditSubmitAction}
-              SearchFunction={contractSearch => {
+              SearchFunction={(contractSearch) => {
                 return this.props.SearchFunction(contractSearch);
               }}
               showAll={this.props.showAll}
               appProps={this.props}
               contractSearch={{
-                external_contract_code: []
+                external_contract_code: [],
               }}
               getContracts={() => {
                 return this.props.getContracts();
+              }}
+              getSelectOptions={() => {
+                return this.props.getSelectOptions();
               }}
             />
           </Jumbotron>
