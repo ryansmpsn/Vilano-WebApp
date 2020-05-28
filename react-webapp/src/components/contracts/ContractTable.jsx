@@ -4,27 +4,32 @@ import { MDBDataTable } from "mdbreact";
 
 function ContractTable(props) {
   let contractData = props.contractData.map((c, index) => c);
-  let rowData = contractData.map((data, index) => Object.fromEntries(data));
+  // let rowParameters = contractData[0].filter(labelFilter).map((c, index) => c.label);
+  let columnData = contractData[0].filter(labelFilter).map((c, index) => ({ label: c.label, field: c.columnName, sort: "asc" }));
+  columnData = [...columnData, { label: "View Trips", field: "viewTrips" }];
+  let rowData = contractData.map((data, index) => data.filter(labelFilter).map((c, index) => [c.columnName, c.value]));
+  rowData = rowData.map((c, index) => Object.fromEntries(c));
   rowData = rowData.map((c, index) => ({
     ...c,
     viewTrips: (
-      <Link onClick={(e) => props.setSelectedContract(contractData[index][16][1])} to="/contracts/trips" className="btn btn-primary btn-sm">
+      <Link onClick={(e) => props.setSelectedContract(contractData[index][6].value)} to="/contracts/trips" className="btn btn-primary btn-sm">
         View Trips
       </Link>
     ),
   }));
 
-  let columnData = contractData[0].filter(labelFilter).map((c, index) => ({ label: c[0], field: c[0], sort: "asc" }));
-  columnData = [...columnData, { label: "View Trips", field: "viewTrips" }];
-
   function labelFilter(tableData) {
-    return tableData[0] !== "DONOTSHOW";
+    return tableData.label !== null;
   }
   const data = {
     columns: columnData,
     rows: rowData,
   };
-  return <MDBDataTable striped bordered hover responsive data={data} />;
+  return (
+    <div>
+      <MDBDataTable striped bordered hover responsive data={data} />
+    </div>
+  );
 }
 
 export default ContractTable;

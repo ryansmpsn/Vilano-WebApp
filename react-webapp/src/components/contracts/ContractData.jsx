@@ -20,11 +20,12 @@ function ContractData(props) {
     setTableView(false);
     props
       .SearchFunction(contractSearch)
-      .then(res => {
-        setContractData(JSON.parse(res.data.contentList));
+      .then((res) => {
+        console.log(res);
+        setContractData(res.data);
         setIsLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
@@ -33,13 +34,13 @@ function ContractData(props) {
     setTableView(true);
     props
       .showAll()
-      .then(res => {
-        setContractData(JSON.parse(res.data.contentList));
+      .then((res) => {
+        setContractData(res.data);
         setIsLoading(false);
         setSearching(false);
         setGetAll(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
@@ -70,7 +71,7 @@ function ContractData(props) {
   function json_array(json) {
     var result = [];
     var keys = Object.keys(json);
-    keys.forEach(function(key) {
+    keys.forEach(function (key) {
       result.push([key, json[key]]);
     });
     return result;
@@ -85,7 +86,7 @@ function ContractData(props) {
             options={props.selectOptions}
             isMulti
             placeholder={"Search for Contracts by ID"}
-            onChange={x => {
+            onChange={(x) => {
               doSetContractSearch(x, "external_contract_code");
             }}
             isLoading={isLoading & isSearching}
@@ -95,10 +96,7 @@ function ContractData(props) {
           {json_array(contractSearch).map((item, index) => (
             /*ControlID must match useFormFields value*/
 
-            <FormGroup
-              key={"ContractSearch" + index}
-              controlId={item[0]}
-            ></FormGroup>
+            <FormGroup key={"ContractSearch" + index} controlId={item[0]}></FormGroup>
           ))}
 
           {(isLoading & isSearching) | isGetAll ? (
@@ -110,7 +108,7 @@ function ContractData(props) {
               </Button>
               <Button
                 disabled={isGetAll && isSearching}
-                onClick={e => {
+                onClick={(e) => {
                   handleSearch(e, true);
                 }}
               >
@@ -122,13 +120,7 @@ function ContractData(props) {
       </Container>
       <hr />
       {tableView
-        ? !isLoading && (
-            <ContractTable
-              url={props.url}
-              setSelectedContract={props.setSelectedContract}
-              contractData={contractData}
-            />
-          )
+        ? !isLoading && <ContractTable url={props.url} setSelectedContract={props.setSelectedContract} contractData={contractData} />
         : !isLoading && (
             <div className="contract">
               <Row key="topRow" className="show-grid">
@@ -141,7 +133,7 @@ function ContractData(props) {
                     appProps={props.appProps}
                     Contract={c}
                     eventKeyIndex={index}
-                    submitAction={editContract => {
+                    submitAction={(editContract) => {
                       return props.contractEditSubmitAction(editContract);
                     }}
                     accessLevel={props.accessLevel}

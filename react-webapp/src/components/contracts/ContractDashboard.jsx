@@ -6,7 +6,7 @@ import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge,
 import NavPerm from "../NavPerms";
 import Send from "../send";
 
-import ContractRoutes from "./Routes";
+import ContractRoutes from "./ContractRoutes";
 
 class ContractDashboard extends Component {
   constructor(props) {
@@ -16,10 +16,15 @@ class ContractDashboard extends Component {
       selectOptions: [],
       selectedContract: "null",
       selectedTrip: "null",
+      searchContract: {
+        external_contract_code: ["test006"],
+      },
     };
   }
 
   setSelectedContract = (e) => {
+    console.log(this.state.selectedContract);
+
     return this.setState({ selectedContract: e });
   };
   setSelectedTrip = (e) => {
@@ -27,11 +32,11 @@ class ContractDashboard extends Component {
   };
 
   search = (contractSearch) => {
-    return Send.post("/ViewContracts", contractSearch, this.props);
+    return Send.post("/Contract/Search", this.state.searchContract, this.props);
   };
 
   show_all() {
-    return Send.post("/ViewContracts", "", this.props);
+    return Send.post("/Contract/Search", "", this.props);
   }
 
   contractEditSubmitAction = (editContract) => {
@@ -39,14 +44,14 @@ class ContractDashboard extends Component {
   };
 
   componentDidMount() {
-    Send.get("/contract/ids", this.props, "").then((res) => {
-      let contractData = JSON.parse(res.data);
+    return Send.get("/Contract/Ids", this.props).then((res) => {
+      let contractData = res.data;
+      console.log(contractData);
       let getSelectOptions = [];
-
       contractData.map((item, index) => {
         return getSelectOptions.push({
-          label: item.external_contract_code,
-          value: item.contract_id,
+          label: item[1].value,
+          value: item[0].value,
         });
       });
       this.setState({ selectOptions: getSelectOptions });
@@ -79,13 +84,13 @@ class ContractDashboard extends Component {
                             <MDBListGroupItem>
                               Total Trips
                               <MDBBadge color="default-color-dark" pill className="float-right">
-                                <CountUp start={0} end={1234} duration={5} />
+                                <CountUp start={0} end={0} duration={5} />
                               </MDBBadge>
                             </MDBListGroupItem>
                             <MDBListGroupItem>
                               Total Routes
                               <MDBBadge color="unique-color" pill className="float-right">
-                                <CountUp start={0} end={2371} duration={8} />
+                                <CountUp start={0} end={0} duration={8} />
                               </MDBBadge>
                             </MDBListGroupItem>
                           </MDBListGroup>
@@ -109,7 +114,7 @@ class ContractDashboard extends Component {
                       View Routes
                     </Link>
                     <Link to="/contracts/add" className="btn btn-primary">
-                      Add Contract
+                      Add Cost Data (7468A)
                     </Link>
                   </ButtonGroup>
                 </div>

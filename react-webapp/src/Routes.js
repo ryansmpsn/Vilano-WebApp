@@ -14,6 +14,7 @@ import PerformancePage from "./components/pages/PerformancePage";
 import FinancialsPage from "./components/pages/FinancialsPage";
 import ResourcesPage from "./components/pages/ResourcesPage";
 import SubcontractorPage from "./components/pages/SubcontractorPage";
+import AxiosTestPage from "./components/pages/AxiosTestPage";
 
 class Routes extends React.Component {
   render() {
@@ -24,8 +25,8 @@ class Routes extends React.Component {
         <Route exact path="/about" render={(props) => <About {...this.props} />} />
         <AppliedRoute path="/login" exact component={Login} appProps={this.props} />
         {this.props.isAuthenticated && <Route path="/contracts" render={(appProps) => <ContractDashboard {...this.props} />} />}
+        {this.props.isAuthenticated && <Route path="/axios" render={(appProps) => <AxiosTestPage {...this.props} />} />}
         {this.props.isAuthenticated && <Route path="/bids" render={(appProps) => <BidDashboard {...this.props} />} />}
-
         <AppliedRoute path="/testpage" exact component={testpage} props={this.props} />
         <Route path="/payroll" component={PayrollPage} />
         <Route path="/performance" component={PerformancePage} />

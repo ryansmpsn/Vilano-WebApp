@@ -28,8 +28,7 @@ function ContractCards(props) {
   //     });
   // }
 
-  var cardClass =
-    "card border-primary mb-3" + (showContract ? "cardContract" : null);
+  var cardClass = "card border-primary mb-3" + (showContract ? "cardContract" : null);
 
   return (
     !isLoading && (
@@ -41,39 +40,33 @@ function ContractCards(props) {
               padding: "10px",
               margin: "10px",
               marginRight: "0px",
-              width: "278px"
+              width: "278px",
             }}
           >
+            {console.log(contract)}
             {contract.map(
               (h, index) =>
-                h[0] !== "DONOTSHOW" && (
+                h.label !== null && (
                   <div key={index}>
-                    {h[0] === "Contract No." ||
-                    h[0] === "Company" ||
-                    h[0] === "Start City" ? (
+                    {h.label === "Contract No." || h.label === "Company" || h.label === "Start City" ? (
                       <>
-                        <Card.Title>{h[0]}:</Card.Title>
-                        <Card.Text>{h[1]}</Card.Text>
+                        <Card.Title>{h.label}:</Card.Title>
+                        <Card.Text>{h.value}</Card.Text>
                         <hr />
                       </>
                     ) : (
                       <div hidden={!showContract}>
-                        <Card.Title>{h[0]}:</Card.Title>
-                        <Card.Text>{h[1]}</Card.Text>
+                        <Card.Title>{h.label}:</Card.Title>
+                        <Card.Text>{h.value}</Card.Text>
                         <hr />
                       </div>
                     )}
                   </div>
                 )
             )}
-            <Link
-              onClick={e => props.setSelectedContract(contract[16][1])}
-              to={`${props.url}/${contract[16][1]}`}
-              className="btn btn-primary"
-            >
+            <Link onClick={(e) => props.setSelectedContract(contract[6].value)} to={`${props.url}/${contract[6].value}`} className="btn btn-primary">
               View Trips
             </Link>
-            {console.log(contract)}
             <Button
               hidden={showContract}
               className=" btn btn-primary"

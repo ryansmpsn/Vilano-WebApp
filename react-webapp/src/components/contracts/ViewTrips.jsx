@@ -9,7 +9,7 @@ function ViewTrips(props) {
   return (
     <MDBCard className="m-2">
       <MDBCardHeader>
-        <h4>Trip Information from contract: {contractId}</h4>
+        <h4>Trip Information from contract: {props.selectedContract}</h4>
         <h4>Trip Selected: {props.selectedTrip}</h4>
       </MDBCardHeader>
       <MDBCardBody>
@@ -19,7 +19,7 @@ function ViewTrips(props) {
               padding: "10px",
               margin: "10px",
               marginRight: "0px",
-              width: "278px"
+              width: "278px",
             }}
           >
             <MDBCardHeader>This is a Trip Header</MDBCardHeader>
@@ -31,7 +31,7 @@ function ViewTrips(props) {
               padding: "10px",
               margin: "10px",
               marginRight: "0px",
-              width: "278px"
+              width: "278px",
             }}
           >
             <MDBCardHeader>
@@ -57,11 +57,7 @@ function ViewTrips(props) {
               <Card.Text>326</Card.Text>
               <hr />
             </MDBCardBody>
-            <Link
-              onClick={e => props.setSelectedTrip("Trip 326")}
-              to={`${props.url}/trip/326`}
-              className="btn btn-primary"
-            >
+            <Link onClick={(e) => props.setSelectedTrip("Trip 326")} to={`${props.url}/trip/326`} className="btn btn-primary">
               View Routes
             </Link>
           </MDBCard>

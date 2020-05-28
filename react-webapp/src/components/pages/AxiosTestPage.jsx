@@ -7,12 +7,16 @@ class AxiosTestPage extends Component {
     super(props);
     this.state = {
       display: "none",
+      external_contract_code: {
+        external_contract_code: ["test006"],
+      },
     };
   }
 
   componentDidMount() {
-    Send.get("/contract/dropdowns/all", this.props, "").then((res) => {
+    Send.post("/Contract/Search", this.state.external_contract_code, this.props).then((res) => {
       this.setState({ display: res.data[0] });
+      console.log(res);
     });
   }
 
@@ -39,15 +43,15 @@ class AxiosTestPage extends Component {
           </MDBCol>
         </MDBRow>
         <div>Current Active Contracts: &nbsp;</div>
-        {console.log(this.state.display)}
-        {this.state.display !== "none" &&
+        {/* {console.log(this.state.display)} */}
+        {/* {this.state.display !== "none" &&
           this.state.display.map((content, index) => {
             return (
               <div>
                 Content: {content.columnName} Value: {content.value}
               </div>
             );
-          })}
+          })} */}
       </React.Fragment>
     );
   }

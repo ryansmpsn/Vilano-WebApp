@@ -18,14 +18,14 @@ function App(props) {
   useEffect(() => {
     if (isAuthenticated) {
       Send.get("/Loggedin", { handleLogout, handleLogin })
-        .then(res => {
+        .then((res) => {
           addToast("Logged in Successfuly", {
             appearance: "success",
-            autoDismiss: true
+            autoDismiss: true,
           });
         }, userHasAuthenticated(true))
-        .catch(err => {
-          props.history.push("/");
+        .catch((err) => {
+          // props.history.push("/");
           console.log(err);
           /* loggin out */
         });
@@ -33,13 +33,13 @@ function App(props) {
       setIsAuthenticating(false);
     } else {
       Send.get("/Loggedin", { handleLogin })
-        .then(res => {
+        .then((res) => {
           handleRedirect();
         })
-        .catch(err => {
+        .catch((err) => {
           addToast("Please Login", {
             appearance: "warning",
-            autoDismiss: true
+            autoDismiss: true,
           });
         });
 
@@ -52,7 +52,7 @@ function App(props) {
     if (sess.match === true) {
       sessionStorage.setItem("SessionID", sess.SessionID);
       sessionStorage.setItem("IDSession", sess.IDSession);
-      sess.NavPermissions.map(a => {
+      sess.NavPermissions.map((a) => {
         return sessionStorage.setItem(a[0], a[1]);
       });
       userHasAuthenticated(true);
@@ -84,15 +84,8 @@ function App(props) {
             isAuthenticating={isAuthenticating}
             setContractAccess={setContractAccess}
           />
-          <SideBar
-            contractAccess={contractAccess}
-            isAuthenticated={isAuthenticated}
-          />
-          <main
-            id="content"
-            className="p-5"
-            style={{ minHeight: "calc(100vh - 102px)" }}
-          >
+          <SideBar contractAccess={contractAccess} isAuthenticated={isAuthenticated} />
+          <main id="content" className="p-5" style={{ minHeight: "calc(100vh - 102px)" }}>
             <Routes
               handleLogout={handleLogout}
               handleLogin={handleLogin}

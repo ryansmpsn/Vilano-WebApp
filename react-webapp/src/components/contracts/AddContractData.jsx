@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { useToasts } from "react-toast-notifications";
+// import { useToasts } from "react-toast-notifications";
+import Select from "react-select";
 import { useFormFields } from "../../libs/hookslib";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
 
-function AddContract(props) {
-  const { addToast } = useToasts();
-  const [isLoading, setIsLoading] = useState(false);
+function AddContractData(props) {
+  // const { addToast } = useToasts();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSearching, setSearching] = useState(false);
+  const [contractSearch, setContractSearch] = useState(props.contractSearch);
   const [fields, handleFieldChange] = useFormFields({
     solicitation_number: "",
     date_of_solicitation: "",
@@ -34,19 +37,43 @@ function AddContract(props) {
     console.log(fields);
     event.preventDefault();
     setIsLoading(true);
+    console.log(isLoading);
+  }
+
+  function doSetContractSearch(newContract, keyValue) {
+    let getValue = [];
+    newContract !== null &&
+      newContract.map((item, index) => {
+        return getValue.push(item.label);
+      });
+    let tempCon = contractSearch;
+    tempCon[keyValue] = getValue;
+    setContractSearch(tempCon);
   }
   return (
     <MDBCard className="m-2">
       <MDBCardHeader>
         <h4>Add New Contract</h4>
-        <h5>(contract info)</h5>
+        <h5>
+          <Select
+            autoFocus
+            options={props.selectOptions}
+            isMulti
+            placeholder={"Search for Contracts by ID"}
+            onChange={(x) => {
+              doSetContractSearch(x, "external_contract_code");
+            }}
+            isLoading={isLoading & isSearching}
+            isDisabled={isSearching & isLoading}
+          />
+        </h5>
       </MDBCardHeader>
       <MDBCardBody>
         <MDBContainer>
           <form onSubmit={handleSubmit}>
             <MDBRow>
               <MDBCol md="6">
-                <p className="h5 text-center mb-4">Subscribe</p>
+                <p className="h5 text-center mb-4">Data Column</p>
                 <div className="grey-text">
                   <MDBInput label="Solicitaion Number" id="solicitation_number" icon="user" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
                   <MDBInput
@@ -109,6 +136,11 @@ function AddContract(props) {
                     success="right"
                     onChange={handleFieldChange}
                   />
+                </div>
+              </MDBCol>
+              <MDBCol md="6">
+                <p className="h5 text-center mb-4">Data Column </p>
+                <div className="grey-text">
                   <MDBInput
                     label="Inspection, Equipment, Deadhead, Portal Hours"
                     id="portal_hours"
@@ -120,6 +152,7 @@ function AddContract(props) {
                     success="right"
                     onChange={handleFieldChange}
                   />
+                  <MDBInput label="Total Offer" id="total_offer" icon="user" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
                   <MDBInput label="Plate Hours" id="plate_hours" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
                   <MDBInput label="Total Hours" id="total_hours" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
                   <MDBInput label="Cost Segment" id="cost_segment" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
@@ -151,12 +184,6 @@ function AddContract(props) {
                   />
                 </div>
               </MDBCol>
-              <MDBCol md="6">
-                <p className="h5 text-center mb-4">Subscribe</p>
-                <div className="grey-text">
-                  <MDBInput label="Total Offer" id="total_offer" icon="user" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
-                </div>
-              </MDBCol>
               <MDBCol md="12">
                 <div className="text-center">
                   <MDBBtn outline color="info" type="submit">
@@ -173,4 +200,4 @@ function AddContract(props) {
   );
 }
 
-export default AddContract;
+export default AddContractData;
