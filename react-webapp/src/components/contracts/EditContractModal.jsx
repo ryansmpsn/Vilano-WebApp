@@ -73,6 +73,7 @@ export default class EditContractModal extends React.Component {
     var newContract = null;
 
     this.setState({ submitting: true });
+    console.log(this.state.editContract);
     hand.state
       .submitAction(this.state.editContract)
       .then((res) => {

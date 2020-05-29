@@ -18,7 +18,7 @@ export default class InputFormControl extends React.Component {
 
   set_Input_restrictions = (cn) => {
     this.state.inputRes.forEach((input_res) => {
-      if (input_res.columnName === cn) {
+      if (input_res.column_name === cn) {
         this.setState({ inputRestrictions: input_res });
       }
     });
@@ -27,7 +27,6 @@ export default class InputFormControl extends React.Component {
   render() {
     return (
       <div key={"FormControlSelect" + this.state.index + "div"}>
-        {console.log(this.state.content)}
         {this.state.inputRestrictions === null && (
           <Button
             onClick={() => {

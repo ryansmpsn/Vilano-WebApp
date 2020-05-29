@@ -23,14 +23,13 @@ function ContractData(props) {
       .SearchFunction(contractSearch)
       .then((res) => {
         setContractData(res.data);
-        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
     props.getSelectOptions().then((res) => {
-      console.log(res);
       setContentInputRestrictions(res.data);
+      setIsLoading(false);
     });
   }
 
@@ -40,16 +39,15 @@ function ContractData(props) {
       .showAll()
       .then((res) => {
         setContractData(res.data);
-        setIsLoading(false);
-        setSearching(false);
-        setGetAll(false);
       })
       .catch((err) => {
         console.log(err);
       });
     props.getSelectOptions().then((res) => {
-      console.log(res);
       setContentInputRestrictions(res.data);
+      setIsLoading(false);
+      setSearching(false);
+      setGetAll(false);
     });
   }
 
