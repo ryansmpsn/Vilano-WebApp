@@ -1,6 +1,14 @@
 import React, { Component } from "react";
-import Send from "../send";
-import { MDBCard, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBCardText, MDBBadge } from "mdbreact";
+import Send from "../../libs/send";
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBRow,
+  MDBCol,
+  MDBIcon,
+  MDBCardText,
+  MDBBadge,
+} from "mdbreact";
 
 class AxiosTestPage extends Component {
   constructor(props) {
@@ -14,7 +22,11 @@ class AxiosTestPage extends Component {
   }
 
   componentDidMount() {
-    Send.post("/Contract/Search", this.state.external_contract_code, this.props).then((res) => {
+    Send.post(
+      "/Contract/Search",
+      this.state.external_contract_code,
+      this.props
+    ).then((res) => {
       this.setState({ display: res.data[0] });
       console.log(res);
     });

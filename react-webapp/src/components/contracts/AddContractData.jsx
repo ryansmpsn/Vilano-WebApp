@@ -2,7 +2,17 @@ import React, { useState } from "react";
 // import { useToasts } from "react-toast-notifications";
 import Select from "react-select";
 import { useFormFields } from "../../libs/hookslib";
-import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
+import {
+  MDBCard,
+  MDBCardHeader,
+  MDBCardBody,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBInput,
+  MDBIcon,
+  MDBBtn,
+} from "mdbreact";
 
 function AddContractData(props) {
   // const { addToast } = useToasts();
@@ -35,6 +45,7 @@ function AddContractData(props) {
   });
   async function handleSubmit(event) {
     console.log(fields);
+    setSearching(true);
     event.preventDefault();
     setIsLoading(true);
     console.log(isLoading);
@@ -75,7 +86,17 @@ function AddContractData(props) {
               <MDBCol md="6">
                 <p className="h5 text-center mb-4">Data Column</p>
                 <div className="grey-text">
-                  <MDBInput label="Solicitaion Number" id="solicitation_number" icon="user" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
+                  <MDBInput
+                    label="Solicitaion Number"
+                    id="solicitation_number"
+                    icon="user"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
                   <MDBInput
                     label="Date of Solicitation"
                     id="date_of_solicitation"
@@ -87,7 +108,17 @@ function AddContractData(props) {
                     success="right"
                     onChange={handleFieldChange}
                   />
-                  <MDBInput label="Contract Number" id="contract_number" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
+                  <MDBInput
+                    label="Contract Number"
+                    id="contract_number"
+                    icon="envelope"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
                   <MDBInput
                     label="Begin Contract Term"
                     id=" begin_contract_term"
@@ -110,9 +141,39 @@ function AddContractData(props) {
                     success="right"
                     onChange={handleFieldChange}
                   />
-                  <MDBInput label="City & State" id="city_state_1" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
-                  <MDBInput label="City & State" id=" city_state_2" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
-                  <MDBInput label="Offeror's Name" id="offerors_name" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
+                  <MDBInput
+                    label="City & State"
+                    id="city_state_1"
+                    icon="envelope"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
+                  <MDBInput
+                    label="City & State"
+                    id=" city_state_2"
+                    icon="envelope"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
+                  <MDBInput
+                    label="Offeror's Name"
+                    id="offerors_name"
+                    icon="envelope"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
                   <MDBInput
                     label="Dead Head & Portal Miles"
                     id="portal_miles"
@@ -124,7 +185,17 @@ function AddContractData(props) {
                     success="right"
                     onChange={handleFieldChange}
                   />
-                  <MDBInput label="Plate Miles" id="plate_miles" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
+                  <MDBInput
+                    label="Plate Miles"
+                    id="plate_miles"
+                    icon="envelope"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
                   <MDBInput
                     label="Annual Total Miles"
                     id="total_annual_miles"
@@ -152,14 +223,94 @@ function AddContractData(props) {
                     success="right"
                     onChange={handleFieldChange}
                   />
-                  <MDBInput label="Total Offer" id="total_offer" icon="user" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
-                  <MDBInput label="Plate Hours" id="plate_hours" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
-                  <MDBInput label="Total Hours" id="total_hours" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
-                  <MDBInput label="Cost Segment" id="cost_segment" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
-                  <MDBInput label="Gallons" id="gallons" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
-                  <MDBInput label="Price Per" id="gallons_price" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
-                  <MDBInput label="Trips" id="trips" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
-                  <MDBInput label="Per Trip" id="trip_price" icon="envelope" group type="text" validate error="wrong" success="right" onChange={handleFieldChange} />
+                  <MDBInput
+                    label="Total Offer"
+                    id="total_offer"
+                    icon="user"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
+                  <MDBInput
+                    label="Plate Hours"
+                    id="plate_hours"
+                    icon="envelope"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
+                  <MDBInput
+                    label="Total Hours"
+                    id="total_hours"
+                    icon="envelope"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
+                  <MDBInput
+                    label="Cost Segment"
+                    id="cost_segment"
+                    icon="envelope"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
+                  <MDBInput
+                    label="Gallons"
+                    id="gallons"
+                    icon="envelope"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
+                  <MDBInput
+                    label="Price Per"
+                    id="gallons_price"
+                    icon="envelope"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
+                  <MDBInput
+                    label="Trips"
+                    id="trips"
+                    icon="envelope"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
+                  <MDBInput
+                    label="Per Trip"
+                    id="trip_price"
+                    icon="envelope"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={handleFieldChange}
+                  />
                   <MDBInput
                     label="Total Fixed and Operational Cost"
                     id="operation_cost"

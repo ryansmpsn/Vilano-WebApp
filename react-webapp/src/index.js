@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ToastProvider } from "react-toast-notifications";
 import { BrowserRouter as Router } from "react-router-dom";
-import "./index.css";
+import "./css/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import App from "./App";
-import Notification from "./components/Notifications";
+import Notification from "./libs/Notifications";
 
 ReactDOM.render(
   <Router>

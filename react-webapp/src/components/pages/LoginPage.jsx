@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FormGroup, FormControl, Spinner } from "react-bootstrap";
 import { useFormFields } from "../../libs/hookslib";
-import Send from "../send";
+import Send from "../../libs/send";
 import { MDBBtn } from "mdbreact";
 import { useToasts } from "react-toast-notifications";
 import styled from "styled-components";
@@ -84,15 +84,31 @@ export default function Login(props) {
         <form onSubmit={handleSubmit}>
           {/*ControlID must match useFormFields value*/}
           <FormGroup controlId="username">
-            <FormControl autoFocus placeholder="Enter Username" type="text" value={fields.username.replace(/[*|":<>[\]{}`\\()';@&$]/, "")} onChange={handleFieldChange} />
+            <FormControl
+              autoFocus
+              placeholder="Enter Username"
+              type="text"
+              value={fields.username.replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
+              onChange={handleFieldChange}
+            />
           </FormGroup>
           <FormGroup controlId="password">
-            <FormControl placeholder="Enter Password" value={fields.password.replace(/[*|":<>[\]{}`\\()';@&$]/, "")} onChange={handleFieldChange} type="password" />
+            <FormControl
+              placeholder="Enter Password"
+              value={fields.password.replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
+              onChange={handleFieldChange}
+              type="password"
+            />
           </FormGroup>
           {isLoading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-            <MDBBtn type="submit" active={!isLoading} disabled={!validateForm()} gradient="aqua">
+            <MDBBtn
+              type="submit"
+              active={!isLoading}
+              disabled={!validateForm()}
+              gradient="aqua"
+            >
               Login
             </MDBBtn>
           )}

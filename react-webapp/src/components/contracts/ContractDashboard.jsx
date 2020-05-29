@@ -2,9 +2,19 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Link, withRouter } from "react-router-dom";
 import { ButtonGroup } from "react-bootstrap";
 import CountUp from "react-countup";
-import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
+import {
+  MDBCard,
+  MDBCardHeader,
+  MDBCardBody,
+  MDBRow,
+  MDBCol,
+  MDBIcon,
+  MDBBadge,
+  MDBListGroup,
+  MDBListGroupItem,
+} from "mdbreact";
 import NavPerm from "../../libs/NavPerms";
-import Send from "../send";
+import Send from "../../libs/send";
 
 import ContractRoutes from "./ContractRoutes";
 
@@ -42,6 +52,7 @@ class ContractDashboard extends Component {
   }
 
   componentDidMount() {
+    console.log(sessionStorage);
     return Send.get("/Contract/Ids", this.props).then((res) => {
       let contractData = res.data;
       let getSelectOptions = [];
@@ -65,7 +76,10 @@ class ContractDashboard extends Component {
             <MDBCard className="cascading-admin-card">
               <MDBCardHeader>
                 <div className="admin-up">
-                  <MDBIcon icon="file-invoice-dollar" className="primary-color" />
+                  <MDBIcon
+                    icon="file-invoice-dollar"
+                    className="primary-color"
+                  />
                   <MDBRow style={{ margin: -20 }}>
                     <MDBCol md="4" className="ml-auto mb-4">
                       <MDBCard className="mb-4">
@@ -74,19 +88,35 @@ class ContractDashboard extends Component {
                           <MDBListGroup className="list-group-flush">
                             <MDBListGroupItem>
                               Current Active Contracts
-                              <MDBBadge color="primary-color" pill className="float-right">
-                                <CountUp start={0} end={this.state.selectOptions.length} duration={5} />
+                              <MDBBadge
+                                color="primary-color"
+                                pill
+                                className="float-right"
+                              >
+                                <CountUp
+                                  start={0}
+                                  end={this.state.selectOptions.length}
+                                  duration={5}
+                                />
                               </MDBBadge>
                             </MDBListGroupItem>
                             <MDBListGroupItem>
                               Total Trips
-                              <MDBBadge color="default-color-dark" pill className="float-right">
+                              <MDBBadge
+                                color="default-color-dark"
+                                pill
+                                className="float-right"
+                              >
                                 <CountUp start={0} end={0} duration={5} />
                               </MDBBadge>
                             </MDBListGroupItem>
                             <MDBListGroupItem>
                               Total Routes
-                              <MDBBadge color="unique-color" pill className="float-right">
+                              <MDBBadge
+                                color="unique-color"
+                                pill
+                                className="float-right"
+                              >
                                 <CountUp start={0} end={0} duration={8} />
                               </MDBBadge>
                             </MDBListGroupItem>

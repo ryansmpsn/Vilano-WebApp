@@ -1,13 +1,12 @@
 import React, { Component, useState, useEffect } from "react";
-import "./App.css";
+import "./css/App.css";
 import { Redirect } from "react-router-dom";
 import Routes from "./Routes";
 import NavBar from "./components/layout/NavBar";
 import SideBar from "./components/layout/SideBar";
 import Footer from "./components/layout/Footer";
 import { useToasts } from "react-toast-notifications";
-
-import Send from "./components/send";
+import Send from "./libs/send";
 
 function App(props) {
   const { addToast } = useToasts();
@@ -84,8 +83,15 @@ function App(props) {
             isAuthenticating={isAuthenticating}
             setContractAccess={setContractAccess}
           />
-          <SideBar contractAccess={contractAccess} isAuthenticated={isAuthenticated} />
-          <main id="content" className="p-5" style={{ minHeight: "calc(100vh - 102px)" }}>
+          <SideBar
+            contractAccess={contractAccess}
+            isAuthenticated={isAuthenticated}
+          />
+          <main
+            id="content"
+            className="p-5"
+            style={{ minHeight: "calc(100vh - 102px)" }}
+          >
             <Routes
               handleLogout={handleLogout}
               handleLogin={handleLogin}

@@ -1,10 +1,10 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer } from "mdbreact";
 import { Card } from "react-bootstrap";
 
 function ViewTrips(props) {
-  let { contractId } = useParams();
+  // let { contractId } = useParams();
 
   return (
     <MDBCard className="m-2">
@@ -57,7 +57,11 @@ function ViewTrips(props) {
               <Card.Text>326</Card.Text>
               <hr />
             </MDBCardBody>
-            <Link onClick={(e) => props.setSelectedTrip("Trip 326")} to={`${props.url}/trip/326`} className="btn btn-primary">
+            <Link
+              onClick={(e) => props.setSelectedTrip("Trip 326")}
+              to={`${props.url}/trip/326`}
+              className="btn btn-primary"
+            >
               View Routes
             </Link>
           </MDBCard>

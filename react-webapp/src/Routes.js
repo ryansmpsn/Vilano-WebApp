@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import AppliedRoute from "./components/AppliedRoute";
+import AppliedRoute from "./libs/AppliedRoute";
 import Home from "./components/pages/HomePage";
 import Login from "./components/pages/LoginPage";
 import About from "./components/pages/AboutPage";
@@ -22,12 +22,41 @@ class Routes extends React.Component {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/resources" component={ResourcesPage} />
-        <Route exact path="/about" render={(props) => <About {...this.props} />} />
-        <AppliedRoute path="/login" exact component={Login} appProps={this.props} />
-        {this.props.isAuthenticated && <Route path="/contracts" render={(appProps) => <ContractDashboard {...this.props} />} />}
-        {this.props.isAuthenticated && <Route path="/axios" render={(appProps) => <AxiosTestPage {...this.props} />} />}
-        {this.props.isAuthenticated && <Route path="/bids" render={(appProps) => <BidDashboard {...this.props} />} />}
-        <AppliedRoute path="/testpage" exact component={testpage} props={this.props} />
+        <Route
+          exact
+          path="/about"
+          render={(props) => <About {...this.props} />}
+        />
+        <AppliedRoute
+          path="/login"
+          exact
+          component={Login}
+          appProps={this.props}
+        />
+        {this.props.isAuthenticated && (
+          <Route
+            path="/contracts"
+            render={(appProps) => <ContractDashboard {...this.props} />}
+          />
+        )}
+        {this.props.isAuthenticated && (
+          <Route
+            path="/axios"
+            render={(appProps) => <AxiosTestPage {...this.props} />}
+          />
+        )}
+        {this.props.isAuthenticated && (
+          <Route
+            path="/bids"
+            render={(appProps) => <BidDashboard {...this.props} />}
+          />
+        )}
+        <AppliedRoute
+          path="/testpage"
+          exact
+          component={testpage}
+          props={this.props}
+        />
         <Route path="/payroll" component={PayrollPage} />
         <Route path="/performance" component={PerformancePage} />
         <Route path="/financials" component={FinancialsPage} />
