@@ -3,6 +3,7 @@ import { Row, FormGroup, Button, Container, Spinner } from "react-bootstrap";
 import ContractCards from "./ContractCards";
 import Select from "react-select";
 import ContractTable from "./ContractTable";
+import UpsertContractModal from "./UpsertContractModal";
 
 function ContractData(props) {
   const [contractData, setContractData] = useState([]);
@@ -12,6 +13,7 @@ function ContractData(props) {
   const [tableView, setTableView] = useState(false);
   const [contractSearch, setContractSearch] = useState(props.contractSearch);
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     //Can put stuff that needs to happen on load here.
@@ -50,6 +52,16 @@ function ContractData(props) {
       setGetAll(false);
     });
   }
+  function add() {
+    setIsLoading(true);
+    setSearching(true);
+    props.getSelectOptions().then((res) => {
+      setContentInputRestrictions(res.data);
+      setIsLoading(false);
+      setSearching(false);
+      openModal();
+    });
+  }
 
   function doSetContractSearch(newContract, keyValue) {
     let getValue = [];
@@ -81,6 +93,16 @@ function ContractData(props) {
       result.push([key, json[key]]);
     });
     return result;
+  }
+
+  function openModal() {
+    setShowModal(true);
+    window.location.hash = "edit";
+  }
+
+  function closeModal() {
+    window.history.replaceState(null, null, " ");
+    setShowModal(false);
   }
 
   return (
@@ -120,6 +142,7 @@ function ContractData(props) {
               >
                 Show All
               </Button>
+              <Button onClick={add}>Add Contract</Button>
             </>
           )}
         </form>
@@ -149,6 +172,50 @@ function ContractData(props) {
               </Row>
             </div>
           )}
+      {console.log(contentInputRestrictions)}
+      {!isLoading && (
+        <UpsertContractModal
+          modalName={props.modalName}
+          contract={[
+            { columnName: "contract_id", inputType: null, label: null, updatedValue: null, value: null },
+            { columnName: "modified_by", inputType: null, label: null, updatedValue: null, value: null },
+            { columnName: "employee_name", inputType: null, label: "Last Modified By", updatedValue: null, value: null },
+            { columnName: "is_active", inputType: "select", label: "Active", updatedValue: null, value: 1 },
+            { columnName: "company_id", inputType: null, label: null, updatedValue: null, value: 1 },
+            { columnName: "company_name", inputType: "select", label: "Company", updatedValue: null, value: "Vilano Management Systems, Inc." },
+            { columnName: "external_contract_code", inputType: "text", label: "Contract No.", updatedValue: null, value: "ABC123" },
+            { columnName: "solicitation_number", inputType: "text", label: "Solicitation No.", updatedValue: null, value: null },
+            { columnName: "admin_facility_id", inputType: null, label: null, updatedValue: null, value: null },
+            { columnName: "admin_facility_name", inputType: "select", label: "Administration Office", updatedValue: null, value: "unknown" },
+            { columnName: "contract_type_id", inputType: null, label: null, updatedValue: null, value: 1 },
+            { columnName: "contract_type_code", inputType: "select", label: "Contract Type Code", updatedValue: null, value: "HCR" },
+            { columnName: "contract_type_name", inputType: null, label: "Contract Type Name", updatedValue: null, value: "Highway Contract Route" },
+            { columnName: "contract_division_id", inputType: null, label: null, updatedValue: null, value: 1 },
+            { columnName: "contract_division_code", inputType: "select", label: "Division Code", updatedValue: null, value: "LDT" },
+            { columnName: "contract_division_name", inputType: null, label: "Division Name", updatedValue: null, value: "Local Distribution Transportation" },
+            { columnName: "status_id", inputType: null, label: null, updatedValue: null, value: 12 },
+            { columnName: "contract_status", inputType: "select", label: "Contract Status", updatedValue: null, value: "Active" },
+            { columnName: "origin_facility_id", inputType: null, label: null, updatedValue: null, value: null },
+            { columnName: "origin_facility_name", inputType: "select", label: "Origination", updatedValue: null, value: "unknown" },
+            { columnName: "origin_state_name", inputType: null, label: "Origin State", updatedValue: null, value: "unknown" },
+            { columnName: "destination_facility_id", inputType: null, label: null, updatedValue: null, value: null },
+            { columnName: "destination_facility_name", inputType: "select", label: "Destination", updatedValue: null, value: "unknown" },
+            { columnName: "destination_state_name", inputType: null, label: "Destination State", updatedValue: null, value: "unknown" },
+            { columnName: "solicitation_date", inputType: "date", label: "Date of Solicitation", updatedValue: null, value: "2020-01-29" },
+            { columnName: "begin_contract_date", inputType: "date", label: "Begin Contract Term", updatedValue: null, value: "2020-02-27" },
+            { columnName: "end_contract_date", inputType: "date", label: "End Contract Term", updatedValue: null, value: "2020-01-03" },
+            { columnName: "modified_timestamp", inputType: null, label: "Last Modified", updatedValue: null, value: null },
+          ]}
+          inputRestrictions={contentInputRestrictions}
+          show={showModal}
+          closeModal={closeModal}
+          accessLevel={props.accessLevel}
+          appProps={props.appProps}
+          submitAction={(editContract) => {
+            return props.contractEditSubmitAction(editContract);
+          }}
+        />
+      )}
     </>
   );
 }

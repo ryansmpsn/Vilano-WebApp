@@ -1,34 +1,22 @@
 import React, { Component } from "react";
+import { MDBCard, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBCardText, MDBBadge } from "mdbreact";
+import Select, { createFilter } from "react-select";
 import Send from "../../libs/send";
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBRow,
-  MDBCol,
-  MDBIcon,
-  MDBCardText,
-  MDBBadge,
-} from "mdbreact";
+import MenuList from "../../libs/OptimizedSelect";
+import { Form } from "react-bootstrap";
 
 class AxiosTestPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       display: "none",
-      external_contract_code: {
-        external_contract_code: ["test006"],
-      },
     };
   }
 
   componentDidMount() {
-    Send.post(
-      "/Contract/Search",
-      this.state.external_contract_code,
-      this.props
-    ).then((res) => {
-      this.setState({ display: res.data[0] });
-      console.log(res);
+    Send.get("/Contract/Dropdowns/All", this.props).then((res) => {
+      this.setState({ display: res.data[0].options });
+      console.log(this.state.display);
     });
   }
 
@@ -47,23 +35,23 @@ class AxiosTestPage extends Component {
                   </h4>
                 </div>
               </div>
-
               <MDBCardBody>
                 <h2 className="m-3 ">Endpoint / Axios Test Page</h2>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
         </MDBRow>
-        <div>Current Active Contracts: &nbsp;</div>
-        {/* {console.log(this.state.display)} */}
-        {/* {this.state.display !== "none" &&
-          this.state.display.map((content, index) => {
-            return (
-              <div>
-                Content: {content.columnName} Value: {content.value}
-              </div>
-            );
-          })} */}
+
+        <div>Current Facilities: &nbsp;</div>
+        <Form.Control as="select">
+          {this.state.display !== "none" &&
+            this.state.display.map((c, index) => (
+              <option key={c.value} value={c.value}>
+                {c.label}
+              </option>
+            ))}
+        </Form.Control>
+        <Select components={{ MenuList }} options={this.state.display} filterOption={createFilter({ ignoreAccents: false })} />
       </React.Fragment>
     );
   }

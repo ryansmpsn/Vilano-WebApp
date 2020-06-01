@@ -1,6 +1,7 @@
 import React from "react";
-import Select from "react-select";
+import Select, { createFilter } from "react-select";
 import { Button } from "react-bootstrap";
+import MenuList from "./OptimizedSelect";
 
 export default class InputFormControl extends React.Component {
   constructor(props) {
@@ -17,6 +18,15 @@ export default class InputFormControl extends React.Component {
   }
 
   set_Input_restrictions = (cn) => {
+    if (cn === "destination_facility_name") {
+      this.setState({ inputRestrictions: this.state.inputRes[0] });
+    } else if (cn === "origin_facility_name") {
+      this.setState({ inputRestrictions: this.state.inputRes[0] });
+    } else if (cn === "admin_facility_name") {
+      console.log("Hitting");
+      this.setState({ inputRestrictions: this.state.inputRes[0] });
+    }
+
     this.state.inputRes.forEach((input_res) => {
       if (input_res.column_name === cn) {
         this.setState({ inputRestrictions: input_res });
@@ -27,6 +37,7 @@ export default class InputFormControl extends React.Component {
   render() {
     return (
       <div key={"FormControlSelect" + this.state.index + "div"}>
+        {console.log(this.state.inputRestrictions)}
         {this.state.inputRestrictions === null && (
           <Button
             onClick={() => {
@@ -37,7 +48,7 @@ export default class InputFormControl extends React.Component {
           </Button>
         )}
         {this.state.inputRestrictions !== null && (
-          <Select key={"FormControlSelect" + this.state.index} options={this.state.inputRestrictions.options} onChange={this.state.onChange} />
+          <Select components={{ MenuList }} options={this.state.inputRestrictions.options} filterOption={createFilter({ ignoreAccents: false })} onChange={this.state.onChange} />
         )}
       </div>
     );

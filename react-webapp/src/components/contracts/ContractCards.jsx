@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
 import { MDBContainer } from "mdbreact";
-import EditContractModal from "./EditContractModal";
+import UpsertContractModal from "./UpsertContractModal";
 
 function ContractCards(props) {
   const [contract, setContract] = useState([]);
@@ -101,7 +101,7 @@ function ContractCards(props) {
             </Button>
             <Button onClick={openModal}>Edit</Button>
           </Card>
-          <EditContractModal
+          <UpsertContractModal
             modalName={props.modalName}
             contract={contract}
             inputRestrictions={props.inputRestrictions}
