@@ -12,7 +12,14 @@ function ContractTable(props) {
   rowData = rowData.map((c, index) => ({
     ...c,
     viewTrips: (
-      <Link onClick={(e) => props.setSelectedContract(contractData[index][6].value)} to="/contracts/trips" className="btn btn-primary btn-sm">
+      <Link
+        onClick={(e) => {
+          props.setSelectedContract(contractData[index][6].value);
+          props.setSelectedContractId(contractData[index][0].value);
+        }}
+        to={`${props.url}/${contractData[index][0].value}`}
+        className="btn btn-primary btn-sm"
+      >
         View Trips
       </Link>
     ),

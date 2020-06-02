@@ -67,7 +67,7 @@ function ContractCards(props) {
                         <hr />
                       </>
                     ) : (
-                      <div hidden={!showContract}>
+                      <div key={index} hidden={!showContract}>
                         <Card.Title>{h.label}:</Card.Title>
                         <Card.Text>{h.value}</Card.Text>
                         <hr />
@@ -76,7 +76,14 @@ function ContractCards(props) {
                   </div>
                 )
             )}
-            <Link onClick={(e) => props.setSelectedContract(contract[6].value)} to={`${props.url}/${contract[6].value}`} className="btn btn-primary">
+            <Link
+              onClick={(e) => {
+                props.setSelectedContract(contract[6].value);
+                props.setSelectedContractId(contract[0].value);
+              }}
+              to={`${props.url}/${contract[0].value}`}
+              className="btn btn-primary"
+            >
               View Trips
             </Link>
             <Button

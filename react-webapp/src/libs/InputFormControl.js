@@ -23,7 +23,6 @@ export default class InputFormControl extends React.Component {
     } else if (cn === "origin_facility_name") {
       this.setState({ inputRestrictions: this.state.inputRes[0] });
     } else if (cn === "admin_facility_name") {
-      console.log("Hitting");
       this.setState({ inputRestrictions: this.state.inputRes[0] });
     }
 
@@ -37,7 +36,6 @@ export default class InputFormControl extends React.Component {
   render() {
     return (
       <div key={"FormControlSelect" + this.state.index + "div"}>
-        {console.log(this.state.inputRestrictions)}
         {this.state.inputRestrictions === null && (
           <Button
             onClick={() => {

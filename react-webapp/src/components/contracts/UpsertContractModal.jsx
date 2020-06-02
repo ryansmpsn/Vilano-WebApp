@@ -39,21 +39,26 @@ export default class UpsertContractModal extends React.Component {
   has_changed() {
     var hasChanged = false;
     var object = this.state.contract;
-    console.log(object);
     object.forEach((item) => {
-      if (item.updatedValue !== "" && item.updatedValue !== item.value) {
+      if (item.updatedValue !== null && item.updatedValue !== item.value) {
         hasChanged = true;
       }
     });
+    // add notification for upated Contract
     return hasChanged;
   }
 
   update_contract(newContract) {
     var object = this.state.contract;
+
     object.forEach((item) => {
-      var new_val = newContract[item.columnName];
-      item.value = new_val;
-      item.updatedValue = "";
+      let data = item;
+      item.updatedValue = null;
+      newContract.forEach((c) => {
+        if (c.columnName === data.columnName) data.value = c.value;
+      });
+
+      item = data;
     });
   }
   /*
@@ -74,24 +79,25 @@ export default class UpsertContractModal extends React.Component {
     var newContract = null;
 
     this.setState({ submitting: true });
-    console.log(this.state.editContract);
     hand.state
       .submitAction(this.state.editContract)
       .then((res) => {
-        newContract = JSON.parse(res.data);
-
+        newContract = res.data[0];
+        newContract.pop();
         if (newContract !== null) {
+          console.log(newContract);
           hand.update_contract(newContract);
           hand.setState({ submitting: false });
         } else {
           hand.setState({ submitting: false });
         }
+
+        return <MDBNotification show fade icon="envelope" iconClassName="green-text" title="New Message" message="Hello, user! You have a new message." text="just now" />;
       })
       .catch((err) => {
         hand.setState({ submitting: false });
         console.log(err);
       });
-    return <MDBNotification show fade icon="envelope" iconClassName="green-text" title="New Message" message="Hello, user! You have a new message." text="just now" />;
   }
 
   set_variable_id(object, variable_key, value) {
@@ -161,6 +167,7 @@ export default class UpsertContractModal extends React.Component {
                           <>
                             <br />
                             <span>Edit Date: &nbsp;</span>
+                            {/* Fix date picker to default to current day */}
                             <DatePicker
                               onChange={(e) => {
                                 var object = this.state.editContract;
@@ -171,7 +178,7 @@ export default class UpsertContractModal extends React.Component {
                                 this.setState({ date: date });
                               }}
                               value={
-                                item.updatedValue !== ""
+                                item.updatedValue !== null
                                   ? new Date(
                                       new Date(item.updatedValue).getUTCMonth() +
                                         1 +

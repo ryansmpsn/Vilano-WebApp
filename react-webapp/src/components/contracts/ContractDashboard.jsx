@@ -14,13 +14,18 @@ class ContractDashboard extends Component {
     this.state = {
       accessLevel: NavPerm.nav_perm_check(),
       selectOptions: [],
-      selectedContract: "null",
+      selectedContractId: "null",
+      selectedContract: "",
       selectedTrip: "null",
+      contractProfile: null,
     };
   }
 
   setSelectedContract = (e) => {
     return this.setState({ selectedContract: e });
+  };
+  setSelectedContractId = (e) => {
+    return this.setState({ selectedContractId: e });
   };
   setSelectedTrip = (e) => {
     return this.setState({ selectedTrip: e });
@@ -33,12 +38,17 @@ class ContractDashboard extends Component {
   show_all() {
     return Send.post("/Contract/Search", "", this.props);
   }
+  getTrips = (e) => {
+    return Send.get(e, this.props).then((res) => {
+      this.setState({ contractProfile: res.data[0] });
+    });
+  };
 
   contractEditSubmitAction = (editContract) => {
     return Send.post("/Contract", editContract, this.props);
   };
   getSelectOptions() {
-    return Send.get("/Contract/Dropdowns/All", this.props);
+    return Send.get("/Contract/Dropdowns/Contract/All", this.props);
   }
 
   componentDidMount() {
@@ -124,10 +134,13 @@ class ContractDashboard extends Component {
           path={path}
           setSelectedTrip={this.setSelectedTrip}
           setSelectedContract={this.setSelectedContract}
+          setSelectedContractId={this.setSelectedContractId}
           selectedTrip={this.state.selectedTrip}
           selectedContract={this.state.selectedContract}
+          selectedContractId={this.state.selectedContractId}
           selectOptions={this.state.selectOptions}
           contractID
+          contractProfile={this.state.contractProfile}
           modalName="Edit Contract"
           accessLevel={this.state.accessLevel}
           contractEditSubmitAction={this.contractEditSubmitAction}
@@ -147,6 +160,7 @@ class ContractDashboard extends Component {
           getContracts={() => {
             return this.getContracts();
           }}
+          getTrips={this.getTrips}
         />
       </Router>
     );
