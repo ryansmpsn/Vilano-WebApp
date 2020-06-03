@@ -123,6 +123,9 @@ class ContractDashboard extends Component {
                     <Link to="/contracts/add" className="btn btn-primary">
                       Add Cost Data (7468A)
                     </Link>
+                    <Link to="/contracts/ratesheet" className="btn btn-primary">
+                      Rate Sheet
+                    </Link>
                   </ButtonGroup>
                 </div>
               </MDBCardBody>

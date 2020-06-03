@@ -49,6 +49,7 @@ function TripData(props) {
           ) : (
             <div className="trip">
               <Row key="topRow" className="show-grid">
+                {console.log(props.contractProfile)}
                 {props.contractProfile[28].value.map((c, index) => (
                   <DisplayTrips key={index} tripData={c} />
                 ))}
