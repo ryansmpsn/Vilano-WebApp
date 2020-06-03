@@ -117,8 +117,12 @@ class ContractDashboard extends Component {
                     <Link to="/contracts/trips" className="btn btn-primary">
                       View Trips
                     </Link>
+
                     <Link to="/contracts/routes" className="btn btn-primary">
                       View Routes
+                    </Link>
+                    <Link to="/contracts/costdata" className="btn btn-primary">
+                      View Cost Data
                     </Link>
                     <Link to="/contracts/add" className="btn btn-primary">
                       Add Cost Data (7468A)

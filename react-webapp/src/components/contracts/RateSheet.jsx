@@ -64,11 +64,11 @@ function RateSheet(props) {
     return_on_investment: "",
     TOTAL_OFFER: "",
     equipment_realaignment_deadhead_portalmiles: "",
-    plate_miles: "",
+    plate_miles1: "",
     total_miles: "",
     DOT: "",
-    plate_hours: "",
-    total_hours: "",
+    plate_hours1: "",
+    total_hours1: "",
   });
   async function handleSubmit(event) {
     console.log(fields);

@@ -1,354 +1,179 @@
 import React, { useState } from "react";
 // import { useToasts } from "react-toast-notifications";
 import Select from "react-select";
-import { useFormFields } from "../../libs/hookslib";
-import {
-  MDBCard,
-  MDBCardHeader,
-  MDBCardBody,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBInput,
-  MDBIcon,
-  MDBBtn,
-} from "mdbreact";
-
-function AddContractData(props) {
+import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
+import { Button } from "react-bootstrap";
+export default class AddContractData extends React.Component {
   // const { addToast } = useToasts();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSearching, setSearching] = useState(false);
-  const [contractSearch, setContractSearch] = useState(props.contractSearch);
-  const [fields, handleFieldChange] = useFormFields({
-    solicitation_number: "",
-    date_of_solicitation: "",
-    contract_number: "",
-    begin_contract_term: "",
-    end_contract_term: "",
-    city_state_1: "",
-    city_state_2: "",
-    offerors_name: "",
-    portal_miles: "",
-    plate_miles: "",
-    total_annual_miles: "",
-    portal_hours: "",
-    plate_hours: "",
-    total_hours: "",
-    cost_segment: "",
-    gallons: "",
-    gallons_price: "",
-    trips: "",
-    trip_price: "",
-    operation_cost: "",
-    labor_cost: "",
-    total_offer: "",
-  });
-  async function handleSubmit(event) {
-    console.log(fields);
-    setSearching(true);
-    event.preventDefault();
-    setIsLoading(true);
-    console.log(isLoading);
+  constructor(props) {
+    super(props);
+    this.state = {
+      contractSearch: props.contractSearch,
+      fieldData: [
+        { columnName: "contract_test_id", inputType: null, label: null, updatedValue: null, value: null },
+        { columnName: "modified_timestamp", inputType: null, label: "Modified At", updatedValue: null, value: null },
+        { columnName: "modified_by", inputType: null, label: "modified_by", updatedValue: null, value: null },
+        { columnName: "contract_id", inputType: null, label: "contract_id", updatedValue: null, value: 853 },
+        { columnName: "external_contract_code", inputType: null, label: "external_contract_code", updatedValue: null, value: "Test006" },
+        { columnName: "begin_contract_date", inputType: null, label: "begin_contract_date", updatedValue: null, value: "2020-01-10" },
+        { columnName: "end_contract_date", inputType: null, label: "end_contract_date", updatedValue: null, value: "2020-01-04" },
+        { columnName: "origin_facility_id", inputType: null, label: "origin_facility_id", updatedValue: null, value: 1 },
+        { columnName: "destination_facility_id", inputType: null, label: "destination_facility_id", updatedValue: null, value: 1 },
+        { columnName: "company_id", inputType: null, label: null, updatedValue: 2, value: null },
+        { columnName: "cost_segment_id", inputType: null, label: null, updatedValue: 1, value: null },
+        { columnName: "plate_miles", inputType: "num", label: "Plate Miles", updatedValue: 2128612.9, value: null },
+        { columnName: "dh_portal_miles", inputType: "num", label: "Dead Head & Portal Miles", updatedValue: 87208.15, value: null },
+        { columnName: "annual_miles", inputType: "num", label: "Annual Total Miles", updatedValue: 2215821.05, value: null },
+        { columnName: "plate_hours", inputType: "num", label: "Plate Hours", updatedValue: 54936, value: null },
+        { columnName: "misc_hours", inputType: "num", label: "Inspection, Equipment, Deadhead, Portal Hours", updatedValue: 4306, value: null },
+        { columnName: "annual_hours", inputType: "num", label: "Annual Total Hours", updatedValue: 59242, value: null },
+        { columnName: "plate_gallons", inputType: "num", label: "Plate Gallons", updatedValue: 367454.51, value: null },
+        { columnName: "dh_portal_gallons", inputType: "num", label: "Dead Head & Portal Gallons", updatedValue: null, value: null },
+        { columnName: "annual_gallons", inputType: "num", label: "Annual Total Gallons", updatedValue: 367454.51, value: null },
+        { columnName: "vehicle_type_id", inputType: null, label: null, updatedValue: 16, value: null },
+        { columnName: "num_vehicle", inputType: "num", label: "Number of Vehicles", updatedValue: 24, value: null },
+        { columnName: "trailer_type", inputType: "select", label: "Trailer Type", updatedValue: "NEW Dry Van 53'", value: null },
+        { columnName: "trailer_type_id", inputType: null, label: null, updatedValue: 5, value: null },
+        { columnName: "num_trailer", inputType: "num", label: "Number of Trailers", updatedValue: 31, value: null },
+        { columnName: "total_trips", inputType: "num", label: "Total Number of Trips", updatedValue: 66, value: null },
+        { columnName: "total_fix_oc_cost", inputType: "num", label: "Total Fixed & Operational Costs", updatedValue: 2435407.34, value: null },
+        { columnName: "total_op_labor_cost", inputType: "num", label: "Total Operation Labor Costs", updatedValue: 1894943.86, value: null },
+        { columnName: "total_revenue", inputType: "num", label: "Total Revenue (Offer)", updatedValue: 4395756.32, value: null },
+      ],
+      editedFieldData: [
+        { columnName: "contract_test_id", inputType: null, label: null, updatedValue: null, value: null },
+        { columnName: "modified_timestamp", inputType: null, label: "Modified At", updatedValue: null, value: null },
+        { columnName: "modified_by", inputType: null, label: "modified_by", updatedValue: null, value: null },
+        { columnName: "contract_id", inputType: null, label: "contract_id", updatedValue: null, value: 853 },
+        { columnName: "external_contract_code", inputType: null, label: "external_contract_code", updatedValue: null, value: "Test006" },
+        { columnName: "begin_contract_date", inputType: null, label: "begin_contract_date", updatedValue: null, value: "2020-01-10" },
+        { columnName: "end_contract_date", inputType: null, label: "end_contract_date", updatedValue: null, value: "2020-01-04" },
+        { columnName: "origin_facility_id", inputType: null, label: "origin_facility_id", updatedValue: null, value: 1 },
+        { columnName: "destination_facility_id", inputType: null, label: "destination_facility_id", updatedValue: null, value: 1 },
+        { columnName: "company_id", inputType: null, label: null, updatedValue: null, value: null },
+        { columnName: "cost_segment_id", inputType: null, label: null, updatedValue: null, value: null },
+        { columnName: "plate_miles", inputType: "num", label: "Plate Miles", updatedValue: null, value: null },
+        { columnName: "dh_portal_miles", inputType: "num", label: "Dead Head & Portal Miles", updatedValue: null, value: null },
+        { columnName: "annual_miles", inputType: "num", label: "Annual Total Miles", updatedValue: null, value: null },
+        { columnName: "plate_hours", inputType: "num", label: "Plate Hours", updatedValue: null, value: null },
+        { columnName: "misc_hours", inputType: "num", label: "Inspection, Equipment, Deadhead, Portal Hours", updatedValue: null, value: null },
+        { columnName: "annual_hours", inputType: "num", label: "Annual Total Hours", updatedValue: null, value: null },
+        { columnName: "plate_gallons", inputType: "num", label: "Plate Gallons", updatedValue: null, value: null },
+        { columnName: "dh_portal_gallons", inputType: "num", label: "Dead Head & Portal Gallons", updatedValue: null, value: null },
+        { columnName: "annual_gallons", inputType: "num", label: "Annual Total Gallons", updatedValue: null, value: null },
+        { columnName: "vehicle_type_id", inputType: null, label: null, updatedValue: null, value: null },
+        { columnName: "num_vehicle", inputType: "num", label: "Number of Vehicles", updatedValue: null, value: null },
+        { columnName: "trailer_type", inputType: "select", label: "Trailer Type", updatedValue: null, value: null },
+        { columnName: "trailer_type_id", inputType: null, label: null, updatedValue: null, value: null },
+        { columnName: "num_trailer", inputType: "num", label: "Number of Trailers", updatedValue: null, value: null },
+        { columnName: "total_trips", inputType: "num", label: "Total Number of Trips", updatedValue: null, value: null },
+        { columnName: "total_fix_oc_cost", inputType: "num", label: "Total Fixed & Operational Costs", updatedValue: null, value: null },
+        { columnName: "total_op_labor_cost", inputType: "num", label: "Total Operation Labor Costs", updatedValue: null, value: null },
+        { columnName: "total_revenue", inputType: "num", label: "Total Revenue (Offer)", updatedValue: null, value: null },
+      ],
+    };
   }
+  has_changed() {
+    var hasChanged = false;
+    var object = this.state.fieldData;
+    object.forEach((item) => {
+      if (item.updatedValue !== null && item.updatedValue !== item.value) {
+        hasChanged = true;
+      }
+    });
+    // add notification for upated Contract
+    return hasChanged;
+  }
+  update_fieldData(newFieldData) {
+    var object = this.state.fieldData;
 
-  function doSetContractSearch(newContract, keyValue) {
-    let getValue = [];
-    newContract !== null &&
-      newContract.map((item, index) => {
-        return getValue.push(item.label);
+    object.forEach((item) => {
+      let data = item;
+      item.updatedValue = null;
+      newFieldData.forEach((c) => {
+        if (c.columnName === data.columnName) data.value = c.value;
       });
-    let tempCon = contractSearch;
-    tempCon[keyValue] = getValue;
-    setContractSearch(tempCon);
-  }
-  return (
-    <MDBCard className="m-2">
-      <MDBCardHeader>
-        <h4>Add New Contract</h4>
-        <h5>
-          <Select
-            autoFocus
-            options={props.selectOptions}
-            isMulti
-            placeholder={"Search for Contracts by ID"}
-            onChange={(x) => {
-              doSetContractSearch(x, "external_contract_code");
-            }}
-            isLoading={isLoading & isSearching}
-            isDisabled={isSearching & isLoading}
-          />
-        </h5>
-      </MDBCardHeader>
-      <MDBCardBody>
-        <MDBContainer>
-          <form onSubmit={handleSubmit}>
-            <MDBRow>
-              <MDBCol md="6">
-                <p className="h5 text-center mb-4">Data Column</p>
-                <div className="grey-text">
-                  <MDBInput
-                    label="Solicitaion Number"
-                    id="solicitation_number"
-                    icon="user"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Date of Solicitation"
-                    id="date_of_solicitation"
-                    icon="calendar"
-                    group
-                    type="datepicker"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Contract Number"
-                    id="contract_number"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Begin Contract Term"
-                    id=" begin_contract_term"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="End Contract Term"
-                    id="end_contract_term"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="City & State"
-                    id="city_state_1"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="City & State"
-                    id=" city_state_2"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Offeror's Name"
-                    id="offerors_name"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Dead Head & Portal Miles"
-                    id="portal_miles"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Plate Miles"
-                    id="plate_miles"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Annual Total Miles"
-                    id="total_annual_miles"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                </div>
-              </MDBCol>
-              <MDBCol md="6">
-                <p className="h5 text-center mb-4">Data Column </p>
-                <div className="grey-text">
-                  <MDBInput
-                    label="Inspection, Equipment, Deadhead, Portal Hours"
-                    id="portal_hours"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Total Offer"
-                    id="total_offer"
-                    icon="user"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Plate Hours"
-                    id="plate_hours"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Total Hours"
-                    id="total_hours"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Cost Segment"
-                    id="cost_segment"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Gallons"
-                    id="gallons"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Price Per"
-                    id="gallons_price"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Trips"
-                    id="trips"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Per Trip"
-                    id="trip_price"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Total Fixed and Operational Cost"
-                    id="operation_cost"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                  <MDBInput
-                    label="Total Operation Labor Cost"
-                    id="labor_cost"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleFieldChange}
-                  />
-                </div>
-              </MDBCol>
-              <MDBCol md="12">
-                <div className="text-center">
-                  <MDBBtn outline color="info" type="submit">
-                    Send
-                    <MDBIcon far icon="paper-plane" className="ml-1" />
-                  </MDBBtn>
-                </div>
-              </MDBCol>
-            </MDBRow>
-          </form>
-        </MDBContainer>
-      </MDBCardBody>
-    </MDBCard>
-  );
-}
 
-export default AddContractData;
+      item = data;
+    });
+  }
+  set_variable_id(object, variable_key, value) {
+    var variable = variable_key.substring(0, variable_key.lastIndexOf("_")) + "_id";
+    var set = false;
+    object.forEach((item) => {
+      if (item.columnName === variable) {
+        item.updatedValue = value;
+        set = true;
+      }
+    });
+    if (set === false) {
+      object.push([null, value, variable, "", "None"]);
+    }
+    return object;
+  }
+
+  handleSubmit() {
+    // navigate to "viewCost Data"
+    console.log("submitted");
+  }
+  render() {
+    return (
+      <MDBCard className="m-2">
+        <MDBCardHeader>
+          <h4>Add New Contract</h4>
+          <h5>
+            <Select autoFocus options={this.props.selectOptions} isMulti placeholder={"Search for Contracts by ID"} onChange={console.log("changed")} />
+          </h5>
+          <h4>
+            <Button type="submit">Search</Button>
+          </h4>
+        </MDBCardHeader>
+        <MDBCardBody>
+          <MDBContainer>
+            <form onSubmit={this.handleSubmit}>
+              <MDBRow>
+                <MDBCol md="6">
+                  <p className="h5 text-center mb-4">Data Column</p>
+
+                  <div className="grey-text">
+                    {this.state.editedFieldData.map(
+                      (c, index) =>
+                        c.label !== null && (
+                          <MDBInput
+                            label={c.label}
+                            id={c.index}
+                            value={c.updatedValue}
+                            icon="user"
+                            group
+                            type="text"
+                            validate
+                            error="wrong"
+                            success="right"
+                            onChange={(e) => {
+                              var object = this.state.editedFieldData;
+                              var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
+                              object[index].updatedValue = e.target.value.replace(specials, "");
+                              this.setState({ editContract: object });
+                            }}
+                            placeholder={c.value}
+                          />
+                        )
+                    )}
+                  </div>
+                </MDBCol>
+                <MDBCol md="12">
+                  <div className="text-center">
+                    <MDBBtn outline color="info" type="submit" onClick={this.handleSubmit}>
+                      Send
+                      <MDBIcon far icon="paper-plane" className="ml-1" />
+                    </MDBBtn>
+                  </div>
+                </MDBCol>
+              </MDBRow>
+            </form>
+          </MDBContainer>
+        </MDBCardBody>
+      </MDBCard>
+    );
+  }
+}

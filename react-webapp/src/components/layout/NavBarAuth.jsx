@@ -10,7 +10,7 @@ function Auth(props) {
   }
   return (
     <>
-      {!props.appProps.isAuthenticating &&
+      {props.appProps.isAuthenticating &&
         (props.appProps.isAuthenticated ? (
           <NavLink onClick={handleLogout} to="/">
             Logout

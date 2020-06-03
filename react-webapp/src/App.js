@@ -5,11 +5,9 @@ import Routes from "./Routes";
 import NavBar from "./components/layout/NavBar";
 import SideBar from "./components/layout/SideBar";
 import Footer from "./components/layout/Footer";
-import { useToasts } from "react-toast-notifications";
 import Send from "./libs/send";
 
 function App(props) {
-  const { addToast } = useToasts();
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [contractAccess, setContractAccess] = useState("None");
@@ -17,12 +15,7 @@ function App(props) {
   useEffect(() => {
     if (isAuthenticated) {
       Send.get("/Loggedin", { handleLogout, handleLogin })
-        .then((res) => {
-          addToast("Logged in Successfuly", {
-            appearance: "success",
-            autoDismiss: true,
-          });
-        }, userHasAuthenticated(true))
+        .then((res) => {}, userHasAuthenticated(true))
         .catch((err) => {
           // props.history.push("/");
           console.log(err);
@@ -35,17 +28,36 @@ function App(props) {
         .then((res) => {
           handleRedirect();
         })
-        .catch((err) => {
-          addToast("Please Login", {
-            appearance: "warning",
-            autoDismiss: true,
-          });
-        });
+        .catch((err) => {});
 
       userHasAuthenticated(false);
       setIsAuthenticating(false);
     }
-  }, [isAuthenticated, props.history, addToast]);
+  }, [isAuthenticated, props.history]);
+
+  // function authenticate() {
+  //   if (isAuthenticated) {
+  //     Send.get("/Loggedin", { handleLogout, handleLogin })
+  //       .then((res) => userHasAuthenticated(true))
+  //       .catch((err) => {
+  //         // props.history.push("/");
+  //         console.log(err);
+  //         /* loggin out */
+  //       });
+  //     /* loggin in */
+  //     setIsAuthenticating(false);
+  //   } else {
+  //     Send.get("/Loggedin", { handleLogin })
+  //       .then((res) => {
+  //         console.log(res);
+  //         handleRedirect();
+  //       })
+  //       .catch((err) => {});
+
+  //     userHasAuthenticated(false);
+  //     setIsAuthenticating(false);
+  //   }
+  // }
 
   function handleLogin(sess) {
     if (sess.match === true) {
@@ -74,6 +86,7 @@ function App(props) {
     render() {
       return (
         <React.Fragment>
+          {console.log("hit me")}
           <NavBar
             handleLogout={handleLogout}
             handleLogin={handleLogin}
@@ -83,15 +96,8 @@ function App(props) {
             isAuthenticating={isAuthenticating}
             setContractAccess={setContractAccess}
           />
-          <SideBar
-            contractAccess={contractAccess}
-            isAuthenticated={isAuthenticated}
-          />
-          <main
-            id="content"
-            className="p-5"
-            style={{ minHeight: "calc(100vh - 102px)" }}
-          >
+          <SideBar contractAccess={contractAccess} isAuthenticated={isAuthenticated} />
+          <main id="content" className="p-5" style={{ minHeight: "calc(100vh - 102px)" }}>
             <Routes
               handleLogout={handleLogout}
               handleLogin={handleLogin}

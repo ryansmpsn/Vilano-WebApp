@@ -1,23 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ToastProvider } from "react-toast-notifications";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./css/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import App from "./App";
-import Notification from "./libs/Notifications";
+// import App1 from "./App1";
 
 ReactDOM.render(
   <Router>
-    <ToastProvider
-      autoDismiss
-      autoDismissTimeout={6000}
-      placement="bottom-right"
-      components={{ Toast: Notification }}
-    >
-      <App />
-    </ToastProvider>
+    <App />
   </Router>,
   document.getElementById("root")
 );

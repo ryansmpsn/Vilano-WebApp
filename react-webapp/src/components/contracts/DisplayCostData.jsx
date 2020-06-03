@@ -3,19 +3,19 @@ import { Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import { MDBContainer } from "mdbreact";
 
-function DisplayTrips(props) {
-  const [tripData, setTripData] = useState([]);
-  const [showTrip, setShowTrip] = useState(false);
+function DisplayCostData(props) {
+  const [costData, setCostData] = useState([]);
+  const [showCost, setShowCost] = useState(false);
 
   useEffect(() => {
     onLoad();
   });
 
   function onLoad() {
-    setTripData(props.tripData);
+    setCostData(props.costData);
   }
 
-  var cardClass = "card border-primary mb-3" + (showTrip ? "cardContract" : null);
+  var cardClass = "card border-primary mb-3" + (showCost ? "cardContract" : null);
 
   return (
     <div>
@@ -29,18 +29,18 @@ function DisplayTrips(props) {
             width: "278px",
           }}
         >
-          {tripData.map(
+          {costData.map(
             (c, index) =>
               c.label !== null && (
                 <div key={index}>
-                  {c.label === "Trip Number" || c.label === "Cost Segment" || c.label === "Frequency" ? (
+                  {c.label === "Cost Number" || c.label === "Cost Segment" || c.label === "Frequency" ? (
                     <>
                       <Card.Title>{c.label}:</Card.Title>
                       <Card.Text>{c.value}</Card.Text>
                       <hr />
                     </>
                   ) : (
-                    <div key={index} hidden={!showTrip}>
+                    <div key={index} hidden={!showCost}>
                       <Card.Title>{c.label}:</Card.Title>
                       {typeof c.value !== "object" && c.value !== null && <Card.Text>{c.value}</Card.Text>}
                       {typeof c.value === "object" &&
@@ -63,29 +63,29 @@ function DisplayTrips(props) {
                 </div>
               )
           )}
-          {tripData.map((c, index) => typeof c.value === "object" && c.value !== null && c.value.map((t, index) => console.log(t)))}
+          {costData.map((c, index) => typeof c.value === "object" && c.value !== null && c.value.map((t, index) => console.log(t)))}
 
           <Button
-            hidden={showTrip}
+            hidden={showCost}
             className=" btn btn-primary"
-            onClick={() => setShowTrip(true)}
+            onClick={() => setShowCost(true)}
             data-target="#collapseExample"
             aria-expanded="false"
             aria-controls="collapseExample"
           >
-            Show Trip
+            Show Cost
           </Button>
           <Button
-            hidden={!showTrip}
+            hidden={!showCost}
             className=" btn btn-primary"
-            onClick={() => setShowTrip(false)}
+            onClick={() => setShowCost(false)}
             data-target="#collapseExample"
             aria-expanded="false"
             aria-controls="collapseExample"
           >
-            Hide Trip
+            Hide Cost
           </Button>
-          <Link onClick={(e) => props.setSelectedTrip("Trip 326")} to={`${props.url}/trip/${props.selectedContractId}`} className="btn btn-primary">
+          <Link onClick={(e) => props.setSelectedCost("Cost 326")} to={`${props.url}/cost/${props.selectedContractId}`} className="btn btn-primary">
             View Routes
           </Link>
         </Card>
@@ -94,4 +94,4 @@ function DisplayTrips(props) {
   );
 }
 
-export default DisplayTrips;
+export default DisplayCostData;

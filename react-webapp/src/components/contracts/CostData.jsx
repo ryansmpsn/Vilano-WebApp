@@ -2,16 +2,16 @@ import React, { useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer } from "mdbreact";
 import { Spinner, Row, Container, Jumbotron } from "react-bootstrap";
-import DisplayTrips from "./DisplayTrips";
+import DisplayCostData from "./DisplayCostData";
 
-function TripData(props) {
+function CostData(props) {
   let { contractId } = useParams();
   useEffect(() => {
     onLoad();
   }, []);
 
   const onLoad = useCallback(() => {
-    props.getTrips("/Contract/" + contractId);
+    props.getTrips("/Contract/" + props.selectedContractId);
   }, [contractId, props]);
 
   return (
@@ -22,17 +22,17 @@ function TripData(props) {
         {props.selectedContractId}
         <h4>Contract ID from Params:</h4>
         {contractId}
-        <h4>Trip Selected: {props.selectedTrip}</h4>
+        <h4>Cost Selected: {props.selectedCost}</h4>
         {/* 
         TODO
-        Select new contract to view Trips
+        Select new contract to view Costs
 
 <Button
           onClick={(e) => {
-            props.getTrips("/Contract/" + contractId);
+            props.getCosts("/Contract/" + contractId);
           }}
         >
-          Get Trip
+          Get Cost
         </Button>
 
         */}
@@ -47,11 +47,11 @@ function TripData(props) {
               <Spinner animation="border" variant="primary" />
             </MDBContainer>
           ) : (
-            <div className="trip">
+            <div className="cost">
               <Row key="topRow" className="show-grid">
                 {console.log(props.contractProfile)}
-                {props.contractProfile[28].value.map((c, index) => (
-                  <DisplayTrips key={index} tripData={c} />
+                {props.contractProfile[29].value.map((c, index) => (
+                  <DisplayCostData key={index} costData={c} />
                 ))}
               </Row>
             </div>
@@ -62,4 +62,4 @@ function TripData(props) {
   );
 }
 
-export default TripData;
+export default CostData;

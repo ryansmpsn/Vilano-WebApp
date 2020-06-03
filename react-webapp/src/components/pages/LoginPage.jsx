@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Spinner } from "react-bootstrap";
 import { useFormFields } from "../../libs/hookslib";
 import Send from "../../libs/send";
 import { MDBBtn } from "mdbreact";
-import { useToasts } from "react-toast-notifications";
 import styled from "styled-components";
 
 const LoginPage = styled.div`
@@ -47,7 +46,6 @@ const LoginPage = styled.div`
 `;
 
 export default function Login(props) {
-  const { addToast } = useToasts();
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     username: "",
@@ -64,13 +62,9 @@ export default function Login(props) {
     Send.post("/Login", fields, props)
       .then((res) => {
         props.handleLogin(res.our_session);
-        props.history.push("/");
+        // props.history.push("/");
       })
       .catch((err) => {
-        addToast("Invalid Credentials! Please Try Again.", {
-          appearance: "error",
-          autoDismiss: true,
-        });
         setIsLoading(false);
         props.handleLogout();
         props.userHasAuthenticated(false);
@@ -84,31 +78,15 @@ export default function Login(props) {
         <form onSubmit={handleSubmit}>
           {/*ControlID must match useFormFields value*/}
           <FormGroup controlId="username">
-            <FormControl
-              autoFocus
-              placeholder="Enter Username"
-              type="text"
-              value={fields.username.replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
-              onChange={handleFieldChange}
-            />
+            <FormControl autoFocus placeholder="Enter Username" type="text" value={fields.username.replace(/[*|":<>[\]{}`\\()';@&$]/, "")} onChange={handleFieldChange} />
           </FormGroup>
           <FormGroup controlId="password">
-            <FormControl
-              placeholder="Enter Password"
-              value={fields.password.replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
-              onChange={handleFieldChange}
-              type="password"
-            />
+            <FormControl placeholder="Enter Password" value={fields.password.replace(/[*|":<>[\]{}`\\()';@&$]/, "")} onChange={handleFieldChange} type="password" />
           </FormGroup>
           {isLoading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-            <MDBBtn
-              type="submit"
-              active={!isLoading}
-              disabled={!validateForm()}
-              gradient="aqua"
-            >
+            <MDBBtn type="submit" active={!isLoading} disabled={!validateForm()} gradient="aqua">
               Login
             </MDBBtn>
           )}

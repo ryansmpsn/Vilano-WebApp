@@ -3,7 +3,6 @@ import { MDBCard, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBCardText, MDBBadge } 
 import Select, { createFilter } from "react-select";
 import Send from "../../libs/send";
 import MenuList from "../../libs/OptimizedSelect";
-import { Form } from "react-bootstrap";
 
 class AxiosTestPage extends Component {
   constructor(props) {
@@ -14,8 +13,9 @@ class AxiosTestPage extends Component {
   }
 
   componentDidMount() {
-    Send.get("/Contract/Dropdowns/All", this.props).then((res) => {
-      this.setState({ display: res.data[0].options });
+    console.log("I'm Mounted");
+    Send.get("/Contract/Dropdowns/ContractTest/Cached", this.props).then((res) => {
+      this.setState({ display: res.data });
       console.log(this.state.display);
     });
   }
@@ -43,15 +43,22 @@ class AxiosTestPage extends Component {
         </MDBRow>
 
         <div>Current Facilities: &nbsp;</div>
-        <Form.Control as="select">
+        {/* <Form.Control as="select">
           {this.state.display !== "none" &&
             this.state.display.map((c, index) => (
               <option key={c.value} value={c.value}>
                 {c.label}
               </option>
             ))}
-        </Form.Control>
-        <Select components={{ MenuList }} options={this.state.display} filterOption={createFilter({ ignoreAccents: false })} />
+        </Form.Control> */}
+        <Select components={{ MenuList }} options={this.state.display[0].options} filterOption={createFilter({ ignoreAccents: false })} />
+
+        {this.state.display !== "none" &&
+          this.state.display.map((c, index) => (
+            <>
+              <div>{c.column_name}</div> <Select options={c.options} />
+            </>
+          ))}
       </React.Fragment>
     );
   }
