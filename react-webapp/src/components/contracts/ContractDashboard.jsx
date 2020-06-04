@@ -139,6 +139,7 @@ class ContractDashboard extends Component {
         <ContractRoutes
           url={url}
           path={path}
+          props={this.props}
           setSelectedTrip={this.setSelectedTrip}
           setSelectedContract={this.setSelectedContract}
           setSelectedContractId={this.setSelectedContractId}
