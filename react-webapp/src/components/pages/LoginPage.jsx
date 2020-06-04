@@ -62,7 +62,7 @@ export default function Login(props) {
     Send.post("/Login", fields, props)
       .then((res) => {
         props.handleLogin(res.our_session);
-        // props.history.push("/");
+        props.history.push("/");
       })
       .catch((err) => {
         setIsLoading(false);

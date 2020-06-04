@@ -9,18 +9,14 @@ class SideBar extends Component {
     super(props);
     this.state = {
       collapse: false,
-      props: props
+      props: props,
     };
   }
   render() {
     return (
       <div className="sidebar-fixed position-fixed side-nav">
         <a href="/" className="mt-3 mb-3 waves-effect">
-          <img
-            alt="Vilano Management Services Inc."
-            className="img-fluid"
-            src={logo}
-          />
+          <img alt="Vilano Management Services Inc." className="img-fluid" src={logo} />
         </a>
         <MDBListGroup className="list-group list-group-flush">
           <NavLink exact={true} to="/" activeClassName="activeClass">
@@ -38,7 +34,7 @@ class SideBar extends Component {
             </MDBListGroupItem>
           </NavLink>
           <SideBarAuth appProps={this.state.props} />
-          <NavLink to="/testpage" activeClassName="activeClass">
+          {/* <NavLink to="/testpage" activeClassName="activeClass">
             <div />
             <MDBListGroupItem>
               <div className="fas fa-vial mr-3" />
@@ -51,7 +47,7 @@ class SideBar extends Component {
               <MDBIcon icon="exclamation" className="mr-3" />
               404
             </MDBListGroupItem>
-          </NavLink>
+          </NavLink> */}
         </MDBListGroup>
       </div>
     );

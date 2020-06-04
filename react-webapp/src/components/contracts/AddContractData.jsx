@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 // import { useToasts } from "react-toast-notifications";
 import Select from "react-select";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
 import { Button } from "react-bootstrap";
 import Send from "../../libs/send";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
+import InputFormControl from "../../libs/InputFormControl";
 
 export default class AddContractData extends React.Component {
   // const { addToast } = useToasts();
@@ -14,18 +15,16 @@ export default class AddContractData extends React.Component {
       contractSearch: 1,
       contractData: null,
       search: false,
+      display: "none",
       editedFieldData: [
         { columnName: "contract_test_id", inputType: null, label: null, updatedValue: null, value: null },
-        { columnName: "modified_timestamp", inputType: null, label: "Modified At", updatedValue: null, value: null },
-        { columnName: "modified_by", inputType: null, label: "modified_by", updatedValue: null, value: null },
-        { columnName: "contract_id", inputType: null, label: "contract_id", updatedValue: null, value: null },
-        { columnName: "external_contract_code", inputType: null, label: "external_contract_code", updatedValue: null, value: null },
-        { columnName: "begin_contract_date", inputType: null, label: "begin_contract_date", updatedValue: null, value: null },
-        { columnName: "end_contract_date", inputType: null, label: "end_contract_date", updatedValue: null, value: null },
-        { columnName: "origin_facility_id", inputType: null, label: "origin_facility_id", updatedValue: null, value: null },
-        { columnName: "destination_facility_id", inputType: null, label: "destination_facility_id", updatedValue: null, value: null },
+        { columnName: "external_contract_code", inputType: null, label: "Contract No.", updatedValue: null, value: null },
+        { columnName: "begin_contract_date", inputType: null, label: "Begin Contract Term", updatedValue: null, value: null },
+        { columnName: "end_contract_date", inputType: null, label: "End Contract Term", updatedValue: null, value: null },
+        { columnName: "origin_facility_name", inputType: null, label: "Origin", updatedValue: null, value: null },
+        { columnName: "destination_facility_name", inputType: null, label: "Destination", updatedValue: null, value: null },
         { columnName: "company_id", inputType: null, label: null, updatedValue: null, value: null },
-        { columnName: "cost_segment_id", inputType: null, label: null, updatedValue: null, value: null },
+        { columnName: "cost_segment", inputType: "select", label: "Cost Segment", updatedValue: null, value: null },
         { columnName: "plate_miles", inputType: "num", label: "Plate Miles", updatedValue: null, value: null },
         { columnName: "dh_portal_miles", inputType: "num", label: "Dead Head & Portal Miles", updatedValue: null, value: null },
         { columnName: "annual_miles", inputType: "num", label: "Annual Total Miles", updatedValue: null, value: null },
@@ -35,10 +34,9 @@ export default class AddContractData extends React.Component {
         { columnName: "plate_gallons", inputType: "num", label: "Plate Gallons", updatedValue: null, value: null },
         { columnName: "dh_portal_gallons", inputType: "num", label: "Dead Head & Portal Gallons", updatedValue: null, value: null },
         { columnName: "annual_gallons", inputType: "num", label: "Annual Total Gallons", updatedValue: null, value: null },
-        { columnName: "vehicle_type_id", inputType: null, label: null, updatedValue: null, value: null },
+        { columnName: "vehicle_type", inputType: "select", label: "Vehicle Type", updatedValue: null, value: null },
         { columnName: "num_vehicle", inputType: "num", label: "Number of Vehicles", updatedValue: null, value: null },
         { columnName: "trailer_type", inputType: "select", label: "Trailer Type", updatedValue: null, value: null },
-        { columnName: "trailer_type_id", inputType: null, label: null, updatedValue: null, value: null },
         { columnName: "num_trailer", inputType: "num", label: "Number of Trailers", updatedValue: null, value: null },
         { columnName: "total_trips", inputType: "num", label: "Total Number of Trips", updatedValue: null, value: null },
         { columnName: "total_fix_oc_cost", inputType: "num", label: "Total Fixed & Operational Costs", updatedValue: null, value: null },
@@ -82,9 +80,7 @@ export default class AddContractData extends React.Component {
         set = true;
       }
     });
-    if (set === false) {
-      object.push([null, value, variable, "", "None"]);
-    }
+
     return object;
   }
 
@@ -102,6 +98,12 @@ export default class AddContractData extends React.Component {
 
   updateEditData() {
     console.log("Searching...");
+
+    Send.get("/Contract/Dropdowns/ContractTest/Cached", this.props.appProps).then((res) => {
+      this.setState({ display: res.data });
+      console.log(this.state.display);
+    });
+
     this.props.setSelectedContractId(this.state.contractSearch);
 
     Send.get("/Contract/" + this.state.contractSearch, this.props.appProps).then((res) => {
@@ -126,7 +128,7 @@ export default class AddContractData extends React.Component {
     });
   }
   handleRedirect() {
-    return <Redirect to="/contracts/costdata" />;
+    return <Link to="/contracts/costdata" />;
   }
 
   render() {
@@ -155,40 +157,69 @@ export default class AddContractData extends React.Component {
         <MDBCardBody>
           <MDBContainer>
             <form onSubmit={this.handleSubmit}>
-              {" "}
               {this.state.search ? (
-                <MDBRow>
-                  <MDBCol md="6">
-                    <p className="h5 text-center mb-4">Data Column</p>
+                <>
+                  <MDBRow>
+                    <MDBCol md="6">
+                      <p className="h5 text-center mb-4">Data Column</p>
 
-                    <div className="grey-text">
-                      {this.state.editedFieldData.map(
-                        (c, index) =>
-                          c.label !== null && (
-                            <MDBInput
-                              label={c.label}
-                              id={c.index}
-                              value={c.updatedValue === null ? c.value : c.updatedValue}
-                              icon="user"
-                              group
-                              type="text"
-                              validate
-                              error="wrong"
-                              success="right"
-                              disabled={c.value !== null}
-                              onChange={(e) => {
-                                var object = this.state.editedFieldData;
-                                var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
-                                object[index].updatedValue = e.target.value.replace(specials, "");
-                                this.setState({ editContract: object });
-                              }}
-                              placeholder={c.value}
-                            />
-                          )
-                      )}
-                    </div>
-                  </MDBCol>
+                      <div className="grey-text">
+                        {this.state.editedFieldData.map(
+                          (c, index) =>
+                            c.label !== null &&
+                            c.inputType !== "select" && (
+                              <MDBInput
+                                label={c.label}
+                                id={c.index}
+                                value={c.updatedValue === null ? c.value : c.updatedValue}
+                                icon="user"
+                                group
+                                type="text"
+                                validate
+                                error="wrong"
+                                success="right"
+                                disabled={c.value !== null}
+                                onChange={(e) => {
+                                  var object = this.state.editedFieldData;
+                                  var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
+                                  object[index].updatedValue = e.target.value.replace(specials, "");
+                                  this.setState({ editContract: object });
+                                }}
+                                placeholder={c.value}
+                              />
+                            )
+                        )}
+                      </div>
+                    </MDBCol>
+                    <MDBCol md="6">
+                      <p className="h5 text-center mb-4">Data Column</p>
 
+                      <div className="grey-text">
+                        {this.state.editedFieldData.map(
+                          (c, index) =>
+                            c.label !== null &&
+                            c.inputType === "select" && (
+                              <>
+                                <div className="grey-text">{c.label}</div>
+                                <InputFormControl
+                                  index={index}
+                                  input={c.inputType}
+                                  onChange={(e) => {
+                                    var object = this.set_variable_id(this.state.editedFieldData, c.columnName, e.value);
+                                    var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
+                                    object[index].updatedValue = e.label.toString().replace(specials, "");
+                                    this.setState({ editedFieldData: object });
+                                  }}
+                                  content={c}
+                                  inputRestrictions={this.state.display}
+                                />
+                              </>
+                            )
+                        )}
+                      </div>
+                    </MDBCol>
+                  </MDBRow>
+                  {this.state.display !== "none" && console.log(this.state.display)}
                   <MDBCol md="12">
                     <div className="text-center">
                       <MDBBtn outline color="info" type="button" onClick={this.handleSubmit}>
@@ -197,7 +228,7 @@ export default class AddContractData extends React.Component {
                       </MDBBtn>
                     </div>
                   </MDBCol>
-                </MDBRow>
+                </>
               ) : (
                 <MDBRow>
                   <MDBCol md="6">

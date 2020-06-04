@@ -18,11 +18,11 @@ function CostData(props) {
     <MDBCard className="m-2">
       <MDBCardHeader>
         <h4>Contract Selected: {props.selectedContract}</h4>
-        <h4>Contract ID from State:</h4>
+        {/* <h4>Contract ID from State:</h4>
         {props.selectedContractId}
         <h4>Contract ID from Params:</h4>
         {contractId}
-        <h4>Cost Selected: {props.selectedCost}</h4>
+        <h4>Cost Selected: {props.selectedCost}</h4> */}
         {/* 
         TODO
         Select new contract to view Costs
