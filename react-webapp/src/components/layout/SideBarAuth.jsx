@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 function SideBarAuth(props) {
   return (
     <>
-      {!props.appProps.isAuthenticating && props.appProps.isAuthenticated && (
+      {props.appProps.isAuthenticated && (
         <>
           {props.appProps.contractAccess !== "None" && (
             <>
@@ -25,7 +25,7 @@ function SideBarAuth(props) {
               </NavLink>
             </>
           )}
-          {/* <NavLink to="/performance" activeClassName="activeClass">
+          <NavLink to="/performance" activeClassName="activeClass">
             <div />
             <MDBListGroupItem>
               <MDBIcon icon="chart-line" className="mr-3" />
@@ -52,7 +52,7 @@ function SideBarAuth(props) {
               <MDBIcon icon="user" className="mr-3" />
               Profile
             </MDBListGroupItem>
-          </NavLink> */}
+          </NavLink>
           <NavLink to="/About" activeClassName="activeClass">
             <div />
             <MDBListGroupItem>

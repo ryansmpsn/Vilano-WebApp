@@ -34,7 +34,7 @@ class SideBar extends Component {
             </MDBListGroupItem>
           </NavLink>
           <SideBarAuth appProps={this.state.props} />
-          {/* <NavLink to="/testpage" activeClassName="activeClass">
+          <NavLink to="/testpage" activeClassName="activeClass">
             <div />
             <MDBListGroupItem>
               <div className="fas fa-vial mr-3" />
@@ -47,7 +47,7 @@ class SideBar extends Component {
               <MDBIcon icon="exclamation" className="mr-3" />
               404
             </MDBListGroupItem>
-          </NavLink> */}
+          </NavLink>
         </MDBListGroup>
       </div>
     );

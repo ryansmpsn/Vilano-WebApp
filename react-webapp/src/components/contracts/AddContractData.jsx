@@ -4,7 +4,7 @@ import Select from "react-select";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
 import { Button } from "react-bootstrap";
 import Send from "../../libs/send";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import InputFormControl from "../../libs/InputFormControl";
 
 export default class AddContractData extends React.Component {
@@ -83,16 +83,17 @@ export default class AddContractData extends React.Component {
 
     return object;
   }
-
-  async handleSubmit() {
+  handleRedirect() {
+    return <Redirect to="/contracts/costdata" />;
+  }
+  handleSubmit() {
     // navigate to "viewCost Data"
     let output = this.state.editedFieldData;
     console.log(output);
+    this.handleRedirect();
 
     Send.post("/Contract/ContractTest", this.state.editedFieldData, this.props.appProps).then((res) => {
       console.log(res);
-
-      window.location.href = "/contract/costdata";
     });
   }
 
@@ -127,15 +128,12 @@ export default class AddContractData extends React.Component {
       this.setState({ editedFieldData: object });
     });
   }
-  handleRedirect() {
-    return <Link to="/contracts/costdata" />;
-  }
 
   render() {
     return (
       <MDBCard className="m-2">
         <MDBCardHeader>
-          <h4>Add New Contract</h4>
+          <h4>Add Cost Segment To A Contract</h4>
           <form onSubmit={this.handleSubmit}>
             <h5>
               <Select
@@ -161,7 +159,7 @@ export default class AddContractData extends React.Component {
                 <>
                   <MDBRow>
                     <MDBCol md="6">
-                      <p className="h5 text-center mb-4">Data Column</p>
+                      <p className="h5 text-center mb-4">Selected Contract</p>
 
                       <div className="grey-text">
                         {this.state.editedFieldData.map(
@@ -192,7 +190,7 @@ export default class AddContractData extends React.Component {
                       </div>
                     </MDBCol>
                     <MDBCol md="6">
-                      <p className="h5 text-center mb-4">Data Column</p>
+                      <p className="h5 text-center mb-4"></p>
 
                       <div className="grey-text">
                         {this.state.editedFieldData.map(
@@ -222,7 +220,7 @@ export default class AddContractData extends React.Component {
                   {this.state.display !== "none" && console.log(this.state.display)}
                   <MDBCol md="12">
                     <div className="text-center">
-                      <MDBBtn outline color="info" type="button" onClick={this.handleSubmit}>
+                      <MDBBtn outline color="info" type="button" onClick={() => this.handleSubmit()}>
                         Send
                         <MDBIcon far icon="paper-plane" className="ml-1" />
                       </MDBBtn>

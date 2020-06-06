@@ -7,7 +7,6 @@ const Send = new (class send extends React.Component {
     this.props = props;
     this.state = {
       testURL: "http://localhost:3888",
-      //testURL: 'http://Hand-Of-God:8080',
       liveURL: "https://centcom-dot-pfsi-centcom.appspot.com",
       URL: "",
       SessionID: "None",
@@ -21,13 +20,13 @@ const Send = new (class send extends React.Component {
     axios.defaults.headers.common["our_session"] = "";
   }
 
-  set_our_session = (sess, props) => {
-    if (sess) {
-      if (sess.match !== "false") props.handleLogin(sess);
-      else props.handleLogout(); // Still not refreshing page for loggout... Get 401 denieds, but no user display change.
-      // Oh yeah I need to handle 401s to loggout. Will do this later.
-    }
-  };
+  // set_our_session = (sess, props) => {
+  //   if (sess) {
+  //     if (sess.match !== "false") props.handleLogin(sess);
+  //     else props.handleLogout(); // Still not refreshing page for loggout... Get 401 denieds, but no user display change.
+  //     // Oh yeah I need to handle 401s to loggout. Will do this later.
+  //   }
+  // };
 
   update_auth = () => {
     axios.defaults.headers.common["SessionID"] = this.state.SessionID;
@@ -60,9 +59,9 @@ const Send = new (class send extends React.Component {
         .post(url, data)
         .then((res) => {
           var data = res.data; // Set a custom variable as our actual return data which contains data and our_session
-          if (data.our_session) {
-            send.set_our_session(data.our_session, props);
-          }
+          // if (data.our_session) {
+          //   send.set_our_session(data.our_session, props);
+          // }
           if (parsejson) data.data = JSON.parse(res.data.data);
           resolve(data);
         })
@@ -85,9 +84,9 @@ const Send = new (class send extends React.Component {
         .get(url)
         .then((res) => {
           var data = res.data; // Set a custom variable as our actual return data which contains data and our_session
-          if (data.our_session) {
-            send.set_our_session(data.our_session, props);
-          }
+          // if (data.our_session) {
+          //   send.set_our_session(data.our_session, props);
+          // }
           if (parsejson) data.data = JSON.parse(res.data.data);
           resolve(data);
         })

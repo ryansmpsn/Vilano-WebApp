@@ -45,7 +45,7 @@ class ContractDashboard extends Component {
   };
 
   contractEditSubmitAction = (editContract) => {
-    return Send.post("/Contract", editContract, this.props);
+    return Send.post("/Contract/Contract", editContract, this.props);
   };
   getSelectOptions() {
     return Send.get("/Contract/Dropdowns/Contract/All", this.props);

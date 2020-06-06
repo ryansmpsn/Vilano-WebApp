@@ -1,23 +1,24 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../auth";
 
 function Auth(props) {
-  function handleLogout() {
-    props.appProps.userHasAuthenticated(false);
-    props.appProps.setContractAccess("None");
+  const { setSession } = useAuth();
+  function logOut() {
+    setSession();
     sessionStorage.clear();
-    //props.history.push("/login");
+    props.appProps.setIsAuthenticated(false);
   }
+
   return (
     <>
-      {!props.appProps.isAuthenticating &&
-        (props.appProps.isAuthenticated ? (
-          <NavLink onClick={handleLogout} to="/">
-            Logout
-          </NavLink>
-        ) : (
-          <NavLink to="/Login">Login</NavLink>
-        ))}
+      {props.appProps.isAuthenticated ? (
+        <NavLink onClick={logOut} to="/">
+          Logout
+        </NavLink>
+      ) : (
+        <NavLink to="/Login">Login</NavLink>
+      )}
     </>
   );
 }

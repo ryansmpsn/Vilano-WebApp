@@ -4,6 +4,8 @@ import { useFormFields } from "../../libs/hookslib";
 import Send from "../../libs/send";
 import { MDBBtn } from "mdbreact";
 import styled from "styled-components";
+import { useAuth } from "../../auth";
+import { Redirect } from "react-router-dom";
 
 const LoginPage = styled.div`
   .box {
@@ -46,7 +48,10 @@ const LoginPage = styled.div`
 `;
 
 export default function Login(props) {
+  const { setSession } = useAuth();
+  const referrer = props.location.hasOwnProperty("state").hasOwnProperty("referrer") ? props.location.state.referrer : "/";
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(true);
   const [fields, handleFieldChange] = useFormFields({
     username: "",
     password: "",
@@ -56,37 +61,55 @@ export default function Login(props) {
     return fields.username.length > 0 && fields.password.length > 0;
   }
 
-  async function handleSubmit(event) {
-    event.preventDefault();
+  function postLogin() {
     setIsLoading(true);
+    console.log(isLoading);
+
     Send.post("/Login", fields, props)
-      .then((res) => {
-        props.handleLogin(res.our_session);
-        props.history.push("/");
+      .then((result) => {
+        setIsLoading(false);
+        setLoggedIn(true);
+        setSession(result.our_session);
+        handleRedirect();
+        console.log(isLoading, isLoggedIn);
       })
       .catch((err) => {
+        // add invalid credentials toast notification
         setIsLoading(false);
-        props.handleLogout();
-        props.userHasAuthenticated(false);
+        console.log(err);
       });
+  }
+
+  function handleRedirect() {
+    console.log(referrer);
+
+    // Handle toast notifications
+    return <Redirect to={referrer} />;
   }
 
   return (
     <LoginPage>
       <div className="box">
+        {console.log(props.location)}
         <h1>Sign in</h1>
-        <form onSubmit={handleSubmit}>
+        <form>
           {/*ControlID must match useFormFields value*/}
           <FormGroup controlId="username">
             <FormControl autoFocus placeholder="Enter Username" type="text" value={fields.username.replace(/[*|":<>[\]{}`\\()';@&$]/, "")} onChange={handleFieldChange} />
           </FormGroup>
           <FormGroup controlId="password">
-            <FormControl placeholder="Enter Password" value={fields.password.replace(/[*|":<>[\]{}`\\()';@&$]/, "")} onChange={handleFieldChange} type="password" />
+            <FormControl
+              placeholder="Enter Password"
+              value={fields.password.replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
+              onChange={handleFieldChange}
+              type="password"
+              autoComplete="on"
+            />
           </FormGroup>
           {isLoading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-            <MDBBtn type="submit" active={!isLoading} disabled={!validateForm()} gradient="aqua">
+            <MDBBtn active={!isLoading} disabled={!validateForm()} onClick={postLogin} gradient="aqua">
               Login
             </MDBBtn>
           )}

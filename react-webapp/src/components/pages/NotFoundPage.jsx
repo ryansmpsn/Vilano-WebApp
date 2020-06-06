@@ -8,9 +8,9 @@ const NotFoundPage = () => {
         <MDBRow className="bad-gateway-row">
           <MDBCol md="8">
             <div className="alert alert-danger" role="alert">
-              Error 404.{" "}
+              Error 404.
               <a href="/" className="alert-link">
-                Click Here{" "}
+                Click Here
               </a>
               to be redireced back to your dashboard.
             </div>
@@ -19,11 +19,7 @@ const NotFoundPage = () => {
             <h4>The requested URL was not found on this server.</h4>
           </MDBCol>
           <MDBCol md="4">
-            <img
-              alt="Error 404"
-              className="img-fluid"
-              src="https://mdbootstrap.com/img/Others/grafika404-bf.png"
-            />
+            <img alt="Error 404" className="img-fluid" src="https://mdbootstrap.com/img/Others/grafika404-bf.png" />
           </MDBCol>
         </MDBRow>
       </div>
