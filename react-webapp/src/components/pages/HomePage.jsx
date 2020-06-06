@@ -1,7 +1,7 @@
 import React from "react";
 import { Jumbotron, Container } from "react-bootstrap";
 
-export default function Home(props) {
+export default function Home() {
   return (
     <Jumbotron>
       <Container className="text-center">

@@ -1,9 +1,10 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { useAuth } from "../../auth";
+import { NavLink } from "react-router-dom";
 
 function Auth(props) {
   const { setSession } = useAuth();
+
   function logOut() {
     setSession();
     sessionStorage.clear();

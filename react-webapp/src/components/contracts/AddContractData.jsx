@@ -4,7 +4,7 @@ import Select from "react-select";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
 import { Button } from "react-bootstrap";
 import Send from "../../libs/send";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import InputFormControl from "../../libs/InputFormControl";
 
 export default class AddContractData extends React.Component {
@@ -73,11 +73,9 @@ export default class AddContractData extends React.Component {
   }
   set_variable_id(object, variable_key, value) {
     var variable = variable_key.substring(0, variable_key.lastIndexOf("_")) + "_id";
-    var set = false;
     object.forEach((item) => {
       if (item.columnName === variable) {
         item.updatedValue = value;
-        set = true;
       }
     });
 

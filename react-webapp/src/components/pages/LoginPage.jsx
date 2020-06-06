@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { FormGroup, FormControl, Spinner } from "react-bootstrap";
-import { useFormFields } from "../../libs/hookslib";
-import Send from "../../libs/send";
 import { MDBBtn } from "mdbreact";
-import styled from "styled-components";
+import Send from "../../libs/send";
 import { useAuth } from "../../auth";
+import styled from "styled-components";
 import { Redirect } from "react-router-dom";
+import { useFormFields } from "../../libs/hookslib";
+import { useToasts } from "react-toast-notifications";
+import { FormGroup, FormControl, Spinner } from "react-bootstrap";
 
 const LoginPage = styled.div`
   .box {
@@ -49,9 +50,9 @@ const LoginPage = styled.div`
 
 export default function Login(props) {
   const { setSession } = useAuth();
-  const referrer = props.location.hasOwnProperty("state").hasOwnProperty("referrer") ? props.location.state.referrer : "/";
+  const { addToast } = useToasts();
+  const referrer = props.location.state !== null && props.location.state.hasOwnProperty("referrer") ? props.location.state.referrer.pathname : "/";
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoggedIn, setLoggedIn] = useState(true);
   const [fields, handleFieldChange] = useFormFields({
     username: "",
     password: "",
@@ -61,36 +62,33 @@ export default function Login(props) {
     return fields.username.length > 0 && fields.password.length > 0;
   }
 
-  function postLogin() {
+  async function postLogin() {
     setIsLoading(true);
-    console.log(isLoading);
-
     Send.post("/Login", fields, props)
       .then((result) => {
         setIsLoading(false);
-        setLoggedIn(true);
         setSession(result.our_session);
-        handleRedirect();
-        console.log(isLoading, isLoggedIn);
       })
       .catch((err) => {
-        // add invalid credentials toast notification
         setIsLoading(false);
         console.log(err);
       });
   }
 
   function handleRedirect() {
-    console.log(referrer);
+    if (props.isAuthenticated)
+      addToast("You Have Loggen in Successfully", {
+        appearance: "success",
+        autoDismiss: true,
+      });
 
-    // Handle toast notifications
-    return <Redirect to={referrer} />;
+    if (props.isAuthenticated) return <Redirect to={referrer} />;
   }
 
   return (
     <LoginPage>
+      {handleRedirect()}
       <div className="box">
-        {console.log(props.location)}
         <h1>Sign in</h1>
         <form>
           {/*ControlID must match useFormFields value*/}
