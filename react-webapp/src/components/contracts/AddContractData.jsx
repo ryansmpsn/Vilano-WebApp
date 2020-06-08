@@ -189,7 +189,6 @@ export default class AddContractData extends React.Component {
                     </MDBCol>
                     <MDBCol md="6">
                       <p className="h5 text-center mb-4"></p>
-
                       <div className="grey-text">
                         {this.state.editedFieldData.map(
                           (c, index) =>

@@ -67,7 +67,12 @@ export default function Login(props) {
     Send.post("/Login", fields, props)
       .then((result) => {
         setIsLoading(false);
-        setSession(result.our_session);
+        result.our_session.match
+          ? setSession(result.our_session)
+          : addToast("Invalid Credentials. Please Try Logging In Again.", {
+              appearance: "error",
+              autoDismiss: true,
+            });
       })
       .catch((err) => {
         setIsLoading(false);
