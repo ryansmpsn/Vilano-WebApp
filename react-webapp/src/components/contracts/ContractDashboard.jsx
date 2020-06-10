@@ -114,7 +114,7 @@ class ContractDashboard extends Component {
                     <Link className="btn btn-primary" to="/contracts/dashboard">
                       View Contracts
                     </Link>
-                    {/* <Link to="/contracts/trips" className="btn btn-primary">
+                    <Link to="/contracts/trips" className="btn btn-primary">
                       View Trips
                     </Link>
 
@@ -123,12 +123,12 @@ class ContractDashboard extends Component {
                     </Link>
                     <Link to="/contracts/costdata" className="btn btn-primary">
                       View Cost Data
-                    </Link>*/}
+                    </Link>
                     <Link to="/contracts/add" className="btn btn-primary">
                       Add Cost Data (7468A)
                     </Link>
-                    <Link to="/contracts/ratesheet" className="btn btn-primary">
-                      Rate Sheet
+                    <Link to="/contracts/costsegment" className="btn btn-primary">
+                      View Cost Segment
                     </Link>
                   </ButtonGroup>
                 </div>

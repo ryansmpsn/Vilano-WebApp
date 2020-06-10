@@ -1,26 +1,23 @@
 import React, { useState } from "react";
 // import { useToasts } from "react-toast-notifications";
 import Select from "react-select";
-import {
-  MDBCard,
-  MDBCardHeader,
-  MDBCardBody,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBInput,
-  MDBIcon,
-  MDBBtn,
-} from "mdbreact";
+import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
+import { Button, Spinner } from "react-bootstrap";
+import Send from "../../libs/send";
+import UpsertCostSegment from "./UpsertCostSegment";
 
-function RateSheet(props) {
+function CostSegment(props) {
   // const { addToast } = useToasts();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [costSegmentDropdowns, setCostSegmentDropdowns] = useState(null);
+  const [selectedCostSegment, setSelectedCostSegment] = useState();
   const [isSearching, setSearching] = useState(false);
   const [contractSearch, setContractSearch] = useState(props.contractSearch);
+  const [contractData, setContractData] = useState(null);
+  const [contractCostSegments, setContractCostSegments] = useState(null);
   const [units, setUnits] = useState([
     {
-      columnName: "Vehicle Cost",
+      columnName: "Vehicle Cost_Per_Year",
       inputType: "num",
       label: "Annual Miles",
       updatedValue: null,
@@ -28,7 +25,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Vehicle Cost2",
+      columnName: "Vehicle Cost2_Per_Year",
       inputType: "num",
       label: "Annual Miles",
       updatedValue: null,
@@ -36,7 +33,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Opertational Cost",
+      columnName: "Opertational Cost_Per_Year",
       inputType: "num",
       label: "Annual Miles",
       updatedValue: null,
@@ -44,7 +41,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Taxes",
+      columnName: "Taxes_Per_Year",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -52,7 +49,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Vehicle Registration",
+      columnName: "Vehicle Registration_Per_Year",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -60,7 +57,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Miscellaneous",
+      columnName: "Miscellaneous_Per_Year",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -68,7 +65,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "General Overhead",
+      columnName: "General Overhead_Per_Year",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -76,7 +73,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Fuel",
+      columnName: "Fuel_Per_Year",
       inputType: "num",
       label: "Gallons",
       updatedValue: null,
@@ -84,7 +81,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Oil",
+      columnName: "Oil_Per_Year",
       inputType: "num",
       label: "Quarts",
       updatedValue: null,
@@ -92,7 +89,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Insurance",
+      columnName: "Insurance_Per_Year",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -100,7 +97,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Road Taxes",
+      columnName: "Road Taxes_Per_Year",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -108,7 +105,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Tolls",
+      columnName: "Tolls_Per_Year",
       inputType: "num",
       label: "Trips",
       updatedValue: null,
@@ -116,7 +113,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Total Fixed and Operational Cost",
+      columnName: "Total Fixed and Operational Cost_Per_Year",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -124,7 +121,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Straight Time",
+      columnName: "Straight Time_Per_Year",
       inputType: "num",
       label: "Hours",
       updatedValue: null,
@@ -132,7 +129,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Overtime",
+      columnName: "Overtime_Per_Year",
       inputType: "num",
       label: "Hours",
       updatedValue: null,
@@ -140,7 +137,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Payroll Taxes (Itemized) ",
+      columnName: "Payroll Taxes (Itemized) _Per_Year",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -148,7 +145,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Social Security",
+      columnName: "Social Security_Per_Year",
       inputType: "num",
       label: "Taxable Wages",
       updatedValue: null,
@@ -156,7 +153,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Workman's Compensation",
+      columnName: "Workman's Compensation_Per_Year",
       inputType: "num",
       label: "Taxable Wages",
       updatedValue: null,
@@ -164,7 +161,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Federal Unemployment Comp.",
+      columnName: "Federal Unemployment Comp._Per_Year",
       inputType: "num",
       label: "Taxable Wages",
       updatedValue: null,
@@ -172,7 +169,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "State Unemployment Comp.",
+      columnName: "State Unemployment Comp._Per_Year",
       inputType: "num",
       label: "Taxable Wages",
       updatedValue: null,
@@ -180,7 +177,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Fringe Benefits (Itemized)",
+      columnName: "Fringe Benefits (Itemized)_Per_Year",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -188,7 +185,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Health & Welfare",
+      columnName: "Health & Welfare_Per_Year",
       inputType: "num",
       label: "No. of Employees or Hours",
       updatedValue: null,
@@ -196,7 +193,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Vacation",
+      columnName: "Vacation_Per_Year",
       inputType: "num",
       label: "No. of Employees or Hours",
       updatedValue: null,
@@ -204,7 +201,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Holiday",
+      columnName: "Holiday_Per_Year",
       inputType: "num",
       label: "No. of Employees or Hours",
       updatedValue: null,
@@ -212,7 +209,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Pension",
+      columnName: "Pension_Per_Year",
       inputType: "num",
       label: "No. of Employees or Hours",
       updatedValue: null,
@@ -220,7 +217,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Total Operation Labor Cost",
+      columnName: "Total Operation Labor Cost_Per_Year",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -228,7 +225,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Supplier's Wages",
+      columnName: "Supplier's Wages_Per_Year",
       inputType: "num",
       label: "Hours",
       updatedValue: null,
@@ -236,7 +233,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Total Cost",
+      columnName: "Total Cost_Per_Year",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -244,7 +241,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Return on Investment",
+      columnName: "Return on Investment_Per_Year",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -252,7 +249,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Total Offer",
+      columnName: "Total Offer_Per_Year",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -262,7 +259,7 @@ function RateSheet(props) {
   ]);
   const [unitCost, setUnitCost] = useState([
     {
-      columnName: "Vehicle Cost1",
+      columnName: "Vehicle Cost_Unit_Cost",
       inputType: "num",
       label: "Annual Miles",
       updatedValue: null,
@@ -270,7 +267,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Vehicle Cost21",
+      columnName: "Vehicle Cost2_Unit_Cost",
       inputType: "num",
       label: "Annual Miles",
       updatedValue: null,
@@ -278,7 +275,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Opertational Cost1",
+      columnName: "Opertational Cost_Unit_Cost",
       inputType: "num",
       label: "Annual Miles",
       updatedValue: null,
@@ -286,7 +283,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Taxes1",
+      columnName: "Taxes_Unit_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -294,7 +291,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Vehicle Registration1",
+      columnName: "Vehicle Registration_Unit_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -302,7 +299,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Miscellaneous1",
+      columnName: "Miscellaneous_Unit_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -310,7 +307,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "General Overhead1",
+      columnName: "General Overhead_Unit_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -318,7 +315,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Fuel1",
+      columnName: "Fuel_Unit_Cost",
       inputType: "num",
       label: "Per Gallon",
       updatedValue: null,
@@ -326,7 +323,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Oil1",
+      columnName: "Oil_Unit_Cost",
       inputType: "num",
       label: "Per Quart",
       updatedValue: null,
@@ -334,7 +331,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Insurance1",
+      columnName: "Insurance_Unit_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -342,7 +339,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Road Taxes1",
+      columnName: "Road Taxes_Unit_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -350,7 +347,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Tolls1",
+      columnName: "Tolls_Unit_Cost",
       inputType: "num",
       label: "Per Trip",
       updatedValue: null,
@@ -358,7 +355,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Total Fixed and Operational Cost1",
+      columnName: "Total Fixed and Operational Cost_Unit_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -366,7 +363,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Straight Time1",
+      columnName: "Straight Time_Unit_Cost",
       inputType: "num",
       label: "Per Hour",
       updatedValue: null,
@@ -374,7 +371,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Overtime1",
+      columnName: "Overtime_Unit_Cost",
       inputType: "num",
       label: "Per Hour",
       updatedValue: null,
@@ -382,7 +379,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Payroll Taxes (Itemized) 1",
+      columnName: "Payroll Taxes (Itemized) _Unit_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -390,7 +387,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Social Security1",
+      columnName: "Social Security_Unit_Cost",
       inputType: "num",
       label: "Unit Cost",
       updatedValue: null,
@@ -398,7 +395,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Workman's Compensation1",
+      columnName: "Workman's Compensation_Unit_Cost",
       inputType: "num",
       label: "Unit Cost",
       updatedValue: null,
@@ -406,7 +403,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Federal Unemployment Comp.1",
+      columnName: "Federal Unemployment Comp._Unit_Cost",
       inputType: "num",
       label: "Unit Cost",
       updatedValue: null,
@@ -414,7 +411,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "State Unemployment Comp.1",
+      columnName: "State Unemployment Comp._Unit_Cost",
       inputType: "num",
       label: "Unit Cost",
       updatedValue: null,
@@ -422,7 +419,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Fringe Benefits (Itemized)1",
+      columnName: "Fringe Benefits (Itemized)_Unit_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -430,7 +427,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Health & Welfare1",
+      columnName: "Health & Welfare_Unit_Cost",
       inputType: "num",
       label: "Rate",
       updatedValue: null,
@@ -438,7 +435,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Vacation1",
+      columnName: "Vacation_Unit_Cost",
       inputType: "num",
       label: "Rate",
       updatedValue: null,
@@ -446,7 +443,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Holiday1",
+      columnName: "Holiday_Unit_Cost",
       inputType: "num",
       label: "Rate",
       updatedValue: null,
@@ -454,7 +451,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Pension1",
+      columnName: "Pension_Unit_Cost",
       inputType: "num",
       label: "Rate",
       updatedValue: null,
@@ -462,7 +459,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Total Operation Labor Cost1",
+      columnName: "Total Operation Labor Cost_Unit_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -470,7 +467,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Supplier's Wages1",
+      columnName: "Supplier's Wages_Unit_Cost",
       inputType: "num",
       label: "Per Hour",
       updatedValue: null,
@@ -478,7 +475,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Total Cost1",
+      columnName: "Total Cost_Unit_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -486,7 +483,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Return on Investment1",
+      columnName: "Return on Investment_Unit_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -494,7 +491,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Total Offer1",
+      columnName: "Total Offer_Unit_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -504,7 +501,7 @@ function RateSheet(props) {
   ]);
   const [annualCost, setAnnualCost] = useState([
     {
-      columnName: "Vehicle Cost23",
+      columnName: "Vehicle Cost_Annual_Cost",
       inputType: "num",
       label: "Annual Cost",
       updatedValue: null,
@@ -512,7 +509,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Vehicle Cost22",
+      columnName: "Vehicle Cost2_Annual_Cost",
       inputType: "num",
       label: "Annual Cost",
       updatedValue: null,
@@ -520,7 +517,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Opertational Cost2",
+      columnName: "Opertational Cost_Annual_Cost",
       inputType: "num",
       label: "Annual Cost",
       updatedValue: null,
@@ -528,7 +525,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Taxes2",
+      columnName: "Taxes_Annual_Cost",
       inputType: null,
       label: "Annual Cost",
       updatedValue: null,
@@ -536,7 +533,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Vehicle Registration2",
+      columnName: "Vehicle Registration_Annual_Cost",
       inputType: null,
       label: "Annual Cost",
       updatedValue: null,
@@ -544,7 +541,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Miscellaneous2",
+      columnName: "Miscellaneous_Annual_Cost",
       inputType: null,
       label: "Annual Cost",
       updatedValue: null,
@@ -552,7 +549,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "General Overhead2",
+      columnName: "General Overhead_Annual_Cost",
       inputType: null,
       label: "Annual Cost",
       updatedValue: null,
@@ -560,7 +557,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Fuel2",
+      columnName: "Fuel_Annual_Cost",
       inputType: "num",
       label: "Annual Cost",
       updatedValue: null,
@@ -568,7 +565,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Oil2",
+      columnName: "Oil_Annual_Cost",
       inputType: "num",
       label: "Annual Cost",
       updatedValue: null,
@@ -576,7 +573,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Insurance2",
+      columnName: "Insurance_Annual_Cost",
       inputType: null,
       label: "Annual Cost",
       updatedValue: null,
@@ -584,7 +581,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Road Taxes2",
+      columnName: "Road Taxes_Annual_Cost",
       inputType: null,
       label: "Annual Cost",
       updatedValue: null,
@@ -592,7 +589,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Tolls2",
+      columnName: "Tolls_Annual_Cost",
       inputType: "num",
       label: "Annual Cost",
       updatedValue: null,
@@ -600,7 +597,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Total Fixed and Operational Cost2",
+      columnName: "Total Fixed and Operational Cost_Annual_Cost",
       inputType: null,
       label: "Annual Cost",
       updatedValue: null,
@@ -608,7 +605,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Straight Time2",
+      columnName: "Straight Time_Annual_Cost",
       inputType: "num",
       label: "Annual Cost",
       updatedValue: null,
@@ -616,7 +613,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Overtime2",
+      columnName: "Overtime_Annual_Cost",
       inputType: "num",
       label: "Annual Cost",
       updatedValue: null,
@@ -624,47 +621,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Payroll Taxes (Itemized) 2",
-      inputType: null,
-      label: null,
-      updatedValue: null,
-      value: undefined,
-      icon: null,
-    },
-    {
-      columnName: "Social Security2",
-      inputType: "num",
-      label: "Annual Cost",
-      updatedValue: null,
-      value: undefined,
-      icon: "dollar-sign",
-    },
-    {
-      columnName: "Workman's Compensation2",
-      inputType: "num",
-      label: "Annual Cost",
-      updatedValue: null,
-      value: undefined,
-      icon: "dollar-sign",
-    },
-    {
-      columnName: "Federal Unemployment Comp.2",
-      inputType: "num",
-      label: "Annual Cost",
-      updatedValue: null,
-      value: undefined,
-      icon: "dollar-sign",
-    },
-    {
-      columnName: "State Unemployment Comp.2",
-      inputType: "num",
-      label: "Annual Cost",
-      updatedValue: null,
-      value: undefined,
-      icon: "dollar-sign",
-    },
-    {
-      columnName: "Fringe Benefits (Itemized)2",
+      columnName: "Payroll Taxes (Itemized) _Annual_Cost",
       inputType: null,
       label: null,
       updatedValue: null,
@@ -672,7 +629,7 @@ function RateSheet(props) {
       icon: null,
     },
     {
-      columnName: "Health & Welfare2",
+      columnName: "Social Security_Annual_Cost",
       inputType: "num",
       label: "Annual Cost",
       updatedValue: null,
@@ -680,7 +637,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Vacation2",
+      columnName: "Workman's Compensation_Annual_Cost",
       inputType: "num",
       label: "Annual Cost",
       updatedValue: null,
@@ -688,7 +645,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Holiday2",
+      columnName: "Federal Unemployment Comp._Annual_Cost",
       inputType: "num",
       label: "Annual Cost",
       updatedValue: null,
@@ -696,7 +653,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Pension2",
+      columnName: "State Unemployment Comp._Annual_Cost",
       inputType: "num",
       label: "Annual Cost",
       updatedValue: null,
@@ -704,7 +661,47 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Total Operation Labor Cost2",
+      columnName: "Fringe Benefits (Itemized)_Annual_Cost",
+      inputType: null,
+      label: null,
+      updatedValue: null,
+      value: undefined,
+      icon: null,
+    },
+    {
+      columnName: "Health & Welfare_Annual_Cost",
+      inputType: "num",
+      label: "Annual Cost",
+      updatedValue: null,
+      value: undefined,
+      icon: "dollar-sign",
+    },
+    {
+      columnName: "Vacation_Annual_Cost",
+      inputType: "num",
+      label: "Annual Cost",
+      updatedValue: null,
+      value: undefined,
+      icon: "dollar-sign",
+    },
+    {
+      columnName: "Holiday_Annual_Cost",
+      inputType: "num",
+      label: "Annual Cost",
+      updatedValue: null,
+      value: undefined,
+      icon: "dollar-sign",
+    },
+    {
+      columnName: "Pension_Annual_Cost",
+      inputType: "num",
+      label: "Annual Cost",
+      updatedValue: null,
+      value: undefined,
+      icon: "dollar-sign",
+    },
+    {
+      columnName: "Total Operation Labor Cost_Annual_Cost",
       inputType: null,
       label: "Annual Cost",
       updatedValue: null,
@@ -712,7 +709,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Supplier's Wages2",
+      columnName: "Supplier's Wages_Annual_Cost",
       inputType: "num",
       label: "Annual Cost",
       updatedValue: null,
@@ -720,7 +717,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Total Cost2",
+      columnName: "Total Cost_Annual_Cost",
       inputType: null,
       label: "Annual Cost",
       updatedValue: null,
@@ -728,7 +725,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Return on Investment2",
+      columnName: "Return on Investment_Annual_Cost",
       inputType: null,
       label: "Annual Cost",
       updatedValue: null,
@@ -736,7 +733,7 @@ function RateSheet(props) {
       icon: "dollar-sign",
     },
     {
-      columnName: "Total Offer2",
+      columnName: "Total Offer_Annual_Cost",
       inputType: null,
       label: "Annual Cost",
       updatedValue: null,
@@ -776,232 +773,154 @@ function RateSheet(props) {
     { label: "Return on Investment", sub: null },
     { label: "Total Offer", sub: "(Lines 18 & 19)" },
   ];
+  const [remarkAnnualCost, setRemarkAnnualCost] = useState([
+    {
+      columnName: "Equipment Realignment, Deadhead & Portal Miles",
+      inputType: "num",
+      label: "Annual Cost",
+      updatedValue: null,
+      value: undefined,
+      icon: "dollar-sign",
+    },
+    {
+      columnName: "Plate Miles",
+      inputType: "num",
+      label: "Annual Cost",
+      updatedValue: null,
+      value: undefined,
+      icon: "dollar-sign",
+    },
+    {
+      columnName: "Total Miles",
+      inputType: "num",
+      label: "Annual Cost",
+      updatedValue: null,
+      value: undefined,
+      icon: "dollar-sign",
+    },
+    {
+      columnName: "U.S. DOT required vehicle Inspection, Equipment, Realignment, Deadhead  & Portal Hours ",
+      inputType: "num",
+      label: "Annual Cost",
+      updatedValue: null,
+      value: undefined,
+      icon: "dollar-sign",
+    },
+    {
+      columnName: "Plate Hours",
+      inputType: "num",
+      label: "Annual Cost",
+      updatedValue: null,
+      value: undefined,
+      icon: "dollar-sign",
+    },
+    {
+      columnName: "Total Hours",
+      inputType: "num",
+      label: "Annual Cost",
+      updatedValue: null,
+      value: undefined,
+      icon: "dollar-sign",
+    },
+  ]);
+  const [rateSheetData, setRateSheetData] = useState(null);
 
-  async function handleSubmit(event) {
+  async function handleSubmit() {
     setSearching(true);
-    event.preventDefault();
     setIsLoading(true);
-    console.log(isLoading);
+    // costSegment.push(units[index], unitCost[index], annualCost[index]), console.log(costSegment)
+    // console.log(units[index], unitCost[index], annualCost[index])
   }
 
-  function doSetContractSearch(newContract, keyValue) {
-    let getValue = [];
-    newContract !== null &&
-      newContract.map((item, index) => {
-        return getValue.push(item.label);
-      });
-    let tempCon = contractSearch;
-    tempCon[keyValue] = getValue;
-    setContractSearch(tempCon);
+  function getSelectedContract() {
+    setIsLoading(true);
+    Send.get("/Contract/Dropdowns/ContractTest/Cached", props.appProps).then((res) => {
+      setCostSegmentDropdowns(res.data[1].options);
+    });
+    props.setSelectedContractId(contractSearch);
+
+    Send.get("/Contract/699/RateSheet", props.appProps).then((res) => {
+      console.log(res);
+      setContractCostSegments(res.data[0].pop());
+      setContractData(res.data[0]);
+
+      // let object = [];
+      // this.state.editedFieldData.forEach((item) => {
+      //   let data = item;
+
+      //   this.state.contractData.forEach((c) => {
+      //     if (c.columnName === item.columnName) {
+      //       data.value = c.value;
+      //       object.push(data);
+      //     } else {
+      //       console.log(c);
+      //     }
+      //   });
+      //   data.value === null && object.push(data);
+      // });
+      // console.log(object);
+      // this.setState({ editedFieldData: object });
+      setIsLoading(false);
+    });
+  }
+
+  function updateRateSheetData() {
+    contractCostSegments.value.map((c, index) => console.log(c));
   }
   return (
     <MDBCard className="m-2">
       <MDBCardHeader>
-        <h4>Add New Contract</h4>
+        <h4>Add Cost Segment To A Contract</h4>
         <h5>
           <Select
             autoFocus
             options={props.selectOptions}
-            isMulti
             placeholder={"Search for Contracts by ID"}
             onChange={(x) => {
-              doSetContractSearch(x, "external_contract_code");
+              setContractSearch(x.value);
             }}
-            isLoading={isLoading & isSearching}
-            isDisabled={isSearching & isLoading}
+            isDisabled={isLoading}
           />
         </h5>
-      </MDBCardHeader>
-      <MDBCardBody>
-        <MDBContainer fluid>
-          <form onSubmit={handleSubmit}>
-            <MDBRow>
-              <MDBCol md="6">
-                <p className="h5 text-center mb-4">Selected Contract Data </p>
-                <div className="grey-text">
-                  <MDBInput
-                    label="Road Taxess"
-                    id="road_taxess"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                  />
-                </div>
-              </MDBCol>
-              <MDBCol md="6">
-                <p className="h5 text-center mb-4">Selected Contract Data </p>
-                <div className="grey-text">
-                  <MDBInput
-                    label="Road Taxes"
-                    id="road_taxes"
-                    icon="envelope"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                  />
-                </div>
-              </MDBCol>
-            </MDBRow>
-            <p className="h4 text-center mb-4">Basis For Determining Cost</p>
-            <div className="grey-text">
-              {itemLabels.map((c, index) => (
-                <MDBRow key={index}>
-                  <MDBCol md="3">
-                    {c.sub === null ? (
-                      <div className=" text-center mb-5">
-                        <h4 key={index + c.label}>{c.label}</h4>
-                      </div>
-                    ) : (
-                      <div key={index} className=" text-center mb-4">
-                        <h4 key={index + c.label}>{c.label}</h4>
-                        <small key={index + c.sub}>{c.sub}</small>
-                      </div>
-                    )}
-                  </MDBCol>
+        {isLoading === true ? (
+          <MDBContainer>
+            <Spinner animation="border" variant="primary" />
+          </MDBContainer>
+        ) : (
+          <h4>
+            <Button type="button" onClick={getSelectedContract}>
+              Search
+            </Button>
+          </h4>
+        )}
 
-                  <MDBCol md="9">
-                    <MDBRow>
-                      <MDBCol md="4">
-                        <div className="grey-text">
-                          {units[index].label !== null ? (
-                            <MDBInput
-                              key={units[index].columnName}
-                              label={units[index].label}
-                              id={units[index].columnName}
-                              value={
-                                units[index].updatedValue === null
-                                  ? units[index].value
-                                  : units[index].updatedValue
-                              }
-                              placeholder={units[index].value}
-                              icon={units[index].icon}
-                              group
-                              type="text"
-                              validate
-                              error="wrong"
-                              success="right"
-                              onChange={(e) => {
-                                var object = units;
-                                var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
-                                object[
-                                  index
-                                ].updatedValue = e.target.value.replace(
-                                  specials,
-                                  ""
-                                );
-                                setUnits(object);
-                              }}
-                            />
-                          ) : (
-                            <MDBInput key={units[index].columnName} disabled />
-                          )}
-                        </div>
-                      </MDBCol>
-                      <MDBCol md="4">
-                        <div className="grey-text">
-                          {unitCost[index].label !== null ? (
-                            <MDBInput
-                              key={unitCost[index].columnName}
-                              label={unitCost[index].label}
-                              id={unitCost[index].columnName}
-                              value={
-                                unitCost[index].updatedValue === null
-                                  ? unitCost[index].value
-                                  : unitCost[index].updatedValue
-                              }
-                              placeholder={unitCost[index].value}
-                              icon={unitCost[index].icon}
-                              group
-                              type="text"
-                              validate
-                              error="wrong"
-                              success="right"
-                              onChange={(e) => {
-                                var object = unitCost;
-                                var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
-                                object[
-                                  index
-                                ].updatedValue = e.target.value.replace(
-                                  specials,
-                                  ""
-                                );
-                                setUnitCost(object);
-                              }}
-                            />
-                          ) : (
-                            <MDBInput key={units[index].columnName} disabled />
-                          )}
-                        </div>
-                      </MDBCol>
-                      <MDBCol md="4">
-                        <div className="grey-text">
-                          {annualCost[index].label !== null ? (
-                            <MDBInput
-                              key={annualCost[index].columnName}
-                              label={annualCost[index].label}
-                              id={annualCost[index].columnName}
-                              value={
-                                annualCost[index].updatedValue === null
-                                  ? annualCost[index].value
-                                  : annualCost[index].updatedValue
-                              }
-                              placeholder={annualCost[index].value}
-                              icon={annualCost[index].icon}
-                              group
-                              type="text"
-                              validate
-                              error="wrong"
-                              success="right"
-                              onChange={(e) => {
-                                var object = annualCost;
-                                var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
-                                object[
-                                  index
-                                ].updatedValue = e.target.value.replace(
-                                  specials,
-                                  ""
-                                );
-                                setAnnualCost(object);
-                              }}
-                            />
-                          ) : (
-                            <MDBInput
-                              key={annualCost[index].columnName}
-                              disabled
-                            />
-                          )}
-                        </div>
-                      </MDBCol>
-                    </MDBRow>
-                  </MDBCol>
-                </MDBRow>
-              ))}
-            </div>
-            <MDBRow>
-              <MDBCol md="12">
-                <div className="text-center">
-                  <MDBBtn
-                    outline
-                    color="info"
-                    type="button"
-                    onClick={handleSubmit}
-                  >
-                    Send
-                    <MDBIcon far icon="paper-plane" className="ml-1" />
-                  </MDBBtn>
-                </div>
-              </MDBCol>
-            </MDBRow>
-          </form>
-        </MDBContainer>
-      </MDBCardBody>
+        {contractCostSegments !== null && (
+          <Select
+            autoFocus
+            options={costSegmentDropdowns}
+            placeholder={"Select a Cost Segment to Update"}
+            onChange={(x) => {
+              setSelectedCostSegment(x.value);
+              updateRateSheetData();
+            }}
+            isDisabled={isLoading}
+          />
+        )}
+      </MDBCardHeader>
+      <UpsertCostSegment
+        contractData={contractData}
+        units={units}
+        unitCost={unitCost}
+        itemLabels={itemLabels}
+        annualCost={annualCost}
+        remarkAnnualCost={remarkAnnualCost}
+        setUnits={setUnits}
+        setUnitCost={setUnitCost}
+        setAnnualCost={setAnnualCost}
+        setRemarkAnnualCost={setRemarkAnnualCost}
+      />
     </MDBCard>
   );
 }
 
-export default RateSheet;
+export default CostSegment;

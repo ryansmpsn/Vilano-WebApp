@@ -5,7 +5,7 @@ import CostData from "./CostData";
 import ViewRoutes from "./ViewRoutes";
 import AddContractData from "./AddContractData";
 import ContractData from "./ContractData";
-import RateSheet from "./RateSheet";
+import CostSegment from "./CostSegment";
 
 class ContractRoutes extends Component {
   render() {
@@ -16,7 +16,7 @@ class ContractRoutes extends Component {
         <Route exact path="/contracts/trips" render={(props) => <TripData {...props} {...this.props} />} />
         <Route exact path="/contracts/costdata" render={(props) => <CostData {...props} {...this.props} />} />
         <Route exact path="/contracts/add" render={(props) => <AddContractData {...props} {...this.props} />} />
-        <Route exact path="/contracts/ratesheet" render={(props) => <RateSheet {...props} {...this.props} />} />
+        <Route exact path="/contracts/costsegment" render={(props) => <CostSegment {...props} {...this.props} />} />
         <Route exact path={`${this.props.path}/trip/:tripId`} render={(props) => <ViewRoutes {...props} {...this.props} />} />
         <Route exact path={`${this.props.path}/:contractId`} render={(props) => <TripData {...props} {...this.props} />} />
         <Route exact path={`${this.props.path}/:contractId`} render={(props) => <CostData {...props} {...this.props} />} />

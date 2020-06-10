@@ -82,7 +82,7 @@ export default function Login(props) {
 
   function handleRedirect() {
     if (props.isAuthenticated)
-      addToast("You Have Loggen in Successfully", {
+      addToast("You Have Logged in Successfully.", {
         appearance: "success",
         autoDismiss: true,
       });

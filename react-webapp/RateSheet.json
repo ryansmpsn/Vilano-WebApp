@@ -1,0 +1,826 @@
+[
+  { "columnName": "contract_test_id", "inputType": null, "label": null, "updatedValue": null, "value": null },
+  { "columnName": "modified_timestamp", "inputType": null, "label": "Modified At", "updatedValue": null, "value": null },
+  { "columnName": "modified_by", "inputType": null, "label": "modified_by", "updatedValue": null, "value": null },
+  { "columnName": "contract_id", "inputType": null, "label": "contract_id", "updatedValue": null, "value": 853 },
+  { "columnName": "external_contract_code", "inputType": null, "label": "external_contract_code", "updatedValue": null, "value": "Test006" },
+  { "columnName": "begin_contract_date", "inputType": null, "label": "begin_contract_date", "updatedValue": null, "value": "2020-06-01" },
+  { "columnName": "end_contract_date", "inputType": null, "label": "end_contract_date", "updatedValue": null, "value": "2020-01-04" },
+  { "columnName": "origin_facility_id", "inputType": null, "label": "origin_facility_id", "updatedValue": null, "value": 1 },
+  { "columnName": "destination_facility_id", "inputType": null, "label": "destination_facility_id", "updatedValue": null, "value": 1 },
+  { "columnName": "company_id", "inputType": null, "label": null, "updatedValue": 2, "value": null },
+  { "columnName": "cost_segment", "inputType": null, "label": null, "updatedValue": "A", "value": null },
+  {
+    "Federal Unemployment Comp.": [
+      {
+        "columnName": "Federal Unemployment Comp._Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Taxable Wages",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Federal Unemployment Comp._Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Unit Cost",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Federal Unemployment Comp._Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Fringe Benefits (Itemized)": [
+      {
+        "columnName": "Fringe Benefits (Itemized)_Per_Year",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Fringe Benefits (Itemized)_Unit_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Fringe Benefits (Itemized)_Annual_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Fuel": [
+      {
+        "columnName": "Fuel_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Gallons",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Fuel_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Per Gallon",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Fuel_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "General Overhead": [
+      {
+        "columnName": "General Overhead_Per_Year",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "General Overhead_Unit_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "General Overhead_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": null,
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Health & Welfare": [
+      {
+        "columnName": "Health & Welfare_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "No. of Employees or Hours",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Health & Welfare_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Rate",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Health & Welfare_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Holiday": [
+      {
+        "columnName": "Holiday_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "No. of Employees or Hours",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Holiday_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Rate",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Holiday_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Insurance": [
+      {
+        "columnName": "Insurance_Per_Year",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Insurance_Unit_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Insurance_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": null,
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Miscellaneous": [
+      {
+        "columnName": "Miscellaneous_Per_Year",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Miscellaneous_Unit_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Miscellaneous_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": null,
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Oil": [
+      {
+        "columnName": "Oil_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Quarts",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Oil_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Per Quart",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Oil_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Opertational Cost": [
+      {
+        "columnName": "Opertational Cost_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Miles",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Opertational Cost_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Miles",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Opertational Cost_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Overtime": [
+      {
+        "columnName": "Overtime_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Hours",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Overtime_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Per Hour",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Overtime_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Payroll Taxes (Itemized) ": [
+      {
+        "columnName": "Payroll Taxes (Itemized) _Per_Year",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Payroll Taxes (Itemized) _Unit_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Payroll Taxes (Itemized) _Annual_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Pension": [
+      {
+        "columnName": "Pension_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "No. of Employees or Hours",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Pension_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Rate",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Pension_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Return on Investment": [
+      {
+        "columnName": "Return on Investment_Per_Year",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Return on Investment_Unit_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Return on Investment_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": null,
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Road Taxes": [
+      {
+        "columnName": "Road Taxes_Per_Year",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Road Taxes_Unit_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Road Taxes_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": null,
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Social Security": [
+      {
+        "columnName": "Social Security_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Taxable Wages",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Social Security_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Unit Cost",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Social Security_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "State Unemployment Comp.": [
+      {
+        "columnName": "State Unemployment Comp._Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Taxable Wages",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "State Unemployment Comp._Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Unit Cost",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "State Unemployment Comp._Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Straight Time": [
+      {
+        "columnName": "Straight Time_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Hours",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Straight Time_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Per Hour",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Straight Time_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Supplier's Wages": [
+      {
+        "columnName": "Supplier's Wages_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Hours",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Supplier's Wages_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Per Hour",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Supplier's Wages_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Taxes": [
+      {
+        "columnName": "Taxes_Per_Year",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Taxes_Unit_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Taxes_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": null,
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Tolls": [
+      {
+        "columnName": "Tolls_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Trips",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Tolls_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Per Trip",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Tolls_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Total Cost": [
+      {
+        "columnName": "Total Cost_Per_Year",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Total Cost_Unit_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Total Cost_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": null,
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Total Fixed and Operational Cost": [
+      {
+        "columnName": "Total Fixed and Operational Cost_Per_Year",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Total Fixed and Operational Cost_Unit_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Total Fixed and Operational Cost_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": null,
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Total Offer": [
+      {
+        "columnName": "Total Offer_Per_Year",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Total Offer_Unit_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Total Offer_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": null,
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Total Operation Labor Cost": [
+      {
+        "columnName": "Total Operation Labor Cost_Per_Year",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Total Operation Labor Cost_Unit_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Total Operation Labor Cost_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": null,
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Vacation": [
+      {
+        "columnName": "Vacation_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "No. of Employees or Hours",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Vacation_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Rate",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Vacation_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Vehicle Cost": [
+      {
+        "columnName": "Vehicle Cost2_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Miles",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Vehicle Cost2_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Miles",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Vehicle Cost2_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "Vehicle Registration": [
+      {
+        "columnName": "Vehicle Registration_Per_Year",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Vehicle Registration_Unit_Cost",
+        "icon": null,
+        "inputType": null,
+        "label": null,
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Vehicle Registration_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": null,
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  },
+
+  {
+    "Workman's Compensation": [
+      {
+        "columnName": "Workman's Compensation_Per_Year",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Taxable Wages",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Workman's Compensation_Unit_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Unit Cost",
+        "updatedValue": null,
+        "value": null
+      },
+      {
+        "columnName": "Workman's Compensation_Annual_Cost",
+        "icon": "dollar-sign",
+        "inputType": "num",
+        "label": "Annual Cost",
+        "updatedValue": null,
+        "value": null
+      }
+    ]
+  }
+]
