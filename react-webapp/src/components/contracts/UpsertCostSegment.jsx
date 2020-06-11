@@ -1,21 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 // import { useToasts } from "react-toast-notifications";
-import Select from "react-select";
-import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
-import { Button, Spinner } from "react-bootstrap";
-import Send from "../../libs/send";
+import { MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
 
 function UpsertCostSegment(props) {
   // const { addToast } = useToasts();
-  const [isLoading, setIsLoading] = useState(false);
-  const [dropdowns, setDropdowns] = useState(null);
-  const [isSearching, setSearching] = useState(false);
-  const [contractSearch, setContractSearch] = useState(props.contractSearch);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [dropdowns, setDropdowns] = useState(null);
+  // const [isSearching, setSearching] = useState(false);
+  // const [contractSearch, setContractSearch] = useState(props.contractSearch);
+  // const [contractData, setContractData] = useState(props.contractData);
+  // const [units, setUnits] = useState(props.units);
 
   function buildJsonObject() {
     console.log(props.remarkAnnualCost);
 
-    let costSegment = {};
+    // let costSegment = {};
     let jsonData = {};
     props.itemLabels.forEach(
       (c, index) => {
@@ -41,7 +40,6 @@ function UpsertCostSegment(props) {
                   </MDBCol>
                 )
             )}
-          {dropdowns !== null && console.log(dropdowns)}
         </MDBRow>
         <p className="h4 text-center mb-4">Remarks:</p>
         <div className="grey-text">
@@ -128,10 +126,9 @@ function UpsertCostSegment(props) {
                     <div className="grey-text">
                       {props.units[index].label !== null ? (
                         <MDBInput
-                          key={props.units[index].columnName}
                           label={props.units[index].label}
-                          id={props.units[index].columnName}
-                          value={props.units[index].updatedValue === null ? props.units[index].value : props.units[index].updatedValue}
+                          id={props.units[index].id}
+                          value={props.units[index].value}
                           placeholder={props.units[index].value}
                           icon={props.units[index].icon}
                           group
@@ -147,7 +144,7 @@ function UpsertCostSegment(props) {
                           }}
                         />
                       ) : (
-                        <MDBInput key={props.units[index].columnName} disabled />
+                        <MDBInput disabled />
                       )}
                     </div>
                   </MDBCol>
@@ -155,9 +152,8 @@ function UpsertCostSegment(props) {
                     <div className="grey-text">
                       {props.unitCost[index].label !== null ? (
                         <MDBInput
-                          key={props.unitCost[index].columnName}
                           label={props.unitCost[index].label}
-                          id={props.unitCost[index].columnName}
+                          id={props.unitCost[index].id}
                           value={props.unitCost[index].updatedValue === null ? props.unitCost[index].value : props.unitCost[index].updatedValue}
                           placeholder={props.unitCost[index].value}
                           icon={props.unitCost[index].icon}
@@ -174,7 +170,7 @@ function UpsertCostSegment(props) {
                           }}
                         />
                       ) : (
-                        <MDBInput key={props.units[index].columnName} disabled />
+                        <MDBInput disabled />
                       )}
                     </div>
                   </MDBCol>
@@ -182,9 +178,8 @@ function UpsertCostSegment(props) {
                     <div className="grey-text">
                       {props.annualCost[index].label !== null ? (
                         <MDBInput
-                          key={props.annualCost[index].columnName}
                           label={props.annualCost[index].label}
-                          id={props.annualCost[index].columnName}
+                          id={props.annualCost[index].id}
                           value={props.annualCost[index].updatedValue === null ? props.annualCost[index].value : props.annualCost[index].updatedValue}
                           placeholder={props.annualCost[index].value}
                           icon={props.annualCost[index].icon}
@@ -201,7 +196,7 @@ function UpsertCostSegment(props) {
                           }}
                         />
                       ) : (
-                        <MDBInput key={props.annualCost[index].columnName} disabled />
+                        <MDBInput disabled />
                       )}
                     </div>
                   </MDBCol>
