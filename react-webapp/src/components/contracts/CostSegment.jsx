@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Select from "react-select";
-import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
+import { MDBCard, MDBCardHeader, MDBContainer, MDBCardBody } from "mdbreact";
 import { Button, Spinner } from "react-bootstrap";
 import Send from "../../libs/send";
 import UpsertCostSegment from "./UpsertCostSegment";
@@ -9,12 +9,14 @@ class CostSegment extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      settingData: false,
       isLoading: false,
       costSegmentDropdowns: null,
       isSearching: false,
       contractSearch: this.props.contractSearch,
       contractData: null,
       contractCostSegments: null,
+      selectedCostSegment: "",
       rateSheetData: null,
       units: [
         {
@@ -218,7 +220,7 @@ class CostSegment extends Component {
           icon: "dollar-sign",
         },
         {
-          rateItemCode: "fb15",
+          rateItemCode: "fb_15",
           columnName: "annual_unit",
           id: "Fringe Benefits (Itemized)_Per_Year",
           inputType: null,
@@ -318,7 +320,6 @@ class CostSegment extends Component {
           icon: null,
         },
       ],
-      updateUnits: null,
       unitCost: [
         {
           rateItemCode: "mv_1",
@@ -521,7 +522,7 @@ class CostSegment extends Component {
           icon: "dollar-sign",
         },
         {
-          rateItemCode: "fb15",
+          rateItemCode: "fb_15",
           columnName: "unit_cost",
           id: "Fringe Benefits (Itemized)_Unit_Cost",
           inputType: null,
@@ -621,7 +622,6 @@ class CostSegment extends Component {
           icon: null,
         },
       ],
-      updateUnitCost: null,
       annualCost: [
         {
           rateItemCode: "mv_1",
@@ -824,7 +824,7 @@ class CostSegment extends Component {
           icon: "dollar-sign",
         },
         {
-          rateItemCode: "fb15",
+          rateItemCode: "fb_15",
           columnName: "annual_cost",
           id: "Fringe Benefits (Itemized)_Annual_Cost",
           inputType: null,
@@ -924,7 +924,6 @@ class CostSegment extends Component {
           icon: "dollar-sign",
         },
       ],
-      updateAnnualCost: null,
       itemLabels: [
         { label: "Vehicle Cost", sub: "Motor Vehicles" },
         { label: "Vehicle Cost", sub: "Trailers" },
@@ -1013,17 +1012,23 @@ class CostSegment extends Component {
           icon: "dollar-sign",
         },
       ],
-      updateRemarkAnnualCost: null,
     };
     this.getSelectedContract = this.getSelectedContract.bind(this);
     this.updateRateSheetData = this.updateRateSheetData.bind(this);
-    this.showOutput = this.showOutput.bind(this);
+    this.setCostSegmentdata = this.setCostSegmentdata.bind(this);
   }
-
-  handleSubmit() {
-    // costSegment.push(units[index], unitCost[index], annualCost[index]), console.log(costSegment)
-    // console.log(units[index], unitCost[index], annualCost[index])
-  }
+  setUnits = (e) => {
+    return this.setState({ units: e });
+  };
+  setUnitCost = (e) => {
+    return this.setState({ unitCost: e });
+  };
+  setAnnualCost = (e) => {
+    return this.setState({ annualCost: e });
+  };
+  setRemarkAnnualCost = (e) => {
+    return this.setState({ remarkAnnualCost: e });
+  };
 
   getSelectedContract() {
     this.setState({ isLoading: true });
@@ -1033,76 +1038,74 @@ class CostSegment extends Component {
     this.props.setSelectedContractId(this.state.contractSearch);
 
     Send.get("/Contract/1/RateSheet", this.props.appProps).then((res) => {
-      console.log(res);
       this.setState({ contractCostSegments: res.data[0].pop() });
       this.setState({ contractData: res.data[0] });
-
-      // let object = [];
-      // this.state.editedFieldData.forEach((item) => {
-      //   let data = item;
-
-      //   this.state.contractData.forEach((c) => {
-      //     if (c.columnName === item.columnName) {
-      //       data.value = c.value;
-      //       object.push(data);
-      //     } else {
-      //       console.log(c);
-      //     }
-      //   });
-      //   data.value === null && object.push(data);
-      // });
-      // console.log(object);
-      // this.setState({ editedFieldData: object });
       this.setState({ isLoading: false });
     });
   }
   updateRateSheetData(x) {
-    this.state.contractCostSegments.value.map((c, index) => c[1].value === x.label && this.setState({ rateSheetData: c[3].value }));
-    console.log(this.state.rateSheetData);
-
-    // let unitObject = this.state.units;
-    // this.state.units.forEach(
-    //   (c, index) => this.state.rateSheetData !== null && (unitObject[index].value = this.state.rateSheetData[index][4].value),
-    //   this.setState({ updateUnits: unitObject })
-    // );
-    // let unitCostObject = this.state.unitCost;
-    // this.state.unitCost.forEach(
-    //   (c, index) => this.state.rateSheetData !== null && (unitCostObject[index].value = this.state.rateSheetData[index][5].value),
-    //   this.setState({ updateUnitCost: unitCostObject })
-    // );
-    // let annualCostObject = this.state.annualCost;
-    // this.state.annualCost.forEach(
-    //   (c, index) => this.state.rateSheetData !== null && (annualCostObject[index].value = this.state.rateSheetData[index][6].value),
-    //   this.setState({ updateAnnualCost: annualCostObject })
-    // );
+    this.setState({ settingData: false });
+    this.setState({ selectedCostSegment: x.label });
+    this.state.contractCostSegments.value.map((c, index) => (c[1].value === x.label ? this.setState({ rateSheetData: c[3].value }) : this.setState({ rateSheetData: null })));
   }
 
-  showOutput() {
-    let unitsObject = this.state.units;
-    unitsObject.forEach(
-      (c, index) => this.state.rateSheetData !== null && this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitsObject[index].value = x[4].value)),
-      this.setState({ updateUnits: unitsObject })
-    );
+  setCostSegmentdata() {
+    if (this.state.rateSheetData !== null) {
+      let unitsObject = this.state.units;
+      unitsObject.forEach(
+        (c, index) => this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitsObject[index].value = x[4].value)),
+        this.setState({ units: unitsObject })
+      );
 
-    let unitCostObject = this.state.unitCost;
-    unitCostObject.forEach(
-      (c, index) => this.state.rateSheetData !== null && this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitCostObject[index].value = x[5].value)),
-      this.setState({ updateUnitCost: unitCostObject })
-    );
+      let unitCostObject = this.state.unitCost;
+      unitCostObject.forEach(
+        (c, index) => this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitCostObject[index].value = x[5].value)),
+        this.setState({ unitCost: unitCostObject })
+      );
 
-    let annualCostObject = this.state.annualCost;
-    annualCostObject.forEach(
-      (c, index) => this.state.rateSheetData !== null && this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (annualCostObject[index].value = x[6].value)),
-      this.setState({ updateAnnualCost: annualCostObject })
-    );
+      let annualCostObject = this.state.annualCost;
+      annualCostObject.forEach(
+        (c, index) => this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (annualCostObject[index].value = x[6].value)),
+        this.setState({ annualCost: annualCostObject })
+      );
 
-    let remarkObject = this.state.remarkAnnualCost;
-    remarkObject.forEach(
-      (c, index) => this.state.rateSheetData !== null && this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (remarkObject[index].value = x[6].value)),
-      this.setState({ updateRemarkAnnualCost: remarkObject })
-    );
+      let remarkObject = this.state.remarkAnnualCost;
+      remarkObject.forEach(
+        (c, index) => this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (remarkObject[index].value = x[6].value)),
+        this.setState({ remarkAnnualCost: remarkObject })
+      );
+    } else {
+      let unitsObject = this.state.units;
+      unitsObject.forEach((c, index) => {
+        unitsObject[index].value = null;
+        unitsObject[index].updatedValue = null;
+        this.setState({ units: unitsObject });
+      });
 
-    console.log(this.state.updateUnits);
+      let unitCostObject = this.state.unitCost;
+      unitCostObject.forEach((c, index) => {
+        unitCostObject[index].value = null;
+        unitCostObject[index].updatedValue = null;
+        this.setState({ unitCost: unitCostObject });
+      });
+
+      let annualCostObject = this.state.annualCost;
+      annualCostObject.forEach((c, index) => {
+        annualCostObject[index].value = null;
+        annualCostObject[index].updatedValue = null;
+        this.setState({ annualCost: annualCostObject });
+      });
+
+      let remarkObject = this.state.remarkAnnualCost;
+      remarkObject.forEach((c, index) => {
+        remarkObject[index].value = null;
+        remarkObject[index].updatedValue = null;
+        this.setState({ remarkAnnualCost: remarkObject });
+      });
+
+      console.log(this.state.units);
+    }
+    this.setState({ settingData: true });
   }
   render() {
     return (
@@ -1145,7 +1148,7 @@ class CostSegment extends Component {
               />
 
               <h4>
-                <Button type="button" onClick={this.showOutput}>
+                <Button type="button" onClick={this.setCostSegmentdata}>
                   Select Cost Segment
                 </Button>
               </h4>
@@ -1153,31 +1156,25 @@ class CostSegment extends Component {
           )}
         </MDBCardHeader>
 
-        {this.state.updateUnits === null ? (
+        {!this.state.settingData ? (
+          <MDBCardBody>
+            <MDBContainer>Please select a contract to add or update cost segment</MDBContainer>
+          </MDBCardBody>
+        ) : (
           <UpsertCostSegment
+            props={this.props}
             contractData={this.state.contractData}
             units={this.state.units}
             unitCost={this.state.unitCost}
             itemLabels={this.state.itemLabels}
             annualCost={this.state.annualCost}
             remarkAnnualCost={this.state.remarkAnnualCost}
-            setUnits={"fix this"}
-            setUnitCost={"fix this"}
-            setAnnualCost={"fix this"}
-            setRemarkAnnualCost={"fix this"}
-          />
-        ) : (
-          <UpsertCostSegment
-            contractData={this.state.contractData}
-            units={this.state.updateUnits}
-            unitCost={this.state.updateUnitCost}
-            itemLabels={this.state.itemLabels}
-            annualCost={this.state.updateAnnualCost}
-            remarkAnnualCost={this.state.remarkAnnualCost}
-            setUnits={"fix this"}
-            setUnitCost={"fix this"}
-            setAnnualCost={"fix this"}
-            setRemarkAnnualCost={"fix this"}
+            contractCostSegments={this.state.contractCostSegments}
+            selectedCostSegment={this.state.selectedCostSegment}
+            setUnits={this.setUnits}
+            setUnitCost={this.setUnitCost}
+            setAnnualCost={this.setAnnualCost}
+            setRemarkAnnualCost={this.setRemarkAnnualCost}
           />
         )}
       </MDBCard>

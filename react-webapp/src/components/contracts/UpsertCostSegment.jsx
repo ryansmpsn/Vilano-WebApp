@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 // import { useToasts } from "react-toast-notifications";
 import { MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
+import { Spinner } from "react-bootstrap";
+import Send from "../../libs/send";
 
 function UpsertCostSegment(props) {
   // const { addToast } = useToasts();
-  // const [isLoading, setIsLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   // const [dropdowns, setDropdowns] = useState(null);
   // const [isSearching, setSearching] = useState(false);
   // const [contractSearch, setContractSearch] = useState(props.contractSearch);
@@ -12,18 +14,33 @@ function UpsertCostSegment(props) {
   // const [units, setUnits] = useState(props.units);
 
   function buildJsonObject() {
-    console.log(props.remarkAnnualCost);
+    setSubmitting(true);
+    let rateSheetItems = [];
+    props.units.forEach((c, index) => {
+      var rateArray = [];
+      rateArray.push({ rate_item_code: props.units[index].rateItemCode }, c, props.unitCost[index], props.annualCost[index]);
+      rateSheetItems.push(rateArray);
+    });
+    props.remarkAnnualCost.forEach((c, index) => {
+      var rateArray = [];
+      rateArray.push({ rate_item_code: props.remarkAnnualCost[index].rateItemCode }, c);
+      rateSheetItems.push(rateArray);
+    });
+    let costSegment = [
+      { columnName: "cost_segment", value: props.selectedCostSegment },
+      { columnName: "vw_contract_rate_sheet_items", value: rateSheetItems },
+    ];
+    let jsonData = props.contractData;
+    jsonData.push({ columnName: "vw_contract_rate_sheet_segment", inputType: null, label: "Cost Segment", updatedValue: null, value: costSegment });
+    console.log(jsonData);
+    // console.log(JSON.stringify(jsonData));
 
-    // let costSegment = {};
-    let jsonData = {};
-    props.itemLabels.forEach(
-      (c, index) => {
-        var columnName = c.label;
-        jsonData[columnName] = [props.units[index], props.unitCost[index], props.annualCost[index]];
-      },
+    // Send.post("/Contract/ContractRateSheet", jsonData, props.appProps).then((res) => {
+    //   console.log(res);
 
-      console.log(jsonData)
-    );
+    //
+    // });
+    setSubmitting(false);
   }
 
   return (
@@ -128,7 +145,7 @@ function UpsertCostSegment(props) {
                         <MDBInput
                           label={props.units[index].label}
                           id={props.units[index].id}
-                          value={props.units[index].value}
+                          value={props.units[index].updatedValue === null ? props.units[index].value : props.units[index].updatedValue}
                           placeholder={props.units[index].value}
                           icon={props.units[index].icon}
                           group
@@ -208,10 +225,16 @@ function UpsertCostSegment(props) {
         <MDBRow>
           <MDBCol md="12">
             <div className="text-center">
-              <MDBBtn outline color="info" type="button" onClick={buildJsonObject}>
-                Send
-                <MDBIcon far icon="paper-plane" className="ml-1" />
-              </MDBBtn>
+              {submitting === true ? (
+                <MDBContainer>
+                  <Spinner animation="border" variant="primary" />
+                </MDBContainer>
+              ) : (
+                <MDBBtn outline color="info" type="button" onClick={buildJsonObject}>
+                  Send
+                  <MDBIcon far icon="paper-plane" className="ml-1" />
+                </MDBBtn>
+              )}
             </div>
           </MDBCol>
         </MDBRow>
