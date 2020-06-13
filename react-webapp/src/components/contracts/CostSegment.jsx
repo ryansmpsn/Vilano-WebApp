@@ -20,6 +20,14 @@ class CostSegment extends Component {
       rateSheetData: null,
       units: [
         {
+          rateItemCode: "vc_1",
+          columnName: "annual_unit",
+          inputType: null,
+          label: null,
+          updatedValue: null,
+          value: null,
+        },
+        {
           rateItemCode: "mv_1",
           columnName: "annual_unit",
           id: "Vehicle Cost_Per_Year",
@@ -321,6 +329,14 @@ class CostSegment extends Component {
         },
       ],
       unitCost: [
+        {
+          rateItemCode: "vc_1",
+          columnName: "unit_cost",
+          inputType: null,
+          label: null,
+          updatedValue: null,
+          value: null,
+        },
         {
           rateItemCode: "mv_1",
           columnName: "unit_cost",
@@ -624,6 +640,14 @@ class CostSegment extends Component {
       ],
       annualCost: [
         {
+          rateItemCode: "vc_1",
+          columnName: "annual_cost",
+          inputType: null,
+          label: null,
+          updatedValue: null,
+          value: null,
+        },
+        {
           rateItemCode: "mv_1",
           columnName: "annual_cost",
           id: "Vehicle Cost_Annual_Cost",
@@ -925,6 +949,7 @@ class CostSegment extends Component {
         },
       ],
       itemLabels: [
+        { label: "Vehicle Cost", sub: null },
         { label: "Vehicle Cost", sub: "Motor Vehicles" },
         { label: "Vehicle Cost", sub: "Trailers" },
         { label: "Opertational Cost", sub: "(Repairs, repair labor, tires, etc.)" },
@@ -1032,12 +1057,12 @@ class CostSegment extends Component {
 
   getSelectedContract() {
     this.setState({ isLoading: true });
-    Send.get("/Contract/Dropdowns/ContractTest/Cached", this.props.appProps).then((res) => {
-      this.setState({ costSegmentDropdowns: res.data[1].options });
+    Send.get("/Contract/Dropdowns/CostSegment/All", this.props.appProps).then((res) => {
+      this.setState({ costSegmentDropdowns: res.data[0].options });
     });
     this.props.setSelectedContractId(this.state.contractSearch);
 
-    Send.get("/Contract/1/RateSheet", this.props.appProps).then((res) => {
+    Send.get("/Contract/" + this.state.contractSearch + "/RateSheet", this.props.appProps).then((res) => {
       this.setState({ contractCostSegments: res.data[0].pop() });
       this.setState({ contractData: res.data[0] });
       this.setState({ isLoading: false });
@@ -1077,29 +1102,29 @@ class CostSegment extends Component {
     } else {
       let unitsObject = this.state.units;
       unitsObject.forEach((c, index) => {
-        unitsObject[index].value = null;
-        unitsObject[index].updatedValue = null;
+        unitsObject[index].value = "";
+        unitsObject[index].updatedValue = "";
         this.setState({ units: unitsObject });
       });
 
       let unitCostObject = this.state.unitCost;
       unitCostObject.forEach((c, index) => {
-        unitCostObject[index].value = null;
-        unitCostObject[index].updatedValue = null;
+        unitCostObject[index].value = "";
+        unitCostObject[index].updatedValue = "";
         this.setState({ unitCost: unitCostObject });
       });
 
       let annualCostObject = this.state.annualCost;
       annualCostObject.forEach((c, index) => {
-        annualCostObject[index].value = null;
-        annualCostObject[index].updatedValue = null;
+        annualCostObject[index].value = "";
+        annualCostObject[index].updatedValue = "";
         this.setState({ annualCost: annualCostObject });
       });
 
       let remarkObject = this.state.remarkAnnualCost;
       remarkObject.forEach((c, index) => {
-        remarkObject[index].value = null;
-        remarkObject[index].updatedValue = null;
+        remarkObject[index].value = "";
+        remarkObject[index].updatedValue = "";
         this.setState({ remarkAnnualCost: remarkObject });
       });
 

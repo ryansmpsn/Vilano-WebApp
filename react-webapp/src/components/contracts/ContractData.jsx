@@ -187,12 +187,12 @@ function ContractData(props) {
               contract={[
                 { columnName: "contract_id", inputType: null, label: null, updatedValue: null, value: null },
                 { columnName: "modified_by", inputType: null, label: null, updatedValue: null, value: null },
-                { columnName: "employee_name", inputType: null, label: "Last Modified By", updatedValue: null, value: null },
+                { columnName: "employee_name", inputType: null, label: "Last Modified By", updatedValue: null, value: "" },
                 { columnName: "is_active", inputType: "select", label: "Active", updatedValue: null, value: 1 },
                 { columnName: "company_id", inputType: null, label: null, updatedValue: null, value: 1 },
                 { columnName: "company_name", inputType: "select", label: "Company", updatedValue: null, value: "Vilano Management Systems, Inc." },
-                { columnName: "external_contract_code", inputType: "text", label: "Contract No.", updatedValue: null, value: "ABC123" },
-                { columnName: "solicitation_number", inputType: "text", label: "Solicitation No.", updatedValue: null, value: null },
+                { columnName: "external_contract_code", inputType: "text", label: "Contract No.", updatedValue: "", value: "" },
+                { columnName: "solicitation_number", inputType: "text", label: "Solicitation No.", updatedValue: "", value: "" },
                 { columnName: "admin_facility_id", inputType: null, label: null, updatedValue: null, value: null },
                 { columnName: "admin_facility_name", inputType: "select", label: "Administration Office", updatedValue: null, value: "unknown" },
                 { columnName: "contract_type_id", inputType: null, label: null, updatedValue: null, value: 1 },
@@ -212,7 +212,7 @@ function ContractData(props) {
                 { columnName: "solicitation_date", inputType: "date", label: "Date of Solicitation", updatedValue: null, value: "2020-01-29" },
                 { columnName: "begin_contract_date", inputType: "date", label: "Begin Contract Term", updatedValue: null, value: "2020-02-27" },
                 { columnName: "end_contract_date", inputType: "date", label: "End Contract Term", updatedValue: null, value: "2020-01-03" },
-                { columnName: "modified_timestamp", inputType: null, label: "Last Modified", updatedValue: null, value: null },
+                { columnName: "modified_timestamp", inputType: null, label: "Last Modified", updatedValue: null, value: "" },
               ]}
               inputRestrictions={contentInputRestrictions}
               show={showModal}

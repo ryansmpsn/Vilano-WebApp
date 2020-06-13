@@ -35,11 +35,9 @@ function UpsertCostSegment(props) {
     console.log(jsonData);
     // console.log(JSON.stringify(jsonData));
 
-    // Send.post("/Contract/ContractRateSheet", jsonData, props.appProps).then((res) => {
-    //   console.log(res);
-
-    //
-    // });
+    Send.post("/Contract/ContractRateSheet", jsonData, props.appProps).then((res) => {
+      console.log(res);
+    });
     setSubmitting(false);
   }
 
@@ -53,7 +51,7 @@ function UpsertCostSegment(props) {
                 c.label !== null && (
                   <MDBCol md="2" key={c.label + index}>
                     <p className="h5 mb-1">{c.label}: </p>
-                    <div className="text-muted">{c.value}</div>
+                    {/* <div className="text-muted">{c.value}</div> */}
                   </MDBCol>
                 )
             )}

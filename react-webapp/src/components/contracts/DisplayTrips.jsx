@@ -85,6 +85,19 @@ function DisplayTrips(props) {
           >
             Hide Trip
           </Button>
+          <Button className=" btn btn-primary" onClick={() => console.log("editing trip")} data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Edit Trip Information
+          </Button>
+          <Button
+            hidden={!showTrip}
+            className=" btn btn-primary"
+            onClick={() => console.log("editing vehicles")}
+            data-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Edit Vehicles
+          </Button>
           <Link onClick={(e) => props.setSelectedTrip("Trip 326")} to={`${props.url}/trip/${props.selectedContractId}`} className="btn btn-primary">
             View Routes
           </Link>
