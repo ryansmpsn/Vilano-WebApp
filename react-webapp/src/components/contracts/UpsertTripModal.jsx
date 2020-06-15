@@ -73,35 +73,37 @@ export default class UpsertTripModal extends React.Component {
     console.log(JSONResponse);
     console.log(JSON.stringify(JSONResponse));
 
-    // hand.state
-    //   .submitAction(this.state.editTrip)
-    //   .then((res) => {
-    //     newTrip = res.data[0];
-    //     newTrip.pop();
-    //     if (newTrip !== null) {
-    //       console.log(newTrip);
-    //       hand.update_contract(newTrip);
-    //       hand.setState({ submitting: false });
-    //     } else {
-    //       hand.setState({ submitting: false });
-    //     }
+    hand.state
+      .submitAction(this.state.editTrip)
+      .then((res) => {
+        console.log(res);
 
-    //     return (
-    //       <MDBNotification
-    //         show
-    //         fade
-    //         icon="envelope"
-    //         iconClassName="green-text"
-    //         title="New Message"
-    //         message="Hello, user! You have a new message."
-    //         text="just now"
-    //       />
-    //     );
-    //   })
-    //   .catch((err) => {
-    //     hand.setState({ submitting: false });
-    //     console.log(err);
-    //   });
+        newTrip = res.data[0];
+        newTrip.pop();
+        if (newTrip !== null) {
+          console.log(newTrip);
+          hand.update_contract(newTrip);
+          hand.setState({ submitting: false });
+        } else {
+          hand.setState({ submitting: false });
+        }
+
+        return (
+          <MDBNotification
+            show
+            fade
+            icon="envelope"
+            iconClassName="green-text"
+            title="New Message"
+            message="Hello, user! You have a new message."
+            text="just now"
+          />
+        );
+      })
+      .catch((err) => {
+        hand.setState({ submitting: false });
+        console.log(err);
+      });
   }
 
   set_variable_id(object, variable_key, value) {

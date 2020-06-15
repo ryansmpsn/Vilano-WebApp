@@ -31,14 +31,20 @@ function UpsertCostSegment(props) {
       { columnName: "vw_contract_rate_sheet_items", value: rateSheetItems },
     ];
     let jsonData = props.contractData;
-    jsonData.push({ columnName: "vw_contract_rate_sheet_segment", inputType: null, label: "Cost Segment", updatedValue: null, value: costSegment });
+    jsonData.push({
+      columnName: "vw_contract_rate_sheet_segment",
+      inputType: null,
+      label: "Cost Segment",
+      updatedValue: null,
+      value: costSegment,
+    });
     console.log(jsonData);
     // console.log(JSON.stringify(jsonData));
 
     Send.post("/Contract/ContractRateSheet", jsonData, props.appProps).then((res) => {
-      console.log(res);
+      // notification for completed add contract succsesfully
+      setSubmitting(false);
     });
-    setSubmitting(false);
   }
 
   return (
@@ -65,11 +71,11 @@ function UpsertCostSegment(props) {
                   (c, index) =>
                     index < 3 && (
                       <MDBInput
-                        key={c.columnName}
-                        label={c.columnName}
-                        id={c.columnName}
-                        value={c.updatedValue === null ? c.value : c.updatedValue}
-                        placeholder={c.columnName}
+                        key={c.label + index}
+                        label={c.label}
+                        id={c.label}
+                        value={c.updatedValue === null ? (c.value === null ? "" : c.value) : c.updatedValue}
+                        placeholder={c.value}
                         icon={c.icon}
                         group
                         type="text"
@@ -93,11 +99,11 @@ function UpsertCostSegment(props) {
                   (c, index) =>
                     index > 2 && (
                       <MDBInput
-                        key={c.columnName}
-                        label={c.columnName}
-                        id={c.columnName}
-                        value={c.updatedValue === null ? c.value : c.updatedValue}
-                        placeholder={c.columnName}
+                        key={c.label + index}
+                        label={c.label}
+                        id={c.label}
+                        value={c.updatedValue === null ? (c.value === null ? "" : c.value) : c.updatedValue}
+                        placeholder={c.value}
                         icon={c.icon}
                         group
                         type="text"
@@ -143,7 +149,9 @@ function UpsertCostSegment(props) {
                         <MDBInput
                           label={props.units[index].label}
                           id={props.units[index].id}
-                          value={props.units[index].updatedValue === null ? props.units[index].value : props.units[index].updatedValue}
+                          value={
+                            props.units[index].updatedValue === null ? props.units[index].value : props.units[index].updatedValue
+                          }
                           placeholder={props.units[index].value}
                           icon={props.units[index].icon}
                           group
@@ -169,7 +177,11 @@ function UpsertCostSegment(props) {
                         <MDBInput
                           label={props.unitCost[index].label}
                           id={props.unitCost[index].id}
-                          value={props.unitCost[index].updatedValue === null ? props.unitCost[index].value : props.unitCost[index].updatedValue}
+                          value={
+                            props.unitCost[index].updatedValue === null
+                              ? props.unitCost[index].value
+                              : props.unitCost[index].updatedValue
+                          }
                           placeholder={props.unitCost[index].value}
                           icon={props.unitCost[index].icon}
                           group
@@ -195,7 +207,11 @@ function UpsertCostSegment(props) {
                         <MDBInput
                           label={props.annualCost[index].label}
                           id={props.annualCost[index].id}
-                          value={props.annualCost[index].updatedValue === null ? props.annualCost[index].value : props.annualCost[index].updatedValue}
+                          value={
+                            props.annualCost[index].updatedValue === null
+                              ? props.annualCost[index].value
+                              : props.annualCost[index].updatedValue
+                          }
                           placeholder={props.annualCost[index].value}
                           icon={props.annualCost[index].icon}
                           group
@@ -223,7 +239,7 @@ function UpsertCostSegment(props) {
         <MDBRow>
           <MDBCol md="12">
             <div className="text-center">
-              {submitting === true ? (
+              {submitting ? (
                 <MDBContainer>
                   <Spinner animation="border" variant="primary" />
                 </MDBContainer>

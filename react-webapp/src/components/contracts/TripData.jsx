@@ -14,8 +14,7 @@ function TripData(props) {
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
 
   function getTripData(x) {
-    props.getTrips("/Contract/1");
-    // + x.value);
+    props.getTrips("/Contract/" + x.value);
   }
   function addTrip() {
     setIsLoading(true);
@@ -151,14 +150,14 @@ function TripData(props) {
                   columnName: "is_active",
                   inputType: "checkbox",
                   label: "Active",
-                  updatedValue: null,
+                  updatedValue: 1,
                   value: 1,
                 },
                 {
                   columnName: "is_peak",
                   inputType: "checkbox",
                   label: "Peak",
-                  updatedValue: null,
+                  updatedValue: 0,
                   value: 0,
                 },
                 {

@@ -987,55 +987,54 @@ class CostSegmentData extends Component {
       remarkAnnualCost: [
         {
           rateItemCode: "dm_21",
-          columnName: "Equipment Realignment, Deadhead & Portal Miles",
+          label: "Equipment Realignment, Deadhead & Portal Miles",
           inputType: "num",
-          label: "Annual Cost",
+          columnName: "annual_cost",
           updatedValue: null,
           value: undefined,
           icon: "dollar-sign",
         },
         {
           rateItemCode: "pm_21",
-          columnName: "Plate Miles",
+          label: "Plate Miles",
           inputType: "num",
-          label: "Annual Cost",
+          columnName: "annual_cost",
           updatedValue: null,
           value: undefined,
           icon: "dollar-sign",
         },
         {
           rateItemCode: "tm_21",
-          columnName: "Total Miles",
+          label: "Total Miles",
           inputType: "num",
-          label: "Annual Cost",
+          columnName: "annual_cost",
           updatedValue: null,
           value: undefined,
           icon: "dollar-sign",
         },
         {
           rateItemCode: "dh_22",
-          columnName:
-            "U.S. DOT required vehicle Inspection, Equipment, Realignment, Deadhead  & Portal Hours ",
+          label: "U.S. DOT required vehicle Inspection, Equipment, Realignment, Deadhead  & Portal Hours ",
           inputType: "num",
-          label: "Annual Cost",
+          columnName: "annual_cost",
           updatedValue: null,
           value: undefined,
           icon: "dollar-sign",
         },
         {
           rateItemCode: "ph_22",
-          columnName: "Plate Hours",
+          label: "Plate Hours",
           inputType: "num",
-          label: "Annual Cost",
+          columnName: "annual_cost",
           updatedValue: null,
           value: undefined,
           icon: "dollar-sign",
         },
         {
           rateItemCode: "th_22",
-          columnName: "Total Hours",
+          label: "Total Hours",
           inputType: "num",
-          label: "Annual Cost",
+          columnName: "annual_cost",
           updatedValue: null,
           value: undefined,
           icon: "dollar-sign",
@@ -1061,17 +1060,12 @@ class CostSegmentData extends Component {
 
   getSelectedContract() {
     this.setState({ isLoading: true });
-    Send.get("/Contract/Dropdowns/CostSegment/All", this.props.appProps).then(
-      (res) => {
-        this.setState({ costSegmentDropdowns: res.data[0].options });
-      }
-    );
+    Send.get("/Contract/Dropdowns/CostSegment/All", this.props.appProps).then((res) => {
+      this.setState({ costSegmentDropdowns: res.data[0].options });
+    });
     this.props.setSelectedContractId(this.state.contractSearch);
 
-    Send.get(
-      "/Contract/" + this.state.contractSearch + "/RateSheet",
-      this.props.appProps
-    ).then((res) => {
+    Send.get("/Contract/" + this.state.contractSearch + "/RateSheet", this.props.appProps).then((res) => {
       this.setState({ contractCostSegments: res.data[0].pop() });
       this.setState({ contractData: res.data[0] });
       this.setState({ isLoading: false });
@@ -1080,11 +1074,18 @@ class CostSegmentData extends Component {
   updateRateSheetData(x) {
     this.setState({ settingData: false });
     this.setState({ selectedCostSegment: x.label });
-    this.state.contractCostSegments.value.map((c, index) =>
-      c[1].value === x.label
-        ? this.setState({ rateSheetData: c[3].value })
-        : this.setState({ rateSheetData: null })
-    );
+
+    for (var i = 0; i < this.state.contractCostSegments.value.length; i++) {
+      if (this.state.contractCostSegments.value[i][1].value === x.label) {
+        this.setState({ rateSheetData: this.state.contractCostSegments.value[i][3].value });
+        break;
+      } else {
+        this.setState({ rateSheetData: null });
+      }
+    }
+    // this.state.contractCostSegments.value.map((c, index) =>
+    //   c[1].value === x.label ? this.setState({ rateSheetData: c[3].value }) : this.setState({ rateSheetData: null })
+    // );
   }
 
   setCostSegmentdata() {
@@ -1092,44 +1093,28 @@ class CostSegmentData extends Component {
       let unitsObject = this.state.units;
       unitsObject.forEach(
         (c, index) =>
-          this.state.rateSheetData.map(
-            (x) =>
-              c.rateItemCode === x[2].value &&
-              (unitsObject[index].value = x[4].value)
-          ),
+          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitsObject[index].value = x[4].value)),
         this.setState({ units: unitsObject })
       );
 
       let unitCostObject = this.state.unitCost;
       unitCostObject.forEach(
         (c, index) =>
-          this.state.rateSheetData.map(
-            (x) =>
-              c.rateItemCode === x[2].value &&
-              (unitCostObject[index].value = x[5].value)
-          ),
+          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitCostObject[index].value = x[5].value)),
         this.setState({ unitCost: unitCostObject })
       );
 
       let annualCostObject = this.state.annualCost;
       annualCostObject.forEach(
         (c, index) =>
-          this.state.rateSheetData.map(
-            (x) =>
-              c.rateItemCode === x[2].value &&
-              (annualCostObject[index].value = x[6].value)
-          ),
+          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (annualCostObject[index].value = x[6].value)),
         this.setState({ annualCost: annualCostObject })
       );
 
       let remarkObject = this.state.remarkAnnualCost;
       remarkObject.forEach(
         (c, index) =>
-          this.state.rateSheetData.map(
-            (x) =>
-              c.rateItemCode === x[2].value &&
-              (remarkObject[index].value = x[6].value)
-          ),
+          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (remarkObject[index].value = x[6].value)),
         this.setState({ remarkAnnualCost: remarkObject })
       );
     } else {
@@ -1160,8 +1145,6 @@ class CostSegmentData extends Component {
         remarkObject[index].updatedValue = "";
         this.setState({ remarkAnnualCost: remarkObject });
       });
-
-      console.log(this.state.units);
     }
     this.setState({ settingData: true });
   }
@@ -1186,39 +1169,37 @@ class CostSegmentData extends Component {
               <Spinner animation="border" variant="primary" />
             </MDBContainer>
           ) : (
-            <h4>
-              <Button type="button" onClick={this.getSelectedContract}>
-                Search
-              </Button>
-            </h4>
-          )}
-
-          {this.state.costSegmentDropdowns !== null && (
             <>
-              <Select
-                autoFocus
-                options={this.state.costSegmentDropdowns}
-                placeholder={"Select a Cost Segment to Update"}
-                onChange={(x) => {
-                  this.updateRateSheetData(x);
-                }}
-                isDisabled={this.state.isLoading}
-              />
-
               <h4>
-                <Button type="button" onClick={this.setCostSegmentdata}>
-                  Select Cost Segment
+                <Button type="button" onClick={this.getSelectedContract}>
+                  Search
                 </Button>
               </h4>
+              {this.state.costSegmentDropdowns !== null && (
+                <>
+                  <Select
+                    autoFocus
+                    options={this.state.costSegmentDropdowns}
+                    placeholder={"Select a Cost Segment to Update"}
+                    onChange={(x) => {
+                      this.updateRateSheetData(x);
+                    }}
+                    isDisabled={this.state.isLoading}
+                  />
+                  <h4>
+                    <Button type="button" onClick={this.setCostSegmentdata}>
+                      Select Cost Segment
+                    </Button>
+                  </h4>
+                </>
+              )}
             </>
           )}
         </MDBCardHeader>
 
         {!this.state.settingData ? (
           <MDBCardBody>
-            <MDBContainer>
-              Please select a contract to add or update cost segment
-            </MDBContainer>
+            <MDBContainer>Please select a contract to add or update cost segment</MDBContainer>
           </MDBCardBody>
         ) : (
           <UpsertCostSegment
