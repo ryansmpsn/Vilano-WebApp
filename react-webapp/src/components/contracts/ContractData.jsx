@@ -38,13 +38,13 @@ function ContractData(props) {
       .showAll()
       .then((res) => {
         setContractData(res.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
     props.getSelectOptions().then((res) => {
       setContentInputRestrictions(res.data);
-      setIsLoading(false);
       setSearching(false);
       setGetAll(false);
     });
@@ -162,24 +162,25 @@ function ContractData(props) {
             : !isLoading && (
                 <div className="contract">
                   <Row key="topRow" className="show-grid">
-                    {contractData.map((c, index) => (
-                      <ContractCards
-                        url={props.url}
-                        getTrips={props.getTrips}
-                        setSelectedContract={props.setSelectedContract}
-                        setSelectedContractId={props.setSelectedContractId}
-                        modalName={props.modalName}
-                        key={index + "contract"}
-                        appProps={props.appProps}
-                        inputRestrictions={contentInputRestrictions}
-                        Contract={c}
-                        eventKeyIndex={index}
-                        submitAction={(editContract) => {
-                          return props.contractEditSubmitAction(editContract);
-                        }}
-                        accessLevel={props.accessLevel}
-                      />
-                    ))}
+                    {contractData !== [] &&
+                      contractData.map((c, index) => (
+                        <ContractCards
+                          url={props.url}
+                          getTrips={props.getTrips}
+                          setSelectedContract={props.setSelectedContract}
+                          setSelectedContractId={props.setSelectedContractId}
+                          modalName={props.modalName}
+                          key={index + "contract"}
+                          appProps={props.appProps}
+                          inputRestrictions={contentInputRestrictions}
+                          Contract={c}
+                          eventKeyIndex={index}
+                          submitAction={(editContract) => {
+                            return props.contractEditSubmitAction(editContract);
+                          }}
+                          accessLevel={props.accessLevel}
+                        />
+                      ))}
                   </Row>
                 </div>
               )}

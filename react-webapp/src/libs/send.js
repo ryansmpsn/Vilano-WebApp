@@ -8,7 +8,7 @@ const Send = new (class send extends React.Component {
     this.state = {
       localTestURL: "http://localhost:3888",
       liveTestURL: "https://centcom-testing-dot-pfsi-centcom.uc.r.appspot.com",
-      liveProductionURL: "https://centcom-dot-pfsi-centcom.uc.r.appspot.com/",
+      liveProductionURL: "https://centcom-dot-pfsi-centcom.appspot.com",
       URL: "",
       SessionID: "None",
       IDSession: "None",
@@ -16,7 +16,7 @@ const Send = new (class send extends React.Component {
     if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
       this.state.URL = this.state.localTestURL;
     } else {
-      this.state.URL = this.state.liveProductionURL;
+      this.state.URL = this.state.liveTestURL;
     }
     axios.defaults.headers.common["our_session"] = "";
   }
