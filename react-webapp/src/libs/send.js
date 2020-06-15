@@ -7,7 +7,7 @@ const Send = new (class send extends React.Component {
     this.props = props;
     this.state = {
       testURL: "http://localhost:3888",
-      liveURL: "https://centcom-dot-pfsi-centcom.appspot.com",
+      liveURL: "https://centcom-testing-dot-pfsi-centcom.uc.r.appspot.com/ ",
       URL: "",
       SessionID: "None",
       IDSession: "None",
