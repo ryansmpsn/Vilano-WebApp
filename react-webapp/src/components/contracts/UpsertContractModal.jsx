@@ -92,7 +92,17 @@ export default class UpsertContractModal extends React.Component {
           hand.setState({ submitting: false });
         }
 
-        return <MDBNotification show fade icon="envelope" iconClassName="green-text" title="New Message" message="Hello, user! You have a new message." text="just now" />;
+        return (
+          <MDBNotification
+            show
+            fade
+            icon="envelope"
+            iconClassName="green-text"
+            title="New Message"
+            message="Hello, user! You have a new message."
+            text="just now"
+          />
+        );
       })
       .catch((err) => {
         hand.setState({ submitting: false });
@@ -132,7 +142,12 @@ export default class UpsertContractModal extends React.Component {
                         ": " +
                         (item.inputType !== "date"
                           ? item.value
-                          : new Date(item.value).getUTCMonth() + 1 + "/" + new Date(item.value).getUTCDate() + "/" + new Date(item.value).getUTCFullYear())}
+                          : new Date(item.value).getUTCMonth() +
+                            1 +
+                            "/" +
+                            new Date(item.value).getUTCDate() +
+                            "/" +
+                            new Date(item.value).getUTCFullYear())}
                     </FormLabel>
                     {/* Make this formcontrol tie to values for editing-- Done I think?  */}
                     {this.state.Permissions === "Write" &&
@@ -172,7 +187,8 @@ export default class UpsertContractModal extends React.Component {
                               onChange={(e) => {
                                 var object = this.state.editContract;
                                 var date = new Date(e);
-                                var return_date = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+                                var return_date =
+                                  date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
                                 object[index].updatedValue = return_date;
                                 this.setState({ editContract: object });
                                 this.setState({ date: date });
@@ -188,8 +204,22 @@ export default class UpsertContractModal extends React.Component {
                                         new Date(item.updatedValue).getUTCFullYear()
                                     )
                                   : item.value !== null
-                                  ? new Date(new Date(item.value).getUTCMonth() + 1 + "/" + new Date(item.value).getUTCDate() + "/" + new Date(item.value).getUTCFullYear())
-                                  : new Date(new Date().getUTCMonth() + 1 + "/" + new Date().getUTCDate() + "/" + new Date().getUTCFullYear())
+                                  ? new Date(
+                                      new Date(item.value).getUTCMonth() +
+                                        1 +
+                                        "/" +
+                                        new Date(item.value).getUTCDate() +
+                                        "/" +
+                                        new Date(item.value).getUTCFullYear()
+                                    )
+                                  : new Date(
+                                      new Date().getUTCMonth() +
+                                        1 +
+                                        "/" +
+                                        new Date().getUTCDate() +
+                                        "/" +
+                                        new Date().getUTCFullYear()
+                                    )
                               }
                             />
                           </>

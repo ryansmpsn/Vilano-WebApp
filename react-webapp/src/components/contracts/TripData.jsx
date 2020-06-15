@@ -1,60 +1,238 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer } from "mdbreact";
-import { Spinner, Row, Container, Jumbotron } from "react-bootstrap";
-import DisplayTrips from "./DisplayTrips";
+import { Button, Row, Container, Jumbotron, Spinner } from "react-bootstrap";
+import Select from "react-select";
+import ViewTrips from "./ViewTrips";
+import UpsertTripModal from "./UpsertTripModal";
+import Send from "../../libs/send";
 
 function TripData(props) {
   let { contractId } = useParams();
-  useEffect(() => {
-    onLoad();
-  }, []);
+  const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
 
-  const onLoad = useCallback(() => {
-    props.getTrips("/Contract/" + contractId);
-  }, [contractId, props]);
+  function getTripData(x) {
+    props.getTrips("/Contract/1");
+    // + x.value);
+  }
+  function addTrip() {
+    setIsLoading(true);
+    Send.get("/Contract/Dropdowns/ContractTrip/Cached", props).then((res) => {
+      setContentInputRestrictions(res.data);
+      setIsLoading(false);
+      openModal();
+    });
+  }
 
+  function openModal() {
+    setShowModal(true);
+    window.location.hash = "edit";
+  }
+
+  function closeModal() {
+    window.history.replaceState(null, null, " ");
+    setShowModal(false);
+  }
   return (
     <MDBCard className="m-2">
       <MDBCardHeader>
         <h4>Contract Selected: {props.selectedContract}</h4>
-        {/* <h4>Contract ID from State:</h4>
-        {props.selectedContractId}
-        <h4>Contract ID from Params:</h4>
-        {contractId}
-        <h4>Trip Selected: {props.selectedTrip}</h4> */}
-        {/* 
-        TODO
-        Select new contract to view Trips
-
-<Button
-          onClick={(e) => {
-            props.getTrips("/Contract/" + contractId);
-          }}
-        >
-          Get Trip
-        </Button>
-
-        */}
+        <h4>Trip Selected: {props.selectedTrip}</h4>
       </MDBCardHeader>
       <MDBCardBody>
         <Jumbotron>
-          <Container className="container-sm pl-5 pr-5 pt-2"> Search Select will go here -> </Container>
-          <hr />
-
-          {props.contractProfile === null ? (
-            <MDBContainer>
+          <Container className="container-sm pl-5 pr-5 pt-2">
+            <Select
+              autoFocus
+              options={props.selectOptions}
+              placeholder={"Select a Contract to View Trips"}
+              onChange={(x) => {
+                props.setSelectedContract(x.label);
+                props.setSelectedContractId(x.value);
+                getTripData(x);
+              }}
+              isLoading={props.isSearching | isLoading}
+              isDisabled={props.isSearching | isLoading}
+            />
+            {isLoading ? (
               <Spinner animation="border" variant="primary" />
-            </MDBContainer>
+            ) : (
+              <Button onClick={addTrip} disabled={(props.contractProfile === null) | props.isSearching}>
+                Add Trip
+              </Button>
+            )}
+          </Container>
+          <hr />
+          {props.isSearching ? (
+            <Spinner animation="border" variant="primary" />
+          ) : props.contractProfile === null ? (
+            <MDBContainer>Select a Contract to Display Trips</MDBContainer>
           ) : (
             <div className="trip">
               <Row key="topRow" className="show-grid">
-                {console.log(props.contractProfile)}
                 {props.contractProfile[28].value.map((c, index) => (
-                  <DisplayTrips key={index} tripData={c} />
+                  <ViewTrips key={index} tripData={c} />
                 ))}
               </Row>
             </div>
+          )}
+          {!isLoading && (
+            <UpsertTripModal
+              modalName={"Create New Trip"}
+              inputRestrictions={contentInputRestrictions}
+              show={showModal}
+              closeModal={closeModal}
+              accessLevel={props.accessLevel}
+              appProps={props.appProps}
+              contractProfile={props.contractProfile}
+              submitAction={(editTrip) => {
+                return props.tripEditSubmitAction(editTrip);
+              }}
+              trip={[
+                {
+                  columnName: "contract_id",
+                  inputType: null,
+                  label: null,
+                  updatedValue: null,
+                  value: props.selectedContractId,
+                },
+                {
+                  columnName: "external_contract_code",
+                  inputType: null,
+                  label: "Contract Number",
+                  updatedValue: null,
+                  value: props.selectedContract,
+                },
+                {
+                  columnName: "contract_trip_id",
+                  inputType: null,
+                  label: null,
+                  updatedValue: null,
+                  value: null,
+                },
+                {
+                  columnName: "trip_number",
+                  inputType: "num",
+                  label: "Trip Number",
+                  updatedValue: null,
+                  value: null,
+                },
+                {
+                  columnName: "cost_segment_id",
+                  inputType: null,
+                  label: null,
+                  updatedValue: null,
+                  value: null,
+                },
+                {
+                  columnName: "cost_segment",
+                  inputType: "select",
+                  label: "Cost Segment",
+                  updatedValue: null,
+                  value: null,
+                },
+                {
+                  columnName: "frequency_id",
+                  inputType: null,
+                  label: null,
+                  updatedValue: null,
+                  value: null,
+                },
+                {
+                  columnName: "frequency",
+                  inputType: "select",
+                  label: "Frequency",
+                  updatedValue: null,
+                  value: null,
+                },
+                {
+                  columnName: "is_active",
+                  inputType: "checkbox",
+                  label: "Active",
+                  updatedValue: null,
+                  value: 1,
+                },
+                {
+                  columnName: "is_peak",
+                  inputType: "checkbox",
+                  label: "Peak",
+                  updatedValue: null,
+                  value: 0,
+                },
+                {
+                  columnName: "status_id",
+                  inputType: null,
+                  label: null,
+                  updatedValue: null,
+                  value: null,
+                },
+                {
+                  columnName: "contract_trip_status",
+                  inputType: "select",
+                  label: "Trip Status",
+                  updatedValue: null,
+                  value: null,
+                },
+                {
+                  columnName: "start_date",
+                  inputType: "date",
+                  label: "Start Date",
+                  updatedValue: null,
+                  value: null,
+                },
+                {
+                  columnName: "end_date",
+                  inputType: "date",
+                  label: "End Date",
+                  updatedValue: null,
+                  value: null,
+                },
+                {
+                  columnName: "mileage",
+                  inputType: "num",
+                  label: "Miles",
+                  updatedValue: null,
+                  value: "",
+                },
+                {
+                  columnName: "hours",
+                  inputType: "num",
+                  label: "Hours",
+                  updatedValue: null,
+                  value: "",
+                },
+                {
+                  columnName: "modified_by",
+                  inputType: null,
+                  label: null,
+                  updatedValue: null,
+                  value: null,
+                },
+                {
+                  columnName: "employee_name",
+                  inputType: null,
+                  label: "Last Modified By",
+                  updatedValue: null,
+                  value: null,
+                },
+                {
+                  columnName: "last_modified",
+                  inputType: null,
+                  label: "Last Modified",
+                  updatedValue: null,
+                  value: null,
+                },
+                {
+                  columnName: "vw_contract_trip_vehicles",
+                  inputType: null,
+                  label: "Contract Trip Vehicles",
+                  updatedValue: null,
+                  value: null,
+                },
+              ]}
+            />
           )}
         </Jumbotron>
       </MDBCardBody>

@@ -46,7 +46,12 @@ export default class InputFormControl extends React.Component {
           </Button>
         )}
         {this.state.inputRestrictions !== null && (
-          <Select components={{ MenuList }} options={this.state.inputRestrictions.options} filterOption={createFilter({ ignoreAccents: false })} onChange={this.state.onChange} />
+          <Select
+            components={{ MenuList }}
+            options={this.state.inputRestrictions.options}
+            filterOption={createFilter({ ignoreAccents: false })}
+            onChange={this.state.onChange}
+          />
         )}
       </div>
     );

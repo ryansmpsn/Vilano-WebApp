@@ -63,7 +63,9 @@ function DisplayCostData(props) {
                 </div>
               )
           )}
-          {costData.map((c, index) => typeof c.value === "object" && c.value !== null && c.value.map((t, index) => console.log(t)))}
+          {costData.map(
+            (c, index) => typeof c.value === "object" && c.value !== null && c.value.map((t, index) => console.log(t))
+          )}
 
           <Button
             hidden={showCost}
@@ -85,7 +87,11 @@ function DisplayCostData(props) {
           >
             Hide Cost
           </Button>
-          <Link onClick={(e) => props.setSelectedCost("Cost 326")} to={`${props.url}/cost/${props.selectedContractId}`} className="btn btn-primary">
+          <Link
+            onClick={(e) => props.setSelectedCost("Cost 326")}
+            to={`${props.url}/cost/${props.selectedContractId}`}
+            className="btn btn-primary"
+          >
             View Routes
           </Link>
         </Card>

@@ -5,7 +5,7 @@ import { Button, Spinner } from "react-bootstrap";
 import Send from "../../libs/send";
 import UpsertCostSegment from "./UpsertCostSegment";
 
-class CostSegment extends Component {
+class CostSegmentData extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -952,7 +952,10 @@ class CostSegment extends Component {
         { label: "Vehicle Cost", sub: null },
         { label: "Vehicle Cost", sub: "Motor Vehicles" },
         { label: "Vehicle Cost", sub: "Trailers" },
-        { label: "Opertational Cost", sub: "(Repairs, repair labor, tires, etc.)" },
+        {
+          label: "Opertational Cost",
+          sub: "(Repairs, repair labor, tires, etc.)",
+        },
         { label: "Taxes", sub: null },
         { label: "Vehicle Registration", sub: null },
         { label: "Miscellaneous", sub: null },
@@ -1011,7 +1014,8 @@ class CostSegment extends Component {
         },
         {
           rateItemCode: "dh_22",
-          columnName: "U.S. DOT required vehicle Inspection, Equipment, Realignment, Deadhead  & Portal Hours ",
+          columnName:
+            "U.S. DOT required vehicle Inspection, Equipment, Realignment, Deadhead  & Portal Hours ",
           inputType: "num",
           label: "Annual Cost",
           updatedValue: null,
@@ -1057,12 +1061,17 @@ class CostSegment extends Component {
 
   getSelectedContract() {
     this.setState({ isLoading: true });
-    Send.get("/Contract/Dropdowns/CostSegment/All", this.props.appProps).then((res) => {
-      this.setState({ costSegmentDropdowns: res.data[0].options });
-    });
+    Send.get("/Contract/Dropdowns/CostSegment/All", this.props.appProps).then(
+      (res) => {
+        this.setState({ costSegmentDropdowns: res.data[0].options });
+      }
+    );
     this.props.setSelectedContractId(this.state.contractSearch);
 
-    Send.get("/Contract/" + this.state.contractSearch + "/RateSheet", this.props.appProps).then((res) => {
+    Send.get(
+      "/Contract/" + this.state.contractSearch + "/RateSheet",
+      this.props.appProps
+    ).then((res) => {
       this.setState({ contractCostSegments: res.data[0].pop() });
       this.setState({ contractData: res.data[0] });
       this.setState({ isLoading: false });
@@ -1071,32 +1080,56 @@ class CostSegment extends Component {
   updateRateSheetData(x) {
     this.setState({ settingData: false });
     this.setState({ selectedCostSegment: x.label });
-    this.state.contractCostSegments.value.map((c, index) => (c[1].value === x.label ? this.setState({ rateSheetData: c[3].value }) : this.setState({ rateSheetData: null })));
+    this.state.contractCostSegments.value.map((c, index) =>
+      c[1].value === x.label
+        ? this.setState({ rateSheetData: c[3].value })
+        : this.setState({ rateSheetData: null })
+    );
   }
 
   setCostSegmentdata() {
     if (this.state.rateSheetData !== null) {
       let unitsObject = this.state.units;
       unitsObject.forEach(
-        (c, index) => this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitsObject[index].value = x[4].value)),
+        (c, index) =>
+          this.state.rateSheetData.map(
+            (x) =>
+              c.rateItemCode === x[2].value &&
+              (unitsObject[index].value = x[4].value)
+          ),
         this.setState({ units: unitsObject })
       );
 
       let unitCostObject = this.state.unitCost;
       unitCostObject.forEach(
-        (c, index) => this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitCostObject[index].value = x[5].value)),
+        (c, index) =>
+          this.state.rateSheetData.map(
+            (x) =>
+              c.rateItemCode === x[2].value &&
+              (unitCostObject[index].value = x[5].value)
+          ),
         this.setState({ unitCost: unitCostObject })
       );
 
       let annualCostObject = this.state.annualCost;
       annualCostObject.forEach(
-        (c, index) => this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (annualCostObject[index].value = x[6].value)),
+        (c, index) =>
+          this.state.rateSheetData.map(
+            (x) =>
+              c.rateItemCode === x[2].value &&
+              (annualCostObject[index].value = x[6].value)
+          ),
         this.setState({ annualCost: annualCostObject })
       );
 
       let remarkObject = this.state.remarkAnnualCost;
       remarkObject.forEach(
-        (c, index) => this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (remarkObject[index].value = x[6].value)),
+        (c, index) =>
+          this.state.rateSheetData.map(
+            (x) =>
+              c.rateItemCode === x[2].value &&
+              (remarkObject[index].value = x[6].value)
+          ),
         this.setState({ remarkAnnualCost: remarkObject })
       );
     } else {
@@ -1183,7 +1216,9 @@ class CostSegment extends Component {
 
         {!this.state.settingData ? (
           <MDBCardBody>
-            <MDBContainer>Please select a contract to add or update cost segment</MDBContainer>
+            <MDBContainer>
+              Please select a contract to add or update cost segment
+            </MDBContainer>
           </MDBCardBody>
         ) : (
           <UpsertCostSegment
@@ -1207,4 +1242,4 @@ class CostSegment extends Component {
   }
 }
 
-export default CostSegment;
+export default CostSegmentData;

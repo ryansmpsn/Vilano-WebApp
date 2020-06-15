@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MDBCard, MDBCardHeader, MDBCardBody } from "mdbreact";
 import { Row, FormGroup, Button, Container, Spinner, Jumbotron } from "react-bootstrap";
 import ContractCards from "./ContractCards";
@@ -15,10 +15,6 @@ function ContractData(props) {
   const [contractSearch, setContractSearch] = useState(props.contractSearch);
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
   const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    //Can put stuff that needs to happen on load here.
-  }, []);
 
   function search() {
     setTableView(false);
@@ -53,7 +49,7 @@ function ContractData(props) {
       setGetAll(false);
     });
   }
-  function add() {
+  function addContract() {
     setIsLoading(true);
     setSearching(true);
     props.getSelectOptions().then((res) => {
@@ -129,7 +125,6 @@ function ContractData(props) {
 
               {json_array(contractSearch).map((item, index) => (
                 /*ControlID must match useFormFields value*/
-
                 <FormGroup key={"ContractSearch" + index} controlId={item[0]}></FormGroup>
               ))}
 
@@ -148,7 +143,7 @@ function ContractData(props) {
                   >
                     Show All
                   </Button>
-                  <Button onClick={add}>Add Contract</Button>
+                  <Button onClick={addContract}>Add Contract</Button>
                 </>
               )}
             </form>
@@ -156,7 +151,13 @@ function ContractData(props) {
           <hr />
           {tableView
             ? !isLoading && (
-                <ContractTable url={props.url} setSelectedContract={props.setSelectedContract} contractData={contractData} setSelectedContractId={props.setSelectedContractId} />
+                <ContractTable
+                  url={props.url}
+                  setSelectedContract={props.setSelectedContract}
+                  contractData={contractData}
+                  setSelectedContractId={props.setSelectedContractId}
+                  getTrips={props.getTrips}
+                />
               )
             : !isLoading && (
                 <div className="contract">
@@ -164,6 +165,7 @@ function ContractData(props) {
                     {contractData.map((c, index) => (
                       <ContractCards
                         url={props.url}
+                        getTrips={props.getTrips}
                         setSelectedContract={props.setSelectedContract}
                         setSelectedContractId={props.setSelectedContractId}
                         modalName={props.modalName}
@@ -190,28 +192,106 @@ function ContractData(props) {
                 { columnName: "employee_name", inputType: null, label: "Last Modified By", updatedValue: null, value: "" },
                 { columnName: "is_active", inputType: "select", label: "Active", updatedValue: null, value: 1 },
                 { columnName: "company_id", inputType: null, label: null, updatedValue: null, value: 1 },
-                { columnName: "company_name", inputType: "select", label: "Company", updatedValue: null, value: "Vilano Management Systems, Inc." },
+                {
+                  columnName: "company_name",
+                  inputType: "select",
+                  label: "Company",
+                  updatedValue: null,
+                  value: "Vilano Management Systems, Inc.",
+                },
                 { columnName: "external_contract_code", inputType: "text", label: "Contract No.", updatedValue: "", value: "" },
                 { columnName: "solicitation_number", inputType: "text", label: "Solicitation No.", updatedValue: "", value: "" },
                 { columnName: "admin_facility_id", inputType: null, label: null, updatedValue: null, value: null },
-                { columnName: "admin_facility_name", inputType: "select", label: "Administration Office", updatedValue: null, value: "unknown" },
+                {
+                  columnName: "admin_facility_name",
+                  inputType: "select",
+                  label: "Administration Office",
+                  updatedValue: null,
+                  value: "unknown",
+                },
                 { columnName: "contract_type_id", inputType: null, label: null, updatedValue: null, value: 1 },
-                { columnName: "contract_type_code", inputType: "select", label: "Contract Type Code", updatedValue: null, value: "HCR" },
-                { columnName: "contract_type_name", inputType: null, label: "Contract Type Name", updatedValue: null, value: "Highway Contract Route" },
+                {
+                  columnName: "contract_type_code",
+                  inputType: "select",
+                  label: "Contract Type Code",
+                  updatedValue: null,
+                  value: "HCR",
+                },
+                {
+                  columnName: "contract_type_name",
+                  inputType: null,
+                  label: "Contract Type Name",
+                  updatedValue: null,
+                  value: "Highway Contract Route",
+                },
                 { columnName: "contract_division_id", inputType: null, label: null, updatedValue: null, value: 1 },
-                { columnName: "contract_division_code", inputType: "select", label: "Division Code", updatedValue: null, value: "LDT" },
-                { columnName: "contract_division_name", inputType: null, label: "Division Name", updatedValue: null, value: "Local Distribution Transportation" },
+                {
+                  columnName: "contract_division_code",
+                  inputType: "select",
+                  label: "Division Code",
+                  updatedValue: null,
+                  value: "LDT",
+                },
+                {
+                  columnName: "contract_division_name",
+                  inputType: null,
+                  label: "Division Name",
+                  updatedValue: null,
+                  value: "Local Distribution Transportation",
+                },
                 { columnName: "status_id", inputType: null, label: null, updatedValue: null, value: 12 },
-                { columnName: "contract_status", inputType: "select", label: "Contract Status", updatedValue: null, value: "Active" },
+                {
+                  columnName: "contract_status",
+                  inputType: "select",
+                  label: "Contract Status",
+                  updatedValue: null,
+                  value: "Active",
+                },
                 { columnName: "origin_facility_id", inputType: null, label: null, updatedValue: null, value: null },
-                { columnName: "origin_facility_name", inputType: "select", label: "Origination", updatedValue: null, value: "unknown" },
+                {
+                  columnName: "origin_facility_name",
+                  inputType: "select",
+                  label: "Origination",
+                  updatedValue: null,
+                  value: "unknown",
+                },
                 { columnName: "origin_state_name", inputType: null, label: "Origin State", updatedValue: null, value: "unknown" },
                 { columnName: "destination_facility_id", inputType: null, label: null, updatedValue: null, value: null },
-                { columnName: "destination_facility_name", inputType: "select", label: "Destination", updatedValue: null, value: "unknown" },
-                { columnName: "destination_state_name", inputType: null, label: "Destination State", updatedValue: null, value: "unknown" },
-                { columnName: "solicitation_date", inputType: "date", label: "Date of Solicitation", updatedValue: null, value: "2020-01-29" },
-                { columnName: "begin_contract_date", inputType: "date", label: "Begin Contract Term", updatedValue: null, value: "2020-02-27" },
-                { columnName: "end_contract_date", inputType: "date", label: "End Contract Term", updatedValue: null, value: "2020-01-03" },
+                {
+                  columnName: "destination_facility_name",
+                  inputType: "select",
+                  label: "Destination",
+                  updatedValue: null,
+                  value: "unknown",
+                },
+                {
+                  columnName: "destination_state_name",
+                  inputType: null,
+                  label: "Destination State",
+                  updatedValue: null,
+                  value: "unknown",
+                },
+                {
+                  columnName: "solicitation_date",
+                  inputType: "date",
+                  label: "Date of Solicitation",
+                  updatedValue: null,
+                  value: "2020-01-29",
+                },
+                {
+                  columnName: "begin_contract_date",
+                  inputType: "date",
+                  label: "Begin Contract Term",
+                  updatedValue: null,
+                  value: "2020-02-27",
+                },
+                {
+                  columnName: "end_contract_date",
+                  inputType: "date",
+                  label: "End Contract Term",
+                  updatedValue: null,
+                  value: "2020-01-03",
+                },
                 { columnName: "modified_timestamp", inputType: null, label: "Last Modified", updatedValue: null, value: "" },
               ]}
               inputRestrictions={contentInputRestrictions}

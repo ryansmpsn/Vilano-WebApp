@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import { MDBContainer } from "mdbreact";
+import UpsertVehicleModal from "./UpsertVehicleModal";
 
-function DisplayTrips(props) {
+function ViewTrips(props) {
   const [tripData, setTripData] = useState([]);
   const [showTrip, setShowTrip] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     onLoad();
@@ -14,7 +16,16 @@ function DisplayTrips(props) {
   function onLoad() {
     setTripData(props.tripData);
   }
+  function openModal() {
+    setShowModal(true);
+    window.location.hash = "edit";
+    console.log(window.location.hash);
+  }
 
+  function closeModal() {
+    window.history.replaceState(null, null, " ");
+    setShowModal(false);
+  }
   var cardClass = "card border-primary mb-3" + (showTrip ? "cardContract" : null);
 
   return (
@@ -63,7 +74,9 @@ function DisplayTrips(props) {
                 </div>
               )
           )}
-          {tripData.map((c, index) => typeof c.value === "object" && c.value !== null && c.value.map((t, index) => console.log(t)))}
+          {tripData.map(
+            (c, index) => typeof c.value === "object" && c.value !== null && c.value.map((t, index) => console.log(t))
+          )}
 
           <Button
             hidden={showTrip}
@@ -85,26 +98,37 @@ function DisplayTrips(props) {
           >
             Hide Trip
           </Button>
-          <Button className=" btn btn-primary" onClick={() => console.log("editing trip")} data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          <Button
+            className=" btn btn-primary"
+            onClick={() => console.log("editing trip")}
+            data-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
             Edit Trip Information
           </Button>
           <Button
             hidden={!showTrip}
             className=" btn btn-primary"
-            onClick={() => console.log("editing vehicles")}
+            onClick={openModal}
             data-target="#collapseExample"
             aria-expanded="false"
             aria-controls="collapseExample"
           >
             Edit Vehicles
           </Button>
-          <Link onClick={(e) => props.setSelectedTrip("Trip 326")} to={`${props.url}/trip/${props.selectedContractId}`} className="btn btn-primary">
+          <Link
+            onClick={(e) => props.setSelectedTrip("Trip 326")}
+            to={`${props.url}/trip/${props.selectedContractId}`}
+            className="btn btn-primary"
+          >
             View Routes
           </Link>
         </Card>
+        <UpsertVehicleModal modalName={"Edit Vehicles"} show={showModal} closeModal={closeModal} />
       </MDBContainer>
     </div>
   );
 }
 
-export default DisplayTrips;
+export default ViewTrips;

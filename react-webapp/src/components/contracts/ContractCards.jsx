@@ -80,6 +80,7 @@ function ContractCards(props) {
               onClick={(e) => {
                 props.setSelectedContract(contract[6].value);
                 props.setSelectedContractId(contract[0].value);
+                props.getTrips("/Contract/" + contract[0].value);
               }}
               to={`${props.url}/${contract[0].value}`}
               className="btn btn-primary"

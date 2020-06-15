@@ -16,8 +16,9 @@ class ContractDashboard extends Component {
       selectOptions: [],
       selectedContractId: "null",
       selectedContract: "",
-      selectedTrip: "null",
+      selectedTrip: "",
       contractProfile: null,
+      isSearching: false,
     };
   }
 
@@ -38,14 +39,20 @@ class ContractDashboard extends Component {
   show_all() {
     return Send.post("/Contract/Search", "", this.props);
   }
+
   getTrips = (e) => {
+    this.setState({ isSearching: true });
     return Send.get(e, this.props).then((res) => {
       this.setState({ contractProfile: res.data[0] });
+      this.setState({ isSearching: false });
     });
   };
 
   contractEditSubmitAction = (editContract) => {
     return Send.post("/Contract/Contract", editContract, this.props);
+  };
+  tripEditSubmitAction = (editTrip) => {
+    return Send.post("/Contract/ContractTrip", editTrip, this.props);
   };
   getSelectOptions() {
     return Send.get("/Contract/Dropdowns/Contract/All", this.props);
@@ -148,10 +155,12 @@ class ContractDashboard extends Component {
           selectedContractId={this.state.selectedContractId}
           selectOptions={this.state.selectOptions}
           contractID
+          isSearching={this.state.isSearching}
           contractProfile={this.state.contractProfile}
           modalName="Edit Contract"
           accessLevel={this.state.accessLevel}
           contractEditSubmitAction={this.contractEditSubmitAction}
+          tripEditSubmitAction={this.tripEditSubmitAction}
           getSelectOptions={() => {
             return this.getSelectOptions();
           }}
