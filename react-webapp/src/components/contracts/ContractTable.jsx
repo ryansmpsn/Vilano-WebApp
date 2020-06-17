@@ -31,10 +31,11 @@ function ContractTable(props) {
           props.setSelectedContract(contractData[index][6].value);
           props.setSelectedContractId(contractData[index][0].value);
         }}
-        to={`${props.url}/costdata`}
+        to="/contracts/costsegment"
+        // to={`${props.url}/costdata`}
         className="btn btn-primary btn-sm"
       >
-        Cost Data
+        Cost Segments
       </Link>
     ),
   }));

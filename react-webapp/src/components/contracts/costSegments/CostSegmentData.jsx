@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Select from "react-select";
 import { MDBCard, MDBCardHeader, MDBContainer, MDBCardBody } from "mdbreact";
 import { Button, Spinner } from "react-bootstrap";
-import Send from "../../libs/send";
+import Send from "../../../libs/send";
 import UpsertCostSegment from "./UpsertCostSegment";
 
 class CostSegmentData extends Component {
@@ -1083,9 +1083,6 @@ class CostSegmentData extends Component {
         this.setState({ rateSheetData: null });
       }
     }
-    // this.state.contractCostSegments.value.map((c, index) =>
-    //   c[1].value === x.label ? this.setState({ rateSheetData: c[3].value }) : this.setState({ rateSheetData: null })
-    // );
   }
 
   setCostSegmentdata() {

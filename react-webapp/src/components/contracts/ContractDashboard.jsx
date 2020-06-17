@@ -9,6 +9,7 @@ import Send from "../../libs/send";
 import ContractRoutes from "./ContractRoutes";
 
 class ContractDashboard extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -59,6 +60,7 @@ class ContractDashboard extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     return Send.get("/Contract/Ids", this.props).then((res) => {
       let contractData = res.data;
       let getSelectOptions = [];
@@ -68,8 +70,14 @@ class ContractDashboard extends Component {
           value: item[0].value,
         });
       });
-      this.setState({ selectOptions: getSelectOptions });
+      if (this._isMounted) {
+        this.setState({ selectOptions: getSelectOptions });
+      }
     });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
@@ -114,8 +122,6 @@ class ContractDashboard extends Component {
                   </MDBRow>
                 </div>
                 <h1 className="m-3 text-center">Contract Dashboard</h1>
-              </MDBCardHeader>
-              <MDBCardBody>
                 <div className="d-flex flex-column">
                   <ButtonGroup size="lg">
                     <Link className="btn btn-primary" to="/contracts/dashboard">
@@ -135,10 +141,25 @@ class ContractDashboard extends Component {
                       Add Cost Data (7468A)
                     </Link> */}
                     <Link to="/contracts/costsegment" className="btn btn-primary">
-                      View Cost Worksheet
+                      View Rate Sheet
                     </Link>
                   </ButtonGroup>
                 </div>
+              </MDBCardHeader>
+              <MDBCardBody>
+                {/* <MDBRow>
+                  {this.state.contractProfile !== null &&
+                    this.state.contractProfile.map(
+                      (c, index) =>
+                        c.label !== null &&
+                        typeof c.value !== "object" && (
+                          <MDBCol md="2" key={c.label + index}>
+                            <p className="h5 mb-1">{c.label}: </p>
+                            <div className="text-muted">{c.value}</div>
+                          </MDBCol>
+                        )
+                    )}
+                </MDBRow> */}
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

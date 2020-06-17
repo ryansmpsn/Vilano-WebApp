@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Card, Button } from "react-bootstrap";
+// import { Link } from "react-router-dom";
+import { Card, Button, Spinner } from "react-bootstrap";
 import { MDBContainer } from "mdbreact";
 import UpsertVehicleModal from "./UpsertVehicleModal";
+import UpsertTripModal from "./UpsertTripModal";
+import Send from "../../../libs/send";
 
 function ViewTrips(props) {
   const [tripData, setTripData] = useState([]);
   const [showTrip, setShowTrip] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
 
   useEffect(() => {
     onLoad();
@@ -19,18 +23,26 @@ function ViewTrips(props) {
   function openModal() {
     setShowModal(true);
     window.location.hash = "edit";
-    console.log(window.location.hash);
   }
 
   function closeModal() {
     window.history.replaceState(null, null, " ");
     setShowModal(false);
   }
+
+  function editTrip() {
+    setIsLoading(true);
+    Send.get("/Contract/Dropdowns/ContractTrip/Cached", props).then((res) => {
+      setContentInputRestrictions(res.data);
+      setIsLoading(false);
+      openModal();
+    });
+  }
   var cardClass = "card border-primary mb-3" + (showTrip ? "cardContract" : null);
 
   return (
     <div>
-      <MDBContainer key={props.key}>
+      <MDBContainer>
         <Card
           className={cardClass}
           style={{
@@ -43,7 +55,7 @@ function ViewTrips(props) {
           {tripData.map(
             (c, index) =>
               c.label !== null && (
-                <div key={index}>
+                <div key={index + "title"}>
                   {c.label === "Trip Number" || c.label === "Cost Segment" || c.label === "Frequency" ? (
                     <>
                       <Card.Title>{c.label}:</Card.Title>
@@ -51,7 +63,7 @@ function ViewTrips(props) {
                       <hr />
                     </>
                   ) : (
-                    <div key={index} hidden={!showTrip}>
+                    <div key={index + "cardContent"} hidden={!showTrip}>
                       <Card.Title>{c.label}:</Card.Title>
                       {typeof c.value !== "object" && c.value !== null && <Card.Text>{c.value}</Card.Text>}
                       {typeof c.value === "object" &&
@@ -60,11 +72,11 @@ function ViewTrips(props) {
                           t.map(
                             (x, index) =>
                               x.label !== null && (
-                                <>
+                                <div key={x.label}>
                                   <Card.Text>{x.label}:</Card.Text>
                                   <Card.Text>{x.value}</Card.Text>
                                   <br />
-                                </>
+                                </div>
                               )
                           )
                         )}
@@ -74,10 +86,6 @@ function ViewTrips(props) {
                 </div>
               )
           )}
-          {tripData.map(
-            (c, index) => typeof c.value === "object" && c.value !== null && c.value.map((t, index) => console.log(t))
-          )}
-
           <Button
             hidden={showTrip}
             className=" btn btn-primary"
@@ -98,34 +106,53 @@ function ViewTrips(props) {
           >
             Hide Trip
           </Button>
-          <Button
-            className=" btn btn-primary"
-            onClick={() => console.log("editing trip")}
-            data-target="#collapseExample"
-            aria-expanded="false"
-            aria-controls="collapseExample"
-          >
-            Edit Trip Information
-          </Button>
+          {isLoading ? (
+            <Spinner animation="border" variant="primary" />
+          ) : (
+            <Button
+              className=" btn btn-primary"
+              onClick={editTrip}
+              data-target="#collapseExample"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+            >
+              Edit Trip
+            </Button>
+          )}
           <Button
             hidden={!showTrip}
             className=" btn btn-primary"
-            onClick={openModal}
+            onClick={() => console.log("Edit Vehicles")}
             data-target="#collapseExample"
             aria-expanded="false"
             aria-controls="collapseExample"
           >
             Edit Vehicles
           </Button>
-          <Link
+          {/* <Link
             onClick={(e) => props.setSelectedTrip("Trip 326")}
             to={`${props.url}/trip/${props.selectedContractId}`}
             className="btn btn-primary"
           >
             View Routes
-          </Link>
+          </Link> */}
         </Card>
         <UpsertVehicleModal modalName={"Edit Vehicles"} show={showModal} closeModal={closeModal} />
+        {!isLoading && (
+          <UpsertTripModal
+            modalName={"Edit Trip"}
+            inputRestrictions={contentInputRestrictions}
+            show={showModal}
+            closeModal={closeModal}
+            accessLevel={props.accessLevel}
+            appProps={props.appProps}
+            contractProfile={props.contractProfile}
+            submitAction={(editTrip) => {
+              return props.submitAction(editTrip);
+            }}
+            trip={props.tripData}
+          />
+        )}
       </MDBContainer>
     </div>
   );

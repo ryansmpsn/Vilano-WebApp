@@ -1,25 +1,25 @@
 import React from "react";
 import { Button, Modal, FormGroup, FormControl, FormLabel, Spinner } from "react-bootstrap";
 import { MDBNotification } from "mdbreact";
-import InputFormControl from "../../libs/InputFormControl";
+import InputFormControl from "../../../libs/InputFormControl";
 // import NavPerm from "../../libs/NavPerms";
 import DatePicker from "react-date-picker";
 
-export default class UpsertTripModal extends React.Component {
+export default class UpsertContentModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       date: new Date(),
       modalName: props.modalName,
       show: props.show,
-      trip: props.trip,
+      content: props.content,
       Permissions: "Write",
-      editTrip: props.trip,
+      editContent: props.content,
       inputRestrictions: props.inputRestrictions,
       contractProfile: props.contractProfile,
       submitting: false,
-      submitAction: (editTrip) => {
-        return props.submitAction(editTrip);
+      submitAction: (editContent) => {
+        return props.submitAction(editContent);
       },
       props: props.appProps,
     };
@@ -38,7 +38,7 @@ export default class UpsertTripModal extends React.Component {
 
   has_changed() {
     var hasChanged = false;
-    var object = this.state.trip;
+    var object = this.state.content;
     object.forEach((item) => {
       if (item.updatedValue !== null && item.updatedValue !== item.value) {
         hasChanged = true;
@@ -48,13 +48,13 @@ export default class UpsertTripModal extends React.Component {
     return hasChanged;
   }
 
-  update_trip(newTrip) {
-    var object = this.state.trip;
+  update_content(newContent) {
+    var object = this.state.content;
 
     object.forEach((item) => {
       let data = item;
       item.updatedValue = null;
-      newTrip.forEach((c) => {
+      newContent.forEach((c) => {
         if (c.columnName === data.columnName) data.value = c.value;
       });
 
@@ -65,24 +65,24 @@ export default class UpsertTripModal extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     var hand = this;
-    var newTrip = null;
+    var newContent = null;
     this.setState({ submitting: true });
 
     var JSONResponse = this.state.contractProfile;
-    JSONResponse[28].value.push(this.state.editTrip);
+    JSONResponse[28].value.push(this.state.editContent);
     console.log(JSONResponse);
     console.log(JSON.stringify(JSONResponse));
 
     hand.state
-      .submitAction(this.state.editTrip)
+      .submitAction(JSONResponse)
       .then((res) => {
         console.log(res);
 
-        newTrip = res.data[0];
-        newTrip.pop();
-        if (newTrip !== null) {
-          console.log(newTrip);
-          hand.update_contract(newTrip);
+        newContent = res.data[0];
+        newContent.pop();
+        if (newContent !== null) {
+          console.log(newContent);
+          hand.update_content(newContent);
           hand.setState({ submitting: false });
         } else {
           hand.setState({ submitting: false });
@@ -110,7 +110,7 @@ export default class UpsertTripModal extends React.Component {
     var variable = variable_key.substring(0, variable_key.lastIndexOf("_")) + "_id";
     var set = false;
     object.forEach((item) => {
-      if (item.columnName === variable_key) {
+      if (item.columnName === variable) {
         item.updatedValue = value;
         set = true;
       }
@@ -129,7 +129,7 @@ export default class UpsertTripModal extends React.Component {
         </Modal.Header>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <Modal.Body>
-            {this.state.editTrip.map(
+            {this.state.editContent.map(
               (item, index) =>
                 item.label !== null && (
                   <FormGroup key={index}>
@@ -154,10 +154,10 @@ export default class UpsertTripModal extends React.Component {
                           type="text"
                           value={item.updatedValue !== null && item.updatedValue}
                           onChange={(e) => {
-                            var object = this.state.editTrip;
+                            var object = this.state.editContent;
                             var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
                             object[index].updatedValue = e.target.value.replace(specials, "");
-                            this.setState({ editTrip: object });
+                            this.setState({ editContent: object });
                           }}
                           placeholder={item.value}
                         />
@@ -167,10 +167,10 @@ export default class UpsertTripModal extends React.Component {
                             type="number"
                             value={item.updatedValue !== null && item.updatedValue}
                             onChange={(e) => {
-                              var object = this.state.editTrip;
+                              var object = this.state.editContent;
                               var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
                               object[index].updatedValue = e.target.value.replace(specials, "");
-                              this.setState({ editTrip: object });
+                              this.setState({ editContent: object });
                             }}
                             placeholder={item.value}
                           />
@@ -180,10 +180,10 @@ export default class UpsertTripModal extends React.Component {
                             index={index}
                             input={item.inputType}
                             onChange={(e) => {
-                              var object = this.set_variable_id(this.state.editTrip, item.columnName, e.value);
+                              var object = this.set_variable_id(this.state.editContent, item.columnName, e.value);
                               var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
                               object[index].updatedValue = e.label.toString().replace(specials, "");
-                              this.setState({ editTrip: object });
+                              this.setState({ editContent: object });
                             }}
                             content={item}
                             inputRestrictions={this.state.inputRestrictions}
@@ -196,12 +196,12 @@ export default class UpsertTripModal extends React.Component {
                             {/* Fix date picker to default to current day */}
                             <DatePicker
                               onChange={(e) => {
-                                var object = this.state.editTrip;
+                                var object = this.state.editContent;
                                 var date = new Date(e);
                                 var return_date =
                                   date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
                                 object[index].updatedValue = return_date;
-                                this.setState({ editTrip: object });
+                                this.setState({ editContent: object });
                                 this.setState({ date: date });
                               }}
                               value={

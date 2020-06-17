@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
-import TripData from "./TripData";
-import CostData from "./CostData";
-import ViewRoutes from "./ViewRoutes";
+import TripData from "./trips/TripData";
+import CostData from "./costSegments/CostData";
+import ViewRoutes from "./routes/ViewRoutes";
 import AddContractData from "./AddContractData";
 import ContractData from "./ContractData";
-import CostSegmentData from "./CostSegmentData";
+import CostSegmentData from "./costSegments/CostSegmentData";
 
 class ContractRoutes extends Component {
   render() {

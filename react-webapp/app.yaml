@@ -1,5 +1,5 @@
 # Publish to Test = service: test-webapp
-service: webapp
+service: test-webapp
 runtime: nodejs10
 
 handlers:

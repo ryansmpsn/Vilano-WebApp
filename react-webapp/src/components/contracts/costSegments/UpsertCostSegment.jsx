@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import { useToasts } from "react-toast-notifications";
 import { MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
 import { Spinner } from "react-bootstrap";
-import Send from "../../libs/send";
+import Send from "../../../libs/send";
 
 function UpsertCostSegment(props) {
   // const { addToast } = useToasts();

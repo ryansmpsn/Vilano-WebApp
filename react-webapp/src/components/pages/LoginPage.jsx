@@ -51,7 +51,10 @@ const LoginPage = styled.div`
 export default function Login(props) {
   const { setSession } = useAuth();
   const { addToast } = useToasts();
-  const referrer = props.location.state !== null && props.location.state.hasOwnProperty("referrer") ? props.location.state.referrer.pathname : "/";
+  const referrer =
+    props.location.state !== null && props.location.state.hasOwnProperty("referrer")
+      ? props.location.state.referrer.pathname
+      : "/";
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     username: "",
@@ -98,7 +101,13 @@ export default function Login(props) {
         <form>
           {/*ControlID must match useFormFields value*/}
           <FormGroup controlId="username">
-            <FormControl autoFocus placeholder="Enter Username" type="text" value={fields.username.replace(/[*|":<>[\]{}`\\()';@&$]/, "")} onChange={handleFieldChange} />
+            <FormControl
+              autoFocus
+              placeholder="Enter Username"
+              type="text"
+              value={fields.username.replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
+              onChange={handleFieldChange}
+            />
           </FormGroup>
           <FormGroup controlId="password">
             <FormControl
@@ -112,7 +121,7 @@ export default function Login(props) {
           {isLoading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-            <MDBBtn active={!isLoading} disabled={!validateForm()} onClick={postLogin} gradient="aqua">
+            <MDBBtn type={"submit"} active={!isLoading} disabled={!validateForm()} onClick={postLogin} gradient="aqua">
               Login
             </MDBBtn>
           )}
