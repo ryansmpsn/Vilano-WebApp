@@ -6,7 +6,7 @@ import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge,
 import NavPerm from "../../libs/NavPerms";
 import Send from "../../libs/send";
 
-import ContractRoutes from "./ContractRoutes";
+import Routing from "./Routing";
 
 class ContractDashboard extends Component {
   _isMounted = false;
@@ -90,11 +90,12 @@ class ContractDashboard extends Component {
             <MDBCard className="cascading-admin-card">
               <MDBCardHeader>
                 <div className="admin-up">
-                  <MDBIcon icon="file-invoice-dollar" className="primary-color" />
+                  <MDBIcon icon="file-invoice-dollar" className="primary-color" />{" "}
+                  <h1 className="m-3 text-center">Contract Dashboard</h1>
                   <MDBRow style={{ margin: -20 }}>
                     <MDBCol md="4" className="ml-auto mb-4">
                       <MDBCard className="mb-4">
-                        <MDBCardHeader>Important Statistics</MDBCardHeader>
+                        <MDBCardHeader>Statistics</MDBCardHeader>
                         <MDBCardBody>
                           <MDBListGroup className="list-group-flush">
                             <MDBListGroupItem>
@@ -103,7 +104,7 @@ class ContractDashboard extends Component {
                                 <CountUp start={0} end={this.state.selectOptions.length} duration={5} />
                               </MDBBadge>
                             </MDBListGroupItem>
-                            <MDBListGroupItem>
+                            {/* <MDBListGroupItem>
                               Total Trips
                               <MDBBadge color="default-color-dark" pill className="float-right">
                                 <CountUp start={0} end={0} duration={5} />
@@ -114,40 +115,35 @@ class ContractDashboard extends Component {
                               <MDBBadge color="unique-color" pill className="float-right">
                                 <CountUp start={0} end={0} duration={8} />
                               </MDBBadge>
-                            </MDBListGroupItem>
+                            </MDBListGroupItem> */}
                           </MDBListGroup>
                         </MDBCardBody>
                       </MDBCard>
                     </MDBCol>
                   </MDBRow>
                 </div>
-                <h1 className="m-3 text-center">Contract Dashboard</h1>
                 <div className="d-flex flex-column">
                   <ButtonGroup size="lg">
                     <Link className="btn btn-primary" to="/contracts/dashboard">
-                      View Contracts
+                      Contracts
                     </Link>
                     <Link to="/contracts/trips" className="btn btn-primary">
-                      View Trips
+                      Trips
                     </Link>
-
-                    {/* <Link to="/contracts/routes" className="btn btn-primary">
-                      View Routes
+                    {/* <Link to="/contracts/" className="btn btn-primary">
+                      Routes
                     </Link>
-                    <Link to="/contracts/costdata" className="btn btn-primary">
-                      View Cost Data
-                    </Link>
-                    <Link to="/contracts/add" className="btn btn-primary">
-                      Add Cost Data (7468A)
+                    <Link to="/contracts/" className="btn btn-primary">
+                      Cost Segments
                     </Link> */}
                     <Link to="/contracts/costsegment" className="btn btn-primary">
-                      View Rate Sheet
+                      Rate Sheets
                     </Link>
                   </ButtonGroup>
                 </div>
               </MDBCardHeader>
               <MDBCardBody>
-                {/* <MDBRow>
+                <MDBRow>
                   {this.state.contractProfile !== null &&
                     this.state.contractProfile.map(
                       (c, index) =>
@@ -159,12 +155,12 @@ class ContractDashboard extends Component {
                           </MDBCol>
                         )
                     )}
-                </MDBRow> */}
+                </MDBRow>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
         </MDBRow>
-        <ContractRoutes
+        <Routing
           url={url}
           path={path}
           props={this.props}

@@ -236,7 +236,7 @@ function ContractData(props) {
             },
             { columnName: "status_id", inputType: null, label: null, updatedValue: null, value: 12 },
             {
-              columnName: "contract_status",
+              columnName: "status_value",
               inputType: "select",
               label: "Contract Status",
               updatedValue: null,

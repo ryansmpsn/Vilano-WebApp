@@ -3,7 +3,6 @@ import { Button, Modal, FormGroup, FormControl, FormLabel, Spinner } from "react
 import InputFormControl from "../../../libs/InputFormControl";
 // import NavPerm from "../../libs/NavPerms";
 import DatePicker from "react-date-picker";
-import { useToasts } from "react-toast-notifications";
 
 export default class UpsertTripModal extends React.Component {
   constructor(props) {
@@ -63,8 +62,6 @@ export default class UpsertTripModal extends React.Component {
   }
 
   async handleSubmit(event) {
-    const { addToast } = useToasts();
-
     event.preventDefault();
     var hand = this;
     this.setState({ submitting: true });
@@ -80,10 +77,6 @@ export default class UpsertTripModal extends React.Component {
         JSONResponse = res.data;
         this.props.closeModal();
         hand.setState({ submitting: false });
-        addToast("Invalid Credentials. Please Try Logging In Again.", {
-          appearance: "error",
-          autoDismiss: true,
-        });
       })
       .catch((err) => {
         hand.setState({ submitting: false });

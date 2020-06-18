@@ -3,9 +3,9 @@ import React from "react";
 import Select from "react-select";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
 import { Button } from "react-bootstrap";
-import Send from "../../libs/send";
+import Send from "../src/libs/send";
 import { Redirect } from "react-router-dom";
-import InputFormControl from "../../libs/InputFormControl";
+import InputFormControl from "../src/libs/InputFormControl";
 
 export default class AddContractData extends React.Component {
   // const { addToast } = useToasts();
@@ -29,18 +29,42 @@ export default class AddContractData extends React.Component {
         { columnName: "dh_portal_miles", inputType: "num", label: "Dead Head & Portal Miles", updatedValue: null, value: null },
         { columnName: "annual_miles", inputType: "num", label: "Annual Total Miles", updatedValue: null, value: null },
         { columnName: "plate_hours", inputType: "num", label: "Plate Hours", updatedValue: null, value: null },
-        { columnName: "misc_hours", inputType: "num", label: "Inspection, Equipment, Deadhead, Portal Hours", updatedValue: null, value: null },
+        {
+          columnName: "misc_hours",
+          inputType: "num",
+          label: "Inspection, Equipment, Deadhead, Portal Hours",
+          updatedValue: null,
+          value: null,
+        },
         { columnName: "annual_hours", inputType: "num", label: "Annual Total Hours", updatedValue: null, value: null },
         { columnName: "plate_gallons", inputType: "num", label: "Plate Gallons", updatedValue: null, value: null },
-        { columnName: "dh_portal_gallons", inputType: "num", label: "Dead Head & Portal Gallons", updatedValue: null, value: null },
+        {
+          columnName: "dh_portal_gallons",
+          inputType: "num",
+          label: "Dead Head & Portal Gallons",
+          updatedValue: null,
+          value: null,
+        },
         { columnName: "annual_gallons", inputType: "num", label: "Annual Total Gallons", updatedValue: null, value: null },
         { columnName: "vehicle_type", inputType: "select", label: "Vehicle Type", updatedValue: null, value: null },
         { columnName: "num_vehicle", inputType: "num", label: "Number of Vehicles", updatedValue: null, value: null },
         { columnName: "trailer_type", inputType: "select", label: "Trailer Type", updatedValue: null, value: null },
         { columnName: "num_trailer", inputType: "num", label: "Number of Trailers", updatedValue: null, value: null },
         { columnName: "total_trips", inputType: "num", label: "Total Number of Trips", updatedValue: null, value: null },
-        { columnName: "total_fix_oc_cost", inputType: "num", label: "Total Fixed & Operational Costs", updatedValue: null, value: null },
-        { columnName: "total_op_labor_cost", inputType: "num", label: "Total Operation Labor Costs", updatedValue: null, value: null },
+        {
+          columnName: "total_fix_oc_cost",
+          inputType: "num",
+          label: "Total Fixed & Operational Costs",
+          updatedValue: null,
+          value: null,
+        },
+        {
+          columnName: "total_op_labor_cost",
+          inputType: "num",
+          label: "Total Operation Labor Costs",
+          updatedValue: null,
+          value: null,
+        },
         { columnName: "total_revenue", inputType: "num", label: "Total Revenue (Offer)", updatedValue: null, value: null },
       ],
     };

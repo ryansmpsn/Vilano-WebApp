@@ -34,7 +34,6 @@ function TripData(props) {
   }
   return (
     <Jumbotron>
-      Selected Contract: {props.selectedContract}
       <Container className="container-sm pl-5 pr-5 pt-2">
         <Select
           autoFocus

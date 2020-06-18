@@ -1149,7 +1149,6 @@ class CostSegmentData extends Component {
     return (
       <MDBCard className="m-2">
         <MDBCardHeader>
-          <h4>Add Cost Segment To A Contract</h4>
           <h5>
             <Select
               autoFocus
@@ -1196,7 +1195,7 @@ class CostSegmentData extends Component {
 
         {!this.state.settingData ? (
           <MDBCardBody>
-            <MDBContainer>Please select a contract to add or update cost segment</MDBContainer>
+            <MDBContainer>Please select a contract to add or update cost segment information.</MDBContainer>
           </MDBCardBody>
         ) : (
           <UpsertCostSegment

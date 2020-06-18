@@ -39,7 +39,7 @@ function App(props) {
   class Content extends Component {
     render() {
       return (
-        <AuthContext.Provider value={{ session, setSession: setSessionData }}>
+        <AuthContext.Provider value={{ isAuthenticated, session, setSession: setSessionData }}>
           <NavBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
           <SideBar isAuthenticated={isAuthenticated} />
           <ToastProvider autoDismiss autoDismissTimeout={6000} placement="bottom-right" components={{ Toast: Notification }}>
