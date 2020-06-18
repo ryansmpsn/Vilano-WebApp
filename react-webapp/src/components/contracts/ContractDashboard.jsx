@@ -143,7 +143,7 @@ class ContractDashboard extends Component {
                 </div>
               </MDBCardHeader>
               <MDBCardBody>
-                <MDBRow>
+                {/* <MDBRow>
                   {this.state.contractProfile !== null &&
                     this.state.contractProfile.map(
                       (c, index) =>
@@ -155,7 +155,7 @@ class ContractDashboard extends Component {
                           </MDBCol>
                         )
                     )}
-                </MDBRow>
+                </MDBRow> */}
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

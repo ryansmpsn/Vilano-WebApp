@@ -16,7 +16,7 @@ const About = (props) => (
     <Jumbotron>
       <h1>Welcome to the PostalFleetSVS Alpha WebSoftware</h1>
       <p>
-        We are ever working on making this site a useful tool for you, so that you can more easily take care of things like
+        We are ever working on making this site a useful tool for you, so that you can easily take care of things like
         adding/updating contracts, task management, submitting tickets and many more things to come in the future. Eventually we
         will replace this small informative space with a proper landing page designed to look nice and pretty, but for now we just
         have this little informative area to tell you exactly what we are doing. At the moment this little space right here is

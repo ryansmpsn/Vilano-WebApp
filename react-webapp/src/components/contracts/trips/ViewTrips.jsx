@@ -9,7 +9,8 @@ import Send from "../../../libs/send";
 function ViewTrips(props) {
   const [tripData, setTripData] = useState([]);
   const [showTrip, setShowTrip] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showTripModal, setShowTripModal] = useState(false);
+  const [showVehicleModal, setShowVehicleModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
 
@@ -20,14 +21,18 @@ function ViewTrips(props) {
   function onLoad() {
     setTripData(props.tripData);
   }
-  function openModal() {
-    setShowModal(true);
+  function openModal(x) {
+    console.log(x);
+
+    x === "trip" && setShowTripModal(true);
+    x === "vehicle" && setShowVehicleModal(true);
     window.location.hash = "edit";
   }
 
   function closeModal() {
     window.history.replaceState(null, null, " ");
-    setShowModal(false);
+    setShowTripModal(false);
+    setShowVehicleModal(false);
   }
 
   function editTrip() {
@@ -35,7 +40,7 @@ function ViewTrips(props) {
     Send.get("/Contract/Dropdowns/ContractTrip/Cached", props).then((res) => {
       setContentInputRestrictions(res.data);
       setIsLoading(false);
-      openModal();
+      openModal("trip");
     });
   }
   var cardClass = "card border-primary mb-3" + (showTrip ? "cardContract" : null);
@@ -122,7 +127,7 @@ function ViewTrips(props) {
           <Button
             hidden={!showTrip}
             className=" btn btn-primary"
-            onClick={() => console.log("Edit Vehicles")}
+            onClick={() => openModal("vehicle")}
             data-target="#collapseExample"
             aria-expanded="false"
             aria-controls="collapseExample"
@@ -137,21 +142,28 @@ function ViewTrips(props) {
             View Routes
           </Link> */}
         </Card>
-        <UpsertVehicleModal modalName={"Edit Vehicles"} show={showModal} closeModal={closeModal} />
         {!isLoading && (
-          <UpsertTripModal
-            modalName={"Edit Trip"}
-            inputRestrictions={contentInputRestrictions}
-            show={showModal}
-            closeModal={closeModal}
-            accessLevel={props.accessLevel}
-            appProps={props.appProps}
-            contractProfile={props.contractProfile}
-            submitAction={(editTrip) => {
-              return props.submitAction(editTrip);
-            }}
-            trip={props.tripData}
-          />
+          <>
+            <UpsertTripModal
+              modalName={"Edit Trip"}
+              inputRestrictions={contentInputRestrictions}
+              show={showTripModal}
+              closeModal={closeModal}
+              accessLevel={props.accessLevel}
+              appProps={props.appProps}
+              contractProfile={props.contractProfile}
+              submitAction={(editTrip) => {
+                return props.submitAction(editTrip);
+              }}
+              trip={props.tripData}
+            />
+            <UpsertVehicleModal
+              modalName={"Edit Vehicles"}
+              vehicle={props.tripData}
+              show={showVehicleModal}
+              closeModal={closeModal}
+            />
+          </>
         )}
       </MDBContainer>
     </div>

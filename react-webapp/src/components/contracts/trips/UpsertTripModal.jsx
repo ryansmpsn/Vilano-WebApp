@@ -109,6 +109,7 @@ export default class UpsertTripModal extends React.Component {
           <Modal.Body>
             {this.state.editTrip.map(
               (item, index) =>
+                !Array.isArray(item.value) &&
                 item.label !== null && (
                   <FormGroup key={index}>
                     <FormLabel>

@@ -114,7 +114,7 @@ function TripData(props) {
             },
             {
               columnName: "trip_number",
-              inputType: "num",
+              inputType: "text",
               label: "Trip Number",
               updatedValue: null,
               value: null,

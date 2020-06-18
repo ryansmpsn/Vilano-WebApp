@@ -27,7 +27,7 @@ function UpsertCostSegment(props) {
       rateSheetItems.push(rateArray);
     });
     let costSegment = [
-      { columnName: "cost_segment", value: props.selectedCostSegment },
+      { columnName: "cost_segment", updatedValue: props.selectedCostSegment },
       { columnName: "vw_contract_rate_sheet_items", value: rateSheetItems },
     ];
     let jsonData = props.contractData;
@@ -38,7 +38,7 @@ function UpsertCostSegment(props) {
       updatedValue: null,
       value: costSegment,
     });
-    console.log(jsonData);
+    // console.log(jsonData);
     // console.log(JSON.stringify(jsonData));
 
     Send.post("/Contract/ContractRateSheet", jsonData, props.appProps).then((res) => {
@@ -54,10 +54,11 @@ function UpsertCostSegment(props) {
           {props.contractData !== null &&
             props.contractData.map(
               (c, index) =>
+                !Array.isArray(c.value) &&
                 c.label !== null && (
                   <MDBCol md="2" key={c.label + index}>
                     <p className="h5 mb-1">{c.label}: </p>
-                    {/* <div className="text-muted">{c.value}</div> */}
+                    <div className="text-muted">{c.value}</div>
                   </MDBCol>
                 )
             )}
