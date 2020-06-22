@@ -30,21 +30,25 @@ const Send = new (class send extends React.Component {
   };
 
   set_our_session = (sess, props) => {
-    console.log("Setting Session");
-
-    //   if (sess) {
-    //     if (sess.match !== "false") props.handleLogin(sess);
-    //     else props.handleLogout(); // Still not refreshing page for loggout... Get 401 denieds, but no user display change.
-    //     // Oh yeah I need to handle 401s to loggout. Will do this later.
-    //   }
+    if (sess) {
+      if (sess.SessionID !== this.state.SessionID && sess.match !== false) {
+        sessionStorage.setItem("SessionID", sess.SessionID);
+        sessionStorage.setItem("IDSession", sess.IDSession);
+        sess.NavPermissions.map((a) => {
+          return sessionStorage.setItem(a[0], a[1]);
+        });
+      }
+      //     else props.handleLogout(); // Still not refreshing page for loggout... Get 401 denieds, but no user display change.
+      //     // Oh yeah I need to handle 401s to loggout. Will do this later.
+    }
   };
 
   post = async (route, data, props) => {
     this.state.SessionID = sessionStorage.getItem("SessionID");
     this.state.IDSession = sessionStorage.getItem("IDSession");
     this.update_auth();
-
-    // var send = this;    Must set this here, as when we enter promise, it will disappear.
+    var send = this;
+    // Must set this here, as when we enter promise, it will disappear.
 
     var url = this.state.URL + route;
 
@@ -55,7 +59,7 @@ const Send = new (class send extends React.Component {
           var data = res.data; // Set a custom variable as our actual return data which contains data and our_session
 
           if (data.our_session) {
-            //   send.set_our_session(data.our_session, props);
+            send.set_our_session(data.our_session, props);
           }
           resolve(data);
         })
@@ -69,7 +73,8 @@ const Send = new (class send extends React.Component {
     this.state.SessionID = sessionStorage.getItem("SessionID");
     this.state.IDSession = sessionStorage.getItem("IDSession");
     this.update_auth();
-    // var send = this;
+    var send = this;
+    // Must set this here, as when we enter promise, it will disappear.
 
     var url = this.state.URL + route;
 
@@ -80,7 +85,7 @@ const Send = new (class send extends React.Component {
           var data = res.data; // Set a custom variable as our actual return data which contains data and our_session
 
           if (data.our_session) {
-            //   send.set_our_session(data.our_session, props);
+            send.set_our_session(data.our_session, props);
           }
           resolve(data);
         })

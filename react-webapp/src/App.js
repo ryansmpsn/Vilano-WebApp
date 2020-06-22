@@ -35,11 +35,16 @@ function App(props) {
       setSession();
     }
   };
+  const setIsAuthenticatedData = (authenticated) => {
+    setIsAuthenticated(authenticated);
+  };
 
   class Content extends Component {
     render() {
       return (
-        <AuthContext.Provider value={{ isAuthenticated, session, setSession: setSessionData }}>
+        <AuthContext.Provider
+          value={{ isAuthenticated, session, setSession: setSessionData, setIsAuthenticated: setIsAuthenticatedData }}
+        >
           <NavBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
           <SideBar isAuthenticated={isAuthenticated} />
           <ToastProvider autoDismiss autoDismissTimeout={6000} placement="bottom-right" components={{ Toast: Notification }}>

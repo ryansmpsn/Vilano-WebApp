@@ -1,43 +1,43 @@
 [
-  { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": 860, "value": 860 },
-  { "columnName": "modified_by", "inputType": null, "label": null, "updatedValue": 100138, "value": 100138 },
+  { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": 856, "value": 856 },
+  { "columnName": "modified_by", "inputType": null, "label": null, "updatedValue": 100012, "value": 100012 },
   {
     "columnName": "employee_name",
     "inputType": null,
     "label": "Last Modified By",
-    "updatedValue": "Ryan Simpson",
-    "value": "Ryan Simpson"
+    "updatedValue": "Kenneth Shimo",
+    "value": "Kenneth Shimo"
   },
   { "columnName": "is_active", "inputType": "select", "label": "Active", "updatedValue": 1, "value": 1 },
-  { "columnName": "company_id", "inputType": null, "label": null, "updatedValue": 3, "value": 3 },
+  { "columnName": "company_id", "inputType": null, "label": null, "updatedValue": 2, "value": 2 },
   {
     "columnName": "company_name",
     "inputType": "select",
     "label": "Company",
-    "updatedValue": "The Stageline Company, LLC",
-    "value": "The Stageline Company, LLC"
+    "updatedValue": "Postal Fleet Services, LLC",
+    "value": "Postal Fleet Services, LLC"
   },
   {
     "columnName": "external_contract_code",
     "inputType": "text",
     "label": "Contract No.",
-    "updatedValue": "NoahTest",
-    "value": "NoahTest"
+    "updatedValue": "KennyTest",
+    "value": "KennyTest"
   },
   {
     "columnName": "solicitation_number",
     "inputType": "text",
     "label": "Solicitation No.",
-    "updatedValue": "C3PO-12AB",
-    "value": "C3PO-12AB"
+    "updatedValue": "abcd_123",
+    "value": "abcd_123"
   },
-  { "columnName": "admin_facility_id", "inputType": null, "label": null, "updatedValue": 4, "value": 4 },
+  { "columnName": "admin_facility_id", "inputType": null, "label": null, "updatedValue": 2612, "value": 2612 },
   {
     "columnName": "admin_facility_name",
     "inputType": "select",
     "label": "Administration Office",
-    "updatedValue": "SAN JUAN P&DC",
-    "value": "SAN JUAN P&DC"
+    "updatedValue": "ORLANDO (SEMINOLE P&DC)",
+    "value": "ORLANDO (SEMINOLE P&DC)"
   },
   { "columnName": "contract_type_id", "inputType": null, "label": null, "updatedValue": 3, "value": 3 },
   {
@@ -69,71 +69,65 @@
     "updatedValue": "Contract Delivery Service",
     "value": "Contract Delivery Service"
   },
-  { "columnName": "status_id", "inputType": null, "label": null, "updatedValue": 20, "value": 20 },
+  { "columnName": "status_id", "inputType": null, "label": null, "updatedValue": 12, "value": 12 },
   {
     "columnName": "status_value",
     "inputType": "select",
     "label": "Contract Status",
-    "updatedValue": "Not Awarded",
-    "value": "Not Awarded"
+    "updatedValue": "Active",
+    "value": "Active"
   },
-  { "columnName": "origin_facility_id", "inputType": null, "label": null, "updatedValue": 57, "value": 57 },
+  { "columnName": "origin_facility_id", "inputType": null, "label": null, "updatedValue": 2612, "value": 2612 },
   {
     "columnName": "origin_facility_name",
     "inputType": "select",
     "label": "Origination",
-    "updatedValue": "BO CAMARONES (N.O.)",
-    "value": "BO CAMARONES (N.O.)"
+    "updatedValue": "ORLANDO (SEMINOLE P&DC)",
+    "value": "ORLANDO (SEMINOLE P&DC)"
   },
-  {
-    "columnName": "origin_state_name",
-    "inputType": null,
-    "label": "Origin State",
-    "updatedValue": "unknown",
-    "value": "unknown"
-  },
-  { "columnName": "destination_facility_id", "inputType": null, "label": null, "updatedValue": 1, "value": 1 },
+  { "columnName": "origin_state_name", "inputType": null, "label": "Origin State", "updatedValue": "FL", "value": "FL" },
+  { "columnName": "destination_facility_id", "inputType": null, "label": null, "updatedValue": 2611, "value": 2611 },
   {
     "columnName": "destination_facility_name",
     "inputType": "select",
     "label": "Destination",
-    "updatedValue": "DMU - PPA",
-    "value": "DMU - PPA"
+    "updatedValue": "JACKSONVILLE P&DC",
+    "value": "JACKSONVILLE P&DC"
   },
   {
     "columnName": "destination_state_name",
     "inputType": null,
     "label": "Destination State",
-    "updatedValue": "unknown",
-    "value": "unknown"
+    "updatedValue": "FL",
+    "value": "FL"
   },
   {
     "columnName": "solicitation_date",
     "inputType": "date",
     "label": "Date of Solicitation",
-    "updatedValue": "2020-03-06",
-    "value": "2020-03-06"
+    "updatedValue": "2020-07-01",
+    "value": "2020-07-01"
   },
   {
     "columnName": "begin_contract_date",
     "inputType": "date",
     "label": "Begin Contract Term",
-    "updatedValue": "2018-02-06",
-    "value": "2018-02-06"
+    "updatedValue": "2020-09-01",
+    "value": "2020-09-01"
   },
   {
     "columnName": "end_contract_date",
     "inputType": "date",
     "label": "End Contract Term",
-    "updatedValue": "2023-06-22",
-    "value": "2023-06-22"
+    "updatedValue": "2024-09-01",
+    "value": "2024-09-01"
   },
   {
     "columnName": "modified_timestamp",
     "inputType": null,
     "label": "Last Modified",
-    "updatedValue": "2020-06-19 15:04:32",
-    "value": "2020-06-19 15:04:32"
+    "updatedValue": "2020-06-22 16:16:32",
+    "value": "2020-06-22 16:16:32"
   },
   {
     "columnName": "vw_contract_trips",
@@ -142,26 +136,20 @@
     "updatedValue": null,
     "value": [
       [
-        { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": null, "value": 860 },
+        { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": 856, "value": 856 },
         {
           "columnName": "external_contract_code",
           "inputType": null,
           "label": "Contract Number",
-          "updatedValue": null,
-          "value": "NoahTest"
+          "updatedValue": "KennyTest",
+          "value": "KennyTest"
         },
-        { "columnName": "contract_trip_id", "inputType": null, "label": null, "updatedValue": null, "value": null },
-        { "columnName": "trip_number", "inputType": "text", "label": "Trip Number", "updatedValue": "12", "value": null },
-        { "columnName": "cost_segment_id", "inputType": null, "label": null, "updatedValue": 1, "value": null },
-        {
-          "columnName": "cost_segment_value",
-          "inputType": "select",
-          "label": "Cost Segment",
-          "updatedValue": "A",
-          "value": null
-        },
-        { "columnName": "frequency_id", "inputType": null, "label": null, "updatedValue": 1782, "value": null },
-        { "columnName": "frequency_value", "inputType": "select", "label": "Frequency", "updatedValue": "B56", "value": null },
+        { "columnName": "contract_trip_id", "inputType": null, "label": null, "updatedValue": 94, "value": 94 },
+        { "columnName": "trip_number", "inputType": "num", "label": "Trip Number", "updatedValue": "6", "value": "7" },
+        { "columnName": "cost_segment_id", "inputType": null, "label": null, "updatedValue": 2, "value": 1 },
+        { "columnName": "cost_segment_value", "inputType": "select", "label": "Cost Segment", "updatedValue": "B", "value": "A" },
+        { "columnName": "frequency_id", "inputType": null, "label": null, "updatedValue": 995, "value": 1866 },
+        { "columnName": "frequency_value", "inputType": "select", "label": "Frequency", "updatedValue": "123X", "value": "K7" },
         { "columnName": "is_active", "inputType": "checkbox", "label": "Active", "updatedValue": 1, "value": 1 },
         { "columnName": "is_peak", "inputType": "checkbox", "label": "Peak", "updatedValue": 0, "value": 0 },
         { "columnName": "status_id", "inputType": null, "label": null, "updatedValue": null, "value": null },
@@ -169,22 +157,53 @@
           "columnName": "contract_trip_status",
           "inputType": "select",
           "label": "Trip Status",
-          "updatedValue": null,
-          "value": null
+          "updatedValue": "unknown",
+          "value": "unknown"
         },
-        { "columnName": "start_date", "inputType": "date", "label": "Start Date", "updatedValue": "2019-5-7", "value": null },
-        { "columnName": "end_date", "inputType": "date", "label": "End Date", "updatedValue": "2021-8-19", "value": null },
-        { "columnName": "mileage", "inputType": "num", "label": "Miles", "updatedValue": "600", "value": "" },
-        { "columnName": "hours", "inputType": "num", "label": "Hours", "updatedValue": "1000", "value": "" },
-        { "columnName": "modified_by", "inputType": null, "label": null, "updatedValue": null, "value": null },
-        { "columnName": "employee_name", "inputType": null, "label": "Last Modified By", "updatedValue": null, "value": null },
-        { "columnName": "last_modified", "inputType": null, "label": "Last Modified", "updatedValue": null, "value": null },
+        {
+          "columnName": "start_date",
+          "inputType": "date",
+          "label": "Start Date",
+          "updatedValue": "2020-06-22",
+          "value": "2020-06-22"
+        },
+        {
+          "columnName": "end_date",
+          "inputType": "date",
+          "label": "End Date",
+          "updatedValue": "2022-08-22",
+          "value": "2022-08-22"
+        },
+        { "columnName": "mileage", "inputType": "num", "label": "Miles", "updatedValue": 75, "value": 75 },
+        { "columnName": "hours", "inputType": "num", "label": "Hours", "updatedValue": "31.8", "value": 1.5 },
+        { "columnName": "modified_by", "inputType": null, "label": null, "updatedValue": 100012, "value": 100012 },
+        {
+          "columnName": "employee_name",
+          "inputType": null,
+          "label": "Last Modified By",
+          "updatedValue": "Kenneth Shimo",
+          "value": "Kenneth Shimo"
+        },
+        {
+          "columnName": "last_modified",
+          "inputType": null,
+          "label": "Last Modified",
+          "updatedValue": "2020-06-22 18:27:52",
+          "value": "2020-06-22 18:27:52"
+        },
         {
           "columnName": "vw_contract_trip_vehicles",
           "inputType": null,
           "label": "Contract Trip Vehicles",
           "updatedValue": null,
-          "value": null
+          "value": []
+        },
+        {
+          "columnName": "vw_contract_trip_trailers",
+          "inputType": null,
+          "label": "Contract Trip Trailers",
+          "updatedValue": null,
+          "value": []
         }
       ]
     ]
