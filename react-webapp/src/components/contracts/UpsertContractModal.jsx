@@ -131,7 +131,6 @@ export default class UpsertContractModal extends React.Component {
       <Modal show={this.state.show} onHide={this.props.closeModal}>
         <Modal.Header closeButton>
           <Modal.Title>{this.state.modalName}</Modal.Title>
-          {console.log(this.state.editContract)}
         </Modal.Header>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <Modal.Body>

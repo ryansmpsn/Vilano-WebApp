@@ -1070,8 +1070,6 @@ class CostSegmentData extends Component {
       });
 
       Send.get("/Contract/" + this.props.selectedContractId + "/RateSheet", this.props.appProps).then((res) => {
-        console.log(res.data);
-
         this.setState({ contractCostSegments: res.data[0].pop() });
         this.setState({ contractData: res.data[0] });
         this.setState({ isLoading: false });

@@ -22,8 +22,6 @@ function ViewTrips(props) {
     setTripData(props.tripData);
   }
   function openModal(x) {
-    console.log(x);
-
     x === "trip" && setShowTripModal(true);
     x === "vehicle" && setShowVehicleModal(true);
     window.location.hash = "edit";
@@ -157,12 +155,14 @@ function ViewTrips(props) {
               }}
               trip={props.tripData}
             />
-            <UpsertVehicleModal
-              modalName={"Edit Vehicles"}
-              vehicle={props.tripData}
-              show={showVehicleModal}
-              closeModal={closeModal}
-            />
+            {showVehicleModal && (
+              <UpsertVehicleModal
+                modalName={"Edit Vehicles"}
+                vehicle={props.tripData}
+                show={showVehicleModal}
+                closeModal={closeModal}
+              />
+            )}
           </>
         )}
       </MDBContainer>
