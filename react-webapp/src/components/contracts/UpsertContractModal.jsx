@@ -53,7 +53,7 @@ export default class UpsertContractModal extends React.Component {
 
     object.forEach((item) => {
       let data = item;
-      item.updatedValue = null;
+      // item.updatedValue = null;
       newContract.forEach((c) => {
         if (c.columnName === data.columnName) data.value = c.value;
       });
@@ -77,7 +77,8 @@ export default class UpsertContractModal extends React.Component {
     event.preventDefault();
     var hand = this;
     var newContract = null;
-
+    console.log(this.state.editContract);
+    console.log(JSON.stringify(this.state.editContract));
     this.setState({ submitting: true });
     hand.state
       .submitAction(this.state.editContract)
@@ -130,6 +131,7 @@ export default class UpsertContractModal extends React.Component {
       <Modal show={this.state.show} onHide={this.props.closeModal}>
         <Modal.Header closeButton>
           <Modal.Title>{this.state.modalName}</Modal.Title>
+          {console.log(this.state.editContract)}
         </Modal.Header>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <Modal.Body>

@@ -1,1252 +1,192 @@
 [
+  { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": 860, "value": 860 },
+  { "columnName": "modified_by", "inputType": null, "label": null, "updatedValue": 100138, "value": 100138 },
   {
-    "columnName": "contract_id",
+    "columnName": "employee_name",
     "inputType": null,
-    "label": null,
-    "updatedValue": 857,
-    "value": 857
+    "label": "Last Modified By",
+    "updatedValue": "Ryan Simpson",
+    "value": "Ryan Simpson"
+  },
+  { "columnName": "is_active", "inputType": "select", "label": "Active", "updatedValue": 1, "value": 1 },
+  { "columnName": "company_id", "inputType": null, "label": null, "updatedValue": 3, "value": 3 },
+  {
+    "columnName": "company_name",
+    "inputType": "select",
+    "label": "Company",
+    "updatedValue": "The Stageline Company, LLC",
+    "value": "The Stageline Company, LLC"
   },
   {
     "columnName": "external_contract_code",
-    "inputType": null,
-    "label": "Contract No",
-    "updatedValue": "RyanTest",
-    "value": "RyanTest"
+    "inputType": "text",
+    "label": "Contract No.",
+    "updatedValue": "NoahTest",
+    "value": "NoahTest"
   },
   {
     "columnName": "solicitation_number",
-    "inputType": null,
+    "inputType": "text",
     "label": "Solicitation No.",
-    "updatedValue": "123-A67",
-    "value": "123-A67"
+    "updatedValue": "C3PO-12AB",
+    "value": "C3PO-12AB"
   },
+  { "columnName": "admin_facility_id", "inputType": null, "label": null, "updatedValue": 4, "value": 4 },
   {
-    "columnName": "solicitation_date",
-    "inputType": null,
-    "label": "Date of Solicitation",
-    "updatedValue": "2020-01-29",
-    "value": "2020-01-29"
-  },
-  {
-    "columnName": "begin_contract_date",
-    "inputType": null,
-    "label": "Begin Contract Term",
-    "updatedValue": "2021-02-18",
-    "value": "2021-02-18"
-  },
-  {
-    "columnName": "end_contract_date",
-    "inputType": null,
-    "label": "End Contract Term",
-    "updatedValue": "2022-01-27",
-    "value": "2022-01-27"
-  },
-  {
-    "columnName": "orgin_facility_name",
-    "inputType": null,
-    "label": "Origination City",
-    "updatedValue": "ARECIBO",
-    "value": "ARECIBO"
-  },
-  {
-    "columnName": "origin_state",
-    "inputType": null,
-    "label": "Origination State",
-    "updatedValue": "PR",
-    "value": "PR"
-  },
-  {
-    "columnName": "destination_facility_name",
-    "inputType": null,
-    "label": "Destination City",
+    "columnName": "admin_facility_name",
+    "inputType": "select",
+    "label": "Administration Office",
     "updatedValue": "SAN JUAN P&DC",
     "value": "SAN JUAN P&DC"
   },
+  { "columnName": "contract_type_id", "inputType": null, "label": null, "updatedValue": 3, "value": 3 },
   {
-    "columnName": "destination_state",
-    "inputType": null,
-    "label": "Destination State",
-    "updatedValue": "PR",
-    "value": "PR"
+    "columnName": "contract_type_code",
+    "inputType": "select",
+    "label": "Contract Type Code",
+    "updatedValue": "CDS",
+    "value": "CDS"
   },
   {
-    "columnName": "vw_contract_rate_sheet_segment",
+    "columnName": "contract_type_name",
     "inputType": null,
-    "label": "Cost Segment",
+    "label": "Contract Type Name",
+    "updatedValue": "Contract Delivery Service",
+    "value": "Contract Delivery Service"
+  },
+  { "columnName": "contract_division_id", "inputType": null, "label": null, "updatedValue": 3, "value": 3 },
+  {
+    "columnName": "contract_division_code",
+    "inputType": "select",
+    "label": "Division Code",
+    "updatedValue": "CDS",
+    "value": "CDS"
+  },
+  {
+    "columnName": "contract_division_name",
+    "inputType": null,
+    "label": "Division Name",
+    "updatedValue": "Contract Delivery Service",
+    "value": "Contract Delivery Service"
+  },
+  { "columnName": "status_id", "inputType": null, "label": null, "updatedValue": 20, "value": 20 },
+  {
+    "columnName": "status_value",
+    "inputType": "select",
+    "label": "Contract Status",
+    "updatedValue": "Not Awarded",
+    "value": "Not Awarded"
+  },
+  { "columnName": "origin_facility_id", "inputType": null, "label": null, "updatedValue": 57, "value": 57 },
+  {
+    "columnName": "origin_facility_name",
+    "inputType": "select",
+    "label": "Origination",
+    "updatedValue": "BO CAMARONES (N.O.)",
+    "value": "BO CAMARONES (N.O.)"
+  },
+  {
+    "columnName": "origin_state_name",
+    "inputType": null,
+    "label": "Origin State",
+    "updatedValue": "unknown",
+    "value": "unknown"
+  },
+  { "columnName": "destination_facility_id", "inputType": null, "label": null, "updatedValue": 1, "value": 1 },
+  {
+    "columnName": "destination_facility_name",
+    "inputType": "select",
+    "label": "Destination",
+    "updatedValue": "DMU - PPA",
+    "value": "DMU - PPA"
+  },
+  {
+    "columnName": "destination_state_name",
+    "inputType": null,
+    "label": "Destination State",
+    "updatedValue": "unknown",
+    "value": "unknown"
+  },
+  {
+    "columnName": "solicitation_date",
+    "inputType": "date",
+    "label": "Date of Solicitation",
+    "updatedValue": "2020-03-06",
+    "value": "2020-03-06"
+  },
+  {
+    "columnName": "begin_contract_date",
+    "inputType": "date",
+    "label": "Begin Contract Term",
+    "updatedValue": "2018-02-06",
+    "value": "2018-02-06"
+  },
+  {
+    "columnName": "end_contract_date",
+    "inputType": "date",
+    "label": "End Contract Term",
+    "updatedValue": "2023-06-22",
+    "value": "2023-06-22"
+  },
+  {
+    "columnName": "modified_timestamp",
+    "inputType": null,
+    "label": "Last Modified",
+    "updatedValue": "2020-06-19 15:04:32",
+    "value": "2020-06-19 15:04:32"
+  },
+  {
+    "columnName": "vw_contract_trips",
+    "inputType": null,
+    "label": "Contract Trips",
     "updatedValue": null,
     "value": [
-      {
-        "columnName": "cost_segment",
-        "value": "D"
-      },
-      {
-        "columnName": "vw_contract_rate_sheet_items",
-        "value": [
-          [
-            {
-              "rate_item_code": "vc_1"
-            },
-            {
-              "rateItemCode": "vc_1",
-              "columnName": "annual_unit",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": ""
-            },
-            {
-              "rateItemCode": "vc_1",
-              "columnName": "unit_cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": ""
-            },
-            {
-              "rateItemCode": "vc_1",
-              "columnName": "annual_cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": ""
-            }
-          ],
-          [
-            {
-              "rate_item_code": "mv_1"
-            },
-            {
-              "rateItemCode": "mv_1",
-              "columnName": "annual_unit",
-              "id": "Vehicle Cost_Per_Year",
-              "inputType": "num",
-              "label": "Annual Miles",
-              "updatedValue": "24",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "mv_1",
-              "columnName": "unit_cost",
-              "id": "Vehicle Cost_Unit_Cost",
-              "inputType": "num",
-              "label": "Rate Per Mile",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "mv_1",
-              "columnName": "annual_cost",
-              "id": "Vehicle Cost_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "tr_1"
-            },
-            {
-              "rateItemCode": "tr_1",
-              "columnName": "annual_unit",
-              "id": "Vehicle Cost2_Per_Year",
-              "inputType": "num",
-              "label": "Annual Miles",
-              "updatedValue": "3",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "tr_2",
-              "columnName": "unit_cost",
-              "id": "Vehicle Cost2_Unit_Cost",
-              "inputType": "num",
-              "label": "Rate Per Mile",
-              "updatedValue": "1",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "tr_1",
-              "columnName": "annual_cost",
-              "id": "Vehicle Cost2_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "2",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "oc_1"
-            },
-            {
-              "rateItemCode": "oc_1",
-              "columnName": "annual_unit",
-              "id": "Opertational Cost_Per_Year",
-              "inputType": "num",
-              "label": "Annual Miles",
-              "updatedValue": "3",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "oc_1",
-              "columnName": "unit_cost",
-              "id": "Opertational Cost_Unit_Cost",
-              "inputType": "num",
-              "label": "Rate Per Mile",
-              "updatedValue": "1",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "oc_1",
-              "columnName": "annual_cost",
-              "id": "Opertational Cost_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "2",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "tx_2"
-            },
-            {
-              "rateItemCode": "tx_2",
-              "columnName": "annual_unit",
-              "id": "Taxes_Per_Year",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "tx_2",
-              "columnName": "unit_cost",
-              "id": "Taxes_Unit_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "tx_2",
-              "columnName": "annual_cost",
-              "id": "Taxes_Annual_Cost",
-              "inputType": null,
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "vr_3"
-            },
-            {
-              "rateItemCode": "vr_3",
-              "columnName": "annual_unit",
-              "id": "Vehicle Registration_Per_Year",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "vr_3",
-              "columnName": "unit_cost",
-              "id": "Vehicle Registration_Unit_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "vr_3",
-              "columnName": "annual_cost",
-              "id": "Vehicle Registration_Annual_Cost",
-              "inputType": null,
-              "label": "Annual Cost",
-              "updatedValue": "2",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "ms_4"
-            },
-            {
-              "rateItemCode": "ms_4",
-              "columnName": "annual_unit",
-              "id": "Miscellaneous_Per_Year",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "ms_4",
-              "columnName": "unit_cost",
-              "id": "Miscellaneous_Unit_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "ms_4",
-              "columnName": "annual_cost",
-              "id": "Miscellaneous_Annual_Cost",
-              "inputType": null,
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "go_5"
-            },
-            {
-              "rateItemCode": "go_5",
-              "columnName": "annual_unit",
-              "id": "General Overhead_Per_Year",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "go_5",
-              "columnName": "unit_cost",
-              "id": "General Overhead_Unit_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "go_5",
-              "columnName": "annual_cost",
-              "id": "General Overhead_Annual_Cost",
-              "inputType": null,
-              "label": "Annual Cost",
-              "updatedValue": "5",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "fu_6"
-            },
-            {
-              "rateItemCode": "fu_6",
-              "columnName": "annual_unit",
-              "id": "Fuel_Per_Year",
-              "inputType": "num",
-              "label": "Gallons",
-              "updatedValue": "5",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "fu_6",
-              "columnName": "unit_cost",
-              "id": "Fuel_Unit_Cost",
-              "inputType": "num",
-              "label": "Per Gallon",
-              "updatedValue": "1",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "fu_6",
-              "columnName": "annual_cost",
-              "id": "Fuel_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "oi_7"
-            },
-            {
-              "rateItemCode": "oi_7",
-              "columnName": "annual_unit",
-              "id": "Oil_Per_Year",
-              "inputType": "num",
-              "label": "Quarts",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "oi_7",
-              "columnName": "unit_cost",
-              "id": "Oil_Unit_Cost",
-              "inputType": "num",
-              "label": "Per Quart",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "oi_7",
-              "columnName": "annual_cost",
-              "id": "Oil_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "in_8"
-            },
-            {
-              "rateItemCode": "in_8",
-              "columnName": "annual_unit",
-              "id": "Insurance_Per_Year",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "in_8",
-              "columnName": "unit_cost",
-              "id": "Insurance_Unit_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "in_8",
-              "columnName": "annual_cost",
-              "id": "Insurance_Annual_Cost",
-              "inputType": null,
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "rt_9"
-            },
-            {
-              "rateItemCode": "rt_9",
-              "columnName": "annual_unit",
-              "id": "Road Taxes_Per_Year",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "rt_9",
-              "columnName": "unit_cost",
-              "id": "Road Taxes_Unit_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "rt_9",
-              "columnName": "annual_cost",
-              "id": "Road Taxes_Annual_Cost",
-              "inputType": null,
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "tl_10"
-            },
-            {
-              "rateItemCode": "tl_10",
-              "columnName": "annual_unit",
-              "id": "Tolls_Per_Year",
-              "inputType": "num",
-              "label": "Trips",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "tl_10",
-              "columnName": "unit_cost",
-              "id": "Tolls_Unit_Cost",
-              "inputType": "num",
-              "label": "Per Trip",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "tl_10",
-              "columnName": "annual_cost",
-              "id": "Tolls_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "fo_11"
-            },
-            {
-              "rateItemCode": "fo_11",
-              "columnName": "annual_unit",
-              "id": "Total Fixed and Operational Cost_Per_Year",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "fo_11",
-              "columnName": "unit_cost",
-              "id": "Total Fixed and Operational Cost_Unit_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "fo_11",
-              "columnName": "annual_cost",
-              "id": "Total Fixed and Operational Cost_Annual_Cost",
-              "inputType": null,
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "st_12"
-            },
-            {
-              "rateItemCode": "st_12",
-              "columnName": "annual_unit",
-              "id": "Straight Time_Per_Year",
-              "inputType": "num",
-              "label": "Hours",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "st_12",
-              "columnName": "unit_cost",
-              "id": "Straight Time_Unit_Cost",
-              "inputType": "num",
-              "label": "Per Hour",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "st_12",
-              "columnName": "annual_cost",
-              "id": "Straight Time_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "ot_13"
-            },
-            {
-              "rateItemCode": "ot_13",
-              "columnName": "annual_unit",
-              "id": "Overtime_Per_Year",
-              "inputType": "num",
-              "label": "Hours",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "ot_13",
-              "columnName": "unit_cost",
-              "id": "Overtime_Unit_Cost",
-              "inputType": "num",
-              "label": "Per Hour",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "ot_13",
-              "columnName": "annual_cost",
-              "id": "Overtime_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "pt_14"
-            },
-            {
-              "rateItemCode": "pt_14",
-              "columnName": "annual_unit",
-              "id": "Payroll Taxes (Itemized) _Per_Year",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "pt_14",
-              "columnName": "unit_cost",
-              "id": "Payroll Taxes (Itemized) _Unit_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "pt_14",
-              "columnName": "annual_cost",
-              "id": "Payroll Taxes (Itemized) _Annual_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            }
-          ],
-          [
-            {
-              "rate_item_code": "ss_14"
-            },
-            {
-              "rateItemCode": "ss_14",
-              "columnName": "annual_unit",
-              "id": "Social Security_Per_Year",
-              "inputType": "num",
-              "label": "Taxable Wages",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "ss_14",
-              "columnName": "unit_cost",
-              "id": "Social Security_Unit_Cost",
-              "inputType": "num",
-              "label": "Unit Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "ss_14",
-              "columnName": "annual_cost",
-              "id": "Social Security_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "wc_14"
-            },
-            {
-              "rateItemCode": "wc_14",
-              "columnName": "annual_unit",
-              "id": "Workman's Compensation_Per_Year",
-              "inputType": "num",
-              "label": "Taxable Wages",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "wc_14",
-              "columnName": "unit_cost",
-              "id": "Workman's Compensation_Unit_Cost",
-              "inputType": "num",
-              "label": "Unit Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "wc_14",
-              "columnName": "annual_cost",
-              "id": "Workman's Compensation_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "fc_14"
-            },
-            {
-              "rateItemCode": "fc_14",
-              "columnName": "annual_unit",
-              "id": "Federal Unemployment Comp._Per_Year",
-              "inputType": "num",
-              "label": "Taxable Wages",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "fc_14",
-              "columnName": "unit_cost",
-              "id": "Federal Unemployment Comp._Unit_Cost",
-              "inputType": "num",
-              "label": "Unit Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "fc_14",
-              "columnName": "annual_cost",
-              "id": "Federal Unemployment Comp._Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "su_14"
-            },
-            {
-              "rateItemCode": "su_14",
-              "columnName": "annual_unit",
-              "id": "State Unemployment Comp._Per_Year",
-              "inputType": "num",
-              "label": "Taxable Wages",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "su_14",
-              "columnName": "unit_cost",
-              "id": "State Unemployment Comp._Unit_Cost",
-              "inputType": "num",
-              "label": "Unit Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "su_14",
-              "columnName": "annual_cost",
-              "id": "State Unemployment Comp._Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "fb_15"
-            },
-            {
-              "rateItemCode": "fb_15",
-              "columnName": "annual_unit",
-              "id": "Fringe Benefits (Itemized)_Per_Year",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "fb_15",
-              "columnName": "unit_cost",
-              "id": "Fringe Benefits (Itemized)_Unit_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "fb_15",
-              "columnName": "annual_cost",
-              "id": "Fringe Benefits (Itemized)_Annual_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            }
-          ],
-          [
-            {
-              "rate_item_code": "hw_15"
-            },
-            {
-              "rateItemCode": "hw_15",
-              "columnName": "annual_unit",
-              "id": "Health & Welfare_Per_Year",
-              "inputType": "num",
-              "label": "No. of Employees or Hours",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "hw_15",
-              "columnName": "unit_cost",
-              "id": "Health & Welfare_Unit_Cost",
-              "inputType": "num",
-              "label": "Rate",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "hw_15",
-              "columnName": "annual_cost",
-              "id": "Health & Welfare_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "va_15"
-            },
-            {
-              "rateItemCode": "va_15",
-              "columnName": "annual_unit",
-              "id": "Vacation_Per_Year",
-              "inputType": "num",
-              "label": "No. of Employees or Hours",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "va_15",
-              "columnName": "unit_cost",
-              "id": "Vacation_Unit_Cost",
-              "inputType": "num",
-              "label": "Rate",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "va_15",
-              "columnName": "annual_cost",
-              "id": "Vacation_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "ho_15"
-            },
-            {
-              "rateItemCode": "ho_15",
-              "columnName": "annual_unit",
-              "id": "Holiday_Per_Year",
-              "inputType": "num",
-              "label": "No. of Employees or Hours",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "ho_15",
-              "columnName": "unit_cost",
-              "id": "Holiday_Unit_Cost",
-              "inputType": "num",
-              "label": "Rate",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "ho_15",
-              "columnName": "annual_cost",
-              "id": "Holiday_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "ps_15"
-            },
-            {
-              "rateItemCode": "ps_15",
-              "columnName": "annual_unit",
-              "id": "Pension_Per_Year",
-              "inputType": "num",
-              "label": "No. of Employees or Hours",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "ps_15",
-              "columnName": "unit_cost",
-              "id": "Pension_Unit_Cost",
-              "inputType": "num",
-              "label": "Rate",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "ps_15",
-              "columnName": "annual_cost",
-              "id": "Pension_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "ol_16"
-            },
-            {
-              "rateItemCode": "ol_16",
-              "columnName": "annual_unit",
-              "id": "Total Operation Labor Cost_Per_Year",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "ol_16",
-              "columnName": "unit_cost",
-              "id": "Total Operation Labor Cost_Unit_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "ol_16",
-              "columnName": "annual_cost",
-              "id": "Total Operation Labor Cost_Annual_Cost",
-              "inputType": null,
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "sw_17"
-            },
-            {
-              "rateItemCode": "sw_17",
-              "columnName": "annual_unit",
-              "id": "Supplier's Wages_Per_Year",
-              "inputType": "num",
-              "label": "Hours",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "sw_17",
-              "columnName": "unit_cost",
-              "id": "Supplier's Wages_Unit_Cost",
-              "inputType": "num",
-              "label": "Per Hour",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            },
-            {
-              "rateItemCode": "sw_17",
-              "columnName": "annual_cost",
-              "id": "Supplier's Wages_Annual_Cost",
-              "inputType": "num",
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "tc_18"
-            },
-            {
-              "rateItemCode": "tc_18",
-              "columnName": "annual_unit",
-              "id": "Total Cost_Per_Year",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "tc_18",
-              "columnName": "unit_cost",
-              "id": "Total Cost_Unit_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "tc_18",
-              "columnName": "annual_cost",
-              "id": "Total Cost_Annual_Cost",
-              "inputType": null,
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "ri_19"
-            },
-            {
-              "rateItemCode": "ri_19",
-              "columnName": "annual_unit",
-              "id": "Return on Investment_Per_Year",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "ri_19",
-              "columnName": "unit_cost",
-              "id": "Return on Investment_Unit_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "ri_19",
-              "columnName": "annual_cost",
-              "id": "Return on Investment_Annual_Cost",
-              "inputType": null,
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "to_20"
-            },
-            {
-              "rateItemCode": "to_20",
-              "columnName": "annual_unit",
-              "id": "Total Offer_Per_Year",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "to_20",
-              "columnName": "unit_cost",
-              "id": "Total Offer_Unit_Cost",
-              "inputType": null,
-              "label": null,
-              "updatedValue": "",
-              "value": "",
-              "icon": null
-            },
-            {
-              "rateItemCode": "to_20",
-              "columnName": "annual_cost",
-              "id": "Total Offer_Annual_Cost",
-              "inputType": null,
-              "label": "Annual Cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "dm_21"
-            },
-            {
-              "rateItemCode": "dm_21",
-              "label": "Equipment Realignment, Deadhead & Portal Miles",
-              "inputType": "num",
-              "columnName": "annual_cost",
-              "updatedValue": "1234",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "pm_21"
-            },
-            {
-              "rateItemCode": "pm_21",
-              "label": "Plate Miles",
-              "inputType": "num",
-              "columnName": "annual_cost",
-              "updatedValue": "12",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "tm_21"
-            },
-            {
-              "rateItemCode": "tm_21",
-              "label": "Total Miles",
-              "inputType": "num",
-              "columnName": "annual_cost",
-              "updatedValue": "24",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "dh_22"
-            },
-            {
-              "rateItemCode": "dh_22",
-              "label": "U.S. DOT required vehicle Inspection, Equipment, Realignment, Deadhead  & Portal Hours ",
-              "inputType": "num",
-              "columnName": "annual_cost",
-              "updatedValue": "12",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "ph_22"
-            },
-            {
-              "rateItemCode": "ph_22",
-              "label": "Plate Hours",
-              "inputType": "num",
-              "columnName": "annual_cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ],
-          [
-            {
-              "rate_item_code": "th_22"
-            },
-            {
-              "rateItemCode": "th_22",
-              "label": "Total Hours",
-              "inputType": "num",
-              "columnName": "annual_cost",
-              "updatedValue": "",
-              "value": "",
-              "icon": "dollar-sign"
-            }
-          ]
-        ]
-      }
+      [
+        { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": null, "value": 860 },
+        {
+          "columnName": "external_contract_code",
+          "inputType": null,
+          "label": "Contract Number",
+          "updatedValue": null,
+          "value": "NoahTest"
+        },
+        { "columnName": "contract_trip_id", "inputType": null, "label": null, "updatedValue": null, "value": null },
+        { "columnName": "trip_number", "inputType": "text", "label": "Trip Number", "updatedValue": "12", "value": null },
+        { "columnName": "cost_segment_id", "inputType": null, "label": null, "updatedValue": 1, "value": null },
+        {
+          "columnName": "cost_segment_value",
+          "inputType": "select",
+          "label": "Cost Segment",
+          "updatedValue": "A",
+          "value": null
+        },
+        { "columnName": "frequency_id", "inputType": null, "label": null, "updatedValue": 1782, "value": null },
+        { "columnName": "frequency_value", "inputType": "select", "label": "Frequency", "updatedValue": "B56", "value": null },
+        { "columnName": "is_active", "inputType": "checkbox", "label": "Active", "updatedValue": 1, "value": 1 },
+        { "columnName": "is_peak", "inputType": "checkbox", "label": "Peak", "updatedValue": 0, "value": 0 },
+        { "columnName": "status_id", "inputType": null, "label": null, "updatedValue": null, "value": null },
+        {
+          "columnName": "contract_trip_status",
+          "inputType": "select",
+          "label": "Trip Status",
+          "updatedValue": null,
+          "value": null
+        },
+        { "columnName": "start_date", "inputType": "date", "label": "Start Date", "updatedValue": "2019-5-7", "value": null },
+        { "columnName": "end_date", "inputType": "date", "label": "End Date", "updatedValue": "2021-8-19", "value": null },
+        { "columnName": "mileage", "inputType": "num", "label": "Miles", "updatedValue": "600", "value": "" },
+        { "columnName": "hours", "inputType": "num", "label": "Hours", "updatedValue": "1000", "value": "" },
+        { "columnName": "modified_by", "inputType": null, "label": null, "updatedValue": null, "value": null },
+        { "columnName": "employee_name", "inputType": null, "label": "Last Modified By", "updatedValue": null, "value": null },
+        { "columnName": "last_modified", "inputType": null, "label": "Last Modified", "updatedValue": null, "value": null },
+        {
+          "columnName": "vw_contract_trip_vehicles",
+          "inputType": null,
+          "label": "Contract Trip Vehicles",
+          "updatedValue": null,
+          "value": null
+        }
+      ]
     ]
   }
 ]

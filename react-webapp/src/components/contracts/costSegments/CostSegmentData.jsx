@@ -6,6 +6,8 @@ import Send from "../../../libs/send";
 import UpsertCostSegment from "./UpsertCostSegment";
 
 class CostSegmentData extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -1058,19 +1060,44 @@ class CostSegmentData extends Component {
     return this.setState({ remarkAnnualCost: e });
   };
 
+  componentDidMount() {
+    this._isMounted = true;
+    if (this.props.contractProfile !== null) {
+      this.setState({ isLoading: true });
+
+      Send.get("/Contract/Dropdowns/CostSegment/All", this.props.appProps).then((res) => {
+        this.setState({ costSegmentDropdowns: res.data[0].options });
+      });
+
+      Send.get("/Contract/" + this.props.selectedContractId + "/RateSheet", this.props.appProps).then((res) => {
+        console.log(res.data);
+
+        this.setState({ contractCostSegments: res.data[0].pop() });
+        this.setState({ contractData: res.data[0] });
+        this.setState({ isLoading: false });
+      });
+    }
+  }
+
   getSelectedContract() {
     this.setState({ isLoading: true });
+
+    this.props.getTrips("/Contract/" + this.state.contractSearch);
+
     Send.get("/Contract/Dropdowns/CostSegment/All", this.props.appProps).then((res) => {
       this.setState({ costSegmentDropdowns: res.data[0].options });
     });
     this.props.setSelectedContractId(this.state.contractSearch);
 
     Send.get("/Contract/" + this.state.contractSearch + "/RateSheet", this.props.appProps).then((res) => {
+      console.log(res.data);
+
       this.setState({ contractCostSegments: res.data[0].pop() });
       this.setState({ contractData: res.data[0] });
       this.setState({ isLoading: false });
     });
   }
+
   updateRateSheetData(x) {
     this.setState({ settingData: false });
     this.setState({ selectedCostSegment: x.label });
@@ -1145,19 +1172,25 @@ class CostSegmentData extends Component {
     }
     this.setState({ settingData: true });
   }
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   render() {
     return (
       <MDBCard className="m-2">
         <MDBCardHeader>
           <h5>
             <Select
-              autoFocus
               options={this.props.selectOptions}
               placeholder={"Search for Contracts by ID"}
               onChange={(x) => {
+                this.setState({ costSegmentDropdowns: null });
+                this.setState({ settingData: false });
                 this.setState({ contractSearch: x.value });
               }}
               isDisabled={this.state.isLoading}
+              defaultInputValue={this.props.selectedContract}
             />
           </h5>
           {this.state.isLoading === true ? (

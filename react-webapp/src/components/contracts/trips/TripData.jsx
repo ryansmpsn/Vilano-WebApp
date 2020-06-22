@@ -36,7 +36,7 @@ function TripData(props) {
     <Jumbotron>
       <Container className="container-sm pl-5 pr-5 pt-2">
         <Select
-          autoFocus
+          defaultInputValue={props.selectedContract}
           options={props.selectOptions}
           placeholder={"Select a Contract to View Trips"}
           onChange={(x) => {

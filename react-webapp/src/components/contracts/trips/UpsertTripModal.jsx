@@ -68,8 +68,8 @@ export default class UpsertTripModal extends React.Component {
 
     var JSONResponse = this.state.contractProfile;
     JSONResponse[28].value = [this.state.editTrip];
-    // console.log(JSONResponse);
-    // console.log(JSON.stringify(JSONResponse));
+    console.log(JSONResponse);
+    console.log(JSON.stringify(JSONResponse));
 
     hand.state
       .submitAction(JSONResponse)
@@ -131,7 +131,7 @@ export default class UpsertTripModal extends React.Component {
                       ((item.inputType === "text" && (
                         <FormControl
                           type="text"
-                          value={item.updatedValue !== null && item.updatedValue}
+                          value={item.updatedValue !== null ? item.updatedValue : ""}
                           onChange={(e) => {
                             var object = this.state.editTrip;
                             var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.

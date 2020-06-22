@@ -14,7 +14,7 @@ const Send = new (class send extends React.Component {
       IDSession: "None",
     };
     if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-      this.state.URL = this.state.localTestURL;
+      this.state.URL = this.state.liveTestURL;
     } else {
       this.state.URL = this.state.liveTestURL;
     }
@@ -29,11 +29,22 @@ const Send = new (class send extends React.Component {
     axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
   };
 
-  post = async (route, data, props, parsejson = false) => {
+  set_our_session = (sess, props) => {
+    console.log("Setting Session");
+
+    //   if (sess) {
+    //     if (sess.match !== "false") props.handleLogin(sess);
+    //     else props.handleLogout(); // Still not refreshing page for loggout... Get 401 denieds, but no user display change.
+    //     // Oh yeah I need to handle 401s to loggout. Will do this later.
+    //   }
+  };
+
+  post = async (route, data, props) => {
     this.state.SessionID = sessionStorage.getItem("SessionID");
     this.state.IDSession = sessionStorage.getItem("IDSession");
     this.update_auth();
-    // Must set this here, as when we enter promise, it will disappear.  var send = this;
+
+    // var send = this;    Must set this here, as when we enter promise, it will disappear.
 
     var url = this.state.URL + route;
 
@@ -42,7 +53,10 @@ const Send = new (class send extends React.Component {
         .post(url, data)
         .then((res) => {
           var data = res.data; // Set a custom variable as our actual return data which contains data and our_session
-          if (parsejson) data.data = JSON.parse(res.data.data);
+
+          if (data.our_session) {
+            //   send.set_our_session(data.our_session, props);
+          }
           resolve(data);
         })
         .catch((err) => {
@@ -51,10 +65,11 @@ const Send = new (class send extends React.Component {
     });
   };
 
-  get = async (route, props, parsejson = false) => {
+  get = async (route, props) => {
     this.state.SessionID = sessionStorage.getItem("SessionID");
     this.state.IDSession = sessionStorage.getItem("IDSession");
     this.update_auth();
+    // var send = this;
 
     var url = this.state.URL + route;
 
@@ -63,7 +78,10 @@ const Send = new (class send extends React.Component {
         .get(url)
         .then((res) => {
           var data = res.data; // Set a custom variable as our actual return data which contains data and our_session
-          if (parsejson) data.data = JSON.parse(res.data.data);
+
+          if (data.our_session) {
+            //   send.set_our_session(data.our_session, props);
+          }
           resolve(data);
         })
         .catch((err) => {

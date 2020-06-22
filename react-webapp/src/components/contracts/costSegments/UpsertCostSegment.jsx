@@ -38,8 +38,8 @@ function UpsertCostSegment(props) {
       updatedValue: null,
       value: costSegment,
     });
-    // console.log(jsonData);
-    // console.log(JSON.stringify(jsonData));
+    console.log(jsonData);
+    console.log(JSON.stringify(jsonData));
 
     Send.post("/Contract/ContractRateSheet", jsonData, props.appProps).then((res) => {
       // notification for completed add contract succsesfully
