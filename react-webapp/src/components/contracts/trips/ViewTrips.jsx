@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // import { Link } from "react-router-dom";
 import { Card, Button, Spinner } from "react-bootstrap";
 import { MDBContainer } from "mdbreact";
@@ -7,20 +7,13 @@ import UpsertTripModal from "./UpsertTripModal";
 import Send from "../../../libs/send";
 
 function ViewTrips(props) {
-  const [tripData, setTripData] = useState([]);
+  const [tripData] = useState(props.tripData);
   const [showTrip, setShowTrip] = useState(false);
   const [showTripModal, setShowTripModal] = useState(false);
   const [showVehicleModal, setShowVehicleModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
 
-  useEffect(() => {
-    onLoad();
-  });
-
-  function onLoad() {
-    setTripData(props.tripData);
-  }
   function openModal(x) {
     x === "trip" && setShowTripModal(true);
     x === "vehicle" && setShowVehicleModal(true);

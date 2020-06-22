@@ -53,7 +53,12 @@ class ContractDashboard extends Component {
     return Send.post("/Contract/Contract", editContract, this.props);
   };
   tripEditSubmitAction = (editTrip) => {
-    return Send.post("/Contract/ContractTrip", editTrip, this.props);
+    this.setState({ isSearching: true });
+
+    return Send.post("/Contract/ContractTrip", editTrip, this.props).then((res) => {
+      this.setState({ contractProfile: res.data[0] });
+      this.setState({ isSearching: false });
+    });
   };
   getSelectOptions() {
     return Send.get("/Contract/Dropdowns/Contract/All", this.props);

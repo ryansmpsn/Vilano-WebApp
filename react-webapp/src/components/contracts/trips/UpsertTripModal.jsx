@@ -20,6 +20,7 @@ export default class UpsertTripModal extends React.Component {
       submitAction: (editTrip) => {
         return props.submitAction(editTrip);
       },
+      setContractProfile: props.submitAction,
       props: props.appProps,
     };
   }
@@ -68,20 +69,9 @@ export default class UpsertTripModal extends React.Component {
 
     var JSONResponse = this.state.contractProfile;
     JSONResponse[28].value = [this.state.editTrip];
-    console.log(JSONResponse);
-    console.log(JSON.stringify(JSONResponse));
 
-    hand.state
-      .submitAction(JSONResponse)
-      .then((res) => {
-        JSONResponse = res.data;
-        this.props.closeModal();
-        hand.setState({ submitting: false });
-      })
-      .catch((err) => {
-        hand.setState({ submitting: false });
-        console.log(err);
-      });
+    hand.state.submitAction(JSONResponse);
+    hand.props.closeModal();
   }
 
   set_variable_id(object, variable_key, value) {
