@@ -70,18 +70,13 @@ export default class UpsertContentModal extends React.Component {
 
     var JSONResponse = this.state.contractProfile;
     JSONResponse[28].value.push(this.state.editContent);
-    console.log(JSONResponse);
-    console.log(JSON.stringify(JSONResponse));
 
     hand.state
       .submitAction(JSONResponse)
       .then((res) => {
-        console.log(res);
-
         newContent = res.data[0];
         newContent.pop();
         if (newContent !== null) {
-          console.log(newContent);
           hand.update_content(newContent);
           hand.setState({ submitting: false });
         } else {

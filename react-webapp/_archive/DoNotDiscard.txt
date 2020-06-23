@@ -1,3 +1,7 @@
+    console.log(JSONResponse);
+    console.log(JSON.stringify(JSONResponse));
+
+
 ContractTable.jsx ->   
 
 import React from "react";

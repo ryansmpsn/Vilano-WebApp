@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import { MDBCard, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBCardText, MDBBadge } from "mdbreact";
 import Select, { createFilter } from "react-select";
 import Send from "../../libs/send";
@@ -13,10 +14,8 @@ class AxiosTestPage extends Component {
   }
 
   componentDidMount() {
-    console.log("I'm Mounted");
     Send.get("/Contract/Dropdowns/ContractTest/Cached", this.props).then((res) => {
       this.setState({ display: res.data });
-      console.log(this.state.display);
     });
   }
 
@@ -51,7 +50,11 @@ class AxiosTestPage extends Component {
               </option>
             ))}
         </Form.Control> */}
-        <Select components={{ MenuList }} options={this.state.display[0].options} filterOption={createFilter({ ignoreAccents: false })} />
+        <Select
+          components={{ MenuList }}
+          options={this.state.display[0].options}
+          filterOption={createFilter({ ignoreAccents: false })}
+        />
 
         {this.state.display !== "none" &&
           this.state.display.map((c, index) => (

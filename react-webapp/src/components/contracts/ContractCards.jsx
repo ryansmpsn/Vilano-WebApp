@@ -24,7 +24,6 @@ function ContractCards(props) {
   function openModal() {
     setShowModal(true);
     window.location.hash = "edit";
-    console.log(window.location.hash);
   }
 
   function closeModal() {
