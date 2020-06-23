@@ -1,11 +1,3 @@
-How to deploy this project:
-
-1. Run 'gcloud init' in the Google Cloud SDK.
-2. run 'npm run build'
-3. navigate to app.yaml
-4. run 'gcloud app deploy'
-5. delete old version on google console
-
 How to run this project:
 
 1. Download and setup Visual Studio, Visual Studio Code, and Google Cloud SDK.
@@ -16,7 +8,27 @@ How to run this project:
 6. cd to react-webapp & Run 'npm install'.
 7. Run 'npm start'.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+How to deploy this project to test:
+
+1. Run 'gcloud init' in the Google Cloud SDK.
+2. Run 'npm run build'
+3. Navigate to app.yaml
+4. Change service to test-webapp
+5. Navigate to send.js
+6. Change line 19 URL to liveTestURL
+7. Run 'gcloud app deploy'
+8. Delete old version on google console
+
+How to deploy this project to production:
+
+1. Run 'gcloud init' in the Google Cloud SDK.
+2. Run 'npm run build'
+3. Navigate to app.yaml
+4. Change service to webapp
+5. Navigate to send.js
+6. Change line 19 URL to liveProductionURL
+7. Run 'gcloud app deploy'
+8. Delete old version on google console
 
 ## Available Scripts
 

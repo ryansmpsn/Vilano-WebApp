@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBContainer } from "mdbreact";
 import { Spinner, Row, Container, Jumbotron } from "react-bootstrap";
-import DisplayCostData from "./DisplayCostData";
+import DisplayCostData from "../src/components/contracts/costSegments/DisplayCostData";
 
 function CostData(props) {
   let { contractId } = useParams();

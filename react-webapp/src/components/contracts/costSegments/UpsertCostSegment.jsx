@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-// import { useToasts } from "react-toast-notifications";
+import { useToasts } from "react-toast-notifications";
 import { MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
 import { Spinner } from "react-bootstrap";
-import Send from "../../../libs/send";
 
 function UpsertCostSegment(props) {
-  // const { addToast } = useToasts();
+  const { addToast } = useToasts();
   const [submitting, setSubmitting] = useState(false);
-  // const [dropdowns, setDropdowns] = useState(null);
-  // const [isSearching, setSearching] = useState(false);
-  // const [contractSearch, setContractSearch] = useState(props.contractSearch);
-  // const [contractData, setContractData] = useState(props.contractData);
-  // const [units, setUnits] = useState(props.units);
 
   function buildJsonObject() {
     setSubmitting(true);
@@ -38,11 +32,12 @@ function UpsertCostSegment(props) {
       updatedValue: null,
       value: costSegment,
     });
-    console.log(jsonData);
-    console.log(JSON.stringify(jsonData));
 
-    Send.post("/Contract/ContractRateSheet", jsonData, props.appProps).then((res) => {
-      // notification for completed add contract succsesfully
+    props.submitAction(jsonData).then((res) => {
+      addToast("Rate Sheet Submitted Successfully!", {
+        appearance: "success",
+        autoDismiss: true,
+      });
       setSubmitting(false);
     });
   }

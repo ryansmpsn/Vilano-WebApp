@@ -1060,6 +1060,17 @@ class CostSegmentData extends Component {
     return this.setState({ remarkAnnualCost: e });
   };
 
+  costSegmentSubmitAction = (rateSheet) => {
+    this.setState({ isLoading: true });
+
+    return Send.post("/Contract/ContractRateSheet", rateSheet, this.props.appProps).then((res) => {
+      console.log(res);
+      this.setState({ contractCostSegments: res.data[0].pop() });
+      this.setState({ contractData: res.data[0] });
+      this.setState({ isLoading: false });
+    });
+  };
+
   componentDidMount() {
     this._isMounted = true;
     if (this.props.contractProfile !== null) {
@@ -1088,8 +1099,6 @@ class CostSegmentData extends Component {
     this.props.setSelectedContractId(this.state.contractSearch);
 
     Send.get("/Contract/" + this.state.contractSearch + "/RateSheet", this.props.appProps).then((res) => {
-      console.log(res.data);
-
       this.setState({ contractCostSegments: res.data[0].pop() });
       this.setState({ contractData: res.data[0] });
       this.setState({ isLoading: false });
@@ -1243,6 +1252,9 @@ class CostSegmentData extends Component {
             setUnitCost={this.setUnitCost}
             setAnnualCost={this.setAnnualCost}
             setRemarkAnnualCost={this.setRemarkAnnualCost}
+            submitAction={(rateSheet) => {
+              return this.costSegmentSubmitAction(rateSheet);
+            }}
           />
         )}
       </MDBCard>
