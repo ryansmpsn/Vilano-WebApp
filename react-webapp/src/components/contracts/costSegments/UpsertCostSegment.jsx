@@ -33,7 +33,6 @@ function UpsertCostSegment(props) {
       updatedValue: null,
       value: costSegment,
     });
-    console.log(JSON.stringify(jsonData));
 
     props.submitAction(jsonData).then((res) => {
       addToast("Rate Sheet Submitted Successfully!", {
