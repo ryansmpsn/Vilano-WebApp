@@ -1124,28 +1124,30 @@ class CostSegmentData extends Component {
       let unitsObject = this.state.units;
       unitsObject.forEach(
         (c, index) =>
-          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitsObject[index].value = x[4].value)),
+          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitsObject[index].updatedValue = x[4].value)),
         this.setState({ units: unitsObject })
       );
 
       let unitCostObject = this.state.unitCost;
       unitCostObject.forEach(
         (c, index) =>
-          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitCostObject[index].value = x[5].value)),
+          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitCostObject[index].updatedValue = x[5].value)),
         this.setState({ unitCost: unitCostObject })
       );
 
       let annualCostObject = this.state.annualCost;
       annualCostObject.forEach(
         (c, index) =>
-          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (annualCostObject[index].value = x[6].value)),
+          this.state.rateSheetData.map(
+            (x) => c.rateItemCode === x[2].value && (annualCostObject[index].updatedValue = x[6].value)
+          ),
         this.setState({ annualCost: annualCostObject })
       );
 
       let remarkObject = this.state.remarkAnnualCost;
       remarkObject.forEach(
         (c, index) =>
-          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (remarkObject[index].value = x[6].value)),
+          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (remarkObject[index].updatedValue = x[6].value)),
         this.setState({ remarkAnnualCost: remarkObject })
       );
     } else {
