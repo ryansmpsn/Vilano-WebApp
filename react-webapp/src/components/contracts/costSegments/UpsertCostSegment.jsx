@@ -74,7 +74,7 @@ function UpsertCostSegment(props) {
                         placeholder={c.value}
                         icon={c.icon}
                         group
-                        type="text"
+                        type="number"
                         validate
                         error="wrong"
                         success="right"
@@ -102,7 +102,7 @@ function UpsertCostSegment(props) {
                         placeholder={c.value}
                         icon={c.icon}
                         group
-                        type="text"
+                        type="number"
                         validate
                         error="wrong"
                         success="right"
@@ -151,7 +151,7 @@ function UpsertCostSegment(props) {
                           placeholder={props.units[index].value}
                           icon={props.units[index].icon}
                           group
-                          type="text"
+                          type="number"
                           validate
                           error="wrong"
                           success="right"
@@ -181,7 +181,7 @@ function UpsertCostSegment(props) {
                           placeholder={props.unitCost[index].value}
                           icon={props.unitCost[index].icon}
                           group
-                          type="text"
+                          type="number"
                           validate
                           error="wrong"
                           success="right"
@@ -211,7 +211,7 @@ function UpsertCostSegment(props) {
                           placeholder={props.annualCost[index].value}
                           icon={props.annualCost[index].icon}
                           group
-                          type="text"
+                          type="number"
                           validate
                           error="wrong"
                           success="right"
@@ -241,7 +241,7 @@ function UpsertCostSegment(props) {
                 </MDBContainer>
               ) : (
                 <MDBBtn outline color="info" type="button" onClick={buildJsonObject}>
-                  Send
+                  Save
                   <MDBIcon far icon="paper-plane" className="ml-1" />
                 </MDBBtn>
               )}
