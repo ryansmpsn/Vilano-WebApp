@@ -85,7 +85,6 @@ export default class UpsertContractModal extends React.Component {
         newContract = res.data[0];
         newContract.pop();
         if (newContract !== null) {
-          console.log(newContract);
           hand.update_contract(newContract);
           hand.setState({ submitting: false });
         } else {

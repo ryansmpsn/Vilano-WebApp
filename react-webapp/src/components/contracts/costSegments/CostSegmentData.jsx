@@ -350,7 +350,7 @@ class CostSegmentData extends Component {
           icon: "dollar-sign",
         },
         {
-          rateItemCode: "tr_2",
+          rateItemCode: "tr_1",
           columnName: "unit_cost",
           id: "Vehicle Cost2_Unit_Cost",
           inputType: "num",
@@ -1064,7 +1064,6 @@ class CostSegmentData extends Component {
     this.setState({ isLoading: true });
 
     return Send.post("/Contract/ContractRateSheet", rateSheet, this.props.appProps).then((res) => {
-      console.log(res);
       this.setState({ contractCostSegments: res.data[0].pop() });
       this.setState({ contractData: res.data[0] });
       this.setState({ isLoading: false });

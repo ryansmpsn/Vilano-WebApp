@@ -57,7 +57,7 @@
     "label": "Cost Segment",
     "updatedValue": null,
     "value": [
-      { "columnName": "cost_segment", "updatedValue": "C" },
+      { "columnName": "cost_segment", "updatedValue": "A" },
       {
         "columnName": "vw_contract_rate_sheet_items",
         "value": [
@@ -96,8 +96,7 @@
               "id": "Vehicle Cost_Per_Year",
               "inputType": "num",
               "label": "Annual Miles",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -106,8 +105,7 @@
               "id": "Vehicle Cost_Unit_Cost",
               "inputType": "num",
               "label": "Rate Per Mile",
-              "updatedValue": null,
-              "value": 2,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -116,8 +114,7 @@
               "id": "Vehicle Cost_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -129,8 +126,7 @@
               "id": "Vehicle Cost2_Per_Year",
               "inputType": "num",
               "label": "Annual Miles",
-              "updatedValue": null,
-              "value": 3,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -139,7 +135,7 @@
               "id": "Vehicle Cost2_Unit_Cost",
               "inputType": "num",
               "label": "Rate Per Mile",
-              "updatedValue": null,
+              "updatedValue": "12",
               "icon": "dollar-sign"
             },
             {
@@ -148,8 +144,7 @@
               "id": "Vehicle Cost2_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -161,8 +156,7 @@
               "id": "Opertational Cost_Per_Year",
               "inputType": "num",
               "label": "Annual Miles",
-              "updatedValue": null,
-              "value": 3,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -171,8 +165,7 @@
               "id": "Opertational Cost_Unit_Cost",
               "inputType": "num",
               "label": "Rate Per Mile",
-              "updatedValue": null,
-              "value": 1,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -181,8 +174,7 @@
               "id": "Opertational Cost_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 2,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -195,7 +187,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -205,7 +196,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -214,8 +204,7 @@
               "id": "Taxes_Annual_Cost",
               "inputType": null,
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -228,7 +217,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -238,7 +226,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -247,8 +234,7 @@
               "id": "Vehicle Registration_Annual_Cost",
               "inputType": null,
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 5,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -261,7 +247,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -271,7 +256,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -280,8 +264,7 @@
               "id": "Miscellaneous_Annual_Cost",
               "inputType": null,
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 5,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -294,7 +277,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -304,7 +286,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -313,8 +294,7 @@
               "id": "General Overhead_Annual_Cost",
               "inputType": null,
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 5,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -326,8 +306,7 @@
               "id": "Fuel_Per_Year",
               "inputType": "num",
               "label": "Gallons",
-              "updatedValue": null,
-              "value": 5,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -336,8 +315,7 @@
               "id": "Fuel_Unit_Cost",
               "inputType": "num",
               "label": "Per Gallon",
-              "updatedValue": null,
-              "value": 1,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -346,8 +324,7 @@
               "id": "Fuel_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 2,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -359,8 +336,7 @@
               "id": "Oil_Per_Year",
               "inputType": "num",
               "label": "Quarts",
-              "updatedValue": null,
-              "value": 3,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -369,8 +345,7 @@
               "id": "Oil_Unit_Cost",
               "inputType": "num",
               "label": "Per Quart",
-              "updatedValue": null,
-              "value": 2,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -379,8 +354,7 @@
               "id": "Oil_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -393,7 +367,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -403,7 +376,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -412,8 +384,7 @@
               "id": "Insurance_Annual_Cost",
               "inputType": null,
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -426,7 +397,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -436,7 +406,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -445,8 +414,7 @@
               "id": "Road Taxes_Annual_Cost",
               "inputType": null,
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 5,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -458,8 +426,7 @@
               "id": "Tolls_Per_Year",
               "inputType": "num",
               "label": "Trips",
-              "updatedValue": null,
-              "value": 9,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -468,8 +435,7 @@
               "id": "Tolls_Unit_Cost",
               "inputType": "num",
               "label": "Per Trip",
-              "updatedValue": null,
-              "value": 4,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -478,8 +444,7 @@
               "id": "Tolls_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 5,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -492,7 +457,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -502,7 +466,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -511,8 +474,7 @@
               "id": "Total Fixed and Operational Cost_Annual_Cost",
               "inputType": null,
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 69,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -524,8 +486,7 @@
               "id": "Straight Time_Per_Year",
               "inputType": "num",
               "label": "Hours",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -534,8 +495,7 @@
               "id": "Straight Time_Unit_Cost",
               "inputType": "num",
               "label": "Per Hour",
-              "updatedValue": null,
-              "value": 123,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -544,8 +504,7 @@
               "id": "Straight Time_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 123,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -557,8 +516,7 @@
               "id": "Overtime_Per_Year",
               "inputType": "num",
               "label": "Hours",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -567,8 +525,7 @@
               "id": "Overtime_Unit_Cost",
               "inputType": "num",
               "label": "Per Hour",
-              "updatedValue": null,
-              "value": 123,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -577,8 +534,7 @@
               "id": "Overtime_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -591,7 +547,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -601,7 +556,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -611,7 +565,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             }
           ],
@@ -623,8 +576,7 @@
               "id": "Social Security_Per_Year",
               "inputType": "num",
               "label": "Taxable Wages",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -633,8 +585,7 @@
               "id": "Social Security_Unit_Cost",
               "inputType": "num",
               "label": "Unit Cost",
-              "updatedValue": null,
-              "value": 123,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -643,8 +594,7 @@
               "id": "Social Security_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 123,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -656,8 +606,7 @@
               "id": "Workman's Compensation_Per_Year",
               "inputType": "num",
               "label": "Taxable Wages",
-              "updatedValue": null,
-              "value": 357,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -666,8 +615,7 @@
               "id": "Workman's Compensation_Unit_Cost",
               "inputType": "num",
               "label": "Unit Cost",
-              "updatedValue": null,
-              "value": 59,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -676,8 +624,7 @@
               "id": "Workman's Compensation_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 653,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -689,8 +636,7 @@
               "id": "Federal Unemployment Comp._Per_Year",
               "inputType": "num",
               "label": "Taxable Wages",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -699,8 +645,7 @@
               "id": "Federal Unemployment Comp._Unit_Cost",
               "inputType": "num",
               "label": "Unit Cost",
-              "updatedValue": null,
-              "value": 12,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -709,8 +654,7 @@
               "id": "Federal Unemployment Comp._Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -722,8 +666,7 @@
               "id": "State Unemployment Comp._Per_Year",
               "inputType": "num",
               "label": "Taxable Wages",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -732,8 +675,7 @@
               "id": "State Unemployment Comp._Unit_Cost",
               "inputType": "num",
               "label": "Unit Cost",
-              "updatedValue": null,
-              "value": 3,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -742,8 +684,7 @@
               "id": "State Unemployment Comp._Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 2,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -756,7 +697,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -766,7 +706,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -776,7 +715,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             }
           ],
@@ -788,8 +726,7 @@
               "id": "Health & Welfare_Per_Year",
               "inputType": "num",
               "label": "No. of Employees or Hours",
-              "updatedValue": null,
-              "value": 3,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -798,8 +735,7 @@
               "id": "Health & Welfare_Unit_Cost",
               "inputType": "num",
               "label": "Rate",
-              "updatedValue": null,
-              "value": 1,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -808,8 +744,7 @@
               "id": "Health & Welfare_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 2,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -821,8 +756,7 @@
               "id": "Vacation_Per_Year",
               "inputType": "num",
               "label": "No. of Employees or Hours",
-              "updatedValue": null,
-              "value": 1,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -831,8 +765,7 @@
               "id": "Vacation_Unit_Cost",
               "inputType": "num",
               "label": "Rate",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -841,8 +774,7 @@
               "id": "Vacation_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 2,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -854,8 +786,7 @@
               "id": "Holiday_Per_Year",
               "inputType": "num",
               "label": "No. of Employees or Hours",
-              "updatedValue": null,
-              "value": 3,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -864,8 +795,7 @@
               "id": "Holiday_Unit_Cost",
               "inputType": "num",
               "label": "Rate",
-              "updatedValue": null,
-              "value": 1,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -874,8 +804,7 @@
               "id": "Holiday_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 2,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -887,8 +816,7 @@
               "id": "Pension_Per_Year",
               "inputType": "num",
               "label": "No. of Employees or Hours",
-              "updatedValue": null,
-              "value": 3,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -897,8 +825,7 @@
               "id": "Pension_Unit_Cost",
               "inputType": "num",
               "label": "Rate",
-              "updatedValue": null,
-              "value": 2,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -907,8 +834,7 @@
               "id": "Pension_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -921,7 +847,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -931,7 +856,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -940,8 +864,7 @@
               "id": "Total Operation Labor Cost_Annual_Cost",
               "inputType": null,
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 3,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -953,8 +876,7 @@
               "id": "Supplier's Wages_Per_Year",
               "inputType": "num",
               "label": "Hours",
-              "updatedValue": null,
-              "value": 13,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -963,8 +885,7 @@
               "id": "Supplier's Wages_Unit_Cost",
               "inputType": "num",
               "label": "Per Hour",
-              "updatedValue": null,
-              "value": 4,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             },
             {
@@ -973,8 +894,7 @@
               "id": "Supplier's Wages_Annual_Cost",
               "inputType": "num",
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 2,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -987,7 +907,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -997,7 +916,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -1006,8 +924,7 @@
               "id": "Total Cost_Annual_Cost",
               "inputType": null,
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 3,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -1020,7 +937,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -1030,7 +946,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -1039,8 +954,7 @@
               "id": "Return on Investment_Annual_Cost",
               "inputType": null,
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 2,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -1053,7 +967,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -1063,7 +976,6 @@
               "inputType": null,
               "label": null,
               "updatedValue": null,
-              "value": null,
               "icon": null
             },
             {
@@ -1072,8 +984,7 @@
               "id": "Total Offer_Annual_Cost",
               "inputType": null,
               "label": "Annual Cost",
-              "updatedValue": null,
-              "value": 1234,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -1084,8 +995,7 @@
               "label": "Equipment Realignment, Deadhead & Portal Miles",
               "inputType": "num",
               "columnName": "annual_cost",
-              "updatedValue": null,
-              "value": 1234,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -1096,8 +1006,7 @@
               "label": "Plate Miles",
               "inputType": "num",
               "columnName": "annual_cost",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -1108,8 +1017,7 @@
               "label": "Total Miles",
               "inputType": "num",
               "columnName": "annual_cost",
-              "updatedValue": null,
-              "value": 24,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -1120,8 +1028,7 @@
               "label": "U.S. DOT required vehicle Inspection, Equipment, Realignment, Deadhead  & Portal Hours ",
               "inputType": "num",
               "columnName": "annual_cost",
-              "updatedValue": null,
-              "value": null,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -1132,8 +1039,7 @@
               "label": "Plate Hours",
               "inputType": "num",
               "columnName": "annual_cost",
-              "updatedValue": null,
-              "value": 12,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ],
@@ -1144,8 +1050,7 @@
               "label": "Total Hours",
               "inputType": "num",
               "columnName": "annual_cost",
-              "updatedValue": "789",
-              "value": 24,
+              "updatedValue": 12,
               "icon": "dollar-sign"
             }
           ]
