@@ -115,7 +115,7 @@ function ViewTrips(props) {
               Edit Trip
             </Button>
           )}
-          {/*<Button
+          <Button
             hidden={!showTrip}
             className=" btn btn-primary"
             onClick={() => openModal("vehicle")}
@@ -125,7 +125,7 @@ function ViewTrips(props) {
           >
             Edit Vehicles
           </Button>
-           <Link
+          {/* <Link
             onClick={(e) => props.setSelectedTrip("Trip 326")}
             to={`${props.url}/trip/${props.selectedContractId}`}
             className="btn btn-primary"
@@ -151,7 +151,8 @@ function ViewTrips(props) {
             {showVehicleModal && (
               <UpsertVehicleModal
                 modalName={"Edit Vehicles"}
-                vehicle={props.tripData}
+                vehicles={props.tripData[19]}
+                trailers={props.tripData[20]}
                 show={showVehicleModal}
                 closeModal={closeModal}
               />

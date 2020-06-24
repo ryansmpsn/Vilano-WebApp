@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, FormControl, Button } from "react-bootstrap";
+import { Modal, FormControl, Button, FormLabel, FormGroup } from "react-bootstrap";
 import Select from "react-select";
 import Send from "../../../libs/send";
 
@@ -12,7 +12,8 @@ class UpsertVehicleModal extends React.Component {
       isLoading: true,
       modalName: props.modalName,
       show: props.show,
-      vehicle: props.vehicle,
+      vehicles: props.vehicles,
+      trailers: props.trailers,
       vehicleOptions: [],
       trailerOptions: [],
       Permissions: "Write",
@@ -38,6 +39,9 @@ class UpsertVehicleModal extends React.Component {
     return (
       <Modal show={this.props.show} onHide={this.props.closeModal}>
         <Modal.Header closeButton>
+          {console.log(this.state.vehicles)}
+          {console.log(this.state.trailers)}
+
           <Modal.Title>{this.props.modalName}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -75,6 +79,22 @@ class UpsertVehicleModal extends React.Component {
               <Button>add</Button>
             </>
           )}
+
+          {this.state.vehicles.value.map((c, index) => (
+            <FormGroup key={index}>
+              <FormLabel>{c[3].label + ": " + c[3].value}</FormLabel>
+              <FormLabel>{c[4].label + ": " + c[4].value}</FormLabel>
+            </FormGroup>
+          ))}
+          {this.state.trailers.value.map((c, index) => (
+            <FormGroup key={index}>
+              <FormLabel>{c[3].label + ": " + c[3].value}</FormLabel>
+              <FormLabel>{c[4].label + ": " + c[4].value}</FormLabel>
+            </FormGroup>
+          ))}
+
+          {/* <FormGroup key={index}>
+                     <FormLabel>)} */}
         </Modal.Body>
       </Modal>
     );

@@ -77,9 +77,8 @@ export default class UpsertContractModal extends React.Component {
     event.preventDefault();
     var hand = this;
     var newContract = null;
-    console.log(this.state.editContract);
-    console.log(JSON.stringify(this.state.editContract));
     this.setState({ submitting: true });
+
     hand.state
       .submitAction(this.state.editContract)
       .then((res) => {
