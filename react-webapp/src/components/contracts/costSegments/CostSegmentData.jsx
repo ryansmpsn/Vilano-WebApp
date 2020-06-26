@@ -1193,6 +1193,7 @@ class CostSegmentData extends Component {
               options={this.props.selectOptions}
               placeholder={"Search for Contracts by ID"}
               onChange={(x) => {
+                this.setState({ rateSheetData: null });
                 this.setState({ costSegmentDropdowns: null });
                 this.setState({ settingData: false });
                 this.setState({ contractSearch: x.value });
