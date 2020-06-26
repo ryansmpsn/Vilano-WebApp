@@ -61,22 +61,20 @@ function TripData(props) {
       ) : props.contractProfile === null ? (
         <MDBContainer>Select a Contract to Display Trips</MDBContainer>
       ) : (
-        <div className="trip">
-          <Row key="topRow" className="show-grid">
-            {props.contractProfile[28].value.map((c, index) => (
-              <ViewTrips
-                key={index}
-                tripData={c}
-                contractProfile={props.contractProfile}
-                inputRestrictions={contentInputRestrictions}
-                submitAction={(editTrip) => {
-                  return props.tripEditSubmitAction(editTrip);
-                }}
-                appProps={props.appProps}
-              />
-            ))}
-          </Row>
-        </div>
+        <Row key="topRow" className="show-grid">
+          {props.contractProfile[28].value.map((c, index) => (
+            <ViewTrips
+              key={index}
+              tripData={c}
+              contractProfile={props.contractProfile}
+              inputRestrictions={contentInputRestrictions}
+              submitAction={(editTrip) => {
+                return props.tripEditSubmitAction(editTrip);
+              }}
+              appProps={props.appProps}
+            />
+          ))}
+        </Row>
       )}
       {!isLoading && (
         <UpsertTripModal

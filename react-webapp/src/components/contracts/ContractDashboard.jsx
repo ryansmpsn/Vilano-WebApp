@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Link, withRouter } from "react-router-dom";
-import { ButtonGroup } from "react-bootstrap";
+import { ButtonGroup, Dropdown, Button } from "react-bootstrap";
 import CountUp from "react-countup";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
 import NavPerm from "../../libs/NavPerms";
@@ -127,25 +127,25 @@ class ContractDashboard extends Component {
                     </MDBCol>
                   </MDBRow>
                 </div>
-                <div className="d-flex flex-column">
-                  <ButtonGroup size="lg">
-                    <Link className="btn btn-primary" to="/contracts/dashboard">
-                      Contracts
-                    </Link>
-                    <Link to="/contracts/trips" className="btn btn-primary">
+                <Dropdown as={ButtonGroup}>
+                  <Link className="btn  btn-primary" to="/contracts/dashboard">
+                    Contracts
+                  </Link>
+                  <Dropdown.Toggle split variant="primary" id="dropdown-split-basic" />
+
+                  <Dropdown.Menu>
+                    <Link className="dropdown-item" to="/contracts/trips">
                       Trips
                     </Link>
-                    {/* <Link to="/contracts/" className="btn btn-primary">
-                      Routes
-                    </Link>
-                    <Link to="/contracts/" className="btn btn-primary">
-                      Cost Segments
-                    </Link> */}
-                    <Link to="/contracts/costsegment" className="btn btn-primary">
+                    <Link className="dropdown-item" to="/contracts/costsegment">
                       Rate Sheets
                     </Link>
-                  </ButtonGroup>
-                </div>
+                  </Dropdown.Menu>
+                </Dropdown>
+
+                {/* <Link to="/contracts/" className="btn btn-primary">
+                    Routes
+                  </Link> */}
               </MDBCardHeader>
               <MDBCardBody>
                 <MDBRow>
