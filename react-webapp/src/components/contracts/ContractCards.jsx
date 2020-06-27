@@ -81,7 +81,7 @@ function ContractCards(props) {
                 props.setSelectedContractId(contract[0].value);
                 props.getTrips("/Contract/" + contract[0].value);
               }}
-              to={`${props.url}/${contract[0].value}`}
+              to={"../trips"}
               className="btn btn-primary"
             >
               View Trips

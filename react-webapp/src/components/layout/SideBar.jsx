@@ -19,7 +19,7 @@ class SideBar extends Component {
           <img alt="Vilano Management Services Inc." className="img-fluid" src={logo} />
         </a>
         <MDBListGroup className="list-group list-group-flush">
-          <NavLink exact={true} to="/" activeClassName="activeClass">
+          <NavLink to="/dashboard" activeClassName="activeClass">
             <br />
             <MDBListGroupItem>
               <MDBIcon icon="chart-pie" className="mr-3" />
@@ -49,6 +49,13 @@ class SideBar extends Component {
               404
             </MDBListGroupItem>
           </NavLink> */}
+          <NavLink to="/about" activeClassName="activeClass">
+            <div />
+            <MDBListGroupItem>
+              <MDBIcon icon="question" className="mr-3" />
+              About
+            </MDBListGroupItem>
+          </NavLink>
         </MDBListGroup>
       </div>
     );

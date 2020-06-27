@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Link, withRouter } from "react-router-dom";
-import { ButtonGroup, Dropdown } from "react-bootstrap";
-import CountUp from "react-countup";
-import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
-import NavPerm from "../../libs/NavPerms";
-import Send from "../../libs/send";
-
 import Routing from "./Routing";
+import Send from "../../libs/send";
+import CountUp from "react-countup";
+import { Link } from "react-router-dom";
+import NavPerm from "../../libs/NavPerms";
+import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
 
 class ContractDashboard extends Component {
   _isMounted = false;
@@ -86,10 +84,8 @@ class ContractDashboard extends Component {
   }
 
   render() {
-    let { url, path } = this.props.match;
-
     return (
-      <Router>
+      <>
         <MDBRow className="mb-4">
           <MDBCol xl="12" md="12" className="mb-r">
             <MDBCard className="cascading-admin-card">
@@ -104,7 +100,7 @@ class ContractDashboard extends Component {
                         <MDBCardBody>
                           <MDBListGroup className="list-group-flush">
                             <MDBListGroupItem>
-                              Current Active Contracts
+                              Active Contracts
                               <MDBBadge color="primary-color" pill className="float-right">
                                 <CountUp start={0} end={this.state.selectOptions.length} duration={5} />
                               </MDBBadge>
@@ -127,27 +123,9 @@ class ContractDashboard extends Component {
                     </MDBCol>
                   </MDBRow>
                 </div>
-                <Dropdown as={ButtonGroup}>
-                  <Link className="btn  btn-primary" to="/contracts/dashboard">
-                    Contracts
-                  </Link>
-                  <Dropdown.Toggle split variant="primary" id="dropdown-split-basic" />
-
-                  <Dropdown.Menu>
-                    <Link className="dropdown-item" to="/contracts/trips">
-                      Trips
-                    </Link>
-                    <Link className="dropdown-item" to="/contracts/costsegment">
-                      Rate Sheets
-                    </Link>
-                  </Dropdown.Menu>
-                </Dropdown>
-
-                {/* <Link to="/contracts/" className="btn btn-primary">
-                    Routes
-                  </Link> */}
               </MDBCardHeader>
               <MDBCardBody>
+                {this.state.contractProfile !== null && " Selected Contract Information"}
                 <MDBRow>
                   {this.state.contractProfile !== null &&
                     this.state.contractProfile.map(
@@ -160,14 +138,38 @@ class ContractDashboard extends Component {
                           </MDBCol>
                         )
                     )}
+                  {this.state.contractProfile === null ? (
+                    <MDBCol>
+                      <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
+                        Contracts
+                      </Link>
+                      <Link to="trips" className="btn btn-primary btn-sm btn-outline-info">
+                        Trips
+                      </Link>
+                      <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info">
+                        Rate Sheets
+                      </Link>
+                    </MDBCol>
+                  ) : (
+                    <MDBCol>
+                      <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info float-right">
+                        Rate Sheets
+                      </Link>
+                      <Link to="trips" className="btn btn-primary btn-sm btn-outline-info float-right">
+                        Trips
+                      </Link>
+                      <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info float-right">
+                        Contracts
+                      </Link>
+                    </MDBCol>
+                  )}
                 </MDBRow>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
         </MDBRow>
+
         <Routing
-          url={url}
-          path={path}
           props={this.props}
           setSelectedTrip={this.setSelectedTrip}
           setSelectedContract={this.setSelectedContract}
@@ -201,9 +203,9 @@ class ContractDashboard extends Component {
           }}
           getTrips={this.getTrips}
         />
-      </Router>
+      </>
     );
   }
 }
 
-export default withRouter(ContractDashboard);
+export default ContractDashboard;

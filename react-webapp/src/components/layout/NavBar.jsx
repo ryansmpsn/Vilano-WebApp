@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  MDBNavbar,
-  MDBNavbarBrand,
-  MDBNavbarNav,
-  MDBNavbarToggler,
-  MDBCollapse
-} from "mdbreact";
+import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse } from "mdbreact";
 import Clock from "./Clock";
 import Auth from "./NavBarAuth";
 
@@ -14,32 +8,27 @@ class NavBar extends Component {
     super(props);
     this.state = {
       collapse: false,
-      props: props
+      props: props,
     };
   }
 
   onClick = () => {
     this.setState({
-      collapse: !this.state.collapse
+      collapse: !this.state.collapse,
     });
   };
 
   toggle = () => {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+      dropdownOpen: !this.state.dropdownOpen,
     });
   };
 
   render() {
     return (
       <div>
-        <MDBNavbar
-          className="navbar fixed-top flexible-navbar"
-          light
-          expand="md"
-          scrolling
-        >
-          <MDBNavbarBrand href="/">
+        <MDBNavbar className="navbar fixed-top flexible-navbar" light expand="md" scrolling>
+          <MDBNavbarBrand>
             <strong>
               <Clock />
             </strong>

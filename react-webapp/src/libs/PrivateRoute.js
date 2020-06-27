@@ -1,23 +1,14 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../auth";
 
-function PrivateRoute({ component: Component, ...rest }) {
+function PrivateRoute({ element, ...rest }) {
   const { session } = useAuth();
   const { isAuthenticated } = useAuth();
+  let location = useLocation();
+  let state = { referrer: location };
 
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        session && isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to={{ pathname: "/login", state: { referrer: props.location } }} />
-        )
-      }
-    />
-  );
+  return session && isAuthenticated ? <Route {...rest} element={element} /> : <Navigate to="/login" replace state={state} />;
 }
 
 export default PrivateRoute;

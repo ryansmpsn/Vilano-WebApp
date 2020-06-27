@@ -1,6 +1,6 @@
 import React from "react";
-import { Dropdown, ListGroupItem, Button, DropdownButton, NavDropdown, ButtonGroup, ListGroup } from "react-bootstrap";
-import { MDBListGroupItem, MDBIcon } from "mdbreact";
+import { Dropdown, ListGroupItem, ButtonGroup } from "react-bootstrap";
+import { MDBIcon } from "mdbreact";
 import { NavLink } from "react-router-dom";
 
 function SideBarAuth(props) {
@@ -76,13 +76,6 @@ function SideBarAuth(props) {
               Profile
             </MDBListGroupItem>
           </NavLink> */}
-      <NavLink to="/About" activeClassName="activeClass">
-        <div />
-        <MDBListGroupItem>
-          <MDBIcon icon="question" className="mr-3" />
-          About
-        </MDBListGroupItem>
-      </NavLink>
     </>
   );
 }

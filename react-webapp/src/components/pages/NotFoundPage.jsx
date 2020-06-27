@@ -10,7 +10,7 @@ const NotFoundPage = () => {
             <div className="alert alert-danger" role="alert">
               Error 404.
               <a href="/" className="alert-link">
-                Click Here
+                Click Here{" "}
               </a>
               to be redireced back to your dashboard.
             </div>

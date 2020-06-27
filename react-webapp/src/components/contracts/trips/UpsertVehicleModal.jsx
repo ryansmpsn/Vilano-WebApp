@@ -135,7 +135,7 @@ class UpsertVehicleModal extends React.Component {
                       this.setState({ vehicleValues: object });
                     }}
                     max="100"
-                    min="0"
+                    min="1"
                     step="1"
                     placeholder="Number of Vehicles"
                   />
@@ -175,7 +175,7 @@ class UpsertVehicleModal extends React.Component {
                       this.setState({ trailerValues: object });
                     }}
                     max="100"
-                    min="0"
+                    min="1"
                     step="1"
                     placeholder="Number of Trailers"
                   />

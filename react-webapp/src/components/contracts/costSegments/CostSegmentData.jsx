@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Select from "react-select";
-import { MDBCard, MDBCardHeader, MDBContainer, MDBCardBody } from "mdbreact";
-import { Button, Spinner } from "react-bootstrap";
+import { MDBContainer, MDBCardBody } from "mdbreact";
+import { Button, Spinner, Jumbotron, Container } from "react-bootstrap";
 import Send from "../../../libs/send";
 import UpsertCostSegment from "./UpsertCostSegment";
 
@@ -1186,22 +1186,20 @@ class CostSegmentData extends Component {
 
   render() {
     return (
-      <MDBCard className="m-2">
-        <MDBCardHeader>
-          <h5>
-            <Select
-              options={this.props.selectOptions}
-              placeholder={"Search for Contracts by ID"}
-              onChange={(x) => {
-                this.setState({ rateSheetData: null });
-                this.setState({ costSegmentDropdowns: null });
-                this.setState({ settingData: false });
-                this.setState({ contractSearch: x.value });
-              }}
-              isDisabled={this.state.isLoading}
-              defaultInputValue={this.props.selectedContract}
-            />
-          </h5>
+      <Jumbotron>
+        <Container className="container-sm pl-5 pr-5 pt-2">
+          <Select
+            options={this.props.selectOptions}
+            placeholder={"Select a Contract to View Rate Information"}
+            onChange={(x) => {
+              this.setState({ rateSheetData: null });
+              this.setState({ costSegmentDropdowns: null });
+              this.setState({ settingData: false });
+              this.setState({ contractSearch: x.value });
+            }}
+            isDisabled={this.state.isLoading}
+            defaultInputValue={this.props.selectedContract}
+          />
           {this.state.isLoading === true ? (
             <MDBContainer>
               <Spinner animation="border" variant="primary" />
@@ -1218,7 +1216,7 @@ class CostSegmentData extends Component {
                   <Select
                     autoFocus
                     options={this.state.costSegmentDropdowns}
-                    placeholder={"Select a Cost Segment to Update"}
+                    placeholder={"Select a Cost-Segment View Rate Information"}
                     onChange={(x) => {
                       this.updateRateSheetData(x);
                     }}
@@ -1233,11 +1231,12 @@ class CostSegmentData extends Component {
               )}
             </>
           )}
-        </MDBCardHeader>
+        </Container>
+        <hr />
 
         {!this.state.settingData ? (
           <MDBCardBody>
-            <MDBContainer>Please select a contract to add or update cost segment information.</MDBContainer>
+            <MDBContainer>Please select a contract and cost-segment to add or update rate information.</MDBContainer>
           </MDBCardBody>
         ) : (
           <UpsertCostSegment
@@ -1259,7 +1258,7 @@ class CostSegmentData extends Component {
             }}
           />
         )}
-      </MDBCard>
+      </Jumbotron>
     );
   }
 }

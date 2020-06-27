@@ -103,6 +103,7 @@ function ContractData(props) {
 
   return (
     <Jumbotron>
+      {console.log(props)}
       <Container className="container-sm pl-5 pr-5 pt-2">
         <form onSubmit={handleSearch}>
           <Select
