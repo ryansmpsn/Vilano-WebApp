@@ -26,6 +26,7 @@ class SideBar extends Component {
               Dashboard
             </MDBListGroupItem>
           </NavLink>
+
           <NavLink to="/resources" activeClassName="activeClass">
             <div />
             <MDBListGroupItem>

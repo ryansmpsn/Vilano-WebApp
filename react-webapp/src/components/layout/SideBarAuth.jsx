@@ -1,31 +1,54 @@
 import React from "react";
+import { Dropdown, ListGroupItem, Button, DropdownButton, NavDropdown, ButtonGroup, ListGroup } from "react-bootstrap";
 import { MDBListGroupItem, MDBIcon } from "mdbreact";
 import { NavLink } from "react-router-dom";
 
 function SideBarAuth(props) {
   return (
     <>
-      {props.appProps.isAuthenticated && (
+      {props.appProps.isAuthenticated && props.appProps.contractAccess !== "None" && (
         <>
-          {props.appProps.contractAccess !== "None" && (
-            <>
-              <NavLink to="/contracts" activeClassName="activeClass">
-                <div />
-                <MDBListGroupItem>
-                  <MDBIcon icon="file-invoice-dollar" className="mr-3" />
-                  Contracts
-                </MDBListGroupItem>
+          {/* <NavLink to="/contracts" activeClassName="activeClass">
+            <div />
+            <ListGroupItem>
+              <MDBIcon icon="file-invoice-dollar" className="mr-3" />
+              Contracts
+            </ListGroupItem>
+          </NavLink> */}
+
+          <Dropdown as={ButtonGroup}>
+            <NavLink to="/contracts" activeClassName="activeClass">
+              <div />
+              <ListGroupItem>
+                <MDBIcon icon="file-invoice-dollar" className="mr-3" />
+                Contracts
+              </ListGroupItem>
+            </NavLink>
+            <Dropdown.Toggle split id="dropdown-split-basic" as={ListGroupItem} />
+            <Dropdown.Menu>
+              <NavLink className="dropdown-item" to="/contracts/trips">
+                <MDBIcon icon="road" className="mr-2" />
+                Trips
               </NavLink>
-              <NavLink to="/bids" activeClassName="activeClass">
+              <Dropdown.Divider />
+
+              <NavLink className="dropdown-item" to="/contracts/costsegment">
+                <MDBIcon icon="file-signature" className="mr-2" />
+                Rate Sheets
+              </NavLink>
+            </Dropdown.Menu>
+          </Dropdown>
+
+          {/* <NavLink to="/bids" activeClassName="activeClass">
                 <div />
-                {/* <MDBListGroupItem>
+                 <MDBListGroupItem>
                   <MDBIcon icon="file-signature" className="mr-3" />
                   Contract Analytics
-                </MDBListGroupItem> */}
-              </NavLink>
-            </>
-          )}
-          {/* <NavLink to="/performance" activeClassName="activeClass">
+                </MDBListGroupItem> 
+              </NavLink>*/}
+        </>
+      )}
+      {/* <NavLink to="/performance" activeClassName="activeClass">
             <div />
             <MDBListGroupItem>
               <MDBIcon icon="chart-line" className="mr-3" />
@@ -53,15 +76,13 @@ function SideBarAuth(props) {
               Profile
             </MDBListGroupItem>
           </NavLink> */}
-          <NavLink to="/About" activeClassName="activeClass">
-            <div />
-            <MDBListGroupItem>
-              <MDBIcon icon="question" className="mr-3" />
-              About
-            </MDBListGroupItem>
-          </NavLink>
-        </>
-      )}
+      <NavLink to="/About" activeClassName="activeClass">
+        <div />
+        <MDBListGroupItem>
+          <MDBIcon icon="question" className="mr-3" />
+          About
+        </MDBListGroupItem>
+      </NavLink>
     </>
   );
 }

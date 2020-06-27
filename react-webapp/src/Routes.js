@@ -26,6 +26,9 @@ class Routes extends React.Component {
         <Route path="/resources" component={ResourcesPage} />
         <Route path="/about" component={About} />
         <PrivateRoute path="/contracts" component={ContractDashboard} />
+        <PrivateRoute path="/contracts/trips" component={ContractDashboard} />
+        <PrivateRoute path="/contracts/costsegment" component={ContractDashboard} />
+        <PrivateRoute path="/contracts/routes" component={ContractDashboard} />
         <PrivateRoute path="/bids" component={BidDashboard} />
         <PrivateRoute path="/axios" component={AxiosTestPage} />
         <PrivateRoute path="/testpage" component={testpage} />
