@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { MDBListGroup, MDBListGroupItem, MDBIcon } from "mdbreact";
+import { ListGroup, ListGroupItem } from "react-bootstrap";
+import { MDBIcon } from "mdbreact";
 import logo from "../../img/logo.jpg";
 import { NavLink } from "react-router-dom";
 import SideBarAuth from "./SideBarAuth";
@@ -18,45 +19,44 @@ class SideBar extends Component {
         <a href="/" className="mt-3 mb-3 waves-effect">
           <img alt="Vilano Management Services Inc." className="img-fluid" src={logo} />
         </a>
-        <MDBListGroup className="list-group list-group-flush">
+        <ListGroup className="list-group-flush">
           <NavLink to="/dashboard" activeClassName="activeClass">
-            <br />
-            <MDBListGroupItem>
+            <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
               <MDBIcon icon="chart-pie" className="mr-3" />
               Dashboard
-            </MDBListGroupItem>
+            </ListGroupItem>
           </NavLink>
 
           <NavLink to="/resources" activeClassName="activeClass">
             <div />
-            <MDBListGroupItem>
+            <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
               <div className="fas fa-paperclip mr-3" />
               Resources
-            </MDBListGroupItem>
+            </ListGroupItem>
           </NavLink>
           <SideBarAuth appProps={this.state.props} />
           {/* <NavLink to="/testpage" activeClassName="activeClass">
             <div />
-            <MDBListGroupItem>
+            <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
               <div className="fas fa-vial mr-3" />
               Test Page
-            </MDBListGroupItem>
+            </ListGroupItem>
           </NavLink>
           <NavLink to="/404" activeClassName="activeClass">
             <div />
-            <MDBListGroupItem>
+            <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
               <MDBIcon icon="exclamation" className="mr-3" />
               404
-            </MDBListGroupItem>
+            </ListGroupItem>
           </NavLink> */}
           <NavLink to="/about" activeClassName="activeClass">
             <div />
-            <MDBListGroupItem>
+            <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
               <MDBIcon icon="question" className="mr-3" />
               About
-            </MDBListGroupItem>
+            </ListGroupItem>
           </NavLink>
-        </MDBListGroup>
+        </ListGroup>
       </div>
     );
   }

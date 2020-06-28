@@ -19,12 +19,12 @@ function SideBarAuth(props) {
           <Dropdown as={ButtonGroup}>
             <NavLink to="/contracts" activeClassName="activeClass">
               <div />
-              <ListGroupItem>
+              <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
                 <MDBIcon icon="file-invoice-dollar" className="mr-3" />
                 Contracts
               </ListGroupItem>
             </NavLink>
-            <Dropdown.Toggle split id="dropdown-split-basic" as={ListGroupItem} />
+            <Dropdown.Toggle split id="dropdown-split-basic" as={ListGroupItem} style={{ borderWidth: "0 0 1px" }} />
             <Dropdown.Menu>
               <NavLink className="dropdown-item" to="/contracts/trips">
                 <MDBIcon icon="road" className="mr-2" />
