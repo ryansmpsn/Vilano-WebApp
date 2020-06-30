@@ -88,6 +88,14 @@ class UpsertVehicleModal extends React.Component {
     JSONData[19] = this.state.vehicles;
     JSONData[20] = this.state.trailers;
     console.log(JSON.stringify(JSONData));
+
+    Send.post("/Contract/ContractTripVehicle", JSONData).then((res) => {
+      console.log(res);
+    });
+
+    Send.post("/Contract/ContractTripTrailer", JSONData).then((res) => {
+      console.log(res);
+    });
   }
 
   set_variable_id(object, variable_key, value) {
