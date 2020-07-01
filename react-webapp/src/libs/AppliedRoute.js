@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Navigate } from "react-router-dom";
 import Home from "../components/pages/HomePage";
 import NavPerm from "./NavPerms";
 
@@ -16,9 +16,9 @@ export function ModuleRoute({
 }) {
   return (
     <>
-      {(NavPerm.nav_perm_check() !== "NA" && (
-        <AppliedRoute path={path} exact component={C} appProps={appProps} />
-      )) || <Redirect to="/" exact component={Home} appProps={appProps} />}
+      {(NavPerm.nav_perm_check() !== "NA" && <AppliedRoute path={path} exact component={C} appProps={appProps} />) || (
+        <Navigate to="/" exact component={Home} appProps={appProps} />
+      )}
     </>
   );
 }

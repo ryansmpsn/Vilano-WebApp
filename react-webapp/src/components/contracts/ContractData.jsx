@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, FormGroup, Button, Container, Spinner, Jumbotron } from "react-bootstrap";
+import { Row, Button, Container, Spinner, Jumbotron } from "react-bootstrap";
 import ContractCards from "./ContractCards";
 import Select from "react-select";
 import ContractTable from "./ContractTable";
@@ -11,7 +11,7 @@ function ContractData(props) {
   const [isSearching, setSearching] = useState(false);
   const [isGetAll, setGetAll] = useState(false);
   const [tableView, setTableView] = useState(false);
-  const [contractSearch, setContractSearch] = useState(props.contractSearch);
+  const [contractSearch] = useState(props.contractSearch);
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
@@ -67,7 +67,7 @@ function ContractData(props) {
       });
     let tempCon = contractSearch;
     tempCon[keyValue] = getValue;
-    setContractSearch(tempCon);
+    props.setContractSearchCode(tempCon);
   }
 
   function handleSearch(event, all = false) {
@@ -80,15 +80,6 @@ function ContractData(props) {
       show_all();
       setGetAll(true);
     }
-  }
-
-  function json_array(json) {
-    var result = [];
-    var keys = Object.keys(json);
-    keys.forEach(function (key) {
-      result.push([key, json[key]]);
-    });
-    return result;
   }
 
   function openModal() {
@@ -117,16 +108,11 @@ function ContractData(props) {
             isDisabled={isGetAll | (isSearching & isLoading)}
           />
 
-          {json_array(contractSearch).map((item, index) => (
-            /*ControlID must match useFormFields value*/
-            <FormGroup key={"ContractSearch" + index} controlId={item[0]}></FormGroup>
-          ))}
-
           {(isLoading & isSearching) | isGetAll ? (
             <Spinner animation="border" variant="primary" />
           ) : (
             <>
-              <Button type="submit" disabled={isGetAll}>
+              <Button type="submit" disabled={isGetAll || contractSearch.external_contract_code.length === 0}>
                 Search
               </Button>
               <Button
@@ -137,7 +123,9 @@ function ContractData(props) {
               >
                 Show All
               </Button>
-              <Button onClick={addContract}>Add Contract</Button>
+              <Button onClick={addContract} variant="outline-warning">
+                Add Contract
+              </Button>
             </>
           )}
         </form>

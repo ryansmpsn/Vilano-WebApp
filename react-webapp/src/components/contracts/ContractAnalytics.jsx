@@ -4,7 +4,7 @@ import { Bar, Pie } from "react-chartjs-2";
 import { ProgressBar } from "react-bootstrap";
 import CountUp from "react-countup";
 
-class BidAnalytics extends Component {
+class ContractAnalytics extends Component {
   render() {
     const dataBar = {
       labels: ["Eastern", "Southern", "Central"],
@@ -240,4 +240,4 @@ class BidAnalytics extends Component {
   }
 }
 
-export default BidAnalytics;
+export default ContractAnalytics;

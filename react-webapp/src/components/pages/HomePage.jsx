@@ -6,9 +6,10 @@ export default function Home() {
     <Jumbotron>
       <Container className="text-center">
         <h1 className="display-3">Vilano Management Services Application</h1>
-        <h4 className="text-muted">Alpha V 1.21</h4>
-        <h4 className="text-muted">Under Development</h4>
-        <br />
+        <h4 className="text-muted">Alpha V 1.30</h4>
+        <h4 className="text-muted">
+          <small>Under Development</small>
+        </h4>
       </Container>
     </Jumbotron>
   );

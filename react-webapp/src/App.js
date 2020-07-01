@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import "./css/App.css";
-import Routes from "./Routes";
+import Routing from "./Routes";
 import Send from "./libs/send";
 import { AuthContext } from "./auth";
 import NavBar from "./components/layout/NavBar";
@@ -49,7 +49,7 @@ function App(props) {
           <SideBar isAuthenticated={isAuthenticated} />
           <ToastProvider autoDismiss autoDismissTimeout={6000} placement="bottom-right" components={{ Toast: Notification }}>
             <main id="content" className="p-5" style={{ minHeight: "calc(100vh - 102px)" }}>
-              <Routes isAuthenticated={isAuthenticated} />
+              <Routing isAuthenticated={isAuthenticated} />
             </main>
           </ToastProvider>
           <Footer />

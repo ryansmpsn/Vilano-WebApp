@@ -3,7 +3,7 @@ import { MDBBtn } from "mdbreact";
 import Send from "../../libs/send";
 import { useAuth } from "../../auth";
 import styled from "styled-components";
-import { Redirect } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useFormFields } from "../../libs/hookslib";
 import { useToasts } from "react-toast-notifications";
 import { FormGroup, FormControl, Spinner } from "react-bootstrap";
@@ -51,10 +51,8 @@ const LoginPage = styled.div`
 export default function Login(props) {
   const { setSession } = useAuth();
   const { addToast } = useToasts();
-  const referrer =
-    props.location.state !== null && props.location.state.hasOwnProperty("referrer")
-      ? props.location.state.referrer.pathname
-      : "/";
+  let location = useLocation();
+  const referrer = location.state !== null && location.state.hasOwnProperty("referrer") ? location.state.referrer.pathname : "/";
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     username: "",
@@ -85,12 +83,12 @@ export default function Login(props) {
 
   function handleRedirect() {
     if (props.isAuthenticated)
-      addToast("You Have Logged in Successfully.", {
+      addToast("You have successfully logged in.", {
         appearance: "success",
         autoDismiss: true,
       });
 
-    if (props.isAuthenticated) return <Redirect to={referrer} />;
+    if (props.isAuthenticated) return <Navigate to={referrer} />;
   }
 
   return (

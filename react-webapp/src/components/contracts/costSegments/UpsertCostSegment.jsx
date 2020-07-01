@@ -25,8 +25,8 @@ function UpsertCostSegment(props) {
       { columnName: "cost_segment", updatedValue: props.selectedCostSegment },
       { columnName: "vw_contract_rate_sheet_items", value: rateSheetItems },
     ];
-    let jsonData = props.contractData;
-    jsonData.push({
+    let JSONData = props.contractData;
+    JSONData.push({
       columnName: "vw_contract_rate_sheet_segment",
       inputType: null,
       label: "Cost Segment",
@@ -34,7 +34,7 @@ function UpsertCostSegment(props) {
       value: costSegment,
     });
 
-    props.submitAction(jsonData).then((res) => {
+    props.submitAction(JSONData).then((res) => {
       addToast("Rate Sheet Submitted Successfully!", {
         appearance: "success",
         autoDismiss: true,

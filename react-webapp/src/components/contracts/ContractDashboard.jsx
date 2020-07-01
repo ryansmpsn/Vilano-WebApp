@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Link, withRouter } from "react-router-dom";
-import { ButtonGroup } from "react-bootstrap";
-import CountUp from "react-countup";
-import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
-import NavPerm from "../../libs/NavPerms";
-import Send from "../../libs/send";
-
 import Routing from "./Routing";
+import Send from "../../libs/send";
+import CountUp from "react-countup";
+import { Link } from "react-router-dom";
+import NavPerm from "../../libs/NavPerms";
+import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
 
 class ContractDashboard extends Component {
   _isMounted = false;
@@ -15,6 +13,7 @@ class ContractDashboard extends Component {
     this.state = {
       accessLevel: NavPerm.nav_perm_check(),
       selectOptions: [],
+      contractSearchCode: { external_contract_code: [] },
       selectedContractId: "null",
       selectedContract: "",
       selectedTrip: "",
@@ -32,7 +31,9 @@ class ContractDashboard extends Component {
   setSelectedTrip = (e) => {
     return this.setState({ selectedTrip: e });
   };
-
+  setContractSearchCode = (e) => {
+    return this.setState({ contractSearchCode: e });
+  };
   search = (contractSearch) => {
     return Send.post("/Contract/Search", contractSearch, this.props);
   };
@@ -86,16 +87,14 @@ class ContractDashboard extends Component {
   }
 
   render() {
-    let { url, path } = this.props.match;
-
     return (
-      <Router>
+      <>
         <MDBRow className="mb-4">
           <MDBCol xl="12" md="12" className="mb-r">
             <MDBCard className="cascading-admin-card">
               <MDBCardHeader>
                 <div className="admin-up">
-                  <MDBIcon icon="file-invoice-dollar" className="primary-color" />
+                  <MDBIcon icon="file-contract" className="primary-color" />
                   <h1 className="m-3 text-center">Contract Dashboard</h1>
                   <MDBRow style={{ margin: -20 }}>
                     <MDBCol md="4" className="ml-auto mb-4">
@@ -104,7 +103,7 @@ class ContractDashboard extends Component {
                         <MDBCardBody>
                           <MDBListGroup className="list-group-flush">
                             <MDBListGroupItem>
-                              Current Active Contracts
+                              Active Contracts
                               <MDBBadge color="primary-color" pill className="float-right">
                                 <CountUp start={0} end={this.state.selectOptions.length} duration={5} />
                               </MDBBadge>
@@ -127,27 +126,9 @@ class ContractDashboard extends Component {
                     </MDBCol>
                   </MDBRow>
                 </div>
-                <div className="d-flex flex-column">
-                  <ButtonGroup size="lg">
-                    <Link className="btn btn-primary" to="/contracts/dashboard">
-                      Contracts
-                    </Link>
-                    <Link to="/contracts/trips" className="btn btn-primary">
-                      Trips
-                    </Link>
-                    {/* <Link to="/contracts/" className="btn btn-primary">
-                      Routes
-                    </Link>
-                    <Link to="/contracts/" className="btn btn-primary">
-                      Cost Segments
-                    </Link> */}
-                    <Link to="/contracts/costsegment" className="btn btn-primary">
-                      Rate Sheets
-                    </Link>
-                  </ButtonGroup>
-                </div>
               </MDBCardHeader>
               <MDBCardBody>
+                {this.state.contractProfile !== null && " Selected Contract Information"}
                 <MDBRow>
                   {this.state.contractProfile !== null &&
                     this.state.contractProfile.map(
@@ -161,17 +142,50 @@ class ContractDashboard extends Component {
                         )
                     )}
                 </MDBRow>
+                <MDBRow>
+                  {this.state.contractProfile === null ? (
+                    <MDBCol>
+                      <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
+                        Contracts
+                      </Link>
+                      <Link to="trips" className="btn btn-primary btn-sm btn-outline-info">
+                        Trips
+                      </Link>
+                      <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info">
+                        Rate Sheets
+                      </Link>
+                      {/* <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
+                        Routes
+                      </Link> */}
+                    </MDBCol>
+                  ) : (
+                    <MDBCol>
+                      {/* <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
+                        Routes
+                      </Link> */}
+                      <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info float-right">
+                        Rate Sheets
+                      </Link>
+                      <Link to="trips" className="btn btn-primary btn-sm btn-outline-info float-right">
+                        Trips
+                      </Link>
+                      <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info float-right">
+                        Contracts
+                      </Link>
+                    </MDBCol>
+                  )}
+                </MDBRow>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
         </MDBRow>
+
         <Routing
-          url={url}
-          path={path}
           props={this.props}
           setSelectedTrip={this.setSelectedTrip}
           setSelectedContract={this.setSelectedContract}
           setSelectedContractId={this.setSelectedContractId}
+          setContractSearchCode={this.setContractSearchCode}
           selectedTrip={this.state.selectedTrip}
           selectedContract={this.state.selectedContract}
           selectedContractId={this.state.selectedContractId}
@@ -193,17 +207,15 @@ class ContractDashboard extends Component {
             return this.show_all();
           }}
           appProps={this.props}
-          contractSearch={{
-            external_contract_code: [],
-          }}
+          contractSearch={this.state.contractSearchCode}
           getContracts={() => {
             return this.getContracts();
           }}
           getTrips={this.getTrips}
         />
-      </Router>
+      </>
     );
   }
 }
 
-export default withRouter(ContractDashboard);
+export default ContractDashboard;

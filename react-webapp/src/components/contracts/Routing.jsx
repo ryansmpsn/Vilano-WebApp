@@ -1,24 +1,47 @@
 import React, { Component } from "react";
-import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import TripData from "./trips/TripData";
-import ViewRoutes from "./routes/ViewRoutes";
 import ContractData from "./ContractData";
+import ViewRoutes from "./routes/ViewRoutes";
+import ContractAnalytics from "./ContractAnalytics";
+import { Route, Routes, Navigate } from "react-router-dom";
 import CostSegmentData from "./costSegments/CostSegmentData";
 
 class Routing extends Component {
   render() {
     return (
-      <Switch>
-        <Route exact path="/contracts/dashboard" render={(props) => <ContractData {...props} {...this.props} />} />
-        <Route exact path="/contracts/routes" render={(props) => <ViewRoutes {...props} {...this.props} />} />
-        <Route exact path="/contracts/trips" render={(props) => <TripData {...props} {...this.props} />} />
-        <Route exact path="/contracts/costsegment" render={(props) => <CostSegmentData {...props} {...this.props} />} />
-        <Route exact path={`${this.props.path}/trip/:tripId`} render={(props) => <ViewRoutes {...props} {...this.props} />} />
-        <Route exact path={`${this.props.path}/:contractId`} render={(props) => <TripData {...props} {...this.props} />} />
-        <Redirect from="/contracts" to="/contracts/dashboard" />
-      </Switch>
+      <Routes>
+        <Route path="dashboard" element={<ContractData {...this.props} />} />
+        <Route path="routes" element={<ViewRoutes {...this.props} />} />
+        <Route path="trips" element={<TripData {...this.props} />} />
+        <Route path="costsegment" element={<CostSegmentData {...this.props} />} />
+        <Route path="analytics" element={<ContractAnalytics {...this.props} />} />
+        {/* <Route path={`${this.props.path}/trip/:tripId`} element={<ViewRoutes {...this.props} />} />
+        <Route path={`${this.props.path}/:contractId`} element={<TripData {...this.props} />} /> */}
+        <Navigate from="/contracts" to="/contracts/dashboard" />
+      </Routes>
     );
   }
 }
 
-export default withRouter(Routing);
+export default Routing;
+
+// <Routes>
+//    <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+
+//     <Tab eventKey="home" title="Contracts">
+//       <Route path="dashboard" element={<ContractData {...this.props} />} />
+//     </Tab>
+//     <Tab eventKey="profile" title="Trips" unmountOnExit>
+//       <Route path="trips" element={<TripData {...this.props} />} />
+//     </Tab>
+//     <Tab eventKey="contact" title="Rate Sheets" unmountOnExit>
+//       <Route path="costsegment" element={<CostSegmentData {...this.props} />} />
+//     </Tab>
+//   </Tabs>
+
+//   <Route path="routes" element={<ViewRoutes {...this.props} />} />
+
+//    <Route path={`${this.props.path}/trip/:tripId`} element={<ViewRoutes {...this.props} />} />
+//   <Route path={`${this.props.path}/:contractId`} element={<TripData {...this.props} />} /> */}
+//   <Navigate from="/contracts" to="/contracts/dashboard" />
+// </Routes>

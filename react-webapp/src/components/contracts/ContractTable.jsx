@@ -19,7 +19,7 @@ function ContractTable(props) {
           props.setSelectedContractId(contractData[index][0].value);
           props.getTrips("/Contract/" + contractData[index][0].value);
         }}
-        to={`${props.url}/${contractData[index][0].value}`}
+        to={"../trips"}
         className="btn btn-primary btn-sm"
       >
         View Trips
@@ -31,8 +31,7 @@ function ContractTable(props) {
           props.setSelectedContract(contractData[index][6].value);
           props.setSelectedContractId(contractData[index][0].value);
         }}
-        to="/contracts/costsegment"
-        // to={`${props.url}/costdata`}
+        to="../costsegment"
         className="btn btn-primary btn-sm"
       >
         Cost Segments
