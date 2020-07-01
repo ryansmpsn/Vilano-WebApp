@@ -13,6 +13,7 @@ class ContractDashboard extends Component {
     this.state = {
       accessLevel: NavPerm.nav_perm_check(),
       selectOptions: [],
+      contractSearchCode: { external_contract_code: [] },
       selectedContractId: "null",
       selectedContract: "",
       selectedTrip: "",
@@ -30,7 +31,9 @@ class ContractDashboard extends Component {
   setSelectedTrip = (e) => {
     return this.setState({ selectedTrip: e });
   };
-
+  setContractSearchCode = (e) => {
+    return this.setState({ contractSearchCode: e });
+  };
   search = (contractSearch) => {
     return Send.post("/Contract/Search", contractSearch, this.props);
   };
@@ -138,6 +141,8 @@ class ContractDashboard extends Component {
                           </MDBCol>
                         )
                     )}
+                </MDBRow>
+                <MDBRow>
                   {this.state.contractProfile === null ? (
                     <MDBCol>
                       <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
@@ -149,9 +154,15 @@ class ContractDashboard extends Component {
                       <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info">
                         Rate Sheets
                       </Link>
+                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
+                        Routes
+                      </Link>
                     </MDBCol>
                   ) : (
                     <MDBCol>
+                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
+                        Routes
+                      </Link>
                       <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info float-right">
                         Rate Sheets
                       </Link>
@@ -174,6 +185,7 @@ class ContractDashboard extends Component {
           setSelectedTrip={this.setSelectedTrip}
           setSelectedContract={this.setSelectedContract}
           setSelectedContractId={this.setSelectedContractId}
+          setContractSearchCode={this.setContractSearchCode}
           selectedTrip={this.state.selectedTrip}
           selectedContract={this.state.selectedContract}
           selectedContractId={this.state.selectedContractId}
@@ -195,9 +207,7 @@ class ContractDashboard extends Component {
             return this.show_all();
           }}
           appProps={this.props}
-          contractSearch={{
-            external_contract_code: [],
-          }}
+          contractSearch={this.state.contractSearchCode}
           getContracts={() => {
             return this.getContracts();
           }}

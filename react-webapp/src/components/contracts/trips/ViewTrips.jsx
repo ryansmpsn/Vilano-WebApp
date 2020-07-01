@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-import { Card, Spinner, Row, Col, OverlayTrigger, Popover } from "react-bootstrap";
 import { MDBBtn } from "mdbreact";
-import UpsertVehicleModal from "./UpsertVehicleModal";
-import UpsertTripModal from "./UpsertTripModal";
 import Send from "../../../libs/send";
+import UpsertTripModal from "./UpsertTripModal";
+import { useToasts } from "react-toast-notifications";
+import UpsertVehicleModal from "./UpsertVehicleModal";
+import { Card, Spinner, Row, Col, OverlayTrigger, Popover } from "react-bootstrap";
 
 function ViewTrips(props) {
   const [tripData] = useState(props.tripData);
@@ -12,6 +12,8 @@ function ViewTrips(props) {
   const [showVehicleModal, setShowVehicleModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
+  const [submitting, setSubmitting] = useState(false);
+  const { addToast } = useToasts();
 
   function openModal(x) {
     x === "trip" && setShowTripModal(true);
@@ -33,6 +35,30 @@ function ViewTrips(props) {
       openModal("trip");
     });
   }
+
+  function vehicleSubmitAction(editVehicle) {
+    setSubmitting(true);
+
+    Send.post("/Contract/ContractTripVehicle", editVehicle).then((res) => {
+      addToast("Vehicles Have Been Successfully Updated!", {
+        appearance: "success",
+        autoDismiss: true,
+      });
+      setSubmitting(false);
+    });
+  }
+
+  function trailerSubmitAction(editTrailer) {
+    setSubmitting(true);
+    Send.post("/Contract/ContractTripTrailer", editTrailer).then((res) => {
+      addToast("Trailers Have Been Successfully Updated!", {
+        appearance: "success",
+        autoDismiss: true,
+      });
+      setSubmitting(false);
+    });
+  }
+
   return (
     <Card
       className={"card border-primary mb-3 "}
@@ -168,6 +194,13 @@ function ViewTrips(props) {
               tripData={tripData}
               show={showVehicleModal}
               closeModal={closeModal}
+              submitting={submitting}
+              vehicleSubmitAction={(editVehicle) => {
+                return vehicleSubmitAction(editVehicle);
+              }}
+              trailerSubmitAction={(editTrip) => {
+                return trailerSubmitAction(editTrip);
+              }}
             />
           )}
         </>

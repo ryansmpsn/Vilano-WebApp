@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, FormGroup, Button, Container, Spinner, Jumbotron } from "react-bootstrap";
+import { Row, Button, Container, Spinner, Jumbotron } from "react-bootstrap";
 import ContractCards from "./ContractCards";
 import Select from "react-select";
 import ContractTable from "./ContractTable";
@@ -11,7 +11,7 @@ function ContractData(props) {
   const [isSearching, setSearching] = useState(false);
   const [isGetAll, setGetAll] = useState(false);
   const [tableView, setTableView] = useState(false);
-  const [contractSearch, setContractSearch] = useState(props.contractSearch);
+  const [contractSearch] = useState(props.contractSearch);
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
@@ -67,7 +67,7 @@ function ContractData(props) {
       });
     let tempCon = contractSearch;
     tempCon[keyValue] = getValue;
-    setContractSearch(tempCon);
+    props.setContractSearchCode(tempCon);
   }
 
   function handleSearch(event, all = false) {
@@ -82,15 +82,6 @@ function ContractData(props) {
     }
   }
 
-  function json_array(json) {
-    var result = [];
-    var keys = Object.keys(json);
-    keys.forEach(function (key) {
-      result.push([key, json[key]]);
-    });
-    return result;
-  }
-
   function openModal() {
     setShowModal(true);
     window.location.hash = "edit";
@@ -103,7 +94,6 @@ function ContractData(props) {
 
   return (
     <Jumbotron>
-      {console.log(props)}
       <Container className="container-sm pl-5 pr-5 pt-2">
         <form onSubmit={handleSearch}>
           <Select
@@ -118,16 +108,11 @@ function ContractData(props) {
             isDisabled={isGetAll | (isSearching & isLoading)}
           />
 
-          {json_array(contractSearch).map((item, index) => (
-            /*ControlID must match useFormFields value*/
-            <FormGroup key={"ContractSearch" + index} controlId={item[0]}></FormGroup>
-          ))}
-
           {(isLoading & isSearching) | isGetAll ? (
             <Spinner animation="border" variant="primary" />
           ) : (
             <>
-              <Button type="submit" disabled={isGetAll}>
+              <Button type="submit" disabled={isGetAll || contractSearch.external_contract_code.length === 0}>
                 Search
               </Button>
               <Button
