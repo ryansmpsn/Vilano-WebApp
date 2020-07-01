@@ -27,40 +27,40 @@ function SideBarAuth(props) {
                 <MDBIcon icon="file-signature" className="mr-2" />
                 Rate Sheets
               </NavLink>
-              <Dropdown.Divider />
+              {/*<Dropdown.Divider />
 
-              <NavLink to="/contracts/analytics" className="dropdown-item">
+               <NavLink to="/contracts/analytics" className="dropdown-item">
                 <MDBIcon icon="file-invoice-dollar" className="mr-3" />
                 Contract Analytics
-              </NavLink>
+              </NavLink> */}
             </Dropdown.Menu>
           </Dropdown>
+          {/* <NavLink to="/performance" activeClassName="activeClass">
+            <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
+              <MDBIcon icon="chart-line" className="mr-3" />
+              Performance
+            </ListGroupItem>
+          </NavLink>
+          <NavLink to="/financials" activeClassName="activeClass">
+            <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
+              <MDBIcon icon="money-bill" className="mr-3" />
+              Financials
+            </ListGroupItem>
+          </NavLink>
+          <NavLink to="/payroll" activeClassName="activeClass">
+            <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
+              <MDBIcon icon="hand-holding-usd" className="mr-3" />
+              Payroll
+            </ListGroupItem>
+          </NavLink>
+          <NavLink to="/profile" activeClassName="activeClass">
+            <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
+              <MDBIcon icon="user" className="mr-3" />
+              Profile
+            </ListGroupItem>
+          </NavLink> */}
         </>
       )}
-      <NavLink to="/performance" activeClassName="activeClass">
-        <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-          <MDBIcon icon="chart-line" className="mr-3" />
-          Performance
-        </ListGroupItem>
-      </NavLink>
-      <NavLink to="/financials" activeClassName="activeClass">
-        <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-          <MDBIcon icon="money-bill" className="mr-3" />
-          Financials
-        </ListGroupItem>
-      </NavLink>
-      <NavLink to="/payroll" activeClassName="activeClass">
-        <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-          <MDBIcon icon="hand-holding-usd" className="mr-3" />
-          Payroll
-        </ListGroupItem>
-      </NavLink>
-      <NavLink to="/profile" activeClassName="activeClass">
-        <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-          <MDBIcon icon="user" className="mr-3" />
-          Profile
-        </ListGroupItem>
-      </NavLink>
     </>
   );
 }
