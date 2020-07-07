@@ -8,8 +8,9 @@ const NotFoundPage = () => {
         <MDBRow className="bad-gateway-row">
           <MDBCol md="8">
             <div className="alert alert-danger" role="alert">
-              Error 404.
+              Error.
               <a href="/" className="alert-link">
+                {" "}
                 Click Here{" "}
               </a>
               to be redireced back to your dashboard.

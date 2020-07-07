@@ -21,15 +21,20 @@ class UpsertVehicleModal extends React.Component {
       vehicleValues: { vehicle_type_id: "", vehicle_type_value: "", num_vehicle: "" },
       trailerValues: { trailer_type_id: "", trailer_type_value: "", num_trailer: "" },
       submitting: false,
-      submitAction: () => {
-        console.log("submitting...");
+      vehiclesHaveChanged: false,
+      trailersHaveChanged: false,
+      vehicleSubmitAction: (editVehicle) => {
+        return props.vehicleSubmitAction(editVehicle);
+      },
+      trailerSubmitAction: (editTrailer) => {
+        return props.trailerSubmitAction(editTrailer);
       },
       props: props.appProps,
     };
     this.addVehicle = this.addVehicle.bind(this);
     this.addTrailer = this.addTrailer.bind(this);
     this.removeItem = this.removeItem.bind(this);
-    this.submitData = this.submitData.bind(this);
+    this.submitAction = this.submitAction.bind(this);
   }
 
   componentDidMount() {
@@ -53,6 +58,7 @@ class UpsertVehicleModal extends React.Component {
       { columnName: "num_vehicle", label: "Number of Vehicles", updatedValue: this.state.vehicleValues.num_vehicle },
     ]);
     this.setState({ vehicles: newVehicles });
+    this.setState({ vehiclesHaveChanged: true });
   }
 
   addTrailer(event) {
@@ -67,27 +73,33 @@ class UpsertVehicleModal extends React.Component {
       { columnName: "num_trailer", label: "Number of Trailers", updatedValue: this.state.trailerValues.num_trailer },
     ]);
     this.setState({ trailers: newTrailers });
+    this.setState({ trailersHaveChanged: true });
   }
 
   removeItem(item, index) {
     if (item === "vehicle") {
+      this.setState({ vehiclesHaveChanged: true });
       let newVehicles = this.state.vehicles;
       newVehicles.value.splice(index, 1);
       this.setState({ vehicles: newVehicles });
     }
 
     if (item === "trailer") {
+      this.setState({ trailersHaveChanged: true });
       let newTrailers = this.state.trailers;
       newTrailers.value.splice(index, 1);
       this.setState({ trailers: newTrailers });
     }
   }
 
-  submitData() {
+  submitAction() {
     let JSONData = this.state.tripData;
     JSONData[19] = this.state.vehicles;
     JSONData[20] = this.state.trailers;
-    console.log(JSON.stringify(JSONData));
+
+    if (this.state.vehiclesHaveChanged) this.state.vehicleSubmitAction(JSONData);
+    if (this.state.trailersHaveChanged) this.state.trailerSubmitAction(JSONData);
+    this.props.closeModal();
   }
 
   set_variable_id(object, variable_key, value) {
@@ -120,6 +132,7 @@ class UpsertVehicleModal extends React.Component {
                   <Select
                     options={this.state.vehicleOptions}
                     placeholder={"Vehicles"}
+                    isDisabled={this.state.isLoading}
                     onChange={(x) => {
                       var object = this.state.vehicleValues;
                       object.vehicle_type_id = x.value;
@@ -129,6 +142,7 @@ class UpsertVehicleModal extends React.Component {
                   />
                   <FormControl
                     type="number"
+                    disabled={this.state.isLoading}
                     onChange={(e) => {
                       var object = this.state.vehicleValues;
                       object.num_vehicle = e.target.value;
@@ -138,8 +152,11 @@ class UpsertVehicleModal extends React.Component {
                     min="1"
                     step="1"
                     placeholder="Number of Vehicles"
+                    required
                   />
-                  <Button type="submit">add</Button>
+                  <Button type="submit" disabled={this.state.isLoading}>
+                    add
+                  </Button>
                 </Form>
                 {this.state.vehicles.value.map((c, index) => (
                   <FormGroup key={index}>
@@ -160,6 +177,7 @@ class UpsertVehicleModal extends React.Component {
                   <Select
                     options={this.state.trailerOptions}
                     placeholder={"Trailers"}
+                    isDisabled={this.state.isLoading}
                     onChange={(x) => {
                       var object = this.state.trailerValues;
                       object.trailer_type_id = x.value;
@@ -169,6 +187,7 @@ class UpsertVehicleModal extends React.Component {
                   />
                   <FormControl
                     type="number"
+                    disabled={this.state.isLoading}
                     onChange={(e) => {
                       var object = this.state.trailerValues;
                       object.num_trailer = e.target.value;
@@ -178,8 +197,11 @@ class UpsertVehicleModal extends React.Component {
                     min="1"
                     step="1"
                     placeholder="Number of Trailers"
+                    required
                   />
-                  <Button type="submit">add</Button>
+                  <Button type="submit" disabled={this.state.isLoading}>
+                    add
+                  </Button>
                 </Form>
                 {this.state.trailers.value.map((c, index) => (
                   <FormGroup key={index}>
@@ -193,12 +215,13 @@ class UpsertVehicleModal extends React.Component {
                 ))}
               </Col>
             )}
-
-            {/* <FormGroup key={index}>
-                     <FormLabel>)} */}
           </Row>
           <div className={"text-center"}>
-            <Button variant={"outline-primary"} onClick={this.submitData}>
+            <Button
+              variant={"outline-primary"}
+              onClick={this.submitAction}
+              disabled={!this.state.vehiclesHaveChanged && !this.state.trailersHaveChanged}
+            >
               Save
             </Button>
           </div>

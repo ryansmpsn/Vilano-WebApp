@@ -26,36 +26,31 @@ class SideBar extends Component {
               Dashboard
             </ListGroupItem>
           </NavLink>
-
           <NavLink to="/resources" activeClassName="activeClass">
-            <div />
             <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
               <div className="fas fa-paperclip mr-3" />
               Resources
             </ListGroupItem>
           </NavLink>
           <SideBarAuth appProps={this.state.props} />
-          {/* <NavLink to="/testpage" activeClassName="activeClass">
-            <div />
+          {/* <NavLink to="/about" activeClassName="activeClass">
+            <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
+              <MDBIcon icon="question" className="mr-3" />
+              About
+            </ListGroupItem>
+          </NavLink>
+          <NavLink to="/testpage" activeClassName="activeClass">
             <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
               <div className="fas fa-vial mr-3" />
               Test Page
             </ListGroupItem>
           </NavLink>
           <NavLink to="/404" activeClassName="activeClass">
-            <div />
             <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
               <MDBIcon icon="exclamation" className="mr-3" />
               404
             </ListGroupItem>
           </NavLink> */}
-          <NavLink to="/about" activeClassName="activeClass">
-            <div />
-            <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-              <MDBIcon icon="question" className="mr-3" />
-              About
-            </ListGroupItem>
-          </NavLink>
         </ListGroup>
       </div>
     );

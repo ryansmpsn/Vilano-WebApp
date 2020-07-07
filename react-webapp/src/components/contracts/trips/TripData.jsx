@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { MDBContainer } from "mdbreact";
 import { Button, Row, Container, Jumbotron, Spinner } from "react-bootstrap";
 import Select from "react-select";
 import ViewTrips from "./ViewTrips";
@@ -58,23 +57,23 @@ function TripData(props) {
       <hr />
       {props.isSearching ? (
         <Spinner animation="border" variant="primary" />
-      ) : props.contractProfile === null ? (
-        <MDBContainer>Select a Contract to Display Trips</MDBContainer>
       ) : (
-        <Row key="topRow" className="show-grid">
-          {props.contractProfile[28].value.map((c, index) => (
-            <ViewTrips
-              key={index}
-              tripData={c}
-              contractProfile={props.contractProfile}
-              inputRestrictions={contentInputRestrictions}
-              submitAction={(editTrip) => {
-                return props.tripEditSubmitAction(editTrip);
-              }}
-              appProps={props.appProps}
-            />
-          ))}
-        </Row>
+        props.contractProfile !== null && (
+          <Row key="topRow" className="show-grid">
+            {props.contractProfile[28].value.map((c, index) => (
+              <ViewTrips
+                key={index}
+                tripData={c}
+                contractProfile={props.contractProfile}
+                inputRestrictions={contentInputRestrictions}
+                submitAction={(editTrip) => {
+                  return props.tripEditSubmitAction(editTrip);
+                }}
+                appProps={props.appProps}
+              />
+            ))}
+          </Row>
+        )
       )}
       {!isLoading && (
         <UpsertTripModal

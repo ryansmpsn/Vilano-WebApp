@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Select from "react-select";
-import { MDBContainer, MDBCardBody } from "mdbreact";
+import { MDBContainer } from "mdbreact";
 import { Button, Spinner, Jumbotron, Container } from "react-bootstrap";
 import Send from "../../../libs/send";
 import UpsertCostSegment from "./UpsertCostSegment";
@@ -15,7 +15,7 @@ class CostSegmentData extends Component {
       isLoading: false,
       costSegmentDropdowns: null,
       isSearching: false,
-      contractSearch: this.props.contractSearch,
+      contractSearch: null,
       contractData: null,
       contractCostSegments: null,
       selectedCostSegment: "",
@@ -1207,7 +1207,7 @@ class CostSegmentData extends Component {
           ) : (
             <>
               <h4>
-                <Button type="button" onClick={this.getSelectedContract}>
+                <Button type="button" onClick={this.getSelectedContract} disabled={this.state.contractSearch === null}>
                   Search
                 </Button>
               </h4>
@@ -1234,11 +1234,7 @@ class CostSegmentData extends Component {
         </Container>
         <hr />
 
-        {!this.state.settingData ? (
-          <MDBCardBody>
-            <MDBContainer>Please select a contract and cost-segment to add or update rate information.</MDBContainer>
-          </MDBCardBody>
-        ) : (
+        {this.state.settingData && (
           <UpsertCostSegment
             props={this.props}
             contractData={this.state.contractData}

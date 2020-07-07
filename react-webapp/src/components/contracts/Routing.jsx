@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
 import TripData from "./trips/TripData";
-import ViewRoutes from "./routes/ViewRoutes";
 import ContractData from "./ContractData";
+import ViewRoutes from "./routes/ViewRoutes";
+import ContractAnalytics from "./ContractAnalytics";
+import { Route, Routes, Navigate } from "react-router-dom";
 import CostSegmentData from "./costSegments/CostSegmentData";
 
 class Routing extends Component {
@@ -13,6 +14,7 @@ class Routing extends Component {
         <Route path="routes" element={<ViewRoutes {...this.props} />} />
         <Route path="trips" element={<TripData {...this.props} />} />
         <Route path="costsegment" element={<CostSegmentData {...this.props} />} />
+        <Route path="analytics" element={<ContractAnalytics {...this.props} />} />
         {/* <Route path={`${this.props.path}/trip/:tripId`} element={<ViewRoutes {...this.props} />} />
         <Route path={`${this.props.path}/:contractId`} element={<TripData {...this.props} />} /> */}
         <Navigate from="/contracts" to="/contracts/dashboard" />

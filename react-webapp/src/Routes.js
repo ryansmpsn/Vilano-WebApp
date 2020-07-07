@@ -9,7 +9,6 @@ import ProfilePage from "./components/pages/ProfilePage";
 import Testpage from "./components/pages/TestPage";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import ContractDashboard from "./components/contracts/ContractDashboard";
-import BidDashboard from "./components/bids/BidDashboard";
 import PerformancePage from "./components/pages/PerformancePage";
 import FinancialsPage from "./components/pages/FinancialsPage";
 import ResourcesPage from "./components/pages/ResourcesPage";
@@ -26,7 +25,7 @@ class Routing extends React.Component {
         <Route path="resources" element={<ResourcesPage />} />
         <Route path="about" element={<About />} />
         <PrivateRoute path="contracts/*" element={<ContractDashboard />} />
-        <PrivateRoute path="/bids" element={<BidDashboard />} />
+        {/* <PrivateRoute path="/bids" element={<BidDashboard />} /> */}
         <PrivateRoute path="/axios" element={<AxiosTestPage />} />
         <PrivateRoute path="/testpage" element={<Testpage />} />
         <PrivateRoute path="/payroll" element={<PayrollPage />} />
