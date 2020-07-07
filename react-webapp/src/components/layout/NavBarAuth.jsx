@@ -11,16 +11,12 @@ function Auth(props) {
     props.appProps.setIsAuthenticated(false);
   }
 
-  return (
-    <>
-      {props.appProps.isAuthenticated ? (
-        <NavLink onClick={logOut} to="/">
-          Logout
-        </NavLink>
-      ) : (
-        <NavLink to="/Login">Login</NavLink>
-      )}
-    </>
+  return props.appProps.isAuthenticated ? (
+    <NavLink onClick={logOut} to="/">
+      Logout
+    </NavLink>
+  ) : (
+    <NavLink to="/Login">Login</NavLink>
   );
 }
 export default Auth;

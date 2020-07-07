@@ -154,15 +154,15 @@ class ContractDashboard extends Component {
                       <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info">
                         Rate Sheets
                       </Link>
-                      {/* <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
+                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
                         Routes
-                      </Link> */}
+                      </Link>
                     </MDBCol>
                   ) : (
                     <MDBCol>
-                      {/* <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
+                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
                         Routes
-                      </Link> */}
+                      </Link>
                       <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info float-right">
                         Rate Sheets
                       </Link>

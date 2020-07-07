@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { ListGroup, ListGroupItem } from "react-bootstrap";
 import { MDBIcon } from "mdbreact";
 import logo from "../../img/logo.jpg";
-import { NavLink } from "react-router-dom";
 import SideBarAuth from "./SideBarAuth";
+import { NavLink } from "react-router-dom";
+import { ListGroup, ListGroupItem } from "react-bootstrap";
 
 class SideBar extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class SideBar extends Component {
             </ListGroupItem>
           </NavLink>
           <SideBarAuth appProps={this.state.props} />
-          {/* <NavLink to="/about" activeClassName="activeClass">
+          <NavLink to="/about" activeClassName="activeClass">
             <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
               <MDBIcon icon="question" className="mr-3" />
               About
@@ -50,7 +50,7 @@ class SideBar extends Component {
               <MDBIcon icon="exclamation" className="mr-3" />
               404
             </ListGroupItem>
-          </NavLink> */}
+          </NavLink>
         </ListGroup>
       </div>
     );

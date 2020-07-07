@@ -26,21 +26,17 @@ class NavBar extends Component {
 
   render() {
     return (
-      <div>
-        <MDBNavbar className="navbar fixed-top flexible-navbar" light expand="md" scrolling>
-          <MDBNavbarBrand>
-            <strong>
-              <Clock />
-            </strong>
-          </MDBNavbarBrand>
-          <MDBNavbarToggler onClick={this.onClick} />
-          <MDBCollapse isOpen={this.state.collapse} navbar>
-            <MDBNavbarNav right>
-              <Auth appProps={this.state.props} />
-            </MDBNavbarNav>
-          </MDBCollapse>
-        </MDBNavbar>
-      </div>
+      <MDBNavbar className="navbar fixed-top flexible-navbar" light expand="md" scrolling>
+        <MDBNavbarBrand>
+          <Clock />
+        </MDBNavbarBrand>
+        <MDBNavbarToggler onClick={this.onClick} />
+        <MDBCollapse isOpen={this.state.collapse} navbar>
+          <MDBNavbarNav right>
+            <Auth appProps={this.state.props} />
+          </MDBNavbarNav>
+        </MDBCollapse>
+      </MDBNavbar>
     );
   }
 }

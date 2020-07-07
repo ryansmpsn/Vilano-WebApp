@@ -221,13 +221,6 @@ function TripData(props) {
               updatedValue: null,
               value: null,
             },
-            {
-              columnName: "vw_contract_trip_vehicles",
-              inputType: null,
-              label: "Contract Trip Vehicles",
-              updatedValue: null,
-              value: null,
-            },
           ]}
         />
       )}
