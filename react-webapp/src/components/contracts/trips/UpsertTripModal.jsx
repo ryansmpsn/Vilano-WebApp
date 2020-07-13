@@ -144,6 +144,20 @@ export default class UpsertTripModal extends React.Component {
                             placeholder={item.value}
                           />
                         )) ||
+                        (item.inputType === "checkbox" && (
+                          <FormControl
+                            id={item.columnName}
+                            style={{ width: 25 }}
+                            size="sm"
+                            type="checkbox"
+                            checked={item.updatedValue === 1 || item.updatedValue === true}
+                            onChange={() => {
+                              var object = this.state.editTrip;
+                              object[index].updatedValue = !item.updatedValue;
+                              this.setState({ editTrip: object });
+                            }}
+                          />
+                        )) ||
                         (item.inputType === "select" && (
                           <InputFormControl
                             index={index}

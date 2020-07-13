@@ -128,8 +128,8 @@ class ContractDashboard extends Component {
                 </div>
               </MDBCardHeader>
               <MDBCardBody>
-                {this.state.contractProfile !== null && " Selected Contract Information"}
                 <MDBRow>
+                  {this.state.contractProfile !== null && " Selected Contract Information"}
                   {this.state.contractProfile !== null &&
                     this.state.contractProfile.map(
                       (c, index) =>
