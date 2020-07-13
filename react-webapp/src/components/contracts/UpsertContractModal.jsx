@@ -21,6 +21,9 @@ export default class UpsertContractModal extends React.Component {
       submitAction: (editcontract) => {
         return props.submitAction(editcontract);
       },
+      addSelectOption: (option) => {
+        return props.addSelectOption(option);
+      },
       props: props.appProps,
     };
   }
@@ -82,6 +85,7 @@ export default class UpsertContractModal extends React.Component {
     hand.state
       .submitAction(this.state.editContract)
       .then((res) => {
+        hand.state.addSelectOption(this.state.editContract[6].updatedvalue);
         newContract = res.data[0];
         newContract.pop();
         if (newContract !== null) {

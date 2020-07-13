@@ -5,6 +5,7 @@ import CountUp from "react-countup";
 import { Link } from "react-router-dom";
 import NavPerm from "../../libs/NavPerms";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
+import { Button } from "react-bootstrap";
 
 class ContractDashboard extends Component {
   _isMounted = false;
@@ -64,6 +65,12 @@ class ContractDashboard extends Component {
   getSelectOptions() {
     return Send.get("/Contract/Dropdowns/Contract/All", this.props);
   }
+  addSelectOption = (e) => {
+    let options = this.state.selectOptions;
+    let newOption = { label: e, value: options.length + 1 };
+    options.push(newOption);
+    this.setState({ selectOptions: options });
+  };
 
   componentDidMount() {
     this._isMounted = true;
@@ -129,7 +136,6 @@ class ContractDashboard extends Component {
               </MDBCardHeader>
               <MDBCardBody>
                 <MDBRow>
-                  {this.state.contractProfile !== null && " Selected Contract Information"}
                   {this.state.contractProfile !== null &&
                     this.state.contractProfile.map(
                       (c, index) =>
@@ -143,6 +149,8 @@ class ContractDashboard extends Component {
                     )}
                 </MDBRow>
                 <MDBRow>
+                  <Button onClick={() => this.addSelectOption(5)}> add an option</Button>
+
                   {this.state.contractProfile === null ? (
                     <MDBCol>
                       <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
@@ -212,6 +220,7 @@ class ContractDashboard extends Component {
             return this.getContracts();
           }}
           getTrips={this.getTrips}
+          addSelectOption={this.addSelectOption}
         />
       </>
     );

@@ -1,22 +1,6 @@
 import React from "react";
-import {
-  Button,
-  Modal,
-  FormGroup,
-  FormControl,
-  FormLabel,
-  Spinner,
-} from "react-bootstrap";
-import {
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBView,
-  MDBCardBody,
-  MDBInput,
-  MDBContainer,
-  MDBBtn,
-} from "mdbreact";
+import { Button, FormGroup, FormControl, FormLabel, Spinner } from "react-bootstrap";
+import { MDBCard, MDBView, MDBCardBody } from "mdbreact";
 import InputFormControl from "../../libs/InputFormControl";
 import DatePicker from "react-date-picker";
 
@@ -103,8 +87,7 @@ export default class Testing extends React.Component {
   }
 
   set_variable_id(object, variable_key, value) {
-    var variable =
-      variable_key.substring(0, variable_key.lastIndexOf("_")) + "_id";
+    var variable = variable_key.substring(0, variable_key.lastIndexOf("_")) + "_id";
     var set = false;
     object.forEach((item) => {
       if (item.columnName === variable) {
@@ -126,9 +109,7 @@ export default class Testing extends React.Component {
           this.state.editContract.map((arrayObj, arrayIndex) => (
             <MDBCard narrow>
               <MDBView cascade className="mdb-color lighten-3 card-header">
-                <h5 className="mb-0 font-weight-bold text-center text-white">
-                  {arrayObj["label"]}
-                </h5>
+                <h5 className="mb-0 font-weight-bold text-center text-white">{arrayObj["label"]}</h5>
               </MDBView>
               <MDBCardBody key={arrayIndex + "arrayObj"}>
                 {arrayObj["value"].map(
@@ -156,12 +137,7 @@ export default class Testing extends React.Component {
                                 var object = this.state.editContract;
                                 console.log(object);
                                 var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
-                                object[arrayIndex]["value"][
-                                  index
-                                ].updatedValue = e.target.value.replace(
-                                  specials,
-                                  ""
-                                );
+                                object[arrayIndex]["value"][index].updatedValue = e.target.value.replace(specials, "");
                                 this.setState({ editContract: object });
                               }}
                               placeholder={item.value}
@@ -172,17 +148,9 @@ export default class Testing extends React.Component {
                                 index={index}
                                 input={item.inputType}
                                 onChange={(e) => {
-                                  var object = this.set_variable_id(
-                                    this.state.editContract,
-                                    item.columnName,
-                                    e.value
-                                  );
+                                  var object = this.set_variable_id(this.state.editContract, item.columnName, e.value);
                                   var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
-                                  object[arrayIndex]["value"][
-                                    index
-                                  ].updatedValue = e.label
-                                    .toString()
-                                    .replace(specials, "");
+                                  object[arrayIndex]["value"][index].updatedValue = e.label.toString().replace(specials, "");
                                   this.setState({ editContract: object });
                                 }}
                                 content={item}
@@ -199,32 +167,20 @@ export default class Testing extends React.Component {
                                     var object = this.state.editContract;
                                     var date = new Date(e);
                                     var return_date =
-                                      date.getUTCFullYear() +
-                                      "-" +
-                                      (date.getUTCMonth() + 1) +
-                                      "-" +
-                                      date.getUTCDate();
-                                    object[arrayIndex]["value"][
-                                      index
-                                    ].updatedValue = return_date;
+                                      date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+                                    object[arrayIndex]["value"][index].updatedValue = return_date;
                                     this.setState({ editContract: object });
                                     this.setState({ date: date });
                                   }}
                                   value={
                                     item.updatedValue !== null
                                       ? new Date(
-                                          new Date(
-                                            item.updatedValue
-                                          ).getUTCMonth() +
+                                          new Date(item.updatedValue).getUTCMonth() +
                                             1 +
                                             "/" +
-                                            new Date(
-                                              item.updatedValue
-                                            ).getUTCDate() +
+                                            new Date(item.updatedValue).getUTCDate() +
                                             "/" +
-                                            new Date(
-                                              item.updatedValue
-                                            ).getUTCFullYear()
+                                            new Date(item.updatedValue).getUTCFullYear()
                                         )
                                       : item.value !== null
                                       ? new Date(
@@ -233,9 +189,7 @@ export default class Testing extends React.Component {
                                             "/" +
                                             new Date(item.value).getUTCDate() +
                                             "/" +
-                                            new Date(
-                                              item.value
-                                            ).getUTCFullYear()
+                                            new Date(item.value).getUTCFullYear()
                                         )
                                       : new Date(
                                           new Date().getUTCMonth() +
@@ -259,11 +213,7 @@ export default class Testing extends React.Component {
 
         {this.state.Permissions === "Write" &&
           (!this.state.submitting ? (
-            <Button
-              className="btn btn-primary mr-auto"
-              type="submit"
-              disabled={this.state.submitting}
-            >
+            <Button className="btn btn-primary mr-auto" type="submit" disabled={this.state.submitting}>
               Save
             </Button>
           ) : (

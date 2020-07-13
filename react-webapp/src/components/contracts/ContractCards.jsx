@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Card } from "react-bootstrap";
-import { MDBContainer } from "mdbreact";
+import { Card, Row, Col } from "react-bootstrap";
 import UpsertContractModal from "./UpsertContractModal";
+import { MDBBtn } from "mdbreact";
 
 function ContractCards(props) {
   const [contract, setContract] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [showContract, setShowContract] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [accessLevel, setAccessLevel] = useState("None");
   //TODO would be contract_id and the like.  const [contractID, setContractID] = useState(0);
@@ -40,88 +39,76 @@ function ContractCards(props) {
   //     });
   // }
 
-  var cardClass = "card border-primary mb-3" + (showContract ? "cardContract" : null);
-
   return (
     !isLoading && (
-      <div>
-        <MDBContainer key={props.eventKeyIndex}>
-          <Card
-            className={cardClass}
-            style={{
-              padding: "10px",
-              margin: "10px",
-              marginRight: "0px",
-              width: "278px",
-            }}
-          >
+      <Card
+        className={"card border-primary mb-3 "}
+        style={{
+          width: "100%",
+        }}
+      >
+        {contract.map(
+          (c, index) =>
+            c.label !== null &&
+            c.label === "Contract No." && (
+              <Card.Header key={index + "header"} as="h5">
+                {c.label} {c.value}
+              </Card.Header>
+            )
+        )}
+        <Card.Body>
+          <Row>
             {contract.map(
-              (h, index) =>
-                h.label !== null && (
-                  <div key={index}>
-                    {h.label === "Contract No." || h.label === "Company" || h.label === "Start City" ? (
-                      <>
-                        <Card.Title>{h.label}:</Card.Title>
-                        <Card.Text>{h.value}</Card.Text>
-                        <hr />
-                      </>
-                    ) : (
-                      <div key={index} hidden={!showContract}>
-                        <Card.Title>{h.label}:</Card.Title>
-                        <Card.Text>{h.value}</Card.Text>
-                        <hr />
-                      </div>
-                    )}
-                  </div>
+              (c, index) =>
+                c.label !== null && (
+                  <Col md="3" key={index + "body"}>
+                    <Card.Title className="h5 mb-1">{c.label}:</Card.Title>
+                    {c.value !== null && <Card.Text className="text-muted">{c.value}</Card.Text>}
+                    <hr />
+                  </Col>
                 )
             )}
-            <Link
-              onClick={(e) => {
-                props.setSelectedContract(contract[6].value);
-                props.setSelectedContractId(contract[0].value);
-                props.getTrips("/Contract/" + contract[0].value);
-              }}
-              to={"../trips"}
-              className="btn btn-primary"
-            >
-              View Trips
-            </Link>
-            <Button
-              hidden={showContract}
-              className=" btn btn-primary"
-              onClick={() => setShowContract(true)}
-              data-target="#collapseExample"
-              aria-expanded="false"
-              aria-controls="collapseExample"
-            >
-              Show Contract
-            </Button>
-            <Button
-              hidden={!showContract}
-              className=" btn btn-primary"
-              onClick={() => setShowContract(false)}
-              data-target="#collapseExample"
-              aria-expanded="false"
-              aria-controls="collapseExample"
-            >
-              Hide Contract
-            </Button>
-            <Button onClick={openModal}>Edit</Button>
-          </Card>
-          <UpsertContractModal
-            modalName={props.modalName}
-            contract={contract}
-            inputRestrictions={props.inputRestrictions}
-            show={showModal}
-            closeModal={closeModal}
-            accessLevel={accessLevel}
-            appProps={props.appProps}
-            submitAction={(editContent) => {
-              return props.submitAction(editContent);
+          </Row>
+
+          <Link
+            onClick={(e) => {
+              props.setSelectedContract(contract[6].value);
+              props.setSelectedContractId(contract[0].value);
+              props.getTrips("/Contract/" + contract[0].value);
             }}
-          />
-        </MDBContainer>
-      </div>
+            to={"../trips"}
+            className="btn btn-primary"
+          >
+            View Trips
+          </Link>
+          <Link
+            onClick={(e) => {
+              props.setSelectedContract(contract[6].value);
+              props.setSelectedContractId(contract[0].value);
+              props.getTrips("/Contract/" + contract[0].value);
+            }}
+            to={"../costsegment"}
+            className="btn btn-primary"
+          >
+            View Rate Information
+          </Link>
+          <MDBBtn outline color="warning" className="float-right" onClick={openModal}>
+            Edit Contract
+          </MDBBtn>
+        </Card.Body>
+        <UpsertContractModal
+          modalName={props.modalName}
+          contract={contract}
+          inputRestrictions={props.inputRestrictions}
+          show={showModal}
+          closeModal={closeModal}
+          accessLevel={accessLevel}
+          appProps={props.appProps}
+          submitAction={(editContent) => {
+            return props.submitAction(editContent);
+          }}
+        />
+      </Card>
     )
   );
 }

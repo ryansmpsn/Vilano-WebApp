@@ -285,6 +285,9 @@ function ContractData(props) {
           submitAction={(editContract) => {
             return props.contractEditSubmitAction(editContract);
           }}
+          addSelectOption={(option) => {
+            return props.addSelectOption(option);
+          }}
         />
       )}
     </Jumbotron>
