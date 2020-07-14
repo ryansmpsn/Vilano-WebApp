@@ -175,7 +175,7 @@ export default class UpsertContractModal extends React.Component {
                             type="checkbox"
                             checked={item.updatedValue === 1 || item.updatedValue === true}
                             onChange={() => {
-                              var object = this.state.editTrip;
+                              var object = this.state.editContract;
                               object[index].updatedValue = !item.updatedValue;
                               this.setState({ editTrip: object });
                             }}

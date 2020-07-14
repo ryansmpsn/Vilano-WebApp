@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MDBRow, MDBCol, MDBCard, MDBView, MDBCardBody, MDBInput, MDBContainer, MDBBtn, MDBCardText } from "mdbreact";
+import { MDBRow, MDBCol, MDBCard, MDBView, MDBCardBody, MDBInput, MDBContainer, MDBBtn } from "mdbreact";
 
 class ProfilePage extends Component {
   state = {};
