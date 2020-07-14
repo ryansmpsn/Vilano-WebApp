@@ -65,6 +65,12 @@ function SideBarAuth(props) {
             Profile
           </ListGroupItem>
         </NavLink>
+        <NavLink to="/profiletest" activeClassName="activeClass">
+          <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
+            <MDBIcon icon="user" className="mr-3" />
+            Test Profile
+          </ListGroupItem>
+        </NavLink>
       </>
     )
   );

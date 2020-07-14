@@ -5,7 +5,6 @@ import CountUp from "react-countup";
 import { Link } from "react-router-dom";
 import NavPerm from "../../libs/NavPerms";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
-import { Button } from "react-bootstrap";
 
 class ContractDashboard extends Component {
   _isMounted = false;
@@ -149,8 +148,6 @@ class ContractDashboard extends Component {
                     )}
                 </MDBRow>
                 <MDBRow>
-                  <Button onClick={() => this.addSelectOption(5)}> add an option</Button>
-
                   {this.state.contractProfile === null ? (
                     <MDBCol>
                       <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
