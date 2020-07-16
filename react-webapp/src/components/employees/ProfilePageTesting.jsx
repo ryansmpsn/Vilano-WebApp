@@ -3,10 +3,12 @@ import Testing from "./Testing";
 import Send from "../../libs/send";
 
 export default class ProfilePageTesting extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
       props: props.appProps,
+      employeeInfo: null,
     };
   }
 
@@ -14,76 +16,42 @@ export default class ProfilePageTesting extends Component {
     return Send.post("/Employee/Profile", profile, this.props);
   };
 
+  componentDidMount() {
+    this._isMounted = true;
+    if (this._isMounted) {
+      console.log(sessionStorage);
+    }
+
+    return Send.get("/Employee/Profile/" + sessionStorage.getItem("IDSession"), this.props).then((res) => {
+      let flatEmployeeInfo = res.data[0];
+      if (this._isMounted) {
+        console.log(res.data[0]);
+        flatEmployeeInfo[1].value = res.data[0][1].value[0];
+        flatEmployeeInfo[2].value = res.data[0][2].value[0];
+        flatEmployeeInfo[3].value = res.data[0][3].value[0];
+
+        this.setState({ employeeInfo: flatEmployeeInfo });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   render() {
     return (
-      <Testing
-        modalName="Testing" //{props.modalName}
-        contract={[
-          {
-            columnName: "Employee",
-            inputType: null,
-            label: "Employee",
-            updatedValue: null,
-            value: [
-              {
-                columnName: "first_name",
-                inputType: "text",
-                label: "First Name",
-                updatedValue: null,
-                value: "Bob",
-              },
-              {
-                columnName: "last_name",
-                inputType: "text",
-                label: "Last Name",
-                updatedValue: null,
-                value: "Bobington",
-              },
-              {
-                columnName: "middle_name",
-                inputType: "text",
-                label: "Middle Name",
-                updatedValue: null,
-                value: "BobsMiddleName",
-              },
-            ],
-          },
-          {
-            columnName: "employee_phone",
-            inputType: null,
-            label: "Employee Phones",
-            updatedValue: null,
-            value: [
-              {
-                columnName: "cell_phone",
-                inputType: "text",
-                label: "Cell Phone",
-                updatedValue: null,
-                value: "1231231234",
-              },
-              {
-                columnName: "home_phone",
-                inputType: "text",
-                label: "Home Phone",
-                updatedValue: null,
-                value: "2342342345",
-              },
-              {
-                columnName: "work_phone",
-                inputType: "text",
-                label: "Work Phone",
-                updatedValue: null,
-                value: "3453453456",
-              },
-            ],
-          },
-        ]}
-        inputRestrictions={"testing, so this is blank"}
-        appProps={this.state.props}
-        submitAction={(profile) => {
-          return this.profileSubmit(profile);
-        }}
-      />
+      this.state.employeeInfo !== null && (
+        <Testing
+          modalName="Testing" //{props.modalName}
+          contract={this.state.employeeInfo}
+          inputRestrictions={"testing, so this is blank"}
+          appProps={this.state.props}
+          submitAction={(profile) => {
+            return this.profileSubmit(profile);
+          }}
+        />
+      )
     );
   }
 }

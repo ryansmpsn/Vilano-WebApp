@@ -29,13 +29,13 @@ function SideBarAuth(props) {
             </NavLink>
             <Dropdown.Divider />
 
-            {/* <NavLink to="/contracts/analytics" className="dropdown-item">
+            <NavLink to="/contracts/analytics" className="dropdown-item">
               <MDBIcon icon="file-invoice-dollar" className="mr-3" />
               Contract Analytics
-            </NavLink> */}
+            </NavLink>
           </Dropdown.Menu>
         </Dropdown>
-        <NavLink to="/administration" activeClassName="activeClass">
+        {/* <NavLink to="/administration" activeClassName="activeClass">
           <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
             <MDBIcon icon="tools" className="mr-3" />
             Administration
@@ -58,19 +58,7 @@ function SideBarAuth(props) {
             <MDBIcon icon="hand-holding-usd" className="mr-3" />
             Payroll
           </ListGroupItem>
-        </NavLink>
-        <NavLink to="/profile" activeClassName="activeClass">
-          <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-            <MDBIcon icon="user" className="mr-3" />
-            Profile
-          </ListGroupItem>
-        </NavLink>
-        <NavLink to="/profiletest" activeClassName="activeClass">
-          <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-            <MDBIcon icon="user" className="mr-3" />
-            Test Profile
-          </ListGroupItem>
-        </NavLink>
+        </NavLink> */}
       </>
     )
   );
