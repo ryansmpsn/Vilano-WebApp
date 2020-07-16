@@ -26,6 +26,7 @@ export default class ProfilePageTesting extends Component {
       let flatEmployeeInfo = res.data[0];
       if (this._isMounted) {
         console.log(res.data[0]);
+        // Flatten Employee Data
         flatEmployeeInfo[1].value = res.data[0][1].value[0];
         flatEmployeeInfo[2].value = res.data[0][2].value[0];
         flatEmployeeInfo[3].value = res.data[0][3].value[0];

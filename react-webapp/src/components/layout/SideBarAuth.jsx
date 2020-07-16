@@ -59,6 +59,12 @@ function SideBarAuth(props) {
             Payroll
           </ListGroupItem>
         </NavLink> */}
+        <NavLink to="/employees" activeClassName="activeClass">
+          <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
+            <MDBIcon icon="users" className="mr-3" />
+            Employees
+          </ListGroupItem>
+        </NavLink>
       </>
     )
   );

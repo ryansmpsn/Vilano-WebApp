@@ -8,6 +8,7 @@ import Testpage from "./components/pages/TestPage";
 import PayrollPage from "./components/pages/PayrollPage";
 import ProfilePage from "./components/pages/ProfilePage";
 import NotFoundPage from "./components/pages/NotFoundPage";
+import EmployeePage from "./components/pages/EmployeePage";
 import ResourcesPage from "./components/pages/ResourcesPage";
 import AxiosTestPage from "./components/pages/AxiosTestPage";
 import FinancialsPage from "./components/pages/FinancialsPage";
@@ -37,6 +38,7 @@ class Routing extends React.Component {
         <PrivateRoute path="/subcontractor" element={<SubcontractorPage />} />
         <PrivateRoute path="/profile" element={<ProfilePage />} />
         <PrivateRoute path="/profiletest" element={<ProfilePageTesting />} />
+        <PrivateRoute path="/employees" element={<EmployeePage />} />
         {/* Catch all unmatched routes */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
