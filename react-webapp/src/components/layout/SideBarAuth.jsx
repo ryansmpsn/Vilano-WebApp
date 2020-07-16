@@ -35,12 +35,12 @@ function SideBarAuth(props) {
             </NavLink> */}
           </Dropdown.Menu>
         </Dropdown>
-        {/* <NavLink to="/administration" activeClassName="activeClass">
+        <NavLink to="/administration" activeClassName="activeClass">
           <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
             <MDBIcon icon="tools" className="mr-3" />
             Administration
           </ListGroupItem>
-        </NavLink> 
+        </NavLink>
         <NavLink to="/performance" activeClassName="activeClass">
           <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
             <MDBIcon icon="chart-line" className="mr-3" />
@@ -70,7 +70,7 @@ function SideBarAuth(props) {
             <MDBIcon icon="user" className="mr-3" />
             Test Profile
           </ListGroupItem>
-        </NavLink>*/}
+        </NavLink>
       </>
     )
   );

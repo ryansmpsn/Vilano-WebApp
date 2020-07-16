@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Row, Container, Jumbotron, Spinner } from "react-bootstrap";
+import { Button, Row, Container, Jumbotron, Spinner, Col } from "react-bootstrap";
 import Select from "react-select";
 import ViewTrips from "./ViewTrips";
 import UpsertTripModal from "./UpsertTripModal";
@@ -34,25 +34,29 @@ function TripData(props) {
   return (
     <Jumbotron>
       <Container className="container-sm pl-5 pr-5 pt-2">
-        <Select
-          defaultInputValue={props.selectedContract}
-          options={props.selectOptions}
-          placeholder={"Select a Contract to View Trips"}
-          onChange={(x) => {
-            props.setSelectedContract(x.label);
-            props.setSelectedContractId(x.value);
-            getTripData(x);
-          }}
-          isLoading={props.isSearching | isLoading}
-          isDisabled={props.isSearching | isLoading}
-        />
-        {isLoading ? (
-          <Spinner animation="border" variant="primary" />
-        ) : (
-          <Button onClick={addTrip} disabled={(props.contractProfile === null) | props.isSearching}>
-            Add Trip
-          </Button>
-        )}
+        <Row>
+          <Col lg="4">
+            <Select
+              defaultInputValue={props.selectedContract}
+              options={props.selectOptions}
+              placeholder={"Select a Contract to View Trips"}
+              onChange={(x) => {
+                props.setSelectedContract(x.label);
+                props.setSelectedContractId(x.value);
+                getTripData(x);
+              }}
+              isLoading={props.isSearching | isLoading}
+              isDisabled={props.isSearching | isLoading}
+            />
+            {isLoading ? (
+              <Spinner animation="border" variant="primary" />
+            ) : (
+              <Button onClick={addTrip} disabled={(props.contractProfile === null) | props.isSearching}>
+                Add Trip
+              </Button>
+            )}
+          </Col>
+        </Row>
       </Container>
       <hr />
       {props.isSearching ? (

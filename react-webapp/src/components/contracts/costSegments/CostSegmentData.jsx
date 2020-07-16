@@ -1207,7 +1207,7 @@ class CostSegmentData extends Component {
           ) : (
             <>
               <h4>
-                <Button type="button" onClick={this.getSelectedContract} disabled={this.state.contractSearch === null}>
+                <Button type="button" onClick={this.getSelectedContract} disabled={this.state.contractSearch === "null"}>
                   Search
                 </Button>
               </h4>
