@@ -35,30 +35,12 @@ function SideBarAuth(props) {
             </NavLink>
           </Dropdown.Menu>
         </Dropdown>
-        {/* <NavLink to="/administration" activeClassName="activeClass">
-          <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-            <MDBIcon icon="tools" className="mr-3" />
-            Administration
-          </ListGroupItem>
-        </NavLink>
-        <NavLink to="/performance" activeClassName="activeClass">
-          <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-            <MDBIcon icon="chart-line" className="mr-3" />
-            Performance
-          </ListGroupItem>
-        </NavLink>
-        <NavLink to="/financials" activeClassName="activeClass">
-          <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-            <MDBIcon icon="money-bill" className="mr-3" />
-            Financials
-          </ListGroupItem>
-        </NavLink>
-        <NavLink to="/payroll" activeClassName="activeClass">
+        <NavLink to="/bids" activeClassName="activeClass">
           <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
             <MDBIcon icon="hand-holding-usd" className="mr-3" />
-            Payroll
+            Bids
           </ListGroupItem>
-        </NavLink> */}
+        </NavLink>
         <NavLink to="/employees" activeClassName="activeClass">
           <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
             <MDBIcon icon="users" className="mr-3" />

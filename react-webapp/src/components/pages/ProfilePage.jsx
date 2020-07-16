@@ -1,249 +1,87 @@
 import React, { Component } from "react";
 import { MDBRow, MDBCol, MDBCard, MDBView, MDBCardBody, MDBInput, MDBContainer, MDBBtn } from "mdbreact";
+import Send from "../../libs/send";
 
 class ProfilePage extends Component {
-  state = {};
+  _isMounted = false;
+  state = { employeeProfile: null, employeeData: null };
+
+  componentDidMount() {
+    this._isMounted = true;
+
+    return Send.get("/Employee/Profile/" + sessionStorage.getItem("IDSession"), this.props).then((res) => {
+      console.log(res.data[0]);
+      if (this._isMounted) {
+        this.setState({ employeeProfile: res.data[0][0].value });
+        this.setState({ employeeData: [res.data[0][1], res.data[0][2], res.data[0][3]] });
+      }
+    });
+  }
+
   render() {
     return (
       <MDBContainer fluid>
-        <MDBRow>
-          <MDBCol lg="4" className="mb-4 mt-5">
+        <MDBRow center>
+          <MDBCol lg="10" className="mb-4 mt-5">
             <MDBCard narrow className="cascading-admin-card">
               <div className="admin-up" style={{ marginRight: "10%" }}>
-                <MDBBtn icon="money-bill-alt" className="mdb-color lighten-3 text-center" block href="/profile">
+                <MDBBtn icon="money-bill-alt" className="mdb-color lighten-3 text-center" block>
                   Profile
                 </MDBBtn>
               </div>
               <MDBCardBody className="text-center">
-                <img tag="img" src="https://picsum.photos/200/300" alt="User Avatar" className="z-depth-1 mb-3 mx-auto" />
-
-                <p className="text-muted">
-                  <small>Profile photo will be changed automatically</small>
-                </p>
-                <MDBRow center>
+                <MDBRow>
+                  {this.state.employeeProfile !== null &&
+                    this.state.employeeProfile.map(
+                      (c, index) =>
+                        c.label !== null && (
+                          <MDBCol md="4" key={index + "profile"}>
+                            <MDBInput
+                              type="text"
+                              label={c.label}
+                              value={c.updatedValue !== null ? c.updatedValue : ""}
+                              disabled
+                            ></MDBInput>
+                          </MDBCol>
+                        )
+                    )}
+                </MDBRow>
+                {/* <MDBRow center>
                   <MDBBtn color="info" rounded size="sm">
-                    Upload New Photo
+                    Update Account
                   </MDBBtn>
-                  <MDBBtn color="danger" rounded size="sm">
-                    Delete
-                  </MDBBtn>
-                </MDBRow>
+                </MDBRow> */}
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
-          <MDBCol lg="8" className="mb-r">
-            <MDBCard narrow>
-              <MDBView cascade className="mdb-color lighten-3 card-header">
-                <h5 className="mb-0 font-weight-bold text-center text-white">Account Details</h5>
-              </MDBView>
-              <MDBCardBody className="text-center">
-                <MDBRow>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Employee ID" />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Type" />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Active" />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Status" />
-                  </MDBCol>
-
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="First Name" />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Last Name" />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Middle Name" />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Prefix" />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Suffix" />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Status" />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol md="12" className="text-center">
-                    <MDBBtn color="info" type="submit" rounded>
-                      Update account
-                    </MDBBtn>
-                  </MDBCol>
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-          <MDBCol lg="6" className="mb-r mt-4">
-            <MDBCard narrow>
-              <MDBView cascade className="mdb-color lighten-3 card-header">
-                <h5 className="mb-0 font-weight-bold text-center text-white">Addresses</h5>
-              </MDBView>
-              <MDBCardBody className="text-center">
-                <MDBRow>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Address Type" value="Mailing" disabled />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Zip Code" />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol md="12">
-                    <MDBInput type="text" label="Street Address" />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol md="12">
-                    <MDBInput type="text" label="Street Address 2" />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol md="6">
-                    <MDBInput type="email" label="City" />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="State" value="FL" disabled />
-                  </MDBCol>
-                </MDBRow>
-
-                <MDBRow>
-                  <MDBCol md="12" className="text-center">
-                    <MDBBtn color="info" type="submit" rounded>
-                      Update account
-                    </MDBBtn>
-                  </MDBCol>
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-          <MDBCol lg="6" className="mb-r mt-4">
-            <MDBCard narrow>
-              <MDBView cascade className="mdb-color lighten-3 card-header">
-                <h5 className="mb-0 font-weight-bold text-center text-white">Employee Emails</h5>
-              </MDBView>
-              <MDBCardBody className="text-center">
-                <MDBRow>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Email Type" value="Primary" disabled />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="email" label="Email" />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol md="6">
-                    <MDBInput type="checkbox" label="Valid" size="sm" />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Opt Out" />
-                  </MDBCol>
-                </MDBRow>
-
-                <MDBRow>
-                  <MDBCol md="12" className="text-center">
-                    <MDBBtn color="info" type="submit" rounded>
-                      Update account
-                    </MDBBtn>
-                  </MDBCol>
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-          <MDBCol lg="6" className="mb-r mt-4">
-            <MDBCard narrow>
-              <MDBView cascade className="mdb-color lighten-3 card-header">
-                <h5 className="mb-0 font-weight-bold text-center text-white">Phones</h5>
-              </MDBView>
-              <MDBCardBody className="text-center">
-                <MDBRow>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Phone Type" value="Cell" disabled />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Phone Number" />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Extension" />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Primary" />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol md="6">
-                    <MDBInput type="email" label="SMS Capable" />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Valid" disabled />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Text Opt Out" />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Call Opt Out" disabled />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol md="12" className="text-center">
-                    <MDBBtn color="info" type="submit" rounded>
-                      Update account
-                    </MDBBtn>
-                  </MDBCol>
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-          <MDBCol lg="6" className="mb-r mt-4">
-            <MDBCard narrow>
-              <MDBView cascade className="mdb-color lighten-3 card-header">
-                <h5 className="mb-0 font-weight-bold text-center text-white">Licenses</h5>
-              </MDBView>
-              <MDBCardBody className="text-center">
-                <MDBRow>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Type" value="Class B" disabled />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="Issuing State" />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol md="6">
-                    <MDBInput type="text" label="License Number" />
-                  </MDBCol>
-                  <MDBCol md="6">
-                    <MDBInput type="date" label="Issue Date" />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol md="6">
-                    <MDBInput type="date" label="Expiration Date" />
-                  </MDBCol>
-                </MDBRow>
-
-                <MDBRow>
-                  <MDBCol md="12" className="text-center">
-                    <MDBBtn color="info" type="submit" rounded>
-                      Update account
-                    </MDBBtn>
-                  </MDBCol>
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
+          {this.state.employeeData !== null &&
+            this.state.employeeData.map((data, index) => (
+              <MDBCol lg="4" className="mb-r mt-4" key={index + "employeeData"}>
+                <MDBCard narrow>
+                  <MDBView cascade className="mdb-color lighten-3 card-header">
+                    <h5 className="mb-0 font-weight-bold text-center text-white">{data.label}</h5>
+                  </MDBView>
+                  <MDBCardBody className="text-center">
+                    <MDBRow>
+                      {data.value !== null &&
+                        data.value[0].map(
+                          (c, index) =>
+                            c.label !== null && (
+                              <MDBCol md="6" key={index + "cData"}>
+                                <MDBInput
+                                  type="text"
+                                  label={c.label}
+                                  value={c.updatedValue !== null ? c.updatedValue : ""}
+                                  disabled
+                                ></MDBInput>
+                              </MDBCol>
+                            )
+                        )}
+                    </MDBRow>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+            ))}
         </MDBRow>
       </MDBContainer>
     );

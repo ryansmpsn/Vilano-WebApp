@@ -14,10 +14,6 @@ function Auth(props) {
 
   return props.appProps.isAuthenticated ? (
     <>
-      <NavLink to="/profiletest" className="border border-light rounded mr-1 nav-link Ripple-parent">
-        <MDBIcon icon="user" className="mr-2" />
-        Profile Test
-      </NavLink>
       <NavLink to="/profile" className="border border-light rounded mr-1 nav-link Ripple-parent">
         <MDBIcon icon="user" className="mr-2" />
         Profile
