@@ -37,7 +37,7 @@ class CostSegmentData extends Component {
           label: "Annual Miles",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "road",
         },
         {
           rateItemCode: "tr_1",
@@ -47,7 +47,7 @@ class CostSegmentData extends Component {
           label: "Annual Miles",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "road",
         },
         {
           rateItemCode: "oc_1",
@@ -57,7 +57,7 @@ class CostSegmentData extends Component {
           label: "Annual Miles",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "road",
         },
         {
           rateItemCode: "tx_2",
@@ -107,7 +107,7 @@ class CostSegmentData extends Component {
           label: "Gallons",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "tint",
         },
         {
           rateItemCode: "oi_7",
@@ -117,7 +117,7 @@ class CostSegmentData extends Component {
           label: "Quarts",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "tint",
         },
         {
           rateItemCode: "in_8",
@@ -147,7 +147,7 @@ class CostSegmentData extends Component {
           label: "Trips",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "route",
         },
         {
           rateItemCode: "fo_11",
@@ -167,7 +167,7 @@ class CostSegmentData extends Component {
           label: "Hours",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "clock",
         },
         {
           rateItemCode: "ot_13",
@@ -177,7 +177,7 @@ class CostSegmentData extends Component {
           label: "Hours",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "clock",
         },
         {
           rateItemCode: "pt_14",
@@ -247,7 +247,7 @@ class CostSegmentData extends Component {
           label: "No. of Employees or Hours",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "user-clock",
         },
         {
           rateItemCode: "va_15",
@@ -257,7 +257,7 @@ class CostSegmentData extends Component {
           label: "No. of Employees or Hours",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "user-clock",
         },
         {
           rateItemCode: "ho_15",
@@ -267,7 +267,7 @@ class CostSegmentData extends Component {
           label: "No. of Employees or Hours",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "user-clock",
         },
         {
           rateItemCode: "ps_15",
@@ -277,7 +277,7 @@ class CostSegmentData extends Component {
           label: "No. of Employees or Hours",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "user-clock",
         },
         {
           rateItemCode: "ol_16",
@@ -297,7 +297,7 @@ class CostSegmentData extends Component {
           label: "Hours",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "clock",
         },
         {
           rateItemCode: "tc_18",
@@ -347,7 +347,7 @@ class CostSegmentData extends Component {
           label: "Rate Per Mile",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "tr_1",
@@ -357,7 +357,7 @@ class CostSegmentData extends Component {
           label: "Rate Per Mile",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "oc_1",
@@ -367,7 +367,7 @@ class CostSegmentData extends Component {
           label: "Rate Per Mile",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "tx_2",
@@ -417,7 +417,7 @@ class CostSegmentData extends Component {
           label: "Per Gallon",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "oi_7",
@@ -427,7 +427,7 @@ class CostSegmentData extends Component {
           label: "Per Quart",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "in_8",
@@ -457,7 +457,7 @@ class CostSegmentData extends Component {
           label: "Per Trip",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "fo_11",
@@ -477,7 +477,7 @@ class CostSegmentData extends Component {
           label: "Per Hour",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "ot_13",
@@ -487,7 +487,7 @@ class CostSegmentData extends Component {
           label: "Per Hour",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "pt_14",
@@ -507,7 +507,7 @@ class CostSegmentData extends Component {
           label: "Unit Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "wc_14",
@@ -517,7 +517,7 @@ class CostSegmentData extends Component {
           label: "Unit Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "fc_14",
@@ -527,7 +527,7 @@ class CostSegmentData extends Component {
           label: "Unit Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "su_14",
@@ -537,7 +537,7 @@ class CostSegmentData extends Component {
           label: "Unit Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "fb_15",
@@ -557,7 +557,7 @@ class CostSegmentData extends Component {
           label: "Rate",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "va_15",
@@ -567,7 +567,7 @@ class CostSegmentData extends Component {
           label: "Rate",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "ho_15",
@@ -577,7 +577,7 @@ class CostSegmentData extends Component {
           label: "Rate",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "ps_15",
@@ -587,7 +587,7 @@ class CostSegmentData extends Component {
           label: "Rate",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "ol_16",
@@ -607,7 +607,7 @@ class CostSegmentData extends Component {
           label: "Per Hour",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "times",
         },
         {
           rateItemCode: "tc_18",
@@ -657,7 +657,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "tr_1",
@@ -667,7 +667,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "oc_1",
@@ -677,7 +677,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "tx_2",
@@ -687,7 +687,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "vr_3",
@@ -697,7 +697,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "ms_4",
@@ -707,7 +707,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "go_5",
@@ -717,7 +717,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "fu_6",
@@ -727,7 +727,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "oi_7",
@@ -737,7 +737,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "in_8",
@@ -747,7 +747,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "rt_9",
@@ -757,7 +757,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "tl_10",
@@ -767,7 +767,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "fo_11",
@@ -777,7 +777,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "st_12",
@@ -787,7 +787,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "ot_13",
@@ -797,7 +797,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "pt_14",
@@ -817,7 +817,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "wc_14",
@@ -827,7 +827,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "fc_14",
@@ -837,7 +837,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "su_14",
@@ -847,7 +847,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "fb_15",
@@ -867,7 +867,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "va_15",
@@ -877,7 +877,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "ho_15",
@@ -887,7 +887,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "ps_15",
@@ -897,7 +897,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "ol_16",
@@ -907,7 +907,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "sw_17",
@@ -917,7 +917,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "tc_18",
@@ -927,7 +927,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "ri_19",
@@ -937,7 +937,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
         {
           rateItemCode: "to_20",
@@ -947,7 +947,7 @@ class CostSegmentData extends Component {
           label: "Annual Cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "equals",
         },
       ],
       itemLabels: [
@@ -994,7 +994,7 @@ class CostSegmentData extends Component {
           columnName: "annual_cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "road",
         },
         {
           rateItemCode: "pm_21",
@@ -1003,7 +1003,7 @@ class CostSegmentData extends Component {
           columnName: "annual_cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "road",
         },
         {
           rateItemCode: "tm_21",
@@ -1012,7 +1012,7 @@ class CostSegmentData extends Component {
           columnName: "annual_cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "road",
         },
         {
           rateItemCode: "dh_22",
@@ -1021,7 +1021,7 @@ class CostSegmentData extends Component {
           columnName: "annual_cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "clock",
         },
         {
           rateItemCode: "ph_22",
@@ -1030,7 +1030,7 @@ class CostSegmentData extends Component {
           columnName: "annual_cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "clock",
         },
         {
           rateItemCode: "th_22",
@@ -1039,7 +1039,7 @@ class CostSegmentData extends Component {
           columnName: "annual_cost",
           updatedValue: null,
           value: undefined,
-          icon: "dollar-sign",
+          icon: "clock",
         },
       ],
     };
