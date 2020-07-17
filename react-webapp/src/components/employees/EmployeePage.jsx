@@ -10,7 +10,7 @@ function EmployeePage() {
             <div className="admin-up">
               <MDBIcon icon="users" className="primary-color" />
             </div>
-            <h1 className="m-3 text-center">Employees</h1>
+            <h1 className="m-3 text-center">Employee Management</h1>
           </MDBCardHeader>
           <MDBCardBody>
             <div className="d-flex flex-column">Employee Content</div>

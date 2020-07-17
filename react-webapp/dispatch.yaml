@@ -5,8 +5,14 @@ dispatch:
   - url: "*app.vilanomanagementsvs.com/*"
     service: webapp
 
+  - url: "*test.vilanomanagementsvs.com/*"
+    service: test-webapp
+
   - url: "*api.vilanomanagementsvs.com/*"
     service: centcom
+
+  - url: "*testapi.vilanomanagementsvs.com/*"
+    service: centcom-testing
 
   - url: "*postalfleetsvs.vilanomanagementsvs.com/*"
     service: postalfleetsvs

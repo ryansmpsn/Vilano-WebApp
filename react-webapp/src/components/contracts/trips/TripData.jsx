@@ -34,8 +34,8 @@ function TripData(props) {
   return (
     <Jumbotron>
       <Container className="container-sm pl-5 pr-5 pt-2">
-        <Row>
-          <Col lg="4">
+        <Row className="justify-content-md-center">
+          <Col lg="5">
             <Select
               defaultInputValue={props.selectedContract}
               options={props.selectOptions}
@@ -51,7 +51,12 @@ function TripData(props) {
             {isLoading ? (
               <Spinner animation="border" variant="primary" />
             ) : (
-              <Button onClick={addTrip} disabled={(props.contractProfile === null) | props.isSearching}>
+              <Button
+                variant="outline-warning"
+                className="float-right"
+                onClick={addTrip}
+                disabled={(props.contractProfile === null) | props.isSearching}
+              >
                 Add Trip
               </Button>
             )}

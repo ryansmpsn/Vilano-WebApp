@@ -97,7 +97,7 @@ function ContractCards(props) {
           </MDBBtn>
         </Card.Body>
         <UpsertContractModal
-          modalName={props.modalName}
+          modalName={"Edit Contract"}
           contract={contract}
           inputRestrictions={props.inputRestrictions}
           show={showModal}

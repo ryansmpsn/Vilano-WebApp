@@ -8,10 +8,9 @@ import Testpage from "./components/pages/TestPage";
 import ProfilePage from "./components/pages/ProfilePage";
 import BidDashboard from "./components/bids/BidDashboard";
 import NotFoundPage from "./components/pages/NotFoundPage";
-import EmployeePage from "./components/pages/EmployeePage";
 import ResourcesPage from "./components/pages/ResourcesPage";
 import AxiosTestPage from "./components/pages/AxiosTestPage";
-
+import EmployeePage from "./components/employees/EmployeePage";
 import ContractDashboard from "./components/contracts/ContractDashboard";
 import ProfilePageTesting from "./components/employees/ProfilePageTesting";
 import AdministrationDashboard from "./components/admin/AdministrationDashboard";

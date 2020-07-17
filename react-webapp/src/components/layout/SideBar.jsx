@@ -39,6 +39,12 @@ class SideBar extends Component {
               About
             </ListGroupItem>
           </NavLink>
+          <NavLink to="/axios" activeClassName="activeClass">
+            <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
+              <div className="fas fa-vials mr-3" />
+              Endpoint Testing
+            </ListGroupItem>
+          </NavLink>
           <NavLink to="/testpage" activeClassName="activeClass">
             <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
               <div className="fas fa-vial mr-3" />

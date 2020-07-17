@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Select from "react-select";
 import { MDBContainer } from "mdbreact";
-import { Button, Spinner, Jumbotron, Container } from "react-bootstrap";
+import { Button, Spinner, Jumbotron, Container, Row, Col } from "react-bootstrap";
 import Send from "../../../libs/send";
 import UpsertCostSegment from "./UpsertCostSegment";
 
@@ -1188,49 +1188,57 @@ class CostSegmentData extends Component {
     return (
       <Jumbotron>
         <Container className="container-sm pl-5 pr-5 pt-2">
-          <Select
-            options={this.props.selectOptions}
-            placeholder={"Select a Contract to View Rate Information"}
-            onChange={(x) => {
-              this.setState({ rateSheetData: null });
-              this.setState({ costSegmentDropdowns: null });
-              this.setState({ settingData: false });
-              this.setState({ contractSearch: x.value });
-            }}
-            isDisabled={this.state.isLoading}
-            defaultInputValue={this.props.selectedContract}
-          />
-          {this.state.isLoading === true ? (
-            <MDBContainer>
-              <Spinner animation="border" variant="primary" />
-            </MDBContainer>
-          ) : (
-            <>
-              <h4>
-                <Button type="button" onClick={this.getSelectedContract} disabled={this.state.contractSearch === "null"}>
-                  Search
-                </Button>
-              </h4>
-              {this.state.costSegmentDropdowns !== null && (
+          <Row>
+            <Col lg="5">
+              <Select
+                options={this.props.selectOptions}
+                placeholder={"Select a Contract to View Rate Information"}
+                onChange={(x) => {
+                  this.setState({ rateSheetData: null });
+                  this.setState({ costSegmentDropdowns: null });
+                  this.setState({ settingData: false });
+                  this.setState({ contractSearch: x.value });
+                }}
+                isDisabled={this.state.isLoading}
+                defaultInputValue={this.props.selectedContract}
+              />
+              {this.state.isLoading === true ? (
+                <MDBContainer>
+                  <Spinner animation="border" variant="primary" />
+                </MDBContainer>
+              ) : (
                 <>
-                  <Select
-                    autoFocus
-                    options={this.state.costSegmentDropdowns}
-                    placeholder={"Select a Cost-Segment View Rate Information"}
-                    onChange={(x) => {
-                      this.updateRateSheetData(x);
-                    }}
-                    isDisabled={this.state.isLoading}
-                  />
                   <h4>
-                    <Button type="button" onClick={this.setCostSegmentdata}>
-                      Select Cost Segment
+                    <Button type="button" onClick={this.getSelectedContract} disabled={this.state.contractSearch === "null"}>
+                      Search
                     </Button>
                   </h4>
                 </>
               )}
-            </>
-          )}
+            </Col>
+            {this.state.isLoading === false && (
+              <Col lg="5">
+                {this.state.costSegmentDropdowns !== null && (
+                  <>
+                    <Select
+                      autoFocus
+                      options={this.state.costSegmentDropdowns}
+                      placeholder={"Select a Cost-Segment to View Rate Information"}
+                      onChange={(x) => {
+                        this.updateRateSheetData(x);
+                      }}
+                      isDisabled={this.state.isLoading}
+                    />
+                    <h4>
+                      <Button type="button" onClick={this.setCostSegmentdata}>
+                        Select Cost Segment
+                      </Button>
+                    </h4>
+                  </>
+                )}
+              </Col>
+            )}
+          </Row>
         </Container>
         <hr />
 

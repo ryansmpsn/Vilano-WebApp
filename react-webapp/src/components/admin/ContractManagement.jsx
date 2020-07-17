@@ -120,9 +120,6 @@ class ContractManagement extends Component {
                     <Link to="routes" className="btn btn-sm btn-outline-warning">
                       Status Code
                     </Link>
-                    <Link to="routes" className="btn btn-sm btn-outline-warning">
-                      Routes
-                    </Link>
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>

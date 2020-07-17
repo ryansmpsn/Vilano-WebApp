@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Button, Container, Spinner, Jumbotron } from "react-bootstrap";
+import { Col, Row, Button, Container, Spinner, Jumbotron } from "react-bootstrap";
 import ContractCards from "./ContractCards";
 import Select from "react-select";
 import ContractTable from "./ContractTable";
@@ -95,40 +95,43 @@ function ContractData(props) {
   return (
     <Jumbotron>
       <Container className="container-sm pl-5 pr-5 pt-2">
-        <form onSubmit={handleSearch}>
-          <Select
-            autoFocus
-            options={props.selectOptions}
-            isMulti
-            placeholder={"Search for Contracts by ID"}
-            onChange={(x) => {
-              doSetContractSearch(x, "external_contract_code");
-            }}
-            isLoading={isLoading & isSearching}
-            isDisabled={isGetAll | (isSearching & isLoading)}
-          />
-
-          {(isLoading & isSearching) | isGetAll ? (
-            <Spinner animation="border" variant="primary" />
-          ) : (
-            <>
-              <Button type="submit" disabled={isGetAll || contractSearch.external_contract_code.length === 0}>
-                Search
-              </Button>
-              <Button
-                disabled={isGetAll && isSearching}
-                onClick={(e) => {
-                  handleSearch(e, true);
+        <Row className="justify-content-md-center">
+          <Col lg="6">
+            <form onSubmit={handleSearch}>
+              <Select
+                autoFocus
+                options={props.selectOptions}
+                isMulti
+                placeholder={"Search for Contracts by ID"}
+                onChange={(x) => {
+                  doSetContractSearch(x, "external_contract_code");
                 }}
-              >
-                Show All
-              </Button>
-              <Button onClick={addContract} variant="outline-warning">
-                Add Contract
-              </Button>
-            </>
-          )}
-        </form>
+                isLoading={isLoading & isSearching}
+                isDisabled={isGetAll | (isSearching & isLoading)}
+              />
+              {(isLoading & isSearching) | isGetAll ? (
+                <Spinner animation="border" variant="primary" />
+              ) : (
+                <>
+                  <Button type="submit" disabled={isGetAll || contractSearch.external_contract_code.length === 0}>
+                    Search
+                  </Button>
+                  <Button
+                    disabled={isGetAll && isSearching}
+                    onClick={(e) => {
+                      handleSearch(e, true);
+                    }}
+                  >
+                    Show All
+                  </Button>
+                  <Button onClick={addContract} variant="outline-warning">
+                    Add Contract
+                  </Button>
+                </>
+              )}
+            </form>
+          </Col>
+        </Row>
       </Container>
       <hr />
       {tableView
@@ -151,7 +154,6 @@ function ContractData(props) {
                       getTrips={props.getTrips}
                       setSelectedContract={props.setSelectedContract}
                       setSelectedContractId={props.setSelectedContractId}
-                      modalName={props.modalName}
                       key={index + "contract"}
                       appProps={props.appProps}
                       inputRestrictions={contentInputRestrictions}
@@ -168,7 +170,7 @@ function ContractData(props) {
           )}
       {!isLoading && (
         <UpsertContractModal
-          modalName={props.modalName}
+          modalName={"New Contract"}
           contract={[
             { columnName: "contract_id", inputType: null, label: null, updatedValue: null, value: null },
             { columnName: "modified_by", inputType: null, label: null, updatedValue: null, value: null },

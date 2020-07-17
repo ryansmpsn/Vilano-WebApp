@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon } from "mdbreact";
 import ContractManagement from "./ContractManagement";
+import EmployeePage from "../employees/EmployeePage";
 
 function AdministrationDashboard() {
   return (
@@ -31,6 +32,7 @@ function AdministrationDashboard() {
         </MDBCol>
       </MDBRow>
       <ContractManagement />
+      <EmployeePage />
     </>
   );
 }

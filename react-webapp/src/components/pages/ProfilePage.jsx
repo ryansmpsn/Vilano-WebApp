@@ -10,7 +10,6 @@ class ProfilePage extends Component {
     this._isMounted = true;
 
     return Send.get("/Employee/Profile/" + sessionStorage.getItem("IDSession"), this.props).then((res) => {
-      console.log(res.data[0]);
       if (this._isMounted) {
         this.setState({ employeeProfile: res.data[0][0].value });
         this.setState({ employeeData: [res.data[0][1], res.data[0][2], res.data[0][3]] });

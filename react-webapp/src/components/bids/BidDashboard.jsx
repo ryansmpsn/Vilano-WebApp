@@ -99,7 +99,7 @@ class BidDashboard extends Component {
             <MDBCard className="cascading-admin-card">
               <MDBCardHeader>
                 <div className="admin-up">
-                  <MDBIcon icon="file-bid" className="primary-color" />
+                  <MDBIcon icon="hand-holding-usd" className="primary-color" />
                   <h1 className="m-3 text-center">Bid Dashboard</h1>
                   <MDBRow style={{ margin: -20 }}>
                     <MDBCol md="4" className="ml-auto mb-4">
