@@ -137,11 +137,14 @@ function ContractData(props) {
       {tableView
         ? !isLoading && (
             <ContractTable
-              url={props.url}
-              setSelectedContract={props.setSelectedContract}
-              contractData={contractData}
-              setSelectedContractId={props.setSelectedContractId}
               getTrips={props.getTrips}
+              setSelectedContract={props.setSelectedContract}
+              setSelectedContractId={props.setSelectedContractId}
+              contractData={contractData}
+              inputRestrictions={contentInputRestrictions}
+              submitAction={(editContract) => {
+                return props.contractEditSubmitAction(editContract);
+              }}
             />
           )
         : !isLoading && (
@@ -150,15 +153,12 @@ function ContractData(props) {
                 {contractData !== [] &&
                   contractData.map((c, index) => (
                     <ContractCards
-                      url={props.url}
+                      key={index + "contract"}
                       getTrips={props.getTrips}
                       setSelectedContract={props.setSelectedContract}
                       setSelectedContractId={props.setSelectedContractId}
-                      key={index + "contract"}
-                      appProps={props.appProps}
-                      inputRestrictions={contentInputRestrictions}
                       Contract={c}
-                      eventKeyIndex={index}
+                      inputRestrictions={contentInputRestrictions}
                       submitAction={(editContract) => {
                         return props.contractEditSubmitAction(editContract);
                       }}
@@ -283,7 +283,6 @@ function ContractData(props) {
           show={showModal}
           closeModal={closeModal}
           accessLevel={props.accessLevel}
-          appProps={props.appProps}
           submitAction={(editContract) => {
             return props.contractEditSubmitAction(editContract);
           }}

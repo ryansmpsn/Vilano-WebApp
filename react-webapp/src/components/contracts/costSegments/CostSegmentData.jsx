@@ -15,10 +15,10 @@ class CostSegmentData extends Component {
       isLoading: false,
       costSegmentDropdowns: null,
       isSearching: false,
-      contractSearch: props.selectedContractId,
+      contractSearch: props.selectedContract,
       contractData: null,
       contractCostSegments: null,
-      selectedCostSegment: "",
+      selectedCostSegment: null,
       rateSheetData: null,
       units: [
         {
@@ -1106,7 +1106,7 @@ class CostSegmentData extends Component {
 
   updateRateSheetData(x) {
     this.setState({ settingData: false });
-    this.setState({ selectedCostSegment: x.label });
+    this.setState({ selectedCostSegment: x });
 
     for (var i = 0; i < this.state.contractCostSegments.value.length; i++) {
       if (this.state.contractCostSegments.value[i][1].value === x.label) {
@@ -1188,7 +1188,7 @@ class CostSegmentData extends Component {
     return (
       <Jumbotron>
         <Container className="container-sm pl-5 pr-5 pt-2">
-          <Row>
+          <Row className="justify-content-md-center">
             <Col lg="5">
               <Select
                 options={this.props.selectOptions}
@@ -1197,10 +1197,13 @@ class CostSegmentData extends Component {
                   this.setState({ rateSheetData: null });
                   this.setState({ costSegmentDropdowns: null });
                   this.setState({ settingData: false });
-                  this.setState({ contractSearch: x.value });
+                  x === null ? this.setState({ contractSearch: x }) : this.setState({ contractSearch: x.value });
+                  this.setState({ selectedCostSegment: null });
                 }}
+                isLoading={this.state.isLoading}
                 isDisabled={this.state.isLoading}
                 defaultInputValue={this.props.selectedContract}
+                isClearable
               />
               {this.state.isLoading === true ? (
                 <MDBContainer>
@@ -1216,28 +1219,24 @@ class CostSegmentData extends Component {
                 </>
               )}
             </Col>
-            {this.state.isLoading === false && (
-              <Col lg="5">
-                {this.state.costSegmentDropdowns !== null && (
-                  <>
-                    <Select
-                      autoFocus
-                      options={this.state.costSegmentDropdowns}
-                      placeholder={"Select a Cost-Segment to View Rate Information"}
-                      onChange={(x) => {
-                        this.updateRateSheetData(x);
-                      }}
-                      isDisabled={this.state.isLoading}
-                    />
-                    <h4>
-                      <Button type="button" onClick={this.setCostSegmentdata}>
-                        Select Cost Segment
-                      </Button>
-                    </h4>
-                  </>
-                )}
-              </Col>
-            )}
+            <Col lg="5">
+              <Select
+                autoFocus
+                options={this.state.costSegmentDropdowns}
+                placeholder={"Select a Cost-Segment to View Rate Information"}
+                onChange={(x) => {
+                  x === null ? this.setState({ selectedCostSegment: x }) : this.updateRateSheetData(x);
+                }}
+                isDisabled={this.state.isLoading || this.state.costSegmentDropdowns === null}
+                isClearable
+                value={this.state.selectedCostSegment}
+              />
+              <h4>
+                <Button type="button" onClick={this.setCostSegmentdata} disabled={this.state.selectedCostSegment === null}>
+                  Select Cost Segment
+                </Button>
+              </h4>
+            </Col>
           </Row>
         </Container>
         <hr />
@@ -1252,7 +1251,7 @@ class CostSegmentData extends Component {
             annualCost={this.state.annualCost}
             remarkAnnualCost={this.state.remarkAnnualCost}
             contractCostSegments={this.state.contractCostSegments}
-            selectedCostSegment={this.state.selectedCostSegment}
+            selectedCostSegment={this.state.selectedCostSegment !== null && this.state.selectedCostSegment.label}
             setUnits={this.setUnits}
             setUnitCost={this.setUnitCost}
             setAnnualCost={this.setAnnualCost}

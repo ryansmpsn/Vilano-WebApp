@@ -48,7 +48,7 @@ class SideBar extends Component {
           <NavLink to="/testpage" activeClassName="activeClass">
             <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
               <div className="fas fa-vial mr-3" />
-              Test Page
+              UI Testing
             </ListGroupItem>
           </NavLink>
           <NavLink to="/404" activeClassName="activeClass">
