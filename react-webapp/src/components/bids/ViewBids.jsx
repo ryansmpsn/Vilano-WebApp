@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { MDBCard, MDBCardHeader, MDBCardBody } from "mdbreact";
-import ContentList from "./ContentList";
 
 class ViewBids extends Component {
   state = {};
@@ -12,27 +11,7 @@ class ViewBids extends Component {
           <h4>Contract Bid Information</h4>
         </MDBCardHeader>
         <MDBCardBody>
-          <Jumbotron>
-            <ContentList
-              setSelectedContract={this.props.setSelectedContract}
-              selectOptions={this.props.selectOptions}
-              contractID
-              modalName="Edit Contract"
-              accessLevel={this.props.accessLevel}
-              contentEditSubmitAction={this.props.contentEditSubmitAction}
-              SearchFunction={(contractSearch) => {
-                return this.props.SearchFunction(contractSearch);
-              }}
-              showAll={this.props.showAll}
-              appProps={this.props}
-              contentSearch={{
-                external_contract_code: [],
-              }}
-              getContracts={() => {
-                return this.props.getContracts();
-              }}
-            />
-          </Jumbotron>
+          <Jumbotron>Bids</Jumbotron>
         </MDBCardBody>
       </MDBCard>
     );

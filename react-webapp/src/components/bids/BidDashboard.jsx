@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Routing from "./Routes";
 import Send from "../../libs/send";
 import CountUp from "react-countup";
 import { Link } from "react-router-dom";
@@ -183,8 +184,7 @@ class BidDashboard extends Component {
             </MDBCard>
           </MDBCol>
         </MDBRow>
-
-        {/* <Routing
+        <Routing
           props={this.props}
           setSelectedTrip={this.setSelectedTrip}
           setSelectedBid={this.setSelectedBid}
@@ -217,7 +217,7 @@ class BidDashboard extends Component {
           }}
           getTrips={this.getTrips}
           addSelectOption={this.addSelectOption}
-        /> */}
+        />
       </>
     );
   }

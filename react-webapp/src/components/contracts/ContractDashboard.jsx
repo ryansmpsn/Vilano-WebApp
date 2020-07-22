@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Routing from "./Routing";
+import Routing from "./Router";
 import Send from "../../libs/send";
 import CountUp from "react-countup";
 import { Link } from "react-router-dom";
