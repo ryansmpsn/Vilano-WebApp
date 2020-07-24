@@ -4,7 +4,7 @@ import { MDBCard, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBCardText, MDBBadge } 
 
 class AxiosTestPage extends Component {
   state = {
-    endpoint: "/Facility/Active",
+    endpoint: "/Bid/BidIDs",
     display: null,
   };
 
@@ -31,7 +31,7 @@ class AxiosTestPage extends Component {
                 </div>
               </div>
               <MDBCardBody>
-                {console.log(this.state.display)}
+                {console.table(this.state.display)}
                 <h2 className="m-3 ">Endpoint / Axios Test Page</h2>
               </MDBCardBody>
             </MDBCard>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Routing from "./Routes";
+import Routing from "./Router";
 import Send from "../../libs/send";
 import CountUp from "react-countup";
 import { Link } from "react-router-dom";
@@ -73,17 +73,9 @@ class BidDashboard extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    return Send.get("/Bid/Ids", this.props).then((res) => {
-      let bidData = res.data;
-      let getSelectOptions = [];
-      bidData.map((item, index) => {
-        return getSelectOptions.push({
-          label: item[1].value,
-          value: item[0].value,
-        });
-      });
+    return Send.get("/Bid/BidIDs", this.props).then((res) => {
       if (this._isMounted) {
-        this.setState({ selectOptions: getSelectOptions });
+        this.setState({ selectOptions: res.data[0].options });
       }
     });
   }
@@ -114,18 +106,6 @@ class BidDashboard extends Component {
                                 <CountUp start={0} end={this.state.selectOptions.length} duration={5} />
                               </MDBBadge>
                             </MDBListGroupItem>
-                            {/* <MDBListGroupItem>
-                              Total Trips
-                              <MDBBadge color="default-color-dark" pill className="float-right">
-                                <CountUp start={0} end={0} duration={5} />
-                              </MDBBadge>
-                            </MDBListGroupItem>
-                            <MDBListGroupItem>
-                              Total Routes
-                              <MDBBadge color="unique-color" pill className="float-right">
-                                <CountUp start={0} end={0} duration={8} />
-                              </MDBBadge>
-                            </MDBListGroupItem> */}
                           </MDBListGroup>
                         </MDBCardBody>
                       </MDBCard>
@@ -159,15 +139,15 @@ class BidDashboard extends Component {
                       <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info">
                         Rate Sheets
                       </Link>
-                      {/* <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
+                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
                         Routes
-                      </Link> */}
+                      </Link>
                     </MDBCol>
                   ) : (
                     <MDBCol>
-                      {/* <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
+                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
                         Routes
-                      </Link> */}
+                      </Link>
                       <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info float-right">
                         Rate Sheets
                       </Link>

@@ -35,7 +35,7 @@ function TripData(props) {
     <Jumbotron>
       <Container className="container-sm pl-5 pr-5 pt-2">
         <Row className="justify-content-md-center">
-          <Col lg="5">
+          <Col lg="6">
             <Select
               defaultInputValue={props.selectedContract}
               options={props.selectOptions}

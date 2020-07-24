@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import { Col, Row, Button, Container, Spinner, Jumbotron } from "react-bootstrap";
-import ContractCards from "./ContractCards";
 import Select from "react-select";
-import ContractTable from "./ContractTable";
-import UpsertContractModal from "./UpsertContractModal";
+import ContractCards from "../contracts/ContractCards";
+import ContractTable from "../contracts/ContractTable";
+// import UpsertContractModal from "./UpsertContractModal";
 
-function ContractData(props) {
-  const [contractData, setContractData] = useState([]);
+function BidData(props) {
+  const [bidData, setBidData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSearching, setSearching] = useState(false);
   const [isGetAll, setGetAll] = useState(false);
   const [tableView, setTableView] = useState(false);
-  const [contractSearch] = useState(props.contractSearch);
+  const [bidSearch] = useState(props.bidSearch);
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   function search() {
     setTableView(false);
     props
-      .SearchFunction(contractSearch)
+      .SearchFunction(bidSearch)
       .then((res) => {
-        setContractData(res.data);
+        setBidData(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -36,7 +36,7 @@ function ContractData(props) {
     props
       .showAll()
       .then((res) => {
-        setContractData(res.data);
+        setBidData(res.data);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -48,7 +48,7 @@ function ContractData(props) {
       setGetAll(false);
     });
   }
-  function addContract() {
+  function addBid() {
     setIsLoading(true);
     setSearching(true);
     props.getSelectOptions().then((res) => {
@@ -59,15 +59,15 @@ function ContractData(props) {
     });
   }
 
-  function doSetContractSearch(newContract, keyValue) {
+  function doSetBidSearch(newBid, keyValue) {
     let getValue = [];
-    newContract !== null &&
-      newContract.map((item, index) => {
+    newBid !== null &&
+      newBid.map((item, index) => {
         return getValue.push(item.label);
       });
-    let tempCon = contractSearch;
+    let tempCon = bidSearch;
     tempCon[keyValue] = getValue;
-    props.setContractSearchCode(tempCon);
+    props.setBidSearchCode(tempCon);
   }
 
   function handleSearch(event, all = false) {
@@ -102,9 +102,9 @@ function ContractData(props) {
                 autoFocus
                 options={props.selectOptions}
                 isMulti
-                placeholder={"Search for Contracts by ID"}
+                placeholder={"Search for Bids by ID"}
                 onChange={(x) => {
-                  doSetContractSearch(x, "external_contract_code");
+                  doSetBidSearch(x, "external_bid_code");
                 }}
                 isLoading={isLoading & isSearching}
                 isDisabled={isGetAll | (isSearching & isLoading)}
@@ -113,7 +113,7 @@ function ContractData(props) {
                 <Spinner animation="border" variant="primary" />
               ) : (
                 <>
-                  <Button type="submit" disabled={isGetAll || contractSearch.external_contract_code.length === 0}>
+                  <Button type="submit" disabled={isGetAll || bidSearch.external_bid_code.length === 0}>
                     Search
                   </Button>
                   <Button
@@ -124,8 +124,8 @@ function ContractData(props) {
                   >
                     Show All
                   </Button>
-                  <Button onClick={addContract} variant="outline-warning">
-                    Add Contract
+                  <Button onClick={addBid} variant="outline-warning">
+                    Add Bid
                   </Button>
                 </>
               )}
@@ -136,46 +136,48 @@ function ContractData(props) {
       <hr />
       {tableView
         ? !isLoading && (
-            <ContractTable
-              getTrips={props.getTrips}
-              setSelectedContract={props.setSelectedContract}
-              setSelectedContractId={props.setSelectedContractId}
-              contractData={contractData}
-              inputRestrictions={contentInputRestrictions}
-              submitAction={(editContract) => {
-                return props.contractEditSubmitAction(editContract);
-              }}
-            />
+            <div>this is the table</div>
+            // <ContractTable
+            //   getTrips={props.getTrips}
+            //   setSelectedBid={props.setSelectedBid}
+            //   setSelectedBidId={props.setSelectedBidId}
+            //   bidData={bidData}
+            //   inputRestrictions={contentInputRestrictions}
+            //   submitAction={(editBid) => {
+            //     return props.bidEditSubmitAction(editBid);
+            //   }}
+            // />
           )
         : !isLoading && (
-            <div className="contract">
+            <div className="bid">
               <Row key="topRow" className="show-grid">
-                {contractData !== [] &&
-                  contractData.map((c, index) => (
-                    <ContractCards
-                      key={index + "contract"}
-                      getTrips={props.getTrips}
-                      setSelectedContract={props.setSelectedContract}
-                      setSelectedContractId={props.setSelectedContractId}
-                      Contract={c}
-                      inputRestrictions={contentInputRestrictions}
-                      submitAction={(editContract) => {
-                        return props.contractEditSubmitAction(editContract);
-                      }}
-                      accessLevel={props.accessLevel}
-                    />
+                {bidData !== [] &&
+                  bidData.map((c, index) => (
+                    <div>this is the card</div>
+                    // <ContractCards
+                    //   key={index + "bid"}
+                    //   getTrips={props.getTrips}
+                    //   setSelectedBid={props.setSelectedBid}
+                    //   setSelectedBidId={props.setSelectedBidId}
+                    //   Bid={c}
+                    //   inputRestrictions={contentInputRestrictions}
+                    //   submitAction={(editBid) => {
+                    //     return props.bidEditSubmitAction(editBid);
+                    //   }}
+                    //   accessLevel={props.accessLevel}
+                    // />
                   ))}
               </Row>
             </div>
           )}
-      {!isLoading && (
+      {/* {!isLoading && (
         <UpsertContractModal
-          modalName={"New Contract"}
-          contract={[
-            { columnName: "contract_id", inputType: null, label: null, updatedValue: null, value: null },
+          modalName={"New Bid"}
+          bid={[
+            { columnName: "bid_id", inputType: null, label: null, updatedValue: null, value: null },
             { columnName: "modified_by", inputType: null, label: null, updatedValue: null, value: null },
             { columnName: "employee_name", inputType: null, label: "Last Modified By", updatedValue: null, value: "" },
-            { columnName: "is_active", inputType: "checkbox", label: "Active", updatedValue: null, value: 1 },
+            { columnName: "is_active", inputType: "select", label: "Active", updatedValue: null, value: 1 },
             { columnName: "company_id", inputType: null, label: null, updatedValue: null, value: 1 },
             {
               columnName: "company_name",
@@ -184,7 +186,7 @@ function ContractData(props) {
               updatedValue: null,
               value: "",
             },
-            { columnName: "external_contract_code", inputType: "text", label: "Contract No.", updatedValue: "", value: "" },
+            { columnName: "external_bid_code", inputType: "text", label: "Bid No.", updatedValue: "", value: "" },
             { columnName: "solicitation_number", inputType: "text", label: "Solicitation No.", updatedValue: "", value: "" },
             { columnName: "admin_facility_id", inputType: null, label: null, updatedValue: null, value: null },
             {
@@ -194,31 +196,31 @@ function ContractData(props) {
               updatedValue: null,
               value: "",
             },
-            { columnName: "contract_type_id", inputType: null, label: null, updatedValue: null, value: 1 },
+            { columnName: "bid_type_id", inputType: null, label: null, updatedValue: null, value: 1 },
             {
-              columnName: "contract_type_code",
+              columnName: "bid_type_code",
               inputType: "select",
-              label: "Contract Type Code",
+              label: "Bid Type Code",
               updatedValue: null,
               value: "",
             },
             {
-              columnName: "contract_type_name",
+              columnName: "bid_type_name",
               inputType: null,
-              label: "Contract Type Name",
+              label: "Bid Type Name",
               updatedValue: null,
               value: "",
             },
-            { columnName: "contract_division_id", inputType: null, label: null, updatedValue: null, value: 1 },
+            { columnName: "bid_division_id", inputType: null, label: null, updatedValue: null, value: 1 },
             {
-              columnName: "contract_division_code",
+              columnName: "bid_division_code",
               inputType: "select",
               label: "Division Code",
               updatedValue: null,
               value: "",
             },
             {
-              columnName: "contract_division_name",
+              columnName: "bid_division_name",
               inputType: null,
               label: "Division Name",
               updatedValue: null,
@@ -228,7 +230,7 @@ function ContractData(props) {
             {
               columnName: "status_value",
               inputType: "select",
-              label: "Contract Status",
+              label: "Bid Status",
               updatedValue: null,
               value: "",
             },
@@ -264,16 +266,16 @@ function ContractData(props) {
               value: "2020-01-29",
             },
             {
-              columnName: "begin_contract_date",
+              columnName: "begin_bid_date",
               inputType: "date",
-              label: "Begin Contract Term",
+              label: "Begin Bid Term",
               updatedValue: null,
               value: "2020-02-27",
             },
             {
-              columnName: "end_contract_date",
+              columnName: "end_bid_date",
               inputType: "date",
-              label: "End Contract Term",
+              label: "End Bid Term",
               updatedValue: null,
               value: "2020-01-03",
             },
@@ -283,16 +285,16 @@ function ContractData(props) {
           show={showModal}
           closeModal={closeModal}
           accessLevel={props.accessLevel}
-          submitAction={(editContract) => {
-            return props.contractEditSubmitAction(editContract);
+          submitAction={(editBid) => {
+            return props.bidEditSubmitAction(editBid);
           }}
           addSelectOption={(option) => {
             return props.addSelectOption(option);
           }}
         />
-      )}
+      )} */}
     </Jumbotron>
   );
 }
 
-export default ContractData;
+export default BidData;

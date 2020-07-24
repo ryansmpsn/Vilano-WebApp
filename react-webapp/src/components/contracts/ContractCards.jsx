@@ -93,6 +93,9 @@ function ContractCards(props) {
             View Rate Information
           </Link>
           <MDBBtn outline color="warning" className="float-right" onClick={openModal}>
+            Create Bid
+          </MDBBtn>
+          <MDBBtn outline color="warning" className="float-right" onClick={openModal}>
             Edit Contract
           </MDBBtn>
         </Card.Body>
