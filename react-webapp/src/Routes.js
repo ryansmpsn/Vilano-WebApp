@@ -24,14 +24,14 @@ class Routing extends React.Component {
         <Route path="login" element={<Login {...this.props} />} />
         <Route path="resources" element={<ResourcesPage />} />
         <Route path="about" element={<About />} />
+        <PrivateRoute path="/axios" element={<AxiosTestPage />} />
+        <PrivateRoute path="/testpage" element={<Testpage />} />
         {/* Seems redundant to check if is authenticated here, but it prevents update during an existing state transision. */}
         {this.props.isAuthenticated && (
           <>
             <PrivateRoute path="contracts/*" element={<ContractDashboard />} />
             <PrivateRoute path="administration/*" element={<AdministrationDashboard />} />
             <PrivateRoute path="/bids/*" element={<BidDashboard />} />
-            <PrivateRoute path="/axios" element={<AxiosTestPage />} />
-            <PrivateRoute path="/testpage" element={<Testpage />} />
             <PrivateRoute path="/profile" element={<ProfilePage />} />
             <PrivateRoute path="/profiletest" element={<ProfilePageTesting />} />
             <PrivateRoute path="/employees" element={<EmployeePage />} />

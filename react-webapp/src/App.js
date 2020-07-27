@@ -13,6 +13,7 @@ function App(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const existingSession = sessionStorage.getItem("SessionID");
   const [session, setSession] = useState(existingSession);
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -46,7 +47,7 @@ function App(props) {
           value={{ isAuthenticated, session, setSession: setSessionData, setIsAuthenticated: setIsAuthenticatedData }}
         >
           <NavBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-          <SideBar isAuthenticated={isAuthenticated} />
+          <SideBar isAuthenticated={isAuthenticated} toggle={toggle} setToggle={setToggle} />
           <ToastProvider autoDismiss autoDismissTimeout={6000} placement="bottom-right" components={{ Toast: Notification }}>
             <main id="content" className="p-5" style={{ minHeight: "calc(100vh - 102px)" }}>
               <Routing isAuthenticated={isAuthenticated} />

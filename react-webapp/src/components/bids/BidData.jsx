@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Col, Row, Button, Container, Spinner, Jumbotron } from "react-bootstrap";
 import Select from "react-select";
-import ContractCards from "../contracts/ContractCards";
-import ContractTable from "../contracts/ContractTable";
+// import ContractCards from "../contracts/ContractCards";
+// import ContractTable from "../contracts/ContractTable";
 // import UpsertContractModal from "./UpsertContractModal";
 
 function BidData(props) {
