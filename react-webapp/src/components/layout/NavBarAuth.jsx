@@ -3,16 +3,16 @@ import { MDBIcon } from "mdbreact";
 import { useAuth } from "../../auth";
 import { NavLink } from "react-router-dom";
 
-function Auth(props) {
+function NavBarAuth(props) {
   const { setSession } = useAuth();
 
   function logOut() {
     setSession();
     sessionStorage.clear();
-    props.appProps.setIsAuthenticated(false);
+    props.setIsAuthenticated(false);
   }
 
-  return props.appProps.isAuthenticated ? (
+  return props.isAuthenticated ? (
     <>
       <NavLink to="/profile" className="border border-light rounded mr-1 nav-link Ripple-parent">
         <MDBIcon icon="user" className="mr-2" />
@@ -30,4 +30,4 @@ function Auth(props) {
     </NavLink>
   );
 }
-export default Auth;
+export default NavBarAuth;

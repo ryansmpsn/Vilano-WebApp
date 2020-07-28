@@ -1,19 +1,17 @@
 import React, { Component, useState, useEffect } from "react";
 import "./css/App.css";
-import Routing from "./Routes";
 import Send from "./libs/send";
+import Routing from "./Routes";
 import { AuthContext } from "./auth";
-import NavBar from "./components/layout/NavBar";
-import SideBar from "./components/layout/SideBar";
-import Footer from "./components/layout/Footer";
-import { ToastProvider } from "react-toast-notifications";
 import Notification from "./libs/Notifications";
+import Footer from "./components/layout/Footer";
+import Navigation from "./components/layout/Navigation";
+import { ToastProvider } from "react-toast-notifications";
 
 function App(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const existingSession = sessionStorage.getItem("SessionID");
   const [session, setSession] = useState(existingSession);
-  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -46,8 +44,7 @@ function App(props) {
         <AuthContext.Provider
           value={{ isAuthenticated, session, setSession: setSessionData, setIsAuthenticated: setIsAuthenticatedData }}
         >
-          <NavBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-          <SideBar isAuthenticated={isAuthenticated} toggle={toggle} setToggle={setToggle} />
+          <Navigation isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
           <ToastProvider autoDismiss autoDismissTimeout={6000} placement="bottom-right" components={{ Toast: Notification }}>
             <main id="content" className="p-5" style={{ minHeight: "calc(100vh - 102px)" }}>
               <Routing isAuthenticated={isAuthenticated} />

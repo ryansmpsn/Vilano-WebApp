@@ -3,7 +3,7 @@ import { MDBIcon } from "mdbreact";
 import { NavLink } from "react-router-dom";
 import { Dropdown, ListGroupItem, ButtonGroup } from "react-bootstrap";
 
-function SideBarAuth(props) {
+function SideNavAuth(props) {
   return (
     props.isAuthenticated && (
       <>
@@ -81,4 +81,4 @@ function SideBarAuth(props) {
     )
   );
 }
-export default SideBarAuth;
+export default SideNavAuth;

@@ -13,7 +13,7 @@ class BidDashboard extends Component {
     this.state = {
       accessLevel: NavPerm.nav_perm_check(),
       selectOptions: [],
-      bidSearchCode: { external_bid_code: [] },
+      bidSearchCode: { bid_name: [] },
       selectedBidId: "null",
       selectedBid: "",
       selectedTrip: "",
@@ -35,6 +35,8 @@ class BidDashboard extends Component {
     return this.setState({ bidSearchCode: e });
   };
   search = (bidSearch) => {
+    console.log(bidSearch);
+
     return Send.post("/Bid/Search", bidSearch, this.props);
   };
 

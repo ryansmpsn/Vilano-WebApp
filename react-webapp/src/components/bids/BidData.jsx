@@ -20,6 +20,7 @@ function BidData(props) {
     props
       .SearchFunction(bidSearch)
       .then((res) => {
+        console.table(res.data);
         setBidData(res.data);
       })
       .catch((err) => {
@@ -104,7 +105,7 @@ function BidData(props) {
                 isMulti
                 placeholder={"Search for Bids by ID"}
                 onChange={(x) => {
-                  doSetBidSearch(x, "external_bid_code");
+                  doSetBidSearch(x, "bid_name");
                 }}
                 isLoading={isLoading & isSearching}
                 isDisabled={isGetAll | (isSearching & isLoading)}
@@ -113,7 +114,7 @@ function BidData(props) {
                 <Spinner animation="border" variant="primary" />
               ) : (
                 <>
-                  <Button type="submit" disabled={isGetAll || bidSearch.external_bid_code.length === 0}>
+                  <Button type="submit" disabled={isGetAll || bidSearch.bid_name === 0}>
                     Search
                   </Button>
                   <Button

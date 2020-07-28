@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { MDBIcon } from "mdbreact";
 import logo from "../../img/logo.jpg";
-import SideBarAuth from "./SideBarAuth";
+import SideNavAuth from "./SideNavAuth";
 import { NavLink } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
-function SideBar(props) {
+function SideNav(props) {
   const StyledMenuMask = styled.div`
     position: fixed;
     background-color: rgba(0, 0, 0, 0.5);
@@ -16,7 +14,7 @@ function SideBar(props) {
     left: 0;
     height: 100vh;
     width: 100%;
-    z-index: 1030;
+    z-index: 1029;
     transition: 1s;
     display: ${props.toggle ? "visible" : "none"};
 
@@ -39,30 +37,17 @@ function SideBar(props) {
   `;
 
   function toggleMenu() {
-    props.setToggle(!props.toggle);
+    if (window.innerWidth >= 1199.98) {
+      props.setToggle(false);
+    } else props.setToggle(!props.toggle);
   }
 
   return (
     <>
-      {console.log(props.toggle)}
-      {console.log(window.innerWidth)}
-
-      {/* {window.innerWidth <= 1200 && props.toggle && <> </>} */}
       <StyledMenuMask id="menuMask" onClick={() => toggleMenu()} />
 
-      <div className="h3 nav position-absolute" style={{ zIndex: 1032, marginTop: "5px", marginLeft: "10px" }}>
-        <FontAwesomeIcon icon={props.toggle ? faChevronRight : faChevronLeft} onClick={() => toggleMenu()} />
-      </div>
-
-      {/* {(window.innerWidth <= 1200 || !props.toggle) && (
-        
-      )} */}
-
-      <StyledMenu className="sidebar-fixed side-nav " style={{ zIndex: 1032, marginTop: "200px", marginLeft: "400px" }}>
-        <FontAwesomeIcon icon={props.toggle ? faChevronRight : faChevronLeft} onClick={() => toggleMenu()} />
-      </StyledMenu>
-
-      <StyledMenu className="sidebar-fixed  side-nav ">
+      {/* fix css on hover open menu */}
+      <StyledMenu id="toggleSidebar" className="sidebar-fixed">
         <a href="/" className="mt-3 mb-3 waves-effect">
           <img alt="Vilano Management Services Inc." className="img-fluid" src={logo} />
         </a>
@@ -83,7 +68,7 @@ function SideBar(props) {
               Resources
             </ListGroupItem>
           </NavLink>
-          <SideBarAuth {...props} />
+          <SideNavAuth {...props} />
           <NavLink to="/about" activeClassName="activeClass">
             <ListGroupItem style={{ borderWidth: "0 0 1px" }} onClick={() => window.innerWidth <= 1200 && props.setToggle(false)}>
               <MDBIcon icon="question" className="mr-3" />
@@ -114,4 +99,4 @@ function SideBar(props) {
   );
 }
 
-export default SideBar;
+export default SideNav;

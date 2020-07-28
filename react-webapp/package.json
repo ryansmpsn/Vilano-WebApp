@@ -28,6 +28,7 @@
     "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "^3.4.1",
     "react-select": "^3.1.0",
+    "react-spring": "^8.0.27",
     "react-table": "^7.2.1",
     "react-toast-notifications": "^2.4.0",
     "react-window": "^1.8.5",
