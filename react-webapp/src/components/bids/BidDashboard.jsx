@@ -35,8 +35,6 @@ class BidDashboard extends Component {
     return this.setState({ bidSearchCode: e });
   };
   search = (bidSearch) => {
-    console.log(bidSearch);
-
     return Send.post("/Bid/Search", bidSearch, this.props);
   };
 
@@ -47,6 +45,8 @@ class BidDashboard extends Component {
   getTrips = (e) => {
     this.setState({ isSearching: true });
     return Send.get(e, this.props).then((res) => {
+      console.log(res.data);
+
       this.setState({ bidProfile: res.data[0] });
       this.setState({ isSearching: false });
     });

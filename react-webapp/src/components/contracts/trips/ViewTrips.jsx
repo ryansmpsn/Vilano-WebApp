@@ -96,10 +96,10 @@ function ViewTrips(props) {
           placement={"top"}
           overlay={
             <Popover id={`popover-Vehicles`}>
-              <Popover.Title>{tripData[19].label}</Popover.Title>
+              <Popover.Title>{props.tripVehicles.label}</Popover.Title>
               <Popover.Content>
-                {tripData[19].value.length !== 0 ? (
-                  tripData[19].value.map((c, index) => (
+                {props.tripVehicles.value.length !== 0 ? (
+                  props.tripVehicles.value.map((c, index) => (
                     <Col key={index}>
                       <strong>{c[3].label}: </strong>
                       {c[3].updatedValue}
@@ -125,10 +125,10 @@ function ViewTrips(props) {
           placement={"top"}
           overlay={
             <Popover id={`popover-trailers`}>
-              <Popover.Title>{tripData[20].label}</Popover.Title>
+              <Popover.Title>{props.tripTrailers.label}</Popover.Title>
               <Popover.Content>
-                {tripData[20].value.length !== 0 ? (
-                  tripData[20].value.map((c, index) => (
+                {props.tripTrailers.value.length !== 0 ? (
+                  props.tripTrailers.value.map((c, index) => (
                     <Col key={index}>
                       <strong>{c[3].label}: </strong>
                       {c[3].updatedValue}
@@ -189,8 +189,8 @@ function ViewTrips(props) {
           {showVehicleModal && (
             <UpsertVehicleModal
               modalName={"Edit Vehicles & Trailers"}
-              vehicles={props.tripData[19]}
-              trailers={props.tripData[20]}
+              vehicles={props.tripVehicles}
+              trailers={props.tripTrailers}
               tripData={tripData}
               show={showVehicleModal}
               closeModal={closeModal}

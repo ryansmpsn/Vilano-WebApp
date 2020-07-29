@@ -73,6 +73,8 @@ function TripData(props) {
               <ViewTrips
                 key={index}
                 tripData={c}
+                tripVehicles={c[19]}
+                tripTrailers={c[20]}
                 contractProfile={props.contractProfile}
                 inputRestrictions={contentInputRestrictions}
                 submitAction={(editTrip) => {

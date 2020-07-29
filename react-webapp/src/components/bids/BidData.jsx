@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Col, Row, Button, Container, Spinner, Jumbotron } from "react-bootstrap";
 import Select from "react-select";
-// import ContractCards from "../contracts/ContractCards";
-// import ContractTable from "../contracts/ContractTable";
-// import UpsertContractModal from "./UpsertContractModal";
+import ContractCards from "../contracts/ContractCards";
+import ContractTable from "../contracts/ContractTable";
+import UpsertContractModal from "../contracts/UpsertContractModal";
 
 function BidData(props) {
   const [bidData, setBidData] = useState([]);
@@ -20,7 +20,7 @@ function BidData(props) {
     props
       .SearchFunction(bidSearch)
       .then((res) => {
-        console.table(res.data);
+        console.log(JSON.stringify(res.data));
         setBidData(res.data);
       })
       .catch((err) => {
@@ -137,48 +137,44 @@ function BidData(props) {
       <hr />
       {tableView
         ? !isLoading && (
-            <div>this is the table</div>
-            // <ContractTable
-            //   getTrips={props.getTrips}
-            //   setSelectedBid={props.setSelectedBid}
-            //   setSelectedBidId={props.setSelectedBidId}
-            //   bidData={bidData}
-            //   inputRestrictions={contentInputRestrictions}
-            //   submitAction={(editBid) => {
-            //     return props.bidEditSubmitAction(editBid);
-            //   }}
-            // />
+            <ContractTable
+              getTrips={props.getTrips}
+              setSelectedContract={props.setSelectedBid}
+              setSelectedContractId={props.setSelectedBidId}
+              contractData={bidData}
+              inputRestrictions={contentInputRestrictions}
+              submitAction={(editBid) => {
+                return props.bidEditSubmitAction(editBid);
+              }}
+            />
           )
         : !isLoading && (
             <div className="bid">
               <Row key="topRow" className="show-grid">
                 {bidData !== [] &&
                   bidData.map((c, index) => (
-                    <div>this is the card</div>
-                    // <ContractCards
-                    //   key={index + "bid"}
-                    //   getTrips={props.getTrips}
-                    //   setSelectedBid={props.setSelectedBid}
-                    //   setSelectedBidId={props.setSelectedBidId}
-                    //   Bid={c}
-                    //   inputRestrictions={contentInputRestrictions}
-                    //   submitAction={(editBid) => {
-                    //     return props.bidEditSubmitAction(editBid);
-                    //   }}
-                    //   accessLevel={props.accessLevel}
-                    // />
+                    <ContractCards
+                      key={index + "bid"}
+                      getTrips={props.getTrips}
+                      setSelectedContract={props.setSelectedBid}
+                      setSelectedContractId={props.setSelectedBidId}
+                      Contract={c}
+                      inputRestrictions={contentInputRestrictions}
+                      submitAction={(editBid) => {
+                        return props.bidEditSubmitAction(editBid);
+                      }}
+                      accessLevel={props.accessLevel}
+                    />
                   ))}
               </Row>
             </div>
           )}
-      {/* {!isLoading && (
+      {!isLoading && (
         <UpsertContractModal
           modalName={"New Bid"}
-          bid={[
-            { columnName: "bid_id", inputType: null, label: null, updatedValue: null, value: null },
-            { columnName: "modified_by", inputType: null, label: null, updatedValue: null, value: null },
-            { columnName: "employee_name", inputType: null, label: "Last Modified By", updatedValue: null, value: "" },
-            { columnName: "is_active", inputType: "select", label: "Active", updatedValue: null, value: 1 },
+          contract={[
+            { columnName: "contract_bid_id", inputType: null, label: null, updatedValue: null, value: null },
+            { columnName: "is_active", inputType: "checkbox", label: "Active", updatedValue: null, value: 1 },
             { columnName: "company_id", inputType: null, label: null, updatedValue: null, value: 1 },
             {
               columnName: "company_name",
@@ -187,8 +183,19 @@ function BidData(props) {
               updatedValue: null,
               value: "",
             },
-            { columnName: "external_bid_code", inputType: "text", label: "Bid No.", updatedValue: "", value: "" },
+            { columnName: "contract_id", inputType: null, label: null, updatedValue: null, value: null },
+            { columnName: "usps_contract_id", inputType: null, label: null, updatedValue: null, value: null },
+            { columnName: "bid_type_id", inputType: null, label: null, updatedValue: null, value: null },
+            { columnName: "bid_type_value", inputType: "select", label: "Bid Type", updatedValue: null, value: "" },
+            { columnName: "external_contract_code", inputType: "text", label: "Contract Number", updatedValue: "", value: "" },
             { columnName: "solicitation_number", inputType: "text", label: "Solicitation No.", updatedValue: "", value: "" },
+            {
+              columnName: "bid_name",
+              inputType: "text",
+              label: "Bid Name",
+              updatedValue: null,
+              value: "",
+            },
             { columnName: "admin_facility_id", inputType: null, label: null, updatedValue: null, value: null },
             {
               columnName: "admin_facility_name",
@@ -197,31 +204,31 @@ function BidData(props) {
               updatedValue: null,
               value: "",
             },
-            { columnName: "bid_type_id", inputType: null, label: null, updatedValue: null, value: 1 },
+            { columnName: "contract_type_id", inputType: null, label: null, updatedValue: null, value: 1 },
             {
-              columnName: "bid_type_code",
+              columnName: "contract_type_code",
               inputType: "select",
               label: "Bid Type Code",
               updatedValue: null,
               value: "",
             },
             {
-              columnName: "bid_type_name",
+              columnName: "contract_type_name",
               inputType: null,
               label: "Bid Type Name",
               updatedValue: null,
               value: "",
             },
-            { columnName: "bid_division_id", inputType: null, label: null, updatedValue: null, value: 1 },
+            { columnName: "contract_division_id", inputType: null, label: null, updatedValue: null, value: 1 },
             {
-              columnName: "bid_division_code",
+              columnName: "contract_division_code",
               inputType: "select",
               label: "Division Code",
               updatedValue: null,
               value: "",
             },
             {
-              columnName: "bid_division_name",
+              columnName: "contract_division_name",
               inputType: null,
               label: "Division Name",
               updatedValue: null,
@@ -267,20 +274,22 @@ function BidData(props) {
               value: "2020-01-29",
             },
             {
-              columnName: "begin_bid_date",
+              columnName: "begin_contract_date",
               inputType: "date",
               label: "Begin Bid Term",
               updatedValue: null,
               value: "2020-02-27",
             },
             {
-              columnName: "end_bid_date",
+              columnName: "end_contract_date",
               inputType: "date",
               label: "End Bid Term",
               updatedValue: null,
               value: "2020-01-03",
             },
             { columnName: "modified_timestamp", inputType: null, label: "Last Modified", updatedValue: null, value: "" },
+            { columnName: "modified_by", inputType: null, label: null, updatedValue: null, value: null },
+            { columnName: "employee_name", inputType: null, label: "Last Modified By", updatedValue: null, value: "" },
           ]}
           inputRestrictions={contentInputRestrictions}
           show={showModal}
@@ -293,7 +302,7 @@ function BidData(props) {
             return props.addSelectOption(option);
           }}
         />
-      )} */}
+      )}
     </Jumbotron>
   );
 }

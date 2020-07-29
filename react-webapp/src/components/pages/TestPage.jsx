@@ -7,7 +7,6 @@ import AdminCardSection2 from "./sections/AdminCardSection2";
 import ChartSection1 from "./sections/ChartSection1";
 import ChartSection2 from "./sections/ChartSection2";
 import MapsPage from "./MapsPage";
-import { useToasts } from "react-toast-notifications";
 const Styles = styled.div`
   .col {
     background-color: grey;
@@ -17,22 +16,11 @@ const Styles = styled.div`
 `;
 
 function TestPage() {
-  const { addToast } = useToasts();
   return (
     <Styles>
       <Jumbotron>
         <h1 className="display-1 text-center">This is the Testing Page</h1>
         <br />
-        <Button
-          onClick={() =>
-            addToast("Message Here", {
-              appearance: "warning",
-              autoDismiss: true,
-            })
-          }
-        >
-          Add Toast
-        </Button>
         <hr />
         <h1 className="display-2">Testing page text: Display-2</h1>
         <h1 className="display-3">Testing page text: Display-3</h1>
@@ -47,7 +35,9 @@ function TestPage() {
         <br />
         <h1>Inline Text Elements: </h1>
         <br />
-        <p className="lead">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus.</p>
+        <p className="lead">
+          Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus.
+        </p>
         <p>
           You can use the mark tag to <mark>highlight</mark> text.
         </p>
@@ -185,28 +175,84 @@ function TestPage() {
         </div>
         <h1>Progress Bars</h1>
         <div className="progress">
-          <div className="progress-bar bg-success" role="progressbar" style={{ width: 25 }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div
+            className="progress-bar bg-success"
+            role="progressbar"
+            style={{ width: 25 }}
+            aria-valuenow="25"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
         </div>
         <div className="progress">
-          <div className="progress-bar bg-info" role="progressbar" style={{ width: 50 }} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+          <div
+            className="progress-bar bg-info"
+            role="progressbar"
+            style={{ width: 50 }}
+            aria-valuenow="50"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
         </div>
         <div className="progress">
-          <div className="progress-bar bg-warning" role="progressbar" style={{ width: 75 }} aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+          <div
+            className="progress-bar bg-warning"
+            role="progressbar"
+            style={{ width: 75 }}
+            aria-valuenow="75"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
         </div>
         <div className="progress">
-          <div className="progress-bar bg-danger" role="progressbar" style={{ width: 100 }} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+          <div
+            className="progress-bar bg-danger"
+            role="progressbar"
+            style={{ width: 100 }}
+            aria-valuenow="100"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
         </div>
         <div className="progress">
-          <div className="progress-bar bg-success" role="progressbar" style={{ width: 25 }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div
+            className="progress-bar bg-success"
+            role="progressbar"
+            style={{ width: 25 }}
+            aria-valuenow="25"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
         </div>
         <div className="progress">
-          <div className="progress-bar bg-info" role="progressbar" style={{ width: 50 }} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+          <div
+            className="progress-bar bg-info"
+            role="progressbar"
+            style={{ width: 50 }}
+            aria-valuenow="50"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
         </div>
         <div className="progress">
-          <div className="progress-bar bg-warning" role="progressbar" style={{ width: 75 }} aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+          <div
+            className="progress-bar bg-warning"
+            role="progressbar"
+            style={{ width: 75 }}
+            aria-valuenow="75"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
         </div>
         <div className="progress">
-          <div className="progress-bar bg-danger" role="progressbar" style={{ width: 100 }} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+          <div
+            className="progress-bar bg-danger"
+            role="progressbar"
+            style={{ width: 100 }}
+            aria-valuenow="100"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
         </div>
         <h2>Striped</h2>
         <div>
