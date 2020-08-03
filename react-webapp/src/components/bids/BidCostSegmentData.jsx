@@ -5,7 +5,7 @@ import { Button, Spinner, Jumbotron, Container, Row, Col } from "react-bootstrap
 import Send from "../../libs/send";
 import UpsertCostSegment from "../contracts/costSegments/UpsertCostSegment";
 
-class BidCostSegment extends Component {
+class BidCostSegmentData extends Component {
   _isMounted = false;
 
   constructor(props) {
@@ -1266,4 +1266,4 @@ class BidCostSegment extends Component {
   }
 }
 
-export default BidCostSegment;
+export default BidCostSegmentData;

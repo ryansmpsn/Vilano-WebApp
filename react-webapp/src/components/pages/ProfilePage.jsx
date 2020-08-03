@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Card, Accordion, Button } from "react-bootstrap";
 import { MDBRow, MDBCol, MDBCard, MDBView, MDBCardBody, MDBInput, MDBContainer, MDBBtn } from "mdbreact";
 import Send from "../../libs/send";
 
@@ -21,7 +22,7 @@ class ProfilePage extends Component {
     return (
       <MDBContainer fluid>
         <MDBRow center>
-          <MDBCol lg="10" className="mb-4 mt-5">
+          <MDBCol lg="6" className="mb-4 mt-5">
             <MDBCard narrow className="cascading-admin-card">
               <div className="admin-up" style={{ marginRight: "10%" }}>
                 <MDBBtn icon="money-bill-alt" className="mdb-color lighten-3 text-center" block>
@@ -53,34 +54,40 @@ class ProfilePage extends Component {
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
-          {this.state.employeeData !== null &&
-            this.state.employeeData.map((data, index) => (
-              <MDBCol lg="4" className="mb-r mt-4" key={index + "employeeData"}>
-                <MDBCard narrow>
-                  <MDBView cascade className="mdb-color lighten-3 card-header">
-                    <h5 className="mb-0 font-weight-bold text-center text-white">{data.label}</h5>
-                  </MDBView>
-                  <MDBCardBody className="text-center">
-                    <MDBRow>
-                      {data.value !== null &&
-                        data.value[0].map(
-                          (c, index) =>
-                            c.label !== null && (
-                              <MDBCol md="6" key={index + "cData"}>
-                                <MDBInput
-                                  type="text"
-                                  label={c.label}
-                                  value={c.updatedValue !== null ? c.updatedValue : ""}
-                                  disabled
-                                ></MDBInput>
-                              </MDBCol>
-                            )
-                        )}
-                    </MDBRow>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCol>
-            ))}
+          <MDBCol lg="6">
+            <Accordion defaultActiveKey={0}>
+              {this.state.employeeData !== null &&
+                this.state.employeeData.map((data, index) => (
+                  <Card key={index + "employeeData"}>
+                    <Card.Header>
+                      <Accordion.Toggle as={Button} block className="mdb-color lighten-3 text-center" eventKey={index}>
+                        {data.label}
+                      </Accordion.Toggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey={index}>
+                      <Card.Body>
+                        <MDBRow>
+                          {data.value !== null &&
+                            data.value[0].map(
+                              (c, index) =>
+                                c.label !== null && (
+                                  <MDBCol md="6" key={index + "cData"}>
+                                    <MDBInput
+                                      type="text"
+                                      label={c.label}
+                                      value={c.updatedValue !== null ? c.updatedValue : ""}
+                                      disabled
+                                    ></MDBInput>
+                                  </MDBCol>
+                                )
+                            )}
+                        </MDBRow>
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                ))}
+            </Accordion>
+          </MDBCol>
         </MDBRow>
       </MDBContainer>
     );

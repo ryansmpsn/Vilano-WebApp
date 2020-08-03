@@ -1,5 +1,5 @@
 import React from "react";
-import { Jumbotron, Container, Row, Col, ProgressBar, Table, Button } from "react-bootstrap";
+import { Jumbotron, Container, Row, Col, ProgressBar, Table } from "react-bootstrap";
 import styled from "styled-components";
 import ModalSection from "./sections/ModalSection";
 import AdminCardSection1 from "./sections/AdminCardSection1";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem } from "mdbreact";
+import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse } from "mdbreact";
 import Clock from "./Clock";
 import NavBarAuth from "./NavBarAuth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -36,9 +36,6 @@ function NavBar(props) {
       <MDBNavbarBrand>
         <Clock />
       </MDBNavbarBrand>
-      <MDBNavbarNav left>
-        <MDBNavItem active></MDBNavItem>
-      </MDBNavbarNav>
 
       <MDBNavbarToggler onClick={() => setCollapse(!collapse)} />
       <MDBCollapse isOpen={collapse} navbar>
