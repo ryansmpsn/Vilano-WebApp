@@ -65,14 +65,8 @@ function SideNavAuth(props) {
           </Dropdown.Menu>
         </Dropdown>
 
-        <NavLink to="/employees" activeClassName="activeClass">
-          <ListGroupItem style={{ borderWidth: "1px 0 1px" }}>
-            <MDBIcon icon="users" className="mr-3" />
-            Employees
-          </ListGroupItem>
-        </NavLink>
         <NavLink to="/administration" activeClassName="activeClass">
-          <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
+          <ListGroupItem style={{ borderWidth: "1px 0 1px" }}>
             <MDBIcon icon="tools" className="mr-3" />
             Administration
           </ListGroupItem>

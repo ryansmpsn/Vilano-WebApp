@@ -1,38 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon } from "mdbreact";
+import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBCardText } from "mdbreact";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { Tabs, Tab } from "react-bootstrap";
+import EmployeeManagement from "./EmployeeManagement";
 import ContractManagement from "./ContractManagement";
-import EmployeePage from "../employees/EmployeePage";
+import FacilityManagement from "./FacilityManagement";
 
 function AdministrationDashboard() {
   return (
     <>
-      <MDBRow className="mb-4">
-        <MDBCol xl="12" md="12" className="mb-r">
-          <MDBCard className="cascading-admin-card">
-            <MDBCardHeader>
-              <div className="admin-up">
-                <MDBIcon icon="tools" className="primary-color" />
-                <h1 className="m-3 text-center">Administration Dashboard</h1>
-              </div>
-            </MDBCardHeader>
-            <MDBCardBody>
-              <MDBRow>
-                <MDBCol>
-                  <Link to="dashboard" className="btn btn-sm btn-outline-warning">
-                    Contract Management
-                  </Link>
-                  <Link to="routes" className="btn btn-sm btn-outline-warning">
-                    Employee Management
-                  </Link>
-                </MDBCol>
-              </MDBRow>
-            </MDBCardBody>
-          </MDBCard>
+      <MDBRow center className="mb-4">
+        <MDBCol md="6" className="mb-r">
+          <h1 className="m-3 text-center">Application Administration</h1>
         </MDBCol>
       </MDBRow>
-      <ContractManagement />
-      <EmployeePage />
+      <Routes>
+        <Tabs defaultActiveKey="employee" id="administration-tabs" variant="pills" className="mb-5 shadow-lg">
+          <Tab eventKey="employee" title="Employee Management">
+            <EmployeeManagement />
+          </Tab>
+          <Tab eventKey="contract" title="Contract Management">
+            <ContractManagement />
+          </Tab>
+          <Tab eventKey="facility" title="Facility Management">
+            <FacilityManagement />
+          </Tab>
+        </Tabs>
+
+        {/* <Navigate from="/administration" to="/administration/dashboard" /> */}
+      </Routes>
     </>
   );
 }

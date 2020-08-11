@@ -1,7 +1,8 @@
 import React from "react";
 import { MDBRow, MDBCol, MDBCard, MDBCardHeader, MDBCardBody, MDBIcon } from "mdbreact";
+import { Button } from "react-bootstrap";
 
-function EmployeePage() {
+function EmployeeManagement() {
   return (
     <MDBRow className="mb-4">
       <MDBCol xl="12" md="12" className="mb-r">
@@ -14,6 +15,10 @@ function EmployeePage() {
           </MDBCardHeader>
           <MDBCardBody>
             <div className="d-flex flex-column">Employee Content</div>
+            <Button className="btn btn-sm btn-primary">All Employees</Button>
+            <Button className="btn btn-sm btn-primary">Assignment</Button>
+            <Button className="btn btn-sm btn-primary">Employees</Button>
+            <Button className="btn btn-sm btn-primary">Hire Employee</Button>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>
@@ -21,4 +26,4 @@ function EmployeePage() {
   );
 }
 
-export default EmployeePage;
+export default EmployeeManagement;

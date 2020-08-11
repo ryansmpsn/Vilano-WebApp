@@ -10,7 +10,6 @@ import BidDashboard from "./components/bids/BidDashboard";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import ResourcesPage from "./components/pages/ResourcesPage";
 import AxiosTestPage from "./components/pages/AxiosTestPage";
-import EmployeePage from "./components/employees/EmployeePage";
 import ContractDashboard from "./components/contracts/ContractDashboard";
 import ProfilePageTesting from "./components/employees/ProfilePageTesting";
 import AdministrationDashboard from "./components/admin/AdministrationDashboard";
@@ -34,7 +33,6 @@ class Routing extends React.Component {
             <PrivateRoute path="/bids/*" element={<BidDashboard />} />
             <PrivateRoute path="/profile" element={<ProfilePage />} />
             <PrivateRoute path="/profiletest" element={<ProfilePageTesting />} />
-            <PrivateRoute path="/employees" element={<EmployeePage />} />
           </>
         )}
         {/* Catch all unmatched routes */}
