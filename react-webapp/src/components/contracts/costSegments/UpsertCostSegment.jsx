@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useToasts } from "react-toast-notifications";
-import { MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon, MDBBtn } from "mdbreact";
-import { Spinner } from "react-bootstrap";
+import { MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon } from "mdbreact";
+import { Spinner, Button } from "react-bootstrap";
 
 function UpsertCostSegment(props) {
   const { addToast } = useToasts();
@@ -259,10 +259,10 @@ function UpsertCostSegment(props) {
                     <Spinner animation="border" variant="primary" />
                   </MDBContainer>
                 ) : (
-                  <MDBBtn outline color="info" type="submit">
+                  <Button className="btn-outline-info" type="submit">
                     Save
                     <MDBIcon far icon="paper-plane" className="ml-1" />
-                  </MDBBtn>
+                  </Button>
                 )}
               </div>
             </MDBCol>

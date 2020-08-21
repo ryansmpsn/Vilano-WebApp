@@ -14,7 +14,6 @@ function EmployeeManagement() {
             <h1 className="m-3 text-center">Employee Management</h1>
           </MDBCardHeader>
           <MDBCardBody>
-            <div className="d-flex flex-column">Employee Content</div>
             <Button className="btn btn-sm btn-primary">All Employees</Button>
             <Button className="btn btn-sm btn-primary">Assignment</Button>
             <Button className="btn btn-sm btn-primary">Employees</Button>

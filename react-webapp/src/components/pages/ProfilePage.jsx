@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Card, Accordion, Button } from "react-bootstrap";
-import { MDBRow, MDBCol, MDBCard, MDBView, MDBCardBody, MDBInput, MDBContainer, MDBBtn } from "mdbreact";
+import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBContainer, MDBBtn } from "mdbreact";
 import Send from "../../libs/send";
 
 class ProfilePage extends Component {
@@ -25,9 +25,9 @@ class ProfilePage extends Component {
           <MDBCol lg="6" className="mb-4 mt-5">
             <MDBCard narrow className="cascading-admin-card">
               <div className="admin-up" style={{ marginRight: "10%" }}>
-                <MDBBtn icon="money-bill-alt" className="mdb-color lighten-3 text-center" block>
+                <Button icon="money-bill-alt" className="mdb-color lighten-3 text-center" block>
                   Profile
-                </MDBBtn>
+                </Button>
               </div>
               <MDBCardBody className="text-center">
                 <MDBRow>

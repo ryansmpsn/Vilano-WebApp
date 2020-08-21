@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col, Button } from "react-bootstrap";
 import UpsertContractModal from "./UpsertContractModal";
-import { MDBBtn } from "mdbreact";
 
 function ContractCards(props) {
   const [contract, setContract] = useState([]);
@@ -92,12 +91,12 @@ function ContractCards(props) {
           >
             View Rate Information
           </Link>
-          <MDBBtn outline color="warning" className="float-right" onClick={openModal}>
+          <Button className="float-right btn-outline-warning" onClick={openModal}>
             Create Bid
-          </MDBBtn>
-          <MDBBtn outline color="warning" className="float-right" onClick={openModal}>
+          </Button>
+          <Button className="float-right btn-outline-warning" onClick={openModal}>
             Edit Contract
-          </MDBBtn>
+          </Button>
         </Card.Body>
         <UpsertContractModal
           modalName={"Edit Contract"}

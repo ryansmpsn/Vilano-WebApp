@@ -15,9 +15,9 @@ class BidCostSegmentData extends Component {
       isLoading: false,
       costSegmentDropdowns: null,
       isSearching: false,
-      contractSearch: props.selectedContract,
-      contractData: null,
-      contractCostSegments: null,
+      bidSearch: props.selectedBid,
+      bidData: null,
+      bidCostSegments: null,
       selectedCostSegment: null,
       rateSheetData: null,
       units: [
@@ -1043,7 +1043,7 @@ class BidCostSegmentData extends Component {
         },
       ],
     };
-    this.getSelectedContract = this.getSelectedContract.bind(this);
+    this.getSelectedBid = this.getSelectedBid.bind(this);
     this.updateRateSheetData = this.updateRateSheetData.bind(this);
     this.setCostSegmentdata = this.setCostSegmentdata.bind(this);
   }
@@ -1063,43 +1063,43 @@ class BidCostSegmentData extends Component {
   costSegmentSubmitAction = (rateSheet) => {
     this.setState({ isLoading: true });
 
-    return Send.post("/Contract/ContractRateSheet", rateSheet, this.props.appProps).then((res) => {
-      this.setState({ contractCostSegments: res.data[0].pop() });
-      this.setState({ contractData: res.data[0] });
+    return Send.post("/Bid/BidRateSheet", rateSheet, this.props.appProps).then((res) => {
+      this.setState({ bidCostSegments: res.data[0].pop() });
+      this.setState({ bidData: res.data[0] });
       this.setState({ isLoading: false });
     });
   };
 
   componentDidMount() {
     this._isMounted = true;
-    if (this.props.contractProfile !== null) {
+    if (this.props.bidProfile !== null) {
       this.setState({ isLoading: true });
 
-      Send.get("/Contract/Dropdowns/CostSegment/All", this.props.appProps).then((res) => {
+      Send.get("/Bid/Dropdowns/CostSegment/All", this.props.appProps).then((res) => {
         this.setState({ costSegmentDropdowns: res.data[0].options });
       });
 
-      Send.get("/Contract/" + this.props.selectedContractId + "/RateSheet", this.props.appProps).then((res) => {
-        this.setState({ contractCostSegments: res.data[0].pop() });
-        this.setState({ contractData: res.data[0] });
+      Send.get("/Bid/" + this.props.selectedBidId + "/RateSheet", this.props.appProps).then((res) => {
+        this.setState({ bidCostSegments: res.data[0].pop() });
+        this.setState({ bidData: res.data[0] });
         this.setState({ isLoading: false });
       });
     }
   }
 
-  getSelectedContract() {
+  getSelectedBid() {
     this.setState({ isLoading: true });
 
-    this.props.getTrips("/Contract/" + this.state.contractSearch);
+    this.props.getTrips("/Bid/" + this.state.bidSearch);
 
-    Send.get("/Contract/Dropdowns/CostSegment/All", this.props.appProps).then((res) => {
+    Send.get("/Bid/Dropdowns/CostSegment/All", this.props.appProps).then((res) => {
       this.setState({ costSegmentDropdowns: res.data[0].options });
     });
-    this.props.setSelectedContractId(this.state.contractSearch);
+    this.props.setSelectedBidId(this.state.bidSearch);
 
-    Send.get("/Contract/" + this.state.contractSearch + "/RateSheet", this.props.appProps).then((res) => {
-      this.setState({ contractCostSegments: res.data[0].pop() });
-      this.setState({ contractData: res.data[0] });
+    Send.get("/Bid/" + this.state.bidSearch + "/RateSheet", this.props.appProps).then((res) => {
+      this.setState({ bidCostSegments: res.data[0].pop() });
+      this.setState({ bidData: res.data[0] });
       this.setState({ isLoading: false });
     });
   }
@@ -1108,9 +1108,9 @@ class BidCostSegmentData extends Component {
     this.setState({ settingData: false });
     this.setState({ selectedCostSegment: x });
 
-    for (var i = 0; i < this.state.contractCostSegments.value.length; i++) {
-      if (this.state.contractCostSegments.value[i][1].value === x.label) {
-        this.setState({ rateSheetData: this.state.contractCostSegments.value[i][3].value });
+    for (var i = 0; i < this.state.bidCostSegments.value.length; i++) {
+      if (this.state.bidCostSegments.value[i][1].value === x.label) {
+        this.setState({ rateSheetData: this.state.bidCostSegments.value[i][3].value });
         break;
       } else {
         this.setState({ rateSheetData: null });
@@ -1197,12 +1197,12 @@ class BidCostSegmentData extends Component {
                   this.setState({ rateSheetData: null });
                   this.setState({ costSegmentDropdowns: null });
                   this.setState({ settingData: false });
-                  x === null ? this.setState({ contractSearch: x }) : this.setState({ contractSearch: x.value });
+                  x === null ? this.setState({ bidSearch: x }) : this.setState({ bidSearch: x.value });
                   this.setState({ selectedCostSegment: null });
                 }}
                 isLoading={this.state.isLoading}
                 isDisabled={this.state.isLoading}
-                defaultInputValue={this.props.selectedContract}
+                defaultInputValue={this.props.selectedBid}
                 isClearable
               />
               {this.state.isLoading === true ? (
@@ -1212,7 +1212,7 @@ class BidCostSegmentData extends Component {
               ) : (
                 <>
                   <h4>
-                    <Button type="button" onClick={this.getSelectedContract} disabled={this.state.contractSearch === "null"}>
+                    <Button type="button" onClick={this.getSelectedBid} disabled={this.state.bidSearch === "null"}>
                       Search
                     </Button>
                   </h4>
@@ -1244,13 +1244,13 @@ class BidCostSegmentData extends Component {
         {this.state.settingData && (
           <UpsertCostSegment
             props={this.props}
-            contractData={this.state.contractData}
+            contractData={this.state.bidData}
             units={this.state.units}
             unitCost={this.state.unitCost}
             itemLabels={this.state.itemLabels}
             annualCost={this.state.annualCost}
             remarkAnnualCost={this.state.remarkAnnualCost}
-            contractCostSegments={this.state.contractCostSegments}
+            contractCostSegments={this.state.bidCostSegments}
             selectedCostSegment={this.state.selectedCostSegment !== null && this.state.selectedCostSegment.label}
             setUnits={this.setUnits}
             setUnitCost={this.setUnitCost}

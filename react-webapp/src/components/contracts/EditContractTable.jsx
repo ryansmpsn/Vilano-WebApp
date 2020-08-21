@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import UpsertContractModal from "./UpsertContractModal";
-import { MDBBtn } from "mdbreact";
+import { Button } from "react-bootstrap";
 
 function EditContractTable(props) {
   const [showModal, setShowModal] = useState(false);
@@ -17,9 +17,9 @@ function EditContractTable(props) {
 
   return (
     <>
-      <MDBBtn outline color="warning" className="float-right" onClick={openModal}>
+      <Button className="float-right btn-outline-warning" onClick={openModal}>
         Edit Contract
-      </MDBBtn>
+      </Button>
       <UpsertContractModal
         modalName={"Edit Contract"}
         contract={props.contract}

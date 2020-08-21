@@ -277,10 +277,10 @@ function TestPage() {
       </Container>
       <AdminCardSection1 />
       <AdminCardSection2 />
-      <ChartSection1 />
       <ChartSection2 />
+      <ChartSection1 />
       <ModalSection />
-      <MapsPage />
+      {/*<MapsPage />*/}
       <Container>
         <h1>This is the Grid System</h1>
         <h3> Auto Layout Grids:</h3>

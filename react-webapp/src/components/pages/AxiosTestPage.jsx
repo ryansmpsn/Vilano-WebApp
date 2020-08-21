@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBCardText, MDBBadge, MDBCardHeader, MDBBtn } from "mdbreact";
 import { useToasts } from "react-toast-notifications";
 import Send from "../../libs/send";
-import { FormGroup, FormControl, Spinner } from "react-bootstrap";
+import { FormGroup, FormControl, Spinner, Button } from "react-bootstrap";
 import { useFormFields } from "../../libs/hookslib";
 
 function AxiosTestPage() {
@@ -82,10 +82,10 @@ function AxiosTestPage() {
                       <p className="text-muted">
                         <small>example: "/Contract/Dropdowns/Contract/All"</small>
                       </p>
-                      <MDBBtn outline color="info" onClick={() => clickMe()}>
+                      <Button className="btn-outline-info" onClick={() => clickMe()}>
                         Send
                         <MDBIcon far icon="paper-plane" className="ml-1" />
-                      </MDBBtn>
+                      </Button>
                     </>
                   )}
                 </MDBCol>

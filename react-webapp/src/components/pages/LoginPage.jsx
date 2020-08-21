@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { MDBBtn } from "mdbreact";
 import Send from "../../libs/send";
 import { useAuth } from "../../auth";
 import styled from "styled-components";
 import { Navigate, useLocation } from "react-router-dom";
 import { useFormFields } from "../../libs/hookslib";
 import { useToasts } from "react-toast-notifications";
-import { FormGroup, FormControl, Spinner } from "react-bootstrap";
+import { FormGroup, FormControl, Spinner, Button } from "react-bootstrap";
 
 const LoginPage = styled.div`
   .box {
@@ -119,9 +118,9 @@ export default function Login(props) {
           {isLoading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-            <MDBBtn type={"submit"} active={!isLoading} disabled={!validateForm()} onClick={postLogin} gradient="aqua">
+            <Button className="aqua-gradient" type={"submit"} active={!isLoading} disabled={!validateForm()} onClick={postLogin}>
               Login
-            </MDBBtn>
+            </Button>
           )}
         </form>
       </div>

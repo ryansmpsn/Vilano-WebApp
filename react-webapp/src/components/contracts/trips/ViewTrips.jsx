@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { MDBBtn } from "mdbreact";
 import Send from "../../../libs/send";
 import UpsertTripModal from "./UpsertTripModal";
 import { useToasts } from "react-toast-notifications";
 import UpsertVehicleModal from "./UpsertVehicleModal";
-import { Card, Spinner, Row, Col, OverlayTrigger, Popover } from "react-bootstrap";
+import { Card, Spinner, Row, Col, OverlayTrigger, Popover, Button } from "react-bootstrap";
 
 function ViewTrips(props) {
   const [tripData] = useState(props.tripData);
@@ -116,9 +115,7 @@ function ViewTrips(props) {
             </Popover>
           }
         >
-          <MDBBtn rounded outline color="info">
-            Vehicles
-          </MDBBtn>
+          <Button className="btn-outline-info rounded">Vehicles</Button>
         </OverlayTrigger>
         <OverlayTrigger
           key={"trailers"}
@@ -145,21 +142,19 @@ function ViewTrips(props) {
             </Popover>
           }
         >
-          <MDBBtn rounded outline color="info">
-            Trailers
-          </MDBBtn>
+          <Button className="rounded btn-outline-info">Trailers</Button>
         </OverlayTrigger>
         {isLoading ? (
           <Spinner animation="border" variant="primary" className="float-right" />
         ) : (
           <>
-            <MDBBtn outline color="warning" size="sm" onClick={editTrip} className="float-right">
+            <Button onClick={editTrip} className="float-right btn-sm btn-outline-warning">
               Edit Trip
-            </MDBBtn>
+            </Button>
 
-            <MDBBtn outline color="warning" size="sm" onClick={() => openModal("vehicle")} className="float-right">
+            <Button onClick={() => openModal("vehicle")} className="float-right btn-sm btn-outline-warning">
               Edit Vehicles
-            </MDBBtn>
+            </Button>
           </>
         )}
         {/*  <Link
