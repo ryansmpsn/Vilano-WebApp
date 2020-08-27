@@ -53,6 +53,7 @@ export default function Login(props) {
   let location = useLocation();
   const referrer = location.state !== null && location.state.hasOwnProperty("referrer") ? location.state.referrer.pathname : "/";
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     username: "",
     password: "",
@@ -67,12 +68,8 @@ export default function Login(props) {
     Send.post("/Login", fields, props)
       .then((result) => {
         setIsLoading(false);
-        result.our_session.match
-          ? setSession(result.our_session)
-          : addToast("Invalid Credentials. Please Try Logging In Again.", {
-              appearance: "error",
-              autoDismiss: true,
-            });
+        setIsDisabled(true);
+        result.our_session.match ? handleSuccess(result) : handleInvalidCredentials();
       })
       .catch((err) => {
         setIsLoading(false);
@@ -80,13 +77,29 @@ export default function Login(props) {
       });
   }
 
-  function handleRedirect() {
-    if (props.isAuthenticated)
-      addToast("You have successfully logged in.", {
-        appearance: "success",
-        autoDismiss: true,
-      });
+  function handleInvalidCredentials() {
+    setIsDisabled(false);
+    addToast("Invalid Credentials. Please Try Logging In Again.", {
+      appearance: "error",
+      autoDismiss: true,
+    });
+  }
 
+  function handleSuccess(result) {
+    addToast("You have logged in successfully. You will be redirected shortly.", {
+      appearance: "success",
+      autoDismiss: true,
+      autoDismissTimeout: 4000,
+    });
+
+    setTimeout(handleLogin, 4000, result);
+  }
+
+  function handleLogin(result) {
+    setSession(result.our_session);
+  }
+
+  function handleRedirect() {
     if (props.isAuthenticated) return <Navigate to={referrer} />;
   }
 
@@ -118,7 +131,13 @@ export default function Login(props) {
           {isLoading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-            <Button className="aqua-gradient" type={"submit"} active={!isLoading} disabled={!validateForm()} onClick={postLogin}>
+            <Button
+              className="aqua-gradient"
+              type={"submit"}
+              active={!isLoading}
+              disabled={!validateForm() || isDisabled}
+              onClick={postLogin}
+            >
               Login
             </Button>
           )}

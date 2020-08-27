@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBCardText } from "mdbreact";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { MDBRow, MDBCol } from "mdbreact";
+import { Routes } from "react-router-dom";
 import { Tabs, Tab } from "react-bootstrap";
 import EmployeeManagement from "./EmployeeManagement";
 import ContractManagement from "./ContractManagement";

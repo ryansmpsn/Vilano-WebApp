@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Card, Accordion, Button } from "react-bootstrap";
-import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBContainer, MDBBtn } from "mdbreact";
+import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBContainer } from "mdbreact";
 import Send from "../../libs/send";
 
 class ProfilePage extends Component {
@@ -10,12 +10,17 @@ class ProfilePage extends Component {
   componentDidMount() {
     this._isMounted = true;
 
-    return Send.get("/Employee/Profile/" + sessionStorage.getItem("IDSession"), this.props).then((res) => {
-      if (this._isMounted) {
-        this.setState({ employeeProfile: res.data[0][0].value });
-        this.setState({ employeeData: [res.data[0][1], res.data[0][2], res.data[0][3]] });
-      }
-    });
+    return Send.get("/Employee/Profile/" + sessionStorage.getItem("IDSession"), this.props)
+      .then((res) => {
+        if (this._isMounted) {
+          this.setState({ employeeProfile: res.data[0][0].value });
+          this.setState({ employeeData: [res.data[0][1], res.data[0][2], res.data[0][3]] });
+        }
+      })
+      .catch((err) => {
+        console.log("cathing errors from profile page");
+        console.log(err.response.data.data.error);
+      });
   }
 
   render() {

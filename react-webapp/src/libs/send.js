@@ -31,15 +31,25 @@ const Send = new (class send extends React.Component {
 
   set_our_session = (sess, props) => {
     if (sess) {
-      if (sess.SessionID !== this.state.SessionID && sess.match !== false) {
+      if (sess.SessionID !== this.state.SessionID && sess.match === true) {
         sessionStorage.setItem("SessionID", sess.SessionID);
         sessionStorage.setItem("IDSession", sess.IDSession);
-        sess.NavPermissions.map((a) => {
-          return sessionStorage.setItem(a[0], a[1]);
+        sess.NavPermissions.map((c) => {
+          return sessionStorage.setItem(c.navigation_permission_route, c.access_level);
         });
       }
-      //     else props.handleLogout(); // Still not refreshing page for loggout... Get 401 denieds, but no user display change.
-      //     // Oh yeah I need to handle 401s to loggout. Will do this later.
+    } else {
+      props.handleLogout();
+    }
+  };
+
+  handleError = (err, props) => {
+    console.log(props);
+    console.log(err.status + " Error: " + err.statusText + " at " + err.config.method + " " + err.config.url);
+    console.log(err.data.data.error);
+    console.log(err);
+    if (props || err.match === false) {
+      props.handleLogout();
     }
   };
 
@@ -64,6 +74,7 @@ const Send = new (class send extends React.Component {
           resolve(data);
         })
         .catch((err) => {
+          send.handleError(err.response, props);
           reject(err);
         });
     });
@@ -90,6 +101,7 @@ const Send = new (class send extends React.Component {
           resolve(data);
         })
         .catch((err) => {
+          send.handleError(err.response, props);
           reject(err);
         });
     });

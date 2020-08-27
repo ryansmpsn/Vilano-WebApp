@@ -6,7 +6,7 @@ import AdminCardSection1 from "./sections/AdminCardSection1";
 import AdminCardSection2 from "./sections/AdminCardSection2";
 import ChartSection1 from "./sections/ChartSection1";
 import ChartSection2 from "./sections/ChartSection2";
-import MapsPage from "./MapsPage";
+// import MapsPage from "./MapsPage";
 const Styles = styled.div`
   .col {
     background-color: grey;

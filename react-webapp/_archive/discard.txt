@@ -1,84 +1,76 @@
-import React from "react";
-import { Dropdown, ListGroupItem, Button, DropdownButton, NavDropdown, ButtonGroup } from "react-bootstrap";
-import { MDBListGroupItem, MDBIcon } from "mdbreact";
-import { NavLink } from "react-router-dom";
+import React, { Component, useState, useEffect } from "react";
+import "./css/App.css";
+import Send from "./libs/send";
+import Routing from "./Routes";
+import { AuthContext } from "./auth";
+import Notification from "./libs/Notifications";
+import Footer from "./components/layout/Footer";
+import Navigation from "./components/layout/Navigation";
+import { ToastProvider } from "react-toast-notifications";
+import { useNavigate } from "react-router";
 
-function SideBarAuth(props) {
-  return (
-    <>
-      {props.appProps.isAuthenticated && props.appProps.contractAccess !== "None" && (
-        <>
-          {/* <NavLink to="/contracts" activeClassName="activeClass">
-            <div />
-            <ListGroupItem>
-              <MDBIcon icon="file-invoice-dollar" className="mr-3" />
-              Contracts
-            </ListGroupItem>
-          </NavLink> */}
+function App(props) {
+  let navigate = useNavigate();
+  const existingSession = sessionStorage.getItem("SessionID");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [session, setSession] = useState(existingSession);
 
-          <Dropdown as={ButtonGroup}>
-            <NavLink to="/contracts" activeClassName="activeClass">
-              <div />
-              <ListGroupItem>
-                <MDBIcon icon="file-invoice-dollar" className="mr-3" />
-                Contracts
-              </ListGroupItem>
-            </NavLink>
-            <Dropdown.Toggle split id="dropdown-split-basic" as={ListGroupItem} />
-            <Dropdown.Menu>
-              <NavLink to="/Contract/Trips" activeClassName="activeClass">
-                <Dropdown.Item>Trips</Dropdown.Item>
-              </NavLink>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+  useEffect(() => {
+    if (!isAuthenticated) {
+      sessionStorage.getItem("SessionID") !== null &&
+        Send.get("/Loggedin")
+          .then((res) => {
+            setIsAuthenticated(true);
+          })
+          .catch((err) => {
+            console.log("You are not logged in Please login");
+          });
+    }
+  }, [isAuthenticated, props]);
 
-          {/* <NavLink to="/bids" activeClassName="activeClass">
-                <div />
-                 <MDBListGroupItem>
-                  <MDBIcon icon="file-signature" className="mr-3" />
-                  Contract Analytics
-                </MDBListGroupItem> 
-              </NavLink>*/}
-        </>
-      )}
-      {/* <NavLink to="/performance" activeClassName="activeClass">
-            <div />
-            <MDBListGroupItem>
-              <MDBIcon icon="chart-line" className="mr-3" />
-              Performance
-            </MDBListGroupItem>
-          </NavLink>
-          <NavLink to="/financials" activeClassName="activeClass">
-            <div />
-            <MDBListGroupItem>
-              <MDBIcon icon="money-bill" className="mr-3" />
-              Financials
-            </MDBListGroupItem>
-          </NavLink>
-          <NavLink to="/payroll" activeClassName="activeClass">
-            <div />
-            <MDBListGroupItem>
-              <MDBIcon icon="toilet-paper" className="mr-3" />
-              Payroll
-            </MDBListGroupItem>
-          </NavLink>
-          <NavLink to="/profile" activeClassName="activeClass">
-            <div />
-            <MDBListGroupItem>
-              <MDBIcon icon="user" className="mr-3" />
-              Profile
-            </MDBListGroupItem>
-          </NavLink> */}
-      <NavLink to="/About" activeClassName="activeClass">
-        <div />
-        <MDBListGroupItem>
-          <MDBIcon icon="question" className="mr-3" />
-          About
-        </MDBListGroupItem>
-      </NavLink>
-    </>
-  );
+  const setSessionData = (data) => {
+    if (data !== undefined && data.match === true) {
+      sessionStorage.setItem("SessionID", data.SessionID);
+      sessionStorage.setItem("IDSession", data.IDSession);
+      data.NavPermissions.map((c) => {
+        return sessionStorage.setItem(c.navigation_permission_route, c.access_level);
+      });
+      setSession(data);
+      setIsAuthenticated(true);
+    } else {
+      setSession();
+    }
+  };
+
+  const setIsAuthenticatedData = (authenticated) => {
+    setIsAuthenticated(authenticated);
+  };
+
+  function handleLogout() {
+    sessionStorage.clear();
+    setIsAuthenticated(false);
+    navigate("/login");
+    // add notification
+  }
+
+  class Content extends Component {
+    render() {
+      return (
+        <AuthContext.Provider
+          value={{ isAuthenticated, session, setSession: setSessionData, setIsAuthenticated: setIsAuthenticatedData }}
+        >
+          <Navigation isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+          {console.log("hit me")}
+          <ToastProvider autoDismiss autoDismissTimeout={6000} placement="bottom-right" components={{ Toast: Notification }}>
+            <main id="content" className="p-5" style={{ minHeight: "calc(100vh - 102px)" }}>
+              <Routing isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
+            </main>
+          </ToastProvider>
+          <Footer />
+        </AuthContext.Provider>
+      );
+    }
+  }
+  return <Content />;
 }
-export default SideBarAuth;
+export default App;

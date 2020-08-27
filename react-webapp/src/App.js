@@ -21,14 +21,10 @@ function App(props) {
         });
     }
   }, [isAuthenticated, props]);
+
   const setSessionData = (data) => {
     if (data !== undefined && data.match === true) {
-      sessionStorage.setItem("SessionID", data.SessionID);
-      sessionStorage.setItem("IDSession", data.IDSession);
-      data.NavPermissions.map((a) => {
-        return sessionStorage.setItem(a[0], a[1]);
-      });
-      setSession(data);
+      setSession(data.SessionID);
       setIsAuthenticated(true);
     } else {
       setSession();
@@ -37,6 +33,13 @@ function App(props) {
   const setIsAuthenticatedData = (authenticated) => {
     setIsAuthenticated(authenticated);
   };
+
+  function handleLogout() {
+    sessionStorage.clear();
+    setIsAuthenticated(false);
+    // navigate("/login");
+    // add notification
+  }
 
   class Content extends Component {
     render() {
@@ -47,7 +50,7 @@ function App(props) {
           <Navigation isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
           <ToastProvider autoDismiss autoDismissTimeout={6000} placement="bottom-right" components={{ Toast: Notification }}>
             <main id="content" className="p-5" style={{ minHeight: "calc(100vh - 102px)" }}>
-              <Routing isAuthenticated={isAuthenticated} />
+              <Routing isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
             </main>
           </ToastProvider>
           <Footer />

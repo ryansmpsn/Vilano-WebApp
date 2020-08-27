@@ -14,10 +14,12 @@ function NavBarAuth(props) {
 
   return props.isAuthenticated ? (
     <>
-      <NavLink to="/profile" className="border border-light rounded mr-1 nav-link Ripple-parent">
-        <MDBIcon icon="user" className="mr-2" />
-        Profile
-      </NavLink>
+      {sessionStorage.getItem("/profile") >= 3 && (
+        <NavLink to="/profile" className="border border-light rounded mr-1 nav-link Ripple-parent">
+          <MDBIcon icon="user" className="mr-2" />
+          Profile
+        </NavLink>
+      )}
       <NavLink onClick={logOut} to="/" className="border border-light rounded mr-1 nav-link Ripple-parent">
         Logout
         <MDBIcon icon="sign-out-alt" className="ml-2" />
