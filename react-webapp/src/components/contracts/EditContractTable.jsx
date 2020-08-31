@@ -17,7 +17,7 @@ function EditContractTable(props) {
 
   return (
     <>
-      <Button className="float-right btn-outline-warning" onClick={openModal}>
+      <Button className="btn-sm btn-outline-warning float-right" onClick={openModal}>
         Edit Contract
       </Button>
       <UpsertContractModal

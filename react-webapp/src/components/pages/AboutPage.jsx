@@ -13,8 +13,12 @@ const About = (props) => (
       it here, he totally would.
       <br />
       <br />
-      At the end of the day, it would probably take the same amount of time to grab random text as it would to just type this
-      anyway.
+      Enjoy your time using this application and please report any bugs or improvement ideas
+      <a href="http://support.vilanosvs.com/" target="_blank" rel="noopener noreferrer">
+        {" "}
+        <u>here</u>
+      </a>
+      .
     </p>
   </Jumbotron>
 );

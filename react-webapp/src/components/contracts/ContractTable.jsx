@@ -6,12 +6,16 @@ import EditContractTable from "./EditContractTable";
 function ContractTable(props) {
   let contractData = props.contractData.map((c, index) => c);
   let columnData = contractData[0].filter(labelFilter).map((c, index) => ({ label: c.label, field: c.columnName, sort: "asc" }));
-  columnData = [
-    ...columnData,
-    { label: "View Trips", field: "viewTrips" },
-    { label: "View Cost Data", field: "viewCostData" },
-    { label: "Edit Contract", field: "editContract" },
-  ];
+  if (sessionStorage.getItem("/contract/trips") >= 3) {
+    columnData = [...columnData, { label: "View Trips", field: "viewTrips" }];
+  }
+
+  if (sessionStorage.getItem("contract/ratesheets") >= 3) {
+    columnData = [...columnData, { label: "View Cost Data", field: "viewCostData" }];
+  }
+  if (sessionStorage.getItem("/contract") >= 3) {
+    columnData = [...columnData, { label: "Edit Contract", field: "editContract" }];
+  }
 
   let rowData = contractData.map((data, index) => data.filter(labelFilter).map((c, index) => [c.columnName, c.value]));
   rowData = rowData.map((c, index) => Object.fromEntries(c));

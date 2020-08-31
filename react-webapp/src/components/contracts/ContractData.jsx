@@ -124,9 +124,11 @@ function ContractData(props) {
                   >
                     Show All
                   </Button>
-                  <Button onClick={addContract} variant="outline-warning">
-                    Add Contract
-                  </Button>
+                  {sessionStorage.getItem("/contract") >= 3 && (
+                    <Button onClick={addContract} variant="outline-warning">
+                      Add Contract
+                    </Button>
+                  )}
                 </>
               )}
             </form>

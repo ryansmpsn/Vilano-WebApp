@@ -75,24 +75,6 @@ function SideNav(props) {
               About
             </ListGroupItem>
           </NavLink>
-          <NavLink to="/axios" activeClassName="activeClass">
-            <ListGroupItem style={{ borderWidth: "0 0 1px" }} onClick={() => window.innerWidth <= 1200 && props.setToggle(false)}>
-              <div className="fas fa-vials mr-3" />
-              Test Endpoint
-            </ListGroupItem>
-          </NavLink>
-          <NavLink to="/testpage" activeClassName="activeClass">
-            <ListGroupItem style={{ borderWidth: "0 0 1px" }} onClick={() => window.innerWidth <= 1200 && props.setToggle(false)}>
-              <div className="fas fa-vial mr-3" />
-              UI Sandbox
-            </ListGroupItem>
-          </NavLink>
-          <NavLink to="/404" activeClassName="activeClass">
-            <ListGroupItem style={{ borderWidth: "0 0 1px" }} onClick={() => window.innerWidth <= 1200 && props.setToggle(false)}>
-              <MDBIcon icon="exclamation" className="mr-3" />
-              404
-            </ListGroupItem>
-          </NavLink>
         </ListGroup>
       </StyledMenu>
     </>

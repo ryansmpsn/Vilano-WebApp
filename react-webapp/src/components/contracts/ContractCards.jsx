@@ -68,35 +68,42 @@ function ContractCards(props) {
                 )
             )}
           </Row>
-
-          <Link
-            onClick={(e) => {
-              props.setSelectedContract(contract[6].value);
-              props.setSelectedContractId(contract[0].value);
-              props.getTrips("/Contract/" + contract[0].value);
-            }}
-            to={"../trips"}
-            className="btn btn-primary"
-          >
-            View Trips
-          </Link>
-          <Link
-            onClick={(e) => {
-              props.setSelectedContract(contract[6].value);
-              props.setSelectedContractId(contract[0].value);
-              props.getTrips("/Contract/" + contract[0].value);
-            }}
-            to={"../costsegment"}
-            className="btn btn-primary"
-          >
-            View Rate Information
-          </Link>
-          <Button className="float-right btn-outline-warning" onClick={openModal}>
-            Create Bid
-          </Button>
-          <Button className="float-right btn-outline-warning" onClick={openModal}>
-            Edit Contract
-          </Button>
+          {sessionStorage.getItem("/contract/trips") >= 2 && (
+            <Link
+              onClick={(e) => {
+                props.setSelectedContract(contract[6].value);
+                props.setSelectedContractId(contract[0].value);
+                props.getTrips("/Contract/" + contract[0].value);
+              }}
+              to={"../trips"}
+              className="btn btn-primary"
+            >
+              View Trips
+            </Link>
+          )}
+          {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
+            <Link
+              onClick={(e) => {
+                props.setSelectedContract(contract[6].value);
+                props.setSelectedContractId(contract[0].value);
+                props.getTrips("/Contract/" + contract[0].value);
+              }}
+              to={"../costsegment"}
+              className="btn btn-primary"
+            >
+              View Rate Information
+            </Link>
+          )}
+          {sessionStorage.getItem("/bid") >= 3 && (
+            <Button className="float-right btn-outline-warning" onClick={openModal}>
+              Create Bid
+            </Button>
+          )}
+          {sessionStorage.getItem("/contract") >= 3 && (
+            <Button className="float-right btn-outline-warning" onClick={openModal}>
+              Edit Contract
+            </Button>
+          )}
         </Card.Body>
         <UpsertContractModal
           modalName={"Edit Contract"}

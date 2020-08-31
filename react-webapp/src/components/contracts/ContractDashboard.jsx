@@ -150,33 +150,49 @@ class ContractDashboard extends Component {
                 <MDBRow>
                   {this.state.contractProfile === null ? (
                     <MDBCol>
-                      <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
-                        Contracts
-                      </Link>
-                      <Link to="trips" className="btn btn-primary btn-sm btn-outline-info">
-                        Trips
-                      </Link>
-                      <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info">
-                        Rate Sheets
-                      </Link>
-                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
-                        Routes
-                      </Link>
+                      {sessionStorage.getItem("/contract") >= 2 && (
+                        <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
+                          Contracts
+                        </Link>
+                      )}
+                      {sessionStorage.getItem("/contract/trips") >= 2 && (
+                        <Link to="trips" className="btn btn-primary btn-sm btn-outline-info">
+                          Trips
+                        </Link>
+                      )}
+                      {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
+                        <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info">
+                          Rate Sheets
+                        </Link>
+                      )}
+                      {sessionStorage.getItem("/contract/routes") >= 2 && (
+                        <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
+                          Routes
+                        </Link>
+                      )}
                     </MDBCol>
                   ) : (
                     <MDBCol>
-                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
-                        Routes
-                      </Link>
-                      <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info float-right">
-                        Rate Sheets
-                      </Link>
-                      <Link to="trips" className="btn btn-primary btn-sm btn-outline-info float-right">
-                        Trips
-                      </Link>
-                      <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info float-right">
-                        Contracts
-                      </Link>
+                      {sessionStorage.getItem("/contract/routes") >= 2 && (
+                        <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
+                          Routes
+                        </Link>
+                      )}
+                      {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
+                        <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info float-right">
+                          Rate Sheets
+                        </Link>
+                      )}
+                      {sessionStorage.getItem("/contract/trips") >= 2 && (
+                        <Link to="trips" className="btn btn-primary btn-sm btn-outline-info float-right">
+                          Trips
+                        </Link>
+                      )}
+                      {sessionStorage.getItem("/contract") >= 2 && (
+                        <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info float-right">
+                          Contracts
+                        </Link>
+                      )}
                     </MDBCol>
                   )}
                 </MDBRow>

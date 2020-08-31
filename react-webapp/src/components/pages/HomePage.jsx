@@ -6,9 +6,10 @@ export default function Home() {
     <Jumbotron>
       <Container className="text-center">
         <h1 variant="h1-responsive">Vilano Management Services Application</h1>
-        <h4 className="text-muted">Alpha V 1.33</h4>
+        <h4 className="text-muted">Alpha V 1.34</h4>
         <h4 className="text-muted">
-          <small>Under Development {(67543452345).toLocaleString()}</small>
+          <small>Under Development</small>
+          {/* {(67543452345).toLocaleString()} */}
         </h4>
       </Container>
     </Jumbotron>
