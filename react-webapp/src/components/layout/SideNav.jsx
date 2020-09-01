@@ -68,7 +68,7 @@ function SideNav(props) {
               Resources
             </ListGroupItem>
           </NavLink>
-          <SideNavAuth {...props} />
+          {props.isAuthenticated && <SideNavAuth {...props} />}
           <NavLink to="/about" activeClassName="activeClass">
             <ListGroupItem style={{ borderWidth: "0 0 1px" }} onClick={() => window.innerWidth <= 1200 && props.setToggle(false)}>
               <MDBIcon icon="question" className="mr-3" />

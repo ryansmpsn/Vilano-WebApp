@@ -97,15 +97,17 @@ export default function Login(props) {
 
   function handleLogin(result) {
     setSession(result.our_session);
+    // Temporary fix for dropdown's not loading properly
+    window.location.reload(false);
   }
 
   function handleRedirect() {
-    if (props.isAuthenticated) return <Navigate to={referrer} />;
+    return <Navigate to={referrer} />;
   }
 
   return (
     <LoginPage>
-      {handleRedirect()}
+      {props.isAuthenticated && handleRedirect()}
       <div className="box">
         <h1>Sign in</h1>
         <form>
@@ -142,7 +144,9 @@ export default function Login(props) {
             </Button>
           )}
           <br />
-          <NavLink to="/requestpasswordreset">Forgot Password</NavLink>
+          <NavLink to="/requestpasswordreset">
+            <u>Forgot Password ?</u>
+          </NavLink>
         </form>
       </div>
     </LoginPage>
