@@ -23,44 +23,20 @@ class Routing extends React.Component {
         <Route path="/" element={<Home />} />
         <Route path="dashboard" element={<Home />} />
         <Route path="login" element={<Login {...this.props} />} />
-        <Route
-          path="requestPasswordReset"
-          element={<RequestReset {...this.props} />}
-        />
-        <Route
-          path="ResetPassword"
-          element={<ResetPassword {...this.props} />}
-        />
+        <Route path="requestpasswordreset" element={<RequestReset {...this.props} />} />
+        <Route path="resetpassword" element={<ResetPassword {...this.props} />} />
         <Route path="resources" element={<ResourcesPage {...this.props} />} />
         <Route path="about" element={<About />} />
-        <PrivateRoute
-          path="/axios"
-          element={<AxiosTestPage {...this.props} />}
-        />
+        <PrivateRoute path="/axios" element={<AxiosTestPage {...this.props} />} />
         <PrivateRoute path="/testpage" element={<Testpage {...this.props} />} />
         {/* Seems redundant to check if is authenticated here, but it prevents update during an existing state transision. */}
         {this.props.isAuthenticated && (
           <>
-            <PrivateRoute
-              path="contracts/*"
-              element={<ContractDashboard {...this.props} />}
-            />
-            <PrivateRoute
-              path="administration/*"
-              element={<AdministrationDashboard {...this.props} />}
-            />
-            <PrivateRoute
-              path="/bids/*"
-              element={<BidDashboard {...this.props} />}
-            />
-            <PrivateRoute
-              path="/profile"
-              element={<ProfilePage {...this.props} />}
-            />
-            <PrivateRoute
-              path="/profiletest"
-              element={<ProfilePageTesting {...this.props} />}
-            />
+            <PrivateRoute path="contracts/*" element={<ContractDashboard {...this.props} />} />
+            <PrivateRoute path="administration/*" element={<AdministrationDashboard {...this.props} />} />
+            <PrivateRoute path="/bids/*" element={<BidDashboard {...this.props} />} />
+            <PrivateRoute path="/profile" element={<ProfilePage {...this.props} />} />
+            <PrivateRoute path="/profiletest" element={<ProfilePageTesting {...this.props} />} />
           </>
         )}
         {/* Catch all unmatched routes */}

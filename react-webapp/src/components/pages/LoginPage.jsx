@@ -51,10 +51,7 @@ export default function Login(props) {
   const { setSession } = useAuth();
   const { addToast } = useToasts();
   let location = useLocation();
-  const referrer =
-    location.state !== null && location.state.hasOwnProperty("referrer")
-      ? location.state.referrer.pathname
-      : "/";
+  const referrer = location.state !== null && location.state.hasOwnProperty("referrer") ? location.state.referrer.pathname : "/";
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
@@ -72,9 +69,7 @@ export default function Login(props) {
       .then((result) => {
         setIsLoading(false);
         setIsDisabled(true);
-        result.our_session.match
-          ? handleSuccess(result)
-          : handleInvalidCredentials();
+        result.our_session.match ? handleSuccess(result) : handleInvalidCredentials();
       })
       .catch((err) => {
         setIsLoading(false);
@@ -91,14 +86,11 @@ export default function Login(props) {
   }
 
   function handleSuccess(result) {
-    addToast(
-      "You have logged in successfully. You will be redirected shortly.",
-      {
-        appearance: "success",
-        autoDismiss: true,
-        autoDismissTimeout: 4000,
-      }
-    );
+    addToast("You have logged in successfully. You will be redirected shortly.", {
+      appearance: "success",
+      autoDismiss: true,
+      autoDismissTimeout: 4000,
+    });
 
     setTimeout(handleLogin, 4000, result);
   }
@@ -150,7 +142,7 @@ export default function Login(props) {
             </Button>
           )}
           <br />
-          <NavLink to="/requestPasswordReset">Forgot Password</NavLink>
+          <NavLink to="/requestpasswordreset">Forgot Password</NavLink>
         </form>
       </div>
     </LoginPage>
