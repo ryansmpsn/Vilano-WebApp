@@ -90,71 +90,78 @@ function ViewTrips(props) {
               )
           )}
         </Row>
-        <OverlayTrigger
-          key={"vehicles"}
-          placement={"top"}
-          overlay={
-            <Popover id={`popover-Vehicles`}>
-              <Popover.Title>{props.tripVehicles.label}</Popover.Title>
-              <Popover.Content>
-                {props.tripVehicles.value.length !== 0 ? (
-                  props.tripVehicles.value.map((c, index) => (
-                    <Col key={index}>
-                      <strong>{c[3].label}: </strong>
-                      {c[3].updatedValue}
-                      <br />
-                      <strong>{c[4].label}: </strong>
-                      {c[4].updatedValue}
-                      <hr />
-                    </Col>
-                  ))
-                ) : (
-                  <strong>This trip has no vehicles attached!</strong>
-                )}
-              </Popover.Content>
-            </Popover>
-          }
-        >
-          <Button className="btn-outline-info rounded">Vehicles</Button>
-        </OverlayTrigger>
-        <OverlayTrigger
-          key={"trailers"}
-          placement={"top"}
-          overlay={
-            <Popover id={`popover-trailers`}>
-              <Popover.Title>{props.tripTrailers.label}</Popover.Title>
-              <Popover.Content>
-                {props.tripTrailers.value.length !== 0 ? (
-                  props.tripTrailers.value.map((c, index) => (
-                    <Col key={index}>
-                      <strong>{c[3].label}: </strong>
-                      {c[3].updatedValue}
-                      <br />
-                      <strong>{c[4].label}: </strong>
-                      {c[4].updatedValue}
-                      <hr />
-                    </Col>
-                  ))
-                ) : (
-                  <strong>This trip has no trailers attached!</strong>
-                )}
-              </Popover.Content>
-            </Popover>
-          }
-        >
-          <Button className="rounded btn-outline-info">Trailers</Button>
-        </OverlayTrigger>
+        {sessionStorage.getItem("/contract/vehicles") >= 2 && (
+          <>
+            <OverlayTrigger
+              key={"vehicles"}
+              placement={"top"}
+              overlay={
+                <Popover id={`popover-Vehicles`}>
+                  <Popover.Title>{props.tripVehicles.label}</Popover.Title>
+                  <Popover.Content>
+                    {props.tripVehicles.value.length !== 0 ? (
+                      props.tripVehicles.value.map((c, index) => (
+                        <Col key={index}>
+                          <strong>{c[3].label}: </strong>
+                          {c[3].updatedValue}
+                          <br />
+                          <strong>{c[4].label}: </strong>
+                          {c[4].updatedValue}
+                          <hr />
+                        </Col>
+                      ))
+                    ) : (
+                      <strong>This trip has no vehicles attached!</strong>
+                    )}
+                  </Popover.Content>
+                </Popover>
+              }
+            >
+              <Button className="btn-outline-info rounded">Vehicles</Button>
+            </OverlayTrigger>
+            <OverlayTrigger
+              key={"trailers"}
+              placement={"top"}
+              overlay={
+                <Popover id={`popover-trailers`}>
+                  <Popover.Title>{props.tripTrailers.label}</Popover.Title>
+                  <Popover.Content>
+                    {props.tripTrailers.value.length !== 0 ? (
+                      props.tripTrailers.value.map((c, index) => (
+                        <Col key={index}>
+                          <strong>{c[3].label}: </strong>
+                          {c[3].updatedValue}
+                          <br />
+                          <strong>{c[4].label}: </strong>
+                          {c[4].updatedValue}
+                          <hr />
+                        </Col>
+                      ))
+                    ) : (
+                      <strong>This trip has no trailers attached!</strong>
+                    )}
+                  </Popover.Content>
+                </Popover>
+              }
+            >
+              <Button className="rounded btn-outline-info">Trailers</Button>
+            </OverlayTrigger>
+          </>
+        )}
         {isLoading ? (
           <Spinner animation="border" variant="primary" className="float-right" />
         ) : (
           <>
-            <Button onClick={editTrip} className="float-right btn-sm btn-outline-warning">
-              Edit Trip
-            </Button>
-
-            <Button onClick={() => openModal("vehicle")} className="float-right btn-sm btn-outline-warning">
-              Edit Vehicles
-            </Button>
+            {sessionStorage.getItem("/contract/trips") >= 3 && (
+              <Button onClick={editTrip} className="float-right btn-sm btn-outline-warning">
+                Edit Trip
+              </Button>
+            )}
+            {sessionStorage.getItem("/contract/vehicles") >= 3 && (
+              <Button onClick={() => openModal("vehicle")} className="float-right btn-sm btn-outline-warning">
+                Edit Vehicles
+              </Button>
+            )}
           </>
         )}
         {/*  <Link

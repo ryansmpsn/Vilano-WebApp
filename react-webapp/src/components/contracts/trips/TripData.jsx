@@ -51,14 +51,16 @@ function TripData(props) {
             {isLoading ? (
               <Spinner animation="border" variant="primary" />
             ) : (
-              <Button
-                variant="outline-warning"
-                className="float-right"
-                onClick={addTrip}
-                disabled={(props.contractProfile === null) | props.isSearching}
-              >
-                Add Trip
-              </Button>
+              sessionStorage.getItem("/contract/trips") >= 3 && (
+                <Button
+                  variant="outline-warning"
+                  className="float-right"
+                  onClick={addTrip}
+                  disabled={(props.contractProfile === null) | props.isSearching}
+                >
+                  Add Trip
+                </Button>
+              )
             )}
           </Col>
         </Row>

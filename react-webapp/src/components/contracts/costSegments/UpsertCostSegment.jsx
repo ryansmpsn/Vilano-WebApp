@@ -254,16 +254,17 @@ function UpsertCostSegment(props) {
           <MDBRow>
             <MDBCol md="12">
               <div className="text-center">
-                {submitting ? (
-                  <MDBContainer>
-                    <Spinner animation="border" variant="primary" />
-                  </MDBContainer>
-                ) : (
-                  <Button className="btn-outline-info" type="submit">
-                    Save
-                    <MDBIcon far icon="paper-plane" className="ml-1" />
-                  </Button>
-                )}
+                {sessionStorage.getItem("/contract/ratesheets") >= 3 &&
+                  (submitting ? (
+                    <MDBContainer>
+                      <Spinner animation="border" variant="primary" />
+                    </MDBContainer>
+                  ) : (
+                    <Button className="btn-outline-info" type="submit">
+                      Save
+                      <MDBIcon far icon="paper-plane" className="ml-1" />
+                    </Button>
+                  ))}
               </div>
             </MDBCol>
           </MDBRow>
