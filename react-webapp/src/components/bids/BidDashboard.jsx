@@ -45,8 +45,6 @@ class BidDashboard extends Component {
   getTrips = (e) => {
     this.setState({ isSearching: true });
     return Send.get(e, this.props).then((res) => {
-      console.log(res.data);
-
       this.setState({ bidProfile: res.data[0] });
       this.setState({ isSearching: false });
     });
@@ -132,33 +130,49 @@ class BidDashboard extends Component {
                 <MDBRow>
                   {this.state.bidProfile === null ? (
                     <MDBCol>
-                      <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
-                        Bids
-                      </Link>
-                      <Link to="trips" className="btn btn-primary btn-sm btn-outline-info">
-                        Trips
-                      </Link>
-                      <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info">
-                        Rate Sheets
-                      </Link>
-                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
-                        Routes
-                      </Link>
+                      {sessionStorage.getItem("/bid") >= 2 && (
+                        <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
+                          Bids
+                        </Link>
+                      )}
+                      {sessionStorage.getItem("/bid/trips") >= 2 && (
+                        <Link to="trips" className="btn btn-primary btn-sm btn-outline-info">
+                          Trips
+                        </Link>
+                      )}
+                      {sessionStorage.getItem("/bid/ratesheets") >= 2 && (
+                        <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info">
+                          Rate Sheets
+                        </Link>
+                      )}
+                      {sessionStorage.getItem("/bid/routes") >= 2 && (
+                        <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
+                          Routes
+                        </Link>
+                      )}
                     </MDBCol>
                   ) : (
                     <MDBCol>
-                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
-                        Routes
-                      </Link>
-                      <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info float-right">
-                        Rate Sheets
-                      </Link>
-                      <Link to="trips" className="btn btn-primary btn-sm btn-outline-info float-right">
-                        Trips
-                      </Link>
-                      <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info float-right">
-                        Bids
-                      </Link>
+                      {sessionStorage.getItem("/bid/routes") >= 2 && (
+                        <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
+                          Routes
+                        </Link>
+                      )}
+                      {sessionStorage.getItem("/bid/ratesheets") >= 2 && (
+                        <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info float-right">
+                          Rate Sheets
+                        </Link>
+                      )}
+                      {sessionStorage.getItem("/bid/trips") >= 2 && (
+                        <Link to="trips" className="btn btn-primary btn-sm btn-outline-info float-right">
+                          Trips
+                        </Link>
+                      )}
+                      {sessionStorage.getItem("/bid") >= 2 && (
+                        <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info float-right">
+                          Bids
+                        </Link>
+                      )}
                     </MDBCol>
                   )}
                 </MDBRow>

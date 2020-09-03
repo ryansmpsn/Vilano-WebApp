@@ -6,36 +6,37 @@ import { NavLink } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import styled from "styled-components";
 
+const StyledMenuMask = styled.div.attrs((props) => ({
+  toggle: props.toggle,
+}))`
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 1029;
+  transition: 1s;
+  display: ${(props) => (props.toggle ? "visible" : "none")};
+
+  @media (min-width: 1199.98px) {
+    display: none;
+  }
+`;
+
+const StyledMenu = styled.div`
+  width: 230px;
+  transition: visibility 0.5s, opacity 1.2s, transform 250ms ease-in-out;
+  transform: ${(props) => (props.toggle ? "translateX(0)" : "translateX(-250px)")};
+
+  @media (min-width: 1199.98px) {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+  }
+`;
+
 function SideNav(props) {
-  const StyledMenuMask = styled.div`
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.5);
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100%;
-    z-index: 1029;
-    transition: 1s;
-    display: ${props.toggle ? "visible" : "none"};
-
-    @media (min-width: 1199.98px) {
-      display: none;
-    }
-  `;
-
-  const StyledMenu = styled.div`
-    width: 230px;
-    transition: 1s;
-    transition: visibility 0.5s, opacity 1.2s;
-    visibility: ${props.toggle ? "visible" : "hidden"};
-    opacity: ${props.toggle ? 1 : 0};
-
-    @media (min-width: 1199.98px) {
-      visibility: visible;
-      opacity: 1;
-    }
-  `;
-
   function toggleMenu() {
     if (window.innerWidth >= 1199.98) {
       props.setToggle(false);
@@ -44,10 +45,10 @@ function SideNav(props) {
 
   return (
     <>
-      <StyledMenuMask id="menuMask" onClick={() => toggleMenu()} />
+      <StyledMenuMask id="menuMask" onClick={() => toggleMenu()} toggle={props.toggle} />
 
       {/* fix css on hover open menu */}
-      <StyledMenu id="toggleSidebar" className="sidebar-fixed">
+      <StyledMenu id="toggleSidebar" className="sidebar-fixed" toggle={props.toggle}>
         <a href="/" className="mt-3 mb-3 waves-effect">
           <img alt="Vilano Management Services Inc." className="img-fluid" src={logo} />
         </a>

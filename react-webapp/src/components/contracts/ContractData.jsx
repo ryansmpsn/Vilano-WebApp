@@ -139,6 +139,7 @@ function ContractData(props) {
       {tableView
         ? !isLoading && (
             <ContractTable
+              tableType={"Contract"}
               getTrips={props.getTrips}
               setSelectedContract={props.setSelectedContract}
               setSelectedContractId={props.setSelectedContractId}

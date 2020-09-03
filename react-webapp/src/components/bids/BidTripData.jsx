@@ -11,6 +11,7 @@ function BidTripData(props) {
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
 
   function getTripData(x) {
+    console.log(x);
     props.getTrips("/Bid/" + x.value);
   }
   function addTrip() {

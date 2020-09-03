@@ -125,9 +125,11 @@ function BidData(props) {
                   >
                     Show All
                   </Button>
-                  <Button onClick={addBid} variant="outline-warning">
-                    Add Bid
-                  </Button>
+                  {sessionStorage.getItem("/bid") >= 3 && (
+                    <Button onClick={addBid} variant="outline-warning">
+                      Add Bid
+                    </Button>
+                  )}
                 </>
               )}
             </form>
@@ -138,6 +140,7 @@ function BidData(props) {
       {tableView
         ? !isLoading && (
             <ContractTable
+              tableType={"Bid"}
               getTrips={props.getTrips}
               setSelectedContract={props.setSelectedBid}
               setSelectedContractId={props.setSelectedBidId}

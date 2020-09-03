@@ -6,30 +6,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
+const MenuIcon = styled.div.attrs((props) => ({
+  toggle: props.toggle,
+}))`
+  transition: 1.2s;
+  transition: visibility 1.2s opacity 1s;
+  opacity: 0;
+  display: hidden;
+  margin-right: -10px;
+  :hover {
+    cursor: pointer;
+  }
+
+  @media (max-width: 1199.98px) {
+    margin-left: ${(props) => (props.toggle ? "220px" : "0")};
+    margin-right: 0px;
+    display: visible;
+    opacity: 1;
+  }
+`;
+
 function NavBar(props) {
   const [collapse, setCollapse] = useState(false);
 
-  const MenuIcon = styled.div`
-    transition: 1.5s;
-    transition: visibility 1.5s opacity 1.2s;
-    opacity: 0;
-    display: hidden;
-    margin-right: -10px;
-    :hover {
-      cursor: pointer;
-    }
-
-    @media (max-width: 1199.98px) {
-      margin-right: 0px;
-      display: visible;
-      opacity: 1;
-      margin-left: ${props.toggle ? "220px" : "0"};
-    }
-  `;
-
   return (
     <MDBNavbar className="navbar fixed-top flexible-navbar" light expand="md" scrolling>
-      <MenuIcon onClick={() => props.setToggle(!props.toggle)}>
+      <MenuIcon onClick={() => props.setToggle(!props.toggle)} toggle={props.toggle}>
         <FontAwesomeIcon icon={props.toggle ? faChevronRight : faChevronLeft} />
       </MenuIcon>
 

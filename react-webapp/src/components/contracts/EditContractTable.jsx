@@ -18,10 +18,10 @@ function EditContractTable(props) {
   return (
     <>
       <Button className="btn-sm btn-outline-warning float-right" onClick={openModal}>
-        Edit Contract
+        Edit {props.tableType}
       </Button>
       <UpsertContractModal
-        modalName={"Edit Contract"}
+        modalName={"Edit " + props.tableType}
         contract={props.contract}
         inputRestrictions={props.inputRestrictions}
         show={showModal}

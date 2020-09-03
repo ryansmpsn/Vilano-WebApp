@@ -14,7 +14,7 @@ function ContractTable(props) {
     columnData = [...columnData, { label: "View Cost Data", field: "viewCostData" }];
   }
   if (sessionStorage.getItem("/contract") >= 3) {
-    columnData = [...columnData, { label: "Edit Contract", field: "editContract" }];
+    columnData = [...columnData, { label: "Edit " + props.tableType, field: "editContract" }];
   }
 
   let rowData = contractData.map((data, index) => data.filter(labelFilter).map((c, index) => [c.columnName, c.value]));
@@ -48,6 +48,7 @@ function ContractTable(props) {
     ),
     editContract: (
       <EditContractTable
+        tableType={props.tableType}
         contract={contractData[index]}
         inputRestrictions={props.inputRestrictions}
         submitAction={(editContent) => {

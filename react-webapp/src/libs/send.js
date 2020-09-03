@@ -16,7 +16,7 @@ const Send = new (class send extends React.Component {
     if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
       this.state.URL = this.state.testURL;
     } else {
-      this.state.URL = this.state.productionURL;
+      this.state.URL = this.state.testURL;
     }
     axios.defaults.headers.common["our_session"] = "";
   }
@@ -96,7 +96,6 @@ const Send = new (class send extends React.Component {
           var data = res.data; // Set a custom variable as our actual return data which contains data and our_session
 
           if (data.our_session) {
-            console.log(data);
             send.set_our_session(data.our_session, props);
           }
           resolve(data);
