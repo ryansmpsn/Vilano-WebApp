@@ -99,25 +99,25 @@ class ContractManagement extends Component {
               <MDBCardBody>
                 <MDBRow>
                   <MDBCol>
-                    <Link to="routes" className="btn btn-sm btn-outline-warning">
+                    <Link to="routes" className="btn btn-sm btn-outline-primary">
                       Contracts
                     </Link>
-                    <Link to="trips" className="btn btn-sm btn-outline-warning">
+                    <Link to="trips" className="btn btn-sm btn-outline-primary">
                       Trips
                     </Link>
-                    <Link to="costsegment" className="btn btn-sm btn-outline-warning">
+                    <Link to="costsegment" className="btn btn-sm btn-outline-primary">
                       Rate Sheets
                     </Link>
-                    <Link to="routes" className="btn btn-sm btn-outline-warning">
+                    <Link to="routes" className="btn btn-sm btn-outline-primary">
                       Routes
                     </Link>
-                    <Link to="routes" className="btn btn-sm btn-outline-warning">
+                    <Link to="routes" className="btn btn-sm btn-outline-primary">
                       Facility
                     </Link>
-                    <Link to="routes" className="btn btn-sm btn-outline-warning">
+                    <Link to="routes" className="btn btn-sm btn-outline-primary">
                       Frequency
                     </Link>
-                    <Link to="routes" className="btn btn-sm btn-outline-warning">
+                    <Link to="routes" className="btn btn-sm btn-outline-primary">
                       Status Code
                     </Link>
                   </MDBCol>

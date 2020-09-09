@@ -1,6 +1,7 @@
 import React from "react";
 import { MDBRow, MDBCol, MDBCard, MDBCardHeader, MDBCardBody, MDBIcon } from "mdbreact";
-import { Button } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function EmployeeManagement() {
   return (
@@ -14,10 +15,21 @@ function EmployeeManagement() {
             <h1 className="m-3 text-center">Employee Management</h1>
           </MDBCardHeader>
           <MDBCardBody>
-            <Button className="btn btn-sm btn-primary">All Employees</Button>
-            <Button className="btn btn-sm btn-primary">Assignment</Button>
-            <Button className="btn btn-sm btn-primary">Employees</Button>
-            <Button className="btn btn-sm btn-primary">Hire Employee</Button>
+            <Row>
+              <Col></Col>
+            </Row>
+            <Link to="all" className="btn btn-sm btn-outline-primary">
+              All Employees
+            </Link>
+            <Link to="assignment" className="btn btn-sm btn-outline-primary">
+              Assignment
+            </Link>
+            <Link to="employee" className="btn btn-sm btn-outline-primary">
+              Employee Information
+            </Link>
+            <Link to="hire" className="btn btn-sm btn-outline-primary">
+              Hire Employee
+            </Link>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>
