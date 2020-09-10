@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, FormGroup, FormControl, FormLabel, Spinner } from "react-bootstrap";
+import { Button, Modal, FormGroup, FormControl, FormLabel, Spinner, Row, Col } from "react-bootstrap";
 import InputFormControl from "../../../libs/InputFormControl";
 // import NavPerm from "../../libs/NavPerms";
 import DatePicker from "react-date-picker";
@@ -97,130 +97,134 @@ export default class UpsertTripModal extends React.Component {
         </Modal.Header>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <Modal.Body>
-            {this.state.editTrip.map(
-              (item, index) =>
-                !Array.isArray(item.value) &&
-                item.label !== null && (
-                  <FormGroup key={index}>
-                    <FormLabel>
-                      {item.label +
-                        ": " +
-                        (item.inputType !== "date"
-                          ? item.value !== null
-                            ? item.value
-                            : ""
-                          : new Date(item.value).getUTCMonth() +
-                            1 +
-                            "/" +
-                            new Date(item.value).getUTCDate() +
-                            "/" +
-                            new Date(item.value).getUTCFullYear())}
-                    </FormLabel>
-                    {/* Make this formcontrol tie to values for editing-- Done I think?  */}
-                    {this.state.Permissions === "Write" &&
-                      ((item.inputType === "text" && (
-                        <FormControl
-                          type="text"
-                          value={item.updatedValue !== null ? item.updatedValue : ""}
-                          onChange={(e) => {
-                            var object = this.state.editTrip;
-                            var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
-                            object[index].updatedValue = e.target.value.replace(specials, "");
-                            this.setState({ editTrip: object });
-                          }}
-                          placeholder={item.value}
-                        />
-                      )) ||
-                        (item.inputType === "num" && (
-                          <FormControl
-                            type="number"
-                            value={item.updatedValue !== null && item.updatedValue}
-                            onChange={(e) => {
-                              var object = this.state.editTrip;
-                              var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
-                              object[index].updatedValue = e.target.value.replace(specials, "");
-                              this.setState({ editTrip: object });
-                            }}
-                            placeholder={item.value}
-                          />
-                        )) ||
-                        (item.inputType === "checkbox" && (
-                          <FormControl
-                            id={item.columnName}
-                            style={{ width: 25 }}
-                            size="sm"
-                            type="checkbox"
-                            checked={item.updatedValue === 1 || item.updatedValue === true}
-                            onChange={() => {
-                              var object = this.state.editTrip;
-                              object[index].updatedValue = !item.updatedValue;
-                              this.setState({ editTrip: object });
-                            }}
-                          />
-                        )) ||
-                        (item.inputType === "select" && (
-                          <InputFormControl
-                            index={index}
-                            input={item.inputType}
-                            onChange={(e) => {
-                              var object = this.set_variable_id(this.state.editTrip, item.columnName, e.value);
-                              var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
-                              object[index].updatedValue = e.label.toString().replace(specials, "");
-                              this.setState({ editTrip: object });
-                            }}
-                            content={item}
-                            inputRestrictions={this.state.inputRestrictions}
-                          />
-                        )) ||
-                        (item.inputType === "date" && (
-                          <>
-                            <br />
-                            <span>Edit Date: &nbsp;</span>
-                            {/* Fix date picker to default to current day */}
-                            <DatePicker
+            <Row>
+              {this.state.editTrip.map(
+                (item, index) =>
+                  !Array.isArray(item.value) &&
+                  item.label !== null && (
+                    <Col md="6" key={index}>
+                      <FormGroup>
+                        <FormLabel>
+                          {item.label +
+                            ": " +
+                            (item.inputType !== "date"
+                              ? item.value !== null
+                                ? item.value
+                                : ""
+                              : new Date(item.value).getUTCMonth() +
+                                1 +
+                                "/" +
+                                new Date(item.value).getUTCDate() +
+                                "/" +
+                                new Date(item.value).getUTCFullYear())}
+                        </FormLabel>
+                        {/* Make this formcontrol tie to values for editing-- Done I think?  */}
+                        {this.state.Permissions === "Write" &&
+                          ((item.inputType === "text" && (
+                            <FormControl
+                              type="text"
+                              value={item.updatedValue !== null ? item.updatedValue : ""}
                               onChange={(e) => {
                                 var object = this.state.editTrip;
-                                var date = new Date(e);
-                                var return_date =
-                                  date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
-                                object[index].updatedValue = return_date;
+                                var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
+                                object[index].updatedValue = e.target.value.replace(specials, "");
                                 this.setState({ editTrip: object });
-                                this.setState({ date: date });
                               }}
-                              value={
-                                item.updatedValue !== null
-                                  ? new Date(
-                                      new Date(item.updatedValue).getUTCMonth() +
-                                        1 +
-                                        "/" +
-                                        new Date(item.updatedValue).getUTCDate() +
-                                        "/" +
-                                        new Date(item.updatedValue).getUTCFullYear()
-                                    )
-                                  : item.value !== null
-                                  ? new Date(
-                                      new Date(item.value).getUTCMonth() +
-                                        1 +
-                                        "/" +
-                                        new Date(item.value).getUTCDate() +
-                                        "/" +
-                                        new Date(item.value).getUTCFullYear()
-                                    )
-                                  : new Date(
-                                      new Date().getUTCMonth() +
-                                        1 +
-                                        "/" +
-                                        new Date().getUTCDate() +
-                                        "/" +
-                                        new Date().getUTCFullYear()
-                                    )
-                              }
+                              placeholder={item.value}
                             />
-                          </>
-                        )))}
-                  </FormGroup>
-                )
-            )}
+                          )) ||
+                            (item.inputType === "num" && (
+                              <FormControl
+                                type="number"
+                                value={item.updatedValue !== null && item.updatedValue}
+                                onChange={(e) => {
+                                  var object = this.state.editTrip;
+                                  var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
+                                  object[index].updatedValue = e.target.value.replace(specials, "");
+                                  this.setState({ editTrip: object });
+                                }}
+                                placeholder={item.value}
+                              />
+                            )) ||
+                            (item.inputType === "checkbox" && (
+                              <FormControl
+                                id={item.columnName}
+                                style={{ width: 25 }}
+                                size="sm"
+                                type="checkbox"
+                                checked={item.updatedValue === 1 || item.updatedValue === true}
+                                onChange={() => {
+                                  var object = this.state.editTrip;
+                                  object[index].updatedValue = !item.updatedValue;
+                                  this.setState({ editTrip: object });
+                                }}
+                              />
+                            )) ||
+                            (item.inputType === "select" && (
+                              <InputFormControl
+                                index={index}
+                                input={item.inputType}
+                                onChange={(e) => {
+                                  var object = this.set_variable_id(this.state.editTrip, item.columnName, e.value);
+                                  var specials = /[*|":<>[\]{}`\\()';@&$]/; //TODO setup global module to sanatize stuff.
+                                  object[index].updatedValue = e.label.toString().replace(specials, "");
+                                  this.setState({ editTrip: object });
+                                }}
+                                content={item}
+                                inputRestrictions={this.state.inputRestrictions}
+                              />
+                            )) ||
+                            (item.inputType === "date" && (
+                              <>
+                                <br />
+                                <span>Edit Date: &nbsp;</span>
+                                {/* Fix date picker to default to current day */}
+                                <DatePicker
+                                  onChange={(e) => {
+                                    var object = this.state.editTrip;
+                                    var date = new Date(e);
+                                    var return_date =
+                                      date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+                                    object[index].updatedValue = return_date;
+                                    this.setState({ editTrip: object });
+                                    this.setState({ date: date });
+                                  }}
+                                  value={
+                                    item.updatedValue !== null
+                                      ? new Date(
+                                          new Date(item.updatedValue).getUTCMonth() +
+                                            1 +
+                                            "/" +
+                                            new Date(item.updatedValue).getUTCDate() +
+                                            "/" +
+                                            new Date(item.updatedValue).getUTCFullYear()
+                                        )
+                                      : item.value !== null
+                                      ? new Date(
+                                          new Date(item.value).getUTCMonth() +
+                                            1 +
+                                            "/" +
+                                            new Date(item.value).getUTCDate() +
+                                            "/" +
+                                            new Date(item.value).getUTCFullYear()
+                                        )
+                                      : new Date(
+                                          new Date().getUTCMonth() +
+                                            1 +
+                                            "/" +
+                                            new Date().getUTCDate() +
+                                            "/" +
+                                            new Date().getUTCFullYear()
+                                        )
+                                  }
+                                />
+                              </>
+                            )))}
+                      </FormGroup>
+                    </Col>
+                  )
+              )}
+            </Row>
           </Modal.Body>
           <Modal.Footer>
             {this.state.Permissions === "Write" &&

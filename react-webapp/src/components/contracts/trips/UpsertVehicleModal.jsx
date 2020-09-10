@@ -126,7 +126,7 @@ class UpsertVehicleModal extends React.Component {
         <Modal.Body>
           <Row>
             {!this.isLoading && (
-              <Col>
+              <Col md="6">
                 Add a Vehicle
                 <Form onSubmit={this.addVehicle}>
                   <Select
