@@ -10,7 +10,7 @@ function SideNavAuth(props) {
   return (
     <>
       {sessionStorage.getItem("/contract") >= 2 && (
-        <Dropdown as={ButtonGroup} rootCloseEvent="mousedown">
+        <Dropdown as={ButtonGroup}>
           <NavLink to="/contracts" activeClassName="activeClass" onClick={() => handleMenuToggle()}>
             <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
               <MDBIcon icon="file-contract" className="mr-3" />
