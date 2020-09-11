@@ -36,6 +36,7 @@ export default class InputFormControl extends React.Component {
   render() {
     return (
       <div key={"FormControlSelect" + this.state.index + "div"}>
+        {console.log(this.state.content)}
         {this.state.inputRestrictions === null && (
           <Button
             onClick={() => {
@@ -45,14 +46,17 @@ export default class InputFormControl extends React.Component {
             {this.state.content.value || "null"}
           </Button>
         )}
-        {this.state.inputRestrictions !== null && (
-          <Select
-            components={{ MenuList }}
-            options={this.state.inputRestrictions.options}
-            filterOption={createFilter({ ignoreAccents: false })}
-            onChange={this.state.onChange}
-          />
-        )}
+        {this.state.inputRestrictions !== null &&
+          (this.state.content.columnName.includes("facility") ? (
+            <Select
+              components={{ MenuList }}
+              options={this.state.inputRestrictions.options}
+              filterOption={createFilter({ ignoreAccents: false })}
+              onChange={this.state.onChange}
+            />
+          ) : (
+            <Select options={this.state.inputRestrictions.options} onChange={this.state.onChange} />
+          ))}
       </div>
     );
   }
