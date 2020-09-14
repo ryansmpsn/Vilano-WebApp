@@ -8,8 +8,6 @@ export default class InputFormControl extends React.Component {
     super(props);
     this.state = {
       index: props.index,
-      input: props.input,
-      //value: props.value,
       onChange: props.onChange,
       content: props.content,
       inputRes: props.inputRestrictions,

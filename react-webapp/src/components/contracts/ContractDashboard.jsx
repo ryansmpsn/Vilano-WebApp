@@ -4,6 +4,7 @@ import Send from "../../libs/send";
 import CountUp from "react-countup";
 import { Link } from "react-router-dom";
 import NavPerm from "../../libs/NavPerms";
+import { Spinner } from "react-bootstrap";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
 
 class ContractDashboard extends Component {
@@ -12,7 +13,7 @@ class ContractDashboard extends Component {
     super(props);
     this.state = {
       accessLevel: NavPerm.nav_perm_check(),
-      selectOptions: [],
+      selectOptions: null,
       contractSearchCode: { external_contract_code: [] },
       selectedContractId: "null",
       selectedContract: "",
@@ -73,7 +74,7 @@ class ContractDashboard extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    return Send.get("/Contract/Ids", this.props).then((res) => {
+    Send.get("/Contract/Ids", this.props).then((res) => {
       let contractData = res.data;
       let getSelectOptions = [];
       contractData.map((item, index) => {
@@ -111,7 +112,11 @@ class ContractDashboard extends Component {
                             <MDBListGroupItem>
                               Active Contracts
                               <MDBBadge color="primary-color" pill className="float-right">
-                                <CountUp start={0} end={this.state.selectOptions.length} duration={5} />
+                                <CountUp
+                                  start={0}
+                                  end={this.state.selectOptions ? this.state.selectOptions.length : 0}
+                                  duration={5}
+                                />
                               </MDBBadge>
                             </MDBListGroupItem>
                             {/* <MDBListGroupItem>
@@ -200,40 +205,43 @@ class ContractDashboard extends Component {
             </MDBCard>
           </MDBCol>
         </MDBRow>
-
-        <Routing
-          props={this.props}
-          setSelectedTrip={this.setSelectedTrip}
-          setSelectedContract={this.setSelectedContract}
-          setSelectedContractId={this.setSelectedContractId}
-          setContractSearchCode={this.setContractSearchCode}
-          selectedTrip={this.state.selectedTrip}
-          selectedContract={this.state.selectedContract}
-          selectedContractId={this.state.selectedContractId}
-          selectOptions={this.state.selectOptions}
-          contractID
-          isSearching={this.state.isSearching}
-          contractProfile={this.state.contractProfile}
-          accessLevel={this.state.accessLevel}
-          contractEditSubmitAction={this.contractEditSubmitAction}
-          tripEditSubmitAction={this.tripEditSubmitAction}
-          getSelectOptions={() => {
-            return this.getSelectOptions();
-          }}
-          SearchFunction={(contractSearch) => {
-            return this.search(contractSearch);
-          }}
-          showAll={() => {
-            return this.show_all();
-          }}
-          appProps={this.props}
-          contractSearch={this.state.contractSearchCode}
-          getContracts={() => {
-            return this.getContracts();
-          }}
-          getTrips={this.getTrips}
-          addSelectOption={this.addSelectOption}
-        />
+        {this.state.selectOptions === null ? (
+          <Spinner animation="border" variant="primary" />
+        ) : (
+          <Routing
+            props={this.props}
+            setSelectedTrip={this.setSelectedTrip}
+            setSelectedContract={this.setSelectedContract}
+            setSelectedContractId={this.setSelectedContractId}
+            setContractSearchCode={this.setContractSearchCode}
+            selectedTrip={this.state.selectedTrip}
+            selectedContract={this.state.selectedContract}
+            selectedContractId={this.state.selectedContractId}
+            selectOptions={this.state.selectOptions}
+            contractID
+            isSearching={this.state.isSearching}
+            contractProfile={this.state.contractProfile}
+            accessLevel={this.state.accessLevel}
+            contractEditSubmitAction={this.contractEditSubmitAction}
+            tripEditSubmitAction={this.tripEditSubmitAction}
+            getSelectOptions={() => {
+              return this.getSelectOptions();
+            }}
+            SearchFunction={(contractSearch) => {
+              return this.search(contractSearch);
+            }}
+            showAll={() => {
+              return this.show_all();
+            }}
+            appProps={this.props}
+            contractSearch={this.state.contractSearchCode}
+            getContracts={() => {
+              return this.getContracts();
+            }}
+            getTrips={this.getTrips}
+            addSelectOption={this.addSelectOption}
+          />
+        )}
       </>
     );
   }

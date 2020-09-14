@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import UpsertContractModal from "./UpsertContractModal";
+import CreateBidModal from "./CreateBidModal";
 
 function ContractCards(props) {
   const [contract, setContract] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [showBidModal, setShowBidModal] = useState(false);
   const [accessLevel, setAccessLevel] = useState("None");
   //TODO would be contract_id and the like.  const [contractID, setContractID] = useState(0);
 
@@ -27,6 +29,15 @@ function ContractCards(props) {
   function closeModal() {
     window.history.replaceState(null, null, " ");
     setShowModal(false);
+  }
+
+  function openBidModal() {
+    setShowBidModal(true);
+    window.location.hash = "createbid";
+  }
+  function closeBidModal() {
+    window.history.replaceState(null, null, " ");
+    setShowBidModal(false);
   }
   // function get_history() {
   //   Send.get("/ViewContractHistory?Contract_id=" + 851, this.state.props)
@@ -95,7 +106,7 @@ function ContractCards(props) {
             </Link>
           )}
           {sessionStorage.getItem("/bid") >= 3 && (
-            <Button className="float-right btn-outline-warning" onClick={openModal}>
+            <Button className="float-right btn-outline-warning" onClick={openBidModal}>
               Create Bid
             </Button>
           )}
@@ -116,6 +127,14 @@ function ContractCards(props) {
           submitAction={(editContent) => {
             return props.submitAction(editContent);
           }}
+        />
+        <CreateBidModal
+          show={showBidModal}
+          closeModal={closeBidModal}
+          appProps={props.appProps}
+          contractId={contract[0].updatedValue}
+          externalContractCode={contract[6].updatedValue}
+          bidOptions={props.bidOptions}
         />
       </Card>
     )
