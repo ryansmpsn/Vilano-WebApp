@@ -177,7 +177,7 @@ function BidData(props) {
           modalName={"New Bid"}
           contract={[
             { columnName: "contract_bid_id", inputType: null, label: null, updatedValue: null, value: null },
-            { columnName: "is_active", inputType: "checkbox", label: "Active", updatedValue: null, value: 1 },
+            { columnName: "is_active", inputType: null, label: null, updatedValue: 1, value: 1 },
             { columnName: "company_id", inputType: null, label: null, updatedValue: null, value: 1 },
             {
               columnName: "company_name",
