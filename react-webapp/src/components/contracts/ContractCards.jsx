@@ -128,14 +128,14 @@ function ContractCards(props) {
             return props.submitAction(editContent);
           }}
         />
-        <CreateBidModal
+        {/* <CreateBidModal
           show={showBidModal}
           closeModal={closeBidModal}
           appProps={props.appProps}
           contractId={contract[0].updatedValue}
           externalContractCode={contract[6].updatedValue}
           bidOptions={props.bidOptions}
-        />
+        /> */}
       </Card>
     )
   );

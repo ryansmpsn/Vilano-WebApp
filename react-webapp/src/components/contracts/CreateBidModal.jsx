@@ -8,8 +8,8 @@ function CreateBidModal(props) {
     { columnName: "contract_id", updatedValue: props.contractId },
     { columnName: "external_contract_code", updatedValue: props.externalContractCode },
     { columnName: "bid_name", updatedValue: null },
-    { columnName: "status_value", updatedValue: null },
-    { columnName: "bid_type_value", updatedValue: null },
+    { columnName: "status_id", updatedValue: null },
+    { columnName: "bid_type_id", updatedValue: null },
   ]);
   const [isSending, setIsSending] = useState(false);
 
@@ -45,6 +45,7 @@ function CreateBidModal(props) {
               placeholder={newBid[1].updatedValue}
             />
             <FormLabel>Bid Status: </FormLabel>
+            {console.log(props.bidOptions)}
             <Select
               options={props.bidOptions[1].options}
               onChange={(x) => {
@@ -61,7 +62,7 @@ function CreateBidModal(props) {
                 object[4].updatedValue = x.value;
                 setNewBid(object);
               }}
-            />{" "}
+            />
             {isSending === null ? (
               <Spinner animation="border" variant="primary" />
             ) : (
