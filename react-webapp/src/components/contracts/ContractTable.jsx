@@ -43,12 +43,12 @@ function ContractTable(props) {
         to="../costsegment"
         className="btn btn-primary btn-sm"
       >
-        Cost Segments
+        Rate Sheets
       </Link>
     ),
     editContract: (
       <EditContractTable
-        tableType={props.tableType}
+        type={props.type}
         contract={contractData[index]}
         inputRestrictions={props.inputRestrictions}
         submitAction={(editContent) => {

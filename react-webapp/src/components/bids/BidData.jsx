@@ -20,7 +20,7 @@ function BidData(props) {
     props
       .SearchFunction(bidSearch)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
+        console.log(res.data);
         setBidData(res.data);
       })
       .catch((err) => {
@@ -140,7 +140,7 @@ function BidData(props) {
       {tableView
         ? !isLoading && (
             <ContractTable
-              tableType={"Bid"}
+              type={"Bid"}
               getTrips={props.getTrips}
               setSelectedContract={props.setSelectedBid}
               setSelectedContractId={props.setSelectedBidId}
@@ -158,6 +158,7 @@ function BidData(props) {
                   bidData.map((c, index) => (
                     <ContractCards
                       key={index + "bid"}
+                      type={"Bid"}
                       getTrips={props.getTrips}
                       setSelectedContract={props.setSelectedBid}
                       setSelectedContractId={props.setSelectedBidId}

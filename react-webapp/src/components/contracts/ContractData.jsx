@@ -144,7 +144,7 @@ function ContractData(props) {
       {tableView
         ? !isLoading && (
             <ContractTable
-              tableType={"Contract"}
+              type={"Contract"}
               getTrips={props.getTrips}
               setSelectedContract={props.setSelectedContract}
               setSelectedContractId={props.setSelectedContractId}
@@ -162,6 +162,7 @@ function ContractData(props) {
                   contractData.map((c, index) => (
                     <ContractCards
                       key={index + "contract"}
+                      type={"Contract"}
                       getTrips={props.getTrips}
                       setSelectedContract={props.setSelectedContract}
                       setSelectedContractId={props.setSelectedContractId}

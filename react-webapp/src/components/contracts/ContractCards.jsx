@@ -39,15 +39,6 @@ function ContractCards(props) {
     window.history.replaceState(null, null, " ");
     setShowBidModal(false);
   }
-  // function get_history() {
-  //   Send.get("/ViewContractHistory?Contract_id=" + 851, this.state.props)
-  //     .then(res => {
-  //       console.log(res);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
 
   return (
     !isLoading && (
@@ -60,9 +51,9 @@ function ContractCards(props) {
         {contract.map(
           (c, index) =>
             c.label !== null &&
-            c.label === "Contract No." && (
+            (c.label === "Contract No." || c.label === "Bid Name") && (
               <Card.Header key={index + "header"} as="h5">
-                {c.label} {c.value}
+                {c.label}: {c.value}
               </Card.Header>
             )
         )}
@@ -99,20 +90,21 @@ function ContractCards(props) {
                 props.setSelectedContractId(contract[0].value);
                 props.getTrips("/Contract/" + contract[0].value);
               }}
-              to={"../costsegment"}
+              to={"../ratesheets"}
               className="btn btn-primary"
             >
               View Rate Information
             </Link>
           )}
-          {sessionStorage.getItem("/bid") >= 3 && (
+          {props.type !== "Bid" && sessionStorage.getItem("/bid") >= 3 && (
             <Button className="float-right btn-outline-warning" onClick={openBidModal}>
               Create Bid
             </Button>
           )}
+
           {sessionStorage.getItem("/contract") >= 3 && (
             <Button className="float-right btn-outline-warning" onClick={openModal}>
-              Edit Contract
+              Edit {props.type}
             </Button>
           )}
         </Card.Body>
@@ -128,14 +120,16 @@ function ContractCards(props) {
             return props.submitAction(editContent);
           }}
         />
-        {/* <CreateBidModal
-          show={showBidModal}
-          closeModal={closeBidModal}
-          appProps={props.appProps}
-          contractId={contract[0].updatedValue}
-          externalContractCode={contract[6].updatedValue}
-          bidOptions={props.bidOptions}
-        /> */}
+        {props.type !== "Bid" && (
+          <CreateBidModal
+            show={showBidModal}
+            closeModal={closeBidModal}
+            appProps={props.appProps}
+            contractId={contract[0].updatedValue}
+            externalContractCode={contract[6].updatedValue}
+            bidOptions={props.bidOptions}
+          />
+        )}
       </Card>
     )
   );

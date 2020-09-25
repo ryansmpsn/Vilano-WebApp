@@ -10,7 +10,7 @@ class Routing extends Component {
       <Routes>
         <Route path="dashboard" element={<BidData {...this.props} />} />
         <Route path="trips" element={<BidTripData {...this.props} />} />
-        <Route path="costsegment" element={<BidCostSegmentData {...this.props} />} />
+        <Route path="ratesheets" element={<BidCostSegmentData {...this.props} />} />
         <Navigate from="/bids" to="/bids/dashboard" />
       </Routes>
     );
