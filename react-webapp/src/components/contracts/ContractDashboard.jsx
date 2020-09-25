@@ -58,6 +58,7 @@ class ContractDashboard extends Component {
     this.setState({ isSearching: true });
 
     return Send.post("/Contract/ContractTrip", editTrip, this.props).then((res) => {
+      console.log(res);
       this.setState({ contractProfile: res.data[0] });
       this.setState({ isSearching: false });
     });

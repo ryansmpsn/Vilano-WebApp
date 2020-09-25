@@ -1062,7 +1062,7 @@ class BidCostSegmentData extends Component {
 
   costSegmentSubmitAction = (rateSheet) => {
     this.setState({ isLoading: true });
-
+    console.log(rateSheet);
     return Send.post("/Bid/BidRateSheet", rateSheet, this.props.appProps).then((res) => {
       this.setState({ bidCostSegments: res.data[0].pop() });
       this.setState({ bidData: res.data[0] });

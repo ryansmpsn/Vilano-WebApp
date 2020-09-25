@@ -37,25 +37,49 @@ function ViewTrips(props) {
 
   function vehicleSubmitAction(editVehicle) {
     setSubmitting(true);
-
-    Send.post("/Contract/ContractTripVehicle", editVehicle).then((res) => {
-      addToast("Vehicles Have Been Successfully Updated!", {
-        appearance: "success",
-        autoDismiss: true,
+    if (props.type === "Contract") {
+      Send.post("/Contract/ContractTripVehicle", editVehicle).then((res) => {
+        addToast("Vehicles Have Been Successfully Updated!", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+        setSubmitting(false);
       });
-      setSubmitting(false);
-    });
+    }
+
+    if (props.type === "Bid") {
+      Send.post("/Bid/BidTripVehicle", editVehicle).then((res) => {
+        console.log(res);
+        addToast("Vehicles Have Been Successfully Updated!", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+        setSubmitting(false);
+      });
+    }
   }
 
   function trailerSubmitAction(editTrailer) {
     setSubmitting(true);
-    Send.post("/Contract/ContractTripTrailer", editTrailer).then((res) => {
-      addToast("Trailers Have Been Successfully Updated!", {
-        appearance: "success",
-        autoDismiss: true,
+    if (props.type === "Contract") {
+      Send.post("/Contract/ContractTripTrailer", editTrailer).then((res) => {
+        addToast("Trailers Have Been Successfully Updated!", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+        setSubmitting(false);
       });
-      setSubmitting(false);
-    });
+    }
+
+    if (props.type === "Bid") {
+      Send.post("/Bid/BidTripTrailer", editTrailer).then((res) => {
+        addToast("Trailers Have Been Successfully Updated!", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+        setSubmitting(false);
+      });
+    }
   }
 
   return (
@@ -70,7 +94,7 @@ function ViewTrips(props) {
           c.label !== null &&
           c.label === "Trip Number" && (
             <Card.Header key={index + "header"} as="h5">
-              {c.label}: {c.value}
+              {c.label}: {c.updatedValue}
             </Card.Header>
           )
       )}
@@ -83,7 +107,7 @@ function ViewTrips(props) {
               typeof c.value !== "object" && (
                 <Col md="2" key={index + "body"}>
                   <p className="h5 mb-1">{c.label}:</p>
-                  {c.value !== null && <div className="text-muted">{c.value}</div>}
+                  {c.updatedValue !== null && <div className="text-muted">{c.updatedValue}</div>}
 
                   <hr />
                 </Col>
@@ -175,6 +199,7 @@ function ViewTrips(props) {
         <>
           <UpsertTripModal
             modalName={"Edit Trip"}
+            type={props.type}
             inputRestrictions={contentInputRestrictions}
             show={showTripModal}
             closeModal={closeModal}
@@ -189,6 +214,7 @@ function ViewTrips(props) {
           {showVehicleModal && (
             <UpsertVehicleModal
               modalName={"Edit Vehicles & Trailers"}
+              type={props.type}
               vehicles={props.tripVehicles}
               trailers={props.tripTrailers}
               tripData={tripData}

@@ -12,7 +12,7 @@ function ContractTable(props) {
 
   if (sessionStorage.getItem("/contract/ratesheets") >= 3) {
     columnData = [...columnData, { label: "View Cost Data", field: "viewCostData" }];
-  
+  }
   if (sessionStorage.getItem("/contract") >= 3) {
     columnData = [...columnData, { label: "Edit " + props.type, field: "editContract" }];
   }

@@ -77,6 +77,7 @@ function TripData(props) {
             {props.contractProfile[28].value.map((c, index) => (
               <ViewTrips
                 key={index}
+                type="Contract"
                 tripData={c}
                 tripVehicles={c[19]}
                 tripTrailers={c[20]}
@@ -94,6 +95,7 @@ function TripData(props) {
       {!isLoading && (
         <UpsertTripModal
           modalName={"Create New Trip"}
+          type="Contract"
           inputRestrictions={contentInputRestrictions}
           show={showModal}
           closeModal={closeModal}
@@ -236,6 +238,20 @@ function TripData(props) {
               label: "Last Modified",
               updatedValue: null,
               value: null,
+            },
+            {
+              columnName: "vw_contract_trip_vehicles",
+              inputType: null,
+              label: null,
+              updatedValue: [],
+              value: [],
+            },
+            {
+              columnName: "vw_contract_trip_trailers",
+              inputType: null,
+              label: null,
+              updatedValue: [],
+              value: [],
             },
           ]}
         />

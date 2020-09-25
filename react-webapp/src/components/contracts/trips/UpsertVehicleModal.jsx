@@ -50,13 +50,25 @@ class UpsertVehicleModal extends React.Component {
     event.preventDefault();
 
     let newVehicles = this.state.vehicles;
-    newVehicles.value.push([
-      { columnName: "contract_trip_id", label: null, updatedValue: this.state.tripData[2].updatedValue },
-      { columnName: "contract_trip_vehicle_id", label: null, updatedValue: "" },
-      { columnName: "vehicle_type_id", label: null, updatedValue: this.state.vehicleValues.vehicle_type_id },
-      { columnName: "vehicle_type_value", label: "Vehicle Type", updatedValue: this.state.vehicleValues.vehicle_type_value },
-      { columnName: "num_vehicle", label: "Number of Vehicles", updatedValue: this.state.vehicleValues.num_vehicle },
-    ]);
+
+    if (this.props.type === "Contract") {
+      newVehicles.value.push([
+        { columnName: "contract_trip_id", label: null, updatedValue: this.state.tripData[2].updatedValue },
+        { columnName: "contract_trip_vehicle_id", label: null, updatedValue: "" },
+        { columnName: "vehicle_type_id", label: null, updatedValue: this.state.vehicleValues.vehicle_type_id },
+        { columnName: "vehicle_type_value", label: "Vehicle Type", updatedValue: this.state.vehicleValues.vehicle_type_value },
+        { columnName: "num_vehicle", label: "Number of Vehicles", updatedValue: this.state.vehicleValues.num_vehicle },
+      ]);
+    }
+    if (this.props.type === "Bid") {
+      newVehicles.value.push([
+        { columnName: "contract_bid_trip_id", label: null, updatedValue: this.state.tripData[2].updatedValue },
+        { columnName: "contract_bid_trip_vehicle_id", label: null, updatedValue: "" },
+        { columnName: "vehicle_type_id", label: null, updatedValue: this.state.vehicleValues.vehicle_type_id },
+        { columnName: "vehicle_type_value", label: "Vehicle Type", updatedValue: this.state.vehicleValues.vehicle_type_value },
+        { columnName: "num_vehicle", label: "Number of Vehicles", updatedValue: this.state.vehicleValues.num_vehicle },
+      ]);
+    }
     this.setState({ vehicles: newVehicles });
     this.setState({ vehiclesHaveChanged: true });
   }
@@ -65,13 +77,26 @@ class UpsertVehicleModal extends React.Component {
     event.preventDefault();
 
     let newTrailers = this.state.trailers;
-    newTrailers.value.push([
-      { columnName: "contract_trip_id", label: null, updatedValue: this.state.tripData[2].updatedValue },
-      { columnName: "contract_trip_trailer_id", label: null, updatedValue: "" },
-      { columnName: "trailer_type_id", label: null, updatedValue: this.state.trailerValues.trailer_type_id },
-      { columnName: "trailer_type_value", label: "Trailer Type", updatedValue: this.state.trailerValues.trailer_type_value },
-      { columnName: "num_trailer", label: "Number of Trailers", updatedValue: this.state.trailerValues.num_trailer },
-    ]);
+    if (this.props.type === "Contract") {
+      newTrailers.value.push([
+        { columnName: "contract_trip_id", label: null, updatedValue: this.state.tripData[2].updatedValue },
+        { columnName: "contract_trip_trailer_id", label: null, updatedValue: "" },
+        { columnName: "trailer_type_id", label: null, updatedValue: this.state.trailerValues.trailer_type_id },
+        { columnName: "trailer_type_value", label: "Trailer Type", updatedValue: this.state.trailerValues.trailer_type_value },
+        { columnName: "num_trailer", label: "Number of Trailers", updatedValue: this.state.trailerValues.num_trailer },
+      ]);
+    }
+
+    if (this.props.type === "Bid") {
+      newTrailers.value.push([
+        { columnName: "contract_bid_trip_id", label: null, updatedValue: this.state.tripData[2].updatedValue },
+        { columnName: "contract_bid_trip_trailer_id", label: null, updatedValue: "" },
+        { columnName: "trailer_type_id", label: null, updatedValue: this.state.trailerValues.trailer_type_id },
+        { columnName: "trailer_type_value", label: "Trailer Type", updatedValue: this.state.trailerValues.trailer_type_value },
+        { columnName: "num_trailer", label: "Number of Trailers", updatedValue: this.state.trailerValues.num_trailer },
+      ]);
+    }
+
     this.setState({ trailers: newTrailers });
     this.setState({ trailersHaveChanged: true });
   }
@@ -94,8 +119,15 @@ class UpsertVehicleModal extends React.Component {
 
   submitAction() {
     let JSONData = this.state.tripData;
-    JSONData[19] = this.state.vehicles;
-    JSONData[20] = this.state.trailers;
+    if (this.props.type === "Bid") {
+      JSONData[17] = this.state.vehicles;
+      JSONData[18] = this.state.trailers;
+    }
+    if (this.props.type === "Contract") {
+      JSONData[19] = this.state.vehicles;
+      JSONData[20] = this.state.trailers;
+    }
+    console.log(JSON.stringify(JSONData));
 
     if (this.state.vehiclesHaveChanged) this.state.vehicleSubmitAction(JSONData);
     if (this.state.trailersHaveChanged) this.state.trailerSubmitAction(JSONData);

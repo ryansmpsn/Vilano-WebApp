@@ -78,6 +78,7 @@ function BidTripData(props) {
             {props.bidProfile[33].value.map((c, index) => (
               <ViewTrips
                 key={index}
+                type="Bid"
                 tripData={c}
                 tripVehicles={c[17]}
                 tripTrailers={c[18]}
@@ -95,32 +96,33 @@ function BidTripData(props) {
       {!isLoading && (
         <UpsertTripModal
           modalName={"Create New Trip"}
+          type="Bid"
           inputRestrictions={contentInputRestrictions}
           show={showModal}
           closeModal={closeModal}
           accessLevel={props.accessLevel}
           appProps={props.appProps}
-          bidProfile={props.bidProfile}
+          contractProfile={props.bidProfile}
           submitAction={(editTrip) => {
             return props.tripEditSubmitAction(editTrip);
           }}
           trip={[
             {
-              columnName: "bid_id",
+              columnName: "contract_bid_id",
               inputType: null,
               label: null,
               updatedValue: null,
               value: props.selectedBidId,
             },
             {
-              columnName: "external_bid_code",
+              columnName: "bid_name",
               inputType: null,
-              label: "Bid Number",
+              label: "Bid Name",
               updatedValue: null,
               value: props.selectedBid,
             },
             {
-              columnName: "bid_trip_id",
+              columnName: "contract_bid_trip_id",
               inputType: null,
               label: null,
               updatedValue: null,
@@ -176,32 +178,18 @@ function BidTripData(props) {
               value: 0,
             },
             {
-              columnName: "status_id",
-              inputType: null,
-              label: null,
-              updatedValue: null,
-              value: null,
-            },
-            {
-              columnName: "bid_trip_status",
-              inputType: "select",
-              label: "Trip Status",
-              updatedValue: null,
-              value: null,
-            },
-            {
               columnName: "start_date",
               inputType: "date",
               label: "Start Date",
-              updatedValue: null,
-              value: null,
+              updatedValue: props.bidProfile && props.bidProfile[28].updatedValue,
+              value: props.bidProfile && props.bidProfile[28].updatedValue,
             },
             {
               columnName: "end_date",
               inputType: "date",
               label: "End Date",
-              updatedValue: null,
-              value: null,
+              updatedValue: props.bidProfile && props.bidProfile[29].updatedValue,
+              value: props.bidProfile && props.bidProfile[29].updatedValue,
             },
             {
               columnName: "mileage",
@@ -238,6 +226,8 @@ function BidTripData(props) {
               updatedValue: null,
               value: null,
             },
+            { columnName: "vw_contract_bid_trip_vehicles", inputType: null, label: null, updatedValue: [], value: [] },
+            { columnName: "vw_contract_bid_trip_trailers", inputType: null, label: null, updatedValue: [], value: [] },
           ]}
         />
       )}
