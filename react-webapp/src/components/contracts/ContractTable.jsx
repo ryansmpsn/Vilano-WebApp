@@ -10,11 +10,11 @@ function ContractTable(props) {
     columnData = [...columnData, { label: "View Trips", field: "viewTrips" }];
   }
 
-  if (sessionStorage.getItem("contract/ratesheets") >= 3) {
+  if (sessionStorage.getItem("/contract/ratesheets") >= 3) {
     columnData = [...columnData, { label: "View Cost Data", field: "viewCostData" }];
-  }
+  
   if (sessionStorage.getItem("/contract") >= 3) {
-    columnData = [...columnData, { label: "Edit " + props.tableType, field: "editContract" }];
+    columnData = [...columnData, { label: "Edit " + props.type, field: "editContract" }];
   }
 
   let rowData = contractData.map((data, index) => data.filter(labelFilter).map((c, index) => [c.columnName, c.value]));
@@ -23,10 +23,8 @@ function ContractTable(props) {
     ...c,
     viewTrips: (
       <Link
-        onClick={(e) => {
-          props.setSelectedContract(contractData[index][6].value);
-          props.setSelectedContractId(contractData[index][0].value);
-          props.getTrips("/Contract/" + contractData[index][0].value);
+        onClick={() => {
+          setSelectedId(index);
         }}
         to={"../trips"}
         className="btn btn-primary btn-sm"
@@ -36,11 +34,10 @@ function ContractTable(props) {
     ),
     viewCostData: (
       <Link
-        onClick={(e) => {
-          props.setSelectedContract(contractData[index][6].value);
-          props.setSelectedContractId(contractData[index][0].value);
+        onClick={() => {
+          setSelectedId(index);
         }}
-        to="../costsegment"
+        to="../ratesheets"
         className="btn btn-primary btn-sm"
       >
         Rate Sheets
@@ -62,6 +59,20 @@ function ContractTable(props) {
     return tableData.label !== null;
   }
 
+  function setSelectedId(index) {
+    if (props.type === "Contract") {
+      props.setSelectedContract(contractData[index][6].value);
+      props.setSelectedContractId(contractData[index][0].value);
+      props.getTrips("/Contract/" + contractData[index][0].value);
+    }
+
+    if (props.type === "Bid") {
+      props.setSelectedBid(contractData[index][10].value);
+      props.setSelectedBidId(contractData[index][0].value);
+      props.getTrips("/Bid/" + contractData[index][0].value);
+    }
+  }
+
   const data = {
     columns: columnData,
     rows: rowData,
@@ -69,6 +80,7 @@ function ContractTable(props) {
   return (
     <div>
       <MDBDataTable striped bordered hover responsive data={data} />
+      {console.log(props.type)}
     </div>
   );
 }

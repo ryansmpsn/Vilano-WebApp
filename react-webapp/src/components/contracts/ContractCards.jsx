@@ -45,7 +45,6 @@ function ContractCards(props) {
     }
 
     if (props.type === "Bid") {
-      console.log("Hello BId");
       props.setSelectedBid(contract[10].value);
       props.setSelectedBidId(contract[0].value);
       props.getTrips("/Bid/" + contract[0].value);
