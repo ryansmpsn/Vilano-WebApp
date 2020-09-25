@@ -11,7 +11,11 @@ function TripData(props) {
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
 
   function getTripData(x) {
-    props.getTrips("/Contract/" + x.value);
+    if (x !== null) {
+      props.setSelectedContract(x.label);
+      props.setSelectedContractId(x.value);
+      props.getTrips("/Contract/" + x.value);
+    }
   }
   function addTrip() {
     setIsLoading(true);
@@ -41,12 +45,11 @@ function TripData(props) {
               options={props.selectOptions}
               placeholder={"Select a Contract to View Trips"}
               onChange={(x) => {
-                props.setSelectedContract(x.label);
-                props.setSelectedContractId(x.value);
                 getTripData(x);
               }}
               isLoading={props.isSearching | isLoading}
               isDisabled={props.isSearching | isLoading}
+              isClearable
             />
             {isLoading ? (
               <Spinner animation="border" variant="primary" />

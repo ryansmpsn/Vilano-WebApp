@@ -43,9 +43,9 @@ class BidDashboard extends Component {
   }
 
   getTrips = (e) => {
+    console.log(e);
     this.setState({ isSearching: true });
     return Send.get(e, this.props).then((res) => {
-      console.log(res.data);
       this.setState({ bidProfile: res.data[0] });
       this.setState({ isSearching: false });
     });

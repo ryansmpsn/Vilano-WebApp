@@ -45,6 +45,7 @@ function ContractCards(props) {
     }
 
     if (props.type === "Bid") {
+      console.log("Hello BId");
       props.setSelectedBid(contract[10].value);
       props.setSelectedBidId(contract[0].value);
       props.getTrips("/Bid/" + contract[0].value);
@@ -103,7 +104,7 @@ function ContractCards(props) {
               View Rate Information
             </Link>
           )}
-          {props.type !== "Contract" && sessionStorage.getItem("/bid") >= 3 && (
+          {props.type === "Contract" && sessionStorage.getItem("/bid") >= 3 && (
             <Button className="float-right btn-outline-warning" onClick={openBidModal}>
               Create Bid
             </Button>

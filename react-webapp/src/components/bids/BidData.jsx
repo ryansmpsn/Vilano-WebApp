@@ -142,8 +142,8 @@ function BidData(props) {
             <ContractTable
               type={"Bid"}
               getTrips={props.getTrips}
-              setSelectedContract={props.setSelectedBid}
-              setSelectedContractId={props.setSelectedBidId}
+              setSelectedBid={props.setSelectedBid}
+              setSelectedBidId={props.setSelectedBidId}
               contractData={bidData}
               inputRestrictions={contentInputRestrictions}
               submitAction={(editBid) => {
@@ -160,8 +160,8 @@ function BidData(props) {
                       key={index + "bid"}
                       type={"Bid"}
                       getTrips={props.getTrips}
-                      setSelectedContract={props.setSelectedBid}
-                      setSelectedContractId={props.setSelectedBidId}
+                      setSelectedBid={props.setSelectedBid}
+                      setSelectedBidId={props.setSelectedBidId}
                       Contract={c}
                       inputRestrictions={contentInputRestrictions}
                       submitAction={(editBid) => {

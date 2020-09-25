@@ -11,9 +11,13 @@ function BidTripData(props) {
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
 
   function getTripData(x) {
-    console.log(x);
-    props.getTrips("/Bid/" + x.value);
+    if (x !== null) {
+      props.setSelectedBid(x.label);
+      props.setSelectedBidId(x.value);
+      props.getTrips("/Bid/" + x.value);
+    }
   }
+
   function addTrip() {
     setIsLoading(true);
     Send.get("/Bid/Dropdowns/BidTrip/Cached", props).then((res) => {
@@ -33,6 +37,7 @@ function BidTripData(props) {
     window.history.replaceState(null, null, " ");
     setShowModal(false);
   }
+
   return (
     <Jumbotron>
       <Container className="container-sm pl-5 pr-5 pt-2">
@@ -43,12 +48,11 @@ function BidTripData(props) {
               options={props.selectOptions}
               placeholder={"Select a Bid to View Trips"}
               onChange={(x) => {
-                props.setSelectedBid(x.label);
-                props.setSelectedBidId(x.value);
                 getTripData(x);
               }}
               isLoading={props.isSearching | isLoading}
               isDisabled={props.isSearching | isLoading}
+              isClearable
             />
             {isLoading ? (
               <Spinner animation="border" variant="primary" />
