@@ -166,7 +166,7 @@ class ContractDashboard extends Component {
                         </Link>
                       )}
                       {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
-                        <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info">
+                        <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info">
                           Rate Sheets
                         </Link>
                       )}
@@ -184,7 +184,7 @@ class ContractDashboard extends Component {
                         </Link>
                       )}
                       {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
-                        <Link to="costsegment" className="btn btn-primary btn-sm btn-outline-info float-right">
+                        <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info float-right">
                           Rate Sheets
                         </Link>
                       )}

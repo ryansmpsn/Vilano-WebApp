@@ -9,15 +9,12 @@ function ContractCards(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showBidModal, setShowBidModal] = useState(false);
-  const [accessLevel, setAccessLevel] = useState("None");
-  //TODO would be contract_id and the like.  const [contractID, setContractID] = useState(0);
 
   useEffect(() => {
     onLoad();
   });
 
   function onLoad() {
-    setAccessLevel(props.accessLevel);
     setContract(props.Contract);
     setIsLoading(false);
   }
@@ -38,6 +35,20 @@ function ContractCards(props) {
   function closeBidModal() {
     window.history.replaceState(null, null, " ");
     setShowBidModal(false);
+  }
+
+  function setSelectedId() {
+    if (props.type === "Contract") {
+      props.setSelectedContract(contract[6].value);
+      props.setSelectedContractId(contract[0].value);
+      props.getTrips("/Contract/" + contract[0].value);
+    }
+
+    if (props.type === "Bid") {
+      props.setSelectedContract(contract[6].value);
+      props.setSelectedContractId(contract[0].value);
+      props.getTrips("/Bid/" + contract[0].value);
+    }
   }
 
   return (
@@ -72,10 +83,8 @@ function ContractCards(props) {
           </Row>
           {sessionStorage.getItem("/contract/trips") >= 2 && (
             <Link
-              onClick={(e) => {
-                props.setSelectedContract(contract[6].value);
-                props.setSelectedContractId(contract[0].value);
-                props.getTrips("/Contract/" + contract[0].value);
+              onClick={() => {
+                setSelectedId();
               }}
               to={"../trips"}
               className="btn btn-primary"
@@ -85,10 +94,8 @@ function ContractCards(props) {
           )}
           {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
             <Link
-              onClick={(e) => {
-                props.setSelectedContract(contract[6].value);
-                props.setSelectedContractId(contract[0].value);
-                props.getTrips("/Contract/" + contract[0].value);
+              onClick={() => {
+                setSelectedId();
               }}
               to={"../ratesheets"}
               className="btn btn-primary"
@@ -96,7 +103,7 @@ function ContractCards(props) {
               View Rate Information
             </Link>
           )}
-          {props.type !== "Bid" && sessionStorage.getItem("/bid") >= 3 && (
+          {props.type !== "Contract" && sessionStorage.getItem("/bid") >= 3 && (
             <Button className="float-right btn-outline-warning" onClick={openBidModal}>
               Create Bid
             </Button>
@@ -114,7 +121,6 @@ function ContractCards(props) {
           inputRestrictions={props.inputRestrictions}
           show={showModal}
           closeModal={closeModal}
-          accessLevel={accessLevel}
           appProps={props.appProps}
           submitAction={(editContent) => {
             return props.submitAction(editContent);
