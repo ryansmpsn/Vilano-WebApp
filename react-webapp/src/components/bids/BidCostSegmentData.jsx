@@ -1080,6 +1080,7 @@ class BidCostSegmentData extends Component {
       });
 
       Send.get("/Bid/" + this.props.selectedBidId + "/RateSheet", this.props.appProps).then((res) => {
+        console.log(res);
         this.setState({ bidCostSegments: res.data[0].pop() });
         this.setState({ bidData: res.data[0] });
         this.setState({ isLoading: false });
@@ -1098,6 +1099,8 @@ class BidCostSegmentData extends Component {
     this.props.setSelectedBidId(this.state.bidSearch);
 
     Send.get("/Bid/" + this.state.bidSearch + "/RateSheet", this.props.appProps).then((res) => {
+      console.log(res);
+
       this.setState({ bidCostSegments: res.data[0].pop() });
       this.setState({ bidData: res.data[0] });
       this.setState({ isLoading: false });

@@ -78,6 +78,7 @@ function TripData(props) {
               <ViewTrips
                 key={index}
                 type="Contract"
+                index={index}
                 tripData={c}
                 tripVehicles={c[19]}
                 tripTrailers={c[20]}

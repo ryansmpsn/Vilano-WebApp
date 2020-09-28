@@ -214,6 +214,7 @@ function ViewTrips(props) {
           {showVehicleModal && (
             <UpsertVehicleModal
               modalName={"Edit Vehicles & Trailers"}
+              index={props.index}
               type={props.type}
               vehicles={props.tripVehicles}
               trailers={props.tripTrailers}
@@ -221,6 +222,7 @@ function ViewTrips(props) {
               show={showVehicleModal}
               closeModal={closeModal}
               submitting={submitting}
+              contractProfile={props.contractProfile}
               vehicleSubmitAction={(editVehicle) => {
                 return vehicleSubmitAction(editVehicle);
               }}

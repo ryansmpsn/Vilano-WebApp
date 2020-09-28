@@ -21,7 +21,6 @@ function BidTripData(props) {
   function addTrip() {
     setIsLoading(true);
     Send.get("/Bid/Dropdowns/BidTrip/Cached", props).then((res) => {
-      console.log(res.data);
       setContentInputRestrictions(res.data);
       setIsLoading(false);
       openModal();
@@ -79,6 +78,7 @@ function BidTripData(props) {
               <ViewTrips
                 key={index}
                 type="Bid"
+                index={index}
                 tripData={c}
                 tripVehicles={c[17]}
                 tripTrailers={c[18]}

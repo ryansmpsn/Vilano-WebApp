@@ -44,10 +44,10 @@ const Send = new (class send extends React.Component {
   };
 
   handleError = (err, props) => {
-    console.log(props);
-    console.log(err.status + " Error: " + err.statusText + " at " + err.config.method + " " + err.config.url);
-    console.log(err.data.data.error);
-    console.log(err);
+    //   console.log(props);
+    //   console.log(err.status + " Error: " + err.statusText + " at " + err.config.method + " " + err.config.url);
+    //   console.log(err.data.data.error);
+    //   console.log(err);
     if (props || err.match === false) {
       props.handleLogout();
     }

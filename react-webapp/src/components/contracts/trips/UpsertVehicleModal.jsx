@@ -18,6 +18,7 @@ class UpsertVehicleModal extends React.Component {
       trailerOptions: [],
       Permissions: "Write",
       tripData: props.tripData,
+      contractProfile: props.contractProfile,
       vehicleValues: { vehicle_type_id: "", vehicle_type_value: "", num_vehicle: "" },
       trailerValues: { trailer_type_id: "", trailer_type_value: "", num_trailer: "" },
       submitting: false,
@@ -118,19 +119,21 @@ class UpsertVehicleModal extends React.Component {
   }
 
   submitAction() {
-    let JSONData = this.state.tripData;
+    console.log(this.state.contractProfile);
     if (this.props.type === "Bid") {
-      JSONData[17] = this.state.vehicles;
-      JSONData[18] = this.state.trailers;
+      if (this.state.vehiclesHaveChanged) this.state.vehicleSubmitAction(this.state.contractProfile);
+      if (this.state.trailersHaveChanged) this.state.trailerSubmitAction(this.state.contractProfile);
     }
     if (this.props.type === "Contract") {
-      JSONData[19] = this.state.vehicles;
-      JSONData[20] = this.state.trailers;
-    }
-    console.log(JSON.stringify(JSONData));
+      let JSONData = this.state.tripData;
 
-    if (this.state.vehiclesHaveChanged) this.state.vehicleSubmitAction(JSONData);
-    if (this.state.trailersHaveChanged) this.state.trailerSubmitAction(JSONData);
+      JSONData[28].value[this.props.index].value[19] = this.state.vehicles;
+      JSONData[28].value[this.props.index].value[20] = this.state.trailers;
+      if (this.state.vehiclesHaveChanged) this.state.vehicleSubmitAction(JSONData);
+      if (this.state.trailersHaveChanged) this.state.trailerSubmitAction(JSONData);
+      console.log(JSONData);
+    }
+
     this.props.closeModal();
   }
 
