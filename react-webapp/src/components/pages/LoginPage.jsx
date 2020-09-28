@@ -89,10 +89,10 @@ export default function Login(props) {
     addToast("You have logged in successfully. You will be redirected shortly.", {
       appearance: "success",
       autoDismiss: true,
-      autoDismissTimeout: 4000,
+      autoDismissTimeout: 3000,
     });
 
-    setTimeout(handleLogin, 4000, result);
+    setTimeout(handleLogin, 3000, result);
   }
 
   function handleLogin(result) {
