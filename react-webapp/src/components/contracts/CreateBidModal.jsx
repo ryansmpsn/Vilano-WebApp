@@ -64,20 +64,6 @@ function CreateBidModal(props) {
                 setNewBid(object);
               }}
             />
-            <FormLabel>Company: </FormLabel>
-            <Select
-              options={[
-                { value: "1", label: "Vilano Management" },
-                { value: "2", label: "Stageline" },
-                { value: "3", label: "Omega Mile" },
-                { value: 4, label: "Postal Fleet Services" },
-              ]}
-              onChange={(x) => {
-                let object = newBid;
-                object[5].updatedValue = x.value;
-                setNewBid(object);
-              }}
-            />
             {isSending === null ? (
               <Spinner animation="border" variant="primary" />
             ) : (
