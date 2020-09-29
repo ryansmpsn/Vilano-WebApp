@@ -21,18 +21,37 @@ function UpsertCostSegment(props) {
       rateArray.push({ rate_item_code: props.remarkAnnualCost[index].rateItemCode }, c);
       rateSheetItems.push(rateArray);
     });
-    let costSegment = [
-      { columnName: "cost_segment", updatedValue: props.selectedCostSegment },
-      { columnName: "vw_contract_rate_sheet_items", value: rateSheetItems },
-    ];
+
     let JSONData = props.contractData;
-    JSONData.push({
-      columnName: "vw_contract_rate_sheet_segment",
-      inputType: null,
-      label: "Cost Segment",
-      updatedValue: null,
-      value: costSegment,
-    });
+
+    if (props.type === "Contract") {
+      let costSegment = [
+        { columnName: "cost_segment", updatedValue: props.selectedCostSegment },
+        { columnName: "vw_contract_rate_sheet_items", value: rateSheetItems },
+      ];
+
+      JSONData.push({
+        columnName: "vw_contract_rate_sheet_segment",
+        inputType: null,
+        label: "Cost Segment",
+        updatedValue: null,
+        value: costSegment,
+      });
+    }
+    if (props.type === "Bid") {
+      let costSegment = [
+        { columnName: "cost_segment", updatedValue: props.selectedCostSegment },
+        { columnName: "vw_contract_bid_rate_sheet_items", value: rateSheetItems },
+      ];
+
+      JSONData.push({
+        columnName: "vw_contract_bid_rate_sheet_segment",
+        inputType: null,
+        label: "Cost Segment",
+        updatedValue: null,
+        value: [costSegment],
+      });
+    }
 
     props.submitAction(JSONData).then((res) => {
       addToast("Rate Sheet Submitted Successfully!", {

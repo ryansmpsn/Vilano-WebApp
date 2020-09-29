@@ -1064,8 +1064,9 @@ class BidCostSegmentData extends Component {
     this.setState({ isLoading: true });
     console.log(rateSheet);
     return Send.post("/Bid/BidRateSheet", rateSheet, this.props.appProps).then((res) => {
-      this.setState({ bidCostSegments: res.data[0].pop() });
-      this.setState({ bidData: res.data[0] });
+      console.log(res);
+      // this.setState({ bidCostSegments: res.data[0].pop() });
+      // this.setState({ bidData: res.data[0] });
       this.setState({ isLoading: false });
     });
   };
@@ -1247,6 +1248,7 @@ class BidCostSegmentData extends Component {
         {this.state.settingData && (
           <UpsertCostSegment
             props={this.props}
+            type={"Bid"}
             contractData={this.state.bidData}
             units={this.state.units}
             unitCost={this.state.unitCost}

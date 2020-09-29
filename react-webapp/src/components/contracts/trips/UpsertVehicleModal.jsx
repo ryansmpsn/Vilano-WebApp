@@ -127,8 +127,8 @@ class UpsertVehicleModal extends React.Component {
     if (this.props.type === "Contract") {
       let JSONData = this.state.tripData;
 
-      JSONData[28].value[this.props.index].value[19] = this.state.vehicles;
-      JSONData[28].value[this.props.index].value[20] = this.state.trailers;
+      JSONData[19] = this.state.vehicles;
+      JSONData[20] = this.state.trailers;
       if (this.state.vehiclesHaveChanged) this.state.vehicleSubmitAction(JSONData);
       if (this.state.trailersHaveChanged) this.state.trailerSubmitAction(JSONData);
       console.log(JSONData);

@@ -1244,6 +1244,7 @@ class CostSegmentData extends Component {
         {this.state.settingData && (
           <UpsertCostSegment
             props={this.props}
+            type={"Contract"}
             contractData={this.state.contractData}
             units={this.state.units}
             unitCost={this.state.unitCost}
