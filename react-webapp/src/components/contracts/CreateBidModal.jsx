@@ -10,6 +10,7 @@ function CreateBidModal(props) {
     { columnName: "bid_name", updatedValue: null },
     { columnName: "status_id", updatedValue: null },
     { columnName: "bid_type_id", updatedValue: null },
+    { columnName: "company_id", updatedValue: null },
   ]);
   const [isSending, setIsSending] = useState(false);
 
@@ -60,6 +61,20 @@ function CreateBidModal(props) {
               onChange={(x) => {
                 let object = newBid;
                 object[4].updatedValue = x.value;
+                setNewBid(object);
+              }}
+            />
+            <FormLabel>Company: </FormLabel>
+            <Select
+              options={[
+                { value: "1", label: "Vilano Management" },
+                { value: "2", label: "Stageline" },
+                { value: "3", label: "Omega Mile" },
+                { value: 4, label: "Postal Fleet Services" },
+              ]}
+              onChange={(x) => {
+                let object = newBid;
+                object[5].updatedValue = x.value;
                 setNewBid(object);
               }}
             />
