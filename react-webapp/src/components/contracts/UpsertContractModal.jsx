@@ -63,17 +63,6 @@ export default class UpsertContractModal extends React.Component {
       item = data;
     });
   }
-  /*
-  async get_history() {
-    Send.get("/ViewContractHistory?contract_id=" + 851, this.state.props)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-  */
 
   async handleSubmit(event) {
     event.preventDefault();

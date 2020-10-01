@@ -34,6 +34,7 @@ function ContractCards(props) {
   }
   function closeBidModal() {
     window.history.replaceState(null, null, " ");
+
     setShowBidModal(false);
   }
 

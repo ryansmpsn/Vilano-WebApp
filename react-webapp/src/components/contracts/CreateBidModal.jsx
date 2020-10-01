@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { Button, Col, FormControl, FormLabel, Modal, Row, Spinner } from "react-bootstrap";
 import Select from "react-select";
 import Send from "../../libs/send";
+import { useToasts } from "react-toast-notifications";
+import { useNavigate } from "react-router-dom";
 
 function CreateBidModal(props) {
+  const { addToast } = useToasts();
+  let navigate = useNavigate();
+
   const [newBid, setNewBid] = useState([
     { columnName: "contract_id", updatedValue: props.contractId },
     { columnName: "external_contract_code", updatedValue: props.externalContractCode },
@@ -16,18 +21,22 @@ function CreateBidModal(props) {
 
   function handleSubmit() {
     setIsSending(true);
-
-    console.log(JSON.stringify(newBid));
     return Send.post("/Bid/BidContract", newBid)
       .then((res) => {
-        console.log(res);
         setIsSending(false);
+        addToast("Bid successfully created.", {
+          appearance: "success",
+          autoDismiss: true,
+          autoDismissTimeout: 3000,
+        });
+        props.closeModal();
+        navigate("../../bids", res.data);
       })
       .catch((err) => {
-        console.log(err);
         setIsSending(false);
       });
   }
+
   return (
     <Modal show={props.show} onHide={props.closeModal}>
       <Modal.Header closeButton>Create Bid from Contract : {props.externalContractCode}</Modal.Header>
@@ -46,7 +55,6 @@ function CreateBidModal(props) {
               placeholder={newBid[1].updatedValue}
             />
             <FormLabel>Bid Status: </FormLabel>
-            {console.log(props.bidOptions)}
             <Select
               options={props.bidOptions[1].options}
               onChange={(x) => {
@@ -64,7 +72,7 @@ function CreateBidModal(props) {
                 setNewBid(object);
               }}
             />
-            {isSending === null ? (
+            {isSending ? (
               <Spinner animation="border" variant="primary" />
             ) : (
               <Button onClick={() => handleSubmit()}> Save </Button>
