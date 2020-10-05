@@ -21,20 +21,24 @@ function CreateBidModal(props) {
 
   function handleSubmit() {
     setIsSending(true);
-    return Send.post("/Bid/BidContract", newBid)
-      .then((res) => {
-        setIsSending(false);
-        addToast("Bid successfully created.", {
-          appearance: "success",
-          autoDismiss: true,
-          autoDismissTimeout: 3000,
-        });
-        props.closeModal();
-        navigate("../../bids", res.data);
-      })
-      .catch((err) => {
-        setIsSending(false);
-      });
+
+    let someData = { "what is this": "some content" };
+    navigate("../../bids", someData);
+
+    // return Send.post("/Bid/BidContract", newBid)
+    //   .then((res) => {
+    //     setIsSending(false);
+    //     addToast("Bid successfully created.", {
+    //       appearance: "success",
+    //       autoDismiss: true,
+    //       autoDismissTimeout: 3000,
+    //     });
+    //     props.closeModal();
+    //     navigate("../../bids", res.data  );
+    //   })
+    //   .catch((err) => {
+    //     setIsSending(false);
+    //   });
   }
 
   return (

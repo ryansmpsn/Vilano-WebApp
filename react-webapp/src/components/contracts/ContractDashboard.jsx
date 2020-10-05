@@ -97,6 +97,7 @@ class ContractDashboard extends Component {
   render() {
     return (
       <>
+        {console.log(this.props)}
         <MDBRow className="mb-4">
           <MDBCol xl="12" md="12" className="mb-r">
             <MDBCard className="cascading-admin-card">

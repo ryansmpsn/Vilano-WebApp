@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import UpsertContractModal from "./UpsertContractModal";
 import CreateBidModal from "./CreateBidModal";
+import FinalizeBidModal from "./FinalizeBidModal";
 
 function ContractCards(props) {
   const [contract, setContract] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showBidModal, setShowBidModal] = useState(false);
+  const [showFinalModal, setShowFinalModal] = useState(false);
 
   useEffect(() => {
     onLoad();
@@ -21,6 +23,16 @@ function ContractCards(props) {
   function openModal() {
     setShowModal(true);
     window.location.hash = "edit";
+  }
+
+  function openFinalModal() {
+    setShowFinalModal(true);
+    window.location.hash = "finalize";
+  }
+
+  function closeFinalModal() {
+    window.history.replaceState(null, null, " ");
+    setShowFinalModal(false);
   }
 
   function closeModal() {
@@ -109,6 +121,9 @@ function ContractCards(props) {
               Create Bid
             </Button>
           )}
+          <Button className="float-right btn-outline-warning" onClick={openFinalModal}>
+            Finalize Bid
+          </Button>
 
           {sessionStorage.getItem("/contract") >= 3 && (
             <Button className="float-right btn-outline-warning" onClick={openModal}>
@@ -117,7 +132,7 @@ function ContractCards(props) {
           )}
         </Card.Body>
         <UpsertContractModal
-          modalName={"Edit Contract"}
+          modalName={"Edit " + props.type}
           contract={contract}
           inputRestrictions={props.inputRestrictions}
           show={showModal}
@@ -128,14 +143,17 @@ function ContractCards(props) {
           }}
         />
         {props.type !== "Bid" && (
-          <CreateBidModal
-            show={showBidModal}
-            closeModal={closeBidModal}
-            appProps={props.appProps}
-            contractId={contract[0].updatedValue}
-            externalContractCode={contract[6].updatedValue}
-            bidOptions={props.bidOptions}
-          />
+          <>
+            <CreateBidModal
+              show={showBidModal}
+              closeModal={closeBidModal}
+              appProps={props.appProps}
+              contractId={contract[0].updatedValue}
+              externalContractCode={contract[6].updatedValue}
+              bidOptions={props.bidOptions}
+            />
+            <FinalizeBidModal show={showFinalModal} closeModal={closeFinalModal} appProps={props.appProps} />
+          </>
         )}
       </Card>
     )
