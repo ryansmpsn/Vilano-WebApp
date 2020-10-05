@@ -116,16 +116,17 @@ function ContractCards(props) {
               View Rate Information
             </Link>
           )}
-          {props.type === "Contract" && sessionStorage.getItem("/bid") >= 3 && (
+          {props.type === "Contract" && sessionStorage.getItem("/" + props.type.toLowerCase()) >= 3 && (
             <Button className="float-right btn-outline-warning" onClick={openBidModal}>
               Create Bid
             </Button>
           )}
-          <Button className="float-right btn-outline-warning" onClick={openFinalModal}>
-            Finalize Bid
-          </Button>
-
-          {sessionStorage.getItem("/contract") >= 3 && (
+          {props.type === "Bid" && sessionStorage.getItem("/bid/final") >= 3 && (
+            <Button className="float-right btn-outline-warning" onClick={openFinalModal}>
+              Finalize Bid
+            </Button>
+          )}
+          {sessionStorage.getItem("/" + props.type.toLowerCase()) >= 3 && (
             <Button className="float-right btn-outline-warning" onClick={openModal}>
               Edit {props.type}
             </Button>
@@ -142,18 +143,23 @@ function ContractCards(props) {
             return props.submitAction(editContent);
           }}
         />
-        {props.type !== "Bid" && (
-          <>
-            <CreateBidModal
-              show={showBidModal}
-              closeModal={closeBidModal}
-              appProps={props.appProps}
-              contractId={contract[0].updatedValue}
-              externalContractCode={contract[6].updatedValue}
-              bidOptions={props.bidOptions}
-            />
-            <FinalizeBidModal show={showFinalModal} closeModal={closeFinalModal} appProps={props.appProps} />
-          </>
+        {props.type !== "Bid" ? (
+          <CreateBidModal
+            show={showBidModal}
+            closeModal={closeBidModal}
+            appProps={props.appProps}
+            contractId={contract[0].updatedValue}
+            externalContractCode={contract[6].updatedValue}
+            bidOptions={props.bidOptions}
+          />
+        ) : (
+          <FinalizeBidModal
+            show={showFinalModal}
+            closeModal={closeFinalModal}
+            appProps={props.appProps}
+            bidOptions={props.bidOptions}
+            contract={contract}
+          />
         )}
       </Card>
     )

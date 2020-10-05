@@ -4,6 +4,7 @@ import Select from "react-select";
 import ContractCards from "../contracts/ContractCards";
 import ContractTable from "../contracts/ContractTable";
 import UpsertContractModal from "../contracts/UpsertContractModal";
+import Send from "../../libs/send";
 
 function BidData(props) {
   const [bidData, setBidData] = useState([]);
@@ -14,13 +15,13 @@ function BidData(props) {
   const [bidSearch] = useState(props.bidSearch);
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [bidOptions, setBidOptions] = useState([]);
 
   function search() {
     setTableView(false);
     props
       .SearchFunction(bidSearch)
       .then((res) => {
-        console.log(res.data);
         setBidData(res.data);
       })
       .catch((err) => {
@@ -29,6 +30,9 @@ function BidData(props) {
     props.getSelectOptions().then((res) => {
       setContentInputRestrictions(res.data);
       setIsLoading(false);
+    });
+    Send.get("/Bid/Dropdowns/Bid/Final").then((response) => {
+      setBidOptions(response.data);
     });
   }
 
@@ -168,6 +172,7 @@ function BidData(props) {
                         return props.bidEditSubmitAction(editBid);
                       }}
                       accessLevel={props.accessLevel}
+                      bidOptions={bidOptions}
                     />
                   ))}
               </Row>

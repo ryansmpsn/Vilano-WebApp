@@ -1,5 +1,5 @@
-import React from "react";
-import { Jumbotron, Container, Row, Col, ProgressBar, Table } from "react-bootstrap";
+import React, { useState } from "react";
+import { Jumbotron, Container, Row, Col, ProgressBar, Table, Button } from "react-bootstrap";
 import styled from "styled-components";
 import ModalSection from "./sections/ModalSection";
 import AdminCardSection1 from "./sections/AdminCardSection1";
@@ -16,8 +16,15 @@ const Styles = styled.div`
 `;
 
 function TestPage() {
+  const [toggler, setToggler] = useState(null);
   return (
     <Styles>
+      <div>
+        <h4> some text here:</h4>
+        {toggler === 1 && <p>this is rendered when var = 1</p>}
+        {toggler === 2 && <p> this is when var = 2</p>}
+        <Button onClick={() => setToggler(1)}> click to toggle</Button>
+      </div>
       <Jumbotron>
         <h1 className="display-1 text-center">This is the Testing Page</h1>
         <br />
