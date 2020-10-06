@@ -6,7 +6,7 @@ export default function Home() {
     <Jumbotron>
       <Container className="text-center">
         <h1 variant="h1-responsive">Vilano</h1>
-        <h4 className="text-muted">Alpha V 1.37</h4>
+        <h4 className="text-muted">Alpha V 1.38</h4>
         <h4 className="text-muted">
           <small>Under Development</small>
           {/* {(67543452345).toLocaleString()} */}

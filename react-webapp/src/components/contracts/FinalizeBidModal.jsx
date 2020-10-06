@@ -28,7 +28,7 @@ function FinalizeBidModal(props) {
     },
     {
       columnName: "effective_date",
-      updatedValue: new Date(new Date().getUTCMonth() + 1 + "/" + new Date().getUTCDate() + "/" + new Date().getUTCFullYear()),
+      updatedValue: new Date().getUTCFullYear() + "-" + (new Date().getUTCMonth() + 1) + "-" + new Date().getUTCDate(),
     },
   ]);
 
@@ -57,23 +57,25 @@ function FinalizeBidModal(props) {
     if (toggler === 1) {
       finalBid = awardedFinalBid;
     } else finalBid = deniedFinalBid;
+    console.log(finalBid);
 
-    Send.post("/Bid/BidFinal", finalBid)
-      .then((res) => {
-        setIsSending(false);
-        addToast("Bid successfully finalized.", {
-          appearance: "success",
-          autoDismiss: true,
-          autoDismissTimeout: 3000,
-        });
-        props.closeModal();
-      })
-      .catch((err) => {
-        setIsSending(false);
-      });
+    // Send.post("/Bid/BidFinal", finalBid)
+    //   .then((res) => {
+    //     setIsSending(false);
+    //     addToast("Bid successfully finalized.", {
+    //       appearance: "success",
+    //       autoDismiss: true,
+    //       autoDismissTimeout: 3000,
+    //     });
+    //     props.closeModal();
+    //   })
+    //   .catch((err) => {
+    //     setIsSending(false);
+    //   });
   }
   return (
     <Modal show={props.show} onHide={props.closeModal} centered>
+      {console.log(date)}
       <Modal.Header closeButton> Finalize Bid: {props.contract[10].value}</Modal.Header>
       <Modal.Body>
         <Form>
