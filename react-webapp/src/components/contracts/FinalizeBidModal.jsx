@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import { Modal, Row, Col, Button, FormControl, FormLabel, Form } from "react-bootstrap";
 import Select from "react-select";
+import Send from "../../libs/send";
 import DatePicker from "react-date-picker";
+import { useToasts } from "react-toast-notifications";
+import { Modal, Spinner, Col, Button, FormControl, FormLabel, Form } from "react-bootstrap";
 
 function FinalizeBidModal(props) {
+  const { addToast } = useToasts();
+  const [isSending, setIsSending] = useState(false);
+  const [toggler, setToggler] = useState(null);
+
   const [date, setDate] = useState(
     new Date(new Date().getUTCMonth() + 1 + "/" + new Date().getUTCDate() + "/" + new Date().getUTCFullYear())
   );
-  const [toggler, setToggler] = useState(null);
   const [awardedFinalBid, setAwardedFinalBid] = useState([
     // {
     //   columnName: "contract_bid_final_id",
@@ -46,10 +51,26 @@ function FinalizeBidModal(props) {
     },
   ]);
 
-  function getInfo() {
-    if (awardedFinalBid[1].updatedValue === 17) {
-      console.log(awardedFinalBid);
-    } else console.log(deniedFinalBid);
+  function handleSubmit() {
+    setIsSending(true);
+    var finalBid;
+    if (toggler === 1) {
+      finalBid = awardedFinalBid;
+    } else finalBid = deniedFinalBid;
+
+    Send.post("/Bid/BidFinal", finalBid)
+      .then((res) => {
+        setIsSending(false);
+        addToast("Bid successfully finalized.", {
+          appearance: "success",
+          autoDismiss: true,
+          autoDismissTimeout: 3000,
+        });
+        props.closeModal();
+      })
+      .catch((err) => {
+        setIsSending(false);
+      });
   }
   return (
     <Modal show={props.show} onHide={props.closeModal} centered>
@@ -114,12 +135,10 @@ function FinalizeBidModal(props) {
             )}
           </Form.Row>
         </Form>
-
-        {console.log(props)}
       </Modal.Body>
       {toggler !== null && (
         <Modal.Footer>
-          <Button onClick={getInfo}> Send</Button>
+          {isSending ? <Spinner animation="border" variant="primary" /> : <Button onClick={() => handleSubmit()}> Save </Button>}
         </Modal.Footer>
       )}
     </Modal>
