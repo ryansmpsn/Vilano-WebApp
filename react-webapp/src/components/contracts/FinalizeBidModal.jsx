@@ -57,21 +57,21 @@ function FinalizeBidModal(props) {
     if (toggler === 1) {
       finalBid = awardedFinalBid;
     } else finalBid = deniedFinalBid;
-    console.log(finalBid);
+    console.log(JSON.stringify(finalBid));
 
-    // Send.post("/Bid/BidFinal", finalBid)
-    //   .then((res) => {
-    //     setIsSending(false);
-    //     addToast("Bid successfully finalized.", {
-    //       appearance: "success",
-    //       autoDismiss: true,
-    //       autoDismissTimeout: 3000,
-    //     });
-    //     props.closeModal();
-    //   })
-    //   .catch((err) => {
-    //     setIsSending(false);
-    //   });
+    Send.post("/Bid/BidFinal", finalBid)
+      .then((res) => {
+        setIsSending(false);
+        addToast("Bid successfully finalized.", {
+          appearance: "success",
+          autoDismiss: true,
+          autoDismissTimeout: 3000,
+        });
+        props.closeModal();
+      })
+      .catch((err) => {
+        setIsSending(false);
+      });
   }
   return (
     <Modal show={props.show} onHide={props.closeModal} centered>

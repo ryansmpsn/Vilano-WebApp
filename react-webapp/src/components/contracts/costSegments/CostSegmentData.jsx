@@ -15,7 +15,7 @@ class CostSegmentData extends Component {
       isLoading: false,
       costSegmentDropdowns: null,
       isSearching: false,
-      contractSearch: props.selectedContract,
+      contractSearch: props.selectedContractId,
       contractData: null,
       contractCostSegments: null,
       selectedCostSegment: null,
