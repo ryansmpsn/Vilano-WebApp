@@ -15,7 +15,7 @@ class BidCostSegmentData extends Component {
       isLoading: false,
       costSegmentDropdowns: null,
       isSearching: false,
-      bidSearch: props.selectedBid,
+      bidSearch: props.selectedBidId,
       bidData: null,
       bidCostSegments: null,
       selectedCostSegment: null,
