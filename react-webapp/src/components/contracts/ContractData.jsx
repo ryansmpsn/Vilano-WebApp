@@ -31,9 +31,11 @@ function ContractData(props) {
       setContentInputRestrictions(res.data);
       setIsLoading(false);
     });
-    Send.get("/Bid/Dropdowns/BidNames/All").then((response) => {
-      setBidOptions(response.data);
-    });
+    if (sessionStorage.getItem("/Bid") >= 3) {
+      Send.get("/Bid/Dropdowns/BidNames/All").then((response) => {
+        setBidOptions(response.data);
+      });
+    }
   }
 
   function show_all() {
