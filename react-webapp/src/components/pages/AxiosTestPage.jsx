@@ -2,17 +2,20 @@ import React, { useState } from "react";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBCardText, MDBBadge, MDBCardHeader } from "mdbreact";
 import { useToasts } from "react-toast-notifications";
 import Send from "../../libs/send";
-import { FormGroup, FormControl, Spinner, Button } from "react-bootstrap";
+import { FormGroup, FormControl, Spinner, Button, Form, Row } from "react-bootstrap";
 import { useFormFields } from "../../libs/hookslib";
+import { faFileMedicalAlt } from "@fortawesome/free-solid-svg-icons";
 
 function AxiosTestPage() {
   const { addToast } = useToasts();
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     endpoint: "",
+    textData: "",
   });
+  const [selectedFile, setSelectedFile] = useState(null);
 
-  function clickMe() {
+  function onGetRequest() {
     setIsLoading(true);
 
     if (fields.endpoint !== "") {
@@ -44,26 +47,49 @@ function AxiosTestPage() {
       });
     }
   }
+  function onPostRequest() {
+    console.log(fields);
+  }
 
-  const items = [
-    { name: "Bike", price: 100 },
-    { name: "TV", price: 200 },
-    { name: "Album", price: 10 },
-    { name: "Book", price: 5 },
-    { name: "Phone", price: 500 },
-    { name: "Computer", price: 1000 },
-    { name: "Keyboard", price: 25 },
-  ];
+  function onFileChange(e) {
+    setSelectedFile(e.target.files[0]);
+  }
+  function onFileUpload() {
+    // Create an object of formData
+    const formData = new FormData();
 
-  const filteredItems = items.reduce((currentTotal, item) => {
-    return item.price + currentTotal;
-  }, 0);
+    // Update the formData object
+    formData.append("myFile", selectedFile, selectedFile.name);
 
-  console.log(filteredItems);
+    // Details of the uploaded file
+    console.log(selectedFile);
+    console.log(formData);
+  }
+  function fileData() {
+    if (selectedFile) {
+      return (
+        <div>
+          <h2>File Details:</h2>
+          <p>File Name: {selectedFile.name}</p>
+          <p>File Type: {selectedFile.type}</p>
+          <p>
+            Last Modified:
+            {selectedFile.lastModifiedDate.toDateString()}
+          </p>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <br />
+          <h4>Choose before Pressing the Upload button</h4>
+        </div>
+      );
+    }
+  }
 
   return (
     <React.Fragment>
-      {console.log(filteredItems)}
       <MDBRow className="mb-4">
         <MDBCol xl="12" md="12" className="mb-r">
           <MDBCard className="cascading-admin-card">
@@ -81,32 +107,55 @@ function AxiosTestPage() {
             <MDBCardBody>
               <h2 className="m-3 ">Endpoint / Axios Test Page</h2>
 
-              <MDBRow className="mb-4">
-                <MDBCol xl="6" md="6" className="mb-r">
-                  {isLoading ? (
-                    <Spinner animation="border" variant="primary" />
-                  ) : (
-                    <>
-                      <FormGroup controlId="endpoint">
+              <Row className="justify-content-md-center">
+                <MDBCol md="8">
+                  <Form>
+                    {isLoading ? (
+                      <Spinner animation="border" variant="primary" />
+                    ) : (
+                      <>
+                        <FormGroup controlId="endpoint">
+                          <FormControl
+                            autoFocus
+                            placeholder="Enter an Endpoint to Test"
+                            type="text"
+                            value={fields.endpoint}
+                            onChange={handleFieldChange}
+                          />
+                        </FormGroup>
+                        <p className="text-muted">
+                          <small>Example: "/Contract/Dropdowns/Contract/All"</small>
+                        </p>
                         <FormControl
-                          autoFocus
-                          placeholder="Enter an Endpoint to Test"
-                          type="text"
-                          value={fields.endpoint}
-                          onChange={handleFieldChange}
+                          as="textarea"
+                          placeholder="Data to be Submitted"
+                          onChange={(e) => {
+                            var specials = /[*|":<>[\]{}`\\()';@&$]/;
+                          }}
                         />
-                      </FormGroup>
-                      <p className="text-muted">
-                        <small>example: "/Contract/Dropdowns/Contract/All"</small>
-                      </p>
-                      <Button className="btn-outline-info" onClick={() => clickMe()}>
-                        Send
-                        <MDBIcon far icon="paper-plane" className="ml-1" />
-                      </Button>
-                    </>
-                  )}
+                        <p className="text-muted">
+                          <small>JSON / File(s)</small>
+                        </p>
+                        <Button className="btn-outline-info" onClick={() => onGetRequest()}>
+                          Get
+                          <MDBIcon fas icon="database" className="ml-1" />
+                        </Button>
+                        <Button className="btn-outline-info" onClick={() => onPostRequest()}>
+                          Post
+                          <MDBIcon far icon="paper-plane" className="ml-1" />
+                        </Button>
+                        <Button className="btn-outline-info float-right" onClick={() => onFileUpload()}>
+                          Upload File
+                          <MDBIcon fas icon="upload" className="ml-1" />
+                        </Button>
+                        <input type="file" onChange={(e) => onFileChange(e)} />
+
+                        {fileData()}
+                      </>
+                    )}
+                  </Form>
                 </MDBCol>
-              </MDBRow>
+              </Row>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
