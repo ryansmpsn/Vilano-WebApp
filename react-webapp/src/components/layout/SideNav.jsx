@@ -75,6 +75,12 @@ function SideNav(props) {
               <MDBIcon icon="question" className="mr-3" />
               About
             </ListGroupItem>
+          </NavLink>{" "}
+          <NavLink to="/administration" activeClassName="activeClass">
+            <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
+              <MDBIcon icon="tools" className="mr-3" />
+              Administration
+            </ListGroupItem>
           </NavLink>
         </ListGroup>
       </StyledMenu>

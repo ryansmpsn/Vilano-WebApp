@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Send from "../../libs/send";
 import { useAuth } from "../../auth";
 import styled from "styled-components";
-import { Navigate, useLocation, NavLink,  } from "react-router-dom";
+import { Navigate, useLocation, NavLink } from "react-router-dom";
 import { useFormFields } from "../../libs/hookslib";
 import { useToasts } from "react-toast-notifications";
 import { FormGroup, FormControl, Spinner, Button } from "react-bootstrap";

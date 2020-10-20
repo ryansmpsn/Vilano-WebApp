@@ -4,7 +4,6 @@ import { useToasts } from "react-toast-notifications";
 import Send from "../../libs/send";
 import { FormGroup, FormControl, Spinner, Button, Form, Row } from "react-bootstrap";
 import { useFormFields } from "../../libs/hookslib";
-import { faFileMedicalAlt } from "@fortawesome/free-solid-svg-icons";
 
 function AxiosTestPage() {
   const { addToast } = useToasts();
@@ -130,7 +129,7 @@ function AxiosTestPage() {
                           as="textarea"
                           placeholder="Data to be Submitted"
                           onChange={(e) => {
-                            var specials = /[*|":<>[\]{}`\\()';@&$]/;
+                            // var specials = /[*|":<>[\]{}`\\()';@&$]/;
                           }}
                         />
                         <p className="text-muted">

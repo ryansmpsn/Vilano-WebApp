@@ -77,12 +77,7 @@ function ContractTable(props) {
     columns: columnData,
     rows: rowData,
   };
-  return (
-    <div>
-      <MDBDataTable striped bordered hover responsive data={data} />
-      {console.log(props.type)}
-    </div>
-  );
+  return <MDBDataTable striped bordered hover responsive data={data} />;
 }
 
 export default ContractTable;
