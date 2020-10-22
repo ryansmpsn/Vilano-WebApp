@@ -6,7 +6,6 @@ import ContractManagement from "./ContractManagement";
 import FacilityManagement from "./FacilityManagement";
 import AllEmployees from "./employee/AllEmployees";
 import EmployeeInformation from "./employee/EmployeeInformation";
-import HireEmployee from "./employee/HireEmployee";
 import EmployeeAssignment from "./employee/EmployeeAssignment";
 import Send from "../../libs/send";
 
@@ -52,7 +51,6 @@ function AdministrationDashboard() {
           <Route path="all" element={<AllEmployees />} />
           <Route path="assignment" element={<EmployeeAssignment />} />
           <Route path="employee" element={<EmployeeInformation employeeDropdowns={employeeDropdowns} />} />
-          <Route path="hire" element={<HireEmployee />} />
         </Route>
         <Route path="contract/*" element={<ContractManagement />} />
         <Route path="facility/*" element={<FacilityManagement />} />

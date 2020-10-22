@@ -21,9 +21,6 @@ function EmployeeManagement(props) {
             <Link to="employee" className="btn btn-sm btn-outline-primary">
               Employee Information
             </Link>
-            <Link to="hire" className="btn btn-sm btn-outline-primary">
-              Hire Employee
-            </Link>
           </MDBCardHeader>
           <MDBCardBody>
             <Outlet />

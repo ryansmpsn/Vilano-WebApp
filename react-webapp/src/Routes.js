@@ -28,7 +28,6 @@ class Routing extends React.Component {
         <Route path="about" element={<About />} />
         <PrivateRoute path="/axios" element={<AxiosTestPage {...this.props} />} />
         <PrivateRoute path="/testpage" element={<Testpage {...this.props} />} />
-        <Route path="administration/*" element={<AdministrationDashboard {...this.props} />} />
 
         {/* Seems redundant to check if is authenticated here, but it prevents update during an existing state transision. */}
         {this.props.isAuthenticated && (
@@ -36,6 +35,7 @@ class Routing extends React.Component {
             <PrivateRoute path="contracts/*" element={<ContractDashboard {...this.props} />} />
             <PrivateRoute path="/bids/*" element={<BidDashboard {...this.props} />} />
             <PrivateRoute path="/profile" element={<ProfilePage {...this.props} />} />
+            <PrivateRoute path="administration/*" element={<AdministrationDashboard {...this.props} />} />
           </>
         )}
         {/* Catch all unmatched routes */}

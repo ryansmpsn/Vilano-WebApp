@@ -20,7 +20,7 @@ function App(props) {
           setIsAuthenticated(true);
         });
     }
-  }, [isAuthenticated, props]);
+  }, [isAuthenticated]);
 
   const setSessionData = (data) => {
     if (data !== undefined && data.match === true) {
