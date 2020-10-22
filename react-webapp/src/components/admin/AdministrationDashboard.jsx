@@ -1,7 +1,6 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import { Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Routes, Route, NavLink } from "react-router-dom";
+import { Row, Col, Nav, NavItem, Tab, Tabs } from "react-bootstrap";
 import EmployeeManagement from "./EmployeeManagement";
 import ContractManagement from "./ContractManagement";
 import FacilityManagement from "./FacilityManagement";
@@ -9,38 +8,54 @@ import AllEmployees from "./employee/AllEmployees";
 import EmployeeInformation from "./employee/EmployeeInformation";
 import HireEmployee from "./employee/HireEmployee";
 import EmployeeAssignment from "./employee/EmployeeAssignment";
+import Send from "../../libs/send";
 
-function AdministrationDashboard(props) {
+function AdministrationDashboard() {
+  const [employeeDropdowns, setEmployeeDropdowns] = useState([]);
+
+  useEffect(() => {
+    Send.get("/Employee/Dropdowns/Employee/All").then((res) => {
+      setEmployeeDropdowns(res.data);
+    });
+  }, []);
+
   return (
     <>
-      <Row>
-        <Col>
-          <Link to="employee" className="btn btn-primary btn-sm btn-outline-info">
-            Employee Management
-          </Link>
-          <Link to="contract" className="btn btn-primary btn-sm btn-outline-info">
-            Contract Management
-          </Link>
-          <Link to="facility" className="btn btn-primary btn-sm btn-outline-info">
-            Facility Management
-          </Link>
-        </Col>
-      </Row>
       <Row className="mb-4 justify-content-md-center">
         <Col md="6" className="mb-r">
           <h1 className="m-3 text-center">Application Administration</h1>
         </Col>
       </Row>
-
+      <Row className="mb-4 justify-content-md-center">
+        <Col md="6">
+          <Nav justify variant="tabs" defaultActiveKey="contract" className="pb-2">
+            <NavItem>
+              <NavLink to="employee" activeClassName="text-primary border-top">
+                Employee Management
+              </NavLink>
+            </NavItem>
+            <NavItem eventKey="contract">
+              <NavLink to="contract" activeClassName="text-primary border-top">
+                Contract Management
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="facility" activeClassName="text-primary border-top">
+                Facility Management
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </Col>
+      </Row>
       <Routes>
-        <Route path="employee" element={<EmployeeManagement {...props} />}>
+        <Route path="employee" element={<EmployeeManagement />}>
           <Route path="all" element={<AllEmployees />} />
           <Route path="assignment" element={<EmployeeAssignment />} />
-          <Route path="employee" element={<EmployeeInformation />} />
+          <Route path="employee" element={<EmployeeInformation employeeDropdowns={employeeDropdowns} />} />
           <Route path="hire" element={<HireEmployee />} />
         </Route>
-        <Route path="contract/*" element={<ContractManagement {...props} />} />
-        <Route path="facility/*" element={<FacilityManagement {...props} />} />
+        <Route path="contract/*" element={<ContractManagement />} />
+        <Route path="facility/*" element={<FacilityManagement />} />
       </Routes>
     </>
   );

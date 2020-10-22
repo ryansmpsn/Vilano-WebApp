@@ -14,7 +14,7 @@ const Send = new (class send extends React.Component {
       IDSession: "None",
     };
     if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-      this.state.URL = this.state.productionURL;
+      this.state.URL = this.state.localURL;
     } else {
       this.state.URL = this.state.productionURL;
     }
@@ -44,13 +44,10 @@ const Send = new (class send extends React.Component {
   };
 
   handleError = (err, props) => {
-    //   console.log(props);
-    //   console.log(err.status + " Error: " + err.statusText + " at " + err.config.method + " " + err.config.url);
-    //   console.log(err.data.data.error);
-    //   console.log(err);
-    if (props || err.match === false) {
-      props.handleLogout();
-    }
+    console.log(err);
+    // if (props || err.match === false) {
+    //   props.handleLogout();
+    // }
   };
 
   post = async (route, data, props) => {

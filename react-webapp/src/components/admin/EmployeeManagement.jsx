@@ -2,7 +2,7 @@ import React from "react";
 import { MDBRow, MDBCol, MDBCard, MDBCardHeader, MDBCardBody, MDBIcon } from "mdbreact";
 import { Link, Outlet } from "react-router-dom";
 
-function EmployeeManagement() {
+function EmployeeManagement(props) {
   return (
     <MDBRow className="mb-4">
       <MDBCol xl="12" md="12" className="mb-r">
