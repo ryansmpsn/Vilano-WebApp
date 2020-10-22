@@ -5,7 +5,7 @@ import Send from "../../../libs/send";
 import DisplayEmployee from "./sections/DisplayEmployee";
 
 function EmployeeInformation(props) {
-  const [employeeInformation, setEmployeeInformation] = useState([
+  const [employeeData, setEmployeeData] = useState([
     {
       columnName: "employee",
       inputType: null,
@@ -291,7 +291,7 @@ function EmployeeInformation(props) {
   ]);
   function getEmployee(x) {
     Send.get("/Employee/" + x.value).then((res) => {
-      setEmployeeInformation(res.data[0]);
+      setEmployeeData(res.data[0]);
     });
   }
   return (
@@ -301,7 +301,7 @@ function EmployeeInformation(props) {
           <Select options={props.employeeDropdowns} onChange={(x) => getEmployee(x)} />
         </Col>
       </Row>
-      <Row>{employeeInformation !== null && <DisplayEmployee employeeData={employeeInformation} />}</Row>
+      <Row>{employeeData !== null && <DisplayEmployee employeeData={employeeData} />}</Row>
     </>
   );
 }

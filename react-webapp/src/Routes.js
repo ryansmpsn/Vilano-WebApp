@@ -11,7 +11,6 @@ import NotFoundPage from "./components/pages/NotFoundPage";
 import ResourcesPage from "./components/pages/ResourcesPage";
 import AxiosTestPage from "./components/pages/AxiosTestPage";
 import ContractDashboard from "./components/contracts/ContractDashboard";
-import ProfilePageTesting from "./components/employees/ProfilePageTesting";
 import AdministrationDashboard from "./components/admin/AdministrationDashboard";
 import ResetPassword from "./components/pages/ResetPassword";
 import RequestReset from "./components/pages/RequestReset";
@@ -37,7 +36,6 @@ class Routing extends React.Component {
             <PrivateRoute path="contracts/*" element={<ContractDashboard {...this.props} />} />
             <PrivateRoute path="/bids/*" element={<BidDashboard {...this.props} />} />
             <PrivateRoute path="/profile" element={<ProfilePage {...this.props} />} />
-            <PrivateRoute path="/profiletest" element={<ProfilePageTesting {...this.props} />} />
           </>
         )}
         {/* Catch all unmatched routes */}
