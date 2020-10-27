@@ -42,6 +42,7 @@ function DisplayEmployee(props) {
           </MDBCard>
         </MDBCol>
       </MDBRow>
+      {console.log(employeeData)}
       <MDBRow center>
         <MDBCol lg="6">
           <Accordion defaultActiveKey={1}>
@@ -79,12 +80,12 @@ function DisplayEmployee(props) {
                 )
             )}
           </Accordion>
-        </MDBCol>{" "}
+        </MDBCol>
         <MDBCol lg="6">
-          <Accordion defaultActiveKey={1}>
+          <Accordion defaultActiveKey={3}>
             {employeeData.map(
               (data, index) =>
-                index < 4 && (
+                index > 3 && (
                   <Card key={index + "employeeData"}>
                     <Card.Header>
                       <Accordion.Toggle as={Button} block className="mdb-color lighten-3 text-center" eventKey={index}>

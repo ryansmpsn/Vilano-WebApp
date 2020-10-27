@@ -84,6 +84,22 @@ function SideNavAuth(props) {
           </Dropdown.Menu>
         </Dropdown>
       )}
+      {sessionStorage.getItem("/employees") >= 2 && (
+        <NavLink to="/payroll" activeClassName="activeClass" onClick={() => handleMenuToggle()}>
+          <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
+            <MDBIcon icon="money-bill-alt" className="mr-3" />
+            Payroll
+          </ListGroupItem>
+        </NavLink>
+      )}
+      {sessionStorage.getItem("/employees") >= 2 && (
+        <NavLink to="/employee" activeClassName="activeClass" onClick={() => handleMenuToggle()}>
+          <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
+            <MDBIcon icon="users" className="mr-3" />
+            Employees
+          </ListGroupItem>
+        </NavLink>
+      )}
       {sessionStorage.getItem("/admin") >= 2 && (
         <NavLink to="/administration" activeClassName="activeClass" onClick={() => handleMenuToggle()}>
           <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
