@@ -8,15 +8,46 @@ import AllEmployees from "./employee/AllEmployees";
 import EmployeeInformation from "./employee/EmployeeInformation";
 import EmployeeAssignment from "./employee/EmployeeAssignment";
 import Send from "../../libs/send";
+import axios from "axios";
 
 function AdministrationDashboard() {
   const [employeeDropdowns, setEmployeeDropdowns] = useState([]);
+  const [contractIds, setContractIds] = useState([]);
 
   useEffect(() => {
-    Send.get("/Employee/Dropdowns/Employee/All").then((res) => {
-      setEmployeeDropdowns(res.data);
-    });
+    const onLoad = async () => {
+      const requestOne = Send.get("/Employee/Dropdowns/Employee/All");
+      const requestTwo = Send.get("/Contract/Ids");
+
+      axios
+        .all([requestOne, requestTwo])
+        .then(
+          axios.spread((...responses) => {
+            const responseOne = responses[0];
+            const responseTwo = responses[1];
+            setEmployeeDropdowns(responseOne.data);
+            getContractIds(responseTwo.data);
+          })
+        )
+        .catch((errors) => {
+          // react on errors
+          console.log(errors);
+        });
+    };
+    onLoad();
   }, []);
+
+  function getContractIds(ids) {
+    let contractData = ids;
+    let pushContractIds = [];
+    contractData.map((item, index) => {
+      return pushContractIds.push({
+        label: item[1].value,
+        value: item[0].value,
+      });
+    });
+    setContractIds(pushContractIds);
+  }
 
   return (
     <>
@@ -29,11 +60,11 @@ function AdministrationDashboard() {
         <Col md="6">
           <Nav justify variant="tabs" defaultActiveKey="contract" className="pb-2">
             <NavItem>
-              <NavLink to="employee" activeClassName="text-primary border-top">
+              <NavLink to="employee/" activeClassName="text-primary border-top">
                 Employee Management
               </NavLink>
             </NavItem>
-            <NavItem eventKey="contract">
+            <NavItem>
               <NavLink to="contract" activeClassName="text-primary border-top">
                 Contract Management
               </NavLink>
@@ -49,8 +80,8 @@ function AdministrationDashboard() {
       <Routes>
         <Route path="employee" element={<EmployeeManagement />}>
           <Route path="all" element={<AllEmployees />} />
-          <Route path="assignment" element={<EmployeeAssignment />} />
-          <Route path="employee" element={<EmployeeInformation employeeDropdowns={employeeDropdowns} />} />
+          <Route path="assignment" element={<EmployeeAssignment contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
+          <Route path=":employeeId" element={<EmployeeInformation employeeDropdowns={employeeDropdowns} />} />
         </Route>
         <Route path="contract/*" element={<ContractManagement />} />
         <Route path="facility/*" element={<FacilityManagement />} />

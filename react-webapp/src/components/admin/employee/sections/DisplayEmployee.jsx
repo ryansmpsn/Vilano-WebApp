@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Accordion, Button, Spinner } from "react-bootstrap";
+import { Row, Col, Card, Accordion, Button, Spinner } from "react-bootstrap";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBContainer } from "mdbreact";
 
 function DisplayEmployee(props) {
@@ -22,13 +22,8 @@ function DisplayEmployee(props) {
                 {employeeData[0].value[0].map(
                   (c, index) =>
                     c.label !== null && (
-                      <MDBCol md="4" key={index + "profile"}>
-                        <MDBInput
-                          type="text"
-                          label={c.label}
-                          value={c.updatedValue !== null ? c.updatedValue : ""}
-                          disabled
-                        ></MDBInput>
+                      <MDBCol size="3" key={index + "profile"}>
+                        <MDBInput type="text" label={c.label} value={c.updatedValue !== null ? c.updatedValue : ""} disabled></MDBInput>
                       </MDBCol>
                     )
                 )}
@@ -42,17 +37,53 @@ function DisplayEmployee(props) {
           </MDBCard>
         </MDBCol>
       </MDBRow>
-      {console.log(employeeData)}
+      <MDBRow center>
+        <MDBCol>
+          <hr className="mt-5" />
+          <h3 className="m-4 text-center">{employeeData[5].label}</h3>
+        </MDBCol>
+      </MDBRow>
+      <Row>
+        {employeeData[5].value.length > 0 &&
+          employeeData[5].value.map((employee, index) => (
+            <Col md="3" key={"dataCol" + index}>
+              <Card border={employee[7].value === 1 ? "primary" : "light"}>
+                <Card.Header>{employee[4].label + ": " + employee[4].value}</Card.Header>
+                <Card.Body>
+                  {employee.map(
+                    (content, index) =>
+                      content.label !== null && (
+                        <Card.Text key={"employeeContract" + index}>
+                          {content.label}: {content.value}
+                        </Card.Text>
+                      )
+                  )}
+                </Card.Body>
+                <Card.Footer>
+                  <Button className="btn btn-sm" variant="outline-danger">
+                    Remove Contract
+                  </Button>
+                </Card.Footer>
+              </Card>
+            </Col>
+          ))}
+      </Row>
+      <MDBRow center>
+        <MDBCol>
+          <hr className="mt-5" />
+          <h3 className="m-4 text-center">Additional Employee Information</h3>
+        </MDBCol>
+      </MDBRow>
       <MDBRow center>
         <MDBCol lg="6">
           <Accordion defaultActiveKey={1}>
             {employeeData.map(
               (data, index) =>
                 index > 0 &&
-                index < 4 && (
+                index < 3 && (
                   <Card key={index + "employeeData"}>
                     <Card.Header>
-                      <Accordion.Toggle as={Button} block className="mdb-color lighten-3 text-center" eventKey={index}>
+                      <Accordion.Toggle as={Button} block className="winter-neva-gradient text-center" eventKey={index}>
                         {data.label}
                       </Accordion.Toggle>
                     </Card.Header>
@@ -63,13 +94,8 @@ function DisplayEmployee(props) {
                             data.value[0].map(
                               (c, index) =>
                                 c.label !== null && (
-                                  <MDBCol md="6" key={index + "cData"}>
-                                    <MDBInput
-                                      type="text"
-                                      label={c.label}
-                                      value={c.updatedValue !== null ? c.updatedValue : ""}
-                                      disabled
-                                    ></MDBInput>
+                                  <MDBCol md="4" key={index + "cData"}>
+                                    <MDBInput type="text" label={c.label} value={c.updatedValue !== null ? c.updatedValue : ""} disabled></MDBInput>
                                   </MDBCol>
                                 )
                             )}
@@ -82,13 +108,14 @@ function DisplayEmployee(props) {
           </Accordion>
         </MDBCol>
         <MDBCol lg="6">
-          <Accordion defaultActiveKey={3}>
+          <Accordion defaultActiveKey={1}>
             {employeeData.map(
               (data, index) =>
-                index > 3 && (
+                index > 2 &&
+                index < 5 && (
                   <Card key={index + "employeeData"}>
                     <Card.Header>
-                      <Accordion.Toggle as={Button} block className="mdb-color lighten-3 text-center" eventKey={index}>
+                      <Accordion.Toggle as={Button} block className="winter-neva-gradient  text-center" eventKey={index}>
                         {data.label}
                       </Accordion.Toggle>
                     </Card.Header>
@@ -100,12 +127,7 @@ function DisplayEmployee(props) {
                               (c, index) =>
                                 c.label !== null && (
                                   <MDBCol md="6" key={index + "cData"}>
-                                    <MDBInput
-                                      type="text"
-                                      label={c.label}
-                                      value={c.updatedValue !== null ? c.updatedValue : ""}
-                                      disabled
-                                    ></MDBInput>
+                                    <MDBInput type="text" label={c.label} value={c.updatedValue !== null ? c.updatedValue : ""} disabled></MDBInput>
                                   </MDBCol>
                                 )
                             )}

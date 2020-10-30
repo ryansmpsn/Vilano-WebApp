@@ -1,4 +1,4 @@
-import { MDBDataTable, MDBDataTableV5 } from "mdbreact";
+import { MDBDataTable } from "mdbreact";
 import React from "react";
 
 function AllEmployees(props) {
@@ -6,7 +6,6 @@ function AllEmployees(props) {
     <div>
       <h1>All Employees</h1>
       <MDBDataTable />
-      <MDBDataTableV5 />
     </div>
   );
 }

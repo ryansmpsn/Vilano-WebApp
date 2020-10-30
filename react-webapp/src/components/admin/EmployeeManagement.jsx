@@ -16,7 +16,7 @@ function EmployeeManagement(props) {
               All Employees
             </Link>
             <Link to="assignment" className="btn btn-sm btn-outline-primary">
-              Assignment
+              Employee Contracts
             </Link>
             <Link to="employee" className="btn btn-sm btn-outline-primary">
               Employee Information
