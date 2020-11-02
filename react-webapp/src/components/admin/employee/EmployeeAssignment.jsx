@@ -18,6 +18,9 @@ function EmployeeAssignment(props) {
     });
   }
 
+  function handleEmployeeSelect(x) {
+    console.log(x);
+  }
   function searchEmployee(x) {
     navigate("/administration/employee/" + x);
   }
@@ -27,6 +30,11 @@ function EmployeeAssignment(props) {
       <Row className="mb-4 justify-content-md-center">
         <Col md="4">
           <Select autofocus options={props.contractIds} placeholder={"Search for contracts by ID"} onChange={(x) => handleContractSelect(x)} />
+        </Col>
+        {console.log(props)}
+        <Col md="4">
+          <Select isMulti options={props.employeeDropdowns[0].options} placeholder={"Employee List"} onChange={(x) => handleEmployeeSelect(x)} />
+          <Button className="btn btn-sm btn-outline-warning" onClick={()=> (console.log("Button was clicked"))}>Add</Button>
         </Col>
       </Row>
       <Row>
