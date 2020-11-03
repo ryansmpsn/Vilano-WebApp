@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Send from "../../libs/send";
-import DisplayEmployee from "../admin/employee/sections/DisplayEmployee";
+import DisplayEmployeeInfo from "../admin/employee/sections/DisplayEmployeeInfo";
 import { MDBRow, MDBCol, MDBCard, MDBCardHeader, MDBCardBody, MDBIcon } from "mdbreact";
 
 function ProfilePage(props) {
@@ -23,7 +23,7 @@ function ProfilePage(props) {
             <h1 className="m-3 text-center">Your Profile</h1>
           </MDBCardHeader>
           <MDBCardBody>
-            <DisplayEmployee employeeData={employeeData} />
+            <DisplayEmployeeInfo employeeData={employeeData} />
           </MDBCardBody>
         </MDBCard>
       </MDBCol>

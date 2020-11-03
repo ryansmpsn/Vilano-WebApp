@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { Row, Col } from "react-bootstrap";
 import Send from "../../../libs/send";
-import DisplayEmployee from "./sections/DisplayEmployee";
+import DisplayEmployeeInfo from "./sections/DisplayEmployeeInfo";
 import { useNavigate, useParams } from "react-router";
 
 function EmployeeInformation(props) {
@@ -32,7 +32,7 @@ function EmployeeInformation(props) {
           <Select options={props.employeeDropdowns} onChange={(x) => handleChange(x)} />
         </Col>
       </Row>
-      {employeeData !== null && <DisplayEmployee employeeData={employeeData} />}
+      {employeeData !== null && <DisplayEmployeeInfo employeeData={employeeData} />}
     </>
   );
 }

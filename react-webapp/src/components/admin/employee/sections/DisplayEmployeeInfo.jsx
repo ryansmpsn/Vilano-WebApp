@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col, Card, Accordion, Button, Spinner } from "react-bootstrap";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBContainer } from "mdbreact";
 
-function DisplayEmployee(props) {
+function DisplayEmployeeInfo(props) {
   const employeeData = props.employeeData;
 
   return employeeData === null ? (
@@ -23,7 +23,12 @@ function DisplayEmployee(props) {
                   (c, index) =>
                     c.label !== null && (
                       <MDBCol size="3" key={index + "profile"}>
-                        <MDBInput type="text" label={c.label} value={c.updatedValue !== null ? c.updatedValue : ""} disabled></MDBInput>
+                        <MDBInput
+                          type="text"
+                          label={c.label}
+                          value={c.updatedValue !== null ? c.updatedValue : ""}
+                          disabled
+                        ></MDBInput>
                       </MDBCol>
                     )
                 )}
@@ -95,7 +100,12 @@ function DisplayEmployee(props) {
                               (c, index) =>
                                 c.label !== null && (
                                   <MDBCol md="4" key={index + "cData"}>
-                                    <MDBInput type="text" label={c.label} value={c.updatedValue !== null ? c.updatedValue : ""} disabled></MDBInput>
+                                    <MDBInput
+                                      type="text"
+                                      label={c.label}
+                                      value={c.updatedValue !== null ? c.updatedValue : ""}
+                                      disabled
+                                    ></MDBInput>
                                   </MDBCol>
                                 )
                             )}
@@ -127,7 +137,12 @@ function DisplayEmployee(props) {
                               (c, index) =>
                                 c.label !== null && (
                                   <MDBCol md="6" key={index + "cData"}>
-                                    <MDBInput type="text" label={c.label} value={c.updatedValue !== null ? c.updatedValue : ""} disabled></MDBInput>
+                                    <MDBInput
+                                      type="text"
+                                      label={c.label}
+                                      value={c.updatedValue !== null ? c.updatedValue : ""}
+                                      disabled
+                                    ></MDBInput>
                                   </MDBCol>
                                 )
                             )}
@@ -144,4 +159,4 @@ function DisplayEmployee(props) {
   );
 }
 
-export default DisplayEmployee;
+export default DisplayEmployeeInfo;

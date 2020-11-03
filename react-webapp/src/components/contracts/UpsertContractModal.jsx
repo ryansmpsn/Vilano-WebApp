@@ -131,16 +131,8 @@ export default class UpsertContractModal extends React.Component {
                     <Col md="6" key={index}>
                       <FormGroup>
                         <FormLabel>
-                          {item.label +
-                            ": " +
-                            (item.inputType !== "date"
-                              ? item.value
-                              : new Date(item.value).getUTCMonth() +
-                                1 +
-                                "/" +
-                                new Date(item.value).getUTCDate() +
-                                "/" +
-                                new Date(item.value).getUTCFullYear())}
+                          {item.label + ": "}
+                          {item.inputType !== "text" && item.inputType !== "date" && item.inputType !== "select" && item.value}
                         </FormLabel>
                         {/* Make this formcontrol tie to values for editing-- Done I think?  */}
                         {(item.inputType === "text" && (
@@ -187,7 +179,6 @@ export default class UpsertContractModal extends React.Component {
                           (item.inputType === "date" && (
                             <>
                               <br />
-                              <span>Edit Date: &nbsp;</span>
                               {/* Fix date picker to default to current day */}
                               <DatePicker
                                 onChange={(e) => {

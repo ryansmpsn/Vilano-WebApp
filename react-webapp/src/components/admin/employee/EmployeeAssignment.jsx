@@ -4,6 +4,7 @@ import Select from "react-select";
 import Send from "../../../libs/send";
 import { useNavigate } from "react-router";
 import { useToasts } from "react-toast-notifications";
+import DisplayContractEmployee from "./sections/DisplayContractEmployees";
 
 function EmployeeAssignment(props) {
   let navigate = useNavigate();
@@ -51,8 +52,11 @@ function EmployeeAssignment(props) {
     setModifiedContractEmployees(newEmployeeGroup);
   }
 
-  function searchEmployee(x) {
-    navigate("/administration/employee/" + x);
+  function handleRoleSelect(x, index) {
+    let rollChange = modifiedContractEmployees[index];
+    rollChange[5].value = x.value;
+    rollChange[6].value = x.label;
+    console.log(rollChange);
   }
 
   function saveEmployeeToContract() {
@@ -98,39 +102,10 @@ function EmployeeAssignment(props) {
             <Spinner animation="border" variant="primary" />
           </Col>
         ) : (
-          modifiedContractEmployees !== null &&
-          modifiedContractEmployees.map((employee, index) => (
-            <Col md="3" key={"dataCol" + index}>
-              <Card
-                className="mb-3"
-                border={employee[7].value === null ? "warning" : employee[7].value === "true" ? "info" : "light"}
-              >
-                <Card.Header>{employee[1].value + " " + employee[2].value}</Card.Header>
-                <Card.Body>
-                  {employee.map(
-                    (content, index) =>
-                      content.label !== null && (
-                        <Card.Text key={"employeeContent" + index}>
-                          {content.label}: {content.value}
-                        </Card.Text>
-                      )
-                  )}
-                </Card.Body>
-                <Card.Footer>
-                  <Button className="btn btn-sm" variant="outline-info" onClick={() => searchEmployee(employee[0].value)}>
-                    view Profile
-                  </Button>
-                  <Button
-                    className="btn btn-sm float-right"
-                    variant="outline-danger"
-                    onClick={() => console.log("remove this emp")}
-                  >
-                    remove
-                  </Button>
-                </Card.Footer>
-              </Card>
-            </Col>
-          ))
+          <DisplayContractEmployee
+            modifiedContractEmployees={modifiedContractEmployees}
+            employeeDropdowns={props.employeeDropdowns}
+          />
         )}
       </Row>
       <Row className="justify-content-center">

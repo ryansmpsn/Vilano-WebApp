@@ -143,9 +143,9 @@ function ContractCards(props) {
             return props.submitAction(editContent);
           }}
         />
-        {console.log(props.bidOptions)}
-        {sessionStorage.getItem("/bid") >= 3 &&
-          (props.type !== "Bid" ? (
+        {console.log(props)}
+        {sessionStorage.getItem("/bid") >= 3 && props.type === "Bid" && (
+          <>
             <CreateBidModal
               show={showBidModal}
               closeModal={closeBidModal}
@@ -154,7 +154,7 @@ function ContractCards(props) {
               externalContractCode={contract[6].updatedValue}
               bidOptions={props.bidOptions}
             />
-          ) : (
+
             <FinalizeBidModal
               show={showFinalModal}
               closeModal={closeFinalModal}
@@ -162,7 +162,8 @@ function ContractCards(props) {
               bidOptions={props.bidOptions}
               contract={contract}
             />
-          ))}
+          </>
+        )}
       </Card>
     )
   );

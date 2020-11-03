@@ -186,8 +186,8 @@ function ContractData(props) {
           contract={[
             { columnName: "contract_id", inputType: null, label: null, updatedValue: null, value: null },
             { columnName: "modified_by", inputType: null, label: null, updatedValue: null, value: null },
-            { columnName: "employee_name", inputType: null, label: "Last Modified By", updatedValue: null, value: "" },
-            { columnName: "is_active", inputType: "checkbox", label: "Active", updatedValue: null, value: 1 },
+            { columnName: "employee_name", inputType: null, label: null, updatedValue: null, value: "" },
+            { columnName: "is_active", inputType: "checkbox", label: null, updatedValue: null, value: 1 },
             { columnName: "company_id", inputType: null, label: null, updatedValue: null, value: 1 },
             {
               columnName: "company_name",
@@ -217,7 +217,7 @@ function ContractData(props) {
             {
               columnName: "contract_type_name",
               inputType: null,
-              label: "Contract Type Name",
+              label: null,
               updatedValue: null,
               value: "",
             },
@@ -232,7 +232,7 @@ function ContractData(props) {
             {
               columnName: "contract_division_name",
               inputType: null,
-              label: "Division Name",
+              label: null,
               updatedValue: null,
               value: "",
             },

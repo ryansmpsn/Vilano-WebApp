@@ -80,7 +80,10 @@ function AdministrationDashboard() {
       <Routes>
         <Route path="employee" element={<EmployeeManagement />}>
           <Route path="all" element={<AllEmployees />} />
-          <Route path="assignment" element={<EmployeeAssignment contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
+          <Route
+            path="assignment"
+            element={<EmployeeAssignment contractIds={contractIds} employeeDropdowns={employeeDropdowns} />}
+          />
           <Route path=":employeeId" element={<EmployeeInformation employeeDropdowns={employeeDropdowns} />} />
         </Route>
         <Route path="contract/*" element={<ContractManagement />} />
