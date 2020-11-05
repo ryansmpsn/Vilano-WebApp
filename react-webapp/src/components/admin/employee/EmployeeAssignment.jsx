@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { Button, Card, Col, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Row, Spinner } from "react-bootstrap";
 import Select from "react-select";
 import Send from "../../../libs/send";
-import { useNavigate } from "react-router";
 import { useToasts } from "react-toast-notifications";
 import DisplayContractEmployee from "./sections/DisplayContractEmployees";
 
 function EmployeeAssignment(props) {
-  let navigate = useNavigate();
   const { addToast } = useToasts();
 
   const [contractEmployees, setContractEmployees] = useState(null);
@@ -21,12 +19,12 @@ function EmployeeAssignment(props) {
     Send.get("/Employee/ContractEmployee/" + x.value).then((response) => {
       setIsLoading(false);
       setContractEmployees(response.data.value);
-      setModifiedContractEmployees(response.data.value);
+      setModifiedContractEmployees(null);
     });
   }
 
   function handleEmployeeSelect(x) {
-    let newEmployeeGroup = [...contractEmployees];
+    let newEmployeeGroup = [];
     x &&
       x.forEach((x) => {
         let singleEmployee = [
@@ -36,12 +34,10 @@ function EmployeeAssignment(props) {
           { columnName: "contract_id", inputType: null, label: null, value: selectedContract.value },
           { columnName: "external_contract_code", inputType: null, label: "Contract", value: selectedContract.label },
           { columnName: "contract_role_id", inputType: null, label: null, value: null },
-          { columnName: "role", inputType: null, label: "Role", value: null },
-          { columnName: "is_primary", inputType: null, label: "Home Contract", value: null },
+          { columnName: "role", inputType: "select", label: "Role", value: null },
+          { columnName: "is_primary", inputType: "checkbox", label: "Home Contract", value: false },
           { columnName: "employee_contract_id", inputType: null, label: null, value: null },
-          { columnName: "is_active", inputType: null, label: "Active", value: true },
-          { columnName: "modified_timestamp", inputType: null, label: "Last Modified", value: null },
-          { columnName: "modified_by_employee_name", inputType: null, label: "Modified By", value: null },
+          { columnName: "is_active", inputType: "checkbox", label: "Active", value: true },
         ];
         singleEmployee[0].value = x.value;
         singleEmployee[1].value = x.label.split(" ")[0];
@@ -56,17 +52,18 @@ function EmployeeAssignment(props) {
     let rollChange = modifiedContractEmployees[index];
     rollChange[5].value = x.value;
     rollChange[6].value = x.label;
-    console.log(rollChange);
+    console.log(rollChange[5]);
   }
 
   function saveEmployeeToContract() {
-    // Send.post("", modifiedContractEmployees).then((result) => {});
+    let contractEmployees = [{ columnName: "employee_contracts", value: modifiedContractEmployees }];
+    Send.post("/Employee/ContractEmployee/", modifiedContractEmployees).then((result) => {});
     addToast(`Employees Saved to Contract: ${selectedContract.label}.`, {
       appearance: "success",
       autoDismiss: true,
       autoDismissTimeout: 3000,
     });
-    console.log(modifiedContractEmployees);
+    console.log(JSON.stringify(contractEmployees));
   }
 
   return (
@@ -83,7 +80,7 @@ function EmployeeAssignment(props) {
         <Col md="4">
           <Select
             isMulti
-            options={props.employeeDropdowns[0].options || []}
+            options={props.employeeDropdowns[0].options}
             placeholder={"Employee List"}
             onChange={(x) => handleEmployeeSelect(x)}
             isDisabled={contractEmployees === null}
@@ -102,10 +99,20 @@ function EmployeeAssignment(props) {
             <Spinner animation="border" variant="primary" />
           </Col>
         ) : (
-          <DisplayContractEmployee
-            modifiedContractEmployees={modifiedContractEmployees}
-            employeeDropdowns={props.employeeDropdowns}
-          />
+          <>
+            <DisplayContractEmployee
+              modified={false}
+              contractEmployees={contractEmployees}
+              employeeDropdowns={props.employeeDropdowns}
+            />
+            <DisplayContractEmployee
+              modified={true}
+              handleRoleSelect={(x, index) => handleRoleSelect(x, index)}
+              contractEmployees={modifiedContractEmployees}
+              employeeDropdowns={props.employeeDropdowns}
+              setContractEmployees={setModifiedContractEmployees}
+            />
+          </>
         )}
       </Row>
       <Row className="justify-content-center">

@@ -1,47 +1,43 @@
 [
-  { "columnName": "contract_bid_id", "inputType": null, "label": null, "updatedValue": 23, "value": 23 },
-  { "columnName": "bid_name", "inputType": null, "label": "Bid Name", "updatedValue": "Test006-Bid1", "value": "Test006-Bid1" },
-  { "columnName": "contract_bid_trip_id", "inputType": null, "label": null, "updatedValue": 31, "value": 31 },
-  { "columnName": "trip_number", "inputType": "text", "label": "Trip Number", "updatedValue": "1", "value": "1" },
-  { "columnName": "cost_segment_id", "inputType": null, "label": null, "updatedValue": 1, "value": 1 },
-  { "columnName": "cost_segment_value", "inputType": "select", "label": "Cost Segment", "updatedValue": "A", "value": "A" },
-  { "columnName": "frequency_id", "inputType": null, "label": null, "updatedValue": 999, "value": 999 },
-  { "columnName": "frequency_value", "inputType": "select", "label": "Frequency", "updatedValue": "125X", "value": "125X" },
-  { "columnName": "is_active", "inputType": "checkbox", "label": "Active", "updatedValue": 1, "value": 1 },
-  { "columnName": "is_peak", "inputType": "checkbox", "label": "Peak", "updatedValue": 0, "value": 0 },
-  { "columnName": "start_date", "inputType": "date", "label": "Start Date", "updatedValue": "2020-01-10", "value": "2020-01-10" },
-  { "columnName": "end_date", "inputType": "date", "label": "End Date", "updatedValue": "2020-01-03", "value": "2020-01-03" },
-  { "columnName": "mileage", "inputType": "num", "label": "Mileage", "updatedValue": 12, "value": 12 },
-  { "columnName": "hours", "inputType": "num", "label": "Hours", "updatedValue": 7.6, "value": 7.6 },
-  { "columnName": "modified_by", "inputType": null, "label": null, "updatedValue": 100138, "value": 100138 },
   {
-    "columnName": "employee_name",
-    "inputType": null,
-    "label": "Last Modified By",
-    "updatedValue": "Ryan Simpson",
-    "value": "Ryan Simpson"
-  },
-  {
-    "columnName": "last_modified",
-    "inputType": null,
-    "label": "Last Modified",
-    "updatedValue": "2020-09-28 16:17:14",
-    "value": "2020-09-28 16:17:14"
-  },
-  {
-    "columnName": "vw_contract_bid_trip_vehicles",
-    "inputType": null,
-    "label": "Vehicles",
-    "updatedValue": null,
-    "value": [
+    "columnName": "employee_contracts",
+    "updatedValue": [
       [
-        { "columnName": "contract_bid_trip_id", "label": null, "updatedValue": 31 },
-        { "columnName": "contract_bid_trip_vehicle_id", "label": null, "updatedValue": "" },
-        { "columnName": "vehicle_type_id", "label": null, "updatedValue": 1 },
-        { "columnName": "vehicle_type_value", "label": "Vehicle Type", "updatedValue": "90-150 Cubes Car/Truck/Van" },
-        { "columnName": "num_vehicle", "label": "Number of Vehicles", "updatedValue": "1" }
+        { "columnName": "employee_id", "inputType": null, "label": "Employee Id", "updatedValue": 100003 },
+        { "columnName": "first_name", "inputType": null, "label": "First Name", "updatedValue": "Craig" },
+        { "columnName": "last_name", "inputType": null, "label": "Last Name", "updatedValue": "Gregory" },
+        { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": 860 },
+        { "columnName": "external_contract_code", "inputType": null, "label": "Contract", "updatedValue": "NoahTest" },
+        { "columnName": "contract_role_id", "inputType": null, "label": null, "updatedValue": null },
+        { "columnName": "role", "inputType": "select", "label": "Role", "updatedValue": null },
+        { "columnName": "is_primary", "inputType": null, "label": "Home Contract", "updatedValue": null },
+        { "columnName": "employee_contract_id", "inputType": null, "label": null, "updatedValue": null },
+        { "columnName": "is_active", "inputType": "checkbox", "label": "Active", "updatedValue": true }
+      ],
+      [
+        { "columnName": "employee_id", "inputType": null, "label": "Employee Id", "updatedValue": 100005 },
+        { "columnName": "first_name", "inputType": null, "label": "First Name", "updatedValue": "Jeremy" },
+        { "columnName": "last_name", "inputType": null, "label": "Last Name", "updatedValue": "Collins" },
+        { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": 860 },
+        { "columnName": "external_contract_code", "inputType": null, "label": "Contract", "updatedValue": "NoahTest" },
+        { "columnName": "contract_role_id", "inputType": null, "label": null, "updatedValue": 2 },
+        { "columnName": "role", "inputType": "select", "label": "Role", "updatedValue": "Lead Driver" },
+        { "columnName": "is_primary", "inputType": null, "label": "Home Contract", "updatedValue": null },
+        { "columnName": "employee_contract_id", "inputType": null, "label": null, "updatedValue": null },
+        { "columnName": "is_active", "inputType": "checkbox", "label": "Active", "updatedValue": true }
+      ],
+      [
+        { "columnName": "employee_id", "inputType": null, "label": "Employee Id", "updatedValue": 100007 },
+        { "columnName": "first_name", "inputType": null, "label": "First Name", "updatedValue": "Marla" },
+        { "columnName": "last_name", "inputType": null, "label": "Last Name", "updatedValue": "Nolen" },
+        { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": 860 },
+        { "columnName": "external_contract_code", "inputType": null, "label": "Contract", "updatedValue": "NoahTest" },
+        { "columnName": "contract_role_id", "inputType": null, "label": null, "updatedValue": 1 },
+        { "columnName": "role", "inputType": "select", "label": "Role", "updatedValue": "Manager" },
+        { "columnName": "is_primary", "inputType": null, "label": "Home Contract", "updatedValue": null },
+        { "columnName": "employee_contract_id", "inputType": null, "label": null, "updatedValue": null },
+        { "columnName": "is_active", "inputType": "checkbox", "label": "Active", "updatedValue": true }
       ]
     ]
-  },
-  { "columnName": "vw_contract_bid_trip_trailers", "inputType": null, "label": "Trailers", "updatedValue": null, "value": [] }
+  }
 ]

@@ -84,7 +84,10 @@ function AdministrationDashboard() {
             path="assignment"
             element={<EmployeeAssignment contractIds={contractIds} employeeDropdowns={employeeDropdowns} />}
           />
-          <Route path=":employeeId" element={<EmployeeInformation employeeDropdowns={employeeDropdowns} />} />
+          <Route
+            path=":employeeId"
+            element={<EmployeeInformation contractIds={contractIds} employeeDropdowns={employeeDropdowns} />}
+          />
         </Route>
         <Route path="contract/*" element={<ContractManagement />} />
         <Route path="facility/*" element={<FacilityManagement />} />

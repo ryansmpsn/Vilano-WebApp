@@ -10,6 +10,7 @@ function EmployeeInformation(props) {
   let navigate = useNavigate();
 
   const [employeeData, setEmployeeData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (employeeId !== "employee") {
@@ -17,19 +18,37 @@ function EmployeeInformation(props) {
     }
     function getEmployee() {
       Send.get("/Employee/" + employeeId).then((res) => {
+        console.log(res);
         setEmployeeData(res.data[0]);
       });
     }
   }, [employeeId]);
 
-  function handleChange(x) {
+  function handleContractSelect(x) {
+    setIsLoading(true);
+  }
+
+  function handleEmployeeSelect(x) {
     navigate("/administration/employee/" + x.value);
   }
   return (
     <>
       <Row className=" mb-4 justify-content-md-center">
         <Col md="4">
-          <Select options={props.employeeDropdowns} onChange={(x) => handleChange(x)} />
+          <Select
+            autofocus
+            options={props.employeeDropdowns}
+            placeholder={"Employee List"}
+            onChange={(x) => handleEmployeeSelect(x)}
+          />
+        </Col>
+        <Col md="4">
+          <Select
+            isMulti
+            options={props.contractIds}
+            placeholder={"Search for contracts by ID"}
+            onChange={(x) => handleContractSelect(x)}
+          />
         </Col>
       </Row>
       {employeeData !== null && <DisplayEmployeeInfo employeeData={employeeData} />}
