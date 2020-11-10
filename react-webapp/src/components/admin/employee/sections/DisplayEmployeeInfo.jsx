@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col, Card, Accordion, Button, Spinner } from "react-bootstrap";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBContainer } from "mdbreact";
+import DisplayContractEmployee from "./DisplayContractEmployees";
 
 function DisplayEmployeeInfo(props) {
   const employeeData = props.employeeData;
@@ -9,6 +10,52 @@ function DisplayEmployeeInfo(props) {
     <Spinner animation="border" variant="primary" className="mr-auto" />
   ) : (
     <MDBContainer fluid>
+      <MDBRow center>
+        <MDBCol>
+          <hr className="mt-5" />
+          <h3 className="m-4 text-center">{employeeData[5].label}</h3>
+        </MDBCol>
+      </MDBRow>
+      <Row>
+        {employeeData[5].value.length > 0 &&
+          employeeData[5].value.map((employee, index) => (
+            <Col md="3" key={"dataCol" + index}>
+              <Card border={employee[7].value === 1 ? "primary" : "light"} className="mb-4">
+                <Card.Header>{employee[4].label + ": " + employee[4].value}</Card.Header>
+                <Card.Body>
+                  {employee.map(
+                    (content, index) =>
+                      content.label !== null && (
+                        <Card.Text key={"employeeContract" + index}>
+                          {content.label}: {content.value}
+                        </Card.Text>
+                      )
+                  )}
+                </Card.Body>
+                <Card.Footer>
+                  <Button className="btn btn-sm float-right" variant="outline-warning">
+                    edit
+                  </Button>
+                </Card.Footer>
+              </Card>
+            </Col>
+          ))}
+        {/* add a table view for over 10 employes attached toa  contract */}
+        <DisplayContractEmployee
+          contracts
+          modified
+          handleRoleSelect={(x, index) => props.handleRoleSelect(x, index)}
+          contractEmployees={props.modifiedContracts}
+          employeeDropdowns={props.employeeDropdowns}
+          setContractEmployees={props.setContractEmployees}
+        />
+      </Row>
+      <Row className="justify-content-center">
+        <Button className="btn btn-sm " variant="outline-warning">
+          save
+        </Button>
+      </Row>
+      <hr className="mt-5" />
       <MDBRow center>
         <MDBCol lg="10" className="mb-4 mt-5">
           <MDBCard narrow className="cascading-admin-card">
@@ -42,37 +89,6 @@ function DisplayEmployeeInfo(props) {
           </MDBCard>
         </MDBCol>
       </MDBRow>
-      <MDBRow center>
-        <MDBCol>
-          <hr className="mt-5" />
-          <h3 className="m-4 text-center">{employeeData[5].label}</h3>
-        </MDBCol>
-      </MDBRow>
-      <Row>
-        {employeeData[5].value.length > 0 &&
-          employeeData[5].value.map((employee, index) => (
-            <Col md="3" key={"dataCol" + index}>
-              <Card border={employee[7].value === 1 ? "primary" : "light"}>
-                <Card.Header>{employee[4].label + ": " + employee[4].value}</Card.Header>
-                <Card.Body>
-                  {employee.map(
-                    (content, index) =>
-                      content.label !== null && (
-                        <Card.Text key={"employeeContract" + index}>
-                          {content.label}: {content.value}
-                        </Card.Text>
-                      )
-                  )}
-                </Card.Body>
-                <Card.Footer>
-                  <Button className="btn btn-sm" variant="outline-danger">
-                    Remove Contract
-                  </Button>
-                </Card.Footer>
-              </Card>
-            </Col>
-          ))}
-      </Row>
       <MDBRow center>
         <MDBCol>
           <hr className="mt-5" />

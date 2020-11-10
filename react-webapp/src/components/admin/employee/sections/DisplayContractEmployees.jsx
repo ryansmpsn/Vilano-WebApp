@@ -23,12 +23,14 @@ function DisplayContractEmployee(props) {
     contractEmployees.map((employee, index) => (
       <Col md="3" key={"dataCol" + index}>
         <Card className="mb-3" border={props.modified ? "warning" : employee[7].value === "true" ? "info" : "light"}>
-          <Card.Header>{employee[1].value + " " + employee[2].value}</Card.Header>
+          <Card.Header>
+            {props.contracts ? `Contract Number: ${employee[4].value} ` : employee[1].value + " " + employee[2].value}
+          </Card.Header>
           <Card.Body style={{ lineHeight: 0.89 }}>
             {employee.map(
               (content, arrayIndex) =>
                 content.label !== null &&
-                ((props.modified && content.inputType === "select" && (
+                ((props.modified && content.label === "Role" && (
                   <Row key={"employeeContent" + arrayIndex}>
                     <Col md="3" className="mt-2 pr-0">
                       <Card.Text>{content.label}:</Card.Text>
@@ -54,7 +56,7 @@ function DisplayContractEmployee(props) {
                         object[index][arrayIndex].value = !content.value;
                         props.setContractEmployees(object);
                       }}
-                      checked={content.value}
+                      checked={content.value === true || content.value === "true"}
                     />
                   )) || (
                     <Card.Text key={"employeeContent" + arrayIndex}>
@@ -64,14 +66,22 @@ function DisplayContractEmployee(props) {
             )}
           </Card.Body>
           <Card.Footer>
-            <Button className="btn btn-sm" variant="outline-info" onClick={() => searchEmployee(employee[0].value)}>
-              view profile
-            </Button>
+            {!props.contracts && (
+              <Button className="btn btn-sm" variant="outline-info" onClick={() => searchEmployee(employee[0].value)}>
+                view profile
+              </Button>
+            )}
+
             {!props.modified ? (
-              <Button className="btn btn-sm float-right" variant="outline-warning" onClick={() => console.log("remove this emp")}>
+              <Button
+                className="btn btn-sm float-right"
+                variant="outline-warning"
+                onClick={() => props.editContract(employee, index)}
+              >
                 edit
               </Button>
             ) : (
+              // TODO add remove Button
               <Button className="btn btn-sm float-right" variant="outline-danger" onClick={() => console.log("remove this emp")}>
                 remove
               </Button>

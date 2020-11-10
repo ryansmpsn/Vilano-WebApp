@@ -6,7 +6,7 @@ import ContractManagement from "./ContractManagement";
 import FacilityManagement from "./FacilityManagement";
 import AllEmployees from "./employee/AllEmployees";
 import EmployeeInformation from "./employee/EmployeeInformation";
-import EmployeeAssignment from "./employee/EmployeeAssignment";
+import EmployeeContracts from "./employee/EmployeeContracts";
 import Send from "../../libs/send";
 import axios from "axios";
 
@@ -82,7 +82,7 @@ function AdministrationDashboard() {
           <Route path="all" element={<AllEmployees />} />
           <Route
             path="assignment"
-            element={<EmployeeAssignment contractIds={contractIds} employeeDropdowns={employeeDropdowns} />}
+            element={<EmployeeContracts contractIds={contractIds} employeeDropdowns={employeeDropdowns} />}
           />
           <Route
             path=":employeeId"
