@@ -8,23 +8,24 @@ import DisplayContractEmployee from "./sections/DisplayContractEmployees";
 function EmployeeContracts(props) {
   const { addToast } = useToasts();
 
-  const [selectedContract, setSelectedContract] = useState(null);
-  const [selectedEmployeees, setSelectedEmployees] = useState(null);
+  const [selectedContract, setSelectedContract] = useState(null); //from select  contract dropdown
+  const [selectedEmployees, setSelectedEmployees] = useState(null); // controls employee select dropdown
   const [contractEmployees, setContractEmployees] = useState(null);
   const [newEmployees, setNewEmployees] = useState(null);
   const [allModifiedEmployees, setAllModifiedEmployees] = useState(null);
-  const [modifiedContractEmployees, setModifiedContractEmployees] = useState(null);
+  const [modifiedEmployees, setModifiedEmployees] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   function handleContractSelect(x) {
-    setSelectedContract(x);
     setIsLoading(true);
+    setSelectedContract(x);
     setSelectedEmployees(null);
+    gatherAllModifiedEmployees();
 
     Send.get("/Employee/ContractEmployee/" + x.value).then((response) => {
-      setIsLoading(false);
       setContractEmployees(response.data.value);
-      setModifiedContractEmployees(null);
+      setModifiedEmployees(null);
+      setIsLoading(false);
     });
   }
 
@@ -35,42 +36,42 @@ function EmployeeContracts(props) {
     x &&
       x.forEach((x) => {
         let singleEmployee = [
-          { columnName: "employee_id", inputType: null, label: "Employee Id", value: x.value },
-          { columnName: "first_name", inputType: null, label: "First Name", value: x.label.split(" ")[0] },
-          { columnName: "last_name", inputType: null, label: "Last Name", value: x.label.split(" ")[1] },
-          { columnName: "contract_id", inputType: null, label: null, value: selectedContract.value },
-          { columnName: "external_contract_code", inputType: null, label: "Contract", value: selectedContract.label },
-          { columnName: "contract_role_id", inputType: null, label: null, value: null },
-          { columnName: "role", inputType: "select", label: "Role", value: null },
-          { columnName: "is_primary", inputType: "checkbox", label: "Home Contract", value: false },
-          { columnName: "employee_contract_id", inputType: null, label: null, value: null },
-          { columnName: "is_active", inputType: null, label: null, value: true },
+          { columnName: "employee_id", inputType: null, label: "Employee Id", updatedValue: x.value },
+          { columnName: "first_name", inputType: null, label: "First Name", updatedValue: x.label.split(" ")[0] },
+          { columnName: "last_name", inputType: null, label: "Last Name", updatedValue: x.label.split(" ")[1] },
+          { columnName: "contract_id", inputType: null, label: null, updatedValue: selectedContract.value },
+          { columnName: "external_contract_code", inputType: null, label: "Contract", updatedValue: selectedContract.label },
+          { columnName: "contract_role_id", inputType: null, label: null, updatedValue: null },
+          { columnName: "role", inputType: "select", label: "Role", updatedValue: null },
+          { columnName: "is_primary", inputType: "checkbox", label: "Home Contract", updatedValue: false },
+          { columnName: "employee_contract_id", inputType: null, label: null, updatedValue: null },
+          { columnName: "is_active", inputType: null, label: null, updatedValue: true },
         ];
 
         newEmployeeGroup.push(singleEmployee);
       });
     setNewEmployees(newEmployeeGroup);
-    gatherAllModifiedEmployees(newEmployeeGroup, modifiedContractEmployees);
+    gatherAllModifiedEmployees(newEmployeeGroup, modifiedEmployees);
   }
 
   function handleRoleSelect(x, index) {
     let rollChange = allModifiedEmployees[index];
-    rollChange[5].value = x.value;
-    rollChange[6].value = x.label;
+    rollChange[5].updatedValue = x.value;
+    rollChange[6].updatedValue = x.label;
   }
 
   function saveEmployeeToContract() {
-    gatherAllModifiedEmployees(newEmployees, modifiedContractEmployees);
-    let contractEmployees = [{ columnName: "employee_contracts", value: allModifiedEmployees }];
-    Send.post("/Employee/ContractEmployee", allModifiedEmployees).then((result) => {
-      console.log(result);
-    });
+    gatherAllModifiedEmployees(newEmployees, modifiedEmployees);
+    let contractEmployees = [{ columnName: "employee_contracts", updatedValue: allModifiedEmployees }];
+    // Send.post("/Employee/ContractEmployee", allModifiedEmployees).then((result) => {
+    //   console.log(result);
+    // });
     addToast(`Employees Saved to Contract: ${selectedContract.label}.`, {
       appearance: "success",
       autoDismiss: true,
       autoDismissTimeout: 3000,
     });
-    setSelectedEmployees(null);
+    // setSelectedEmployees(null);
     console.log(JSON.stringify(contractEmployees));
   }
 
@@ -79,10 +80,10 @@ function EmployeeContracts(props) {
     newContractEmployees.splice(index, 1);
     setContractEmployees(newContractEmployees);
 
-    let editSelection = modifiedContractEmployees;
-    editSelection ? (editSelection = modifiedContractEmployees) : (editSelection = []);
+    let editSelection = modifiedEmployees;
+    editSelection ? (editSelection = modifiedEmployees) : (editSelection = []);
     editSelection.push(contract);
-    setModifiedContractEmployees(editSelection);
+    setModifiedEmployees(editSelection);
     gatherAllModifiedEmployees(editSelection, newEmployees);
   }
 
@@ -114,7 +115,7 @@ function EmployeeContracts(props) {
         <Col md="4">
           <Select
             isMulti
-            value={selectedEmployeees}
+            value={selectedEmployees}
             options={props.employeeDropdowns[0].options}
             placeholder={"Add Additional Employees"}
             onChange={(x) => handleEmployeeSelect(x)}
@@ -142,10 +143,10 @@ function EmployeeContracts(props) {
               editContract={editContract}
             />
             <DisplayContractEmployee
-              modified={true}
+              modified
               employeeDropdowns={props.employeeDropdowns}
               contractEmployees={allModifiedEmployees}
-              setContractEmployees={setModifiedContractEmployees}
+              setContractEmployees={setModifiedEmployees}
               handleRoleSelect={(x, index) => handleRoleSelect(x, index)}
             />
           </>

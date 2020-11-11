@@ -22,9 +22,11 @@ function DisplayContractEmployee(props) {
     contractEmployees !== null &&
     contractEmployees.map((employee, index) => (
       <Col md="3" key={"dataCol" + index}>
-        <Card className="mb-3" border={props.modified ? "warning" : employee[7].value === "true" ? "info" : "light"}>
+        <Card className="mb-3" border={props.modified ? "warning" : employee[7].updatedValue === "true" ? "info" : "light"}>
           <Card.Header>
-            {props.contracts ? `Contract Number: ${employee[4].value} ` : employee[1].value + " " + employee[2].value}
+            {props.contracts
+              ? `Contract Number: ${employee[4].updatedValue} `
+              : employee[1].updatedValue + " " + employee[2].updatedValue}
           </Card.Header>
           <Card.Body style={{ lineHeight: 0.89 }}>
             {employee.map(
@@ -53,26 +55,26 @@ function DisplayContractEmployee(props) {
                       type="checkbox"
                       onChange={() => {
                         var object = [...contractEmployees];
-                        object[index][arrayIndex].value = !content.value;
+                        object[index][arrayIndex].updatedValue = !content.updatedValue;
                         props.setContractEmployees(object);
                       }}
-                      checked={content.value === true || content.value === "true"}
+                      checked={content.updatedValue === true || content.updatedValue === "true"}
                     />
                   )) || (
                     <Card.Text key={"employeeContent" + arrayIndex}>
-                      {content.label}: {content.value}
+                      {content.label}: {content.updatedValue}
                     </Card.Text>
                   ))
             )}
           </Card.Body>
           <Card.Footer>
             {!props.contracts && (
-              <Button className="btn btn-sm" variant="outline-info" onClick={() => searchEmployee(employee[0].value)}>
+              <Button className="btn btn-sm" variant="outline-info" onClick={() => searchEmployee(employee[0].updatedValue)}>
                 view profile
               </Button>
             )}
 
-            {!props.modified ? (
+            {!props.modified && (
               <Button
                 className="btn btn-sm float-right"
                 variant="outline-warning"
@@ -80,11 +82,11 @@ function DisplayContractEmployee(props) {
               >
                 edit
               </Button>
-            ) : (
-              // TODO add remove Button
-              <Button className="btn btn-sm float-right" variant="outline-danger" onClick={() => console.log("remove this emp")}>
-                remove
-              </Button>
+              // ) : (
+              // TODO add remove Button to set active to false
+              // <Button className="btn btn-sm float-right" variant="outline-danger" onClick={() => console.log("remove this emp")}>
+              //   remove
+              // </Button>
             )}
           </Card.Footer>
         </Card>

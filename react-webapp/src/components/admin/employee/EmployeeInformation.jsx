@@ -12,8 +12,11 @@ function EmployeeInformation(props) {
   let navigate = useNavigate();
 
   const [employeeData, setEmployeeData] = useState(null);
+  const [selectedContracts, setSelectedContracts] = useState(null);
+  const [employeeContracts, setEmployeeContracts] = useState(null);
+  const [newContracts, setNewContracts] = useState(null);
+  const [allModifiedContracts, setAllModifiedContracts] = useState(null);
   const [modifiedContracts, setModifiedContracts] = useState(null);
-
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -21,33 +24,40 @@ function EmployeeInformation(props) {
       getEmployee();
     }
     function getEmployee() {
+      setIsLoading(true);
+      gatherAllModifiedContracts();
+      setSelectedContracts(null);
       Send.get("/Employee/" + employeeId).then((res) => {
-        console.log(res.data[0]);
+        setEmployeeContracts(res.data[0][5].value);
         setEmployeeData(res.data[0]);
+        setModifiedContracts(null);
+        setIsLoading(false);
       });
     }
   }, [employeeId]);
 
   function handleContractSelect(x) {
+    setSelectedContracts(x);
     let newContractGroup = [];
     x &&
       x.forEach((x) => {
         let singleContract = [
-          { columnName: "employee_id", inputType: null, label: "Employee Id", value: employeeId },
-          { columnName: "first_name", inputType: null, label: "First Name", value: employeeData[0].value[0][6].value },
-          { columnName: "last_name", inputType: null, label: "Last Name", value: employeeData[0].value[0][7].value },
-          { columnName: "contract_id", inputType: null, label: null, value: x.value },
-          { columnName: "external_contract_code", inputType: null, label: "Contract", value: x.label },
-          { columnName: "contract_role_id", inputType: null, label: null, value: null },
-          { columnName: "role", inputType: "select", label: "Role", value: null },
-          { columnName: "is_primary", inputType: "checkbox", label: "Home Contract", value: false },
-          { columnName: "employee_contract_id", inputType: null, label: null, value: null },
-          { columnName: "is_active", inputType: "checkbox", label: "Active", value: true },
+          { columnName: "employee_id", inputType: null, label: "Employee Id", updatedValue: employeeId },
+          { columnName: "first_name", inputType: null, label: "First Name", updatedValue: employeeData[0].value[0][6].value },
+          { columnName: "last_name", inputType: null, label: "Last Name", updatedValue: employeeData[0].value[0][7].value },
+          { columnName: "contract_id", inputType: null, label: null, updatedValue: x.value },
+          { columnName: "external_contract_code", inputType: null, label: "Contract", updatedValue: x.label },
+          { columnName: "contract_role_id", inputType: null, label: null, updatedValue: null },
+          { columnName: "role", inputType: "select", label: "Role", updatedValue: null },
+          { columnName: "is_primary", inputType: "checkbox", label: "Home Contract", updatedValue: false },
+          { columnName: "employee_contract_id", inputType: null, label: null, updatedValue: null },
+          { columnName: "is_active", inputType: null, label: null, updatedValue: true },
         ];
 
         newContractGroup.push(singleContract);
       });
-    setModifiedContracts(newContractGroup);
+    setNewContracts(newContractGroup);
+    gatherAllModifiedContracts(newContractGroup, modifiedContracts);
   }
 
   function handleEmployeeSelect(x) {
@@ -60,11 +70,12 @@ function EmployeeInformation(props) {
     let rollChange = modifiedContracts[index];
     rollChange[5].value = x.value;
     rollChange[6].value = x.label;
-    console.log(rollChange[5]);
   }
 
   function saveContractToEmployee() {
-    let contractEmployees = [{ columnName: "employee_contracts", value: modifiedContracts }];
+    gatherAllModifiedContracts(newContracts, modifiedContracts);
+
+    let contractEmployees = [{ columnName: "employee_contracts", updatedValue: allModifiedContracts }];
     // Send.post("/Employee/ContractEmployee/", modifiedContracts).then((result) => {});
     addToast(`Contracts Saved to ${employeeId}'s Profile.`, {
       appearance: "success",
@@ -72,6 +83,33 @@ function EmployeeInformation(props) {
       autoDismissTimeout: 3000,
     });
     console.log(contractEmployees);
+  }
+
+  function editContract(contract, index) {
+    let newContractEmployees = [...employeeContracts];
+    newContractEmployees.splice(index, 1);
+    setEmployeeContracts(newContractEmployees);
+
+    let editSelection = modifiedContracts;
+    editSelection ? (editSelection = modifiedContracts) : (editSelection = []);
+    editSelection.push(contract);
+    setModifiedContracts(editSelection);
+    gatherAllModifiedContracts(editSelection, newContracts);
+  }
+
+  function gatherAllModifiedContracts(x, y) {
+    let modifiedContracts;
+    if (x && y) {
+      modifiedContracts = [...x, ...y];
+    } else if (x) {
+      modifiedContracts = [...x];
+    } else if (y) {
+      modifiedContracts = [...y];
+    } else {
+      modifiedContracts = [];
+    }
+
+    setAllModifiedContracts(modifiedContracts);
   }
   return (
     <>
@@ -87,18 +125,24 @@ function EmployeeInformation(props) {
         <Col md="4">
           <Select
             isMulti
+            value={selectedContracts}
             options={props.contractIds}
-            placeholder={"Search for contracts by ID"}
+            placeholder={"Add Additional Contracts"}
             onChange={(x) => handleContractSelect(x)}
+            isDisabled={isLoading || employeeData === null}
           />
         </Col>
       </Row>
       <DisplayEmployeeInfo
+        isLoading={isLoading}
         employeeData={employeeData}
+        allModifiedContracts={allModifiedContracts}
         employeeDropdowns={props.employeeDropdowns}
-        modifiedContracts={modifiedContracts}
+        employeeContracts={employeeContracts}
+        editContract={editContract}
         setContractEmployees={setModifiedContracts}
         handleRoleSelect={(x, index) => handleRoleSelect(x, index)}
+        saveContractToEmployee={saveContractToEmployee}
       />
     </>
   );
