@@ -116,7 +116,7 @@ function ContractCards(props) {
               View Rate Information
             </Link>
           )}
-          {props.type === "Contract" && sessionStorage.getItem("/Bid") >= 3 && (
+          {props.type === "Contract" && sessionStorage.getItem("/bid") >= 3 && (
             <Button className="float-right btn-outline-warning" onClick={openBidModal}>
               Create Bid
             </Button>
@@ -153,7 +153,7 @@ function ContractCards(props) {
               externalContractCode={contract[6].updatedValue}
               bidOptions={props.bidOptions}
             />
-
+            {console.log(props.bidFinalOptions)}
             <FinalizeBidModal
               show={showFinalModal}
               closeModal={closeFinalModal}

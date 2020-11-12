@@ -16,7 +16,7 @@ function BidData(props) {
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [bidOptions, setBidOptions] = useState([]);
-  const [bidFinalOptions, setBidFinalOptions] = useState([]);
+  const [bidFinalOptions, setBidFinalOptions] = useState(null);
 
   function search() {
     setTableView(false);
@@ -35,9 +35,11 @@ function BidData(props) {
     Send.get("/Bid/Dropdowns/BidNames/All").then((response) => {
       setBidOptions(response.data);
     });
-    Send.get("/Bid/Dropdowns/Bid/Final").then((response) => {
-      setBidFinalOptions(response.data);
-    });
+    if (sessionStorage.getItem("/bid/final") >= 3) {
+      Send.get("/Bid/Dropdowns/Bid/Final").then((response) => {
+        setBidFinalOptions(response.data);
+      });
+    }
   }
 
   function show_all() {

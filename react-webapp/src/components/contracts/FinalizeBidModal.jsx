@@ -81,7 +81,7 @@ function FinalizeBidModal(props) {
             <Form.Group as={Col} md="8">
               <FormLabel>Bid Status: </FormLabel>
               <Select
-                options={props.bidOptions[0].options}
+                options={props.bidOptions && props.bidOptions[0].options}
                 onChange={(x) => {
                   x.value === 17 && setToggler(1);
                   x.value === 20 && setToggler(0);
