@@ -76,7 +76,9 @@ function EmployeeInformation(props) {
     gatherAllModifiedContracts(newContracts, modifiedContracts);
 
     let contractEmployees = [{ columnName: "employee_contracts", updatedValue: allModifiedContracts }];
-    // Send.post("/Employee/ContractEmployee/", modifiedContracts).then((result) => {});
+    Send.post("/Employee/Contract/", modifiedContracts).then((result) => {
+      console.log(result);
+    });
     addToast(`Contracts Saved to ${employeeId}'s Profile.`, {
       appearance: "success",
       autoDismiss: true,

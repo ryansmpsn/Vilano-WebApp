@@ -57,7 +57,6 @@ function FinalizeBidModal(props) {
     if (toggler === 1) {
       finalBid = awardedFinalBid;
     } else finalBid = deniedFinalBid;
-    console.log(JSON.stringify(finalBid));
 
     Send.post("/Bid/BidFinal", finalBid)
       .then((res) => {
@@ -75,7 +74,6 @@ function FinalizeBidModal(props) {
   }
   return (
     <Modal show={props.show} onHide={props.closeModal} centered>
-      {console.log(date)}
       <Modal.Header closeButton> Finalize Bid: {props.contract[10].value}</Modal.Header>
       <Modal.Body>
         <Form>

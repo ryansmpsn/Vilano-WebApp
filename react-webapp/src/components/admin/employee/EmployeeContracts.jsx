@@ -63,9 +63,9 @@ function EmployeeContracts(props) {
   function saveEmployeeToContract() {
     gatherAllModifiedEmployees(newEmployees, modifiedEmployees);
     let contractEmployees = [{ columnName: "employee_contracts", updatedValue: allModifiedEmployees }];
-    // Send.post("/Employee/ContractEmployee", allModifiedEmployees).then((result) => {
-    //   console.log(result);
-    // });
+    Send.post("/Employee/ContractEmployee", allModifiedEmployees).then((result) => {
+      console.log(result);
+    });
     addToast(`Employees Saved to Contract: ${selectedContract.label}.`, {
       appearance: "success",
       autoDismiss: true,

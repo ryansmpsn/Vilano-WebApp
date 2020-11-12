@@ -143,7 +143,6 @@ function ContractCards(props) {
             return props.submitAction(editContent);
           }}
         />
-        {console.log(props)}
         {sessionStorage.getItem("/bid") >= 3 && props.type === "Bid" && (
           <>
             <CreateBidModal

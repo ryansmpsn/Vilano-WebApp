@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Card, Accordion, Button, Spinner } from "react-bootstrap";
+import { Row, Card, Accordion, Button, Spinner } from "react-bootstrap";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBContainer } from "mdbreact";
 import DisplayContractEmployee from "./DisplayContractEmployees";
 
@@ -18,29 +18,6 @@ function DisplayEmployeeInfo(props) {
           </MDBCol>
         </MDBRow>
         <Row>
-          {/* {employeeData[5].value.length > 0 &&
-            employeeData[5].value.map((employee, index) => (
-              <Col md="3" key={"dataCol" + index}>
-                <Card border={employee[7].value === 1 ? "primary" : "light"} className="mb-4">
-                  <Card.Header>{employee[4].label + ": " + employee[4].value}</Card.Header>
-                  <Card.Body>
-                    {employee.map(
-                      (content, index) =>
-                        content.label !== null && (
-                          <Card.Text key={"employeeContract" + index}>
-                            {content.label}: {content.value}
-                          </Card.Text>
-                        )
-                    )}
-                  </Card.Body>
-                  <Card.Footer>
-                    <Button className="btn btn-sm float-right" variant="outline-warning">
-                      edit
-                    </Button>
-                  </Card.Footer>
-                </Card>
-              </Col>
-            ))} */}
           {/* add a table view for over 10 employes attached to a  contract */}
           <DisplayContractEmployee
             contracts
