@@ -65,16 +65,16 @@ function EmployeeContracts(props) {
   function saveEmployeeToContract() {
     gatherAllModifiedEmployees(newEmployees, modifiedEmployees);
     let contractEmployees = [{ columnName: "employee_contracts", updatedValue: allModifiedEmployees }];
-    Send.post("/Employee/ContractEmployee", allModifiedEmployees).then((result) => {
-      console.log(result);
-    });
+    // Send.post("/Employee/ContractEmployee", allModifiedEmployees).then((result) => {
+    //   console.log(result);
+    // });
     addToast(`Employees Saved to Contract: ${selectedContract.label}.`, {
       appearance: "success",
       autoDismiss: true,
       autoDismissTimeout: 3000,
     });
-    // setSelectedEmployees(null);
-    console.log(JSON.stringify(contractEmployees));
+    setSelectedEmployees(null);
+    console.log(contractEmployees);
   }
 
   function editContract(contract, index) {
@@ -103,6 +103,7 @@ function EmployeeContracts(props) {
 
     setAllModifiedEmployees(modifiedEmployees);
   }
+
   return (
     <>
       <Row className="mb-4 justify-content-md-center">
@@ -138,13 +139,14 @@ function EmployeeContracts(props) {
           <Col>
             <Spinner animation="border" variant="primary" />
           </Col>
-        ) : contractEmployees && contractEmployees.length >= 5 ? (
+        ) : contractEmployees && contractEmployees.length + allModifiedEmployees.length >= 5 ? (
           <ContractTable
-            employeeDropdowns={props.employeeDropdowns}
-            setContractEmployees={setModifiedEmployees}
+            editContract={editContract}
+            contractData={contractEmployees}
             handleRoleSelect={handleRoleSelect}
             modifiedContractData={allModifiedEmployees}
-            contractData={contractEmployees}
+            employeeDropdowns={props.employeeDropdowns}
+            setContractEmployees={setAllModifiedEmployees}
           />
         ) : (
           <>
