@@ -11,8 +11,8 @@ import Send from "../../libs/send";
 import axios from "axios";
 
 function AdministrationDashboard() {
-  const [employeeDropdowns, setEmployeeDropdowns] = useState([]);
-  const [contractIds, setContractIds] = useState([]);
+  const [employeeDropdowns, setEmployeeDropdowns] = useState(null);
+  const [contractIds, setContractIds] = useState(null);
 
   useEffect(() => {
     const onLoad = async () => {

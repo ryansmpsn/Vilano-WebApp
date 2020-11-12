@@ -4,7 +4,7 @@ import { MDBDataTable } from "mdbreact";
 import EditContractTable from "./EditContractTable";
 
 function ContractTable(props) {
-  let contractData = props.contractData.map((c, index) => c);
+  let contractData = props.contractData;
   let columnData = contractData[0].filter(labelFilter).map((c, index) => ({ label: c.label, field: c.columnName, sort: "asc" }));
   if (sessionStorage.getItem("/contract/trips") >= 3) {
     columnData = [...columnData, { label: "View Trips", field: "viewTrips" }];

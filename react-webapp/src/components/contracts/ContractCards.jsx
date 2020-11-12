@@ -158,7 +158,7 @@ function ContractCards(props) {
               show={showFinalModal}
               closeModal={closeFinalModal}
               appProps={props.appProps}
-              bidOptions={props.bidOptions}
+              bidOptions={props.bidFinalOptions}
               contract={contract}
             />
           </>

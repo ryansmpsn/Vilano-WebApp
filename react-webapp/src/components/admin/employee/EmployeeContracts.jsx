@@ -4,6 +4,7 @@ import Select from "react-select";
 import Send from "../../../libs/send";
 import { useToasts } from "react-toast-notifications";
 import DisplayContractEmployee from "./sections/DisplayContractEmployees";
+import ContractTable from "./sections/ContractTable";
 
 function EmployeeContracts(props) {
   const { addToast } = useToasts();
@@ -30,6 +31,7 @@ function EmployeeContracts(props) {
   }
 
   function handleEmployeeSelect(x) {
+    console.log(x);
     setSelectedEmployees(x);
     let newEmployeeGroup = [];
 
@@ -110,13 +112,15 @@ function EmployeeContracts(props) {
             options={props.contractIds}
             placeholder={"Search for contracts by ID"}
             onChange={(x) => handleContractSelect(x)}
+            isDisabled={props.contractIds === null}
+            isLoading={props.contractIds === null}
           />
         </Col>
         <Col md="4">
           <Select
             isMulti
             value={selectedEmployees}
-            options={props.employeeDropdowns[0].options}
+            options={props.employeeDropdowns && props.employeeDropdowns[0].options}
             placeholder={"Add Additional Employees"}
             onChange={(x) => handleEmployeeSelect(x)}
             isDisabled={contractEmployees === null}
@@ -134,6 +138,14 @@ function EmployeeContracts(props) {
           <Col>
             <Spinner animation="border" variant="primary" />
           </Col>
+        ) : contractEmployees && contractEmployees.length >= 5 ? (
+          <ContractTable
+            employeeDropdowns={props.employeeDropdowns}
+            setContractEmployees={setModifiedEmployees}
+            handleRoleSelect={handleRoleSelect}
+            modifiedContractData={allModifiedEmployees}
+            contractData={contractEmployees}
+          />
         ) : (
           <>
             <DisplayContractEmployee

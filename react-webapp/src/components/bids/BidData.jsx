@@ -16,6 +16,7 @@ function BidData(props) {
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [bidOptions, setBidOptions] = useState([]);
+  const [bidFinalOptions, setBidFinalOptions] = useState([]);
 
   function search() {
     setTableView(false);
@@ -31,8 +32,11 @@ function BidData(props) {
       setContentInputRestrictions(res.data);
       setIsLoading(false);
     });
-    Send.get("/Bid/Dropdowns/Bid/Final").then((response) => {
+    Send.get("/Bid/Dropdowns/BidNames/All").then((response) => {
       setBidOptions(response.data);
+    });
+    Send.get("/Bid/Dropdowns/Bid/Final").then((response) => {
+      setBidFinalOptions(response.data);
     });
   }
 
@@ -173,6 +177,7 @@ function BidData(props) {
                       }}
                       accessLevel={props.accessLevel}
                       bidOptions={bidOptions}
+                      bidFinalOptions={bidFinalOptions}
                     />
                   ))}
               </Row>
