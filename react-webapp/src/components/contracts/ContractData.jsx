@@ -31,7 +31,7 @@ function ContractData(props) {
       setContentInputRestrictions(res.data);
       setIsLoading(false);
     });
-    if (sessionStorage.getItem("/Bid") >= 3) {
+    if (sessionStorage.getItem("/bid") >= 3) {
       Send.get("/Bid/Dropdowns/BidNames/All").then((response) => {
         setBidOptions(response.data);
       });
@@ -161,6 +161,7 @@ function ContractData(props) {
             <div className="contract">
               <Row key="topRow" className="show-grid">
                 {contractData !== [] &&
+                  bidOptions !== [] &&
                   contractData.map((c, index) => (
                     <ContractCards
                       key={index + "contract"}

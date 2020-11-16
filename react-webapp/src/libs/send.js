@@ -14,9 +14,9 @@ const Send = new (class send extends React.Component {
       IDSession: "None",
     };
     if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-      this.state.URL = this.state.productionURL;
+      this.state.URL = this.state.testURL;
     } else {
-      this.state.URL = this.state.productionURL;
+      this.state.URL = this.state.testURL;
     }
     axios.defaults.headers.common["our_session"] = "";
   }
