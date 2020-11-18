@@ -31,7 +31,6 @@ function EmployeeContracts(props) {
   }
 
   function handleEmployeeSelect(x) {
-    console.log(x);
     setSelectedEmployees(x);
     let newEmployeeGroup = [];
 
@@ -63,18 +62,24 @@ function EmployeeContracts(props) {
   }
 
   function saveEmployeeToContract() {
+    setIsLoading(true);
     gatherAllModifiedEmployees(newEmployees, modifiedEmployees);
-    let contractEmployees = [{ columnName: "employee_contracts", updatedValue: allModifiedEmployees }];
-    Send.post("/Employee/ContractEmployee", allModifiedEmployees).then((result) => {
-      console.log(result);
-    });
-    addToast(`Employees Saved to Contract: ${selectedContract.label}.`, {
-      appearance: "success",
-      autoDismiss: true,
-      autoDismissTimeout: 3000,
-    });
-    setSelectedEmployees(null);
-    console.log(contractEmployees);
+    let contractEmployees = [{ columnName: "employee_contracts", value: allModifiedEmployees }];
+    console.log(JSON.stringify(contractEmployees));
+    // Send.post("/Employee/ContractEmployee", contractEmployees).then((response) => {
+    //   console.log(response);
+    //   setContractEmployees(response.data.value);
+    //   setModifiedEmployees(null);
+    //   setSelectedEmployees(null);
+    //   gatherAllModifiedEmployees();
+    //   setIsLoading(false);
+    // });
+    // addToast(`Employees Saved to Contract: ${selectedContract.label}.`, {
+    //   appearance: "success",
+    //   autoDismiss: true,
+    //   autoDismissTimeout: 3000,
+    // });
+    // console.log(JSON.stringify(contractEmployees));
   }
 
   function editContract(contract, index) {
@@ -139,7 +144,7 @@ function EmployeeContracts(props) {
           <Col>
             <Spinner animation="border" variant="primary" />
           </Col>
-        ) : contractEmployees && contractEmployees.length + allModifiedEmployees.length >= 5 ? (
+        ) : contractEmployees && contractEmployees.length + allModifiedEmployees.length >= 10 ? (
           <ContractTable
             editContract={editContract}
             contractData={contractEmployees}

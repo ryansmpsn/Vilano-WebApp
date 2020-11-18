@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Card, Accordion, Button, Spinner } from "react-bootstrap";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBContainer } from "mdbreact";
 import DisplayContractEmployee from "./DisplayContractEmployees";
+import ContractTable from "./ContractTable";
 
 function DisplayEmployeeInfo(props) {
   const employeeData = props.employeeData;
@@ -17,23 +18,35 @@ function DisplayEmployeeInfo(props) {
             <h3 className="m-4 text-center">{employeeData[5].label}</h3>
           </MDBCol>
         </MDBRow>
-        <Row>
-          {/* add a table view for over 10 employes attached to a  contract */}
-          <DisplayContractEmployee
-            contracts
-            modified={false}
-            contractEmployees={props.employeeContracts}
-            employeeDropdowns={props.employeeDropdowns}
-            editContract={props.editContract}
-          />
-          <DisplayContractEmployee
-            contracts
-            modified
-            handleRoleSelect={(x, index) => props.handleRoleSelect(x, index)}
-            contractEmployees={props.allModifiedContracts}
-            employeeDropdowns={props.employeeDropdowns}
-            setContractEmployees={props.setModifiedContracts}
-          />
+        <Row className="justify-content-md-center">
+          {props.employeeContracts.length + props.allModifiedContracts.length >= 4 ? (
+            <ContractTable
+              editContract={props.editContract}
+              contractData={props.employeeContracts}
+              handleRoleSelect={(x, index) => props.handleRoleSelect(x, index)}
+              modifiedContractData={props.allModifiedContracts}
+              employeeDropdowns={props.employeeDropdowns}
+              setContractEmployees={props.setAllModifiedContracts}
+            />
+          ) : (
+            <>
+              <DisplayContractEmployee
+                contracts
+                modified={false}
+                contractEmployees={props.employeeContracts}
+                employeeDropdowns={props.employeeDropdowns}
+                editContract={props.editContract}
+              />
+              <DisplayContractEmployee
+                contracts
+                modified
+                handleRoleSelect={(x, index) => props.handleRoleSelect(x, index)}
+                contractEmployees={props.allModifiedContracts}
+                employeeDropdowns={props.employeeDropdowns}
+                setContractEmployees={props.setModifiedContracts}
+              />
+            </>
+          )}
         </Row>
         <Row className="justify-content-center">
           <Button className="btn btn-sm " variant="outline-warning" onClick={() => props.saveContractToEmployee()}>

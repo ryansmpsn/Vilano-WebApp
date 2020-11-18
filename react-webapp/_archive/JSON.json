@@ -1,42 +1,44 @@
 [
   {
     "columnName": "employee_contracts",
-    "updatedValue": [
+    "value": [
       [
-        { "columnName": "employee_id", "inputType": null, "label": "Employee Id", "updatedValue": 100003 },
-        { "columnName": "first_name", "inputType": null, "label": "First Name", "updatedValue": "Craig" },
-        { "columnName": "last_name", "inputType": null, "label": "Last Name", "updatedValue": "Gregory" },
-        { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": 860 },
-        { "columnName": "external_contract_code", "inputType": null, "label": "Contract", "updatedValue": "NoahTest" },
-        { "columnName": "contract_role_id", "inputType": null, "label": null, "updatedValue": null },
-        { "columnName": "role", "inputType": "select", "label": "Role", "updatedValue": null },
-        { "columnName": "is_primary", "inputType": null, "label": "Home Contract", "updatedValue": null },
-        { "columnName": "employee_contract_id", "inputType": null, "label": null, "updatedValue": null },
-        { "columnName": "is_active", "inputType": "checkbox", "label": "Active", "updatedValue": true }
-      ],
-      [
-        { "columnName": "employee_id", "inputType": null, "label": "Employee Id", "updatedValue": 100005 },
-        { "columnName": "first_name", "inputType": null, "label": "First Name", "updatedValue": "Jeremy" },
-        { "columnName": "last_name", "inputType": null, "label": "Last Name", "updatedValue": "Collins" },
-        { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": 860 },
-        { "columnName": "external_contract_code", "inputType": null, "label": "Contract", "updatedValue": "NoahTest" },
-        { "columnName": "contract_role_id", "inputType": null, "label": null, "updatedValue": 2 },
-        { "columnName": "role", "inputType": "select", "label": "Role", "updatedValue": "Lead Driver" },
-        { "columnName": "is_primary", "inputType": null, "label": "Home Contract", "updatedValue": null },
-        { "columnName": "employee_contract_id", "inputType": null, "label": null, "updatedValue": null },
-        { "columnName": "is_active", "inputType": "checkbox", "label": "Active", "updatedValue": true }
-      ],
-      [
-        { "columnName": "employee_id", "inputType": null, "label": "Employee Id", "updatedValue": 100007 },
-        { "columnName": "first_name", "inputType": null, "label": "First Name", "updatedValue": "Marla" },
-        { "columnName": "last_name", "inputType": null, "label": "Last Name", "updatedValue": "Nolen" },
-        { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": 860 },
-        { "columnName": "external_contract_code", "inputType": null, "label": "Contract", "updatedValue": "NoahTest" },
-        { "columnName": "contract_role_id", "inputType": null, "label": null, "updatedValue": 1 },
-        { "columnName": "role", "inputType": "select", "label": "Role", "updatedValue": "Manager" },
-        { "columnName": "is_primary", "inputType": null, "label": "Home Contract", "updatedValue": null },
-        { "columnName": "employee_contract_id", "inputType": null, "label": null, "updatedValue": null },
-        { "columnName": "is_active", "inputType": "checkbox", "label": "Active", "updatedValue": true }
+        { "columnName": "employee_id", "inputType": null, "label": "Employee ID", "updatedValue": 100007, "value": 100007 },
+        { "columnName": "first_name", "inputType": null, "label": "First Name", "updatedValue": "Marla", "value": "Marla" },
+        { "columnName": "last_name", "inputType": null, "label": "Last Name", "updatedValue": "Nolen", "value": "Nolen" },
+        { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": 860, "value": 860 },
+        {
+          "columnName": "external_contract_code",
+          "inputType": "select",
+          "label": "Contract",
+          "updatedValue": "NoahTest",
+          "value": "NoahTest"
+        },
+        { "columnName": "contract_role_id", "inputType": null, "label": null, "updatedValue": 5, "value": 3 },
+        { "columnName": "role", "inputType": "select", "label": "Role", "updatedValue": "Regional Manager", "value": "Driver" },
+        {
+          "columnName": "is_primary",
+          "inputType": "checkbox",
+          "label": "Home Contract",
+          "updatedValue": "false",
+          "value": "false"
+        },
+        { "columnName": "employee_contract_id", "inputType": null, "label": null, "updatedValue": 13, "value": 13 },
+        { "columnName": "is_active", "inputType": null, "label": null, "updatedValue": "true", "value": "true" },
+        {
+          "columnName": "modified_timestamp",
+          "inputType": null,
+          "label": "Last Modified",
+          "updatedValue": "2020-11-05 14:42:52",
+          "value": "2020-11-05 14:42:52"
+        },
+        {
+          "columnName": "modified_by_employee_name",
+          "inputType": null,
+          "label": "Modified By",
+          "updatedValue": "System Account",
+          "value": "System Account"
+        }
       ]
     ]
   }
