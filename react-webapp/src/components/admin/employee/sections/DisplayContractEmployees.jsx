@@ -18,11 +18,24 @@ function DisplayContractEmployee(props) {
   function searchEmployee(x) {
     navigate("/administration/employee/" + x);
   }
+
+  function updateBorder(x) {
+    if (x[9].updatedValue === false) {
+      return "danger";
+    }
+    if (props.modified) {
+      return "warning";
+    }
+
+    if (x[7].updatedValue === "true") {
+      return "info";
+    } else return "light";
+  }
   return (
     contractEmployees !== null &&
     contractEmployees.map((employee, index) => (
       <Col md="3" key={"dataCol" + index}>
-        <Card className="mb-3" border={props.modified ? "warning" : employee[7].updatedValue === "true" ? "info" : "light"}>
+        <Card className="mb-3" border={updateBorder(employee)}>
           <Card.Header>
             {props.contracts
               ? `Contract Number: ${employee[4].updatedValue} `
@@ -74,7 +87,7 @@ function DisplayContractEmployee(props) {
               </Button>
             )}
 
-            {!props.modified && (
+            {!props.modified ? (
               <Button
                 className="btn btn-sm float-right"
                 variant="outline-warning"
@@ -82,11 +95,15 @@ function DisplayContractEmployee(props) {
               >
                 edit
               </Button>
-              // ) : (
+            ) : (
               // TODO add remove Button to set active to false
-              // <Button className="btn btn-sm float-right" variant="outline-danger" onClick={() => console.log("remove this emp")}>
-              //   remove
-              // </Button>
+              <Button
+                className="btn btn-sm float-right"
+                variant="outline-danger"
+                onClick={() => props.removeEmployee(employee, index)}
+              >
+                remove
+              </Button>
             )}
           </Card.Footer>
         </Card>

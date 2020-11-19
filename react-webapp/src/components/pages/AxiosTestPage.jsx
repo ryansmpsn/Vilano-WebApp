@@ -47,7 +47,34 @@ function AxiosTestPage() {
     }
   }
   function onPostRequest() {
-    console.log(fields);
+    if (fields.endpoint !== "") {
+      Send.post(fields.endpoint, JSON.parse(fields.textData))
+        .then((res) => {
+          console.log(res);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          addToast(err + ". Check the console for more information.", {
+            appearance: "error",
+            autoDismiss: true,
+          });
+          setIsLoading(false);
+
+          console.log(err);
+        });
+
+      addToast("Endpoint Triggered. Check the console for the result.", {
+        appearance: "info",
+        autoDismiss: true,
+      });
+    } else {
+      setIsLoading(false);
+
+      addToast("Please enter an endpoint before triggering.", {
+        appearance: "warning",
+        autoDismiss: true,
+      });
+    }
   }
 
   function onFileChange(e) {
@@ -79,9 +106,9 @@ function AxiosTestPage() {
       );
     } else {
       return (
-        <div>
+        <div className="float-right">
           <br />
-          <h4>Choose before Pressing the Upload button</h4>
+          <h4>Choose a file before pressing the Upload button.</h4>
         </div>
       );
     }
@@ -125,13 +152,14 @@ function AxiosTestPage() {
                         <p className="text-muted">
                           <small>Example: "/Contract/Dropdowns/Contract/All"</small>
                         </p>
-                        <FormControl
-                          as="textarea"
-                          placeholder="Data to be Submitted"
-                          onChange={(e) => {
-                            // var specials = /[*|":<>[\]{}`\\()';@&$]/;
-                          }}
-                        />
+                        <FormGroup controlId="textData">
+                          <FormControl
+                            as="textarea"
+                            placeholder="Enter Data to be Submitted"
+                            value={fields.textData}
+                            onChange={handleFieldChange}
+                          />
+                        </FormGroup>
                         <p className="text-muted">
                           <small>JSON / File(s)</small>
                         </p>

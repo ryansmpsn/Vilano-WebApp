@@ -82,6 +82,12 @@ function EmployeeContracts(props) {
     });
   }
 
+  function removeEmployee(x, index) {
+    let removeEmp = allModifiedEmployees;
+    removeEmp[index][9].updatedValue = false;
+    gatherAllModifiedEmployees(removeEmp);
+  }
+
   function editContract(contract, index) {
     let newContractEmployees = [...contractEmployees];
     newContractEmployees.splice(index, 1);
@@ -152,6 +158,7 @@ function EmployeeContracts(props) {
             modifiedContractData={allModifiedEmployees}
             employeeDropdowns={props.employeeDropdowns}
             setContractEmployees={setAllModifiedEmployees}
+            removeEmployee={removeEmployee}
           />
         ) : (
           <>
@@ -167,6 +174,7 @@ function EmployeeContracts(props) {
               contractEmployees={allModifiedEmployees}
               setContractEmployees={setModifiedEmployees}
               handleRoleSelect={(x, index) => handleRoleSelect(x, index)}
+              removeEmployee={removeEmployee}
             />
           </>
         )}

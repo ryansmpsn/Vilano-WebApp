@@ -19,7 +19,7 @@ function DisplayEmployeeInfo(props) {
           </MDBCol>
         </MDBRow>
         <Row className="justify-content-md-center">
-          {props.employeeContracts.length + props.allModifiedContracts.length >= 4 ? (
+          {props.employeeContracts.length + props.allModifiedContracts.length >= 10 ? (
             <ContractTable
               editContract={props.editContract}
               contractData={props.employeeContracts}
@@ -43,7 +43,7 @@ function DisplayEmployeeInfo(props) {
                 handleRoleSelect={(x, index) => props.handleRoleSelect(x, index)}
                 contractEmployees={props.allModifiedContracts}
                 employeeDropdowns={props.employeeDropdowns}
-                setContractEmployees={props.setModifiedContracts}
+                setContractEmployees={props.setAllModifiedContracts}
               />
             </>
           )}

@@ -67,19 +67,21 @@ function EmployeeInformation(props) {
   }
 
   function handleRoleSelect(x, index) {
-    let rollChange = modifiedContracts[index];
-    rollChange[5].value = x.value;
-    rollChange[6].value = x.label;
+    let rollChange = allModifiedContracts[index];
+    rollChange[5].updatedValue = x.value;
+    rollChange[6].updatedValue = x.label;
   }
 
   function saveContractToEmployee() {
+    setIsLoading(true);
     gatherAllModifiedContracts(newContracts, modifiedContracts);
 
     let contractEmployees = [{ columnName: "employee_contracts", value: allModifiedContracts }];
-    Send.post("/Employee/Contract/", modifiedContracts).then((result) => {
+    Send.post("/Employee/Contract", contractEmployees).then((result) => {
       setModifiedContracts(null);
-      setEmployeeData(null);
-      setEmployeeContracts(result.data[0]);
+      setEmployeeData(result.data[0]);
+      setEmployeeContracts(result.data[0][5].value);
+      setIsLoading(false);
 
       console.log(result);
     });
@@ -89,6 +91,7 @@ function EmployeeInformation(props) {
       autoDismissTimeout: 3000,
     });
     console.log(contractEmployees);
+    console.log(JSON.stringify(contractEmployees));
   }
 
   function editContract(contract, index) {
