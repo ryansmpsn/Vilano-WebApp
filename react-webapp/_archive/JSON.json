@@ -3,19 +3,19 @@
     "columnName": "employee_contracts",
     "value": [
       [
-        { "columnName": "employee_id", "inputType": null, "label": "Employee ID", "updatedValue": 100007, "value": 100007 },
-        { "columnName": "first_name", "inputType": null, "label": "First Name", "updatedValue": "Marla", "value": "Marla" },
-        { "columnName": "last_name", "inputType": null, "label": "Last Name", "updatedValue": "Nolen", "value": "Nolen" },
-        { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": 860, "value": 860 },
+        { "columnName": "employee_id", "inputType": null, "label": "Employee ID", "updatedValue": 100134, "value": 100134 },
+        { "columnName": "first_name", "inputType": null, "label": "First Name", "updatedValue": "Noah", "value": "Noah" },
+        { "columnName": "last_name", "inputType": null, "label": "Last Name", "updatedValue": "West", "value": "West" },
+        { "columnName": "contract_id", "inputType": null, "label": null, "updatedValue": 857, "value": 857 },
         {
           "columnName": "external_contract_code",
           "inputType": "select",
           "label": "Contract",
-          "updatedValue": "NoahTest",
-          "value": "NoahTest"
+          "updatedValue": "RyanTest",
+          "value": "RyanTest"
         },
-        { "columnName": "contract_role_id", "inputType": null, "label": null, "updatedValue": 5, "value": 3 },
-        { "columnName": "role", "inputType": "select", "label": "Role", "updatedValue": "Regional Manager", "value": "Driver" },
+        { "columnName": "contract_role_id", "inputType": null, "label": null, "updatedValue": 1, "value": 3 },
+        { "columnName": "role", "inputType": "select", "label": "Role", "updatedValue": "Manager", "value": "Driver" },
         {
           "columnName": "is_primary",
           "inputType": "checkbox",
@@ -23,21 +23,21 @@
           "updatedValue": "false",
           "value": "false"
         },
-        { "columnName": "employee_contract_id", "inputType": null, "label": null, "updatedValue": 13, "value": 13 },
+        { "columnName": "employee_contract_id", "inputType": null, "label": null, "updatedValue": 23, "value": 23 },
         { "columnName": "is_active", "inputType": null, "label": null, "updatedValue": "true", "value": "true" },
         {
           "columnName": "modified_timestamp",
           "inputType": null,
           "label": "Last Modified",
-          "updatedValue": "2020-11-05 14:42:52",
-          "value": "2020-11-05 14:42:52"
+          "updatedValue": "2020-11-18 16:42:00",
+          "value": "2020-11-18 16:42:00"
         },
         {
           "columnName": "modified_by_employee_name",
           "inputType": null,
           "label": "Modified By",
-          "updatedValue": "System Account",
-          "value": "System Account"
+          "updatedValue": "Ryan Simpson",
+          "value": "Ryan Simpson"
         }
       ]
     ]

@@ -119,7 +119,6 @@ class UpsertVehicleModal extends React.Component {
   }
 
   submitAction() {
-    console.log(this.state.contractProfile);
     if (this.props.type === "Bid") {
       if (this.state.vehiclesHaveChanged) this.state.vehicleSubmitAction(this.state.contractProfile);
       if (this.state.trailersHaveChanged) this.state.trailerSubmitAction(this.state.contractProfile);
@@ -131,7 +130,6 @@ class UpsertVehicleModal extends React.Component {
       JSONData[20] = this.state.trailers;
       if (this.state.vehiclesHaveChanged) this.state.vehicleSubmitAction(JSONData);
       if (this.state.trailersHaveChanged) this.state.trailerSubmitAction(JSONData);
-      console.log(JSONData);
     }
 
     this.props.closeModal();

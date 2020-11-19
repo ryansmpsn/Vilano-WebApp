@@ -69,10 +69,8 @@ export default class UpsertTripModal extends React.Component {
     var JSONResponse = this.state.contractProfile;
 
     if (hand.props.type === "Contract") {
-      console.log("Hit me");
       JSONResponse[28].value = [this.state.editTrip];
 
-      console.log(JSONResponse);
       hand.state.submitAction(JSONResponse);
     }
     if (hand.props.type === "Bid") {

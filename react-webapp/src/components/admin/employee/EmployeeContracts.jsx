@@ -65,21 +65,21 @@ function EmployeeContracts(props) {
     setIsLoading(true);
     gatherAllModifiedEmployees(newEmployees, modifiedEmployees);
     let contractEmployees = [{ columnName: "employee_contracts", value: allModifiedEmployees }];
+    // remove logs inproduction
     console.log(JSON.stringify(contractEmployees));
-    // Send.post("/Employee/ContractEmployee", contractEmployees).then((response) => {
-    //   console.log(response);
-    //   setContractEmployees(response.data.value);
-    //   setModifiedEmployees(null);
-    //   setSelectedEmployees(null);
-    //   gatherAllModifiedEmployees();
-    //   setIsLoading(false);
-    // });
-    // addToast(`Employees Saved to Contract: ${selectedContract.label}.`, {
-    //   appearance: "success",
-    //   autoDismiss: true,
-    //   autoDismissTimeout: 3000,
-    // });
-    // console.log(JSON.stringify(contractEmployees));
+    Send.post("/Employee/ContractEmployee", contractEmployees).then((response) => {
+      console.log(response);
+      setContractEmployees(response.data.value);
+      setModifiedEmployees(null);
+      setSelectedEmployees(null);
+      gatherAllModifiedEmployees();
+      setIsLoading(false);
+    });
+    addToast(`Employees Saved to Contract: ${selectedContract.label}.`, {
+      appearance: "success",
+      autoDismiss: true,
+      autoDismissTimeout: 3000,
+    });
   }
 
   function editContract(contract, index) {

@@ -54,7 +54,6 @@ class BidDashboard extends Component {
     return Send.post("/Bid/Bid", editBid, this.props);
   };
   tripEditSubmitAction = (editTrip) => {
-    console.log(JSON.stringify(editTrip));
     this.setState({ isSearching: true });
 
     return Send.post("/Bid/BidTrip", editTrip, this.props).then((res) => {

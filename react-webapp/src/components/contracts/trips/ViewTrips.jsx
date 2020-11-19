@@ -49,7 +49,6 @@ function ViewTrips(props) {
 
     if (props.type === "Bid") {
       Send.post("/Bid/BidTripVehicle", editVehicle).then((res) => {
-        console.log(res);
         addToast("Vehicles Have Been Successfully Updated!", {
           appearance: "success",
           autoDismiss: true,

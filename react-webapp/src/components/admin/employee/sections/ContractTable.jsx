@@ -49,7 +49,6 @@ function ContractTable(props) {
   };
 
   function handleInputValue(data, value, index) {
-    // console.log(props.contractData.length - index);
     if (data.columnName === "role" && index >= props.contractData.length) {
       return (
         <Select

@@ -1062,11 +1062,9 @@ class BidCostSegmentData extends Component {
 
   costSegmentSubmitAction = (rateSheet) => {
     this.setState({ isLoading: true });
-    console.log(rateSheet);
     return Send.post("/Bid/BidRateSheet", rateSheet, this.props.appProps).then((res) => {
-      console.log(res);
-      // this.setState({ bidCostSegments: res.data[0].pop() });
-      // this.setState({ bidData: res.data[0] });
+      this.setState({ bidCostSegments: res.data[0].pop() });
+      this.setState({ bidData: res.data[0] });
       this.setState({ isLoading: false });
     });
   };
@@ -1081,7 +1079,6 @@ class BidCostSegmentData extends Component {
       });
 
       Send.get("/Bid/" + this.props.selectedBidId + "/RateSheet", this.props.appProps).then((res) => {
-        console.log(res);
         this.setState({ bidCostSegments: res.data[0].pop() });
         this.setState({ bidData: res.data[0] });
         this.setState({ isLoading: false });
@@ -1100,8 +1097,6 @@ class BidCostSegmentData extends Component {
     this.props.setSelectedBidId(this.state.bidSearch);
 
     Send.get("/Bid/" + this.state.bidSearch + "/RateSheet", this.props.appProps).then((res) => {
-      console.log(res);
-
       this.setState({ bidCostSegments: res.data[0].pop() });
       this.setState({ bidData: res.data[0] });
       this.setState({ isLoading: false });
