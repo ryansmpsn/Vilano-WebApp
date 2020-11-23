@@ -82,7 +82,7 @@ function EmployeeContracts(props) {
     });
   }
 
-  function removeEmployee(x, index) {
+  function removeEmployee(index) {
     let removeEmp = allModifiedEmployees;
     removeEmp[index][9].updatedValue = false;
     gatherAllModifiedEmployees(removeEmp);
@@ -150,7 +150,7 @@ function EmployeeContracts(props) {
           <Col>
             <Spinner animation="border" variant="primary" />
           </Col>
-        ) : contractEmployees && contractEmployees.length + allModifiedEmployees.length >= 10 ? (
+        ) : contractEmployees && contractEmployees.length + allModifiedEmployees.length >= 3 ? (
           <ContractTable
             editContract={editContract}
             contractData={contractEmployees}
@@ -158,7 +158,7 @@ function EmployeeContracts(props) {
             modifiedContractData={allModifiedEmployees}
             employeeDropdowns={props.employeeDropdowns}
             setContractEmployees={setAllModifiedEmployees}
-            removeEmployee={removeEmployee}
+            removeRow={removeEmployee}
           />
         ) : (
           <>

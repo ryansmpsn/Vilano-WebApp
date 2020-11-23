@@ -14,6 +14,7 @@ import ContractDashboard from "./components/contracts/ContractDashboard";
 import AdministrationDashboard from "./components/admin/AdministrationDashboard";
 import ResetPassword from "./components/pages/ResetPassword";
 import RequestReset from "./components/pages/RequestReset";
+import PayrollDashboard from "./components/payroll/PayrollDashboard";
 
 class Routing extends React.Component {
   render() {
@@ -36,6 +37,7 @@ class Routing extends React.Component {
             <PrivateRoute path="/bids/*" element={<BidDashboard {...this.props} />} />
             <PrivateRoute path="/profile" element={<ProfilePage {...this.props} />} />
             <PrivateRoute path="administration/*" element={<AdministrationDashboard {...this.props} />} />
+            <PrivateRoute path="payroll" element={<PayrollDashboard {...this.props} />} />
           </>
         )}
         {/* Catch all unmatched routes */}

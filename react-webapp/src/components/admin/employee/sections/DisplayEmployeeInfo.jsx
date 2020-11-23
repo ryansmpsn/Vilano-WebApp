@@ -5,9 +5,13 @@ import DisplayContractEmployee from "./DisplayContractEmployees";
 import ContractTable from "./ContractTable";
 
 function DisplayEmployeeInfo(props) {
-  const employeeData = props.employeeData;
+  let { employeeData, employeeContracts, allModifiedContracts, isLoading, profile } = props;
 
-  return props.isLoading ? (
+  if (profile && !isLoading) {
+    employeeContracts = employeeData[5].value;
+    allModifiedContracts = [];
+  }
+  return isLoading ? (
     <Spinner animation="border" variant="primary" className="mr-auto" />
   ) : (
     employeeData !== null && (
@@ -19,12 +23,13 @@ function DisplayEmployeeInfo(props) {
           </MDBCol>
         </MDBRow>
         <Row className="justify-content-md-center">
-          {props.employeeContracts.length + props.allModifiedContracts.length >= 10 ? (
+          {employeeContracts.length + allModifiedContracts.length >= 10 ? (
             <ContractTable
+              profile={profile}
               editContract={props.editContract}
-              contractData={props.employeeContracts}
+              contractData={employeeContracts}
               handleRoleSelect={(x, index) => props.handleRoleSelect(x, index)}
-              modifiedContractData={props.allModifiedContracts}
+              modifiedContractData={allModifiedContracts}
               employeeDropdowns={props.employeeDropdowns}
               setContractEmployees={props.setAllModifiedContracts}
             />
@@ -32,8 +37,9 @@ function DisplayEmployeeInfo(props) {
             <>
               <DisplayContractEmployee
                 contracts
+                profile={profile}
                 modified={false}
-                contractEmployees={props.employeeContracts}
+                contractEmployees={employeeContracts}
                 employeeDropdowns={props.employeeDropdowns}
                 editContract={props.editContract}
               />
@@ -41,18 +47,20 @@ function DisplayEmployeeInfo(props) {
                 contracts
                 modified
                 handleRoleSelect={(x, index) => props.handleRoleSelect(x, index)}
-                contractEmployees={props.allModifiedContracts}
+                contractEmployees={allModifiedContracts}
                 employeeDropdowns={props.employeeDropdowns}
                 setContractEmployees={props.setAllModifiedContracts}
               />
             </>
           )}
         </Row>
-        <Row className="justify-content-center">
-          <Button className="btn btn-sm " variant="outline-warning" onClick={() => props.saveContractToEmployee()}>
-            save
-          </Button>
-        </Row>
+        {!profile && (
+          <Row className="justify-content-center">
+            <Button className="btn btn-sm " variant="outline-warning" onClick={() => props.saveContractToEmployee()}>
+              save
+            </Button>
+          </Row>
+        )}
         <hr className="mt-5" />
         <MDBRow center>
           <MDBCol lg="10" className="mb-4 mt-5">

@@ -56,6 +56,7 @@ function DisplayContractEmployee(props) {
                         options={props.employeeDropdowns[3].options}
                         onChange={(x) => props.handleRoleSelect(x, index)}
                         styles={customStyles}
+                        isDisabled={!employee[9].updatedValue}
                       />
                     </Col>
                   </Row>
@@ -72,6 +73,7 @@ function DisplayContractEmployee(props) {
                         props.setContractEmployees(object);
                       }}
                       checked={content.updatedValue === true || content.updatedValue === "true"}
+                      disabled={!employee[9].updatedValue}
                     />
                   )) || (
                     <Card.Text key={"employeeContent" + arrayIndex}>
@@ -87,24 +89,26 @@ function DisplayContractEmployee(props) {
               </Button>
             )}
 
-            {!props.modified ? (
-              <Button
-                className="btn btn-sm float-right"
-                variant="outline-warning"
-                onClick={() => props.editContract(employee, index)}
-              >
-                edit
-              </Button>
-            ) : (
-              // TODO add remove Button to set active to false
-              <Button
-                className="btn btn-sm float-right"
-                variant="outline-danger"
-                onClick={() => props.removeEmployee(employee, index)}
-              >
-                remove
-              </Button>
-            )}
+            {!props.profile &&
+              (!props.modified ? (
+                <Button
+                  className="btn btn-sm float-right"
+                  variant="outline-warning"
+                  onClick={() => props.editContract(employee, index)}
+                >
+                  edit
+                </Button>
+              ) : (
+                // TODO add remove Button to set active to false
+                <Button
+                  className="btn btn-sm float-right"
+                  variant="outline-danger"
+                  onClick={() => props.removeEmployee(index)}
+                  disabled={!employee[9].updatedValue}
+                >
+                  remove
+                </Button>
+              ))}
           </Card.Footer>
         </Card>
       </Col>

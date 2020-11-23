@@ -5,10 +5,13 @@ import { MDBRow, MDBCol, MDBCard, MDBCardHeader, MDBCardBody, MDBIcon } from "md
 
 function ProfilePage(props) {
   const [employeeData, setEmployeeData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     Send.get("/Employee/Profile/" + sessionStorage.getItem("IDSession"), props).then((res) => {
       setEmployeeData(res.data[0]);
+      setIsLoading(false);
     });
   }, [props]);
 
@@ -23,7 +26,7 @@ function ProfilePage(props) {
             <h1 className="m-3 text-center">Your Profile</h1>
           </MDBCardHeader>
           <MDBCardBody>
-            <DisplayEmployeeInfo employeeData={employeeData} />
+            <DisplayEmployeeInfo employeeData={employeeData} profile isLoading={isLoading} />
           </MDBCardBody>
         </MDBCard>
       </MDBCol>
