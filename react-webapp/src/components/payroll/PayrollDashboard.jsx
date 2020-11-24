@@ -8,12 +8,12 @@ function NewPageTemplate() {
         <MDBCard className="cascading-admin-card">
           <MDBCardHeader>
             <div className="admin-up">
-              <MDBIcon icon="users" className="primary-color" />
+              <MDBIcon icon="money-bill-alt" className="primary-color" />
             </div>
-            <h1 className="m-3 text-center">New Page</h1>
+            <h1 className="m-3 text-center">Payroll</h1>
           </MDBCardHeader>
           <MDBCardBody>
-            <div className="d-flex flex-column">New Page Content</div>
+            <div className="d-flex flex-column">Payroll Page Content</div>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>

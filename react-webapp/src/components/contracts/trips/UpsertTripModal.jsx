@@ -98,7 +98,7 @@ export default class UpsertTripModal extends React.Component {
 
   render() {
     return (
-      <Modal show={this.state.show} onHide={this.props.closeModal}>
+      <Modal show={this.state.show} onHide={this.props.closeModal} backdrop={"static"}>
         <Modal.Header closeButton>
           <Modal.Title>{this.state.modalName}</Modal.Title>
         </Modal.Header>

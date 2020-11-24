@@ -73,7 +73,7 @@ function FinalizeBidModal(props) {
       });
   }
   return (
-    <Modal show={props.show} onHide={props.closeModal} centered>
+    <Modal show={props.show} onHide={props.closeModal} centered backdrop={"static"}>
       <Modal.Header closeButton> Finalize Bid: {props.contract[10].value}</Modal.Header>
       <Modal.Body>
         <Form>

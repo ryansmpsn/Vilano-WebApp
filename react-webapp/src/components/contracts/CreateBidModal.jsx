@@ -44,7 +44,7 @@ function CreateBidModal(props) {
   }
 
   return (
-    <Modal show={props.show} onHide={props.closeModal} centered>
+    <Modal show={props.show} onHide={props.closeModal} centered backdrop={"static"}>
       <Modal.Header closeButton>Create Bid from Contract : {props.externalContractCode}</Modal.Header>
       <Modal.Body>
         <Row>

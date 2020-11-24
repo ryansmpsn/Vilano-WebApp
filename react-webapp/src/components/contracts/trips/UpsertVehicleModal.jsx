@@ -152,7 +152,7 @@ class UpsertVehicleModal extends React.Component {
 
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.props.closeModal}>
+      <Modal show={this.props.show} onHide={this.props.closeModal} backdrop={"static"}>
         <Modal.Header closeButton>
           <Modal.Title>{this.props.modalName}</Modal.Title>
         </Modal.Header>
