@@ -29,9 +29,6 @@ function ContractManagement() {
                   Routes
                 </Link>
                 <Link to="routes" className="btn btn-sm btn-outline-primary">
-                  Facility
-                </Link>
-                <Link to="routes" className="btn btn-sm btn-outline-primary">
                   Frequency
                 </Link>
                 <Link to="routes" className="btn btn-sm btn-outline-primary">
