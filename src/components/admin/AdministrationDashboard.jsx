@@ -18,13 +18,16 @@ function AdministrationDashboard() {
     const onLoad = async () => {
       const requestOne = Send.get("/Employee/Dropdowns/Employee/All");
       const requestTwo = Send.get("/Contract/Ids");
+      const requestThree = Send.get("/Facility/Active");
 
       axios
-        .all([requestOne, requestTwo])
+        .all([requestOne, requestTwo, requestThree])
         .then(
           axios.spread((...responses) => {
             const responseOne = responses[0];
             const responseTwo = responses[1];
+            const responseThree = responses[2];
+            console.log(responseThree);
             setEmployeeDropdowns(responseOne.data);
             getContractIds(responseTwo.data);
           })
