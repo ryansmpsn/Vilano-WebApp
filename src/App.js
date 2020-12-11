@@ -45,12 +45,28 @@ function App(props) {
     render() {
       return (
         <AuthContext.Provider
-          value={{ isAuthenticated, session, setSession: setSessionData, setIsAuthenticated: setIsAuthenticatedData }}
+          value={{
+            isAuthenticated,
+            session,
+            setSession: setSessionData,
+            setIsAuthenticated: setIsAuthenticatedData,
+          }}
         >
-          <Navigation isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-          <ToastProvider autoDismiss autoDismissTimeout={6000} placement="bottom-right" components={{ Toast: Notification }}>
-            <main id="content" className="p-5" style={{ minHeight: "calc(100vh - 102px)" }}>
-              <Routing isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
+          <Navigation
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+          />
+          <ToastProvider
+            autoDismiss
+            autoDismissTimeout={6000}
+            placement="bottom-right"
+            components={{ Toast: Notification }}
+          >
+            <main id="content" style={{ minHeight: "calc(100vh - 102px)" }}>
+              <Routing
+                isAuthenticated={isAuthenticated}
+                handleLogout={handleLogout}
+              />
             </main>
           </ToastProvider>
           <Footer />

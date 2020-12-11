@@ -4,7 +4,7 @@ import { MDBCard, MDBCardHeader, MDBCardBody, MDBDataTable } from "mdbreact";
 
 function ViewRoutes(props) {
   let { tripId } = useParams();
-  const [datatable, setDatatable] = React.useState({
+  const [datatable] = React.useState({
     columns: [
       {
         label: 'Driver',

@@ -1,20 +1,21 @@
-import React from "react";
-import Home from "./components/pages/HomePage";
-import PrivateRoute from "./libs/PrivateRoute";
-import { Route, Routes } from "react-router-dom";
-import Login from "./components/pages/LoginPage";
-import About from "./components/pages/AboutPage";
-import Testpage from "./components/pages/TestPage";
-import ProfilePage from "./components/pages/ProfilePage";
-import BidDashboard from "./components/bids/BidDashboard";
-import NotFoundPage from "./components/pages/NotFoundPage";
-import ResourcesPage from "./components/pages/ResourcesPage";
-import AxiosTestPage from "./components/pages/AxiosTestPage";
-import ContractDashboard from "./components/contracts/ContractDashboard";
-import AdministrationDashboard from "./components/admin/AdministrationDashboard";
-import ResetPassword from "./components/pages/ResetPassword";
-import RequestReset from "./components/pages/RequestReset";
-import PayrollDashboard from "./components/payroll/PayrollDashboard";
+import React from "react"
+import Home from "./components/pages/HomePage"
+import PrivateRoute from "./libs/PrivateRoute"
+import { Route, Routes } from "react-router-dom"
+import Login from "./components/pages/LoginPage"
+import About from "./components/pages/AboutPage"
+import Testpage from "./components/pages/TestPage"
+import Claims from "./components/pages/forms/Claims"
+import ProfilePage from "./components/pages/ProfilePage"
+import BidDashboard from "./components/bids/BidDashboard"
+import RequestReset from "./components/pages/RequestReset"
+import NotFoundPage from "./components/pages/NotFoundPage"
+import ResourcesPage from "./components/pages/ResourcesPage"
+import AxiosTestPage from "./components/pages/AxiosTestPage"
+import ResetPassword from "./components/pages/ResetPassword"
+import PayrollDashboard from "./components/payroll/PayrollDashboard"
+import ContractDashboard from "./components/contracts/ContractDashboard"
+import AdministrationDashboard from "./components/admin/AdministrationDashboard"
 
 class Routing extends React.Component {
   render() {
@@ -27,9 +28,10 @@ class Routing extends React.Component {
         <Route path="resetpassword" element={<ResetPassword {...this.props} />} />
         <Route path="resources" element={<ResourcesPage {...this.props} />} />
         <Route path="about" element={<About />} />
+        <Route path="claims" element={<Claims />} />
         <PrivateRoute path="/axios" element={<AxiosTestPage {...this.props} />} />
         <PrivateRoute path="/testpage" element={<Testpage {...this.props} />} />
-
+      
         {/* Seems redundant to check if is authenticated here, but it prevents update during an existing state transision. */}
         {this.props.isAuthenticated && (
           <>
