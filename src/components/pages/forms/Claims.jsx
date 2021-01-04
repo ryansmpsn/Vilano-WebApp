@@ -132,11 +132,13 @@ function NewPageTemplate() {
             </Form.Group>
           </Form.Row>
           <div className="m-3 text-left">
-            <b>
+            <p className="mb-3 font-weight-bold">
               If you answered yes to any of the above questions, please contact
-              the Safety Director Immediatly 904-824-2007 (Follow Prompts if
+              the Safety Director Immediatly.
+              <a href="tel:904-824-2007"> 904-824-2007</a> (Follow Prompts if
               Afterhours)
-            </b>
+            </p>
+            <hr />
             <h4 className="text-center">
               Post Accident Drug & Alcohol Testing
             </h4>
