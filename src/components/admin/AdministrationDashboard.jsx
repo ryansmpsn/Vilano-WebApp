@@ -18,16 +18,15 @@ function AdministrationDashboard() {
     const onLoad = async () => {
       const requestOne = Send.get("/Employee/Dropdowns/Employee/All");
       const requestTwo = Send.get("/Contract/Ids");
-      const requestThree = Send.get("/Facility/Active");
+      // const requestThree = Send.get("/Facility/Active");
 
       axios
-        .all([requestOne, requestTwo, requestThree])
+        .all([requestOne, requestTwo])
         .then(
           axios.spread((...responses) => {
             const responseOne = responses[0];
             const responseTwo = responses[1];
-            const responseThree = responses[2];
-            console.log(responseThree);
+            // const responseThree = responses[2];
             setEmployeeDropdowns(responseOne.data);
             getContractIds(responseTwo.data);
           })
@@ -83,14 +82,8 @@ function AdministrationDashboard() {
       <Routes>
         <Route path="employee" element={<EmployeeManagement />}>
           <Route path="all" element={<AllEmployees />} />
-          <Route
-            path="assignment"
-            element={<EmployeeContracts contractIds={contractIds} employeeDropdowns={employeeDropdowns} />}
-          />
-          <Route
-            path=":employeeId"
-            element={<EmployeeInformation contractIds={contractIds} employeeDropdowns={employeeDropdowns} />}
-          />
+          <Route path="assignment" element={<EmployeeContracts contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
+          <Route path=":employeeId" element={<EmployeeInformation contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
         </Route>
         <Route path="contract/*" element={<ContractManagement />} />
         <Route path="facility/*" element={<FacilityManagement />} />

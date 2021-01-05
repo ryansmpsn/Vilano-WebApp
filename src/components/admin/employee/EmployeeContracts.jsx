@@ -162,12 +162,7 @@ function EmployeeContracts(props) {
           />
         ) : (
           <>
-            <DisplayContractEmployee
-              modified={false}
-              contractEmployees={contractEmployees}
-              employeeDropdowns={props.employeeDropdowns}
-              editContract={editContract}
-            />
+            <DisplayContractEmployee modified={false} contractEmployees={contractEmployees} employeeDropdowns={props.employeeDropdowns} editContract={editContract} />
             <DisplayContractEmployee
               modified
               employeeDropdowns={props.employeeDropdowns}
@@ -179,10 +174,26 @@ function EmployeeContracts(props) {
           </>
         )}
       </Row>
-      <Row className="justify-content-center">
-        <Col md="2">
+      <hr />
+      <Row>
+        <Col>
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="inputGroupFileAddon01">
+                Upload
+              </span>
+            </div>
+            <div className="custom-file">
+              <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
+              <label className="custom-file-label" htmlFor="inputGroupFile01">
+                Choose file
+              </label>
+            </div>
+          </div>
+        </Col>
+        <Col>
           {selectedContract && (
-            <Button className="btn btn-md" variant="outline-warning" onClick={() => saveEmployeeToContract()}>
+            <Button className="btn btn-md  float-right" variant="outline-warning" onClick={() => saveEmployeeToContract()}>
               save
             </Button>
           )}

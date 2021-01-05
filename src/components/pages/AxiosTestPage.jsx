@@ -79,6 +79,18 @@ function AxiosTestPage() {
 
   function onFileChange(e) {
     setSelectedFile(e.target.files[0]);
+
+    let someFileData = e.target.files[0];
+    const formData = new FormData();
+
+    // Update the formData object
+    formData.append("myFile", someFileData, someFileData.name);
+
+    // Details of the uploaded file
+    console.log(someFileData);
+    for (var key of formData.entries()) {
+      console.log(key[0] + ", " + key[1]);
+    }
   }
   function onFileUpload() {
     // Create an object of formData
@@ -89,7 +101,26 @@ function AxiosTestPage() {
 
     // Details of the uploaded file
     console.log(selectedFile);
-    console.log(formData);
+    console.log(formData.values);
+
+    Send.post(fields.endpoint, formData)
+      .then((res) => {
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        addToast(err + ". Check the console for more information.", {
+          appearance: "error",
+          autoDismiss: true,
+        });
+        setIsLoading(false);
+
+        console.log(err);
+      });
+
+    addToast("Endpoint Triggered. Check the console for the result.", {
+      appearance: "info",
+      autoDismiss: true,
+    });
   }
   function fileData() {
     if (selectedFile) {
@@ -141,24 +172,13 @@ function AxiosTestPage() {
                     ) : (
                       <>
                         <FormGroup controlId="endpoint">
-                          <FormControl
-                            autoFocus
-                            placeholder="Enter an Endpoint to Test"
-                            type="text"
-                            value={fields.endpoint}
-                            onChange={handleFieldChange}
-                          />
+                          <FormControl autoFocus placeholder="Enter an Endpoint to Test" type="text" value={fields.endpoint} onChange={handleFieldChange} />
                         </FormGroup>
                         <p className="text-muted">
                           <small>Example: "/Contract/Dropdowns/Contract/All"</small>
                         </p>
                         <FormGroup controlId="textData">
-                          <FormControl
-                            as="textarea"
-                            placeholder="Enter Data to be Submitted"
-                            value={fields.textData}
-                            onChange={handleFieldChange}
-                          />
+                          <FormControl as="textarea" placeholder="Enter Data to be Submitted" value={fields.textData} onChange={handleFieldChange} />
                         </FormGroup>
                         <p className="text-muted">
                           <small>JSON / File(s)</small>
