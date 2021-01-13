@@ -1,56 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 import { Row, Col, Nav, NavItem } from "react-bootstrap";
 import EmployeeManagement from "./EmployeeManagement";
 import ContractManagement from "./ContractManagement";
 import FacilityManagement from "./FacilityManagement";
-import AllEmployees from "./employee/AllEmployees";
-import EmployeeInformation from "./employee/EmployeeInformation";
-import EmployeeContracts from "./employee/EmployeeContracts";
-import Send from "../../libs/send";
-import axios from "axios";
 
 function AdministrationDashboard() {
-  const [employeeDropdowns, setEmployeeDropdowns] = useState(null);
-  const [contractIds, setContractIds] = useState(null);
-
-  useEffect(() => {
-    const onLoad = async () => {
-      const requestOne = Send.get("/Employee/Dropdowns/Employee/All");
-      const requestTwo = Send.get("/Contract/Ids");
-      // const requestThree = Send.get("/Facility/Active");
-
-      axios
-        .all([requestOne, requestTwo])
-        .then(
-          axios.spread((...responses) => {
-            const responseOne = responses[0];
-            const responseTwo = responses[1];
-            // const responseThree = responses[2];
-            setEmployeeDropdowns(responseOne.data);
-            getContractIds(responseTwo.data);
-          })
-        )
-        .catch((errors) => {
-          // react on errors
-          console.log(errors);
-        });
-    };
-    onLoad();
-  }, []);
-
-  function getContractIds(ids) {
-    let contractData = ids;
-    let pushContractIds = [];
-    contractData.map((item, index) => {
-      return pushContractIds.push({
-        label: item[1].value,
-        value: item[0].value,
-      });
-    });
-    setContractIds(pushContractIds);
-  }
-
   return (
     <>
       <Row className="mb-4 justify-content-md-center">
@@ -80,11 +35,7 @@ function AdministrationDashboard() {
         </Col>
       </Row>
       <Routes>
-        <Route path="employee" element={<EmployeeManagement />}>
-          <Route path="all" element={<AllEmployees />} />
-          <Route path="assignment" element={<EmployeeContracts contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
-          <Route path=":employeeId" element={<EmployeeInformation contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
-        </Route>
+        <Route path="employee/*" element={<EmployeeManagement />} />
         <Route path="contract/*" element={<ContractManagement />} />
         <Route path="facility/*" element={<FacilityManagement />} />
       </Routes>

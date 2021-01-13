@@ -124,22 +124,10 @@ function EmployeeInformation(props) {
     <>
       <Row className=" mb-4 justify-content-md-center">
         <Col md="4">
-          <Select
-            autofocus
-            options={props.employeeDropdowns}
-            placeholder={"Employee List"}
-            onChange={(x) => handleEmployeeSelect(x)}
-          />
+          <Select autofocus options={props.employeeDropdowns} placeholder={"Employee List"} onChange={(x) => handleEmployeeSelect(x)} />
         </Col>
         <Col md="4">
-          <Select
-            isMulti
-            value={selectedContracts}
-            options={props.contractIds}
-            placeholder={"Add Additional Contracts"}
-            onChange={(x) => handleContractSelect(x)}
-            isDisabled={isLoading || employeeData === null}
-          />
+          <Select isMulti value={selectedContracts} options={props.contractIds} placeholder={"Add Additional Contracts"} onChange={(x) => handleContractSelect(x)} isDisabled={isLoading || employeeData === null} />
         </Col>
       </Row>
       <DisplayEmployeeInfo
@@ -154,6 +142,34 @@ function EmployeeInformation(props) {
         saveContractToEmployee={saveContractToEmployee}
         setAllModifiedContracts={setAllModifiedContracts}
       />
+
+      <hr />
+      {employeeContracts && allModifiedContracts !== null && (
+        <Row>
+          <Col>
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="inputGroupFileAddon01">
+                  Upload
+                </span>
+              </div>
+              <div className="custom-file">
+                <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
+                <label className="custom-file-label" htmlFor="inputGroupFile01">
+                  Choose file
+                </label>
+              </div>
+            </div>
+          </Col>
+          <Col>
+            {/* {selectedContract && (
+              <Button className="btn btn-md  float-right" variant="outline-warning" onClick={() => saveEmployeeToContract()}>
+                save
+              </Button>
+            )} */}
+          </Col>
+        </Row>
+      )}
     </>
   );
 }

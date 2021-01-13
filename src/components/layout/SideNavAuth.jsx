@@ -17,12 +17,7 @@ function SideNavAuth(props) {
               <span>Contracts</span>
             </ListGroupItem>
           </NavLink>
-          <Dropdown.Toggle
-            split
-            id="dropdown-split-basic"
-            as={ListGroupItem}
-            style={{ borderWidth: "0 0 1px", position: "absolute", right: "0px" }}
-          />
+          <Dropdown.Toggle split id="dropdown-split-basic" as={ListGroupItem} style={{ borderWidth: "0 0 1px", position: "absolute", right: "0px" }} />
 
           <Dropdown.Menu>
             {sessionStorage.getItem("/contract/trips") >= 2 && (
@@ -60,11 +55,7 @@ function SideNavAuth(props) {
               <span style={{ marginRight: "2em" }}>Bids</span>
             </ListGroupItem>
           </NavLink>
-          <Dropdown.Toggle
-            id="dropdown-split-bid"
-            as={ListGroupItem}
-            style={{ borderWidth: "0 0 1px", position: "absolute", right: "0px" }}
-          />
+          <Dropdown.Toggle id="dropdown-split-bid" as={ListGroupItem} style={{ borderWidth: "0 0 1px", position: "absolute", right: "0px" }} />
           <Dropdown.Menu>
             {sessionStorage.getItem("/bid/trips") >= 2 && (
               <>
@@ -92,14 +83,14 @@ function SideNavAuth(props) {
           </ListGroupItem>
         </NavLink>
       )}
-      {/* {sessionStorage.getItem("/employees") >= 2 && (
+      {sessionStorage.getItem("/employees") >= 2 && (
         <NavLink to="/employee" activeClassName="activeClass" onClick={() => handleMenuToggle()}>
           <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
             <MDBIcon icon="users" className="mr-3" />
             Employees
           </ListGroupItem>
         </NavLink>
-      )} */}
+      )}
       {sessionStorage.getItem("/admin") >= 2 && (
         <NavLink to="/administration" activeClassName="activeClass" onClick={() => handleMenuToggle()}>
           <ListGroupItem style={{ borderWidth: "0 0 1px" }}>

@@ -105,6 +105,7 @@ function AxiosTestPage() {
 
     Send.post(fields.endpoint, formData)
       .then((res) => {
+        console.log(res);
         setIsLoading(false);
       })
       .catch((err) => {

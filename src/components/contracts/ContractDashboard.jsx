@@ -112,11 +112,7 @@ class ContractDashboard extends Component {
                             <MDBListGroupItem>
                               Active Contracts
                               <MDBBadge color="primary-color" pill className="float-right">
-                                <CountUp
-                                  start={0}
-                                  end={this.state.selectOptions ? this.state.selectOptions.length : 0}
-                                  duration={5}
-                                />
+                                <CountUp start={0} end={this.state.selectOptions ? this.state.selectOptions.length : 0} duration={5} />
                               </MDBBadge>
                             </MDBListGroupItem>
                             {/* <MDBListGroupItem>
@@ -175,9 +171,15 @@ class ContractDashboard extends Component {
                           Routes
                         </Link>
                       )}
+                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
+                        Documents
+                      </Link>
                     </MDBCol>
                   ) : (
                     <MDBCol>
+                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
+                        Documents
+                      </Link>
                       {sessionStorage.getItem("/contract/routes") >= 2 && (
                         <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
                           Routes
