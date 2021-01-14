@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Row, Col, Container, Form, Button } from "react-bootstrap";
 import Select from "react-select";
 import Send from "../../../libs/send";
+import DocumentModal from "./sections/DocumentModal";
 
 function Documents(props) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -10,8 +11,20 @@ function Documents(props) {
   const [uploadedFileData, setUploadedFileData] = useState([
     { columnName: "doc_type_id", inputType: null, label: null, updatedValue: null, value: 19 },
     { columnName: "employee_id", inputType: null, label: null, updatedValue: null, value: sessionStorage.getItem("IDSession") },
+    { columnName: "first_name", inputType: null, label: null, updatedValue: null, value: "Noah" },
+    { columnName: "last_name", inputType: null, label: null, updatedValue: null, value: "West" },
   ]);
+  const [showModal, setShowModal] = useState(false);
 
+  function openModal() {
+    setShowModal(true);
+    window.location.hash = "edit";
+  }
+
+  function closeModal() {
+    window.history.replaceState(null, null, " ");
+    setShowModal(false);
+  }
   function onFileChange(e) {
     setSelectedFile(e.target.files[0]);
 
@@ -32,8 +45,8 @@ function Documents(props) {
     const formData = new FormData();
 
     // Update the formData object
-    formData.append("user file", selectedFile, selectedFile.name);
-    formData.append("json", uploadedFileData);
+    formData.append("myFile", selectedFile, selectedFile.name);
+    formData.append("json", JSON.stringify(uploadedFileData));
     // Details of the uploaded file
     console.log(selectedFile);
     console.log(uploadedFileData);
@@ -101,32 +114,13 @@ function Documents(props) {
 
       <Row>
         <Col>
-          <Form>
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroupFileAddon01">
-                  Upload
-                </span>
-              </div>
-              <div className="custom-file">
-                <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={(e) => onFileChange(e)} />
-                <label className="custom-file-label" htmlFor="inputGroupFile01">
-                  Choose file
-                </label>
-              </div>
-            </div>
-          </Form>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Button className="btn-outline-info float-right" onClick={() => onFileUpload()}>
+          <Button className="btn-outline-info" onClick={() => openModal()}>
             Upload File
             <MDBIcon fas icon="upload" className="ml-1" />
           </Button>
         </Col>
-        <Col> {fileData()}</Col>
       </Row>
+      <DocumentModal modalName={"Employee Document Upload"} show={showModal} closeModal={closeModal} />
     </Container>
   );
 }

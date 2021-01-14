@@ -28,6 +28,7 @@ function EmployeeInformation(props) {
       gatherAllModifiedContracts();
       setSelectedContracts(null);
       Send.get("/Employee/" + employeeId).then((res) => {
+        console.log(res);
         setEmployeeContracts(res.data[0][5].value);
         setEmployeeData(res.data[0]);
         setModifiedContracts(null);
@@ -63,7 +64,7 @@ function EmployeeInformation(props) {
   function handleEmployeeSelect(x) {
     setModifiedContracts(null);
     setEmployeeData(null);
-    navigate("/administration/employee/" + x.value);
+    navigate("/employee/" + x.value);
   }
 
   function handleRoleSelect(x, index) {
@@ -124,7 +125,7 @@ function EmployeeInformation(props) {
     <>
       <Row className=" mb-4 justify-content-md-center">
         <Col md="4">
-          <Select autofocus options={props.employeeDropdowns} placeholder={"Employee List"} onChange={(x) => handleEmployeeSelect(x)} />
+          <Select autofocus options={props.employeeDropdowns[0].options} placeholder={"Employee List"} onChange={(x) => handleEmployeeSelect(x)} />
         </Col>
         <Col md="4">
           <Select isMulti value={selectedContracts} options={props.contractIds} placeholder={"Add Additional Contracts"} onChange={(x) => handleContractSelect(x)} isDisabled={isLoading || employeeData === null} />

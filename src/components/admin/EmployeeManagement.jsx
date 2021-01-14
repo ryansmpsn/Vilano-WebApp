@@ -12,30 +12,30 @@ function EmployeeManagement(props) {
   const [employeeDropdowns, setEmployeeDropdowns] = useState(null);
   const [contractIds, setContractIds] = useState(null);
 
-  // useEffect(() => {
-  //   const onLoad = async () => {
-  //     const requestOne = Send.get("/Employee/Dropdowns/Employee/All");
-  //     const requestTwo = Send.get("/Contract/Ids");
-  //     // const requestThree = Send.get("/Facility/Active");
+  useEffect(() => {
+    const onLoad = async () => {
+      const requestOne = Send.get("/Employee/Dropdowns/Employee/All");
+      const requestTwo = Send.get("/Contract/Ids");
+      // const requestThree = Send.get("/Facility/Active");
 
-  //     axios
-  //       .all([requestOne, requestTwo])
-  //       .then(
-  //         axios.spread((...responses) => {
-  //           const responseOne = responses[0];
-  //           const responseTwo = responses[1];
-  //           // const responseThree = responses[2];
-  //           setEmployeeDropdowns(responseOne.data);
-  //           getContractIds(responseTwo.data);
-  //         })
-  //       )
-  //       .catch((errors) => {
-  //         // react on errors
-  //         console.log(errors);
-  //       });
-  //   };
-  //   onLoad();
-  // }, []);
+      axios
+        .all([requestOne, requestTwo])
+        .then(
+          axios.spread((...responses) => {
+            const responseOne = responses[0];
+            const responseTwo = responses[1];
+            // const responseThree = responses[2];
+            setEmployeeDropdowns(responseOne.data);
+            getContractIds(responseTwo.data);
+          })
+        )
+        .catch((errors) => {
+          // react on errors
+          console.log(errors);
+        });
+    };
+    onLoad();
+  }, []);
 
   function getContractIds(ids) {
     let contractData = ids;
