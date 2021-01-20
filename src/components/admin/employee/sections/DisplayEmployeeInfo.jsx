@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Card, Accordion, Button, Spinner } from "react-bootstrap";
-import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBContainer } from "mdbreact";
+import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBContainer, MDBIcon } from "mdbreact";
 import DisplayContractEmployee from "./DisplayContractEmployees";
 import ContractTable from "./ContractTable";
+import { ListGroup } from "react-bootstrap";
+import { ListGroupItem } from "react-bootstrap";
+import Documents from "../Documents";
 
 function DisplayEmployeeInfo(props) {
   let { employeeData, employeeContracts, allModifiedContracts, isLoading, profile } = props;
+  const [showModal, setShowModal] = useState(false);
 
   if (profile && !isLoading) {
     employeeContracts = employeeData[5].value;
     allModifiedContracts = [];
+  }
+
+  function openModal() {
+    setShowModal(true);
+  }
+  function closeModal() {
+    setShowModal(false);
   }
   return isLoading ? (
     <Spinner animation="border" variant="primary" className="mr-auto" />
@@ -35,14 +46,7 @@ function DisplayEmployeeInfo(props) {
             />
           ) : (
             <>
-              <DisplayContractEmployee
-                contracts
-                profile={profile}
-                modified={false}
-                contractEmployees={employeeContracts}
-                employeeDropdowns={props.employeeDropdowns}
-                editContract={props.editContract}
-              />
+              <DisplayContractEmployee contracts profile={profile} modified={false} contractEmployees={employeeContracts} employeeDropdowns={props.employeeDropdowns} editContract={props.editContract} />
               <DisplayContractEmployee
                 contracts
                 modified
@@ -63,7 +67,7 @@ function DisplayEmployeeInfo(props) {
         )}
         <hr className="mt-5" />
         <MDBRow center>
-          <MDBCol lg="10" className="mb-4 mt-5">
+          <MDBCol lg="9" className="mb-4 mt-5">
             <MDBCard narrow className="cascading-admin-card">
               <div className="admin-up" style={{ marginRight: "10%" }}>
                 <Button className="text-center blue-gradient" block>
@@ -76,12 +80,7 @@ function DisplayEmployeeInfo(props) {
                     (c, index) =>
                       c.label !== null && (
                         <MDBCol size="3" key={index + "profile"}>
-                          <MDBInput
-                            type="text"
-                            label={c.label}
-                            value={c.updatedValue !== null ? c.updatedValue : ""}
-                            disabled
-                          ></MDBInput>
+                          <MDBInput type="text" label={c.label} value={c.updatedValue !== null ? c.updatedValue : ""} disabled></MDBInput>
                         </MDBCol>
                       )
                   )}
@@ -91,6 +90,41 @@ function DisplayEmployeeInfo(props) {
                     Update Account
                   </MDBBtn>
                 </MDBRow> */}
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+          <MDBCol lg="3" className="mb-4 mt-5">
+            <MDBCard narrow className="cascading-admin-card ">
+              <div className="admin-up" style={{ marginRight: "10%" }}>
+                <Button className="text-center blue-gradient" block>
+                  Documents
+                </Button>
+              </div>
+              <MDBCardBody className="text-center">
+                <ListGroup className="text-left  overflow-auto" style={{ height: "20em" }}>
+                  {employeeData[6].value.map((c, index) => (
+                    <ListGroupItem size="3" key={index + "document"}>
+                      {c[10].value}
+                    </ListGroupItem>
+                  ))}
+                </ListGroup>
+                <Button className="btn btn-sm btn-outline-info mt-3 mb-0" onClick={() => openModal()}>
+                  Upload File
+                  <MDBIcon fas icon="upload" className="ml-1" />
+                </Button>
+                <Documents
+                  showModal={showModal}
+                  closeModal={closeModal}
+                  endpoint="/Employee/FileUpload"
+                  uploadData={[
+                    { columnName: "doc_type_id", inputType: null, label: null, updatedValue: null, value: 19 },
+                    { columnName: "employee_id", inputType: null, label: null, updatedValue: null, value: sessionStorage.getItem("IDSession") },
+                    { columnName: "first_name", inputType: null, label: null, updatedValue: null, value: employeeData[0].value[0][6].value },
+                    { columnName: "last_name", inputType: null, label: null, updatedValue: null, value: employeeData[0].value[0][7].value },
+                    // last 2 objects only for employee
+                  ]}
+                  modalName={"Upload Document to " + employeeData[0].value[0][6].value + " " + employeeData[0].value[0][7].value}
+                />
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
@@ -122,12 +156,7 @@ function DisplayEmployeeInfo(props) {
                                 (c, index) =>
                                   c.label !== null && (
                                     <MDBCol md="4" key={index + "cData"}>
-                                      <MDBInput
-                                        type="text"
-                                        label={c.label}
-                                        value={c.updatedValue !== null ? c.updatedValue : ""}
-                                        disabled
-                                      ></MDBInput>
+                                      <MDBInput type="text" label={c.label} value={c.updatedValue !== null ? c.updatedValue : ""} disabled></MDBInput>
                                     </MDBCol>
                                   )
                               )}
@@ -159,12 +188,7 @@ function DisplayEmployeeInfo(props) {
                                 (c, index) =>
                                   c.label !== null && (
                                     <MDBCol md="6" key={index + "cData"}>
-                                      <MDBInput
-                                        type="text"
-                                        label={c.label}
-                                        value={c.updatedValue !== null ? c.updatedValue : ""}
-                                        disabled
-                                      ></MDBInput>
+                                      <MDBInput type="text" label={c.label} value={c.updatedValue !== null ? c.updatedValue : ""} disabled></MDBInput>
                                     </MDBCol>
                                   )
                               )}

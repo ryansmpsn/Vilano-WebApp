@@ -152,7 +152,7 @@ class UpsertVehicleModal extends React.Component {
 
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.props.closeModal} backdrop={"static"}>
+      <Modal show={this.props.show} onHide={this.props.closeModal}>
         <Modal.Header closeButton>
           <Modal.Title>{this.props.modalName}</Modal.Title>
         </Modal.Header>
@@ -250,11 +250,7 @@ class UpsertVehicleModal extends React.Component {
             )}
           </Row>
           <div className={"text-center"}>
-            <Button
-              variant={"outline-primary"}
-              onClick={this.submitAction}
-              disabled={!this.state.vehiclesHaveChanged && !this.state.trailersHaveChanged}
-            >
+            <Button variant={"outline-primary"} onClick={this.submitAction} disabled={!this.state.vehiclesHaveChanged && !this.state.trailersHaveChanged}>
               Save
             </Button>
           </div>

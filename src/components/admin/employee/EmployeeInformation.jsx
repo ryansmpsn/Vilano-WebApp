@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import Send from "../../../libs/send";
 import DisplayEmployeeInfo from "./sections/DisplayEmployeeInfo";
 import { useNavigate, useParams } from "react-router";
@@ -83,16 +83,12 @@ function EmployeeInformation(props) {
       setEmployeeData(result.data[0]);
       setEmployeeContracts(result.data[0][5].value);
       setIsLoading(false);
-
-      console.log(result);
     });
     addToast(`Contracts Saved to ${employeeId}'s Profile.`, {
       appearance: "success",
       autoDismiss: true,
       autoDismissTimeout: 3000,
     });
-    console.log(contractEmployees);
-    console.log(JSON.stringify(contractEmployees));
   }
 
   function editContract(contract, index) {
@@ -125,7 +121,14 @@ function EmployeeInformation(props) {
     <>
       <Row className=" mb-4 justify-content-md-center">
         <Col md="4">
-          <Select autofocus options={props.employeeDropdowns[0].options} placeholder={"Employee List"} onChange={(x) => handleEmployeeSelect(x)} />
+          <Select
+            autofocus
+            options={props.employeeDropdowns && props.employeeDropdowns[0].options}
+            placeholder={"Employee List"}
+            onChange={(x) => handleEmployeeSelect(x)}
+            isDisabled={props.employeeDropdowns === null}
+            isLoading={props.employeeDropdowns === null}
+          />
         </Col>
         <Col md="4">
           <Select isMulti value={selectedContracts} options={props.contractIds} placeholder={"Add Additional Contracts"} onChange={(x) => handleContractSelect(x)} isDisabled={isLoading || employeeData === null} />

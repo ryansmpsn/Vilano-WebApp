@@ -98,8 +98,8 @@ function EmployeeManagement(props) {
           </MDBCardHeader>
           <MDBCardBody>
             <Routes>
-              <Route path="document" element={<Documents employeeDropdowns={employeeDropdowns} />} />
               <Route path="assignment" element={<EmployeeContracts contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
+              <Route path="document" element={<Documents employeeDropdowns={employeeDropdowns} />} />
               <Route path=":employeeId" element={<EmployeeInformation contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
             </Routes>
           </MDBCardBody>

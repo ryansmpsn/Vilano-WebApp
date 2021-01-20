@@ -1,30 +1,39 @@
 import { MDBIcon } from "mdbreact";
-import React, { useState } from "react";
-import { Row, Col, Container, Form, Button } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Row, Col, Container, Form, Button, Modal, Spinner } from "react-bootstrap";
 import Select from "react-select";
 import Send from "../../../libs/send";
-import DocumentModal from "./sections/DocumentModal";
+import { useToasts } from "react-toast-notifications";
 
 function Documents(props) {
+  let { modalName, showModal, closeModal, endpoint, uploadData } = props;
+  const { addToast } = useToasts();
+
   const [selectedFile, setSelectedFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [documentTypes, setDocumentTypes] = useState(null);
   const [uploadedFileData, setUploadedFileData] = useState([
     { columnName: "doc_type_id", inputType: null, label: null, updatedValue: null, value: 19 },
     { columnName: "employee_id", inputType: null, label: null, updatedValue: null, value: sessionStorage.getItem("IDSession") },
     { columnName: "first_name", inputType: null, label: null, updatedValue: null, value: "Noah" },
     { columnName: "last_name", inputType: null, label: null, updatedValue: null, value: "West" },
+    // last 2 objects only for employee
   ]);
-  const [showModal, setShowModal] = useState(false);
 
-  function openModal() {
-    setShowModal(true);
-    window.location.hash = "edit";
-  }
+  useEffect(() => {
+    const onLoad = async () => {
+      setIsLoading(true);
 
-  function closeModal() {
-    window.history.replaceState(null, null, " ");
-    setShowModal(false);
-  }
+      Send.get("/Employee/Dropdowns/Employee/All").then((res) => {
+        setIsLoading(false);
+        setDocumentTypes(res.data[4].options);
+      });
+    };
+
+    onLoad();
+  }, []);
+
   function onFileChange(e) {
     setSelectedFile(e.target.files[0]);
 
@@ -32,13 +41,7 @@ function Documents(props) {
     const formData = new FormData();
 
     // Update the formData object
-    formData.append(uploadedFileData, someFileData);
-
-    // Details of the uploaded file
-    console.log(someFileData);
-    for (var key of formData.entries()) {
-      console.log(key[0] + ", " + key[1]);
-    }
+    formData.append(uploadData, someFileData);
   }
   function onFileUpload() {
     // Create an object of formData
@@ -46,19 +49,19 @@ function Documents(props) {
 
     // Update the formData object
     formData.append("myFile", selectedFile, selectedFile.name);
-    formData.append("json", JSON.stringify(uploadedFileData));
+    formData.append("json", JSON.stringify(uploadData));
     // Details of the uploaded file
     console.log(selectedFile);
-    console.log(uploadedFileData);
+    console.log(uploadData);
 
-    Send.post("/Employee/FileUpload", formData)
+    Send.post(endpoint, formData)
       .then((res) => {
         console.log(res);
-        setIsLoading(false);
+        setIsSending(false);
       })
       .catch((err) => {
         console.log(err);
-        setIsLoading(false);
+        setIsSending(false);
 
         console.log(err);
       });
@@ -69,10 +72,17 @@ function Documents(props) {
       return (
         <div>
           <h2>File Details:</h2>
-          <p>File Name: {selectedFile.name}</p>
-          <p>File Type: {selectedFile.type}</p>
           <p>
-            Last Modified:
+            <b>File Name: </b>
+            {selectedFile.name}
+          </p>
+
+          <p>
+            <b>File Type: </b>
+            {selectedFile.type}
+          </p>
+          <p>
+            <b>Last Modified: </b>
             {selectedFile.lastModifiedDate.toDateString()}
           </p>
         </div>
@@ -88,40 +98,48 @@ function Documents(props) {
   }
 
   return (
-    <Container>
-      {console.log(uploadedFileData)}
-      <Row>
-        <Col className="text-center">
-          <h1>Documents</h1>
-        </Col>
-      </Row>
-      <Row>
-        <Col lg="6">
-          {/* <Select
-            autoFocus
-            options={props.employeeDropdowns[4].options}
-            placeholder={"Document Type"}
-            onChange={(x) => {
-              setUploadedFileData(
-                { columnName: "document_type_id", inputType: null, label: null, updatedValue: null, value: 19 },
-                { columnName: "employee_id", inputType: null, label: null, updatedValue: null, value: sessionStorage.getItem("IDSession") }
-              );
-            }}
-            isLoading={isLoading}
-          /> */}
-        </Col>
-      </Row>
+    <Modal show={showModal} onHide={closeModal} centered backdrop={"static"}>
+      <Modal.Header closeButton>{modalName}</Modal.Header>
+      <Modal.Body>
+        <Container>
+          <Row>
+            <Col>
+              <Form>
+                <p>Drag and drop file or browse computer to select a file.</p>
+                <Select autofocus placeholder={"File Description"} options={documentTypes} isDisabled={isLoading | isSending} isLoading={isLoading} />
+                <div className="input-group my-3">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text" id="inputGroupFileAddon01">
+                      Upload
+                    </span>
+                  </div>
+                  <div className="custom-file">
+                    <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={(e) => onFileChange(e)} />
+                    <label className="custom-file-label" htmlFor="inputGroupFile01">
+                      Choose file
+                    </label>
+                  </div>
+                </div>
+              </Form>
+            </Col>
+          </Row>
+          <Row>
+            <Col> {fileData()}</Col>
+          </Row>
+        </Container>
+      </Modal.Body>
 
-      <Row>
-        <Col>
-          <Button className="btn-outline-info" onClick={() => openModal()}>
+      <Modal.Footer>
+        {isSending ? (
+          <Spinner animation="border" variant="primary" />
+        ) : (
+          <Button className="btn-outline-info float-right" onClick={() => onFileUpload()}>
             Upload File
             <MDBIcon fas icon="upload" className="ml-1" />
           </Button>
-        </Col>
-      </Row>
-      <DocumentModal modalName={"Employee Document Upload"} show={showModal} closeModal={closeModal} />
-    </Container>
+        )}
+      </Modal.Footer>
+    </Modal>
   );
 }
 
