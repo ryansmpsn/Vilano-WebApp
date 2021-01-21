@@ -101,13 +101,19 @@ function DisplayEmployeeInfo(props) {
                 </Button>
               </div>
               <MDBCardBody className="text-center">
-                <ListGroup className="text-left  overflow-auto" style={{ height: "20em" }}>
-                  {employeeData[6].value.map((c, index) => (
-                    <ListGroupItem size="3" key={index + "document"}>
-                      {c[10].value}
-                    </ListGroupItem>
-                  ))}
-                </ListGroup>
+                {console.log(employeeData[6].value)}
+                {employeeData[6].value === [] ? (
+                  <p className="text-muted small">No Documents.</p>
+                ) : (
+                  <ListGroup className="text-left  overflow-auto" style={{ height: "20em" }}>
+                    {employeeData[6].value.map((c, index) => (
+                      <ListGroupItem size="3" key={index + "document"}>
+                        {c[10].value}
+                      </ListGroupItem>
+                    ))}
+                  </ListGroup>
+                )}
+
                 <Button className="btn btn-sm btn-outline-info mt-3 mb-0" onClick={() => openModal()}>
                   Upload File
                   <MDBIcon fas icon="upload" className="ml-1" />
@@ -117,7 +123,6 @@ function DisplayEmployeeInfo(props) {
                   closeModal={closeModal}
                   endpoint="/Employee/FileUpload"
                   uploadData={[
-                    { columnName: "doc_type_id", inputType: null, label: null, updatedValue: null, value: 19 },
                     { columnName: "employee_id", inputType: null, label: null, updatedValue: null, value: sessionStorage.getItem("IDSession") },
                     { columnName: "first_name", inputType: null, label: null, updatedValue: null, value: employeeData[0].value[0][6].value },
                     { columnName: "last_name", inputType: null, label: null, updatedValue: null, value: employeeData[0].value[0][7].value },

@@ -13,13 +13,7 @@ function Documents(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [documentTypes, setDocumentTypes] = useState(null);
-  const [uploadedFileData, setUploadedFileData] = useState([
-    { columnName: "doc_type_id", inputType: null, label: null, updatedValue: null, value: 19 },
-    { columnName: "employee_id", inputType: null, label: null, updatedValue: null, value: sessionStorage.getItem("IDSession") },
-    { columnName: "first_name", inputType: null, label: null, updatedValue: null, value: "Noah" },
-    { columnName: "last_name", inputType: null, label: null, updatedValue: null, value: "West" },
-    // last 2 objects only for employee
-  ]);
+  const [submissionJson, setSubmissionJson] = useState(null);
 
   useEffect(() => {
     const onLoad = async () => {
@@ -34,7 +28,21 @@ function Documents(props) {
     onLoad();
   }, []);
 
+  function onFileTypeUpdate(e) {
+    // Gather additional JSON from props and append them to The file type Array.
+    let newFileData = [
+      { columnName: "doc_type_id", inputType: null, label: null, updatedValue: null, value: null },
+      { columnName: "doc_type_id", inputType: null, label: null, updatedValue: null, value: null },
+    ];
+
+    uploadData.forEach((object) => newFileData.push(object));
+    newFileData[0].updatedValue = e.label;
+    newFileData[1].updatedValue = e.value;
+    setSubmissionJson(newFileData);
+  }
+
   function onFileChange(e) {
+    // Update Data based on file changes.
     setSelectedFile(e.target.files[0]);
 
     let someFileData = e.target.files[0];
@@ -43,20 +51,19 @@ function Documents(props) {
     // Update the formData object
     formData.append(uploadData, someFileData);
   }
+
   function onFileUpload() {
     // Create an object of formData
     const formData = new FormData();
 
     // Update the formData object
     formData.append("myFile", selectedFile, selectedFile.name);
-    formData.append("json", JSON.stringify(uploadData));
-    // Details of the uploaded file
-    console.log(selectedFile);
-    console.log(uploadData);
+    formData.append("json", JSON.stringify(submissionJson));
+    // Details of the upload file
 
     Send.post(endpoint, formData)
       .then((res) => {
-        console.log(res);
+        console.log("file uploaded Successfully", res);
         setIsSending(false);
       })
       .catch((err) => {
@@ -68,30 +75,24 @@ function Documents(props) {
   }
 
   function fileData() {
+    const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
     if (selectedFile) {
       return (
         <div>
-          <h2>File Details:</h2>
-          <p>
+          <h2 className="mb-3">File Details:</h2>
+          <p className="m-0">
             <b>File Name: </b>
             {selectedFile.name}
           </p>
 
-          <p>
+          <p className="m-0">
             <b>File Type: </b>
             {selectedFile.type}
           </p>
-          <p>
+          <p className="m-0">
             <b>Last Modified: </b>
-            {selectedFile.lastModifiedDate.toDateString()}
+            {selectedFile.lastModifiedDate.toLocaleDateString("en-US", options)}
           </p>
-        </div>
-      );
-    } else {
-      return (
-        <div className="float-right">
-          <br />
-          <h4>Choose a file before pressing the Upload button.</h4>
         </div>
       );
     }
@@ -99,18 +100,22 @@ function Documents(props) {
 
   return (
     <Modal show={showModal} onHide={closeModal} centered backdrop={"static"}>
-      <Modal.Header closeButton>{modalName}</Modal.Header>
+      <Modal.Header closeButton>
+        <h4>{modalName}</h4>
+      </Modal.Header>
       <Modal.Body>
         <Container>
           <Row>
             <Col>
               <Form>
-                <p>Drag and drop file or browse computer to select a file.</p>
-                <Select autofocus placeholder={"File Description"} options={documentTypes} isDisabled={isLoading | isSending} isLoading={isLoading} />
+                <p className="text-muted">Select file type.</p>
+
+                <Select autofocus placeholder={"File Description"} options={documentTypes} isDisabled={isLoading | isSending} isLoading={isLoading} onChange={(e) => onFileTypeUpdate(e)} />
+                <p className="text-muted mt-3">Drag and drop file or browse computer to select a file.</p>
                 <div className="input-group my-3">
                   <div className="input-group-prepend">
                     <span className="input-group-text" id="inputGroupFileAddon01">
-                      Upload
+                      <MDBIcon fas icon="file" />
                     </span>
                   </div>
                   <div className="custom-file">
@@ -133,7 +138,7 @@ function Documents(props) {
         {isSending ? (
           <Spinner animation="border" variant="primary" />
         ) : (
-          <Button className="btn-outline-info float-right" onClick={() => onFileUpload()}>
+          <Button className="btn-outline-info float-right" onClick={() => onFileUpload()} disabled={!selectedFile | !submissionJson}>
             Upload File
             <MDBIcon fas icon="upload" className="ml-1" />
           </Button>
@@ -144,3 +149,27 @@ function Documents(props) {
 }
 
 export default Documents;
+
+/*                Component Notes
+
+
+               ** Required Functions **
+
+function openModal() {
+  setShowModal(true);
+}
+function closeModal() {
+  setShowModal(false);
+}
+
+
+                ** Props **
+ <Documents
+   showModal={showModal}
+   closeModal={closeModal}
+   endpoint="/Employee/FileUpload"
+   uploadData={[
+     JSON Required For Endpoint ]}
+   modalName="optional" 
+                /> 
+*/
