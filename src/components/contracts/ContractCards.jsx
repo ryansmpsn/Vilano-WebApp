@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Card, Row, Col, Button } from "react-bootstrap";
+import { Card, Row, Col, Button, Spinner } from "react-bootstrap";
+import { MDBIcon } from "mdbreact";
 import UpsertContractModal from "./UpsertContractModal";
 import CreateBidModal from "./CreateBidModal";
 import FinalizeBidModal from "./FinalizeBidModal";
+import Documents from "../admin/employee/Documents";
+import { ListGroup } from "react-bootstrap";
+import { ListGroupItem } from "react-bootstrap";
 
 function ContractCards(props) {
   const [contract, setContract] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [showDocumentModal, setShowDocumentModal] = useState(false);
   const [showBidModal, setShowBidModal] = useState(false);
   const [showFinalModal, setShowFinalModal] = useState(false);
+  const [searching, setSearching] = useState(false);
 
   useEffect(() => {
     onLoad();
@@ -49,7 +55,12 @@ function ContractCards(props) {
 
     setShowBidModal(false);
   }
-
+  function openDocumentModal() {
+    setShowDocumentModal(true);
+  }
+  function closeDocumentModal() {
+    setShowDocumentModal(false);
+  }
   function setSelectedId() {
     if (props.type === "Contract") {
       props.setSelectedContract(contract[6].value);
@@ -64,10 +75,13 @@ function ContractCards(props) {
     }
   }
 
+  function gatherDocuments() {
+    setSearching(true);
+  }
   return (
     !isLoading && (
       <Card
-        className={"card border-primary mb-3 "}
+        className="border-primary mb-3 "
         style={{
           width: "100%",
         }}
@@ -76,24 +90,67 @@ function ContractCards(props) {
           (c, index) =>
             c.label !== null &&
             (c.label === "Contract No." || c.label === "Bid Name") && (
-              <Card.Header key={index + "header"} as="h5">
-                {c.label}: {c.value}
+              <Card.Header key={index + "header"} as="h3">
+                {c.label} {c.value}
               </Card.Header>
             )
         )}
         <Card.Body>
+          <Card.Title className="mb-4 text-center">
+            <h2>Contract Information</h2>
+          </Card.Title>
           <Row>
-            {contract.map(
-              (c, index) =>
-                c.label !== null && (
-                  <Col md="3" key={index + "body"}>
-                    <Card.Title className="h5 mb-1">{c.label}:</Card.Title>
-                    {c.value !== null && <Card.Text className="text-muted">{c.value}</Card.Text>}
-                    <hr />
-                  </Col>
-                )
-            )}
+            <Col md="10">
+              <Row>
+                {contract.map(
+                  (c, index) =>
+                    c.label !== null && (
+                      <Col md="2" key={index + "body"}>
+                        <p className="m-0" style={{ minHeight: "2.5em" }}>
+                          {c.label} :<br />
+                          <small className="text-muted m-0" style={{ whiteSpace: "nowrap" }}>
+                            {c.value}
+                          </small>
+                        </p>
+                        <hr className="my-2" />
+                      </Col>
+                    )
+                )}
+              </Row>
+            </Col>
+            <Col md="2" className="text-center p-0">
+              <h5>Contract Documents</h5>
+              <p className="text-muted small">No Documents.</p>
+              <ListGroup className="text-left overflow-auto" style={{ height: "15em" }}>
+                <ListGroupItem>Item</ListGroupItem>
+                <ListGroupItem>Item</ListGroupItem>
+                <ListGroupItem>Item</ListGroupItem>
+                <ListGroupItem>Item</ListGroupItem>
+                <ListGroupItem>Item</ListGroupItem>
+                <ListGroupItem>Item</ListGroupItem>
+                <ListGroupItem>Item</ListGroupItem>
+                <ListGroupItem>Item</ListGroupItem>
+                <ListGroupItem>Item</ListGroupItem>
+                <ListGroupItem>Item</ListGroupItem>
+              </ListGroup>
+              {searching ? (
+                <Spinner animation="border" variant="primary" />
+              ) : (
+                <>
+                  <Button className="btn btn-sm btn-outline-info mt-3" onClick={() => gatherDocuments()}>
+                    Search
+                    <MDBIcon fas icon="search" className="ml-1" />
+                  </Button>
+                  <Button className="btn btn-sm btn-outline-info mt-3 " onClick={() => openDocumentModal()}>
+                    Upload
+                    <MDBIcon fas icon="upload" className="ml-1" />
+                  </Button>
+                </>
+              )}
+            </Col>
           </Row>
+        </Card.Body>
+        <Card.Footer>
           {sessionStorage.getItem("/contract/trips") >= 2 && (
             <Link
               onClick={() => {
@@ -131,7 +188,15 @@ function ContractCards(props) {
               Edit {props.type}
             </Button>
           )}
-        </Card.Body>
+        </Card.Footer>
+        <Documents
+          showModal={showDocumentModal}
+          closeModal={closeDocumentModal}
+          endpoint="/Contract/FileUpload"
+          fileTypes={props.inputRestrictions[4].options}
+          uploadData={[{ columnName: "contract_id", inputType: null, label: null, updatedValue: null, value: contract[0].updatedValue }]}
+          modalName={"Upload Document to " + contract[6].label + " " + contract[6].value}
+        />
         <UpsertContractModal
           modalName={"Edit " + props.type}
           contract={contract}
@@ -145,24 +210,9 @@ function ContractCards(props) {
         />
         {sessionStorage.getItem("/bid") >= 3 && (
           <>
-            <CreateBidModal
-              show={showBidModal}
-              closeModal={closeBidModal}
-              appProps={props.appProps}
-              contractId={contract[0].updatedValue}
-              externalContractCode={contract[6].updatedValue}
-              bidOptions={props.bidOptions}
-            />
+            <CreateBidModal show={showBidModal} closeModal={closeBidModal} appProps={props.appProps} contractId={contract[0].updatedValue} externalContractCode={contract[6].updatedValue} bidOptions={props.bidOptions} />
 
-            {props.type === "Bid" && (
-              <FinalizeBidModal
-                show={showFinalModal}
-                closeModal={closeFinalModal}
-                appProps={props.appProps}
-                bidOptions={props.bidFinalOptions}
-                contract={contract}
-              />
-            )}
+            {props.type === "Bid" && <FinalizeBidModal show={showFinalModal} closeModal={closeFinalModal} appProps={props.appProps} bidOptions={props.bidFinalOptions} contract={contract} />}
           </>
         )}
       </Card>

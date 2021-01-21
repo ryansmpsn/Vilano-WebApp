@@ -22,6 +22,7 @@ function ContractData(props) {
     props
       .SearchFunction(contractSearch)
       .then((res) => {
+        console.log(res);
         setContractData(res.data);
       })
       .catch((err) => {

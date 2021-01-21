@@ -1,32 +1,17 @@
 import { MDBIcon } from "mdbreact";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Row, Col, Container, Form, Button, Modal, Spinner } from "react-bootstrap";
 import Select from "react-select";
 import Send from "../../../libs/send";
-import { useToasts } from "react-toast-notifications";
+// import { useToasts } from "react-toast-notifications";
 
 function Documents(props) {
-  let { modalName, showModal, closeModal, endpoint, uploadData } = props;
-  const { addToast } = useToasts();
+  let { modalName, showModal, closeModal, endpoint, uploadData, fileTypes } = props;
+  // const { addToast } = useToasts();
 
   const [selectedFile, setSelectedFile] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [isSending, setIsSending] = useState(false);
-  const [documentTypes, setDocumentTypes] = useState(null);
   const [submissionJson, setSubmissionJson] = useState(null);
-
-  useEffect(() => {
-    const onLoad = async () => {
-      setIsLoading(true);
-
-      Send.get("/Employee/Dropdowns/Employee/All").then((res) => {
-        setIsLoading(false);
-        setDocumentTypes(res.data[4].options);
-      });
-    };
-
-    onLoad();
-  }, []);
 
   function onFileTypeUpdate(e) {
     // Gather additional JSON from props and append them to The file type Array.
@@ -53,6 +38,7 @@ function Documents(props) {
   }
 
   function onFileUpload() {
+    setIsSending(true);
     // Create an object of formData
     const formData = new FormData();
 
@@ -110,7 +96,7 @@ function Documents(props) {
               <Form>
                 <p className="text-muted">Select file type.</p>
 
-                <Select autofocus placeholder={"File Description"} options={documentTypes} isDisabled={isLoading | isSending} isLoading={isLoading} onChange={(e) => onFileTypeUpdate(e)} />
+                <Select autofocus placeholder={"File Description"} options={fileTypes} isDisabled={isSending} onChange={(e) => onFileTypeUpdate(e)} />
                 <p className="text-muted mt-3">Drag and drop file or browse computer to select a file.</p>
                 <div className="input-group my-3">
                   <div className="input-group-prepend">
@@ -138,7 +124,7 @@ function Documents(props) {
         {isSending ? (
           <Spinner animation="border" variant="primary" />
         ) : (
-          <Button className="btn-outline-info float-right" onClick={() => onFileUpload()} disabled={!selectedFile | !submissionJson}>
+          <Button className="btn-outline-info float-right" onClick={() => onFileUpload()} disabled={!selectedFile | !submissionJson | isSending}>
             Upload File
             <MDBIcon fas icon="upload" className="ml-1" />
           </Button>
@@ -154,20 +140,22 @@ export default Documents;
 
 
                ** Required Functions **
+const [showDocumentModal, setShowDocumentModal] = useState(false);
 
-function openModal() {
-  setShowModal(true);
+function openDocumentModal() {
+  setShowDocumentModal(true);
 }
-function closeModal() {
-  setShowModal(false);
+function closeDocumentModal() {
+  setShowDocumentModal(false);
 }
 
 
                 ** Props **
  <Documents
-   showModal={showModal}
-   closeModal={closeModal}
+   showModal={showDocumentModal}
+   closeModal={closeDocumentModal}
    endpoint="/Employee/FileUpload"
+   fileTypes={}
    uploadData={[
      JSON Required For Endpoint ]}
    modalName="optional" 

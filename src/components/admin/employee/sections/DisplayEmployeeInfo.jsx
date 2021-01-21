@@ -8,7 +8,7 @@ import { ListGroupItem } from "react-bootstrap";
 import Documents from "../Documents";
 
 function DisplayEmployeeInfo(props) {
-  let { employeeData, employeeContracts, allModifiedContracts, isLoading, profile } = props;
+  let { employeeData, employeeContracts, employeeDropdowns, allModifiedContracts, isLoading, profile } = props;
   const [showModal, setShowModal] = useState(false);
 
   if (profile && !isLoading) {
@@ -101,7 +101,6 @@ function DisplayEmployeeInfo(props) {
                 </Button>
               </div>
               <MDBCardBody className="text-center">
-                {console.log(employeeData[6].value)}
                 {employeeData[6].value === [] ? (
                   <p className="text-muted small">No Documents.</p>
                 ) : (
@@ -122,8 +121,9 @@ function DisplayEmployeeInfo(props) {
                   showModal={showModal}
                   closeModal={closeModal}
                   endpoint="/Employee/FileUpload"
+                  fileTypes={employeeDropdowns[4].options}
                   uploadData={[
-                    { columnName: "employee_id", inputType: null, label: null, updatedValue: null, value: sessionStorage.getItem("IDSession") },
+                    { columnName: "employee_id", inputType: null, label: null, updatedValue: null, value: employeeData[0].value[0][0].value },
                     { columnName: "first_name", inputType: null, label: null, updatedValue: null, value: employeeData[0].value[0][6].value },
                     { columnName: "last_name", inputType: null, label: null, updatedValue: null, value: employeeData[0].value[0][7].value },
                     // last 2 objects only for employee
