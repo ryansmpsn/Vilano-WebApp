@@ -4,7 +4,7 @@ import Send from "../../libs/send";
 import CountUp from "react-countup";
 import { Link } from "react-router-dom";
 import NavPerm from "../../libs/NavPerms";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Row } from "react-bootstrap";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
 
 class ContractDashboard extends Component {
@@ -96,117 +96,98 @@ class ContractDashboard extends Component {
   render() {
     return (
       <>
-        <MDBRow className="mb-4">
-          <MDBCol xl="12" md="12" className="mb-r">
-            <MDBCard className="cascading-admin-card">
-              <MDBCardHeader>
-                <div className="admin-up">
-                  <MDBIcon icon="file-contract" className="primary-color" />
-                  <h1 className="m-3 text-center">Contract Dashboard</h1>
-                  <MDBRow style={{ margin: -20 }}>
-                    <MDBCol md="4" className="ml-auto mb-4">
-                      <MDBCard className="mb-4">
-                        <MDBCardHeader>Statistics</MDBCardHeader>
-                        <MDBCardBody>
-                          <MDBListGroup className="list-group-flush">
-                            <MDBListGroupItem>
-                              Active Contracts
-                              <MDBBadge color="primary-color" pill className="float-right">
-                                <CountUp start={0} end={this.state.selectOptions ? this.state.selectOptions.length : 0} duration={5} />
-                              </MDBBadge>
-                            </MDBListGroupItem>
-                            {/* <MDBListGroupItem>
-                              Total Trips
-                              <MDBBadge color="default-color-dark" pill className="float-right">
-                                <CountUp start={0} end={0} duration={5} />
-                              </MDBBadge>
-                            </MDBListGroupItem>
-                            <MDBListGroupItem>
-                              Total Routes
-                              <MDBBadge color="unique-color" pill className="float-right">
-                                <CountUp start={0} end={0} duration={8} />
-                              </MDBBadge>
-                            </MDBListGroupItem> */}
-                          </MDBListGroup>
-                        </MDBCardBody>
-                      </MDBCard>
-                    </MDBCol>
-                  </MDBRow>
-                </div>
-              </MDBCardHeader>
-              <MDBCardBody>
-                <MDBRow>
-                  {this.state.contractProfile !== null &&
-                    this.state.contractProfile.map(
-                      (c, index) =>
-                        c.label !== null &&
-                        typeof c.value !== "object" && (
-                          <MDBCol md="2" key={c.label + index}>
-                            <p className="h5 mb-1">{c.label}: </p>
-                            <div className="text-muted">{c.value}</div>
-                          </MDBCol>
-                        )
-                    )}
-                </MDBRow>
-                <MDBRow>
-                  {this.state.contractProfile === null ? (
-                    <MDBCol>
-                      {sessionStorage.getItem("/contract") >= 2 && (
-                        <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
-                          Contracts
-                        </Link>
-                      )}
-                      {sessionStorage.getItem("/contract/trips") >= 2 && (
-                        <Link to="trips" className="btn btn-primary btn-sm btn-outline-info">
-                          Trips
-                        </Link>
-                      )}
-                      {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
-                        <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info">
-                          Rate Sheets
-                        </Link>
-                      )}
-                      {sessionStorage.getItem("/contract/routes") >= 2 && (
-                        <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
-                          Routes
-                        </Link>
-                      )}
-                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
-                        Employees
-                      </Link>
-                    </MDBCol>
-                  ) : (
-                    <MDBCol>
-                      <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
-                        Employees
-                      </Link>
-                      {sessionStorage.getItem("/contract/routes") >= 2 && (
-                        <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
-                          Routes
-                        </Link>
-                      )}
-                      {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
-                        <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info float-right">
-                          Rate Sheets
-                        </Link>
-                      )}
-                      {sessionStorage.getItem("/contract/trips") >= 2 && (
-                        <Link to="trips" className="btn btn-primary btn-sm btn-outline-info float-right">
-                          Trips
-                        </Link>
-                      )}
-                      {sessionStorage.getItem("/contract") >= 2 && (
-                        <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info float-right">
-                          Contracts
-                        </Link>
-                      )}
-                    </MDBCol>
+        <MDBCard className="cascading-admin-card mb-4">
+          <MDBCardHeader>
+            <div className="admin-up ">
+              <MDBIcon icon="file-contract" className="primary-color" />
+              <MDBCard className="w-25 ml-auto" style={{ marginTop: "-50px" }}>
+                <MDBCardHeader>Statistics</MDBCardHeader>
+                <MDBCardBody>
+                  <MDBListGroup className="list-group-flush">
+                    <MDBListGroupItem>
+                      Active Contracts
+                      <MDBBadge color="primary-color" pill className="float-right">
+                        <CountUp start={0} end={this.state.selectOptions ? this.state.selectOptions.length : 0} duration={5} />
+                      </MDBBadge>
+                    </MDBListGroupItem>
+                  </MDBListGroup>
+                </MDBCardBody>
+              </MDBCard>
+            </div>
+            <h1 className="text-center">Contract Dashboard</h1>
+          </MDBCardHeader>
+          <MDBCardBody>
+            <MDBRow>
+              {this.state.contractProfile !== null &&
+                this.state.contractProfile.map(
+                  (c, index) =>
+                    c.label !== null &&
+                    typeof c.value !== "object" && (
+                      <MDBCol md="2" key={c.label + index}>
+                        <p className="h5 mb-1">{c.label}: </p>
+                        <div className="text-muted">{c.value}</div>
+                      </MDBCol>
+                    )
+                )}
+            </MDBRow>
+            <MDBRow>
+              {this.state.contractProfile === null ? (
+                <MDBCol>
+                  {sessionStorage.getItem("/contract") >= 2 && (
+                    <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
+                      Contracts
+                    </Link>
                   )}
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        </MDBRow>
+                  {sessionStorage.getItem("/contract/trips") >= 2 && (
+                    <Link to="trips" className="btn btn-primary btn-sm btn-outline-info">
+                      Trips
+                    </Link>
+                  )}
+                  {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
+                    <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info">
+                      Rate Sheets
+                    </Link>
+                  )}
+                  {sessionStorage.getItem("/contract/routes") >= 2 && (
+                    <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
+                      Routes
+                    </Link>
+                  )}
+                  <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
+                    Employees
+                  </Link>
+                </MDBCol>
+              ) : (
+                <MDBCol>
+                  <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
+                    Employees
+                  </Link>
+                  {sessionStorage.getItem("/contract/routes") >= 2 && (
+                    <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
+                      Routes
+                    </Link>
+                  )}
+                  {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
+                    <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info float-right">
+                      Rate Sheets
+                    </Link>
+                  )}
+                  {sessionStorage.getItem("/contract/trips") >= 2 && (
+                    <Link to="trips" className="btn btn-primary btn-sm btn-outline-info float-right">
+                      Trips
+                    </Link>
+                  )}
+                  {sessionStorage.getItem("/contract") >= 2 && (
+                    <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info float-right">
+                      Contracts
+                    </Link>
+                  )}
+                </MDBCol>
+              )}
+            </MDBRow>
+          </MDBCardBody>
+        </MDBCard>
+
         {this.state.selectOptions === null ? (
           <Spinner animation="border" variant="primary" />
         ) : (
