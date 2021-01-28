@@ -4,7 +4,7 @@ import Send from "../../libs/send";
 import CountUp from "react-countup";
 import { Link } from "react-router-dom";
 import NavPerm from "../../libs/NavPerms";
-import { Spinner, Row } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
 
 class ContractDashboard extends Component {
