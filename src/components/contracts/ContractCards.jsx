@@ -8,6 +8,7 @@ import FinalizeBidModal from "./FinalizeBidModal";
 import Documents from "../admin/employee/Documents";
 import { ListGroup } from "react-bootstrap";
 import { ListGroupItem } from "react-bootstrap";
+import Send from "../../libs/send";
 
 function ContractCards(props) {
   const [contract, setContract] = useState([]);
@@ -75,9 +76,15 @@ function ContractCards(props) {
     }
   }
 
-  function gatherDocuments() {
+  async function gatherDocuments() {
     setSearching(true);
+
+    Send.get(`/Contract/${contract[0].value}/Document`).then((response) => {
+      setSearching(false);
+      console.log(response);
+    });
   }
+
   return (
     !isLoading && (
       <Card

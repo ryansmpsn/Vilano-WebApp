@@ -87,7 +87,7 @@ function Documents(props) {
   return (
     <Modal show={showModal} onHide={closeModal} centered backdrop={"static"}>
       <Modal.Header closeButton>
-        <h4>{modalName}</h4>
+        <h5>{modalName}</h5>
       </Modal.Header>
       <Modal.Body>
         <Container>
@@ -96,7 +96,17 @@ function Documents(props) {
               <Form>
                 <p className="text-muted">Select file type.</p>
 
-                <Select autofocus placeholder={"File Description"} options={fileTypes} isDisabled={isSending} onChange={(e) => onFileTypeUpdate(e)} />
+                <Select
+                  autofocus
+                  placeholder={"File Description"}
+                  options={fileTypes}
+                  isDisabled={isSending}
+                  onChange={(e) => onFileTypeUpdate(e)}
+                  styles={{
+                    // Fixes the overlapping problem of the component
+                    menu: (provided) => ({ ...provided, zIndex: 9999 }),
+                  }}
+                />
                 <p className="text-muted mt-3">Drag and drop file or browse computer to select a file.</p>
                 <div className="input-group my-3">
                   <div className="input-group-prepend">

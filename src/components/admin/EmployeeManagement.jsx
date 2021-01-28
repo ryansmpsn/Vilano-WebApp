@@ -4,7 +4,6 @@ import axios from "axios";
 import { MDBRow, MDBCol, MDBCard, MDBCardHeader, MDBCardBody, MDBIcon, MDBListGroup, MDBListGroupItem, MDBBadge } from "mdbreact";
 import CountUp from "react-countup";
 import { Link, Routes, Route } from "react-router-dom";
-import Documents from "./employee/Documents";
 import EmployeeInformation from "./employee/EmployeeInformation";
 import EmployeeContracts from "./employee/EmployeeContracts";
 
@@ -92,14 +91,10 @@ function EmployeeManagement(props) {
             <Link to="employee" className="btn btn-sm btn-outline-primary">
               Information
             </Link>
-            <Link to="document" className="btn btn-sm btn-outline-primary">
-              Documents
-            </Link>
           </MDBCardHeader>
           <MDBCardBody>
             <Routes>
               <Route path="assignment" element={<EmployeeContracts contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
-              <Route path="document" element={<Documents employeeDropdowns={employeeDropdowns} />} />
               <Route path=":employeeId" element={<EmployeeInformation contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
             </Routes>
           </MDBCardBody>

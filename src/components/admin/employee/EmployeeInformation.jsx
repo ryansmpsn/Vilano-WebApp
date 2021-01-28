@@ -134,18 +134,20 @@ function EmployeeInformation(props) {
           <Select isMulti value={selectedContracts} options={props.contractIds} placeholder={"Add Additional Contracts"} onChange={(x) => handleContractSelect(x)} isDisabled={isLoading || employeeData === null} />
         </Col>
       </Row>
-      <DisplayEmployeeInfo
-        isLoading={isLoading}
-        employeeData={employeeData}
-        allModifiedContracts={allModifiedContracts}
-        employeeDropdowns={props.employeeDropdowns}
-        employeeContracts={employeeContracts}
-        editContract={editContract}
-        setContractEmployees={setModifiedContracts}
-        handleRoleSelect={(x, index) => handleRoleSelect(x, index)}
-        saveContractToEmployee={saveContractToEmployee}
-        setAllModifiedContracts={setAllModifiedContracts}
-      />
+      <Row className="mt-5">
+        <DisplayEmployeeInfo
+          isLoading={isLoading}
+          employeeData={employeeData}
+          allModifiedContracts={allModifiedContracts}
+          employeeDropdowns={props.employeeDropdowns}
+          employeeContracts={employeeContracts}
+          editContract={editContract}
+          setContractEmployees={setModifiedContracts}
+          handleRoleSelect={(x, index) => handleRoleSelect(x, index)}
+          saveContractToEmployee={saveContractToEmployee}
+          setAllModifiedContracts={setAllModifiedContracts}
+        />
+      </Row>
     </>
   );
 }

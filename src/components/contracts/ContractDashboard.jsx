@@ -172,13 +172,13 @@ class ContractDashboard extends Component {
                         </Link>
                       )}
                       <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
-                        Documents
+                        Employees
                       </Link>
                     </MDBCol>
                   ) : (
                     <MDBCol>
                       <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
-                        Documents
+                        Employees
                       </Link>
                       {sessionStorage.getItem("/contract/routes") >= 2 && (
                         <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">

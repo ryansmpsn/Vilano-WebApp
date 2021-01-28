@@ -53,23 +53,19 @@ function SideNav(props) {
           <img alt="Vilano Management Services Inc." className="img-fluid" src={logo} />
         </a>
         <ListGroup className="list-group-flush">
-          <NavLink
-            to="/dashboard"
-            activeClassName="activeClass"
-            onClick={() => window.innerWidth <= 1200 && props.setToggle(false)}
-          >
+          <NavLink to="/dashboard" activeClassName="activeClass" onClick={() => window.innerWidth <= 1200 && props.setToggle(false)}>
             <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
               <MDBIcon icon="chart-pie" className="mr-3" />
               Dashboard
             </ListGroupItem>
           </NavLink>
+          {props.isAuthenticated && <SideNavAuth {...props} />}
           <NavLink to="/resources" activeClassName="activeClass">
             <ListGroupItem style={{ borderWidth: "0 0 1px" }} onClick={() => window.innerWidth <= 1200 && props.setToggle(false)}>
               <div className="fas fa-paperclip mr-3" />
               Resources
             </ListGroupItem>
           </NavLink>
-          {props.isAuthenticated && <SideNavAuth {...props} />}
           <NavLink to="/about" activeClassName="activeClass">
             <ListGroupItem style={{ borderWidth: "0 0 1px" }} onClick={() => window.innerWidth <= 1200 && props.setToggle(false)}>
               <MDBIcon icon="question" className="mr-3" />
