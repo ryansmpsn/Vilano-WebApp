@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Send from "../../libs/send";
-import DisplayEmployeeInfo from "../admin/employee/sections/DisplayEmployeeInfo";
+import DisplayEmployeeInfo from "../employee/sections/DisplayEmployeeInfo";
 
 function ProfilePage(props) {
   const [employeeData, setEmployeeData] = useState(null);

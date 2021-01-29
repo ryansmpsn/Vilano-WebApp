@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
 import Select from "react-select";
-import Send from "../../../libs/send";
+import Send from "../../libs/send";
 import { useToasts } from "react-toast-notifications";
 import DisplayContractEmployee from "./sections/DisplayContractEmployees";
 import ContractTable from "./sections/ContractTable";

@@ -5,7 +5,7 @@ import { MDBIcon } from "mdbreact";
 import UpsertContractModal from "./UpsertContractModal";
 import CreateBidModal from "./CreateBidModal";
 import FinalizeBidModal from "./FinalizeBidModal";
-import Documents from "../admin/employee/Documents";
+import Documents from "../util/Documents";
 import { ListGroup } from "react-bootstrap";
 import { ListGroupItem } from "react-bootstrap";
 import Send from "../../libs/send";

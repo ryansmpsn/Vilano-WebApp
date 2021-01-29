@@ -5,7 +5,7 @@ import DisplayContractEmployee from "./DisplayContractEmployees";
 import ContractTable from "./ContractTable";
 import { ListGroup } from "react-bootstrap";
 import { ListGroupItem } from "react-bootstrap";
-import Documents from "../Documents";
+import Documents from "../../util/Documents";
 
 function DisplayEmployeeInfo(props) {
   let { employeeData, employeeContracts, employeeDropdowns, allModifiedContracts, isLoading, profile } = props;
@@ -63,7 +63,7 @@ function DisplayEmployeeInfo(props) {
                   <p className="text-muted small">No Documents.</p>
                 ) : (
                   // add document file type along with document file name
-                  <ListGroup className="text-left  overflow-auto" style={{ height: "17em" }}>
+                  <ListGroup className="text-left  overflow-auto" style={{ height: "14em" }}>
                     {employeeData[6].value.map((c, index) => (
                       <ListGroupItem size="3" key={index + "document"} className="p-0 pl-2">
                         <div>

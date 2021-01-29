@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 import { Row, Col, Nav, NavItem } from "react-bootstrap";
-import EmployeeManagement from "./EmployeeManagement";
+// import EmployeeManagement from "./EmployeeManagement";
 import ContractManagement from "./ContractManagement";
 import FacilityManagement from "./FacilityManagement";
 
@@ -35,7 +35,7 @@ function AdministrationDashboard() {
         </Col>
       </Row>
       <Routes>
-        <Route path="employee/*" element={<EmployeeManagement />} />
+        {/* <Route path="employee/*" element={<EmployeeManagement />} /> */}
         <Route path="contract/*" element={<ContractManagement />} />
         <Route path="facility/*" element={<FacilityManagement />} />
       </Routes>

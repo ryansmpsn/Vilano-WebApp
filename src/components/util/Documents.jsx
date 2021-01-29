@@ -2,7 +2,7 @@ import { MDBIcon } from "mdbreact";
 import React, { useState } from "react";
 import { Row, Col, Container, Form, Button, Modal, Spinner } from "react-bootstrap";
 import Select from "react-select";
-import Send from "../../../libs/send";
+import Send from "../../libs/send";
 // import { useToasts } from "react-toast-notifications";
 
 function Documents(props) {

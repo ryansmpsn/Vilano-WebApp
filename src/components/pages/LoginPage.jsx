@@ -89,16 +89,14 @@ export default function Login(props) {
     addToast("You have logged in successfully. You will be redirected shortly.", {
       appearance: "success",
       autoDismiss: true,
-      autoDismissTimeout: 3000,
+      autoDismissTimeout: 2000,
     });
 
-    setTimeout(handleLogin, 3000, result);
+    setTimeout(handleLogin, 2000, result);
   }
 
   function handleLogin(result) {
     setSession(result.our_session);
-    // Temporary fix for dropdown's not loading properly
-    window.location.reload(false);
   }
 
   function handleRedirect() {
@@ -113,33 +111,15 @@ export default function Login(props) {
         <form>
           {/*ControlID must match useFormFields value*/}
           <FormGroup controlId="username">
-            <FormControl
-              autoFocus
-              placeholder="Enter Username"
-              type="text"
-              value={fields.username.replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
-              onChange={handleFieldChange}
-            />
+            <FormControl autoFocus placeholder="Enter Username" type="text" value={fields.username.replace(/[*|":<>[\]{}`\\()';@&$]/, "")} onChange={handleFieldChange} />
           </FormGroup>
           <FormGroup controlId="password">
-            <FormControl
-              placeholder="Enter Password"
-              value={fields.password.replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
-              onChange={handleFieldChange}
-              type="password"
-              autoComplete="on"
-            />
+            <FormControl placeholder="Enter Password" value={fields.password.replace(/[*|":<>[\]{}`\\()';@&$]/, "")} onChange={handleFieldChange} type="password" autoComplete="on" />
           </FormGroup>
           {isLoading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-            <Button
-              className="aqua-gradient"
-              type={"submit"}
-              active={!isLoading}
-              disabled={!validateForm() || isDisabled}
-              onClick={postLogin}
-            >
+            <Button className="aqua-gradient" type={"submit"} active={!isLoading} disabled={!validateForm() || isDisabled} onClick={postLogin}>
               Login
             </Button>
           )}

@@ -87,99 +87,91 @@ class BidDashboard extends Component {
   render() {
     return (
       <>
-        <MDBRow className="mb-4">
-          <MDBCol xl="12" md="12" className="mb-r">
-            <MDBCard className="cascading-admin-card">
-              <MDBCardHeader>
-                <div className="admin-up">
-                  <MDBIcon icon="hand-holding-usd" className="primary-color" />
-                  <h1 className="m-3 text-center">Bid Dashboard</h1>
-                  <MDBRow style={{ margin: -20 }}>
-                    <MDBCol md="4" className="ml-auto mb-4">
-                      <MDBCard className="mb-4">
-                        <MDBCardHeader>Statistics</MDBCardHeader>
-                        <MDBCardBody>
-                          <MDBListGroup className="list-group-flush">
-                            <MDBListGroupItem>
-                              Active Bids
-                              <MDBBadge color="primary-color" pill className="float-right">
-                                <CountUp start={0} end={this.state.selectOptions.length} duration={5} />
-                              </MDBBadge>
-                            </MDBListGroupItem>
-                          </MDBListGroup>
-                        </MDBCardBody>
-                      </MDBCard>
-                    </MDBCol>
-                  </MDBRow>
-                </div>
-              </MDBCardHeader>
-              <MDBCardBody>
-                <MDBRow>
-                  {this.state.bidProfile !== null &&
-                    this.state.bidProfile.map(
-                      (c, index) =>
-                        c.label !== null &&
-                        typeof c.value !== "object" && (
-                          <MDBCol md="2" key={c.label + index}>
-                            <p className="h5 mb-1">{c.label}: </p>
-                            <div className="text-muted">{c.value}</div>
-                          </MDBCol>
-                        )
-                    )}
-                </MDBRow>
-                <MDBRow>
-                  {this.state.bidProfile === null ? (
-                    <MDBCol>
-                      {sessionStorage.getItem("/bid") >= 2 && (
-                        <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
-                          Bids
-                        </Link>
-                      )}
-                      {sessionStorage.getItem("/bid/trips") >= 2 && (
-                        <Link to="trips" className="btn btn-primary btn-sm btn-outline-info">
-                          Trips
-                        </Link>
-                      )}
-                      {sessionStorage.getItem("/bid/ratesheets") >= 2 && (
-                        <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info">
-                          Rate Sheets
-                        </Link>
-                      )}
-                      {sessionStorage.getItem("/bid/routes") >= 2 && (
-                        <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
-                          Routes
-                        </Link>
-                      )}
-                    </MDBCol>
-                  ) : (
-                    <MDBCol>
-                      {sessionStorage.getItem("/bid/routes") >= 2 && (
-                        <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
-                          Routes
-                        </Link>
-                      )}
-                      {sessionStorage.getItem("/bid/ratesheets") >= 2 && (
-                        <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info float-right">
-                          Rate Sheets
-                        </Link>
-                      )}
-                      {sessionStorage.getItem("/bid/trips") >= 2 && (
-                        <Link to="trips" className="btn btn-primary btn-sm btn-outline-info float-right">
-                          Trips
-                        </Link>
-                      )}
-                      {sessionStorage.getItem("/bid") >= 2 && (
-                        <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info float-right">
-                          Bids
-                        </Link>
-                      )}
-                    </MDBCol>
+        <MDBCard className="cascading-admin-card mb-4">
+          <MDBCardHeader>
+            <div className="admin-up">
+              <MDBIcon icon="hand-holding-usd" className="primary-color" />
+              <MDBCard className="w-25 ml-auto" style={{ marginTop: "-50px" }}>
+                <MDBCardHeader>Statistics</MDBCardHeader>
+                <MDBCardBody>
+                  <MDBListGroup className="list-group-flush">
+                    <MDBListGroupItem>
+                      Active Bids
+                      <MDBBadge color="primary-color" pill className="float-right">
+                        <CountUp start={0} end={this.state.selectOptions.length} duration={5} />
+                      </MDBBadge>
+                    </MDBListGroupItem>
+                  </MDBListGroup>
+                </MDBCardBody>
+              </MDBCard>
+            </div>
+            <h1 className="m-3 text-center">Bid Dashboard</h1>
+          </MDBCardHeader>
+          <MDBCardBody>
+            <MDBRow>
+              {this.state.bidProfile !== null &&
+                this.state.bidProfile.map(
+                  (c, index) =>
+                    c.label !== null &&
+                    typeof c.value !== "object" && (
+                      <MDBCol md="2" key={c.label + index}>
+                        <p className="h5 mb-1">{c.label}: </p>
+                        <div className="text-muted">{c.value}</div>
+                      </MDBCol>
+                    )
+                )}
+            </MDBRow>
+            <MDBRow>
+              {this.state.bidProfile === null ? (
+                <MDBCol>
+                  {sessionStorage.getItem("/bid") >= 2 && (
+                    <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
+                      Bids
+                    </Link>
                   )}
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        </MDBRow>
+                  {sessionStorage.getItem("/bid/trips") >= 2 && (
+                    <Link to="trips" className="btn btn-primary btn-sm btn-outline-info">
+                      Trips
+                    </Link>
+                  )}
+                  {sessionStorage.getItem("/bid/ratesheets") >= 2 && (
+                    <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info">
+                      Rate Sheets
+                    </Link>
+                  )}
+                  {sessionStorage.getItem("/bid/routes") >= 2 && (
+                    <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
+                      Routes
+                    </Link>
+                  )}
+                </MDBCol>
+              ) : (
+                <MDBCol>
+                  {sessionStorage.getItem("/bid/routes") >= 2 && (
+                    <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
+                      Routes
+                    </Link>
+                  )}
+                  {sessionStorage.getItem("/bid/ratesheets") >= 2 && (
+                    <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info float-right">
+                      Rate Sheets
+                    </Link>
+                  )}
+                  {sessionStorage.getItem("/bid/trips") >= 2 && (
+                    <Link to="trips" className="btn btn-primary btn-sm btn-outline-info float-right">
+                      Trips
+                    </Link>
+                  )}
+                  {sessionStorage.getItem("/bid") >= 2 && (
+                    <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info float-right">
+                      Bids
+                    </Link>
+                  )}
+                </MDBCol>
+              )}
+            </MDBRow>
+          </MDBCardBody>
+        </MDBCard>
         <Routing
           props={this.props}
           setSelectedTrip={this.setSelectedTrip}

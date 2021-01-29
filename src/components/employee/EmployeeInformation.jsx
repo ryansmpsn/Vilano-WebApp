@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { Row, Col } from "react-bootstrap";
-import Send from "../../../libs/send";
 import DisplayEmployeeInfo from "./sections/DisplayEmployeeInfo";
 import { useNavigate, useParams } from "react-router";
 import { useToasts } from "react-toast-notifications";
+import Send from "../../libs/send";
 
 function EmployeeInformation(props) {
   const { addToast } = useToasts();
