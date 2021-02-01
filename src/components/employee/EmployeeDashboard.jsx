@@ -86,15 +86,11 @@ function EmployeeDashboard(props) {
         </NavItem>
       </Nav>
 
-      <Card className="mt-4">
-        <Card.Body>
-          <Routes>
-            <Route path="assignment" element={<EmployeeContracts contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
-            <Route path=":employeeId" element={<EmployeeInformation contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
-            <Navigate from="/employee" to="/employee/employee" />
-          </Routes>
-        </Card.Body>
-      </Card>
+      <Routes>
+        <Route path="assignment" element={<EmployeeContracts contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
+        <Route path=":employeeId" element={<EmployeeInformation contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
+        <Navigate from="/employee" to="/employee/employee" />
+      </Routes>
     </>
   );
 }

@@ -13,13 +13,15 @@ class BidDashboard extends Component {
     super(props);
     this.state = {
       accessLevel: NavPerm.nav_perm_check(),
-      selectOptions: [],
+      selectOptions: null,
       bidSearchCode: { bid_name: [] },
       selectedBidId: "null",
       selectedBid: "",
       selectedTrip: "",
       bidProfile: null,
       isSearching: false,
+      contentInputRestrictions: null,
+      allBids: null,
     };
   }
 
@@ -62,9 +64,7 @@ class BidDashboard extends Component {
       this.setState({ isSearching: false });
     });
   };
-  getSelectOptions() {
-    return Send.get("/Bid/Dropdowns/Bid/All", this.props);
-  }
+
   addSelectOption = (e) => {
     let options = this.state.selectOptions;
     let newOption = { label: e, value: options.length + 1 };
@@ -74,9 +74,21 @@ class BidDashboard extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    return Send.get("/Bid/BidIDs", this.props).then((res) => {
+    Send.get("/Bid/BidIDs", this.props).then((res) => {
       if (this._isMounted) {
         this.setState({ selectOptions: res.data[0].options });
+      }
+    });
+
+    Send.get("/Bid/Dropdowns/Bid/All", this.props).then((res) => {
+      if (this._isMounted) {
+        this.setState({ contentInputRestrictions: res.data });
+      }
+    });
+
+    Send.post("/Bid/Search", "", this.props).then((res) => {
+      if (this._isMounted) {
+        this.setState({ allBids: res.data });
       }
     });
   }
@@ -99,7 +111,7 @@ class BidDashboard extends Component {
                     <MDBListGroupItem>
                       Active Bids
                       <MDBBadge color="primary-color" pill className="float-right">
-                        <CountUp start={0} end={this.state.selectOptions.length} duration={5} />
+                        <CountUp start={0} end={this.state.selectOptions ? this.state.selectOptions.length : 0} duration={5} />
                       </MDBBadge>
                     </MDBListGroupItem>
                   </MDBListGroup>
@@ -184,6 +196,8 @@ class BidDashboard extends Component {
           }}
           getTrips={this.getTrips}
           addSelectOption={this.addSelectOption}
+          contentInputRestrictions={this.state.contentInputRestrictions}
+          allBids={this.state.allBids}
         />
       </>
     );

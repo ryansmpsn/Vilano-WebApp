@@ -10,9 +10,7 @@ function FinalizeBidModal(props) {
   const [isSending, setIsSending] = useState(false);
   const [toggler, setToggler] = useState(null);
 
-  const [date, setDate] = useState(
-    new Date(new Date().getUTCMonth() + 1 + "/" + new Date().getUTCDate() + "/" + new Date().getUTCFullYear())
-  );
+  const [date, setDate] = useState(new Date(new Date().getUTCMonth() + 1 + "/" + new Date().getUTCDate() + "/" + new Date().getUTCFullYear()));
   const [awardedFinalBid, setAwardedFinalBid] = useState([
     // {
     //   columnName: "contract_bid_final_id",
@@ -74,10 +72,12 @@ function FinalizeBidModal(props) {
   }
   return (
     <Modal show={props.show} onHide={props.closeModal} centered backdrop={"static"}>
-      <Modal.Header closeButton> Finalize Bid: {props.contract[10].value}</Modal.Header>
+      <Modal.Header closeButton>
+        <h4 className="mb-0">Finalize Bid: {props.contract[10].value}</h4>
+      </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Row className="justify-content-md-center">
+          <Form.Row className="px-3">
             <Form.Group as={Col} md="8">
               <FormLabel>Bid Status: </FormLabel>
               <Select
@@ -92,6 +92,7 @@ function FinalizeBidModal(props) {
             {toggler === 1 && (
               <Form.Group as={Col} md="8">
                 <FormLabel>Effective Date: </FormLabel>
+                <br />
                 <DatePicker
                   onChange={(e) => {
                     var object = awardedFinalBid;
@@ -138,7 +139,14 @@ function FinalizeBidModal(props) {
       </Modal.Body>
       {toggler !== null && (
         <Modal.Footer>
-          {isSending ? <Spinner animation="border" variant="primary" /> : <Button onClick={() => handleSubmit()}> Save </Button>}
+          {isSending ? (
+            <Spinner animation="border" variant="primary" />
+          ) : (
+            <Button onClick={() => handleSubmit()} variant="outline-primary">
+              {" "}
+              Save{" "}
+            </Button>
+          )}
         </Modal.Footer>
       )}
     </Modal>

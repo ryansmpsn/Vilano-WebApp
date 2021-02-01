@@ -5,6 +5,7 @@ import Send from "../../libs/send";
 import { useToasts } from "react-toast-notifications";
 import DisplayContractEmployee from "./sections/DisplayContractEmployees";
 import ContractTable from "./sections/ContractTable";
+import { Jumbotron } from "react-bootstrap";
 
 function EmployeeContracts(props) {
   const { addToast } = useToasts();
@@ -116,7 +117,7 @@ function EmployeeContracts(props) {
   }
 
   return (
-    <>
+    <Jumbotron>
       <Row className="mb-4 justify-content-md-center">
         <Col md="4">
           <Select
@@ -139,12 +140,7 @@ function EmployeeContracts(props) {
           />
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <h2 className="text-center">Employees Attached to Selected Contract</h2>
-          <hr />
-        </Col>
-      </Row>
+      <hr />
       <Row className="justify-content-md-center">
         {isLoading ? (
           <Col>
@@ -174,7 +170,7 @@ function EmployeeContracts(props) {
           </>
         )}
       </Row>
-      <hr />
+
       {allModifiedEmployees && allModifiedEmployees.length !== 0 && (
         <Row>
           <Col className="text-center">
@@ -184,7 +180,7 @@ function EmployeeContracts(props) {
           </Col>
         </Row>
       )}
-    </>
+    </Jumbotron>
   );
 }
 

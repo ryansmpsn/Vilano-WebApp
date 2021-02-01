@@ -190,14 +190,16 @@ function ContractCards(props) {
             </Button>
           )}
         </Card.Footer>
-        <Documents
-          showModal={showDocumentModal}
-          closeModal={closeDocumentModal}
-          endpoint="/Contract/FileUpload"
-          fileTypes={props.inputRestrictions[4].options}
-          uploadData={[{ columnName: "contract_id", inputType: null, label: null, updatedValue: null, value: contract[0].updatedValue }]}
-          modalName={"Upload Document to " + contract[6].label + " " + contract[6].value}
-        />
+        {props.type !== "bid" && (
+          <Documents
+            showModal={showDocumentModal}
+            closeModal={closeDocumentModal}
+            endpoint="/Contract/FileUpload"
+            fileTypes={props.inputRestrictions[4].options}
+            uploadData={[{ columnName: "contract_id", inputType: null, label: null, updatedValue: null, value: contract[0].updatedValue }]}
+            modalName={"Upload Document to " + contract[6].label + " " + contract[6].value}
+          />
+        )}
         <UpsertContractModal
           modalName={"Edit " + props.type}
           contract={contract}
@@ -209,7 +211,7 @@ function ContractCards(props) {
             return props.submitAction(editContent);
           }}
         />
-        {sessionStorage.getItem("/bid") >= 3 && (
+        {sessionStorage.getItem("/bid") >= 3 && props.bidOptions && (
           <>
             <CreateBidModal show={showBidModal} closeModal={closeBidModal} appProps={props.appProps} contractId={contract[0].updatedValue} externalContractCode={contract[6].updatedValue} bidOptions={props.bidOptions} />
 

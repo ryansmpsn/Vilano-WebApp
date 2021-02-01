@@ -11,14 +11,13 @@ function ContractData(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [isSearching, setSearching] = useState(false);
   const [tableView, setTableView] = useState(true);
-  const [contractSearch] = useState(props.contractSearch);
   const [showModal, setShowModal] = useState(false);
   const [bidOptions, setBidOptions] = useState(null);
 
   function search() {
     setTableView(false);
     props
-      .SearchFunction(contractSearch)
+      .SearchFunction(props.contractSearch)
       .then((res) => {
         setIsLoading(false);
         setSearching(false);
@@ -35,18 +34,13 @@ function ContractData(props) {
     }
   }
 
-  function show_all() {
-    setTableView(true);
-    setContractData(props.allContracts);
-  }
-
   function doSetContractSearch(newContract, keyValue) {
     let getValue = [];
     newContract !== null &&
       newContract.map((item, index) => {
         return getValue.push(item.label);
       });
-    let tempCon = contractSearch;
+    let tempCon = props.contractSearch;
     tempCon[keyValue] = getValue;
     props.setContractSearchCode(tempCon);
   }
@@ -89,10 +83,10 @@ function ContractData(props) {
                 <Spinner animation="border" variant="primary" />
               ) : (
                 <>
-                  <Button type="submit" variant="outline-primary" disabled={contractSearch.external_contract_code.length === 0}>
+                  <Button type="submit" variant="outline-primary" disabled={props.contractSearch.external_contract_code.length === 0}>
                     Search
                   </Button>
-                  <Button disabled={isSearching} onClick={show_all} variant="outline-primary">
+                  <Button disabled={isSearching} onClick={() => setTableView(true)} variant="outline-primary">
                     Show All
                   </Button>
                   {sessionStorage.getItem("/contract") >= 3 && (
@@ -111,19 +105,17 @@ function ContractData(props) {
         props.allContracts === null ? (
           <Spinner animation="border" variant="primary" />
         ) : (
-          props.inputRestrictions !== null && (
-            <ContractTable
-              type={"Contract"}
-              getTrips={props.getTrips}
-              setSelectedContract={props.setSelectedContract}
-              setSelectedContractId={props.setSelectedContractId}
-              contractData={props.allContracts}
-              inputRestrictions={props.contentInputRestrictions}
-              submitAction={(editContract) => {
-                return props.contractEditSubmitAction(editContract);
-              }}
-            />
-          )
+          <ContractTable
+            type={"Contract"}
+            getTrips={props.getTrips}
+            setSelectedContract={props.setSelectedContract}
+            setSelectedContractId={props.setSelectedContractId}
+            contractData={props.allContracts}
+            inputRestrictions={props.contentInputRestrictions}
+            submitAction={(editContract) => {
+              return props.contractEditSubmitAction(editContract);
+            }}
+          />
         )
       ) : (
         !isLoading && (

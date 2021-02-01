@@ -41,10 +41,6 @@ class ContractDashboard extends Component {
     return Send.post("/Contract/Search", contractSearch, this.props);
   };
 
-  show_all() {
-    return Send.post("/Contract/Search", "", this.props);
-  }
-
   getTrips = (e) => {
     this.setState({ isSearching: true });
     return Send.get(e, this.props).then((res) => {

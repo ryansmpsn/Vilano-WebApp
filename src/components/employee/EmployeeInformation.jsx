@@ -5,6 +5,7 @@ import DisplayEmployeeInfo from "./sections/DisplayEmployeeInfo";
 import { useNavigate, useParams } from "react-router";
 import { useToasts } from "react-toast-notifications";
 import Send from "../../libs/send";
+import { Jumbotron } from "react-bootstrap";
 
 function EmployeeInformation(props) {
   const { addToast } = useToasts();
@@ -118,7 +119,7 @@ function EmployeeInformation(props) {
     setAllModifiedContracts(modifiedContracts);
   }
   return (
-    <>
+    <Jumbotron>
       <Row className=" mb-4 justify-content-md-center">
         <Col md="4">
           <Select
@@ -134,6 +135,7 @@ function EmployeeInformation(props) {
           <Select isMulti value={selectedContracts} options={props.contractIds} placeholder={"Add Additional Contracts"} onChange={(x) => handleContractSelect(x)} isDisabled={isLoading || employeeData === null} />
         </Col>
       </Row>
+      <hr />
       <Row className="mt-5">
         <DisplayEmployeeInfo
           isLoading={isLoading}
@@ -148,7 +150,7 @@ function EmployeeInformation(props) {
           setAllModifiedContracts={setAllModifiedContracts}
         />
       </Row>
-    </>
+    </Jumbotron>
   );
 }
 

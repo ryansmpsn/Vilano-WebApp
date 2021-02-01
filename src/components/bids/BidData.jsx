@@ -10,28 +10,24 @@ function BidData(props) {
   const [bidData, setBidData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSearching, setSearching] = useState(false);
-  const [isGetAll, setGetAll] = useState(false);
-  const [tableView, setTableView] = useState(false);
-  const [bidSearch] = useState(props.bidSearch);
-  const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
+  const [tableView, setTableView] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [bidOptions, setBidOptions] = useState([]);
+  const [bidOptions, setBidOptions] = useState(null);
   const [bidFinalOptions, setBidFinalOptions] = useState(null);
 
   function search() {
     setTableView(false);
     props
-      .SearchFunction(bidSearch)
+      .SearchFunction(props.bidSearch)
       .then((res) => {
+        setIsLoading(false);
+        setSearching(false);
         setBidData(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    props.getSelectOptions().then((res) => {
-      setContentInputRestrictions(res.data);
-      setIsLoading(false);
-    });
+
     Send.get("/Bid/Dropdowns/BidNames/All").then((response) => {
       setBidOptions(response.data);
     });
@@ -42,55 +38,22 @@ function BidData(props) {
     }
   }
 
-  function show_all() {
-    setTableView(true);
-    props
-      .showAll()
-      .then((res) => {
-        setBidData(res.data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    props.getSelectOptions().then((res) => {
-      setContentInputRestrictions(res.data);
-      setSearching(false);
-      setGetAll(false);
-    });
-  }
-  function addBid() {
-    setIsLoading(true);
-    setSearching(true);
-    props.getSelectOptions().then((res) => {
-      setContentInputRestrictions(res.data);
-      setIsLoading(false);
-      setSearching(false);
-      openModal();
-    });
-  }
-
   function doSetBidSearch(newBid, keyValue) {
     let getValue = [];
     newBid !== null &&
       newBid.map((item, index) => {
         return getValue.push(item.label);
       });
-    let tempCon = bidSearch;
+    let tempCon = props.bidSearch;
     tempCon[keyValue] = getValue;
     props.setBidSearchCode(tempCon);
   }
 
-  function handleSearch(event, all = false) {
+  function handleSearch(event) {
     event.preventDefault();
     setIsLoading(true);
-    if (!all) {
-      setSearching(true);
-      search();
-    } else {
-      show_all();
-      setGetAll(true);
-    }
+    setSearching(true);
+    search();
   }
 
   function openModal() {
@@ -117,27 +80,21 @@ function BidData(props) {
                 onChange={(x) => {
                   doSetBidSearch(x, "bid_name");
                 }}
-                isLoading={isLoading & isSearching}
-                isDisabled={isGetAll | (isSearching & isLoading)}
+                isLoading={(isLoading & isSearching) | (props.selectOptions === null)}
+                isDisabled={(isSearching & isLoading) | (props.selectOptions === null)}
               />
-              {(isLoading & isSearching) | isGetAll ? (
+              {isLoading & isSearching ? (
                 <Spinner animation="border" variant="primary" />
               ) : (
                 <>
-                  <Button type="submit" variant="outline-primary" disabled={isGetAll || bidSearch.bid_name === 0}>
+                  <Button type="submit" variant="outline-primary" disabled={props.bidSearch.bid_name.length === 0}>
                     Search
                   </Button>
-                  <Button
-                    disabled={isGetAll && isSearching}
-                    onClick={(e) => {
-                      handleSearch(e, true);
-                    }}
-                    variant="outline-primary"
-                  >
+                  <Button disabled={isSearching} onClick={() => setTableView(true)} variant="outline-primary">
                     Show All
                   </Button>
                   {sessionStorage.getItem("/bid") >= 3 && (
-                    <Button onClick={addBid} variant="outline-warning" className="float-right">
+                    <Button onClick={openModal} variant="outline-warning" className="float-right">
                       Add Bid
                     </Button>
                   )}
@@ -148,44 +105,48 @@ function BidData(props) {
         </Row>
       </Container>
       <hr />
-      {tableView
-        ? !isLoading && (
-            <ContractTable
-              type={"Bid"}
-              getTrips={props.getTrips}
-              setSelectedBid={props.setSelectedBid}
-              setSelectedBidId={props.setSelectedBidId}
-              contractData={bidData}
-              inputRestrictions={contentInputRestrictions}
-              submitAction={(editBid) => {
-                return props.bidEditSubmitAction(editBid);
-              }}
-            />
-          )
-        : !isLoading && (
-            <div className="bid">
-              <Row key="topRow" className="show-grid">
-                {bidData !== [] &&
-                  bidData.map((c, index) => (
-                    <ContractCards
-                      key={index + "bid"}
-                      type={"Bid"}
-                      getTrips={props.getTrips}
-                      setSelectedBid={props.setSelectedBid}
-                      setSelectedBidId={props.setSelectedBidId}
-                      Contract={c}
-                      inputRestrictions={contentInputRestrictions}
-                      submitAction={(editBid) => {
-                        return props.bidEditSubmitAction(editBid);
-                      }}
-                      accessLevel={props.accessLevel}
-                      bidOptions={bidOptions}
-                      bidFinalOptions={bidFinalOptions}
-                    />
-                  ))}
-              </Row>
-            </div>
-          )}
+      {tableView ? (
+        props.allBids === null ? (
+          <Spinner animation="border" variant="primary" />
+        ) : (
+          <ContractTable
+            type={"Bid"}
+            getTrips={props.getTrips}
+            setSelectedBid={props.setSelectedBid}
+            setSelectedBidId={props.setSelectedBidId}
+            contractData={props.allBids}
+            inputRestrictions={props.contentInputRestrictions}
+            submitAction={(editBid) => {
+              return props.bidEditSubmitAction(editBid);
+            }}
+          />
+        )
+      ) : (
+        !isLoading && (
+          <div className="bid">
+            <Row key="topRow" className="show-grid">
+              {bidData !== [] &&
+                bidData.map((c, index) => (
+                  <ContractCards
+                    key={index + "bid"}
+                    type={"Bid"}
+                    getTrips={props.getTrips}
+                    setSelectedBid={props.setSelectedBid}
+                    setSelectedBidId={props.setSelectedBidId}
+                    Contract={c}
+                    inputRestrictions={props.contentInputRestrictions}
+                    submitAction={(editBid) => {
+                      return props.bidEditSubmitAction(editBid);
+                    }}
+                    accessLevel={props.accessLevel}
+                    bidOptions={bidOptions}
+                    bidFinalOptions={bidFinalOptions}
+                  />
+                ))}
+            </Row>
+          </div>
+        )
+      )}
       {!isLoading && (
         <UpsertContractModal
           modalName={"New Bid"}
@@ -308,7 +269,7 @@ function BidData(props) {
             { columnName: "modified_by", inputType: null, label: null, updatedValue: null, value: null },
             { columnName: "employee_name", inputType: null, label: "Last Modified By", updatedValue: null, value: "" },
           ]}
-          inputRestrictions={contentInputRestrictions}
+          inputRestrictions={props.contentInputRestrictions}
           show={showModal}
           closeModal={closeModal}
           accessLevel={props.accessLevel}
