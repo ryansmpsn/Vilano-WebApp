@@ -6,8 +6,6 @@ import UpsertContractModal from "./UpsertContractModal";
 import CreateBidModal from "./CreateBidModal";
 import FinalizeBidModal from "./FinalizeBidModal";
 import Documents from "../util/Documents";
-import { ListGroup } from "react-bootstrap";
-import { ListGroupItem } from "react-bootstrap";
 import Send from "../../libs/send";
 
 function ContractCards(props) {
@@ -97,29 +95,25 @@ function ContractCards(props) {
           (c, index) =>
             c.label !== null &&
             (c.label === "Contract No." || c.label === "Bid Name") && (
-              <Card.Header key={index + "header"} as="h3">
+              <Card.Header key={index + "header"} as="h4">
                 {c.label} {c.value}
               </Card.Header>
             )
         )}
         <Card.Body>
-          <Card.Title className="mb-4 text-center">
-            <h2>Contract Information</h2>
-          </Card.Title>
           <Row>
             <Col md="10">
               <Row>
                 {contract.map(
                   (c, index) =>
                     c.label !== null && (
-                      <Col md="2" key={index + "body"}>
-                        <p className="m-0" style={{ minHeight: "2.5em" }}>
+                      <Col md="3" key={index + "body"}>
+                        <p className="mx-0 my-2 border-bottom" style={{ minHeight: "2.5em" }}>
                           {c.label} :<br />
                           <small className="text-muted m-0" style={{ whiteSpace: "nowrap" }}>
-                            {c.value}
+                            {c.value || "-"}
                           </small>
                         </p>
-                        <hr className="my-2" />
                       </Col>
                     )
                 )}
@@ -127,8 +121,8 @@ function ContractCards(props) {
             </Col>
             <Col md="2" className="text-center p-0">
               <h5>Contract Documents</h5>
-              <p className="text-muted small">No Documents.</p>
-              <ListGroup className="text-left overflow-auto" style={{ height: "15em" }}>
+              <p className="text-muted small">Search for documents attached to this contract.</p>
+              {/* <ListGroup className="text-left overflow-auto" style={{ height: "15em" }}>
                 <ListGroupItem>Item</ListGroupItem>
                 <ListGroupItem>Item</ListGroupItem>
                 <ListGroupItem>Item</ListGroupItem>
@@ -139,7 +133,7 @@ function ContractCards(props) {
                 <ListGroupItem>Item</ListGroupItem>
                 <ListGroupItem>Item</ListGroupItem>
                 <ListGroupItem>Item</ListGroupItem>
-              </ListGroup>
+              </ListGroup> */}
               {searching ? (
                 <Spinner animation="border" variant="primary" />
               ) : (
@@ -164,7 +158,7 @@ function ContractCards(props) {
                 setSelectedId();
               }}
               to={"../trips"}
-              className="btn btn-primary"
+              className="btn btn-outline-primary"
             >
               View Trips
             </Link>
@@ -175,7 +169,7 @@ function ContractCards(props) {
                 setSelectedId();
               }}
               to={"../ratesheets"}
-              className="btn btn-primary"
+              className="btn btn-outline-primary"
             >
               View Rate Information
             </Link>

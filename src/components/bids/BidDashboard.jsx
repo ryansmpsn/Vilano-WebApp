@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Routing from "./Router";
 import Send from "../../libs/send";
 import CountUp from "react-countup";
-import { Link } from "react-router-dom";
 import NavPerm from "../../libs/NavPerms";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
 
@@ -104,13 +103,15 @@ class BidDashboard extends Component {
                   </MDBListGroup>
                 </MDBCardBody>
               </MDBCard>
+              <h2 className="mb-5 text-center" style={{ marginTop: "-50px" }}>
+                Bid Dashboard
+              </h2>
             </div>
-            <h1 className="m-3 text-center">Bid Dashboard</h1>
           </MDBCardHeader>
-          <MDBCardBody>
-            <MDBRow>
-              {this.state.bidProfile !== null &&
-                this.state.bidProfile.map(
+          {this.state.bidProfile !== null && (
+            <MDBCardBody>
+              <MDBRow>
+                {this.state.bidProfile.map(
                   (c, index) =>
                     c.label !== null &&
                     typeof c.value !== "object" && (
@@ -120,57 +121,9 @@ class BidDashboard extends Component {
                       </MDBCol>
                     )
                 )}
-            </MDBRow>
-            <MDBRow>
-              {this.state.bidProfile === null ? (
-                <MDBCol>
-                  {sessionStorage.getItem("/bid") >= 2 && (
-                    <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
-                      Bids
-                    </Link>
-                  )}
-                  {sessionStorage.getItem("/bid/trips") >= 2 && (
-                    <Link to="trips" className="btn btn-primary btn-sm btn-outline-info">
-                      Trips
-                    </Link>
-                  )}
-                  {sessionStorage.getItem("/bid/ratesheets") >= 2 && (
-                    <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info">
-                      Rate Sheets
-                    </Link>
-                  )}
-                  {sessionStorage.getItem("/bid/routes") >= 2 && (
-                    <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
-                      Routes
-                    </Link>
-                  )}
-                </MDBCol>
-              ) : (
-                <MDBCol>
-                  {sessionStorage.getItem("/bid/routes") >= 2 && (
-                    <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
-                      Routes
-                    </Link>
-                  )}
-                  {sessionStorage.getItem("/bid/ratesheets") >= 2 && (
-                    <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info float-right">
-                      Rate Sheets
-                    </Link>
-                  )}
-                  {sessionStorage.getItem("/bid/trips") >= 2 && (
-                    <Link to="trips" className="btn btn-primary btn-sm btn-outline-info float-right">
-                      Trips
-                    </Link>
-                  )}
-                  {sessionStorage.getItem("/bid") >= 2 && (
-                    <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info float-right">
-                      Bids
-                    </Link>
-                  )}
-                </MDBCol>
-              )}
-            </MDBRow>
-          </MDBCardBody>
+              </MDBRow>
+            </MDBCardBody>
+          )}
         </MDBCard>
         <Routing
           props={this.props}

@@ -36,29 +36,17 @@ function SideNavAuth(props) {
         </NavLink>
       )}
 
+      {/* 
+      admin section delayed
+
       {sessionStorage.getItem("/admin") >= 2 && (
-        <NavLink to="/administration" activeClassName="activeClass" onClick={() => handleMenuToggle()}>
-          <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-            <MDBIcon icon="tools" className="mr-3" />
-            Administration
-          </ListGroupItem>
-        </NavLink>
-      )}
+      )} */}
 
       {sessionStorage.getItem("/axios") >= 2 && (
         <NavLink to="/axios" activeClassName="activeClass">
           <ListGroupItem style={{ borderWidth: "0 0 1px" }} onClick={() => handleMenuToggle()}>
             <div className="fas fa-vials mr-3" />
             Test Endpoint
-          </ListGroupItem>
-        </NavLink>
-      )}
-
-      {sessionStorage.getItem("/testpage") >= 2 && (
-        <NavLink to="/testpage" activeClassName="activeClass">
-          <ListGroupItem style={{ borderWidth: "0 0 1px" }} onClick={() => handleMenuToggle()}>
-            <div className="fas fa-vial mr-3" />
-            UI Sandbox
           </ListGroupItem>
         </NavLink>
       )}

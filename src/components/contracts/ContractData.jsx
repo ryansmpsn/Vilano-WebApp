@@ -22,7 +22,7 @@ function ContractData(props) {
     props
       .SearchFunction(contractSearch)
       .then((res) => {
-        console.log(res);
+        setContractData(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -120,7 +120,7 @@ function ContractData(props) {
                 <Spinner animation="border" variant="primary" />
               ) : (
                 <>
-                  <Button type="submit" disabled={isGetAll || contractSearch.external_contract_code.length === 0}>
+                  <Button type="submit" variant="outline-primary" disabled={isGetAll || contractSearch.external_contract_code.length === 0}>
                     Search
                   </Button>
                   <Button
@@ -128,11 +128,12 @@ function ContractData(props) {
                     onClick={(e) => {
                       handleSearch(e, true);
                     }}
+                    variant="outline-primary"
                   >
                     Show All
                   </Button>
                   {sessionStorage.getItem("/contract") >= 3 && (
-                    <Button onClick={addContract} variant="outline-warning">
+                    <Button onClick={addContract} variant="outline-warning" className="float-right">
                       Add Contract
                     </Button>
                   )}

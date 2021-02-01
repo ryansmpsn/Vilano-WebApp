@@ -21,11 +21,7 @@ function PortalPage() {
   ];
   const webLinks = [
     ["tablet-alt", "https://my.geotab.com/", <img className="img-fluid d-block mx-auto" src={geotabLogo} alt="" />],
-    [
-      "tablet-alt",
-      "https://secure.smartdrive.net/login",
-      <img className="img-fluid d-block mx-auto" src={smartdriveLogo} alt="" />,
-    ],
+    ["tablet-alt", "https://secure.smartdrive.net/login", <img className="img-fluid d-block mx-auto" src={smartdriveLogo} alt="" />],
     ["tablet-alt", "https://cloud.samsara.com/signin", <img className="img-fluid d-block mx-auto" src={samsaraLogo} alt="" />],
     ["link", "https://secure4.saashr.com/ta/6163332.login?rnd=NXP", "Benefits / Kronos Link"],
     ["link", "https://dashboard.tenstreet.com/", "Tenstreet Website"],
@@ -35,55 +31,23 @@ function PortalPage() {
     ["hands-helping", "https://support.vilanosvs.com/", "It Support Center"],
   ];
   const corporateContacts = [
-    [
-      "list-ul",
-      "https://docs.google.com/spreadsheets/d/1yZIhdj6XNdPOeI8YT8NCYtsSEzJE8Fjy2Ak3v44p4KY/edit#gid=1288118353",
-      "Manager Contact List",
-    ],
-    [
-      "list-ul",
-      "https://docs.google.com/spreadsheets/d/1EceSyhb7TvJ5WLMltMEggOV-hQ1NU2IfRYgPEkJfj18/edit#gid=0",
-      "Corporate Office Extension & Direct Line List",
-    ],
+    ["list-ul", "https://docs.google.com/spreadsheets/d/1yZIhdj6XNdPOeI8YT8NCYtsSEzJE8Fjy2Ak3v44p4KY/edit#gid=1288118353", "Manager Contact List"],
+    ["list-ul", "https://docs.google.com/spreadsheets/d/1EceSyhb7TvJ5WLMltMEggOV-hQ1NU2IfRYgPEkJfj18/edit#gid=0", "Corporate Office Extension & Direct Line List"],
     ["map-pin", "https://drive.google.com/open?id=1iBRuiGvapPYlkWsiNSgIKVWSrCoLNipG", "Postal Fleet Ryder Locations"],
     ["map-pin", "https://drive.google.com/open?id=1_4VwXucpoLCrsCzxeeg1msLw_kNkCByq", "The Stageline Co Ryder Locations"],
   ];
   const regulatory = [
-    [
-      "list-ul",
-      "https://docs.google.com/spreadsheets/d/1oQxN4xEG4eKNEpkIxQEwBCLBWTHrLlq4wruGLNPnvS4/edit",
-      "Equipment List 2020",
-    ],
-    [
-      "exclamation-circle",
-      "https://sites.google.com/postalfleetsvs.com/vmsi/home",
-      "Physical Damage - Incident Reference Report",
-    ],
-    [
-      "clock",
-      "https://docs.google.com/spreadsheets/d/1qVkfgy29zEzUuya5inaACaK65JE5EfRDXPYUFFwUOBU/edit?ts=584045ce#gid=1967734421",
-      "Floater Per Diem Schedule",
-    ],
+    ["list-ul", "https://docs.google.com/spreadsheets/d/1oQxN4xEG4eKNEpkIxQEwBCLBWTHrLlq4wruGLNPnvS4/edit", "Equipment List 2020"],
+    ["exclamation-circle", "https://sites.google.com/postalfleetsvs.com/vmsi/home", "Physical Damage - Incident Reference Report"],
+    ["clock", "https://docs.google.com/spreadsheets/d/1qVkfgy29zEzUuya5inaACaK65JE5EfRDXPYUFFwUOBU/edit?ts=584045ce#gid=1967734421", "Floater Per Diem Schedule"],
     ["pencil-alt", "https://www.buyerquest.net/crownconnect/customer/account/login/", "Supply Ordering"],
   ];
   const recruiting = [
-    [
-      "folder-open",
-      "https://docs.google.com/forms/d/e/1FAIpQLSe2SPzTen7bLAMXPmlr5DG4GdSs17bL7FGB4FU5MldHwo5pbQ/viewform",
-      "Job Request Form",
-    ],
+    ["folder-open", "https://docs.google.com/forms/d/e/1FAIpQLSe2SPzTen7bLAMXPmlr5DG4GdSs17bL7FGB4FU5MldHwo5pbQ/viewform", "Job Request Form"],
     ["check-square", "https://drive.google.com/file/d/1m7qgAy1Z2hLRMFvZOdSYUyh6niwlViXQ/view", "Orientaion Checklist"],
     ["folder-open", "'https://docs.wixstatic.com/ugd/ffaab1_950601c667d34fa7a13ba5711e673f5d.pdf", "Roadtest Form"],
-    [
-      "truck-moving",
-      "https://drive.google.com/file/d/1Lb4ZDFbYIr5iTfyUpaWtXAwDXBNMBjBd/view",
-      "The Stageline Company Driver Sheet",
-    ],
-    [
-      "truck-moving",
-      "https://drive.google.com/file/d/1skHc4yNPS6uSTJ0HpxmzGsDf_ivk6-2L/view",
-      "Postal Fleet Services, Inc. Driver Sheet",
-    ],
+    ["truck-moving", "https://drive.google.com/file/d/1Lb4ZDFbYIr5iTfyUpaWtXAwDXBNMBjBd/view", "The Stageline Company Driver Sheet"],
+    ["truck-moving", "https://drive.google.com/file/d/1skHc4yNPS6uSTJ0HpxmzGsDf_ivk6-2L/view", "Postal Fleet Services, Inc. Driver Sheet"],
   ];
   const payroll = [
     ["pencil-alt", "https://drive.google.com/file/d/0BzQbmoWt8sMZSnpkVkZYbnFzamh3M1N3ak5hYlgxSmpDNjF3/view", "Driver Paperwork"],
@@ -92,47 +56,19 @@ function PortalPage() {
   ];
   const humanResources = [
     ["book", "https://secure4.saashr.com/ta/6163332.login?rnd=NXP", "Policy Manual"],
-    [
-      "exclamation-triangle",
-      "https://drive.google.com/file/d/1zsNYyUt3Ly-2EU26BAKrR4_K4tSgI3m6/view",
-      "Warning and Progressive Discipline Plan",
-    ],
+    ["exclamation-triangle", "https://drive.google.com/file/d/1zsNYyUt3Ly-2EU26BAKrR4_K4tSgI3m6/view", "Warning and Progressive Discipline Plan"],
     ["tree", "https://docs.google.com/document/d/1VwDelj_vXyu4-J0xU3zY_fL6ApRvaRpjP0JiY-Zy6S4/edit", "Vacation Request Form"],
   ];
   const claims = [
     ["exclamation-circle", "https://claims.vilanosvs.com/", "Auto Claim"],
-    [
-      "exclamation-circle",
-      "https://drive.google.com/file/d/1P3oPlxa95kDHIjb0RDdvrlgKidq_Rr1F/view?usp=sharing",
-      "Workers Comp Claim",
-    ],
-    [
-      "exclamation-circle",
-      "https://drive.google.com/file/d/1ZL4G8b9wr9NhOAPbDaCU1VBgmdhCHCwm/view?usp=sharing",
-      "Workers Comp Claim (Spanish)",
-    ],
-    [
-      "exclamation-circle",
-      "https://drive.google.com/file/d/1_xgUITSf9s0U0Va-BogO8HTbY2X_9fsq/view",
-      "Report Safety Hazard" + <br /> + "(USPS Facilities)",
-    ],
+    ["exclamation-circle", "https://drive.google.com/file/d/1P3oPlxa95kDHIjb0RDdvrlgKidq_Rr1F/view?usp=sharing", "Workers Comp Claim"],
+    ["exclamation-circle", "https://drive.google.com/file/d/1ZL4G8b9wr9NhOAPbDaCU1VBgmdhCHCwm/view?usp=sharing", "Workers Comp Claim (Spanish)"],
+    ["exclamation-circle", "https://drive.google.com/file/d/1_xgUITSf9s0U0Va-BogO8HTbY2X_9fsq/view", "Report Safety Hazard" + <br /> + "(USPS Facilities)"],
   ];
   const insurance = [
-    [
-      "shield-alt",
-      "https://drive.google.com/drive/folders/17EorEXxbIkDmBbvzZhofhHwsu7bRRCxZ",
-      "2019-2020 Insurance Cards for All States",
-    ],
-    [
-      "shield-alt",
-      "https://drive.google.com/drive/folders/1rCbg0PLRIUtNqrQVBaQqIRMlkRUTfdK5",
-      "2019-2020 Insurance Cards for Michigan",
-    ],
-    [
-      "shield-alt",
-      "https://drive.google.com/drive/folders/1CF72WIGqY8j53uripOI23xwAMbITYRxm",
-      "2019-2020 Insurance Cards for New Jersey",
-    ],
+    ["shield-alt", "https://drive.google.com/drive/folders/17EorEXxbIkDmBbvzZhofhHwsu7bRRCxZ", "2019-2020 Insurance Cards for All States"],
+    ["shield-alt", "https://drive.google.com/drive/folders/1rCbg0PLRIUtNqrQVBaQqIRMlkRUTfdK5", "2019-2020 Insurance Cards for Michigan"],
+    ["shield-alt", "https://drive.google.com/drive/folders/1CF72WIGqY8j53uripOI23xwAMbITYRxm", "2019-2020 Insurance Cards for New Jersey"],
   ];
   const safetyTraining = [
     ["user-shield", "https://sites.google.com/postalfleetsvs.com/2018-required-driver-training/home", "2019 Safety Training"],
@@ -148,37 +84,16 @@ function PortalPage() {
   const geotab = [
     ["link", "https://www.geotab.com/how-to-guides/", "Geotab Training Material"],
     ["link", "https://drive.google.com/file/d/1L2apiFvbv6tl09VZYCv8o0io05CLOBS_/view", "Geotab Quick-Start Guide"],
-    [
-      "link",
-      "https://docs.google.com/presentation/d/1nZBmUk4G2ZkTLJtCLjo8VtW7utFHxroQJmbi2gOWcSk/edit#slide=id.g3bf1e856c4_0_24",
-      "Geotab: Change Time Zone",
-    ],
-    [
-      "link",
-      "https://docs.google.com/presentation/d/15BFcViKEunMp5Swp_nd3ic3nIFIUD-xaQXiiQbfNIeo/edit#slide=id.g3bd0dcce6b_2_0",
-      "Geotab: Correct/Edit HOS Logs",
-    ],
-    [
-      "link",
-      "https://docs.google.com/presentation/d/1OvBMfRxKaZi2Kv97Eooj-p4X74p0BmiiIoo212EpDus/edit#slide=id.g3bd0f5c4e8_3_0",
-      "Geotab: Download HOS",
-    ],
-    [
-      "link",
-      "https://docs.google.com/presentation/d/1IYreOchAKcDKMEAHKLo5GlZfbddYjkBiijxQKfy3xoU/edit#slide=id.g3bf1e856c4_0_24",
-      "Geotab: Log Off Duty",
-    ],
+    ["link", "https://docs.google.com/presentation/d/1nZBmUk4G2ZkTLJtCLjo8VtW7utFHxroQJmbi2gOWcSk/edit#slide=id.g3bf1e856c4_0_24", "Geotab: Change Time Zone"],
+    ["link", "https://docs.google.com/presentation/d/15BFcViKEunMp5Swp_nd3ic3nIFIUD-xaQXiiQbfNIeo/edit#slide=id.g3bd0dcce6b_2_0", "Geotab: Correct/Edit HOS Logs"],
+    ["link", "https://docs.google.com/presentation/d/1OvBMfRxKaZi2Kv97Eooj-p4X74p0BmiiIoo212EpDus/edit#slide=id.g3bd0f5c4e8_3_0", "Geotab: Download HOS"],
+    ["link", "https://docs.google.com/presentation/d/1IYreOchAKcDKMEAHKLo5GlZfbddYjkBiijxQKfy3xoU/edit#slide=id.g3bf1e856c4_0_24", "Geotab: Log Off Duty"],
   ];
 
   return (
     <>
       <MDBContainer>
-        <MDBBreadcrumb
-          light
-          color="aqua-gradient"
-          className="position-fixed"
-          style={{ marginTop: -112, zIndex: 9999, marginLeft: 65 }}
-        >
+        <MDBBreadcrumb light color="aqua-gradient" className="position-fixed" style={{ marginTop: -112, zIndex: 9999, marginLeft: 65 }}>
           {headers.map((item, index) => (
             <BreadcrumbItem key={index} href={"#" + item[1]}>
               {item[0]}
@@ -188,7 +103,7 @@ function PortalPage() {
       </MDBContainer>
       <PortalStyle>
         <header className="masthead">
-          <div className="container">
+          <div className="container-fluid">
             <div className="intro-text">
               <div className="intro-lead-in">Manager</div>
               <div className="intro-heading text-uppercase">Intranet Portal</div>
@@ -197,14 +112,14 @@ function PortalPage() {
         </header>
         {/* WebLinks */}
         <section className="bg-light page-section" id="corporate">
-          <div className="container">
+          <div className="container-fluid">
             <div className="col-lg-12 text-center">
               <h3 className="section-subheading text-muted">Web Links</h3>
               <hr />
             </div>
             <div className="row text-center">
               {webLinks.map((content, index) => (
-                <div key={index} className="col-md-4">
+                <div key={index} className="col-md-3">
                   <span className="fa-stack fa-4x">
                     <i className="fas fa-circle fa-stack-2x text-primary" />
                     <i className={"fas fa-" + content[0] + " fa-stack-1x fa-inverse"} />
@@ -226,7 +141,7 @@ function PortalPage() {
             </div>
             <div className="row text-center">
               {corporateContacts.map((content, index) => (
-                <div key={index} className="col-md-4">
+                <div key={index} className="col-md-3">
                   <span className="fa-stack fa-4x">
                     <i className="fas fa-circle fa-stack-2x text-primary" />
                     <i className={"fas fa-" + content[0] + " fa-stack-1x fa-inverse"} />
@@ -242,7 +157,7 @@ function PortalPage() {
         </section>
         {/* Asset Management */}
         <section className="page-section" id="asset">
-          <div className="container">
+          <div className="container-fluid">
             <div className="row">
               <div className="col-lg-12 text-center">
                 <h2 className="section-heading text-uppercase">Asset Management</h2>
@@ -254,7 +169,7 @@ function PortalPage() {
             </div>
             <div className="row text-center">
               {regulatory.map((content, index) => (
-                <div key={index} className="col-md-4">
+                <div key={index} className="col-md-3">
                   <span className="fa-stack fa-4x">
                     <i className="fas fa-circle fa-stack-2x text-primary" />
                     <i className={"fas fa-" + content[0] + " fa-stack-1x fa-inverse"} />
@@ -270,7 +185,7 @@ function PortalPage() {
         </section>
         {/* Recruiting & Payroll */}
         <section className="bg-light page-section" id="recruiting">
-          <div className="container">
+          <div className="container-fluid">
             <div className="row">
               <div className="col-lg-12 text-center">
                 <h2 className="section-subheading text-uppercase">Recruiting & Payroll</h2>
@@ -279,7 +194,7 @@ function PortalPage() {
               </div>
               <div className="row text-center">
                 {recruiting.map((content, index) => (
-                  <div key={index} className="col-md-4">
+                  <div key={index} className="col-md-3">
                     <span className="fa-stack fa-4x">
                       <i className="fas fa-circle fa-stack-2x text-primary" />
                       <i className={"fas fa-" + content[0] + " fa-stack-1x fa-inverse"} />
@@ -297,7 +212,7 @@ function PortalPage() {
               </div>
               <div className="row text-center">
                 {payroll.map((content, index) => (
-                  <div key={index} className="col-md-4">
+                  <div key={index} className="col-md-3">
                     <span className="fa-stack fa-4x">
                       <i className="fas fa-circle fa-stack-2x text-primary" />
                       <i className={"fas fa-" + content[0] + " fa-stack-1x fa-inverse"} />
@@ -314,7 +229,7 @@ function PortalPage() {
         </section>
         {/* Human Resources */}
         <section className="page-section" id="hr">
-          <div className="container">
+          <div className="container-fluid">
             <div className="row">
               <div className="col-lg-12 text-center">
                 <h2 className="section-subheading text-uppercase">Human Resources</h2>
@@ -323,7 +238,7 @@ function PortalPage() {
               </div>
               <div className="row text-center">
                 {humanResources.map((content, index) => (
-                  <div key={index} className="col-md-4">
+                  <div key={index} className="col-md-3">
                     <span className="fa-stack fa-4x">
                       <i className="fas fa-circle fa-stack-2x text-primary" />
                       <i className={"fas fa-" + content[0] + " fa-stack-1x fa-inverse"} />
@@ -340,7 +255,7 @@ function PortalPage() {
         </section>
         {/* Claims */}
         <section className="bg-light page-section" id="claims">
-          <div className="container">
+          <div className="container-fluid">
             <div className="row">
               <div className="col-lg-12 text-center">
                 <h2 className="section-subheading text-uppercase">Claims, Insurance, & Safety Training</h2>
@@ -349,7 +264,7 @@ function PortalPage() {
               </div>
               <div className="row text-center">
                 {claims.map((content, index) => (
-                  <div key={index} className="col-md-4">
+                  <div key={index} className="col-md-3">
                     <span className="fa-stack fa-4x">
                       <i className="fas fa-circle fa-stack-2x text-primary" />
                       <i className={"fas fa-" + content[0] + " fa-stack-1x fa-inverse"} />
@@ -367,7 +282,7 @@ function PortalPage() {
               </div>
               <div className="row text-center">
                 {insurance.map((content, index) => (
-                  <div key={index} className="col-md-4">
+                  <div key={index} className="col-md-3">
                     <span className="fa-stack fa-4x">
                       <i className="fas fa-circle fa-stack-2x text-primary" />
                       <i className={"fas fa-" + content[0] + " fa-stack-1x fa-inverse"} />
@@ -385,7 +300,7 @@ function PortalPage() {
               </div>
               <div className="row text-center">
                 {safetyTraining.map((content, index) => (
-                  <div key={index} className="col-md-4">
+                  <div key={index} className="col-md-3">
                     <span className="fa-stack fa-4x">
                       <i className="fas fa-circle fa-stack-2x text-primary" />
                       <i className={"fas fa-" + content[0] + " fa-stack-1x fa-inverse"} />
@@ -420,7 +335,7 @@ function PortalPage() {
             </div>
             <div className="row text-center">
               {geotab.map((content, index) => (
-                <div key={index} className="col-md-4">
+                <div key={index} className="col-md-3">
                   <span className="fa-stack fa-4x">
                     <i className="fas fa-circle fa-stack-2x text-primary" />
                     <i className={"fas fa-" + content[0] + " fa-stack-1x fa-inverse"} />
@@ -449,41 +364,23 @@ function PortalPage() {
             </div>
             <div className="row">
               <div className="col-lg-6">
-                <a
-                  className="portfolio-link"
-                  href="https://docs.google.com/presentation/d/1QruyntVn79DxmfWlvWz4oED_RvVkyD8ZRDorj19NyZw/present?slide=id.g50f21e44ca_0_0"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
+                <a className="portfolio-link" href="https://docs.google.com/presentation/d/1QruyntVn79DxmfWlvWz4oED_RvVkyD8ZRDorj19NyZw/present?slide=id.g50f21e44ca_0_0" rel="noopener noreferrer" target="_blank">
                   <div className="portfolio-hover">
                     <div className="portfolio-hover-content">
                       <h3 className="section-subheading2 text-muted">How to Start TeamViewer</h3>
                     </div>
                   </div>
-                  <img
-                    className="img-fluid"
-                    src="https://drive.google.com/thumbnail?authuser=0&amp;id=1QruyntVn79DxmfWlvWz4oED_RvVkyD8ZRDorj19NyZw&amp;sz=w1092-h555-p-k-nu"
-                    alt=""
-                  />
+                  <img className="img-fluid" src="https://drive.google.com/thumbnail?authuser=0&amp;id=1QruyntVn79DxmfWlvWz4oED_RvVkyD8ZRDorj19NyZw&amp;sz=w1092-h555-p-k-nu" alt="" />
                 </a>
               </div>
               <div className="col-lg-6">
-                <a
-                  className="portfolio-link"
-                  href="https://docs.google.com/presentation/d/1yvBQ-VAGVMpY_n34fc10TZOKbEpiC0m36hz_SPOdyuI/present?slide=id.g5c9b2b8d06_0_8"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
+                <a className="portfolio-link" href="https://docs.google.com/presentation/d/1yvBQ-VAGVMpY_n34fc10TZOKbEpiC0m36hz_SPOdyuI/present?slide=id.g5c9b2b8d06_0_8" rel="noopener noreferrer" target="_blank">
                   <div className="portfolio-hover">
                     <div className="portfolio-hover-content">
                       <h3 className="section-subheading2 text-muted">How To Add/Remove Email for Mobile Device</h3>
                     </div>
                   </div>
-                  <img
-                    className="img-fluid"
-                    src="https://drive.google.com/thumbnail?authuser=0&amp;id=1yvBQ-VAGVMpY_n34fc10TZOKbEpiC0m36hz_SPOdyuI&amp;sz=w967-h614-p-k-nu"
-                    alt=""
-                  />
+                  <img className="img-fluid" src="https://drive.google.com/thumbnail?authuser=0&amp;id=1yvBQ-VAGVMpY_n34fc10TZOKbEpiC0m36hz_SPOdyuI&amp;sz=w967-h614-p-k-nu" alt="" />
                 </a>
               </div>
             </div>
@@ -510,8 +407,7 @@ const PortalStyle = styled.div`
   body {
     background-color: #f0f0f0;
     overflow-x: hidden;
-    font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   p {
@@ -541,8 +437,7 @@ const PortalStyle = styled.div`
   h5,
   h6 {
     font-weight: 700;
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   .page-section {
@@ -561,8 +456,7 @@ const PortalStyle = styled.div`
     font-style: italic;
     margin-bottom: 75px;
     text-transform: none;
-    font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   .page-section h3.section-subheading2 {
@@ -572,8 +466,7 @@ const PortalStyle = styled.div`
     margin-bottom: 15px;
     margin-top: 20px;
     text-transform: none;
-    font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   @media (min-width: 768px) {
@@ -605,8 +498,7 @@ const PortalStyle = styled.div`
   }
 
   .btn {
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-weight: 700;
   }
 
@@ -687,14 +579,12 @@ const PortalStyle = styled.div`
     color: black;
     border: 0;
     background-color: white;
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   #mainNav .navbar-brand {
     color: black;
-    font-family: "Stardos Stencil", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-      sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Stardos Stencil", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   #mainNav .navbar-brand.active,
@@ -710,8 +600,7 @@ const PortalStyle = styled.div`
     padding: 0.75em 0;
     letter-spacing: 1px;
     color: black;
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   #mainNav .navbar-nav .nav-item .nav-link.active,
@@ -777,8 +666,7 @@ const PortalStyle = styled.div`
     font-style: italic;
     line-height: 22px;
     margin-bottom: 25px;
-    font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   header.masthead .intro-text .intro-heading {
@@ -786,8 +674,7 @@ const PortalStyle = styled.div`
     font-weight: 700;
     line-height: 50px;
     margin-bottom: 25px;
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   @media (min-width: 768px) {
@@ -800,16 +687,14 @@ const PortalStyle = styled.div`
       font-style: italic;
       line-height: 40px;
       margin-bottom: 25px;
-      font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     }
     header.masthead .intro-text .intro-heading {
       font-size: 75px;
       font-weight: 700;
       line-height: 75px;
       margin-bottom: 50px;
-      font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     }
   }
 
@@ -881,8 +766,7 @@ const PortalStyle = styled.div`
     font-size: 16px;
     font-style: italic;
     margin: 0;
-    font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   #portfolio * {
@@ -918,8 +802,7 @@ const PortalStyle = styled.div`
     font-size: 16px;
     font-style: italic;
     margin: 20px 0 30px;
-    font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   .portfolio-modal .modal-content ul.list-inline {
@@ -1214,29 +1097,25 @@ const PortalStyle = styled.div`
   section#support ::-webkit-input-placeholder {
     font-weight: 700;
     color: #ced4da;
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   section#support :-moz-placeholder {
     font-weight: 700;
     color: #ced4da;
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   section#support ::-moz-placeholder {
     font-weight: 700;
     color: #ced4da;
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   section#support :-ms-input-placeholder {
     font-weight: 700;
     color: #ced4da;
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   .footer {
@@ -1248,8 +1127,7 @@ const PortalStyle = styled.div`
     font-size: 90%;
     line-height: 40px;
     text-transform: none;
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   .footer ul.quicklinks {
@@ -1257,8 +1135,7 @@ const PortalStyle = styled.div`
     line-height: 20x;
     margin-bottom: 0;
     text-transform: none;
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   ul.social-buttons {

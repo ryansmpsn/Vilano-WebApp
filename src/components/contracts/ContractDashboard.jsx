@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import NavPerm from "../../libs/NavPerms";
 import { Spinner } from "react-bootstrap";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
+import { Nav } from "react-bootstrap";
+import { NavItem } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 class ContractDashboard extends Component {
   _isMounted = false;
@@ -113,13 +116,15 @@ class ContractDashboard extends Component {
                   </MDBListGroup>
                 </MDBCardBody>
               </MDBCard>
+              <h2 className="text-center mb-5" style={{ marginTop: "-50px" }}>
+                Contract Management
+              </h2>
             </div>
-            <h1 className="text-center">Contract Dashboard</h1>
           </MDBCardHeader>
-          <MDBCardBody>
-            <MDBRow>
-              {this.state.contractProfile !== null &&
-                this.state.contractProfile.map(
+          {this.state.contractProfile !== null && (
+            <MDBCardBody>
+              <MDBRow>
+                {this.state.contractProfile.map(
                   (c, index) =>
                     c.label !== null &&
                     typeof c.value !== "object" && (
@@ -129,102 +134,43 @@ class ContractDashboard extends Component {
                       </MDBCol>
                     )
                 )}
-            </MDBRow>
-            <MDBRow>
-              {this.state.contractProfile === null ? (
-                <MDBCol>
-                  {sessionStorage.getItem("/contract") >= 2 && (
-                    <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info">
-                      Contracts
-                    </Link>
-                  )}
-                  {sessionStorage.getItem("/contract/trips") >= 2 && (
-                    <Link to="trips" className="btn btn-primary btn-sm btn-outline-info">
-                      Trips
-                    </Link>
-                  )}
-                  {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
-                    <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info">
-                      Rate Sheets
-                    </Link>
-                  )}
-                  {sessionStorage.getItem("/contract/routes") >= 2 && (
-                    <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
-                      Routes
-                    </Link>
-                  )}
-                  <Link to="routes" className="btn btn-primary btn-sm btn-outline-info">
-                    Employees
-                  </Link>
-                </MDBCol>
-              ) : (
-                <MDBCol>
-                  <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
-                    Employees
-                  </Link>
-                  {sessionStorage.getItem("/contract/routes") >= 2 && (
-                    <Link to="routes" className="btn btn-primary btn-sm btn-outline-info float-right">
-                      Routes
-                    </Link>
-                  )}
-                  {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
-                    <Link to="ratesheets" className="btn btn-primary btn-sm btn-outline-info float-right">
-                      Rate Sheets
-                    </Link>
-                  )}
-                  {sessionStorage.getItem("/contract/trips") >= 2 && (
-                    <Link to="trips" className="btn btn-primary btn-sm btn-outline-info float-right">
-                      Trips
-                    </Link>
-                  )}
-                  {sessionStorage.getItem("/contract") >= 2 && (
-                    <Link to="dashboard" className="btn btn-primary btn-sm btn-outline-info float-right">
-                      Contracts
-                    </Link>
-                  )}
-                </MDBCol>
-              )}
-            </MDBRow>
-          </MDBCardBody>
+              </MDBRow>
+            </MDBCardBody>
+          )}
         </MDBCard>
-
-        {this.state.selectOptions === null ? (
-          <Spinner animation="border" variant="primary" />
-        ) : (
-          <Routing
-            props={this.props}
-            setSelectedTrip={this.setSelectedTrip}
-            setSelectedContract={this.setSelectedContract}
-            setSelectedContractId={this.setSelectedContractId}
-            setContractSearchCode={this.setContractSearchCode}
-            selectedTrip={this.state.selectedTrip}
-            selectedContract={this.state.selectedContract}
-            selectedContractId={this.state.selectedContractId}
-            selectOptions={this.state.selectOptions}
-            contractID
-            isSearching={this.state.isSearching}
-            contractProfile={this.state.contractProfile}
-            accessLevel={this.state.accessLevel}
-            contractEditSubmitAction={this.contractEditSubmitAction}
-            tripEditSubmitAction={this.tripEditSubmitAction}
-            getSelectOptions={() => {
-              return this.getSelectOptions();
-            }}
-            SearchFunction={(contractSearch) => {
-              return this.search(contractSearch);
-            }}
-            showAll={() => {
-              return this.show_all();
-            }}
-            appProps={this.props}
-            contractSearch={this.state.contractSearchCode}
-            getContracts={() => {
-              return this.getContracts();
-            }}
-            getTrips={this.getTrips}
-            addSelectOption={this.addSelectOption}
-          />
-        )}
+        <Routing
+          props={this.props}
+          setSelectedTrip={this.setSelectedTrip}
+          setSelectedContract={this.setSelectedContract}
+          setSelectedContractId={this.setSelectedContractId}
+          setContractSearchCode={this.setContractSearchCode}
+          selectedTrip={this.state.selectedTrip}
+          selectedContract={this.state.selectedContract}
+          selectedContractId={this.state.selectedContractId}
+          selectOptions={this.state.selectOptions}
+          contractID
+          isSearching={this.state.isSearching}
+          contractProfile={this.state.contractProfile}
+          accessLevel={this.state.accessLevel}
+          contractEditSubmitAction={this.contractEditSubmitAction}
+          tripEditSubmitAction={this.tripEditSubmitAction}
+          getSelectOptions={() => {
+            return this.getSelectOptions();
+          }}
+          SearchFunction={(contractSearch) => {
+            return this.search(contractSearch);
+          }}
+          showAll={() => {
+            return this.show_all();
+          }}
+          appProps={this.props}
+          contractSearch={this.state.contractSearchCode}
+          getContracts={() => {
+            return this.getContracts();
+          }}
+          getTrips={this.getTrips}
+          addSelectOption={this.addSelectOption}
+        />
       </>
     );
   }

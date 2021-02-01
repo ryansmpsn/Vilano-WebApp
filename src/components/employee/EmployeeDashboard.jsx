@@ -3,10 +3,10 @@ import Send from "../../libs/send";
 import axios from "axios";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBIcon, MDBListGroup, MDBListGroupItem, MDBBadge } from "mdbreact";
 import CountUp from "react-countup";
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route, Navigate, NavLink } from "react-router-dom";
 import EmployeeInformation from "./EmployeeInformation";
 import EmployeeContracts from "./EmployeeContracts";
-import { Row, Col, Nav, NavItem, Card, CardBody } from "react-bootstrap";
+import { Nav, NavItem, Card } from "react-bootstrap";
 
 function EmployeeDashboard(props) {
   const [employeeDropdowns, setEmployeeDropdowns] = useState(null);
@@ -54,7 +54,6 @@ function EmployeeDashboard(props) {
         <MDBCardHeader>
           <div className="admin-up">
             <MDBIcon icon="users" className="primary-color" />
-
             <MDBCard className="w-25 ml-auto" style={{ marginTop: "-50px" }}>
               <MDBCardHeader>Statistics</MDBCardHeader>
               <MDBCardBody>
@@ -69,22 +68,22 @@ function EmployeeDashboard(props) {
               </MDBCardBody>
             </MDBCard>
           </div>
-          <h1 className="m-3 text-center">Employee Management</h1>
-        </MDBCardHeader>
-        <MDBCardBody>
-          <Nav justify variant="tabs" defaultActiveKey="contract" className="pb-2 m-0 w-50 m-auto">
-            <NavItem>
-              <NavLink to="assignment" activeClassName="text-primary border-top">
-                Contracts
-              </NavLink>
-            </NavItem>
+          <h2 className="mb-5 text-center" style={{ marginTop: "-50px" }}>
+            Employee Management
+          </h2>
+          <Nav justify variant="tabs" defaultActiveKey="employee" className="pb-2 w-50 mx-auto my-3 ">
             <NavItem>
               <NavLink to="employee" activeClassName="text-primary border-top">
                 Information
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink to="assignment" activeClassName="text-primary border-top">
+                Contracts
+              </NavLink>
+            </NavItem>
           </Nav>
-        </MDBCardBody>
+        </MDBCardHeader>
       </MDBCard>
 
       <Card className="mt-4">
@@ -92,6 +91,7 @@ function EmployeeDashboard(props) {
           <Routes>
             <Route path="assignment" element={<EmployeeContracts contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
             <Route path=":employeeId" element={<EmployeeInformation contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
+            <Navigate from="/employee" to="/employee/employee" />
           </Routes>
         </Card.Body>
       </Card>

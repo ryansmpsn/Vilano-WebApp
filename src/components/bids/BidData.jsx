@@ -124,7 +124,7 @@ function BidData(props) {
                 <Spinner animation="border" variant="primary" />
               ) : (
                 <>
-                  <Button type="submit" disabled={isGetAll || bidSearch.bid_name === 0}>
+                  <Button type="submit" variant="outline-primary" disabled={isGetAll || bidSearch.bid_name === 0}>
                     Search
                   </Button>
                   <Button
@@ -132,11 +132,12 @@ function BidData(props) {
                     onClick={(e) => {
                       handleSearch(e, true);
                     }}
+                    variant="outline-primary"
                   >
                     Show All
                   </Button>
                   {sessionStorage.getItem("/bid") >= 3 && (
-                    <Button onClick={addBid} variant="outline-warning">
+                    <Button onClick={addBid} variant="outline-warning" className="float-right">
                       Add Bid
                     </Button>
                   )}
