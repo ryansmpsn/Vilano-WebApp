@@ -71,20 +71,20 @@ function EmployeeDashboard(props) {
           <h2 className="mb-5 text-center" style={{ marginTop: "-50px" }}>
             Employee Management
           </h2>
-          <Nav justify variant="tabs" defaultActiveKey="employee" className="pb-2 w-50 mx-auto my-3 ">
-            <NavItem>
-              <NavLink to="employee" activeClassName="text-primary border-top">
-                Information
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to="assignment" activeClassName="text-primary border-top">
-                Contracts
-              </NavLink>
-            </NavItem>
-          </Nav>
         </MDBCardHeader>
       </MDBCard>
+      <Nav justify variant="tabs" defaultActiveKey="employee" className="pb-2 w-50 mx-auto my-3 ">
+        <NavItem>
+          <NavLink to="employee" activeClassName="text-primary border-top">
+            Information
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="assignment" activeClassName="text-primary border-top">
+            Contracts
+          </NavLink>
+        </NavItem>
+      </Nav>
 
       <Card className="mt-4">
         <Card.Body>

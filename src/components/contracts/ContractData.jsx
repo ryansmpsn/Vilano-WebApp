@@ -10,27 +10,24 @@ function ContractData(props) {
   const [contractData, setContractData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSearching, setSearching] = useState(false);
-  const [isGetAll, setGetAll] = useState(false);
-  const [tableView, setTableView] = useState(false);
+  const [tableView, setTableView] = useState(true);
   const [contractSearch] = useState(props.contractSearch);
-  const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [bidOptions, setBidOptions] = useState([]);
+  const [bidOptions, setBidOptions] = useState(null);
 
   function search() {
     setTableView(false);
     props
       .SearchFunction(contractSearch)
       .then((res) => {
+        setIsLoading(false);
+        setSearching(false);
         setContractData(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    props.getSelectOptions().then((res) => {
-      setContentInputRestrictions(res.data);
-      setIsLoading(false);
-    });
+
     if (sessionStorage.getItem("/bid") >= 3) {
       Send.get("/Bid/Dropdowns/BidNames/All").then((response) => {
         setBidOptions(response.data);
@@ -40,30 +37,7 @@ function ContractData(props) {
 
   function show_all() {
     setTableView(true);
-    props
-      .showAll()
-      .then((res) => {
-        setContractData(res.data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    props.getSelectOptions().then((res) => {
-      setContentInputRestrictions(res.data);
-      setSearching(false);
-      setGetAll(false);
-    });
-  }
-  function addContract() {
-    setIsLoading(true);
-    setSearching(true);
-    props.getSelectOptions().then((res) => {
-      setContentInputRestrictions(res.data);
-      setIsLoading(false);
-      setSearching(false);
-      openModal();
-    });
+    setContractData(props.allContracts);
   }
 
   function doSetContractSearch(newContract, keyValue) {
@@ -77,16 +51,11 @@ function ContractData(props) {
     props.setContractSearchCode(tempCon);
   }
 
-  function handleSearch(event, all = false) {
+  function handleSearch(event) {
     event.preventDefault();
     setIsLoading(true);
-    if (!all) {
-      setSearching(true);
-      search();
-    } else {
-      show_all();
-      setGetAll(true);
-    }
+    setSearching(true);
+    search();
   }
 
   function openModal() {
@@ -101,7 +70,7 @@ function ContractData(props) {
 
   return (
     <Jumbotron>
-      <Container className="container-sm pl-5 pr-5 pt-2">
+      <Container className="container-sm pl-5 pr-5">
         <Row className="justify-content-md-center">
           <Col lg="6">
             <form onSubmit={handleSearch}>
@@ -113,27 +82,21 @@ function ContractData(props) {
                 onChange={(x) => {
                   doSetContractSearch(x, "external_contract_code");
                 }}
-                isLoading={isLoading & isSearching}
-                isDisabled={isGetAll | (isSearching & isLoading)}
+                isLoading={(isLoading & isSearching) | (props.selectOptions === null)}
+                isDisabled={(isSearching & isLoading) | (props.selectOptions === null)}
               />
-              {(isLoading & isSearching) | isGetAll ? (
+              {isLoading & isSearching ? (
                 <Spinner animation="border" variant="primary" />
               ) : (
                 <>
-                  <Button type="submit" variant="outline-primary" disabled={isGetAll || contractSearch.external_contract_code.length === 0}>
+                  <Button type="submit" variant="outline-primary" disabled={contractSearch.external_contract_code.length === 0}>
                     Search
                   </Button>
-                  <Button
-                    disabled={isGetAll && isSearching}
-                    onClick={(e) => {
-                      handleSearch(e, true);
-                    }}
-                    variant="outline-primary"
-                  >
+                  <Button disabled={isSearching} onClick={show_all} variant="outline-primary">
                     Show All
                   </Button>
                   {sessionStorage.getItem("/contract") >= 3 && (
-                    <Button onClick={addContract} variant="outline-warning" className="float-right">
+                    <Button onClick={openModal} variant="outline-warning" className="float-right" disabled={props.contentInputRestrictions === null}>
                       Add Contract
                     </Button>
                   )}
@@ -144,45 +107,51 @@ function ContractData(props) {
         </Row>
       </Container>
       <hr />
-      {tableView
-        ? !isLoading && (
+      {tableView ? (
+        props.allContracts === null ? (
+          <Spinner animation="border" variant="primary" />
+        ) : (
+          props.inputRestrictions !== null && (
             <ContractTable
               type={"Contract"}
               getTrips={props.getTrips}
               setSelectedContract={props.setSelectedContract}
               setSelectedContractId={props.setSelectedContractId}
-              contractData={contractData}
-              inputRestrictions={contentInputRestrictions}
+              contractData={props.allContracts}
+              inputRestrictions={props.contentInputRestrictions}
               submitAction={(editContract) => {
                 return props.contractEditSubmitAction(editContract);
               }}
             />
           )
-        : !isLoading && (
-            <div className="contract">
-              <Row key="topRow" className="show-grid">
-                {contractData !== [] &&
-                  bidOptions !== [] &&
-                  contractData.map((c, index) => (
-                    <ContractCards
-                      key={index + "contract"}
-                      type={"Contract"}
-                      getTrips={props.getTrips}
-                      setSelectedContract={props.setSelectedContract}
-                      setSelectedContractId={props.setSelectedContractId}
-                      Contract={c}
-                      inputRestrictions={contentInputRestrictions}
-                      submitAction={(editContract) => {
-                        return props.contractEditSubmitAction(editContract);
-                      }}
-                      accessLevel={props.accessLevel}
-                      bidOptions={bidOptions}
-                    />
-                  ))}
-              </Row>
-            </div>
-          )}
-      {!isLoading && (
+        )
+      ) : (
+        !isLoading && (
+          <div className="contract">
+            <Row key="topRow" className="show-grid">
+              {contractData !== [] &&
+                bidOptions !== null &&
+                contractData.map((c, index) => (
+                  <ContractCards
+                    key={index + "contract"}
+                    type={"Contract"}
+                    getTrips={props.getTrips}
+                    setSelectedContract={props.setSelectedContract}
+                    setSelectedContractId={props.setSelectedContractId}
+                    Contract={c}
+                    inputRestrictions={props.contentInputRestrictions}
+                    submitAction={(editContract) => {
+                      return props.contractEditSubmitAction(editContract);
+                    }}
+                    accessLevel={props.accessLevel}
+                    bidOptions={bidOptions}
+                  />
+                ))}
+            </Row>
+          </div>
+        )
+      )}
+      {props.contentInputRestrictions !== null && (
         <UpsertContractModal
           modalName={"New Contract"}
           contract={[
@@ -293,7 +262,7 @@ function ContractData(props) {
             },
             { columnName: "modified_timestamp", inputType: null, label: "Last Modified", updatedValue: null, value: "" },
           ]}
-          inputRestrictions={contentInputRestrictions}
+          inputRestrictions={props.contentInputRestrictions}
           show={showModal}
           closeModal={closeModal}
           accessLevel={props.accessLevel}

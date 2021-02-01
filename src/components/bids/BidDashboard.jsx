@@ -4,6 +4,8 @@ import Send from "../../libs/send";
 import CountUp from "react-countup";
 import NavPerm from "../../libs/NavPerms";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
+import { Nav, NavItem } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 class BidDashboard extends Component {
   _isMounted = false;
@@ -125,6 +127,30 @@ class BidDashboard extends Component {
             </MDBCardBody>
           )}
         </MDBCard>
+
+        <Nav justify variant="tabs" defaultActiveKey="employee" className="pb-2 w-50 mx-auto my-3 ">
+          <NavItem>
+            <NavLink to="dashboard" activeClassName="text-primary border-top">
+              Bids
+            </NavLink>
+          </NavItem>
+
+          {sessionStorage.getItem("/bid/trips") >= 2 && (
+            <NavItem>
+              <NavLink to="trips" activeClassName="text-primary border-top">
+                Trips
+              </NavLink>
+            </NavItem>
+          )}
+          {sessionStorage.getItem("/bid/ratesheets") >= 2 && (
+            <NavItem>
+              <NavLink to="ratesheets" activeClassName="text-primary border-top">
+                Cost Segments
+              </NavLink>
+            </NavItem>
+          )}
+        </Nav>
+
         <Routing
           props={this.props}
           setSelectedTrip={this.setSelectedTrip}

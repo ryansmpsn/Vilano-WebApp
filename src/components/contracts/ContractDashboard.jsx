@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import Routing from "./Router";
 import Send from "../../libs/send";
 import CountUp from "react-countup";
-import { Link } from "react-router-dom";
 import NavPerm from "../../libs/NavPerms";
-import { Spinner } from "react-bootstrap";
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
-import { Nav } from "react-bootstrap";
-import { NavItem } from "react-bootstrap";
+import { Nav, NavItem } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 class ContractDashboard extends Component {
@@ -23,6 +20,8 @@ class ContractDashboard extends Component {
       selectedTrip: "",
       contractProfile: null,
       isSearching: false,
+      contentInputRestrictions: null,
+      allContracts: null,
     };
   }
 
@@ -65,9 +64,7 @@ class ContractDashboard extends Component {
       this.setState({ isSearching: false });
     });
   };
-  getSelectOptions() {
-    return Send.get("/Contract/Dropdowns/Contract/All", this.props);
-  }
+
   addSelectOption = (e) => {
     let options = this.state.selectOptions;
     let newOption = { label: e, value: options.length + 1 };
@@ -88,6 +85,18 @@ class ContractDashboard extends Component {
       });
       if (this._isMounted) {
         this.setState({ selectOptions: getSelectOptions });
+      }
+    });
+
+    Send.get("/Contract/Dropdowns/Contract/All", this.props).then((res) => {
+      if (this._isMounted) {
+        this.setState({ contentInputRestrictions: res.data });
+      }
+    });
+
+    Send.post("/Contract/Search", "", this.props).then((res) => {
+      if (this._isMounted) {
+        this.setState({ allContracts: res.data });
       }
     });
   }
@@ -138,6 +147,54 @@ class ContractDashboard extends Component {
             </MDBCardBody>
           )}
         </MDBCard>
+
+        <Nav justify variant="tabs" defaultActiveKey="employee" className="pb-2 w-50 mx-auto my-3 ">
+          <NavItem>
+            <NavLink to="dashboard" activeClassName="text-primary border-top">
+              Contracts
+            </NavLink>
+          </NavItem>
+
+          {sessionStorage.getItem("/contract/trips") >= 2 && (
+            <NavItem>
+              <NavLink to="trips" activeClassName="text-primary border-top">
+                Trips
+              </NavLink>
+            </NavItem>
+          )}
+
+          {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
+            <NavItem>
+              <NavLink to="ratesheets" activeClassName="text-primary border-top">
+                Cost Segments
+              </NavLink>
+            </NavItem>
+          )}
+
+          {sessionStorage.getItem("/contract/routes") >= 2 && (
+            <NavItem>
+              <NavLink to="routes" activeClassName="text-primary border-top">
+                Routes
+              </NavLink>
+            </NavItem>
+          )}
+
+          {sessionStorage.getItem("/contract/drivers") >= 2 && (
+            <NavItem>
+              <NavLink to="/employee" activeClassName="text-primary border-top">
+                Drivers
+              </NavLink>
+            </NavItem>
+          )}
+
+          {sessionStorage.getItem("/contract/analytics") >= 1 && (
+            <NavItem>
+              <NavLink to="analytics" activeClassName="text-primary border-top">
+                Analytics
+              </NavLink>
+            </NavItem>
+          )}
+        </Nav>
         <Routing
           props={this.props}
           setSelectedTrip={this.setSelectedTrip}
@@ -170,6 +227,8 @@ class ContractDashboard extends Component {
           }}
           getTrips={this.getTrips}
           addSelectOption={this.addSelectOption}
+          contentInputRestrictions={this.state.contentInputRestrictions}
+          allContracts={this.state.allContracts}
         />
       </>
     );
