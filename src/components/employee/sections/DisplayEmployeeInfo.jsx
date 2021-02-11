@@ -6,8 +6,12 @@ import ContractTable from "./ContractTable";
 import { ListGroup } from "react-bootstrap";
 import { ListGroupItem } from "react-bootstrap";
 import Documents from "../../util/Documents";
+import { useToasts } from "react-toast-notifications";
+import Send from "../../../libs/send";
 
 function DisplayEmployeeInfo(props) {
+  const { addToast } = useToasts();
+
   let { employeeData, employeeContracts, employeeDropdowns, allModifiedContracts, isLoading, profile } = props;
   const [showModal, setShowModal] = useState(false);
 
@@ -21,6 +25,26 @@ function DisplayEmployeeInfo(props) {
   }
   function closeModal() {
     setShowModal(false);
+  }
+  function openLink(x) {
+    const newWindow = window.open("https://" + x, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  }
+  function accessFile(fileData) {
+    addToast("Checking your permissions for this file.", {
+      appearance: "info",
+      autoDismiss: true,
+      autoDismissTimeout: 3000,
+    });
+
+    Send.get("/Employee/FileDownloadLink/" + fileData[11].updatedValue + "/" + fileData[9].updatedValue).then((result) => {
+      openLink(result.data.share_link);
+      addToast("File access granted.", {
+        appearance: "success",
+        autoDismiss: true,
+        autoDismissTimeout: 3000,
+      });
+    });
   }
   return isLoading ? (
     <Spinner animation="border" variant="primary" className="mr-auto" />
@@ -37,7 +61,6 @@ function DisplayEmployeeInfo(props) {
               </div>
               <MDBCardBody className="text-center">
                 <MDBRow>
-                  {console.log(employeeData[0])}
                   {employeeData[0].value[0].map(
                     (c, index) =>
                       c.label !== null && (
@@ -65,7 +88,7 @@ function DisplayEmployeeInfo(props) {
                   // add document file type along with document file name
                   <ListGroup className="text-left  overflow-auto" style={{ height: "14em" }}>
                     {employeeData[6].value.map((c, index) => (
-                      <ListGroupItem size="3" key={index + "document"} className="p-0 pl-2">
+                      <ListGroupItem size="3" key={index + "document"} className="p-0 pl-2" action onClick={() => accessFile(c)}>
                         <div>
                           <small className="text-muted">{c[5].value}</small>
                           <p>{c[10].value}</p>
@@ -86,9 +109,9 @@ function DisplayEmployeeInfo(props) {
                     endpoint="/Employee/FileUpload"
                     fileTypes={employeeDropdowns[4].options}
                     uploadData={[
-                      { columnName: "employee_id", inputType: null, label: null, updatedValue: null, value: employeeData[0].value[0][0].value },
-                      { columnName: "first_name", inputType: null, label: null, updatedValue: null, value: employeeData[0].value[0][6].value },
-                      { columnName: "last_name", inputType: null, label: null, updatedValue: null, value: employeeData[0].value[0][7].value },
+                      { columnName: "employee_id", inputType: null, label: null, updatedValue: employeeData[0].value[0][0].value, value: employeeData[0].value[0][0].value },
+                      { columnName: "first_name", inputType: null, label: null, updatedValue: employeeData[0].value[0][6].value, value: employeeData[0].value[0][6].value },
+                      { columnName: "last_name", inputType: null, label: null, updatedValue: employeeData[0].value[0][7].value, value: employeeData[0].value[0][7].value },
                       // last 2 objects only for employee
                     ]}
                     modalName={"Upload Document to " + employeeData[0].value[0][6].value + " " + employeeData[0].value[0][7].value}

@@ -6,7 +6,7 @@ import CountUp from "react-countup";
 import { Routes, Route, Navigate, NavLink } from "react-router-dom";
 import EmployeeInformation from "./EmployeeInformation";
 import EmployeeContracts from "./EmployeeContracts";
-import { Nav, NavItem, Card } from "react-bootstrap";
+import { Nav, NavItem } from "react-bootstrap";
 
 function EmployeeDashboard(props) {
   const [employeeDropdowns, setEmployeeDropdowns] = useState(null);

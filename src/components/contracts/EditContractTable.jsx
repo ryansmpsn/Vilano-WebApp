@@ -17,8 +17,8 @@ function EditContractTable(props) {
 
   return (
     <>
-      <Button className="btn-sm btn-outline-warning float-right" onClick={openModal}>
-        Edit {props.type}
+      <Button className="btn-sm btn-outline-warning" onClick={openModal}>
+        Edit
       </Button>
       <UpsertContractModal
         modalName={"Edit " + props.type}

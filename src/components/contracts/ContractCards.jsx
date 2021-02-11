@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Card, Row, Col, Button, Spinner } from "react-bootstrap";
+import { Card, Row, Col, Button, Spinner, ListGroup, ListGroupItem } from "react-bootstrap";
 import { MDBIcon } from "mdbreact";
 import UpsertContractModal from "./UpsertContractModal";
 import CreateBidModal from "./CreateBidModal";
 import FinalizeBidModal from "./FinalizeBidModal";
 import Documents from "../util/Documents";
 import Send from "../../libs/send";
+import { useToasts } from "react-toast-notifications";
 
 function ContractCards(props) {
+  const { addToast } = useToasts();
+
   const [contract, setContract] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -16,6 +19,7 @@ function ContractCards(props) {
   const [showBidModal, setShowBidModal] = useState(false);
   const [showFinalModal, setShowFinalModal] = useState(false);
   const [searching, setSearching] = useState(false);
+  const [documents, setDocuments] = useState(null);
 
   useEffect(() => {
     onLoad();
@@ -76,10 +80,31 @@ function ContractCards(props) {
 
   async function gatherDocuments() {
     setSearching(true);
+    console.log(contract);
 
     Send.get(`/Contract/${contract[0].value}/Document`).then((response) => {
       setSearching(false);
-      console.log(response);
+      setDocuments(response.data);
+    });
+  }
+  function openLink(x) {
+    const newWindow = window.open("https://" + x, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  }
+  function accessFile(fileData) {
+    addToast("Checking your permissions for this file.", {
+      appearance: "info",
+      autoDismiss: true,
+      autoDismissTimeout: 3000,
+    });
+
+    Send.get("/Contract/FileDownloadLink/" + fileData[11].updatedValue + "/" + fileData[9].updatedValue).then((result) => {
+      openLink(result.data.share_link);
+      addToast("File access granted.", {
+        appearance: "success",
+        autoDismiss: true,
+        autoDismissTimeout: 3000,
+      });
     });
   }
 
@@ -121,19 +146,20 @@ function ContractCards(props) {
             </Col>
             <Col md="2" className="text-center p-0">
               <h5>Contract Documents</h5>
-              <p className="text-muted small">Search for documents attached to this contract.</p>
-              {/* <ListGroup className="text-left overflow-auto" style={{ height: "15em" }}>
-                <ListGroupItem>Item</ListGroupItem>
-                <ListGroupItem>Item</ListGroupItem>
-                <ListGroupItem>Item</ListGroupItem>
-                <ListGroupItem>Item</ListGroupItem>
-                <ListGroupItem>Item</ListGroupItem>
-                <ListGroupItem>Item</ListGroupItem>
-                <ListGroupItem>Item</ListGroupItem>
-                <ListGroupItem>Item</ListGroupItem>
-                <ListGroupItem>Item</ListGroupItem>
-                <ListGroupItem>Item</ListGroupItem>
-              </ListGroup> */}
+              {documents === null ? (
+                <p className="text-muted small">Search for documents attached to this contract.</p>
+              ) : (
+                <ListGroup className="text-left overflow-auto" style={{ height: "15em" }}>
+                  {documents.map((c, index) => (
+                    <ListGroupItem size="3" key={index + "document"} className="p-0 pl-2" action onClick={() => accessFile(c)}>
+                      <div>
+                        <small className="text-muted">{c[5].value}</small>
+                        <p>{c[10].value}</p>
+                      </div>
+                    </ListGroupItem>
+                  ))}
+                </ListGroup>
+              )}
               {searching ? (
                 <Spinner animation="border" variant="primary" />
               ) : (
@@ -190,13 +216,22 @@ function ContractCards(props) {
             </Button>
           )}
         </Card.Footer>
-        {props.type !== "bid" && (
+        {props.type === "Bid" ? (
           <Documents
             showModal={showDocumentModal}
             closeModal={closeDocumentModal}
-            endpoint="/Contract/FileUpload"
-            fileTypes={props.inputRestrictions[4].options}
-            uploadData={[{ columnName: "contract_id", inputType: null, label: null, updatedValue: null, value: contract[0].updatedValue }]}
+            endpoint={"/Bid/FileUpload"}
+            fileTypes={props.inputRestrictions && props.inputRestrictions[6].options}
+            uploadData={[{ columnName: "contract_bid_id", inputType: null, label: null, updatedValue: contract[0].updatedValue, value: contract[0].updatedValue }]}
+            modalName={"Upload Document to " + contract[10].label + " " + contract[10].value}
+          />
+        ) : (
+          <Documents
+            showModal={showDocumentModal}
+            closeModal={closeDocumentModal}
+            endpoint={"/Contract/FileUpload"}
+            fileTypes={props.inputRestrictions && props.inputRestrictions[4].options}
+            uploadData={[{ columnName: "contract_id", inputType: null, label: null, updatedValue: contract[0].updatedValue, value: contract[0].updatedValue }]}
             modalName={"Upload Document to " + contract[6].label + " " + contract[6].value}
           />
         )}

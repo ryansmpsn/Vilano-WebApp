@@ -87,6 +87,7 @@ class ContractDashboard extends Component {
     Send.get("/Contract/Dropdowns/Contract/All", this.props).then((res) => {
       if (this._isMounted) {
         this.setState({ contentInputRestrictions: res.data });
+        console.log(res);
       }
     });
 

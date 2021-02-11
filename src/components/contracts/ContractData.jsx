@@ -82,19 +82,17 @@ function ContractData(props) {
               {isLoading & isSearching ? (
                 <Spinner animation="border" variant="primary" />
               ) : (
-                <>
-                  <Button type="submit" variant="outline-primary" disabled={props.contractSearch.external_contract_code.length === 0}>
-                    Search
-                  </Button>
-                  <Button disabled={isSearching} onClick={() => setTableView(true)} variant="outline-primary">
-                    Show All
-                  </Button>
-                  {sessionStorage.getItem("/contract") >= 3 && (
-                    <Button onClick={openModal} variant="outline-warning" className="float-right" disabled={props.contentInputRestrictions === null}>
-                      Add Contract
-                    </Button>
-                  )}
-                </>
+                <Button type="submit" variant="outline-primary" disabled={props.contractSearch.external_contract_code.length === 0}>
+                  Search
+                </Button>
+              )}
+              <Button disabled={tableView} onClick={() => setTableView(true)} variant="outline-primary">
+                Show All
+              </Button>
+              {sessionStorage.getItem("/contract") >= 3 && (
+                <Button onClick={openModal} variant="outline-warning" className="float-right" disabled={props.contentInputRestrictions === null}>
+                  Add Contract
+                </Button>
               )}
             </form>
           </Col>

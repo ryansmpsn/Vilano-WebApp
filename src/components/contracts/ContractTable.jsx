@@ -27,9 +27,9 @@ function ContractTable(props) {
           setSelectedId(index);
         }}
         to={"../trips"}
-        className="btn btn-primary btn-sm"
+        className="btn btn-outline-primary btn-sm"
       >
-        View Trips
+        Trips
       </Link>
     ),
     viewCostData: (
@@ -38,9 +38,9 @@ function ContractTable(props) {
           setSelectedId(index);
         }}
         to="../ratesheets"
-        className="btn btn-primary btn-sm"
+        className="btn btn-outline-primary btn-sm text-nowrap"
       >
-        Rate Sheets
+        Cost Data
       </Link>
     ),
     editContract: (
@@ -56,7 +56,26 @@ function ContractTable(props) {
   }));
 
   function labelFilter(tableData) {
-    return tableData.label !== null;
+    let excludeColumns = [
+      "Active",
+      "Last Modified By",
+      "Contract Type Name",
+      "Division Name",
+      "Contract Status",
+      "Date of Solicitation",
+      "Last Modified",
+      "Solicitation No.",
+      "Administration Office",
+      "Origin State",
+      "Destination State",
+      "Solicitation Number",
+      "Contract Division Name",
+      "Origination State",
+    ];
+
+    if (tableData.label && !excludeColumns.includes(tableData.label)) {
+      return tableData.label;
+    }
   }
 
   function setSelectedId(index) {

@@ -52,21 +52,10 @@ function App(props) {
             setIsAuthenticated: setIsAuthenticatedData,
           }}
         >
-          <Navigation
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-          />
-          <ToastProvider
-            autoDismiss
-            autoDismissTimeout={6000}
-            placement="bottom-right"
-            components={{ Toast: Notification }}
-          >
-            <main id="content" style={{ minHeight: "calc(100vh - 102px)" }}>
-              <Routing
-                isAuthenticated={isAuthenticated}
-                handleLogout={handleLogout}
-              />
+          <Navigation isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+          <ToastProvider autoDismiss autoDismissTimeout={6000} placement="bottom-right" components={{ Toast: Notification }}>
+            <main id="content">
+              <Routing isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
             </main>
           </ToastProvider>
           <Footer />

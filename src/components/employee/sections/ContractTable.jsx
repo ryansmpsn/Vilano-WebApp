@@ -23,28 +23,17 @@ function ContractTable(props) {
   //   add permissions here
   columnData = [...columnData, { label: "Modify", field: "editContract" }];
 
-  let rowData = contractData.map((data, index) =>
-    data.filter(labelFilter).map((c) => [c.columnName, handleInputValue(c, c.updatedValue, index)])
-  );
+  let rowData = contractData.map((data, index) => data.filter(labelFilter).map((c) => [c.columnName, handleInputValue(c, c.updatedValue, index)]));
   rowData = rowData.map((c) => Object.fromEntries(c));
   rowData = rowData.map((c, index) => ({
     ...c,
     editContract:
       index < props.contractData.length ? (
-        <Button
-          className="btn btn-sm m-0 ml-2"
-          variant="outline-warning"
-          onClick={() => props.editContract(contractData[index], index)}
-        >
+        <Button className="btn btn-sm m-0 ml-2" variant="outline-warning" onClick={() => props.editContract(contractData[index], index)}>
           edit
         </Button>
       ) : (
-        <Button
-          className="btn btn-sm m-0"
-          variant="outline-danger"
-          onClick={() => props.removeRow(index - props.contractData.length)}
-          disabled={getActiveState(index)}
-        >
+        <Button className="btn btn-sm m-0" variant="outline-danger" onClick={() => props.removeRow(index - props.contractData.length)} disabled={getActiveState(index)}>
           remove
         </Button>
       ),

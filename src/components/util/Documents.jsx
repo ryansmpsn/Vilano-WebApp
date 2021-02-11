@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import { Row, Col, Container, Form, Button, Modal, Spinner } from "react-bootstrap";
 import Select from "react-select";
 import Send from "../../libs/send";
-// import { useToasts } from "react-toast-notifications";
+import { useToasts } from "react-toast-notifications";
 
 function Documents(props) {
   let { modalName, showModal, closeModal, endpoint, uploadData, fileTypes } = props;
-  // const { addToast } = useToasts();
+  const { addToast } = useToasts();
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [isSending, setIsSending] = useState(false);
@@ -51,11 +51,19 @@ function Documents(props) {
       .then((res) => {
         console.log("file uploaded Successfully", res);
         setIsSending(false);
+
+        addToast("File has been uploaded successfully.", {
+          appearance: "success",
+          autoDismiss: true,
+        });
       })
       .catch((err) => {
         console.log(err);
         setIsSending(false);
-
+        addToast("Error uploading file.", {
+          appearance: "error",
+          autoDismiss: true,
+        });
         console.log(err);
       });
   }

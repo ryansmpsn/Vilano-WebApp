@@ -43,7 +43,7 @@ function TripData(props) {
             <Select
               defaultInputValue={props.selectedContract}
               options={props.selectOptions}
-              placeholder={"Select a Contract to View Trips"}
+              placeholder={"Select a Contract to View Trip Information"}
               onChange={(x) => {
                 getTripData(x);
               }}
@@ -55,12 +55,7 @@ function TripData(props) {
               <Spinner animation="border" variant="primary" />
             ) : (
               sessionStorage.getItem("/contract/trips") >= 3 && (
-                <Button
-                  variant="outline-warning"
-                  className="float-right"
-                  onClick={addTrip}
-                  disabled={(props.contractProfile === null) | props.isSearching}
-                >
+                <Button variant="outline-warning" className="float-right" onClick={addTrip} disabled={(props.contractProfile === null) | props.isSearching}>
                   Add Trip
                 </Button>
               )
