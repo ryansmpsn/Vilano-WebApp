@@ -80,7 +80,6 @@ function ContractCards(props) {
 
   async function gatherDocuments() {
     setSearching(true);
-    console.log(contract);
 
     Send.get(`/Contract/${contract[0].value}/Document`).then((response) => {
       setSearching(false);

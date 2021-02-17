@@ -20,7 +20,7 @@ class Routing extends React.Component {
     return (
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="dashboard" element={<Home />} />
+        <Route path="dashboard" element={<Home {...this.props} />} />
         <Route path="login" element={<Login {...this.props} />} />
         <Route path="requestpasswordreset" element={<RequestReset {...this.props} />} />
         <Route path="resetpassword" element={<ResetPassword {...this.props} />} />

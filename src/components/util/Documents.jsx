@@ -16,7 +16,7 @@ function Documents(props) {
   function onFileTypeUpdate(e) {
     // Gather additional JSON from props and append them to The file type Array.
     let newFileData = [
-      { columnName: "doc_type_id", inputType: null, label: null, updatedValue: null, value: null },
+      { columnName: "doc_type_name", inputType: null, label: null, updatedValue: null, value: null },
       { columnName: "doc_type_id", inputType: null, label: null, updatedValue: null, value: null },
     ];
 

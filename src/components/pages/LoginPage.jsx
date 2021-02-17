@@ -69,7 +69,7 @@ export default function Login(props) {
       .then((result) => {
         setIsLoading(false);
         setIsDisabled(true);
-        result.our_session.match ? handleSuccess(result) : handleInvalidCredentials();
+        result.our_session.match ? setSession(result.our_session) : handleInvalidCredentials();
       })
       .catch((err) => {
         setIsLoading(false);
@@ -83,20 +83,6 @@ export default function Login(props) {
       appearance: "error",
       autoDismiss: true,
     });
-  }
-
-  function handleSuccess(result) {
-    addToast("You have logged in successfully. You will be redirected shortly.", {
-      appearance: "success",
-      autoDismiss: true,
-      autoDismissTimeout: 2000,
-    });
-
-    setTimeout(handleLogin, 2000, result);
-  }
-
-  function handleLogin(result) {
-    setSession(result.our_session);
   }
 
   function handleRedirect() {

@@ -97,11 +97,12 @@ function DisplayEmployeeInfo(props) {
                     ))}
                   </ListGroup>
                 )}
-
-                <Button className="btn btn-sm btn-outline-info mt-3 mb-0" onClick={() => openModal()}>
-                  Upload File
-                  <MDBIcon fas icon="upload" className="ml-1" />
-                </Button>
+                {!profile && (
+                  <Button className="btn btn-sm btn-outline-info mt-3 mb-0" onClick={() => openModal()}>
+                    Upload File
+                    <MDBIcon fas icon="upload" className="ml-1" />
+                  </Button>
+                )}
                 {employeeDropdowns && (
                   <Documents
                     showModal={showModal}
@@ -171,7 +172,7 @@ function DisplayEmployeeInfo(props) {
                 <MDBCol lg="6" key={index + "employeeData"} className="mb-2">
                   <Card>
                     <Card.Header>
-                      <Button block className="winter-neva-gradient  text-center" eventKey={index}>
+                      <Button block className="winter-neva-gradient  text-center">
                         {data.label}
                       </Button>
                     </Card.Header>

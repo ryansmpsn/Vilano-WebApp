@@ -7,18 +7,40 @@ import Notification from "./libs/Notifications";
 import Footer from "./components/layout/Footer";
 import Navigation from "./components/layout/Navigation";
 import { ToastProvider } from "react-toast-notifications";
+import axios from "axios";
 
 function App(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const existingSession = sessionStorage.getItem("SessionID");
   const [session, setSession] = useState(existingSession);
+  const [appData, setAppData] = useState(null);
 
   useEffect(() => {
+    const onLogin = async () => {
+      const requestOne = Send.get("/Report/Roster");
+      const requestTwo = Send.get("/Contract/Ids");
+      const requestThree = Send.get("/Bid/BidIDs");
+
+      axios
+        .all([requestOne, requestTwo, requestThree])
+        .then(
+          axios.spread((...responses) => {
+            const responseData = { drivers: responses[0].data, contracts: responses[1].data, bids: responses[2].data[0].options };
+            setAppData(responseData);
+          })
+        )
+        .catch((errors) => {
+          // react on errors
+          console.log(errors);
+        });
+    };
     if (!isAuthenticated) {
       sessionStorage.getItem("SessionID") !== null &&
         Send.get("/Loggedin").then((res) => {
           setIsAuthenticated(true);
         });
+    } else {
+      onLogin();
     }
   }, [isAuthenticated]);
 
@@ -37,8 +59,6 @@ function App(props) {
   function handleLogout() {
     sessionStorage.clear();
     setIsAuthenticated(false);
-    // navigate("/login");
-    // add notification
   }
 
   class Content extends Component {
@@ -55,7 +75,7 @@ function App(props) {
           <Navigation isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
           <ToastProvider autoDismiss autoDismissTimeout={6000} placement="bottom-right" components={{ Toast: Notification }}>
             <main id="content">
-              <Routing isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
+              <Routing isAuthenticated={isAuthenticated} handleLogout={handleLogout} appData={appData} />
             </main>
           </ToastProvider>
           <Footer />
