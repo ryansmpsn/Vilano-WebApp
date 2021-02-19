@@ -20,47 +20,49 @@ export default function Home(props) {
             </h4>
           </Container>
         </Jumbotron>
-        {props.appData ? (
-          <Row>
-            <Col md="4">
-              <Card className="mb-4">
-                <Card.Header>Application Activity</Card.Header>
-                <Card.Body>
-                  <ListGroup className="list-group-flush">
-                    <ListGroupItem>
-                      Total Locations
-                      <MDBBadge color="default-color-dark" pill className="float-right">
-                        <CountUp start={0} end={72} duration={5} />
 
-                        <MDBIcon icon="city" className="ml-1" />
-                      </MDBBadge>
-                    </ListGroupItem>
-                    <ListGroupItem>
-                      Drivers
-                      <MDBBadge color="danger-color" pill className="float-right">
-                        <CountUp start={0} end={appData.drivers.length} duration={3} />
-                      </MDBBadge>
-                    </ListGroupItem>
-                    <ListGroupItem>
-                      Contracts
-                      <MDBBadge color="success-color" pill className="float-right">
-                        <CountUp start={0} end={appData.contracts.length} duration={3} />
-                      </MDBBadge>
-                    </ListGroupItem>
-                    <ListGroupItem>
-                      Bids
-                      <MDBBadge color="primary-color" pill className="float-right">
-                        <CountUp start={0} end={appData.bids.length} duration={3} />
-                      </MDBBadge>
-                    </ListGroupItem>
-                  </ListGroup>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        ) : (
-          <Spinner animation="border" variant="primary" />
-        )}
+        {false &&
+          (props.appData ? (
+            <Row>
+              <Col md="4">
+                <Card className="mb-4">
+                  <Card.Header>Application Activity</Card.Header>
+                  <Card.Body>
+                    <ListGroup className="list-group-flush">
+                      <ListGroupItem>
+                        Total Locations
+                        <MDBBadge color="default-color-dark" pill className="float-right">
+                          <CountUp start={0} end={72} duration={5} />
+
+                          <MDBIcon icon="city" className="ml-1" />
+                        </MDBBadge>
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        Drivers
+                        <MDBBadge color="danger-color" pill className="float-right">
+                          <CountUp start={0} end={appData.drivers.length} duration={3} />
+                        </MDBBadge>
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        Contracts
+                        <MDBBadge color="success-color" pill className="float-right">
+                          <CountUp start={0} end={appData.contracts.length} duration={3} />
+                        </MDBBadge>
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        Bids
+                        <MDBBadge color="primary-color" pill className="float-right">
+                          <CountUp start={0} end={appData.bids.length} duration={3} />
+                        </MDBBadge>
+                      </ListGroupItem>
+                    </ListGroup>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          ) : (
+            <Spinner animation="border" variant="primary" />
+          ))}
       </Col>
     </Row>
   );

@@ -20,18 +20,20 @@ function EditContractTable(props) {
       <Button className="btn-sm btn-outline-warning" onClick={openModal}>
         Edit
       </Button>
-      <UpsertContractModal
-        modalName={"Edit " + props.type}
-        contract={props.contract}
-        inputRestrictions={props.inputRestrictions}
-        show={showModal}
-        closeModal={closeModal}
-        accessLevel={props.accessLevel}
-        appProps={props.appProps}
-        submitAction={(editContent) => {
-          return props.submitAction(editContent);
-        }}
-      />
+      {showModal && (
+        <UpsertContractModal
+          modalName={"Edit " + props.type}
+          contract={props.contract}
+          inputRestrictions={props.inputRestrictions}
+          show={showModal}
+          closeModal={closeModal}
+          accessLevel={props.accessLevel}
+          appProps={props.appProps}
+          submitAction={(editContent) => {
+            return props.submitAction(editContent);
+          }}
+        />
+      )}
     </>
   );
 }
