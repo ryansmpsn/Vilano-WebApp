@@ -106,7 +106,6 @@ function ContractCards(props) {
       });
     });
   }
-
   return (
     !isLoading && (
       <Card

@@ -120,7 +120,6 @@ function ContractData(props) {
           <div className="contract">
             <Row key="topRow" className="show-grid">
               {contractData !== [] &&
-                bidOptions !== null &&
                 contractData.map((c, index) => (
                   <ContractCards
                     key={index + "contract"}
