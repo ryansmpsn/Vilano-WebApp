@@ -224,14 +224,14 @@ function TripData(props) {
             {
               columnName: "employee_name",
               inputType: null,
-              label: "Last Modified By",
+              label: null,
               updatedValue: null,
               value: null,
             },
             {
               columnName: "last_modified",
               inputType: null,
-              label: "Last Modified",
+              label: null,
               updatedValue: null,
               value: null,
             },

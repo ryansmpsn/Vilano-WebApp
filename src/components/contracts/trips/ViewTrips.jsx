@@ -116,21 +116,33 @@ function ViewTrips(props) {
 
         <OverlayTrigger
           key={"vehicles"}
-          placement={"top"}
+          placement={"top-start"}
           overlay={
-            <Popover id={`popover-Vehicles`}>
+            <Popover id={`popover-Vehicles`} style={{ width: "400px" }}>
               <Popover.Title>{props.tripVehicles.label}</Popover.Title>
               <Popover.Content>
+                <Row>
+                  <Col md="7">
+                    <p>
+                      <b>Type:</b>
+                    </p>
+                  </Col>
+                  <Col md="5">
+                    <p>
+                      <b>Number:</b>
+                    </p>
+                  </Col>
+                </Row>
                 {props.tripVehicles.value.length !== 0 ? (
                   props.tripVehicles.value.map((c, index) => (
-                    <Col key={index}>
-                      <strong>{c[3].label}: </strong>
-                      {c[3].updatedValue}
-                      <br />
-                      <strong>{c[4].label}: </strong>
-                      {c[4].updatedValue}
-                      <hr />
-                    </Col>
+                    <Row key={index}>
+                      <Col md="10">
+                        <p>{c[3].updatedValue}:</p>
+                      </Col>
+                      <Col md="2">
+                        <p>{c[4].updatedValue}</p>
+                      </Col>
+                    </Row>
                   ))
                 ) : (
                   <strong>This trip has no vehicles attached!</strong>
@@ -139,25 +151,39 @@ function ViewTrips(props) {
             </Popover>
           }
         >
-          <Button className="btn-outline-info rounded">Vehicles</Button>
+          <Button className="btn-outline-info rounded" size="sm">
+            Vehicles
+          </Button>
         </OverlayTrigger>
         <OverlayTrigger
           key={"trailers"}
           placement={"top"}
           overlay={
-            <Popover id={`popover-trailers`}>
+            <Popover id={`popover-trailers`} style={{ width: "400px" }}>
               <Popover.Title>{props.tripTrailers.label}</Popover.Title>
               <Popover.Content>
+                <Row>
+                  <Col md="7">
+                    <p>
+                      <b>Type:</b>
+                    </p>
+                  </Col>
+                  <Col md="5">
+                    <p>
+                      <b>Number:</b>
+                    </p>
+                  </Col>
+                </Row>
                 {props.tripTrailers.value.length !== 0 ? (
                   props.tripTrailers.value.map((c, index) => (
-                    <Col key={index}>
-                      <strong>{c[3].label}: </strong>
-                      {c[3].updatedValue}
-                      <br />
-                      <strong>{c[4].label}: </strong>
-                      {c[4].updatedValue}
-                      <hr />
-                    </Col>
+                    <Row key={index}>
+                      <Col md="10">
+                        <p>{c[3].updatedValue}:</p>
+                      </Col>
+                      <Col md="2">
+                        <p>{c[4].updatedValue}</p>
+                      </Col>
+                    </Row>
                   ))
                 ) : (
                   <strong>This trip has no trailers attached!</strong>
@@ -166,7 +192,9 @@ function ViewTrips(props) {
             </Popover>
           }
         >
-          <Button className="rounded btn-outline-info">Trailers</Button>
+          <Button className="rounded btn-outline-info" size="sm">
+            Trailers
+          </Button>
         </OverlayTrigger>
 
         {isLoading ? (
@@ -210,9 +238,10 @@ function ViewTrips(props) {
             }}
             trip={props.tripData}
           />
+
           {showVehicleModal && (
             <UpsertVehicleModal
-              modalName={"Edit Vehicles & Trailers"}
+              modalName={`Vehicles & Trailers for Trip: ${tripData[3].updatedValue} `}
               index={props.index}
               type={props.type}
               vehicles={props.tripVehicles}

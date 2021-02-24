@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, FormControl, Button, Form, FormLabel, FormGroup, Row, Col } from "react-bootstrap";
+import { Modal, FormControl, Button, Form, FormLabel, Row, Col } from "react-bootstrap";
 import Select from "react-select";
 import Send from "../../../libs/send";
 
@@ -152,109 +152,177 @@ class UpsertVehicleModal extends React.Component {
 
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.props.closeModal}>
+      <Modal show={this.props.show} onHide={this.props.closeModal} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>{this.props.modalName}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Row>
-            {!this.isLoading && (
+        {!this.isLoading && (
+          <Modal.Body>
+            <Row>
               <Col md="6">
-                Add a Vehicle
+                <Row>
+                  <Col>
+                    <p>Add a Vehicle</p>
+                  </Col>
+                </Row>
+
                 <Form onSubmit={this.addVehicle}>
-                  <Select
-                    options={this.state.vehicleOptions}
-                    placeholder={"Vehicles"}
-                    isDisabled={this.state.isLoading}
-                    onChange={(x) => {
-                      var object = this.state.vehicleValues;
-                      object.vehicle_type_id = x.value;
-                      object.vehicle_type_value = x.label;
-                      this.setState({ vehicleValues: object });
-                    }}
-                  />
-                  <FormControl
-                    type="number"
-                    disabled={this.state.isLoading}
-                    onChange={(e) => {
-                      var object = this.state.vehicleValues;
-                      object.num_vehicle = e.target.value;
-                      this.setState({ vehicleValues: object });
-                    }}
-                    max="100"
-                    min="1"
-                    step="1"
-                    placeholder="Number of Vehicles"
-                    required
-                  />
-                  <Button type="submit" disabled={this.state.isLoading}>
-                    add
-                  </Button>
+                  <Row>
+                    <Col md="8">
+                      <Select
+                        options={this.state.vehicleOptions}
+                        placeholder={"Vehicles"}
+                        isDisabled={this.state.isLoading}
+                        onChange={(x) => {
+                          var object = this.state.vehicleValues;
+                          object.vehicle_type_id = x.value;
+                          object.vehicle_type_value = x.label;
+                          this.setState({ vehicleValues: object });
+                        }}
+                      />
+                    </Col>
+                    <Col md="4">
+                      <FormControl
+                        type="number"
+                        disabled={this.state.isLoading}
+                        onChange={(e) => {
+                          var object = this.state.vehicleValues;
+                          object.num_vehicle = e.target.value;
+                          this.setState({ vehicleValues: object });
+                        }}
+                        max="100"
+                        min="1"
+                        step="1"
+                        placeholder="Count"
+                        required
+                      />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <Button type="submit" disabled={this.state.isLoading} size="sm" className="float-right">
+                        add
+                      </Button>
+                    </Col>
+                  </Row>
                 </Form>
+                <hr />
+                <Row>
+                  <Col md="4">
+                    <p>
+                      <b>Vehicle Type:</b>
+                    </p>
+                  </Col>
+                  <Col md="8">
+                    <p>
+                      <b>Number:</b>
+                    </p>
+                  </Col>
+                </Row>
+
                 {this.state.vehicles.value.map((c, index) => (
-                  <FormGroup key={index}>
-                    <FormLabel>{c[3].label + ": " + c[3].updatedValue}</FormLabel>
-                    <br />
-                    <FormLabel>{c[4].label + ": " + c[4].updatedValue}</FormLabel>
-                    <Button variant="outline-danger" size="sm" onClick={() => this.removeItem("vehicle", index)}>
-                      Remove
-                    </Button>
-                  </FormGroup>
+                  <Row key={index}>
+                    <Col md="6">
+                      <small>
+                        <FormLabel>{c[3].updatedValue}</FormLabel>
+                      </small>
+                    </Col>
+                    <Col md="1">
+                      <FormLabel>{c[4].updatedValue}</FormLabel>
+                    </Col>
+                    <Col md="4">
+                      <Button variant="outline-danger" size="sm" onClick={() => this.removeItem("vehicle", index)}>
+                        Remove
+                      </Button>
+                    </Col>
+                  </Row>
                 ))}
               </Col>
-            )}
-            {!this.isLoading && (
-              <Col>
-                Add a Trailer
+
+              <Col md="6">
+                <Row>
+                  <Col>
+                    <p>Add a Trailer</p>
+                  </Col>
+                </Row>
                 <Form onSubmit={this.addTrailer}>
-                  <Select
-                    options={this.state.trailerOptions}
-                    placeholder={"Trailers"}
-                    isDisabled={this.state.isLoading}
-                    onChange={(x) => {
-                      var object = this.state.trailerValues;
-                      object.trailer_type_id = x.value;
-                      object.trailer_type_value = x.label;
-                      this.setState({ trailerValues: object });
-                    }}
-                  />
-                  <FormControl
-                    type="number"
-                    disabled={this.state.isLoading}
-                    onChange={(e) => {
-                      var object = this.state.trailerValues;
-                      object.num_trailer = e.target.value;
-                      this.setState({ trailerValues: object });
-                    }}
-                    max="100"
-                    min="1"
-                    step="1"
-                    placeholder="Number of Trailers"
-                    required
-                  />
-                  <Button type="submit" disabled={this.state.isLoading}>
-                    add
-                  </Button>
+                  <Row>
+                    <Col md="8">
+                      <Select
+                        options={this.state.trailerOptions}
+                        placeholder={"Trailers"}
+                        isDisabled={this.state.isLoading}
+                        onChange={(x) => {
+                          var object = this.state.trailerValues;
+                          object.trailer_type_id = x.value;
+                          object.trailer_type_value = x.label;
+                          this.setState({ trailerValues: object });
+                        }}
+                      />
+                    </Col>
+                    <Col md="4">
+                      <FormControl
+                        type="number"
+                        disabled={this.state.isLoading}
+                        onChange={(e) => {
+                          var object = this.state.trailerValues;
+                          object.num_trailer = e.target.value;
+                          this.setState({ trailerValues: object });
+                        }}
+                        max="100"
+                        min="1"
+                        step="1"
+                        placeholder="Count"
+                        required
+                      />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <Button type="submit" disabled={this.state.isLoading} size="sm" className="float-right">
+                        add
+                      </Button>
+                    </Col>
+                  </Row>
                 </Form>
+                <hr />
+                <Row>
+                  <Col md="4">
+                    <p>
+                      <b>Trailer Type:</b>
+                    </p>
+                  </Col>
+                  <Col md="8">
+                    <p>
+                      <b>Number:</b>
+                    </p>
+                  </Col>
+                </Row>
+
                 {this.state.trailers.value.map((c, index) => (
-                  <FormGroup key={index}>
-                    <FormLabel>{c[3].label + ": " + c[3].updatedValue}</FormLabel>
-                    <br />
-                    <FormLabel>{c[4].label + ": " + c[4].updatedValue}</FormLabel>
-                    <Button variant="outline-danger" size="sm" onClick={() => this.removeItem("trailer", index)}>
-                      Remove
-                    </Button>
-                  </FormGroup>
+                  <Row key={index}>
+                    <Col md="6">
+                      <FormLabel>{c[3].updatedValue}</FormLabel>
+                    </Col>
+                    <Col md="2">
+                      <FormLabel>{c[4].updatedValue}</FormLabel>
+                    </Col>
+                    <Col md="4">
+                      <Button variant="outline-danger" size="sm" onClick={() => this.removeItem("trailer", index)}>
+                        Remove
+                      </Button>
+                    </Col>
+                  </Row>
                 ))}
               </Col>
-            )}
-          </Row>
-          <div className={"text-center"}>
-            <Button variant={"outline-primary"} onClick={this.submitAction} disabled={!this.state.vehiclesHaveChanged && !this.state.trailersHaveChanged}>
-              Save
-            </Button>
-          </div>
-        </Modal.Body>
+            </Row>
+          </Modal.Body>
+        )}
+        <Modal.Footer>
+          <Button variant={"outline-primary"} onClick={this.submitAction} disabled={!this.state.vehiclesHaveChanged && !this.state.trailersHaveChanged}>
+            Save
+          </Button>
+        </Modal.Footer>
       </Modal>
     );
   }
