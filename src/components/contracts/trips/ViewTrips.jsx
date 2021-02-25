@@ -4,11 +4,13 @@ import UpsertTripModal from "./UpsertTripModal";
 import { useToasts } from "react-toast-notifications";
 import UpsertVehicleModal from "./UpsertVehicleModal";
 import { Card, Spinner, Row, Col, OverlayTrigger, Popover, Button } from "react-bootstrap";
+import UpsertTripDetailModal from "./UpsertTripDetailModal";
 
 function ViewTrips(props) {
   const [tripData] = useState(props.tripData);
   const [showTripModal, setShowTripModal] = useState(false);
   const [showVehicleModal, setShowVehicleModal] = useState(false);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
   const [submitting, setSubmitting] = useState(false);
@@ -17,6 +19,7 @@ function ViewTrips(props) {
   function openModal(x) {
     x === "trip" && setShowTripModal(true);
     x === "vehicle" && setShowVehicleModal(true);
+    x === "details" && setShowDetailsModal(true);
     window.location.hash = "edit";
   }
 
@@ -24,6 +27,7 @@ function ViewTrips(props) {
     window.history.replaceState(null, null, " ");
     setShowTripModal(false);
     setShowVehicleModal(false);
+    setShowDetailsModal(false);
   }
 
   function editTrip() {
@@ -211,6 +215,9 @@ function ViewTrips(props) {
                 Edit Vehicles
               </Button>
             )}
+            <Button onClick={() => openModal("details")} className="float-right btn-sm btn-outline-warning">
+              Trip Details
+            </Button>
           </>
         )}
         {/*  <Link
@@ -259,6 +266,7 @@ function ViewTrips(props) {
               }}
             />
           )}
+          <UpsertTripDetailModal modalName={`Add Detail  for Trip: ${tripData[3].updatedValue}`} show={showDetailsModal} closeModal={closeModal} />
         </>
       )}
     </Card>
