@@ -17,7 +17,7 @@ function EditContractTable(props) {
 
   return (
     <>
-      <Button className="btn-sm btn-outline-warning" onClick={openModal}>
+      <Button className="btn-sm btn-outline-primary" onClick={openModal}>
         Edit
       </Button>
       {showModal && (

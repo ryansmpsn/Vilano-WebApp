@@ -55,7 +55,7 @@ function TripData(props) {
               <Spinner animation="border" variant="primary" />
             ) : (
               sessionStorage.getItem("/contract/trips") >= 3 && (
-                <Button variant="outline-warning" className="float-right" onClick={addTrip} disabled={(props.contractProfile === null) | props.isSearching}>
+                <Button variant="outline-primary" className="float-right" onClick={addTrip} disabled={(props.contractProfile === null) | props.isSearching}>
                   Add Trip
                 </Button>
               )

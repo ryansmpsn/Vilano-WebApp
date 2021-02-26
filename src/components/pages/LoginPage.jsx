@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Send from "../../libs/send";
 import { useAuth } from "../../auth";
 import styled from "styled-components";
-import { Navigate, useLocation, NavLink } from "react-router-dom";
+import { Navigate, useLocation, Link } from "react-router-dom";
 import { useFormFields } from "../../libs/hookslib";
 import { useToasts } from "react-toast-notifications";
 import { FormGroup, FormControl, Spinner, Button } from "react-bootstrap";
@@ -44,6 +44,12 @@ const LoginPage = styled.div`
   .box input[type="password"]:focus {
     width: 280px;
     border-color: #2ecc71;
+  }
+  a {
+    color: whitesmoke;
+  }
+  a:hover {
+    color: green;
   }
 `;
 
@@ -110,9 +116,9 @@ export default function Login(props) {
             </Button>
           )}
           <br />
-          <NavLink to="/requestpasswordreset">
-            <u>Forgot Password ?</u>
-          </NavLink>
+          <Link to="/requestpasswordreset" className="nav-link">
+            Forgot Password ?
+          </Link>
         </form>
       </div>
     </LoginPage>

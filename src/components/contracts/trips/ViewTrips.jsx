@@ -206,16 +206,16 @@ function ViewTrips(props) {
         ) : (
           <>
             {sessionStorage.getItem("/contract/trips") >= 3 && (
-              <Button onClick={editTrip} className="float-right btn-sm btn-outline-warning">
+              <Button onClick={editTrip} className="float-right btn-sm btn-outline-primary">
                 Edit Trip
               </Button>
             )}
             {sessionStorage.getItem("/contract/trips") >= 3 && (
-              <Button onClick={() => openModal("vehicle")} className="float-right btn-sm btn-outline-warning">
+              <Button onClick={() => openModal("vehicle")} className="float-right btn-sm btn-outline-primary">
                 Edit Vehicles
               </Button>
             )}
-            <Button onClick={() => openModal("details")} className="float-right btn-sm btn-outline-warning">
+            <Button onClick={() => openModal("details")} className="float-right btn-sm btn-outline-primary">
               Trip Details
             </Button>
           </>

@@ -90,7 +90,7 @@ function ContractData(props) {
                 Show All
               </Button>
               {sessionStorage.getItem("/contract") >= 3 && (
-                <Button onClick={openModal} variant="outline-warning" className="float-right" disabled={props.contentInputRestrictions === null}>
+                <Button onClick={openModal} variant="outline-primary" className="float-right" disabled={props.contentInputRestrictions === null}>
                   Add Contract
                 </Button>
               )}

@@ -199,17 +199,17 @@ function ContractCards(props) {
             </Link>
           )}
           {props.type === "Contract" && sessionStorage.getItem("/bid") >= 3 && (
-            <Button className="float-right btn-outline-warning" onClick={openBidModal}>
+            <Button className="float-right btn-outline-primary" onClick={openBidModal}>
               Create Bid
             </Button>
           )}
           {props.type === "Bid" && sessionStorage.getItem("/bid/final") >= 3 && (
-            <Button className="float-right btn-outline-warning" onClick={openFinalModal}>
+            <Button className="float-right btn-outline-primary" onClick={openFinalModal}>
               Finalize Bid
             </Button>
           )}
           {sessionStorage.getItem("/" + props.type.toLowerCase()) >= 3 && (
-            <Button className="float-right btn-outline-warning" onClick={openModal}>
+            <Button className="float-right btn-outline-primary" onClick={openModal}>
               Edit {props.type}
             </Button>
           )}

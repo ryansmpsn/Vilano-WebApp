@@ -56,12 +56,7 @@ function BidTripData(props) {
             {isLoading ? (
               <Spinner animation="border" variant="primary" />
             ) : (
-              <Button
-                variant="outline-warning"
-                className="float-right"
-                onClick={addTrip}
-                disabled={(props.bidProfile === null) | props.isSearching}
-              >
+              <Button variant="outline-primary" className="float-right" onClick={addTrip} disabled={(props.bidProfile === null) | props.isSearching}>
                 Add Trip
               </Button>
             )}

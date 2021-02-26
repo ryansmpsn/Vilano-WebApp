@@ -94,7 +94,7 @@ function BidData(props) {
                     Show All
                   </Button>
                   {sessionStorage.getItem("/bid") >= 3 && (
-                    <Button onClick={openModal} variant="outline-warning" className="float-right">
+                    <Button onClick={openModal} variant="outline-primary" className="float-right">
                       Add Bid
                     </Button>
                   )}

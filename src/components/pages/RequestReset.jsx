@@ -68,13 +68,10 @@ export default function RequestReset(props) {
             });
             break;
           case "FAILURE":
-            addToast(
-              "Invalid email or email not found in system. Please try again.",
-              {
-                appearance: "error",
-                autoDismiss: true,
-              }
-            );
+            addToast("Invalid email or email not found in system. Please try again.", {
+              appearance: "error",
+              autoDismiss: true,
+            });
             break;
           case "LOCKED":
             addToast("Account is locked", {
@@ -99,7 +96,7 @@ export default function RequestReset(props) {
   return (
     <LoginPage>
       <div className="box">
-        <h3>Enter your account email</h3>
+        <h3>Enter Your Email</h3>
         <form>
           {/*ControlID must match useFormFields value*/}
           <FormGroup controlId="email">
@@ -114,15 +111,8 @@ export default function RequestReset(props) {
           {isLoading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-            <Button
-              className="aqua-gradient"
-              active={!isLoading}
-              disabled={!validateForm()}
-              onClick={postResetRequest}
-              gradient="aqua"
-              type={"submit"}
-            >
-              Request Reset
+            <Button className="aqua-gradient" active={!isLoading} disabled={!validateForm()} onClick={postResetRequest} gradient="aqua" type={"submit"}>
+              Reset
             </Button>
           )}
         </form>

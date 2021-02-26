@@ -29,7 +29,7 @@ function ContractTable(props) {
     ...c,
     editContract:
       index < props.contractData.length ? (
-        <Button className="btn btn-sm m-0 ml-2" variant="outline-warning" onClick={() => props.editContract(contractData[index], index)}>
+        <Button className="btn btn-sm m-0 ml-2" variant="outline-primary" onClick={() => props.editContract(contractData[index], index)}>
           edit
         </Button>
       ) : (
