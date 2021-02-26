@@ -46,6 +46,7 @@ function DisplayEmployeeInfo(props) {
       });
     });
   }
+
   return isLoading ? (
     <Spinner animation="border" variant="primary" className="mr-auto" />
   ) : (
@@ -148,13 +149,14 @@ function DisplayEmployeeInfo(props) {
                 contractEmployees={allModifiedContracts}
                 employeeDropdowns={props.employeeDropdowns}
                 setContractEmployees={props.setAllModifiedContracts}
+                removeEmployee={props.removeContract}
               />
             </>
           )}
         </Row>
         {!profile && (
           <Row className="justify-content-center">
-            <Button className="btn btn-sm " variant="outline-warning" onClick={() => props.saveContractToEmployee()}>
+            <Button className="btn btn-sm " variant="outline-primary" onClick={() => props.saveContractToEmployee()}>
               save
             </Button>
           </Row>

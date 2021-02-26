@@ -29,7 +29,6 @@ function EmployeeInformation(props) {
       gatherAllModifiedContracts();
       setSelectedContracts(null);
       Send.get("/Employee/" + employeeId).then((res) => {
-        console.log(res);
         setEmployeeContracts(res.data[0][5].value);
         setEmployeeData(res.data[0]);
         setModifiedContracts(null);
@@ -79,10 +78,12 @@ function EmployeeInformation(props) {
     gatherAllModifiedContracts(newContracts, modifiedContracts);
 
     let contractEmployees = [{ columnName: "employee_contracts", value: allModifiedContracts }];
+    console.log(contractEmployees);
     Send.post("/Employee/Contract", contractEmployees).then((result) => {
+      setEmployeeContracts(result.data[0][5].value);
       setModifiedContracts(null);
       setEmployeeData(result.data[0]);
-      setEmployeeContracts(result.data[0][5].value);
+      gatherAllModifiedContracts();
       setIsLoading(false);
     });
     addToast(`Contracts Saved to ${employeeId}'s Profile.`, {
@@ -90,6 +91,13 @@ function EmployeeInformation(props) {
       autoDismiss: true,
       autoDismissTimeout: 3000,
     });
+  }
+
+  function removeContract(index) {
+    let removeCon = allModifiedContracts;
+    removeCon[index][2].updatedValue = false;
+    console.log(removeCon[index][2]);
+    gatherAllModifiedContracts(removeCon);
   }
 
   function editContract(contract, index) {
@@ -148,6 +156,7 @@ function EmployeeInformation(props) {
           handleRoleSelect={(x, index) => handleRoleSelect(x, index)}
           saveContractToEmployee={saveContractToEmployee}
           setAllModifiedContracts={setAllModifiedContracts}
+          removeContract={removeContract}
         />
       </Row>
     </Jumbotron>

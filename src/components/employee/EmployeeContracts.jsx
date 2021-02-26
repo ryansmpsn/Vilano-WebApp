@@ -67,9 +67,7 @@ function EmployeeContracts(props) {
     gatherAllModifiedEmployees(newEmployees, modifiedEmployees);
     let contractEmployees = [{ columnName: "employee_contracts", value: allModifiedEmployees }];
     // remove logs inproduction
-    console.log(JSON.stringify(contractEmployees));
     Send.post("/Employee/ContractEmployee", contractEmployees).then((response) => {
-      console.log(response);
       setContractEmployees(response.data.value);
       setModifiedEmployees(null);
       setSelectedEmployees(null);
@@ -146,7 +144,7 @@ function EmployeeContracts(props) {
           <Col>
             <Spinner animation="border" variant="primary" />
           </Col>
-        ) : contractEmployees && contractEmployees.length + allModifiedEmployees.length >= 3 ? (
+        ) : contractEmployees && contractEmployees.length + allModifiedEmployees.length >= 5 ? (
           <ContractTable
             editContract={editContract}
             contractData={contractEmployees}
@@ -174,7 +172,7 @@ function EmployeeContracts(props) {
       {allModifiedEmployees && allModifiedEmployees.length !== 0 && (
         <Row>
           <Col className="text-center">
-            <Button className="btn btn-md" variant="outline-warning" onClick={() => saveEmployeeToContract()}>
+            <Button className="btn btn-md" variant="outline-primary" onClick={() => saveEmployeeToContract()}>
               save
             </Button>
           </Col>

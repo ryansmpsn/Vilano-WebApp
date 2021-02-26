@@ -36,11 +36,7 @@ function DisplayContractEmployee(props) {
     contractEmployees.map((employee, index) => (
       <Col md="3" key={"dataCol" + index}>
         <Card className="mb-3" border={updateBorder(employee)}>
-          <Card.Header>
-            {props.contracts
-              ? `Contract Number: ${employee[4].updatedValue} `
-              : employee[1].updatedValue + " " + employee[2].updatedValue}
-          </Card.Header>
+          <Card.Header>{props.contracts ? `Contract Number: ${employee[4].updatedValue} ` : employee[1].updatedValue + " " + employee[2].updatedValue}</Card.Header>
           <Card.Body style={{ lineHeight: 0.89 }}>
             {employee.map(
               (content, arrayIndex) =>
@@ -56,7 +52,7 @@ function DisplayContractEmployee(props) {
                         options={props.employeeDropdowns[3].options}
                         onChange={(x) => props.handleRoleSelect(x, index)}
                         styles={customStyles}
-                        isDisabled={!employee[9].updatedValue}
+                        isDisabled={props.contracts ? !employee[2].updatedValue : !employee[9].updatedValue}
                       />
                     </Col>
                   </Row>
@@ -73,7 +69,7 @@ function DisplayContractEmployee(props) {
                         props.setContractEmployees(object);
                       }}
                       checked={content.updatedValue === true || content.updatedValue === "true"}
-                      disabled={!employee[9].updatedValue}
+                      disabled={props.contracts ? !employee[2].updatedValue : !employee[9].updatedValue}
                     />
                   )) || (
                     <Card.Text key={"employeeContent" + arrayIndex}>
@@ -91,21 +87,12 @@ function DisplayContractEmployee(props) {
 
             {!props.profile &&
               (!props.modified ? (
-                <Button
-                  className="btn btn-sm float-right"
-                  variant="outline-warning"
-                  onClick={() => props.editContract(employee, index)}
-                >
+                <Button className="btn btn-sm float-right" variant="outline-primary" onClick={() => props.editContract(employee, index)}>
                   edit
                 </Button>
               ) : (
                 // TODO add remove Button to set active to false
-                <Button
-                  className="btn btn-sm float-right"
-                  variant="outline-danger"
-                  onClick={() => props.removeEmployee(index)}
-                  disabled={!employee[9].updatedValue}
-                >
+                <Button className="btn btn-sm float-right" variant="outline-danger" onClick={() => props.removeEmployee(index)} disabled={props.contracts ? !employee[2].updatedValue : !employee[9].updatedValue}>
                   remove
                 </Button>
               ))}
