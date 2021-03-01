@@ -3,8 +3,7 @@ import Routing from "./Router";
 import Send from "../../libs/send";
 import CountUp from "react-countup";
 import NavPerm from "../../libs/NavPerms";
-import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
-import { Nav, NavItem } from "react-bootstrap";
+import { Card, Row, Col, Badge, ListGroup, ListGroupItem, Nav, NavItem } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 class BidDashboard extends Component {
@@ -100,48 +99,47 @@ class BidDashboard extends Component {
   render() {
     return (
       <>
-        <MDBCard className="cascading-admin-card mb-4">
-          <MDBCardHeader>
+        <Card className="cascading-admin-card mb-4">
+          <Card.Header>
             <div className="admin-up">
               <div className="fa">
                 <div className="fas fa-hand-holding-usd " />
               </div>
-              <MDBIcon icon="" className="primary-color" />
-              <MDBCard className="w-25 ml-auto" style={{ marginTop: "-50px" }}>
-                <MDBCardHeader>Statistics</MDBCardHeader>
-                <MDBCardBody>
-                  <MDBListGroup className="list-group-flush">
-                    <MDBListGroupItem>
+              <Card className="w-25 ml-auto" style={{ marginTop: "-50px" }}>
+                <Card.Header>Statistics</Card.Header>
+                <Card.Body>
+                  <ListGroup className="list-group-flush">
+                    <ListGroupItem>
                       Active Bids
-                      <MDBBadge color="primary-color" pill className="float-right">
+                      <Badge color="primary-color" pill className="float-right">
                         <CountUp start={0} end={this.state.selectOptions ? this.state.selectOptions.length : 0} duration={5} />
-                      </MDBBadge>
-                    </MDBListGroupItem>
-                  </MDBListGroup>
-                </MDBCardBody>
-              </MDBCard>
+                      </Badge>
+                    </ListGroupItem>
+                  </ListGroup>
+                </Card.Body>
+              </Card>
               <h2 className="mb-5 text-center" style={{ marginTop: "-50px" }}>
                 Bid Dashboard
               </h2>
             </div>
-          </MDBCardHeader>
+          </Card.Header>
           {this.state.bidProfile !== null && (
-            <MDBCardBody>
-              <MDBRow>
+            <Card.Body>
+              <Row>
                 {this.state.bidProfile.map(
                   (c, index) =>
                     c.label !== null &&
                     typeof c.value !== "object" && (
-                      <MDBCol md="2" key={c.label + index}>
+                      <Col md="2" key={c.label + index}>
                         <p className="h5 mb-1">{c.label}: </p>
                         <div className="text-muted">{c.value}</div>
-                      </MDBCol>
+                      </Col>
                     )
                 )}
-              </MDBRow>
-            </MDBCardBody>
+              </Row>
+            </Card.Body>
           )}
-        </MDBCard>
+        </Card>
 
         <Nav justify variant="tabs" defaultActiveKey="employee" className="pb-2 w-50 mx-auto my-3 ">
           <NavItem>

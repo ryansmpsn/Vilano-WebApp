@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { MDBDataTable } from "mdbreact";
 import { Card } from "react-bootstrap";
+import MaterialTable from "material-table";
 
 function ViewRoutes(props) {
   let { tripId } = useParams();
@@ -512,7 +512,7 @@ function ViewRoutes(props) {
         <h4>Trip Route Param: {tripId}</h4>
       </Card.Header>
       <Card.Body>
-        <MDBDataTable striped bordered hover responsive data={datatable} />
+        <MaterialTable striped bordered hover responsive columns={datatable.columns} data={datatable.rows} title="" />{" "}
         <ul>
           <li>Arrival Time:</li>
           <li>Departure Time</li>

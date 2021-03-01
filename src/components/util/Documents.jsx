@@ -1,4 +1,3 @@
-import { MDBIcon } from "mdbreact";
 import React, { useState } from "react";
 import { Row, Col, Container, Form, Button, Modal, Spinner } from "react-bootstrap";
 import Select from "react-select";
@@ -119,7 +118,7 @@ function Documents(props) {
                 <div className="input-group my-3">
                   <div className="input-group-prepend">
                     <span className="input-group-text" id="inputGroupFileAddon01">
-                      <MDBIcon fas icon="file" />
+                      <div className=" fas fa-file" />
                     </span>
                   </div>
                   <div className="custom-file">
@@ -144,7 +143,7 @@ function Documents(props) {
         ) : (
           <Button className="btn-outline-info float-right" onClick={() => onFileUpload()} disabled={!selectedFile | !submissionJson | isSending}>
             Upload File
-            <MDBIcon fas icon="upload" className="ml-1" />
+            <div className="fas fa-upload ml-1" />
           </Button>
         )}
       </Modal.Footer>

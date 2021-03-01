@@ -1,7 +1,7 @@
 import React from "react";
-import { MDBDataTable } from "mdbreact";
 import Select from "react-select";
 import { Button, FormCheck } from "react-bootstrap";
+import MaterialTable from "material-table";
 
 function ContractTable(props) {
   const customStyles = {
@@ -76,7 +76,7 @@ function ContractTable(props) {
       );
     } else return value;
   }
-  return <MDBDataTable striped bordered hover responsive data={data} />;
+  return <MaterialTable striped bordered hover responsive columns={columnData} data={rowData} title="" />;
 }
 
 export default ContractTable;

@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Row, Col, Card, Button, Spinner } from "react-bootstrap";
-import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBContainer, MDBIcon } from "mdbreact";
+import { Row, Col, Card, Button, Spinner, Container, ListGroup, ListGroupItem, Form } from "react-bootstrap";
 import DisplayContractEmployee from "./DisplayContractEmployees";
 import ContractTable from "./ContractTable";
-import { ListGroup } from "react-bootstrap";
-import { ListGroupItem } from "react-bootstrap";
+
 import Documents from "../../util/Documents";
 import { useToasts } from "react-toast-notifications";
 import Send from "../../../libs/send";
@@ -51,38 +49,41 @@ function DisplayEmployeeInfo(props) {
     <Spinner animation="border" variant="primary" className="mr-auto" />
   ) : (
     employeeData !== null && (
-      <MDBContainer fluid className="mt-3">
+      <Container fluid className="mt-3">
         <Row>
           <Col lg="8">
-            <MDBCard narrow className="cascading-admin-card">
+            <Card className="cascading-admin-card">
               <div className="admin-up" style={{ marginRight: "10%" }}>
                 <Button className="text-center blue-gradient" block>
                   Profile
                 </Button>
               </div>
-              <MDBCardBody className="text-center">
-                <MDBRow>
+              <Card.Body>
+                <Row>
                   {employeeData[0].value[0].map(
                     (c, index) =>
                       c.label !== null && (
-                        <MDBCol size="3" key={index + "profile"}>
-                          <MDBInput type="text" className="mt-0" label={c.label} value={c.updatedValue !== null ? c.updatedValue : ""} disabled></MDBInput>
-                        </MDBCol>
+                        <Col md="3" key={index + "profile"}>
+                          <Form.Group>
+                            <Form.Label>{c.label}</Form.Label>
+                            <Form.Control type="text" className="mt-0" value={c.updatedValue !== null ? c.updatedValue : ""} disabled />
+                          </Form.Group>
+                        </Col>
                       )
                   )}
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
+                </Row>
+              </Card.Body>
+            </Card>
           </Col>
 
           <Col>
-            <MDBCard narrow className="cascading-admin-card ">
+            <Card className="cascading-admin-card ">
               <div className="admin-up" style={{ marginRight: "10%" }}>
                 <Button className="text-center blue-gradient" block>
                   Documents
                 </Button>
               </div>
-              <MDBCardBody className="text-center">
+              <Card.Body className="text-center">
                 {employeeData[6].value.length === 0 ? (
                   <p className="text-muted small">No Documents.</p>
                 ) : (
@@ -101,7 +102,7 @@ function DisplayEmployeeInfo(props) {
                 {!profile && (
                   <Button className="btn btn-sm btn-outline-info mt-3 mb-0" onClick={() => openModal()}>
                     Upload File
-                    <MDBIcon fas icon="upload" className="ml-1" />
+                    <div className="fas fa-upload ml-1" />
                   </Button>
                 )}
                 {employeeDropdowns && (
@@ -119,8 +120,8 @@ function DisplayEmployeeInfo(props) {
                     modalName={"Upload Document to " + employeeData[0].value[0][6].value + " " + employeeData[0].value[0][7].value}
                   />
                 )}
-              </MDBCardBody>
-            </MDBCard>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
 
@@ -162,16 +163,16 @@ function DisplayEmployeeInfo(props) {
           </Row>
         )}
 
-        <MDBRow center>
-          <MDBCol lg="12">
+        <Row>
+          <Col lg="12">
             <hr className="mt-5" />
             <h3 className="m-4 text-center">Additional Employee Information</h3>
-          </MDBCol>
+          </Col>
           {employeeData.map(
             (data, index) =>
               index > 0 &&
               index < 5 && (
-                <MDBCol lg="6" key={index + "employeeData"} className="mb-2">
+                <Col lg="6" key={index + "employeeData"} className="mb-2">
                   <Card>
                     <Card.Header>
                       <Button block className="winter-neva-gradient  text-center">
@@ -179,24 +180,27 @@ function DisplayEmployeeInfo(props) {
                       </Button>
                     </Card.Header>
                     <Card.Body>
-                      <MDBRow>
+                      <Row>
                         {data.value.length !== 0 &&
                           data.value[0].map(
                             (c, index) =>
                               c.label !== null && (
-                                <MDBCol md="6" key={index + "cData"}>
-                                  <MDBInput type="text" label={c.label} value={c.updatedValue !== null ? c.updatedValue : ""} disabled></MDBInput>
-                                </MDBCol>
+                                <Col md="6" key={index + "cData"}>
+                                  <Form.Group>
+                                    <Form.Label>{c.label}</Form.Label>
+                                    <Form.Control type="text" value={c.updatedValue !== null ? c.updatedValue : ""} disabled />
+                                  </Form.Group>
+                                </Col>
                               )
                           )}
-                      </MDBRow>
+                      </Row>
                     </Card.Body>
                   </Card>
-                </MDBCol>
+                </Col>
               )
           )}
-        </MDBRow>
-      </MDBContainer>
+        </Row>
+      </Container>
     )
   );
 }

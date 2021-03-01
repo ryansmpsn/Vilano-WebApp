@@ -94,7 +94,6 @@ function UpsertCostSegment(props) {
                           value={c.updatedValue === null ? (c.value === null ? "" : c.value) : c.updatedValue}
                           placeholder={c.value}
                           type="number"
-                          validate
                           max="999999999999.99"
                           min="0"
                           step="0.01"
@@ -124,7 +123,6 @@ function UpsertCostSegment(props) {
                           value={c.updatedValue === null ? (c.value === null ? "" : c.value) : c.updatedValue}
                           placeholder={c.value}
                           type="number"
-                          validate
                           max="99999999999.99"
                           min="0"
                           step="0.01"
@@ -173,7 +171,6 @@ function UpsertCostSegment(props) {
                             value={props.units[index].updatedValue === null ? props.units[index].value : props.units[index].updatedValue}
                             placeholder={props.units[index].value}
                             type="number"
-                            validate
                             max="99999999999.999"
                             min="0"
                             step="0.001"
@@ -201,7 +198,6 @@ function UpsertCostSegment(props) {
                             value={props.unitCost[index].updatedValue === null ? props.unitCost[index].value : props.unitCost[index].updatedValue}
                             placeholder={props.unitCost[index].value}
                             type="number"
-                            validate
                             max="999999999.99999"
                             min="0"
                             step="0.00001"
@@ -229,7 +225,6 @@ function UpsertCostSegment(props) {
                             value={props.annualCost[index].updatedValue === null ? props.annualCost[index].value : props.annualCost[index].updatedValue}
                             placeholder={props.annualCost[index].value}
                             type="number"
-                            validate
                             max="999999999999.99"
                             min="0"
                             step="0.01"

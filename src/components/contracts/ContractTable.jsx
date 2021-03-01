@@ -1,20 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MDBDataTable } from "mdbreact";
 import EditContractTable from "./EditContractTable";
+import MaterialTable from "material-table";
 
 function ContractTable(props) {
   let contractData = props.contractData;
-  let columnData = contractData[0].filter(labelFilter).map((c, index) => ({ label: c.label, field: c.columnName, sort: "asc" }));
+  let columnData = contractData[0].filter(labelFilter).map((c, index) => ({ title: c.label, field: c.columnName, sort: "asc" }));
   if (sessionStorage.getItem("/contract/trips") >= 3) {
-    columnData = [...columnData, { label: "View Trips", field: "viewTrips" }];
+    columnData = [...columnData, { title: "View Trips", field: "viewTrips" }];
   }
 
   if (sessionStorage.getItem("/contract/ratesheets") >= 3) {
-    columnData = [...columnData, { label: "View Cost Data", field: "viewCostData" }];
+    columnData = [...columnData, { title: "View Cost Data", field: "viewCostData" }];
   }
   if (sessionStorage.getItem("/contract") >= 3) {
-    columnData = [...columnData, { label: "Edit " + props.type, field: "editContract" }];
+    columnData = [...columnData, { title: "Edit " + props.type, field: "editContract" }];
   }
 
   let rowData = contractData.map((data, index) => data.filter(labelFilter).map((c, index) => [c.columnName, c.value]));
@@ -92,11 +92,7 @@ function ContractTable(props) {
     }
   }
 
-  const data = {
-    columns: columnData,
-    rows: rowData,
-  };
-  return <MDBDataTable striped bordered hover responsive data={data} />;
+  return <MaterialTable striped bordered hover responsive columns={columnData} data={rowData} title="Active Contracts" />;
 }
 
 export default ContractTable;
