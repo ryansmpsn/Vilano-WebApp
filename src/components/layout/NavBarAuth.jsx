@@ -1,8 +1,6 @@
 import React from "react";
-import { MDBIcon } from "mdbreact";
 import { useAuth } from "../../auth";
 import { NavLink } from "react-router-dom";
-import { Button } from "react-bootstrap";
 
 function NavBarAuth(props) {
   const { setSession } = useAuth();
@@ -17,19 +15,19 @@ function NavBarAuth(props) {
     <>
       {sessionStorage.getItem("/profile") >= 3 && (
         <NavLink to="/profile" className="border border-light rounded mr-1 nav-link">
-          <MDBIcon icon="user" className="mr-2" />
+          <div className="fas fa-user mr-2" />
           Profile
         </NavLink>
       )}
       <NavLink onClick={logOut} to="/" className="border border-light rounded mr-1 nav-link">
         Logout
-        <MDBIcon icon="sign-out-alt" className="ml-2" />
+        <div className="fas fa-sign-out-alt ml-2" />
       </NavLink>
     </>
   ) : (
     <NavLink to="/Login" className="border border-light rounded mr-1 nav-link">
       Login
-      <MDBIcon icon="sign-in-alt" className="ml-2" />
+      <div className="fas fa-sign-in-alt ml-2" />
     </NavLink>
   );
 }

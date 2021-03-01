@@ -1,7 +1,8 @@
 import React from "react";
-import { MDBIcon } from "mdbreact";
 import { NavLink } from "react-router-dom";
 import { ListGroupItem } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileContract, faHandHoldingUsd, faUsers } from "@fortawesome/free-solid-svg-icons";
 
 function SideNavAuth(props) {
   function handleMenuToggle() {
@@ -12,7 +13,7 @@ function SideNavAuth(props) {
       {sessionStorage.getItem("/contract") >= 2 && (
         <NavLink to="/contracts" activeClassName="activeClass" onClick={() => handleMenuToggle()}>
           <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-            <MDBIcon icon="file-contract" className="mr-3" />
+            <FontAwesomeIcon icon={faFileContract} className="mr-3" />
             <span>Contracts</span>
           </ListGroupItem>
         </NavLink>
@@ -21,7 +22,7 @@ function SideNavAuth(props) {
       {sessionStorage.getItem("/bid") >= 2 && (
         <NavLink to="/bids" activeClassName="activeClass" onClick={() => handleMenuToggle()}>
           <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-            <MDBIcon icon="hand-holding-usd" className="mr-3" />
+            <FontAwesomeIcon icon={faHandHoldingUsd} className="mr-3" />
             <span style={{ marginRight: "2em" }}>Bids</span>
           </ListGroupItem>
         </NavLink>
@@ -30,7 +31,7 @@ function SideNavAuth(props) {
       {sessionStorage.getItem("/employees") >= 2 && (
         <NavLink to="/employee" activeClassName="activeClass" onClick={() => handleMenuToggle()}>
           <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-            <MDBIcon icon="users" className="mr-3" />
+            <FontAwesomeIcon icon={faUsers} className="mr-3" />
             Employees
           </ListGroupItem>
         </NavLink>

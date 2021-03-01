@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { MDBCol, MDBCard, MDBCardBody, MDBCardHeader, MDBRow, MDBListGroup, MDBListGroupItem, MDBBadge, MDBIcon } from "mdbreact";
 import { Bar, Pie } from "react-chartjs-2";
-import { ProgressBar } from "react-bootstrap";
+import { ListGroup, ListGroupItem, Card, Col, ProgressBar, Row, Badge } from "react-bootstrap";
 import CountUp from "react-countup";
 
 class ContractAnalytics extends Component {
@@ -86,156 +85,155 @@ class ContractAnalytics extends Component {
       ],
     };
     return (
-      <MDBRow className="mb-4">
-        <MDBCol md="8" className="mb-4">
-          <MDBCard className="mb-4">
-            <MDBCardHeader>Revenue By Region</MDBCardHeader>
-            <MDBCardBody>
+      <Row className="mb-4">
+        <Col md="8" className="mb-4">
+          <Card className="mb-4">
+            <Card.Header>Revenue By Region</Card.Header>
+            <Card.Body>
               <Bar data={dataBar} height={500} options={barChartOptions} />
-            </MDBCardBody>
-          </MDBCard>
-          <MDBCard className="mb-4">
-            <MDBCardHeader>Progress Chart</MDBCardHeader>
-            <MDBCardBody>
-              <MDBListGroup className="list-group-flush">
-                <MDBListGroupItem>
+            </Card.Body>
+          </Card>
+          <Card className="mb-4">
+            <Card.Header>Progress Chart</Card.Header>
+            <Card.Body>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>
                   POSTAL FLEET SERVICES INC
                   <ProgressBar>
                     <ProgressBar striped variant="danger" animated now={61} key={1} />
                     <ProgressBar variant="success" animated now={37} key={2} />
                     <ProgressBar striped variant="info" animated now={2} key={3} />
                   </ProgressBar>
-                </MDBListGroupItem>
-              </MDBListGroup>
-              <MDBListGroup className="list-group-flush">
-                <MDBListGroupItem>
+                </ListGroupItem>
+              </ListGroup>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>
                   Eastern Revenue:
                   <CountUp start={0} end={134145986.86} duration={8} decimals={2} prefix=" $" separator="," suffix=" / 61%" />
                   <ProgressBar striped variant="danger" animated now={61} />
-                </MDBListGroupItem>
-              </MDBListGroup>
-              <MDBListGroup className="list-group-flush">
-                <MDBListGroupItem>
+                </ListGroupItem>
+              </ListGroup>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>
                   Southern Revenue:
                   <CountUp start={0} end={81333465.09} duration={8} decimals={2} prefix=" $" separator="," suffix=" / 37%" />
                   <ProgressBar striped variant="success" animated now={37} />
-                </MDBListGroupItem>
-              </MDBListGroup>
-              <MDBListGroup className="list-group-flush">
-                <MDBListGroupItem>
+                </ListGroupItem>
+              </ListGroup>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>
                   Central Revenue:
                   <CountUp start={0} end={5116486.44} duration={8} decimals={2} prefix=" $" separator="," suffix=" / 2%" />
                   <ProgressBar striped variant="info" animated now={2} />
-                </MDBListGroupItem>
-              </MDBListGroup>
-              <MDBListGroup className="list-group-flush">
-                <MDBListGroupItem>
+                </ListGroupItem>
+              </ListGroup>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>
                   THE STAGELINE COMPANY
                   <ProgressBar>
                     <ProgressBar striped variant="danger" animated now={87} key={1} />
                     <ProgressBar variant="success" animated now={10} key={2} />
                     <ProgressBar striped variant="info" animated now={3} key={3} />
                   </ProgressBar>
-                </MDBListGroupItem>
-              </MDBListGroup>
-              <MDBListGroup className="list-group-flush">
-                <MDBListGroupItem>
+                </ListGroupItem>
+              </ListGroup>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>
                   Eastern Revenue:
                   <CountUp start={0} end={48435826.52} duration={8} decimals={2} prefix=" $" separator="," suffix=" / 87%" />
                   <ProgressBar striped variant="danger" animated now={87} />
-                </MDBListGroupItem>
-              </MDBListGroup>
-              <MDBListGroup className="list-group-flush">
-                <MDBListGroupItem>
+                </ListGroupItem>
+              </ListGroup>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>
                   Southern Revenue:
                   <CountUp start={0} end={1886802.22} duration={8} decimals={2} prefix=" $" separator="," suffix=" / 10%" />
                   <ProgressBar striped variant="success" animated now={10} />
-                </MDBListGroupItem>
-              </MDBListGroup>
-              <MDBListGroup className="list-group-flush">
-                <MDBListGroupItem>
+                </ListGroupItem>
+              </ListGroup>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>
                   Central Revenue:
                   <CountUp start={0} end={5633366.35} duration={8} decimals={2} prefix=" $" separator="," suffix=" / 3%" />
                   <ProgressBar striped variant="info" animated now={3} />
-                </MDBListGroupItem>
-              </MDBListGroup>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-        <MDBCol md="4" className="mb-4">
-          <MDBCard className="mb-4">
-            <MDBCardHeader>Market Share</MDBCardHeader>
-            <MDBCardBody>
+                </ListGroupItem>
+              </ListGroup>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md="4" className="mb-4">
+          <Card className="mb-4">
+            <Card.Header>Market Share</Card.Header>
+            <Card.Body>
               <Pie data={dataPie} height={330} options={{ responsive: true }} />
-            </MDBCardBody>
-          </MDBCard>
-          <MDBCard className="mb-4">
-            <MDBCardHeader>Postal Fleet Services Location Count By Region</MDBCardHeader>
-            <MDBCardBody>
-              <MDBListGroup className="list-group-flush">
-                <MDBListGroupItem>
+            </Card.Body>
+          </Card>
+          <Card className="mb-4">
+            <Card.Header>Postal Fleet Services Location Count By Region</Card.Header>
+            <Card.Body>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>
                   Total Locations
-                  <MDBBadge color="default-color-dark" pill className="float-right">
+                  <Badge variant="default" pill className="float-right">
                     <CountUp start={0} end={218} duration={5} />
-                    <MDBIcon icon="city" className="ml-1" />
-                  </MDBBadge>
-                </MDBListGroupItem>
-                <MDBListGroupItem>
+                    <div className="fas fa-city ml-1" />
+                  </Badge>
+                </ListGroupItem>
+                <ListGroupItem>
                   Eastern
-                  <MDBBadge color="danger-color" pill className="float-right">
+                  <Badge variant="danger" pill className="float-right">
                     <CountUp start={0} end={112} duration={5} />
-                  </MDBBadge>
-                </MDBListGroupItem>
-                <MDBListGroupItem>
+                  </Badge>
+                </ListGroupItem>
+                <ListGroupItem>
                   Southern
-                  <MDBBadge color="success-color" pill className="float-right">
+                  <Badge variant="success" pill className="float-right">
                     <CountUp start={0} end={58} duration={5} />
-                  </MDBBadge>
-                </MDBListGroupItem>
-                <MDBListGroupItem>
+                  </Badge>
+                </ListGroupItem>
+                <ListGroupItem>
                   Central
-                  <MDBBadge color="primary-color" pill className="float-right">
+                  <Badge variant="primary" pill className="float-right">
                     <CountUp start={0} end={48} duration={5} />
-                  </MDBBadge>
-                </MDBListGroupItem>
-              </MDBListGroup>
-            </MDBCardBody>
-          </MDBCard>
-          <MDBCard className="mb-4">
-            <MDBCardHeader>The Stageline Company Location Count By Region</MDBCardHeader>
-            <MDBCardBody>
-              <MDBListGroup className="list-group-flush">
-                <MDBListGroupItem>
+                  </Badge>
+                </ListGroupItem>
+              </ListGroup>
+            </Card.Body>
+          </Card>
+          <Card className="mb-4">
+            <Card.Header>The Stageline Company Location Count By Region</Card.Header>
+            <Card.Body>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>
                   Total Locations
-                  <MDBBadge color="default-color-dark" pill className="float-right">
+                  <Badge variant="default" pill className="float-right">
                     <CountUp start={0} end={72} duration={5} />
-
-                    <MDBIcon icon="city" className="ml-1" />
-                  </MDBBadge>
-                </MDBListGroupItem>
-                <MDBListGroupItem>
+                    <div className="fas fa-city ml-1" />
+                  </Badge>
+                </ListGroupItem>
+                <ListGroupItem>
                   Eastern
-                  <MDBBadge color="danger-color" pill className="float-right">
+                  <Badge variant="danger" pill className="float-right">
                     <CountUp start={0} end={32} duration={5} />
-                  </MDBBadge>
-                </MDBListGroupItem>
-                <MDBListGroupItem>
+                  </Badge>
+                </ListGroupItem>
+                <ListGroupItem>
                   Southern
-                  <MDBBadge color="success-color" pill className="float-right">
+                  <Badge variant="success" pill className="float-right">
                     <CountUp start={0} end={2} duration={5} />
-                  </MDBBadge>
-                </MDBListGroupItem>
-                <MDBListGroupItem>
+                  </Badge>
+                </ListGroupItem>
+                <ListGroupItem>
                   Central
-                  <MDBBadge color="primary-color" pill className="float-right">
+                  <Badge variant="primary" pill className="float-right">
                     <CountUp start={0} end={38} duration={5} />
-                  </MDBBadge>
-                </MDBListGroupItem>
-              </MDBListGroup>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
+                  </Badge>
+                </ListGroupItem>
+              </ListGroup>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     );
   }
 }

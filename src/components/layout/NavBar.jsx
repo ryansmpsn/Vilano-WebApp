@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse } from "mdbreact";
 import Clock from "./Clock";
 import NavBarAuth from "./NavBarAuth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import { Nav, Navbar, NavbarBrand } from "react-bootstrap";
 
 const MenuIcon = styled.div.attrs((props) => ({
   toggle: props.toggle,
@@ -30,22 +30,22 @@ function NavBar(props) {
   const [collapse, setCollapse] = useState(false);
 
   return (
-    <MDBNavbar className="navbar fixed-top flexible-navbar" light expand="md" scrolling>
+    <Navbar className="navbar fixed-top flexible-navbar" expand="md">
       <MenuIcon onClick={() => props.setToggle(!props.toggle)} toggle={props.toggle}>
         <FontAwesomeIcon icon={props.toggle ? faChevronRight : faChevronLeft} />
       </MenuIcon>
 
-      <MDBNavbarBrand>
+      <NavbarBrand>
         <Clock />
-      </MDBNavbarBrand>
+      </NavbarBrand>
 
-      <MDBNavbarToggler onClick={() => setCollapse(!collapse)} />
-      <MDBCollapse isOpen={collapse} navbar>
-        <MDBNavbarNav right>
+      <Navbar.Toggle onClick={() => setCollapse(!collapse)} />
+      <Navbar.Collapse>
+        <Nav className="ml-auto">
           <NavBarAuth {...props} />
-        </MDBNavbarNav>
-      </MDBCollapse>
-    </MDBNavbar>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }
 

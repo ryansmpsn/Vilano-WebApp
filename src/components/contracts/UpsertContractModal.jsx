@@ -1,8 +1,6 @@
 import React from "react";
 import { Button, Modal, FormGroup, FormControl, FormLabel, Spinner, Row, Col } from "react-bootstrap";
-import { MDBNotification } from "mdbreact";
 import InputFormControl from "../../libs/InputFormControl";
-// import NavPerm from "../../libs/NavPerms";
 import DatePicker from "react-date-picker";
 
 export default class UpsertContractModal extends React.Component {
@@ -82,18 +80,6 @@ export default class UpsertContractModal extends React.Component {
         } else {
           hand.setState({ submitting: false });
         }
-
-        return (
-          <MDBNotification
-            show
-            fade
-            icon="envelope"
-            iconClassName="green-text"
-            title="New Message"
-            message="Hello, user! You have a new message."
-            text="just now"
-          />
-        );
       })
       .catch((err) => {
         hand.setState({ submitting: false });
@@ -184,39 +170,17 @@ export default class UpsertContractModal extends React.Component {
                                 onChange={(e) => {
                                   var object = this.state.editContract;
                                   var date = new Date(e);
-                                  var return_date =
-                                    date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+                                  var return_date = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
                                   object[index].updatedValue = return_date;
                                   this.setState({ editContract: object });
                                   this.setState({ date: date });
                                 }}
                                 value={
                                   item.updatedValue !== null
-                                    ? new Date(
-                                        new Date(item.updatedValue).getUTCMonth() +
-                                          1 +
-                                          "/" +
-                                          new Date(item.updatedValue).getUTCDate() +
-                                          "/" +
-                                          new Date(item.updatedValue).getUTCFullYear()
-                                      )
+                                    ? new Date(new Date(item.updatedValue).getUTCMonth() + 1 + "/" + new Date(item.updatedValue).getUTCDate() + "/" + new Date(item.updatedValue).getUTCFullYear())
                                     : item.value !== null
-                                    ? new Date(
-                                        new Date(item.value).getUTCMonth() +
-                                          1 +
-                                          "/" +
-                                          new Date(item.value).getUTCDate() +
-                                          "/" +
-                                          new Date(item.value).getUTCFullYear()
-                                      )
-                                    : new Date(
-                                        new Date().getUTCMonth() +
-                                          1 +
-                                          "/" +
-                                          new Date().getUTCDate() +
-                                          "/" +
-                                          new Date().getUTCFullYear()
-                                      )
+                                    ? new Date(new Date(item.value).getUTCMonth() + 1 + "/" + new Date(item.value).getUTCDate() + "/" + new Date(item.value).getUTCFullYear())
+                                    : new Date(new Date().getUTCMonth() + 1 + "/" + new Date().getUTCDate() + "/" + new Date().getUTCFullYear())
                                 }
                               />
                             </>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, Row, Col, Button, Spinner, ListGroup, ListGroupItem } from "react-bootstrap";
-import { MDBIcon } from "mdbreact";
 import UpsertContractModal from "./UpsertContractModal";
 import CreateBidModal from "./CreateBidModal";
 import FinalizeBidModal from "./FinalizeBidModal";
@@ -164,11 +163,11 @@ function ContractCards(props) {
                 <>
                   <Button className="btn btn-sm btn-outline-info mt-3" onClick={() => gatherDocuments()}>
                     Search
-                    <MDBIcon fas icon="search" className="ml-1" />
+                    <div className="fas fa-search ml-1" />
                   </Button>
                   <Button className="btn btn-sm btn-outline-info mt-3 " onClick={() => openDocumentModal()}>
                     Upload
-                    <MDBIcon fas icon="upload" className="ml-1" />
+                    <div className="fas fa-upload ml-1" />
                   </Button>
                 </>
               )}

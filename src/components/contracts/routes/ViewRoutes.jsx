@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { MDBCard, MDBCardHeader, MDBCardBody, MDBDataTable } from "mdbreact";
+import { MDBDataTable } from "mdbreact";
+import { Card } from "react-bootstrap";
 
 function ViewRoutes(props) {
   let { tripId } = useParams();
@@ -504,13 +505,13 @@ function ViewRoutes(props) {
     ],
   });
   return (
-    <MDBCard>
-      <MDBCardHeader>
+    <Card>
+      <Card.Header>
         <h4>Routes</h4>
         <h4>Trip Selected: {props.selectedTrip}</h4>
         <h4>Trip Route Param: {tripId}</h4>
-      </MDBCardHeader>
-      <MDBCardBody>
+      </Card.Header>
+      <Card.Body>
         <MDBDataTable striped bordered hover responsive data={datatable} />
         <ul>
           <li>Arrival Time:</li>
@@ -518,8 +519,8 @@ function ViewRoutes(props) {
           <li>Facility ID</li>
           <li>start location? destination? Neither?</li>
         </ul>
-      </MDBCardBody>
-    </MDBCard>
+      </Card.Body>
+    </Card>
   );
 }
 

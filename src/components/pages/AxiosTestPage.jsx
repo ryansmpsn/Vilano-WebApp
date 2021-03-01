@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { MDBCard, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBCardText, MDBBadge, MDBCardHeader } from "mdbreact";
 import { useToasts } from "react-toast-notifications";
 import Send from "../../libs/send";
-import { FormGroup, FormControl, Spinner, Button, Form, Row } from "react-bootstrap";
+import { FormGroup, FormControl, Spinner, Button, Form, Row, Col, Card, Badge } from "react-bootstrap";
 import { useFormFields } from "../../libs/hookslib";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faVials } from "@fortawesome/free-solid-svg-icons";
 
 function AxiosTestPage() {
   const { addToast } = useToasts();
@@ -148,25 +149,27 @@ function AxiosTestPage() {
 
   return (
     <React.Fragment>
-      <MDBRow className="mb-4">
-        <MDBCol xl="12" md="12" className="mb-r">
-          <MDBCard className="cascading-admin-card">
-            <MDBCardHeader>
+      <Row className="mb-4">
+        <Col xl="12" md="12" className="mb-r">
+          <Card className="cascading-admin-card">
+            <Card.Header>
               <div className="admin-up">
-                <MDBIcon icon="vials" className="primary-color" />
+                <div className="fa">
+                  <FontAwesomeIcon icon={faVials} className="" />
+                </div>
                 <div className="data">
-                  <MDBCardText>Endpoint / Axios Test Page</MDBCardText>
+                  <Card.Text>Endpoint / Axios Test Page</Card.Text>
                   <h4>
-                    <MDBBadge color="primary-color" pill></MDBBadge>
+                    <Badge color="primary-color" pill></Badge>
                   </h4>
                 </div>
               </div>
-            </MDBCardHeader>
-            <MDBCardBody>
+            </Card.Header>
+            <Card.Body>
               <h2 className="m-3 ">Endpoint / Axios Test Page</h2>
 
               <Row className="justify-content-md-center">
-                <MDBCol md="8">
+                <Col md="8">
                   <Form>
                     {isLoading ? (
                       <Spinner animation="border" variant="primary" />
@@ -186,15 +189,15 @@ function AxiosTestPage() {
                         </p>
                         <Button className="btn-outline-info" onClick={() => onGetRequest()}>
                           Get
-                          <MDBIcon fas icon="database" className="ml-1" />
+                          <div className="fas fa-database ml-1" />
                         </Button>
                         <Button className="btn-outline-info" onClick={() => onPostRequest()}>
                           Post
-                          <MDBIcon far icon="paper-plane" className="ml-1" />
+                          <div className=" far fa-paper-plane ml-1" />
                         </Button>
                         <Button className="btn-outline-info float-right" onClick={() => onFileUpload()}>
                           Upload File
-                          <MDBIcon fas icon="upload" className="ml-1" />
+                          <div className="fas fa-upload ml-1" />
                         </Button>
                         <input type="file" onChange={(e) => onFileChange(e)} />
 
@@ -202,12 +205,12 @@ function AxiosTestPage() {
                       </>
                     )}
                   </Form>
-                </MDBCol>
+                </Col>
               </Row>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </React.Fragment>
   );
 }

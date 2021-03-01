@@ -8,7 +8,7 @@ import supportBkg from "../../img/map-image.png";
 import fmcsaLogo from "../../img/logos/fmsca.jpg";
 import jjkellerLogo from "../../img/logos/jjkeller.jpg";
 import { BreadcrumbItem } from "react-bootstrap";
-import { MDBContainer, MDBBreadcrumb } from "mdbreact";
+import { Container, Breadcrumb } from "react-bootstrap";
 
 function PortalPage() {
   const headers = [
@@ -92,15 +92,15 @@ function PortalPage() {
 
   return (
     <>
-      <MDBContainer>
-        <MDBBreadcrumb light color="aqua-gradient" className="position-fixed" style={{ marginTop: -112, zIndex: 9999, marginLeft: 65 }}>
+      <Container>
+        <Breadcrumb light color="aqua-gradient" className="position-fixed" style={{ marginTop: -112, zIndex: 9999, marginLeft: 65 }}>
           {headers.map((item, index) => (
             <BreadcrumbItem key={index} href={"#" + item[1]}>
               {item[0]}
             </BreadcrumbItem>
           ))}
-        </MDBBreadcrumb>
-      </MDBContainer>
+        </Breadcrumb>
+      </Container>
       <PortalStyle>
         <header className="masthead">
           <div className="container-fluid">

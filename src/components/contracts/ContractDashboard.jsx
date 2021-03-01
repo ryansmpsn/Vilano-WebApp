@@ -3,8 +3,7 @@ import Routing from "./Router";
 import Send from "../../libs/send";
 import CountUp from "react-countup";
 import NavPerm from "../../libs/NavPerms";
-import { MDBCard, MDBCardHeader, MDBCardBody, MDBRow, MDBCol, MDBIcon, MDBBadge, MDBListGroup, MDBListGroupItem } from "mdbreact";
-import { Nav, NavItem } from "react-bootstrap";
+import { Card, Nav, NavItem, Row, Col, Badge, ListGroup, ListGroupItem } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 class ContractDashboard extends Component {
@@ -104,45 +103,47 @@ class ContractDashboard extends Component {
   render() {
     return (
       <>
-        <MDBCard className="cascading-admin-card mb-4">
-          <MDBCardHeader>
+        <Card className="cascading-admin-card mb-4">
+          <Card.Header>
             <div className="admin-up ">
-              <MDBIcon icon="file-contract" className="primary-color" />
-              <MDBCard className="w-25 ml-auto" style={{ marginTop: "-50px" }}>
-                <MDBCardHeader>Statistics</MDBCardHeader>
-                <MDBCardBody>
-                  <MDBListGroup className="list-group-flush">
-                    <MDBListGroupItem>
+              <div className="fa">
+                <div className="fas fa-file-contract " />
+              </div>
+              <Card className="w-25 ml-auto" style={{ marginTop: "-50px" }}>
+                <Card.Header>Statistics</Card.Header>
+                <Card.Body>
+                  <ListGroup className="list-group-flush">
+                    <ListGroupItem>
                       Active Contracts
-                      <MDBBadge color="primary-color" pill className="float-right">
+                      <Badge color="primary-color" pill className="float-right">
                         <CountUp start={0} end={this.state.selectOptions ? this.state.selectOptions.length : 0} duration={5} />
-                      </MDBBadge>
-                    </MDBListGroupItem>
-                  </MDBListGroup>
-                </MDBCardBody>
-              </MDBCard>
+                      </Badge>
+                    </ListGroupItem>
+                  </ListGroup>
+                </Card.Body>
+              </Card>
               <h2 className="text-center mb-5" style={{ marginTop: "-50px" }}>
                 Contract Management
               </h2>
             </div>
-          </MDBCardHeader>
+          </Card.Header>
           {this.state.contractProfile !== null && (
-            <MDBCardBody>
-              <MDBRow>
+            <Card.Body>
+              <Row>
                 {this.state.contractProfile.map(
                   (c, index) =>
                     c.label !== null &&
                     typeof c.value !== "object" && (
-                      <MDBCol md="2" key={c.label + index}>
+                      <Col md="2" key={c.label + index}>
                         <p className="h5 mb-1">{c.label}: </p>
                         <div className="text-muted">{c.value}</div>
-                      </MDBCol>
+                      </Col>
                     )
                 )}
-              </MDBRow>
-            </MDBCardBody>
+              </Row>
+            </Card.Body>
           )}
-        </MDBCard>
+        </Card>
 
         <Nav justify variant="tabs" defaultActiveKey="employee" className="pb-2 w-50 mx-auto my-3 ">
           <NavItem>

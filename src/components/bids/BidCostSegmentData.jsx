@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Select from "react-select";
-import { MDBContainer } from "mdbreact";
 import { Button, Spinner, Jumbotron, Container, Row, Col } from "react-bootstrap";
 import Send from "../../libs/send";
 import UpsertCostSegment from "../contracts/costSegments/UpsertCostSegment";
@@ -1120,34 +1119,16 @@ class BidCostSegmentData extends Component {
   setCostSegmentdata() {
     if (this.state.rateSheetData !== null) {
       let unitsObject = this.state.units;
-      unitsObject.forEach(
-        (c, index) =>
-          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitsObject[index].updatedValue = x[4].value)),
-        this.setState({ units: unitsObject })
-      );
+      unitsObject.forEach((c, index) => this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitsObject[index].updatedValue = x[4].value)), this.setState({ units: unitsObject }));
 
       let unitCostObject = this.state.unitCost;
-      unitCostObject.forEach(
-        (c, index) =>
-          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitCostObject[index].updatedValue = x[5].value)),
-        this.setState({ unitCost: unitCostObject })
-      );
+      unitCostObject.forEach((c, index) => this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (unitCostObject[index].updatedValue = x[5].value)), this.setState({ unitCost: unitCostObject }));
 
       let annualCostObject = this.state.annualCost;
-      annualCostObject.forEach(
-        (c, index) =>
-          this.state.rateSheetData.map(
-            (x) => c.rateItemCode === x[2].value && (annualCostObject[index].updatedValue = x[6].value)
-          ),
-        this.setState({ annualCost: annualCostObject })
-      );
+      annualCostObject.forEach((c, index) => this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (annualCostObject[index].updatedValue = x[6].value)), this.setState({ annualCost: annualCostObject }));
 
       let remarkObject = this.state.remarkAnnualCost;
-      remarkObject.forEach(
-        (c, index) =>
-          this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (remarkObject[index].updatedValue = x[6].value)),
-        this.setState({ remarkAnnualCost: remarkObject })
-      );
+      remarkObject.forEach((c, index) => this.state.rateSheetData.map((x) => c.rateItemCode === x[2].value && (remarkObject[index].updatedValue = x[6].value)), this.setState({ remarkAnnualCost: remarkObject }));
     } else {
       let unitsObject = this.state.units;
       unitsObject.forEach((c, index) => {
@@ -1205,9 +1186,9 @@ class BidCostSegmentData extends Component {
                 isClearable
               />
               {this.state.isLoading === true ? (
-                <MDBContainer>
+                <Container>
                   <Spinner animation="border" variant="primary" />
-                </MDBContainer>
+                </Container>
               ) : (
                 <>
                   <h4>

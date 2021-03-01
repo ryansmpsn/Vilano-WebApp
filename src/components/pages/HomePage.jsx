@@ -1,8 +1,9 @@
 import React from "react";
-import { Jumbotron, Container, Row, Col, Card, ListGroup, ListGroupItem, ProgressBar, Spinner } from "react-bootstrap";
-import { MDBIcon, MDBBadge } from "mdbreact";
+import { Jumbotron, Container, Row, Col, Card, ListGroup, ListGroupItem, ProgressBar, Spinner, Badge } from "react-bootstrap";
 import { Bar, Pie } from "react-chartjs-2";
 import CountUp from "react-countup";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCity } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home(props) {
   let { appData } = props;
@@ -31,29 +32,29 @@ export default function Home(props) {
                     <ListGroup className="list-group-flush">
                       <ListGroupItem>
                         Total Locations
-                        <MDBBadge color="default-color-dark" pill className="float-right">
+                        <Badge color="default-color-dark" pill className="float-right">
                           <CountUp start={0} end={72} duration={5} />
 
-                          <MDBIcon icon="city" className="ml-1" />
-                        </MDBBadge>
+                          <FontAwesomeIcon icon={faCity} className="ml-1" />
+                        </Badge>
                       </ListGroupItem>
                       <ListGroupItem>
                         Drivers
-                        <MDBBadge color="danger-color" pill className="float-right">
+                        <Badge color="danger-color" pill className="float-right">
                           <CountUp start={0} end={appData.drivers.length} duration={3} />
-                        </MDBBadge>
+                        </Badge>
                       </ListGroupItem>
                       <ListGroupItem>
                         Contracts
-                        <MDBBadge color="success-color" pill className="float-right">
+                        <Badge color="success-color" pill className="float-right">
                           <CountUp start={0} end={appData.contracts.length} duration={3} />
-                        </MDBBadge>
+                        </Badge>
                       </ListGroupItem>
                       <ListGroupItem>
                         Bids
-                        <MDBBadge color="primary-color" pill className="float-right">
+                        <Badge color="primary-color" pill className="float-right">
                           <CountUp start={0} end={appData.bids.length} duration={3} />
-                        </MDBBadge>
+                        </Badge>
                       </ListGroupItem>
                     </ListGroup>
                   </Card.Body>

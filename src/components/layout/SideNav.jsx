@@ -1,5 +1,4 @@
 import React from "react";
-import { MDBIcon } from "mdbreact";
 import logo from "../../img/logo.jpg";
 import SideNavAuth from "./SideNavAuth";
 import { NavLink } from "react-router-dom";
@@ -55,7 +54,7 @@ function SideNav(props) {
         <ListGroup className="list-group-flush">
           <NavLink to="/dashboard" activeClassName="activeClass" onClick={() => window.innerWidth <= 1200 && props.setToggle(false)}>
             <ListGroupItem style={{ borderWidth: "0 0 1px" }}>
-              <MDBIcon icon="chart-pie" className="mr-3" />
+              <div className="fas fa-chart-pie mr-3" />
               Dashboard
             </ListGroupItem>
           </NavLink>
@@ -68,7 +67,7 @@ function SideNav(props) {
           </NavLink>
           <NavLink to="/about" activeClassName="activeClass">
             <ListGroupItem style={{ borderWidth: "0 0 1px" }} onClick={() => window.innerWidth <= 1200 && props.setToggle(false)}>
-              <MDBIcon icon="question" className="mr-3" />
+              <div className="fas fa-question mr-3" />
               About
             </ListGroupItem>
           </NavLink>

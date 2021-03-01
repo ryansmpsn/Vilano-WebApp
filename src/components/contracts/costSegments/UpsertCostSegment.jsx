@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useToasts } from "react-toast-notifications";
-import { MDBCardBody, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon } from "mdbreact";
+import { Card, Container, Row, Col, Form } from "react-bootstrap";
 import { Spinner, Button } from "react-bootstrap";
 
 function UpsertCostSegment(props) {
@@ -63,38 +63,36 @@ function UpsertCostSegment(props) {
   }
 
   return (
-    <MDBCardBody>
-      <MDBContainer fluid>
+    <Card.Body>
+      <Container fluid>
         <form onSubmit={buildJsonObject}>
-          <MDBRow>
+          <Row>
             {props.contractData !== null &&
               props.contractData.map(
                 (c, index) =>
                   !Array.isArray(c.value) &&
                   c.label !== null && (
-                    <MDBCol md="2" key={c.label + index}>
+                    <Col md="2" key={c.label + index}>
                       <p className="h5 mb-1">{c.label}: </p>
                       <div className="text-muted">{c.value}</div>
-                    </MDBCol>
+                    </Col>
                   )
               )}
-          </MDBRow>
+          </Row>
           <p className="h4 text-center mb-4">Remarks:</p>
           <div className="grey-text">
-            <MDBRow>
-              <MDBCol md="6">
-                <div className="grey-text">
-                  {props.remarkAnnualCost.map(
-                    (c, index) =>
-                      index < 3 && (
-                        <MDBInput
-                          key={c.label + index}
-                          label={c.label}
+            <Row>
+              <Col md="6">
+                {props.remarkAnnualCost.map(
+                  (c, index) =>
+                    index < 3 && (
+                      <Form.Group key={c.label + index}>
+                        <div className={"mr-2 fas fa-" + c.icon} />
+                        <Form.Label>{c.label}</Form.Label>
+                        <Form.Control
                           id={c.label}
                           value={c.updatedValue === null ? (c.value === null ? "" : c.value) : c.updatedValue}
                           placeholder={c.value}
-                          icon={c.icon}
-                          group
                           type="number"
                           validate
                           max="999999999999.99"
@@ -109,23 +107,22 @@ function UpsertCostSegment(props) {
                             props.setRemarkAnnualCost(object);
                           }}
                         />
-                      )
-                  )}
-                </div>
-              </MDBCol>
-              <MDBCol md="6">
-                <div className="grey-text">
-                  {props.remarkAnnualCost.map(
-                    (c, index) =>
-                      index > 2 && (
-                        <MDBInput
+                      </Form.Group>
+                    )
+                )}
+              </Col>
+              <Col md="6">
+                {props.remarkAnnualCost.map(
+                  (c, index) =>
+                    index > 2 && (
+                      <Form.Group key={c.label + index}>
+                        <div className={"mr-2 fas fa-" + c.icon} />
+                        <Form.Label>{c.label}</Form.Label>
+                        <Form.Control
                           key={c.label + index}
-                          label={c.label}
                           id={c.label}
                           value={c.updatedValue === null ? (c.value === null ? "" : c.value) : c.updatedValue}
                           placeholder={c.value}
-                          icon={c.icon}
-                          group
                           type="number"
                           validate
                           max="99999999999.99"
@@ -140,18 +137,18 @@ function UpsertCostSegment(props) {
                             props.setRemarkAnnualCost(object);
                           }}
                         />
-                      )
-                  )}
-                </div>
-              </MDBCol>
-            </MDBRow>
+                      </Form.Group>
+                    )
+                )}
+              </Col>
+            </Row>
           </div>
 
           <p className="h4 text-center mb-4">Basis For Determining Cost</p>
           <div className="grey-text">
             {props.itemLabels.map((c, index) => (
-              <MDBRow key={index}>
-                <MDBCol md="3">
+              <Row key={index}>
+                <Col md="3">
                   {c.sub === null ? (
                     <div className=" text-center mb-5">
                       <h4 key={index + c.label}>{c.label}</h4>
@@ -162,24 +159,19 @@ function UpsertCostSegment(props) {
                       <small key={index + c.sub}>{c.sub}</small>
                     </div>
                   )}
-                </MDBCol>
+                </Col>
 
-                <MDBCol md="9">
-                  <MDBRow>
-                    <MDBCol md="4">
-                      <div className="grey-text">
-                        {props.units[index].label !== null ? (
-                          <MDBInput
-                            label={props.units[index].label}
+                <Col md="9">
+                  <Row>
+                    <Col md="4">
+                      {props.units[index].label !== null ? (
+                        <Form.Group>
+                          <div className={"mr-2 fas fa-" + props.units[index].icon} />
+                          <Form.Label>{props.units[index].label}</Form.Label>
+                          <Form.Control
                             id={props.units[index].id}
-                            value={
-                              props.units[index].updatedValue === null
-                                ? props.units[index].value
-                                : props.units[index].updatedValue
-                            }
+                            value={props.units[index].updatedValue === null ? props.units[index].value : props.units[index].updatedValue}
                             placeholder={props.units[index].value}
-                            icon={props.units[index].icon}
-                            group
                             type="number"
                             validate
                             max="99999999999.999"
@@ -194,25 +186,20 @@ function UpsertCostSegment(props) {
                               props.setUnits(object);
                             }}
                           />
-                        ) : (
-                          <MDBInput disabled />
-                        )}
-                      </div>
-                    </MDBCol>
-                    <MDBCol md="4">
-                      <div className="grey-text">
-                        {props.unitCost[index].label !== null ? (
-                          <MDBInput
-                            label={props.unitCost[index].label}
+                        </Form.Group>
+                      ) : (
+                        <>__</>
+                      )}
+                    </Col>
+                    <Col md="4">
+                      {props.unitCost[index].label !== null ? (
+                        <Form.Group>
+                          <div className={"mr-2 fas fa-" + props.unitCost[index].icon} />
+                          <Form.Label>{props.unitCost[index].label}</Form.Label>
+                          <Form.Control
                             id={props.unitCost[index].id}
-                            value={
-                              props.unitCost[index].updatedValue === null
-                                ? props.unitCost[index].value
-                                : props.unitCost[index].updatedValue
-                            }
+                            value={props.unitCost[index].updatedValue === null ? props.unitCost[index].value : props.unitCost[index].updatedValue}
                             placeholder={props.unitCost[index].value}
-                            icon={props.unitCost[index].icon}
-                            group
                             type="number"
                             validate
                             max="999999999.99999"
@@ -227,25 +214,20 @@ function UpsertCostSegment(props) {
                               props.setUnitCost(object);
                             }}
                           />
-                        ) : (
-                          <MDBInput disabled />
-                        )}
-                      </div>
-                    </MDBCol>
-                    <MDBCol md="4">
-                      <div className="grey-text">
-                        {props.annualCost[index].label !== null ? (
-                          <MDBInput
-                            label={props.annualCost[index].label}
+                        </Form.Group>
+                      ) : (
+                        <>__</>
+                      )}
+                    </Col>
+                    <Col md="4">
+                      {props.annualCost[index].label !== null ? (
+                        <Form.Group>
+                          <div className={"mr-2 fas fa-" + props.annualCost[index].icon} />
+                          <Form.Label>{props.annualCost[index].label}</Form.Label>
+                          <Form.Control
                             id={props.annualCost[index].id}
-                            value={
-                              props.annualCost[index].updatedValue === null
-                                ? props.annualCost[index].value
-                                : props.annualCost[index].updatedValue
-                            }
+                            value={props.annualCost[index].updatedValue === null ? props.annualCost[index].value : props.annualCost[index].updatedValue}
                             placeholder={props.annualCost[index].value}
-                            icon={props.annualCost[index].icon}
-                            group
                             type="number"
                             validate
                             max="999999999999.99"
@@ -260,36 +242,36 @@ function UpsertCostSegment(props) {
                               props.setAnnualCost(object);
                             }}
                           />
-                        ) : (
-                          <MDBInput disabled />
-                        )}
-                      </div>
-                    </MDBCol>
-                  </MDBRow>
-                </MDBCol>
-              </MDBRow>
+                        </Form.Group>
+                      ) : (
+                        <>__</>
+                      )}
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
             ))}
           </div>
-          <MDBRow>
-            <MDBCol md="12">
+          <Row>
+            <Col md="12">
               <div className="text-center">
                 {sessionStorage.getItem("/contract/ratesheets") >= 3 &&
                   (submitting ? (
-                    <MDBContainer>
+                    <Container>
                       <Spinner animation="border" variant="primary" />
-                    </MDBContainer>
+                    </Container>
                   ) : (
                     <Button className="btn-outline-info" type="submit">
                       Save
-                      <MDBIcon far icon="paper-plane" className="ml-1" />
+                      <div className="far fa-paper-plane ml-1" />
                     </Button>
                   ))}
               </div>
-            </MDBCol>
-          </MDBRow>
+            </Col>
+          </Row>
         </form>
-      </MDBContainer>
-    </MDBCardBody>
+      </Container>
+    </Card.Body>
   );
 }
 

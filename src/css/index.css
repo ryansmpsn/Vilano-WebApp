@@ -114,6 +114,7 @@ main {
 .cascading-admin-card .admin-up .fa {
   padding: 1.7rem;
   font-size: 2rem;
+  background-color: #007bff;
   color: #fff;
   text-align: left;
   margin-right: 1rem;
@@ -162,6 +163,16 @@ main {
 
 .page-footer {
   margin-left: 230px;
+  background-color: #0d47a1;
+  bottom: 0;
+  color: #fff;
+}
+.bad-gateway {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
 }
 
 @media screen and (min-width: 1600px) and (max-width: 2000px) {
