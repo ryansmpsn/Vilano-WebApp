@@ -65,8 +65,9 @@ function DisplayEmployeeInfo(props) {
                       c.label !== null && (
                         <Col md="3" key={index + "profile"}>
                           <Form.Group>
-                            <Form.Label>{c.label}</Form.Label>
-                            <Form.Control type="text" className="mt-0" value={c.updatedValue !== null ? c.updatedValue : ""} disabled />
+                            <Form.Label>{c.label}:</Form.Label>
+                            <Form.Text>{c.updatedValue !== null ? c.updatedValue : ""}</Form.Text>
+                            {/* <Form.Control type="text" className="mt-0" value= disabled /> */}
                           </Form.Group>
                         </Col>
                       )

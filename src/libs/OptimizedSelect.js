@@ -8,7 +8,7 @@ export default class MenuList extends Component {
     const initialOffset = options.indexOf(value) * 35;
 
     return (
-      <List height={maxHeight} itemCount={children.length} itemSize={35} initialScrollOffset={initialOffset}>
+      <List height={maxHeight} itemCount={children.length} itemSize={45} initialScrollOffset={initialOffset}>
         {({ index, style }) => <div style={style}>{children[index]}</div>}
       </List>
     );

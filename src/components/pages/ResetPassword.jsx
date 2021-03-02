@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useFormFields } from "../../libs/hookslib";
 import { useToasts } from "react-toast-notifications";
 import { FormGroup, FormControl, Spinner, Button } from "react-bootstrap";
+import { useAuth } from "../../auth";
+import { Navigate } from "react-router-dom";
 
 const LoginPage = styled.div`
   .box {
@@ -45,6 +47,8 @@ const LoginPage = styled.div`
 `;
 
 export default function ResetPassword(props) {
+  const { setSession } = useAuth();
+
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const IDSession = urlParams.get("id");
@@ -60,11 +64,7 @@ export default function ResetPassword(props) {
   });
 
   function validateForm() {
-    return (
-      fields.password.length > 0 &&
-      fields.password2.length > 0 &&
-      fields.password === fields.password2
-    );
+    return fields.password.length > 0 && fields.password2.length > 0 && fields.password === fields.password2;
   }
 
   async function postReset() {
@@ -72,6 +72,7 @@ export default function ResetPassword(props) {
     Send.post("/ResetPassword", fields, props)
       .then((result) => {
         setIsLoading(false);
+        result.our_session.match && setSession(result.our_session);
         switch (result) {
           case "SUCCESS":
             addToast("Password has been changed, please login.", {
@@ -80,13 +81,10 @@ export default function ResetPassword(props) {
             });
             break;
           case "FAILURE":
-            addToast(
-              "Secure Password Reset Session invalid, please make a new request",
-              {
-                appearance: "error",
-                autoDismiss: true,
-              }
-            );
+            addToast("Secure Password Reset Session invalid, please make a new request", {
+              appearance: "error",
+              autoDismiss: true,
+            });
             break;
           case "LOCKED":
             addToast("Account is locked", {
@@ -95,13 +93,10 @@ export default function ResetPassword(props) {
             });
             break;
           case "OUTDATED":
-            addToast(
-              "Secure Password Reset Session Outdated, please make a new request.",
-              {
-                appearance: "error",
-                autoDismiss: true,
-              }
-            );
+            addToast("Secure Password Reset Session Outdated, please make a new request.", {
+              appearance: "error",
+              autoDismiss: true,
+            });
             break;
           default:
             addToast("Error", {
@@ -116,42 +111,28 @@ export default function ResetPassword(props) {
         console.log(err);
       });
   }
+  function handleRedirect() {
+    return <Navigate to="/" />;
+  }
 
   return (
     <LoginPage>
+      {props.isAuthenticated && handleRedirect()}
+
       <div className="box">
         <h3>Enter new password</h3>
         <form>
           {/*ControlID must match useFormFields value*/}
           <FormGroup controlId="password">
-            <FormControl
-              placeholder="Enter New Password"
-              value={fields.password.replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
-              onChange={handleFieldChange}
-              type="password"
-              autoComplete="on"
-            />
+            <FormControl placeholder="Enter New Password" value={fields.password.replace(/[*|":<>[\]{}`\\()';@&$]/, "")} onChange={handleFieldChange} type="password" autoComplete="on" />
           </FormGroup>
           <FormGroup controlId="password2">
-            <FormControl
-              placeholder="Confirm New Password"
-              value={fields.password2.replace(/[*|":<>[\]{}`\\()';@&$]/, "")}
-              onChange={handleFieldChange}
-              type="password"
-              autoComplete="on"
-            />
+            <FormControl placeholder="Confirm New Password" value={fields.password2.replace(/[*|":<>[\]{}`\\()';@&$]/, "")} onChange={handleFieldChange} type="password" autoComplete="on" />
           </FormGroup>
           {isLoading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-            <Button
-              className="aqua-gradient"
-              active={!isLoading}
-              disabled={!validateForm()}
-              onClick={postReset}
-              gradient="aqua"
-              type={"submit"}
-            >
+            <Button className="aqua-gradient" active={!isLoading} disabled={!validateForm()} onClick={postReset} gradient="aqua" type={"submit"}>
               Confirm
             </Button>
           )}

@@ -1,5 +1,4 @@
 import React, { Component, useState, useEffect } from "react";
-import "./css/App.css";
 import Send from "./libs/send";
 import Routing from "./Routes";
 import { AuthContext } from "./auth";

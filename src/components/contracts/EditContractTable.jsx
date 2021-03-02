@@ -20,6 +20,7 @@ function EditContractTable(props) {
       <Button size="sm" variant="outline-primary" onClick={openModal}>
         Edit
       </Button>
+      {console.log(props.contract)}
       {showModal && (
         <UpsertContractModal
           modalName={"Edit " + props.type}
