@@ -8,13 +8,6 @@ body {
   text-align: left;
   background-color: #ededee;
 }
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-weight: 300;
-}
 
 .list-group-flush {
   color: #495057;
@@ -25,7 +18,7 @@ h5 {
 }
 
 main {
-  background-color: #fff;
+  background-color: #ededee;
 }
 
 .card-title {

@@ -92,7 +92,7 @@ function ContractTable(props) {
     }
   }
 
-  return <MaterialTable striped bordered hover responsive columns={columnData} data={rowData} title="Active Contracts" />;
+  return <MaterialTable columns={columnData} data={rowData} title="Active Contracts" />;
 }
 
 export default ContractTable;

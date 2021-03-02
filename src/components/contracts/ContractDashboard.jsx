@@ -115,7 +115,7 @@ class ContractDashboard extends Component {
                   <ListGroup className="list-group-flush">
                     <ListGroupItem>
                       Active Contracts
-                      <Badge color="primary-color" pill className="float-right">
+                      <Badge variant="primary" pill className="float-right">
                         <CountUp start={0} end={this.state.selectOptions ? this.state.selectOptions.length : 0} duration={5} />
                       </Badge>
                     </ListGroupItem>
