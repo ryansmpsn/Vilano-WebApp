@@ -50,6 +50,7 @@ export default function RequestReset(props) {
   const [fields, handleFieldChange] = useFormFields({
     email: "",
   });
+  const [disableButton, setDisableButton] = useState(false);
 
   function validateForm() {
     return fields.email.length > 0;
@@ -60,6 +61,7 @@ export default function RequestReset(props) {
     Send.post("/RequestResetPassword", fields, props)
       .then((result) => {
         setIsLoading(false);
+        setDisableButton(true);
         switch (result) {
           case "SUCCESS":
             addToast("Password Reset Request sent. Please check your email.", {
@@ -68,10 +70,11 @@ export default function RequestReset(props) {
             });
             break;
           case "FAILURE":
-            addToast("Invalid email or email not found in system. Please try again.", {
+            addToast("Email address not found in our system. Please try again.", {
               appearance: "error",
               autoDismiss: true,
             });
+            setDisableButton(false);
             break;
           case "LOCKED":
             addToast("Account is locked", {
@@ -111,7 +114,7 @@ export default function RequestReset(props) {
           {isLoading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-            <Button className="aqua-gradient" active={!isLoading} disabled={!validateForm()} onClick={postResetRequest} gradient="aqua" type={"submit"}>
+            <Button className="aqua-gradient" active={!isLoading} disabled={!validateForm() || disableButton} onClick={postResetRequest} gradient="aqua" type={"submit"}>
               Reset
             </Button>
           )}

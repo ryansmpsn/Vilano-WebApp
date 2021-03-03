@@ -19,9 +19,9 @@ function ContractTable(props) {
     return !props.modifiedContractData[index - props.contractData.length][9].updatedValue;
   }
   const contractData = [...props.contractData, ...props.modifiedContractData];
-  let columnData = contractData[0].filter(labelFilter).map((c) => ({ label: c.label, field: c.columnName, sort: "asc" }));
+  let columnData = contractData[0].filter(labelFilter).map((c) => ({ title: c.label, field: c.columnName, sort: "asc" }));
   //   add permissions here
-  columnData = [...columnData, { label: "Modify", field: "editContract" }];
+  columnData = [...columnData, { title: "Modify", field: "editContract" }];
 
   let rowData = contractData.map((data, index) => data.filter(labelFilter).map((c) => [c.columnName, handleInputValue(c, c.updatedValue, index)]));
   rowData = rowData.map((c) => Object.fromEntries(c));
@@ -76,7 +76,7 @@ function ContractTable(props) {
       );
     } else return value;
   }
-  return <MaterialTable striped bordered hover responsive columns={columnData} data={rowData} title="" />;
+  return <MaterialTable columns={columnData} data={rowData} title="" />;
 }
 
 export default ContractTable;

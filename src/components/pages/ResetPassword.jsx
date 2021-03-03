@@ -71,6 +71,7 @@ export default function ResetPassword(props) {
     setIsLoading(true);
     Send.post("/ResetPassword", fields, props)
       .then((result) => {
+        console.log(result);
         setIsLoading(false);
         result.our_session.match && setSession(result.our_session);
         switch (result) {
