@@ -137,6 +137,7 @@ function ViewTrips(props) {
                     </p>
                   </Col>
                 </Row>
+                <hr className="mt-0 mb-1" />
                 {props.tripVehicles.value.length !== 0 ? (
                   props.tripVehicles.value.map((c, index) => (
                     <Row key={index}>
@@ -178,6 +179,7 @@ function ViewTrips(props) {
                     </p>
                   </Col>
                 </Row>
+                <hr className="mt-0 mb-1" />
                 {props.tripTrailers.value.length !== 0 ? (
                   props.tripTrailers.value.map((c, index) => (
                     <Row key={index}>

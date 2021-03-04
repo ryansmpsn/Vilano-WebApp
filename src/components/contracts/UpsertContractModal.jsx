@@ -88,7 +88,6 @@ export default class UpsertContractModal extends React.Component {
   }
 
   set_variable_id(object, variable_key, value) {
-    console.log(variable_key);
     var variable = variable_key.substring(0, variable_key.lastIndexOf("_")) + "_id";
     var set = false;
     object.forEach((item) => {

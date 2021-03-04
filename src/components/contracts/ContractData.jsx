@@ -63,8 +63,8 @@ function ContractData(props) {
   }
 
   return (
-    <Jumbotron>
-      <Container className="container-sm pl-5 pr-5">
+    <>
+      <Jumbotron>
         <Row className="justify-content-md-center">
           <Col lg="6">
             <form onSubmit={handleSearch}>
@@ -97,8 +97,7 @@ function ContractData(props) {
             </form>
           </Col>
         </Row>
-      </Container>
-      <hr />
+      </Jumbotron>
       {tableView ? (
         props.allContracts === null ? (
           <Spinner animation="border" variant="primary" />
@@ -263,7 +262,7 @@ function ContractData(props) {
           }}
         />
       )}
-    </Jumbotron>
+    </>
   );
 }
 

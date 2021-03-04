@@ -11,7 +11,7 @@ const LoginPage = styled.div`
   .box {
     border-radius: 24px;
     background: #34495e;
-    width: 390px;
+    width: 490px;
     padding: 40px;
     position: absolute;
     top: 50%;
@@ -32,7 +32,7 @@ const LoginPage = styled.div`
     text-align: center;
     border: 2px solid #3498db;
     padding: 14px 10px;
-    width: 200px;
+    width: 250px;
     outline: none;
     color: white;
     border-radius: 24px;
@@ -41,7 +41,7 @@ const LoginPage = styled.div`
   }
   .box input[type="text"]:focus,
   .box input[type="password"]:focus {
-    width: 280px;
+    width: 300px;
     border-color: #2ecc71;
   }
 `;
