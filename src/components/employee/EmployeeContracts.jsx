@@ -142,10 +142,10 @@ function EmployeeContracts(props) {
                 isMulti
                 value={selectedEmployees}
                 options={props.employeeDropdowns && props.employeeDropdowns[0].options}
-                placeholder={"Add Additional Employees"}
+                placeholder={"Select an Employee to Add to Contract"}
                 onChange={(x) => handleEmployeeSelect(x)}
                 isDisabled={contractEmployees === null}
-              />{" "}
+              />
             </Col>
           </Row>
         </>
@@ -167,7 +167,7 @@ function EmployeeContracts(props) {
                 isMulti
                 value={selectedEmployees}
                 options={props.employeeDropdowns && props.employeeDropdowns[0].options}
-                placeholder={"Add Additional Employees"}
+                placeholder={"Add Employees"}
                 onChange={(x) => handleEmployeeSelect(x)}
                 isDisabled={contractEmployees === null}
               />
@@ -175,35 +175,34 @@ function EmployeeContracts(props) {
           </Row>
         </Jumbotron>
       )}
-      <Row className="justify-content-md-center">
-        {isLoading ? (
-          <Col>
-            <Spinner animation="border" variant="primary" />
-          </Col>
-        ) : contractEmployees && contractEmployees.length + allModifiedEmployees.length >= 5 ? (
-          <ContractTable
-            editContract={editContract}
-            contractData={contractEmployees}
-            handleRoleSelect={handleRoleSelect}
-            modifiedContractData={allModifiedEmployees}
+
+      {isLoading ? (
+        <Spinner animation="border" variant="primary" />
+      ) : contractEmployees && contractEmployees.length + allModifiedEmployees.length >= 5 ? (
+        <ContractTable
+          editContract={editContract}
+          contractData={contractEmployees}
+          handleRoleSelect={handleRoleSelect}
+          modifiedContractData={allModifiedEmployees}
+          employeeDropdowns={props.employeeDropdowns}
+          setContractEmployees={setAllModifiedEmployees}
+          removeRow={removeEmployee}
+        />
+      ) : contractEmployees && contractEmployees.length > 0 ? (
+        <Row className="justify-content-md-center">
+          <DisplayContractEmployee modified={false} contractEmployees={contractEmployees} employeeDropdowns={props.employeeDropdowns} editContract={editContract} />
+          <DisplayContractEmployee
+            modified
             employeeDropdowns={props.employeeDropdowns}
-            setContractEmployees={setAllModifiedEmployees}
-            removeRow={removeEmployee}
+            contractEmployees={allModifiedEmployees}
+            setContractEmployees={setModifiedEmployees}
+            handleRoleSelect={(x, index) => handleRoleSelect(x, index)}
+            removeEmployee={removeEmployee}
           />
-        ) : (
-          <>
-            <DisplayContractEmployee modified={false} contractEmployees={contractEmployees} employeeDropdowns={props.employeeDropdowns} editContract={editContract} />
-            <DisplayContractEmployee
-              modified
-              employeeDropdowns={props.employeeDropdowns}
-              contractEmployees={allModifiedEmployees}
-              setContractEmployees={setModifiedEmployees}
-              handleRoleSelect={(x, index) => handleRoleSelect(x, index)}
-              removeEmployee={removeEmployee}
-            />
-          </>
-        )}
-      </Row>
+        </Row>
+      ) : (
+        <h5>No employees are associated with this contract.</h5>
+      )}
 
       {allModifiedEmployees && allModifiedEmployees.length !== 0 && (
         <Row>

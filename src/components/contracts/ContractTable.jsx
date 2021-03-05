@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MaterialTable from "material-table";
 import Select, { createFilter } from "react-select";
 import MenuList from "../../libs/OptimizedSelect";
 
 function ContractTable(props) {
-  let liveContract = null;
-
+  let navigate = useNavigate();
   let { contractData, inputRestrictions } = props;
+
+  let liveContract = null;
   let columnData = contractData[0].filter(labelFilter).map((content) => ({ title: content.label, field: content.columnName }));
   columnData[1].editable = "never";
   columnData[6].editable = "never";
@@ -186,7 +187,7 @@ function ContractTable(props) {
       columns={columnData}
       data={rows}
       title="Active Contracts"
-      // onRowClick={(event, rowData) => console.log(event, JSON.stringify(rowData))}
+      onRowClick={(e, rowData) => navigate(`../details/${rowData.contract_id}`)}
       editable={{
         onRowUpdate: (newData, oldData) =>
           new Promise((resolve, reject) => {

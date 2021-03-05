@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Row, Container, Jumbotron, Col } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import ViewTrips from "./ViewTrips";
 import UpsertTripModal from "./UpsertTripModal";
 import Send from "../../../libs/send";
@@ -30,22 +30,28 @@ function TripData(props) {
   }
   return (
     <>
-      {contractProfile[28].value.map((c, index) => (
-        <ViewTrips
-          key={index}
-          type="Contract"
-          index={index}
-          tripData={c}
-          tripVehicles={c[19]}
-          tripTrailers={c[20]}
-          contractProfile={contractProfile}
-          inputRestrictions={contentInputRestrictions}
-          submitAction={(editTrip) => {
-            return props.tripEditSubmitAction(editTrip);
-          }}
-          appProps={props.appProps}
-        />
-      ))}
+      {console.log(contractProfile[28].value)}
+      {contractProfile[28].value > 0 ? (
+        contractProfile[28].value.map((c, index) => (
+          <ViewTrips
+            key={index}
+            type="Contract"
+            index={index}
+            tripData={c}
+            tripVehicles={c[19]}
+            tripTrailers={c[20]}
+            contractProfile={contractProfile}
+            inputRestrictions={contentInputRestrictions}
+            submitAction={(editTrip) => {
+              return props.tripEditSubmitAction(editTrip);
+            }}
+            appProps={props.appProps}
+            setContract={props.setContract}
+          />
+        ))
+      ) : (
+        <h5>No trips are associated with this contract.</h5>
+      )}
       <Row>
         <Col>
           {sessionStorage.getItem("/contract/trips") >= 3 && (

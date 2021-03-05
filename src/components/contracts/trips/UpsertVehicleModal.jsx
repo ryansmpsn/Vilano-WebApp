@@ -173,6 +173,7 @@ class UpsertVehicleModal extends React.Component {
                         options={this.state.vehicleOptions}
                         placeholder={"Vehicles"}
                         isDisabled={this.state.isLoading}
+                        isLoading={this.state.isLoading}
                         onChange={(x) => {
                           var object = this.state.vehicleValues;
                           object.vehicle_type_id = x.value;
@@ -252,6 +253,7 @@ class UpsertVehicleModal extends React.Component {
                         options={this.state.trailerOptions}
                         placeholder={"Trailers"}
                         isDisabled={this.state.isLoading}
+                        isLoading={this.state.isLoading}
                         onChange={(x) => {
                           var object = this.state.trailerValues;
                           object.trailer_type_id = x.value;

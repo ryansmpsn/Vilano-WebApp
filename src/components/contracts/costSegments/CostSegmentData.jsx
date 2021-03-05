@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Select from "react-select";
-import { Button, Spinner, Jumbotron, Container, Row, Col } from "react-bootstrap";
+import { Button, Spinner, Container, Row, Col } from "react-bootstrap";
 import Send from "../../../libs/send";
 import UpsertCostSegment from "./UpsertCostSegment";
+import ViewRateSheets from "./ViewRateSheets";
 
 class CostSegmentData extends Component {
   _isMounted = false;
@@ -19,6 +20,7 @@ class CostSegmentData extends Component {
       contractCostSegments: null,
       selectedCostSegment: null,
       rateSheetData: null,
+      showModal: false,
       units: [
         {
           rateItemCode: "vc_1",
@@ -1071,7 +1073,7 @@ class CostSegmentData extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    if (this.props.contractProfile !== null) {
+    if (this.props.contract !== null) {
       this.setState({ isLoading: true });
 
       Send.get("/Contract/Dropdowns/CostSegment/All", this.props.appProps).then((res) => {
@@ -1160,67 +1162,80 @@ class CostSegmentData extends Component {
       });
     }
     this.setState({ settingData: true });
+    this.setState({ show: true });
   }
   componentWillUnmount() {
     this._isMounted = false;
   }
+  openModal() {
+    this.setState({ showModal: true });
+    window.location.hash = "edit";
+  }
 
+  closeModal() {
+    window.history.replaceState(null, null, " ");
+    this.setState({ showModal: false });
+  }
   render() {
     return (
-      <Jumbotron>
+      <>
         <Container className="container-sm pl-5 pr-5 pt-2">
           <Row className="justify-content-md-center">
-            <Col lg="5">
-              <Select
-                options={this.props.selectOptions}
-                placeholder={"Select a Contract to View Rate Information"}
-                onChange={(x) => {
-                  this.setState({ rateSheetData: null });
-                  this.setState({ costSegmentDropdowns: null });
-                  this.setState({ settingData: false });
-                  x === null ? this.setState({ contractSearch: x }) : this.setState({ contractSearch: x.value });
-                  this.setState({ selectedCostSegment: null });
-                }}
-                isLoading={this.state.isLoading}
-                isDisabled={this.state.isLoading}
-                defaultInputValue={this.props.selectedContract}
-                isClearable
-              />
-              {this.state.isLoading === true ? (
-                <Container>
-                  <Spinner animation="border" variant="primary" />
-                </Container>
-              ) : (
-                <>
-                  <h4>
-                    <Button type="button" onClick={this.getSelectedContract} disabled={this.state.contractSearch === "null"}>
-                      Search
-                    </Button>
-                  </h4>
-                </>
-              )}
-            </Col>
-            <Col lg="5">
+            {!this.props.details && (
+              <Col lg="5">
+                <Select
+                  options={this.props.selectOptions}
+                  placeholder={"Select a Contract to View Rate Information"}
+                  onChange={(x) => {
+                    this.setState({ rateSheetData: null });
+                    this.setState({ costSegmentDropdowns: null });
+                    this.setState({ settingData: false });
+                    x === null ? this.setState({ contractSearch: x }) : this.setState({ contractSearch: x.value });
+                    this.setState({ selectedCostSegment: null });
+                  }}
+                  isLoading={this.state.isLoading}
+                  isDisabled={this.state.isLoading}
+                  defaultInputValue={this.props.selectedContract}
+                  isClearable
+                />
+
+                {this.state.isLoading === true ? (
+                  <Container>
+                    <Spinner animation="border" variant="primary" />
+                  </Container>
+                ) : (
+                  <>
+                    <h4>
+                      <Button variant="outline-primary" onClick={this.getSelectedContract} disabled={this.state.contractSearch === "null"}>
+                        Search
+                      </Button>
+                    </h4>
+                  </>
+                )}
+              </Col>
+            )}
+            <Col lg="6">
               <Select
                 autoFocus
                 options={this.state.costSegmentDropdowns}
-                placeholder={"Select a Cost-Segment to View Rate Information"}
+                placeholder={"Select a Cost-Segment to Update Information"}
                 onChange={(x) => {
                   x === null ? this.setState({ selectedCostSegment: x }) : this.updateRateSheetData(x);
                 }}
                 isDisabled={this.state.isLoading || this.state.costSegmentDropdowns === null}
+                isLoading={this.state.isLoading || this.state.costSegmentDropdowns === null}
                 isClearable
                 value={this.state.selectedCostSegment}
               />
               <h4>
-                <Button type="button" onClick={this.setCostSegmentdata} disabled={this.state.selectedCostSegment === null}>
-                  Select Cost Segment
+                <Button className="float-right" variant="outline-primary" onClick={this.setCostSegmentdata} disabled={this.state.selectedCostSegment === null}>
+                  Select Segment
                 </Button>
               </h4>
             </Col>
           </Row>
         </Container>
-        <hr />
+        {this.props.rateSheets > 0 ? <ViewRateSheets rateSheets={this.props.rateSheets} /> : <h5>No cost segments are associated with this contract.</h5>}
 
         {this.state.settingData && (
           <UpsertCostSegment
@@ -1241,9 +1256,11 @@ class CostSegmentData extends Component {
             submitAction={(rateSheet) => {
               return this.costSegmentSubmitAction(rateSheet);
             }}
+            show={this.state.show}
+            closeModal={this.closeModal}
           />
         )}
-      </Jumbotron>
+      </>
     );
   }
 }

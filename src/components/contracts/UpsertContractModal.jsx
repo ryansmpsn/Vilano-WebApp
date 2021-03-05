@@ -74,6 +74,7 @@ export default class UpsertContractModal extends React.Component {
         hand.state.addSelectOption(this.state.editContract[6].updatedvalue);
         newContract = res.data[0];
         newContract.pop();
+        this.props.closeModal();
         if (newContract !== null) {
           hand.update_contract(newContract);
           hand.setState({ submitting: false });

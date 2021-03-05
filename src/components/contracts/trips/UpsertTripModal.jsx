@@ -1,18 +1,18 @@
 import React from "react";
 import { Button, Modal, FormGroup, FormControl, FormLabel, Spinner, Row, Col } from "react-bootstrap";
 import InputFormControl from "../../../libs/InputFormControl";
-// import NavPerm from "../../libs/NavPerms";
 import DatePicker from "react-date-picker";
+import Send from "../../../libs/send";
 
 export default class UpsertTripModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      permissions: "Write",
       date: new Date(),
       modalName: props.modalName,
       show: props.show,
       trip: props.trip,
-      Permissions: "Write",
       editTrip: props.trip,
       inputRestrictions: props.inputRestrictions,
       contractProfile: props.contractProfile,
@@ -66,19 +66,20 @@ export default class UpsertTripModal extends React.Component {
     event.preventDefault();
     var hand = this;
     this.setState({ submitting: true });
-    var JSONResponse = this.state.contractProfile;
+    let JSONResponse = this.state.contractProfile;
 
     if (hand.props.type === "Contract") {
       JSONResponse[28].value = [this.state.editTrip];
 
-      hand.state.submitAction(JSONResponse);
+      Send.post("/Contract/ContractTrip", JSONResponse, this.props).then((res) => {
+        hand.props.setContract(res.data[0]);
+        hand.props.closeModal();
+      });
     }
     if (hand.props.type === "Bid") {
       JSONResponse[33].value = [this.state.editTrip];
       hand.state.submitAction(JSONResponse);
     }
-
-    hand.props.closeModal();
   }
 
   set_variable_id(object, variable_key, value) {
@@ -118,15 +119,10 @@ export default class UpsertTripModal extends React.Component {
                               ? item.value !== null
                                 ? item.value
                                 : ""
-                              : new Date(item.value).getUTCMonth() +
-                                1 +
-                                "/" +
-                                new Date(item.value).getUTCDate() +
-                                "/" +
-                                new Date(item.value).getUTCFullYear())}
+                              : new Date(item.value).getUTCMonth() + 1 + "/" + new Date(item.value).getUTCDate() + "/" + new Date(item.value).getUTCFullYear())}
                         </FormLabel>
                         {/* Make this formcontrol tie to values for editing-- Done I think?  */}
-                        {this.state.Permissions === "Write" &&
+                        {this.state.permissions === "Write" &&
                           ((item.inputType === "text" && (
                             <FormControl
                               type="text"
@@ -138,6 +134,7 @@ export default class UpsertTripModal extends React.Component {
                                 this.setState({ editTrip: object });
                               }}
                               placeholder={item.value}
+                              disabled={this.state.submitting}
                             />
                           )) ||
                             (item.inputType === "num" && (
@@ -151,6 +148,7 @@ export default class UpsertTripModal extends React.Component {
                                   this.setState({ editTrip: object });
                                 }}
                                 placeholder={item.value}
+                                disabled={this.state.submitting}
                               />
                             )) ||
                             (item.inputType === "checkbox" && (
@@ -165,6 +163,7 @@ export default class UpsertTripModal extends React.Component {
                                   object[index].updatedValue = !item.updatedValue;
                                   this.setState({ editTrip: object });
                                 }}
+                                disabled={this.state.submitting}
                               />
                             )) ||
                             (item.inputType === "select" && (
@@ -179,6 +178,7 @@ export default class UpsertTripModal extends React.Component {
                                 }}
                                 content={item}
                                 inputRestrictions={this.state.inputRestrictions}
+                                disabled={this.state.submitting}
                               />
                             )) ||
                             (item.inputType === "date" && (
@@ -190,40 +190,19 @@ export default class UpsertTripModal extends React.Component {
                                   onChange={(e) => {
                                     var object = this.state.editTrip;
                                     var date = new Date(e);
-                                    var return_date =
-                                      date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+                                    var return_date = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
                                     object[index].updatedValue = return_date;
                                     this.setState({ editTrip: object });
                                     this.setState({ date: date });
                                   }}
                                   value={
                                     item.updatedValue !== null
-                                      ? new Date(
-                                          new Date(item.updatedValue).getUTCMonth() +
-                                            1 +
-                                            "/" +
-                                            new Date(item.updatedValue).getUTCDate() +
-                                            "/" +
-                                            new Date(item.updatedValue).getUTCFullYear()
-                                        )
+                                      ? new Date(new Date(item.updatedValue).getUTCMonth() + 1 + "/" + new Date(item.updatedValue).getUTCDate() + "/" + new Date(item.updatedValue).getUTCFullYear())
                                       : item.value !== null
-                                      ? new Date(
-                                          new Date(item.value).getUTCMonth() +
-                                            1 +
-                                            "/" +
-                                            new Date(item.value).getUTCDate() +
-                                            "/" +
-                                            new Date(item.value).getUTCFullYear()
-                                        )
-                                      : new Date(
-                                          new Date().getUTCMonth() +
-                                            1 +
-                                            "/" +
-                                            new Date().getUTCDate() +
-                                            "/" +
-                                            new Date().getUTCFullYear()
-                                        )
+                                      ? new Date(new Date(item.value).getUTCMonth() + 1 + "/" + new Date(item.value).getUTCDate() + "/" + new Date(item.value).getUTCFullYear())
+                                      : new Date(new Date().getUTCMonth() + 1 + "/" + new Date().getUTCDate() + "/" + new Date().getUTCFullYear())
                                   }
+                                  disabled={this.state.submitting}
                                 />
                               </>
                             )))}
@@ -234,14 +213,13 @@ export default class UpsertTripModal extends React.Component {
             </Row>
           </Modal.Body>
           <Modal.Footer>
-            {this.state.Permissions === "Write" &&
-              (!this.state.submitting ? (
-                <Button className="btn btn-primary mr-auto" type="submit" disabled={this.state.submitting}>
-                  Save
-                </Button>
-              ) : (
-                <Spinner animation="border" variant="primary" className="mr-auto" />
-              ))}
+            {!this.state.submitting ? (
+              <Button className="btn btn-primary mr-auto" type="submit" disabled={this.state.submitting}>
+                Save
+              </Button>
+            ) : (
+              <Spinner animation="border" variant="primary" className="mr-auto" />
+            )}
             <Button onClick={this.props.closeModal}>Close</Button>
           </Modal.Footer>
         </form>

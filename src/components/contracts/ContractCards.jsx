@@ -54,6 +54,16 @@ function ContractCards(props) {
   function closeDocumentModal() {
     setShowDocumentModal(false);
   }
+  useEffect(() => {
+    if (details) {
+      setSearching(true);
+
+      Send.get(`/Contract/${contract[0].value}/Document`).then((response) => {
+        setSearching(false);
+        setDocuments(response.data);
+      });
+    }
+  }, [setSearching, contract, details]);
 
   async function gatherDocuments() {
     setSearching(true);
@@ -154,7 +164,7 @@ function ContractCards(props) {
       </Card.Body>
       <Card.Footer>
         {!details && (
-          <Link to={"../trips"} className="btn btn-outline-primary">
+          <Link to={`../details/${contract[0].value}`} className="btn btn-outline-primary">
             View Details
           </Link>
         )}

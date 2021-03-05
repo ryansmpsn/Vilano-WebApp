@@ -17,6 +17,7 @@ class ContractDashboard extends Component {
       isSearching: false,
       contentInputRestrictions: null,
       allContracts: null,
+      allEmployees: null,
     };
   }
   setContractSearchCode = (e) => {
@@ -58,14 +59,16 @@ class ContractDashboard extends Component {
     const requestOne = Send.get("/Contract/Ids");
     const requestTwo = Send.get("/Contract/Dropdowns/Contract/All");
     const requestThree = Send.post("/Contract/Search", "", this.props);
+    const requestFour = Send.get("/Employee/Dropdowns/Employee/All");
 
     axios
-      .all([requestOne, requestTwo, requestThree])
+      .all([requestOne, requestTwo, requestThree, requestFour])
       .then(
         axios.spread((...responses) => {
           const responseOne = responses[0];
           const responseTwo = responses[1];
           const responseThree = responses[2];
+          const responseFour = responses[3];
 
           let contractData = responseOne.data;
           let getSelectOptions = [];
@@ -80,7 +83,7 @@ class ContractDashboard extends Component {
             this.setState({ selectOptions: getSelectOptions });
             this.setState({ contentInputRestrictions: responseTwo.data });
             this.setState({ allContracts: responseThree.data });
-            console.log("hello setting responses");
+            this.setState({ allEmployees: responseFour.data });
           }
         })
       )
@@ -152,11 +155,6 @@ class ContractDashboard extends Component {
               </NavLink>
             </NavItem>
           )}
-          <NavItem>
-            <NavLink to="details/857" activeClassName="text-primary border-top">
-              Details
-            </NavLink>
-          </NavItem>
         </Nav>
         <Routing
           props={this.props}
@@ -180,6 +178,7 @@ class ContractDashboard extends Component {
           addSelectOption={this.addSelectOption}
           contentInputRestrictions={this.state.contentInputRestrictions}
           allContracts={this.state.allContracts}
+          allEmployees={this.state.allEmployees}
         />
       </>
     );

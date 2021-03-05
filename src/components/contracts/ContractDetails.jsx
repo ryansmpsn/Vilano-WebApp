@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import CostSegmentData from "./costSegments/CostSegmentData";
 import TripData from "./trips/TripData";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import Send from "../../libs/send";
-import ViewRoutes from "./routes/ViewRoutes";
+// import ViewRoutes from "./routes/ViewRoutes";
 import { Spinner } from "react-bootstrap";
 import ContractCards from "./ContractCards";
 import EmployeeContracts from "../employee/EmployeeContracts";
@@ -13,7 +13,6 @@ function ContractDetails(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [contract, setContract] = useState(null);
 
-  console.log(props);
   useEffect(() => {
     if (contractId) {
       Send.get("/Contract/" + contractId).then((res) => {
@@ -36,16 +35,16 @@ function ContractDetails(props) {
       <ContractCards contract={contract} {...props} type="Contract" details />
       <h3>Employees</h3>
       <hr />
-      <EmployeeContracts contract={contract} />
+      <EmployeeContracts contract={contract} employeeDropdowns={props.allEmployees} />
       <h3>Trips</h3>
       <hr />
-      <TripData contractProfile={contract} {...props} />
-      <h3>Rate Sheets</h3>
+      <TripData contractProfile={contract} setContract={setContract} {...props} />
+      <h3>Cost Segments</h3>
       <hr />
-      {/* <CostSegmentData {...props} /> */}
-      <h3>Routes</h3>
+      <CostSegmentData details contract={contract} {...props} selectedContractId={contractId} rateSheets={contract[29].value} />
+      {/* <h3>Routes</h3>
       <hr />
-      <ViewRoutes {...props} />
+      <ViewRoutes {...props} /> */}
     </>
   );
 }

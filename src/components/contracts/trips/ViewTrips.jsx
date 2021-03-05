@@ -87,7 +87,7 @@ function ViewTrips(props) {
 
   return (
     <Card
-      className={"card border-primary mb-3 "}
+      className={"mb-3 "}
       style={{
         width: "100%",
       }}
@@ -238,6 +238,7 @@ function ViewTrips(props) {
               return props.submitAction(editTrip);
             }}
             trip={props.tripData}
+            setContract={props.setContract}
           />
 
           {showVehicleModal && (
