@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Col, Row, Button, Container, Spinner, Jumbotron } from "react-bootstrap";
+import { Col, Row, Button, Spinner, Jumbotron } from "react-bootstrap";
 import ContractCards from "./ContractCards";
 import Select from "react-select";
 import ContractTable from "./ContractTable";
@@ -104,9 +104,6 @@ function ContractData(props) {
         ) : (
           <ContractTable
             type={"Contract"}
-            getTrips={props.getTrips}
-            setSelectedContract={props.setSelectedContract}
-            setSelectedContractId={props.setSelectedContractId}
             contractData={props.allContracts}
             inputRestrictions={props.contentInputRestrictions}
             submitAction={(editContract) => {
@@ -122,16 +119,12 @@ function ContractData(props) {
                 contractData.map((c, index) => (
                   <ContractCards
                     key={index + "contract"}
-                    type={"Contract"}
-                    getTrips={props.getTrips}
-                    setSelectedContract={props.setSelectedContract}
-                    setSelectedContractId={props.setSelectedContractId}
-                    Contract={c}
+                    type="Contract"
+                    contract={c}
                     inputRestrictions={props.contentInputRestrictions}
                     submitAction={(editContract) => {
                       return props.contractEditSubmitAction(editContract);
                     }}
-                    accessLevel={props.accessLevel}
                     bidOptions={bidOptions}
                   />
                 ))}
@@ -253,7 +246,6 @@ function ContractData(props) {
           inputRestrictions={props.contentInputRestrictions}
           show={showModal}
           closeModal={closeModal}
-          accessLevel={props.accessLevel}
           submitAction={(editContract) => {
             return props.contractEditSubmitAction(editContract);
           }}

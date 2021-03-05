@@ -1,22 +1,15 @@
 import React, { useState } from "react";
-import { Button, Row, Container, Jumbotron, Spinner, Col } from "react-bootstrap";
-import Select from "react-select";
+import { Button, Row, Container, Jumbotron, Col } from "react-bootstrap";
 import ViewTrips from "./ViewTrips";
 import UpsertTripModal from "./UpsertTripModal";
 import Send from "../../../libs/send";
 
 function TripData(props) {
+  let { contractProfile } = props;
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
 
-  function getTripData(x) {
-    if (x !== null) {
-      props.setSelectedContract(x.label);
-      props.setSelectedContractId(x.value);
-      props.getTrips("/Contract/" + x.value);
-    }
-  }
   function addTrip() {
     setIsLoading(true);
     Send.get("/Contract/Dropdowns/ContractTrip/Cached", props).then((res) => {
@@ -36,58 +29,32 @@ function TripData(props) {
     setShowModal(false);
   }
   return (
-    <Jumbotron>
-      <Container className="container-sm pl-5 pr-5 pt-2">
-        <Row className="justify-content-md-center">
-          <Col lg="6">
-            <Select
-              defaultInputValue={props.selectedContract}
-              options={props.selectOptions}
-              placeholder={"Select a Contract to View Trip Information"}
-              onChange={(x) => {
-                getTripData(x);
-              }}
-              isLoading={props.isSearching | isLoading}
-              isDisabled={props.isSearching | isLoading}
-              isClearable
-            />
-            {isLoading ? (
-              <Spinner animation="border" variant="primary" />
-            ) : (
-              sessionStorage.getItem("/contract/trips") >= 3 && (
-                <Button variant="outline-primary" className="float-right" onClick={addTrip} disabled={(props.contractProfile === null) | props.isSearching}>
-                  Add Trip
-                </Button>
-              )
-            )}
-          </Col>
-        </Row>
-      </Container>
-      <hr />
-      {props.isSearching ? (
-        <Spinner animation="border" variant="primary" />
-      ) : (
-        props.contractProfile !== null && (
-          <Row key="topRow" className="show-grid">
-            {props.contractProfile[28].value.map((c, index) => (
-              <ViewTrips
-                key={index}
-                type="Contract"
-                index={index}
-                tripData={c}
-                tripVehicles={c[19]}
-                tripTrailers={c[20]}
-                contractProfile={props.contractProfile}
-                inputRestrictions={contentInputRestrictions}
-                submitAction={(editTrip) => {
-                  return props.tripEditSubmitAction(editTrip);
-                }}
-                appProps={props.appProps}
-              />
-            ))}
-          </Row>
-        )
-      )}
+    <>
+      {contractProfile[28].value.map((c, index) => (
+        <ViewTrips
+          key={index}
+          type="Contract"
+          index={index}
+          tripData={c}
+          tripVehicles={c[19]}
+          tripTrailers={c[20]}
+          contractProfile={contractProfile}
+          inputRestrictions={contentInputRestrictions}
+          submitAction={(editTrip) => {
+            return props.tripEditSubmitAction(editTrip);
+          }}
+          appProps={props.appProps}
+        />
+      ))}
+      <Row>
+        <Col>
+          {sessionStorage.getItem("/contract/trips") >= 3 && (
+            <Button variant="outline-primary" className="float-right" onClick={addTrip}>
+              Add Trip
+            </Button>
+          )}
+        </Col>
+      </Row>
       {!isLoading && (
         <UpsertTripModal
           modalName={"Create New Trip"}
@@ -95,9 +62,8 @@ function TripData(props) {
           inputRestrictions={contentInputRestrictions}
           show={showModal}
           closeModal={closeModal}
-          accessLevel={props.accessLevel}
           appProps={props.appProps}
-          contractProfile={props.contractProfile}
+          contractProfile={contractProfile}
           submitAction={(editTrip) => {
             return props.tripEditSubmitAction(editTrip);
           }}
@@ -252,7 +218,7 @@ function TripData(props) {
           ]}
         />
       )}
-    </Jumbotron>
+    </>
   );
 }
 

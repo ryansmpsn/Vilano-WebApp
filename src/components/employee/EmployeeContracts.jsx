@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
 import Select from "react-select";
 import Send from "../../libs/send";
@@ -6,9 +6,12 @@ import { useToasts } from "react-toast-notifications";
 import DisplayContractEmployee from "./sections/DisplayContractEmployees";
 import ContractTable from "./sections/ContractTable";
 import { Jumbotron } from "react-bootstrap";
+import { useParams } from "react-router";
 
 function EmployeeContracts(props) {
   const { addToast } = useToasts();
+  let { contractId } = useParams();
+  let { contract } = props;
 
   const [selectedContract, setSelectedContract] = useState(null); //from select  contract dropdown
   const [selectedEmployees, setSelectedEmployees] = useState(null); // controls employee select dropdown
@@ -17,6 +20,21 @@ function EmployeeContracts(props) {
   const [allModifiedEmployees, setAllModifiedEmployees] = useState(null);
   const [modifiedEmployees, setModifiedEmployees] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (contractId) {
+      setIsLoading(true);
+      setSelectedContract({ label: contract[6].value, value: contractId });
+      gatherAllModifiedEmployees();
+      Send.get("/Employee/ContractEmployee/" + contractId).then((response) => {
+        setContractEmployees(response.data.value);
+        setModifiedEmployees(null);
+        setIsLoading(false);
+      });
+    } else {
+      // do something
+    }
+  }, [contractId, contract]);
 
   function handleContractSelect(x) {
     setIsLoading(true);
@@ -115,30 +133,48 @@ function EmployeeContracts(props) {
   }
 
   return (
-    <Jumbotron>
-      <Row className="mb-4 justify-content-md-center">
-        <Col md="4">
-          <Select
-            autofocus
-            options={props.contractIds}
-            placeholder={"Search for contracts by ID"}
-            onChange={(x) => handleContractSelect(x)}
-            isDisabled={props.contractIds === null}
-            isLoading={props.contractIds === null}
-          />
-        </Col>
-        <Col md="4">
-          <Select
-            isMulti
-            value={selectedEmployees}
-            options={props.employeeDropdowns && props.employeeDropdowns[0].options}
-            placeholder={"Add Additional Employees"}
-            onChange={(x) => handleEmployeeSelect(x)}
-            isDisabled={contractEmployees === null}
-          />
-        </Col>
-      </Row>
-      <hr />
+    <>
+      {contractId ? (
+        <>
+          <Row className="mb-4 justify-content-md-center">
+            <Col md="4">
+              <Select
+                isMulti
+                value={selectedEmployees}
+                options={props.employeeDropdowns && props.employeeDropdowns[0].options}
+                placeholder={"Add Additional Employees"}
+                onChange={(x) => handleEmployeeSelect(x)}
+                isDisabled={contractEmployees === null}
+              />{" "}
+            </Col>
+          </Row>
+        </>
+      ) : (
+        <Jumbotron>
+          <Row className="mb-4 justify-content-md-center">
+            <Col md="4">
+              <Select
+                autofocus
+                options={props.contractIds}
+                placeholder={"Search for contracts by ID"}
+                onChange={(x) => handleContractSelect(x)}
+                isDisabled={props.contractIds === null}
+                isLoading={props.contractIds === null}
+              />
+            </Col>
+            <Col md="4">
+              <Select
+                isMulti
+                value={selectedEmployees}
+                options={props.employeeDropdowns && props.employeeDropdowns[0].options}
+                placeholder={"Add Additional Employees"}
+                onChange={(x) => handleEmployeeSelect(x)}
+                isDisabled={contractEmployees === null}
+              />
+            </Col>
+          </Row>
+        </Jumbotron>
+      )}
       <Row className="justify-content-md-center">
         {isLoading ? (
           <Col>
@@ -178,7 +214,7 @@ function EmployeeContracts(props) {
           </Col>
         </Row>
       )}
-    </Jumbotron>
+    </>
   );
 }
 

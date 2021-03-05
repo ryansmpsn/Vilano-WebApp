@@ -222,13 +222,6 @@ function ViewTrips(props) {
             </Button>
           </>
         )}
-        {/*  <Link
-            onClick={(e) => props.setSelectedTrip("Trip 326")}
-            to={`${props.url}/trip/${props.selectedContractId}`}
-            className="btn btn-primary"
-          >
-            View Routes
-          </Link> */}
       </Card.Body>
 
       {!isLoading && (
@@ -239,7 +232,6 @@ function ViewTrips(props) {
             inputRestrictions={contentInputRestrictions}
             show={showTripModal}
             closeModal={closeModal}
-            accessLevel={props.accessLevel}
             appProps={props.appProps}
             contractProfile={props.contractProfile}
             submitAction={(editTrip) => {

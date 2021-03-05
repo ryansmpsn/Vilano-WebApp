@@ -2,37 +2,23 @@ import React, { Component } from "react";
 import Routing from "./Router";
 import Send from "../../libs/send";
 import CountUp from "react-countup";
-import NavPerm from "../../libs/NavPerms";
 import { Card, Nav, NavItem, Row, Col, Badge, ListGroup, ListGroupItem } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 class ContractDashboard extends Component {
   _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
-      accessLevel: NavPerm.nav_perm_check(),
       selectOptions: null,
       contractSearchCode: { external_contract_code: [] },
-      selectedContractId: "null",
-      selectedContract: "",
-      selectedTrip: "",
       contractProfile: null,
       isSearching: false,
       contentInputRestrictions: null,
       allContracts: null,
     };
   }
-
-  setSelectedContract = (e) => {
-    return this.setState({ selectedContract: e });
-  };
-  setSelectedContractId = (e) => {
-    return this.setState({ selectedContractId: e });
-  };
-  setSelectedTrip = (e) => {
-    return this.setState({ selectedTrip: e });
-  };
   setContractSearchCode = (e) => {
     return this.setState({ contractSearchCode: e });
   };
@@ -55,7 +41,6 @@ class ContractDashboard extends Component {
     this.setState({ isSearching: true });
 
     return Send.post("/Contract/ContractTrip", editTrip, this.props).then((res) => {
-      this.setState({ contractProfile: res.data[0] });
       this.setState({ isSearching: false });
     });
   };
@@ -69,31 +54,40 @@ class ContractDashboard extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    Send.get("/Contract/Ids", this.props).then((res) => {
-      let contractData = res.data;
-      let getSelectOptions = [];
-      contractData.map((item, index) => {
-        return getSelectOptions.push({
-          label: item[1].value,
-          value: item[0].value,
-        });
+
+    const requestOne = Send.get("/Contract/Ids");
+    const requestTwo = Send.get("/Contract/Dropdowns/Contract/All");
+    const requestThree = Send.post("/Contract/Search", "", this.props);
+
+    axios
+      .all([requestOne, requestTwo, requestThree])
+      .then(
+        axios.spread((...responses) => {
+          const responseOne = responses[0];
+          const responseTwo = responses[1];
+          const responseThree = responses[2];
+
+          let contractData = responseOne.data;
+          let getSelectOptions = [];
+          contractData.map((item, index) => {
+            return getSelectOptions.push({
+              label: item[1].value,
+              value: item[0].value,
+            });
+          });
+
+          if (this._isMounted) {
+            this.setState({ selectOptions: getSelectOptions });
+            this.setState({ contentInputRestrictions: responseTwo.data });
+            this.setState({ allContracts: responseThree.data });
+            console.log("hello setting responses");
+          }
+        })
+      )
+      .catch((errors) => {
+        // react on errors
+        console.log(errors);
       });
-      if (this._isMounted) {
-        this.setState({ selectOptions: getSelectOptions });
-      }
-    });
-
-    Send.get("/Contract/Dropdowns/Contract/All", this.props).then((res) => {
-      if (this._isMounted) {
-        this.setState({ contentInputRestrictions: res.data });
-      }
-    });
-
-    Send.post("/Contract/Search", "", this.props).then((res) => {
-      if (this._isMounted) {
-        this.setState({ allContracts: res.data });
-      }
-    });
   }
 
   componentWillUnmount() {
@@ -151,39 +145,6 @@ class ContractDashboard extends Component {
               Contracts
             </NavLink>
           </NavItem>
-
-          {sessionStorage.getItem("/contract/trips") >= 2 && (
-            <NavItem>
-              <NavLink to="trips" activeClassName="text-primary border-top">
-                Trips
-              </NavLink>
-            </NavItem>
-          )}
-
-          {sessionStorage.getItem("/contract/ratesheets") >= 2 && (
-            <NavItem>
-              <NavLink to="ratesheets" activeClassName="text-primary border-top">
-                Cost Segments
-              </NavLink>
-            </NavItem>
-          )}
-
-          {sessionStorage.getItem("/contract/routes") >= 2 && (
-            <NavItem>
-              <NavLink to="routes" activeClassName="text-primary border-top">
-                Routes
-              </NavLink>
-            </NavItem>
-          )}
-
-          {sessionStorage.getItem("/contract/drivers") >= 2 && (
-            <NavItem>
-              <NavLink to="/employee" activeClassName="text-primary border-top">
-                Drivers
-              </NavLink>
-            </NavItem>
-          )}
-
           {sessionStorage.getItem("/contract/analytics") >= 1 && (
             <NavItem>
               <NavLink to="analytics" activeClassName="text-primary border-top">
@@ -191,26 +152,19 @@ class ContractDashboard extends Component {
               </NavLink>
             </NavItem>
           )}
+          <NavItem>
+            <NavLink to="details/857" activeClassName="text-primary border-top">
+              Details
+            </NavLink>
+          </NavItem>
         </Nav>
         <Routing
           props={this.props}
-          setSelectedTrip={this.setSelectedTrip}
-          setSelectedContract={this.setSelectedContract}
-          setSelectedContractId={this.setSelectedContractId}
           setContractSearchCode={this.setContractSearchCode}
-          selectedTrip={this.state.selectedTrip}
-          selectedContract={this.state.selectedContract}
-          selectedContractId={this.state.selectedContractId}
           selectOptions={this.state.selectOptions}
-          contractID
           isSearching={this.state.isSearching}
-          contractProfile={this.state.contractProfile}
-          accessLevel={this.state.accessLevel}
           contractEditSubmitAction={this.contractEditSubmitAction}
           tripEditSubmitAction={this.tripEditSubmitAction}
-          getSelectOptions={() => {
-            return this.getSelectOptions();
-          }}
           SearchFunction={(contractSearch) => {
             return this.search(contractSearch);
           }}
@@ -219,10 +173,10 @@ class ContractDashboard extends Component {
           }}
           appProps={this.props}
           contractSearch={this.state.contractSearchCode}
-          getContracts={() => {
-            return this.getContracts();
-          }}
-          getTrips={this.getTrips}
+          // implement get contract feature to reload all contract data after an edit
+          // getContracts={() => {
+          //   return this.getContracts();
+          // }}
           addSelectOption={this.addSelectOption}
           contentInputRestrictions={this.state.contentInputRestrictions}
           allContracts={this.state.allContracts}

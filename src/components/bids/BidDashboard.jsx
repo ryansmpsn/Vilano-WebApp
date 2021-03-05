@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Routing from "./Router";
 import Send from "../../libs/send";
 import CountUp from "react-countup";
-import NavPerm from "../../libs/NavPerms";
 import { Card, Row, Col, Badge, ListGroup, ListGroupItem, Nav, NavItem } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
@@ -11,7 +10,6 @@ class BidDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      accessLevel: NavPerm.nav_perm_check(),
       selectOptions: null,
       bidSearchCode: { bid_name: [] },
       selectedBidId: "null",
@@ -30,9 +28,7 @@ class BidDashboard extends Component {
   setSelectedBidId = (e) => {
     return this.setState({ selectedBidId: e });
   };
-  setSelectedTrip = (e) => {
-    return this.setState({ selectedTrip: e });
-  };
+
   setBidSearchCode = (e) => {
     return this.setState({ bidSearchCode: e });
   };
@@ -166,7 +162,6 @@ class BidDashboard extends Component {
 
         <Routing
           props={this.props}
-          setSelectedTrip={this.setSelectedTrip}
           setSelectedBid={this.setSelectedBid}
           setSelectedBidId={this.setSelectedBidId}
           setBidSearchCode={this.setBidSearchCode}
@@ -178,7 +173,6 @@ class BidDashboard extends Component {
           isSearching={this.state.isSearching}
           bidProfile={this.state.bidProfile}
           modalName="Edit Bid"
-          accessLevel={this.state.accessLevel}
           bidEditSubmitAction={this.bidEditSubmitAction}
           tripEditSubmitAction={this.tripEditSubmitAction}
           getSelectOptions={() => {
