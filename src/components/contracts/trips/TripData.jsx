@@ -30,8 +30,9 @@ function TripData(props) {
   }
   return (
     <>
-      {console.log(contractProfile[28].value)}
       {contractProfile[28].value > 0 ? (
+        <h5>No trips are associated with this contract.</h5>
+      ) : (
         contractProfile[28].value.map((c, index) => (
           <ViewTrips
             key={index}
@@ -49,8 +50,6 @@ function TripData(props) {
             setContract={props.setContract}
           />
         ))
-      ) : (
-        <h5>No trips are associated with this contract.</h5>
       )}
       <Row>
         <Col>

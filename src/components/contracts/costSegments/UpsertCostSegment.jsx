@@ -63,7 +63,7 @@ function UpsertCostSegment(props) {
   }
 
   return (
-    <Modal show={props.show} onHide={props.closeModal} backdrop={"static"} size="xl">
+    <Modal show={props.show} onHide={() => props.closeModal} backdrop={"static"} size="xl">
       <Modal.Header closeButton>
         <h4 className="mb-0">Rate Sheet for Cost Segment: {props.selectedCostSegment}</h4>
       </Modal.Header>

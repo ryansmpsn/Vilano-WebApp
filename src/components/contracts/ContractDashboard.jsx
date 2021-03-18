@@ -141,7 +141,7 @@ class ContractDashboard extends Component {
             </Card.Body>
           )}
         </Card>
-
+        {/* 
         <Nav justify variant="tabs" defaultActiveKey="employee" className="pb-2 w-50 mx-auto my-3 ">
           <NavItem>
             <NavLink to="dashboard" activeClassName="text-primary border-top">
@@ -155,7 +155,7 @@ class ContractDashboard extends Component {
               </NavLink>
             </NavItem>
           )}
-        </Nav>
+        </Nav> */}
         <Routing
           props={this.props}
           setContractSearchCode={this.setContractSearchCode}

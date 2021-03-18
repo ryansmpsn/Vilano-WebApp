@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Jumbotron, Button } from "react-bootstrap";
 import DisplayEmployeeInfo from "./sections/DisplayEmployeeInfo";
 import { useNavigate, useParams } from "react-router";
 import { useToasts } from "react-toast-notifications";
 import Send from "../../libs/send";
-import { Jumbotron } from "react-bootstrap";
 
 function EmployeeInformation(props) {
   const { addToast } = useToasts();
@@ -78,12 +77,12 @@ function EmployeeInformation(props) {
     gatherAllModifiedContracts(newContracts, modifiedContracts);
 
     let contractEmployees = [{ columnName: "employee_contracts", value: allModifiedContracts }];
-    console.log(contractEmployees);
     Send.post("/Employee/Contract", contractEmployees).then((result) => {
       setEmployeeContracts(result.data[0][5].value);
       setModifiedContracts(null);
       setEmployeeData(result.data[0]);
       gatherAllModifiedContracts();
+      setSelectedContracts([]);
       setIsLoading(false);
     });
     addToast(`Contracts Saved to ${employeeId}'s Profile.`, {
@@ -96,7 +95,6 @@ function EmployeeInformation(props) {
   function removeContract(index) {
     let removeCon = allModifiedContracts;
     removeCon[index][2].updatedValue = false;
-    console.log(removeCon[index][2]);
     gatherAllModifiedContracts(removeCon);
   }
 
@@ -127,23 +125,30 @@ function EmployeeInformation(props) {
     setAllModifiedContracts(modifiedContracts);
   }
   return (
-    <Jumbotron>
-      <Row className=" mb-4 justify-content-md-center">
-        <Col md="4">
-          <Select
-            autofocus
-            options={props.employeeDropdowns && props.employeeDropdowns[0].options}
-            placeholder={"Employee List"}
-            onChange={(x) => handleEmployeeSelect(x)}
-            isDisabled={props.employeeDropdowns === null}
-            isLoading={props.employeeDropdowns === null}
-          />
-        </Col>
-        <Col md="4">
-          <Select isMulti value={selectedContracts} options={props.contractIds} placeholder={"Add Additional Contracts"} onChange={(x) => handleContractSelect(x)} isDisabled={isLoading || employeeData === null} />
-        </Col>
-      </Row>
-      <hr />
+    <>
+      <Jumbotron>
+        <Row className=" mb-4 justify-content-md-center">
+          <Col md="4">
+            <Select
+              autofocus
+              options={props.employeeDropdowns && props.employeeDropdowns[0].options}
+              placeholder={"Employee List"}
+              onChange={(x) => handleEmployeeSelect(x)}
+              isDisabled={props.employeeDropdowns === null}
+              isLoading={props.employeeDropdowns === null}
+            />
+          </Col>
+          <Col md="4">
+            <Select isMulti value={selectedContracts} options={props.contractIds} placeholder={"Add Additional Contracts"} onChange={(x) => handleContractSelect(x)} isDisabled={isLoading || employeeData === null} />
+          </Col>
+        </Row>
+        <Row className="justify-content-center">
+          {console.log(selectedContracts)}
+          <Button className="btn btn-sm " variant="outline-primary" onClick={() => saveContractToEmployee()} disabled={isLoading || employeeData === null || selectedContracts === null}>
+            save
+          </Button>
+        </Row>
+      </Jumbotron>
       <Row className="mt-5">
         <DisplayEmployeeInfo
           isLoading={isLoading}
@@ -159,7 +164,7 @@ function EmployeeInformation(props) {
           removeContract={removeContract}
         />
       </Row>
-    </Jumbotron>
+    </>
   );
 }
 

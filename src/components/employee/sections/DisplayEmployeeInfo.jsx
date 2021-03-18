@@ -128,21 +128,19 @@ function DisplayEmployeeInfo(props) {
 
         <hr className="mt-5" />
 
-        <h3 className="m-4 text-center">{employeeData[5].label}</h3>
-
-        <Row className="justify-content-md-center">
-          {employeeContracts.length + allModifiedContracts.length >= 10 ? (
-            <ContractTable
-              profile={profile}
-              editContract={props.editContract}
-              contractData={employeeContracts}
-              handleRoleSelect={(x, index) => props.handleRoleSelect(x, index)}
-              modifiedContractData={allModifiedContracts}
-              employeeDropdowns={props.employeeDropdowns}
-              setContractEmployees={props.setAllModifiedContracts}
-            />
-          ) : (
-            <>
+        {employeeContracts.length + allModifiedContracts.length >= 4 ? (
+          <ContractTable
+            profile={profile}
+            editContract={props.editContract}
+            contractData={employeeContracts}
+            handleRoleSelect={(x, index) => props.handleRoleSelect(x, index)}
+            modifiedContractData={allModifiedContracts}
+            employeeDropdowns={props.employeeDropdowns}
+            setContractEmployees={props.setAllModifiedContracts}
+          />
+        ) : (
+          <>
+            <Row className="justify-content-md-center">
               <DisplayContractEmployee contracts profile={profile} modified={false} contractEmployees={employeeContracts} employeeDropdowns={props.employeeDropdowns} editContract={props.editContract} />
               <DisplayContractEmployee
                 contracts
@@ -153,15 +151,15 @@ function DisplayEmployeeInfo(props) {
                 setContractEmployees={props.setAllModifiedContracts}
                 removeEmployee={props.removeContract}
               />
-            </>
-          )}
-        </Row>
-        {!profile && (
-          <Row className="justify-content-center">
-            <Button className="btn btn-sm " variant="outline-primary" onClick={() => props.saveContractToEmployee()}>
-              save
-            </Button>
-          </Row>
+            </Row>
+            {!profile && (
+              <Row className="justify-content-center">
+                <Button className="btn btn-sm " variant="outline-primary" onClick={() => props.saveContractToEmployee()}>
+                  save
+                </Button>
+              </Row>
+            )}
+          </>
         )}
 
         <Row>
