@@ -16,7 +16,7 @@ function DisplayContractEmployee(props) {
   };
 
   function searchEmployee(x) {
-    navigate("/administration/employee/" + x);
+    navigate("/employee/" + x);
   }
 
   function updateBorder(x) {

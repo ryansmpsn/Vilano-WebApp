@@ -21,20 +21,20 @@ function EmployeeContracts(props) {
   const [modifiedEmployees, setModifiedEmployees] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (contractId) {
-      setIsLoading(true);
-      setSelectedContract({ label: contract[6].value, value: contractId });
-      gatherAllModifiedEmployees();
-      Send.get("/Employee/ContractEmployee/" + contractId).then((response) => {
-        setContractEmployees(response.data.value);
-        setModifiedEmployees(null);
-        setIsLoading(false);
-      });
-    } else {
-      // do something
-    }
-  }, [contractId, contract]);
+  // useEffect(() => {
+  //   if (contractId) {
+  //     setIsLoading(true);
+  //     setSelectedContract({ label: contract[6].value, value: contractId });
+  //     gatherAllModifiedEmployees();
+  //     Send.get("/Employee/ContractEmployee/" + contractId).then((response) => {
+  //       setContractEmployees(response.data.value);
+  //       setModifiedEmployees(null);
+  //       setIsLoading(false);
+  //     });
+  //   } else {
+  //     // do something
+  //   }
+  // }, [contractId, contract]);
 
   function handleContractSelect(x) {
     setIsLoading(true);
@@ -188,7 +188,7 @@ function EmployeeContracts(props) {
           setContractEmployees={setAllModifiedEmployees}
           removeRow={removeEmployee}
         />
-      ) : contractEmployees && contractEmployees.length > 0 ? (
+      ) : contractEmployees && (contractEmployees.length > 0 || allModifiedEmployees.length > 0) ? (
         <Row className="justify-content-md-center">
           <DisplayContractEmployee modified={false} contractEmployees={contractEmployees} employeeDropdowns={props.employeeDropdowns} editContract={editContract} />
           <DisplayContractEmployee
