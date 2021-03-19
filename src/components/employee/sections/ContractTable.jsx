@@ -73,6 +73,25 @@ function ContractTable(props) {
       data={rows}
       title="Linked Contracts"
       editable={{
+        onRowDelete: (oldData) =>
+          new Promise((resolve, reject) => {
+            let employeeContracts = [{ columnName: "employee_contracts", value: props.contractData[oldData.tableData.id] }];
+            employeeContracts[0].value[2].updatedValue = 0;
+
+            Send.post("/Employee/Contract", employeeContracts).then(() => {
+              const dataDelete = [...rows];
+              const index = oldData.tableData.id;
+              dataDelete.splice(index, 1);
+              setRows([...dataDelete]);
+              addToast("Contract successfully removed.", {
+                appearance: "success",
+                autoDismiss: true,
+                autoDismissTimeout: 3000,
+              });
+              liveContract = null;
+              resolve();
+            });
+          }),
         onRowUpdate: (newData, oldData) =>
           new Promise((resolve, reject) => {
             let employeeContracts = [{ columnName: "employee_contracts", value: liveContract }];
