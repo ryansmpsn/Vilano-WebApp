@@ -8,7 +8,7 @@ import Navigation from "./components/layout/Navigation";
 import { ToastProvider } from "react-toast-notifications";
 import axios from "axios";
 
-function App(props) {
+function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const existingSession = sessionStorage.getItem("SessionID");
   const [session, setSession] = useState(existingSession);

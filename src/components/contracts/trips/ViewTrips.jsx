@@ -261,7 +261,7 @@ function ViewTrips(props) {
               }}
             />
           )}
-          <UpsertTripDetailModal modalName={`Add Detail  for Trip: ${tripData[3].updatedValue}`} show={showDetailsModal} closeModal={closeModal} />
+          <UpsertTripDetailModal modalName={`Details for Trip: ${tripData[3].updatedValue}`} show={showDetailsModal} closeModal={closeModal} tripDetailOptions={props.tripDetailOptions} />
         </>
       )}
     </Card>

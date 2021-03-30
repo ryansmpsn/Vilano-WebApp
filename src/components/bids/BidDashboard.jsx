@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Routing from "./Router";
 import Send from "../../libs/send";
 import CountUp from "react-countup";
-import { Card, Row, Col, Badge, ListGroup, ListGroupItem, Nav, NavItem } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Card, Row, Col, Badge, ListGroup, ListGroupItem } from "react-bootstrap";
+import axios from "axios";
 
 class BidDashboard extends Component {
   _isMounted = false;
@@ -12,22 +12,14 @@ class BidDashboard extends Component {
     this.state = {
       selectOptions: null,
       bidSearchCode: { bid_name: [] },
-      selectedBidId: "null",
-      selectedBid: "",
-      selectedTrip: "",
       bidProfile: null,
       isSearching: false,
       contentInputRestrictions: null,
       allBids: null,
+      allEmployees: null,
+      tripDetailOptions: null,
     };
   }
-
-  setSelectedBid = (e) => {
-    return this.setState({ selectedBid: e });
-  };
-  setSelectedBidId = (e) => {
-    return this.setState({ selectedBidId: e });
-  };
 
   setBidSearchCode = (e) => {
     return this.setState({ bidSearchCode: e });
@@ -35,10 +27,6 @@ class BidDashboard extends Component {
   search = (bidSearch) => {
     return Send.post("/Bid/Search", bidSearch, this.props);
   };
-
-  show_all() {
-    return Send.post("/Bid/Search", "", this.props);
-  }
 
   getTrips = (e) => {
     this.setState({ isSearching: true });
@@ -51,11 +39,10 @@ class BidDashboard extends Component {
   bidEditSubmitAction = (editBid) => {
     return Send.post("/Bid/Bid", editBid, this.props);
   };
+
   tripEditSubmitAction = (editTrip) => {
     this.setState({ isSearching: true });
-
     return Send.post("/Bid/BidTrip", editTrip, this.props).then((res) => {
-      this.setState({ bidProfile: res.data[0] });
       this.setState({ isSearching: false });
     });
   };
@@ -69,23 +56,36 @@ class BidDashboard extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    Send.get("/Bid/BidIDs", this.props).then((res) => {
-      if (this._isMounted) {
-        this.setState({ selectOptions: res.data[0].options });
-      }
-    });
 
-    Send.get("/Bid/Dropdowns/Bid/All", this.props).then((res) => {
-      if (this._isMounted) {
-        this.setState({ contentInputRestrictions: res.data });
-      }
-    });
+    const requestOne = Send.get("/Bid/BidIDs");
+    const requestTwo = Send.get("/Bid/Dropdowns/Bid/All");
+    const requestThree = Send.post("/Bid/Search", "", this.props);
+    const requestFour = Send.get("/Employee/Dropdowns/Employee/All");
+    const requestFive = Send.get("/Contract/Dropdowns/TripDetails/All");
 
-    Send.post("/Bid/Search", "", this.props).then((res) => {
-      if (this._isMounted) {
-        this.setState({ allBids: res.data });
-      }
-    });
+    axios
+      .all([requestOne, requestTwo, requestThree, requestFour, requestFive])
+      .then(
+        axios.spread((...responses) => {
+          const responseOne = responses[0];
+          const responseTwo = responses[1];
+          const responseThree = responses[2];
+          const responseFour = responses[3];
+          const responseFive = responses[4];
+
+          if (this._isMounted) {
+            this.setState({ selectOptions: responseOne.data[0].options });
+            this.setState({ contentInputRestrictions: responseTwo.data });
+            this.setState({ allBids: responseThree.data });
+            this.setState({ allEmployees: responseFour.data });
+            this.setState({ tripDetailOptions: responseFive.data });
+          }
+        })
+      )
+      .catch((errors) => {
+        // react on errors
+        console.log(errors);
+      });
   }
 
   componentWillUnmount() {
@@ -137,62 +137,23 @@ class BidDashboard extends Component {
           )}
         </Card>
 
-        <Nav justify variant="tabs" defaultActiveKey="employee" className="pb-2 w-50 mx-auto my-3 ">
-          <NavItem>
-            <NavLink to="dashboard" activeClassName="text-primary border-top">
-              Bids
-            </NavLink>
-          </NavItem>
-
-          {sessionStorage.getItem("/bid/trips") >= 2 && (
-            <NavItem>
-              <NavLink to="trips" activeClassName="text-primary border-top">
-                Trips
-              </NavLink>
-            </NavItem>
-          )}
-          {sessionStorage.getItem("/bid/ratesheets") >= 2 && (
-            <NavItem>
-              <NavLink to="ratesheets" activeClassName="text-primary border-top">
-                Cost Segments
-              </NavLink>
-            </NavItem>
-          )}
-        </Nav>
-
         <Routing
           props={this.props}
-          setSelectedBid={this.setSelectedBid}
-          setSelectedBidId={this.setSelectedBidId}
           setBidSearchCode={this.setBidSearchCode}
-          selectedTrip={this.state.selectedTrip}
-          selectedBid={this.state.selectedBid}
-          selectedBidId={this.state.selectedBidId}
           selectOptions={this.state.selectOptions}
-          bidID
           isSearching={this.state.isSearching}
-          bidProfile={this.state.bidProfile}
-          modalName="Edit Bid"
           bidEditSubmitAction={this.bidEditSubmitAction}
           tripEditSubmitAction={this.tripEditSubmitAction}
-          getSelectOptions={() => {
-            return this.getSelectOptions();
-          }}
           SearchFunction={(bidSearch) => {
             return this.search(bidSearch);
           }}
-          showAll={() => {
-            return this.show_all();
-          }}
           appProps={this.props}
           bidSearch={this.state.bidSearchCode}
-          getBids={() => {
-            return this.getBids();
-          }}
-          getTrips={this.getTrips}
           addSelectOption={this.addSelectOption}
           contentInputRestrictions={this.state.contentInputRestrictions}
           allBids={this.state.allBids}
+          allEmployees={this.state.allEmployees}
+          tripDetailOptions={this.state.tripDetailOptions}
         />
       </>
     );

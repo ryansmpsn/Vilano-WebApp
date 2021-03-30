@@ -18,19 +18,28 @@ function ContractCards(props) {
   const [showFinalModal, setShowFinalModal] = useState(false);
   const [searching, setSearching] = useState(false);
   const [documents, setDocuments] = useState(null);
+  const [bidOptions, setBidOptions] = useState(null);
+  const [bidFinalOptions, setBidFinalOptions] = useState(null);
 
   function openModal() {
-    setShowModal(true);
-    window.location.hash = "edit";
+    Send.get("/Bid/Dropdowns/BidNames/All").then((response) => {
+      setBidOptions(response.data);
+      setShowModal(true);
+      window.location.hash = "edit";
+    });
   }
 
   function openFinalModal() {
-    setShowFinalModal(true);
-    window.location.hash = "finalize";
+    Send.get("/Bid/Dropdowns/Bid/Final").then((response) => {
+      setBidFinalOptions(response.data);
+      setShowFinalModal(true);
+      window.location.hash = "finalize";
+    });
   }
 
   function closeFinalModal() {
     window.history.replaceState(null, null, " ");
+
     setShowFinalModal(false);
   }
 
@@ -55,7 +64,7 @@ function ContractCards(props) {
     setShowDocumentModal(false);
   }
   useEffect(() => {
-    if (details) {
+    if (details && props.type !== "Bid") {
       setSearching(true);
 
       Send.get(`/Contract/${contract[0].value}/Document`).then((response) => {
@@ -63,7 +72,7 @@ function ContractCards(props) {
         setDocuments(response.data);
       });
     }
-  }, [setSearching, contract, details]);
+  }, [setSearching, contract, details, props.type]);
 
   async function gatherDocuments() {
     setSearching(true);
@@ -111,13 +120,13 @@ function ContractCards(props) {
       )}
       <Card.Body>
         <Row>
-          <Col md="10">
+          <Col md={props.type === "Bid" ? "12" : "10"}>
             <Row>
               {contract.map(
                 (c, index) =>
                   c.label !== null &&
                   !Array.isArray(c.value) && (
-                    <Col md="3" key={index + "body"}>
+                    <Col md={props.type === "Bid" ? "2" : "3"} key={index + "body"}>
                       <p className="mx-0 my-2 border-bottom" style={{ minHeight: "2.5em" }}>
                         {c.label} :<br />
                         <small className="text-muted m-0" style={{ whiteSpace: "nowrap" }}>
@@ -129,37 +138,39 @@ function ContractCards(props) {
               )}
             </Row>
           </Col>
-          <Col md="2" className="text-center p-0">
-            <h5>Contract Documents</h5>
-            {documents === null ? (
-              <p className="text-muted small">Search for documents attached to this contract.</p>
-            ) : (
-              <ListGroup className="text-left overflow-auto" style={{ height: "15em" }}>
-                {documents.map((c, index) => (
-                  <ListGroupItem size="3" key={index + "document"} className="p-0 pl-2" action onClick={() => accessFile(c)}>
-                    <div>
-                      <small className="text-muted">{c[5].value}</small>
-                      <p>{c[10].value}</p>
-                    </div>
-                  </ListGroupItem>
-                ))}
-              </ListGroup>
-            )}
-            {searching ? (
-              <Spinner animation="border" variant="primary" />
-            ) : (
-              <>
-                <Button className="btn btn-sm btn-outline-info mt-3" onClick={() => gatherDocuments()}>
-                  Search
-                  <div className="fas fa-search ml-1" />
-                </Button>
-                <Button className="btn btn-sm btn-outline-info mt-3 " onClick={() => openDocumentModal()}>
-                  Upload
-                  <div className="fas fa-upload ml-1" />
-                </Button>
-              </>
-            )}
-          </Col>
+          {props.type !== "Bid" && (
+            <Col md="2" className="text-center p-0">
+              <h5>Contract Documents</h5>
+              {documents === null ? (
+                <p className="text-muted small">Search for documents attached to this contract.</p>
+              ) : (
+                <ListGroup className="text-left overflow-auto" style={{ height: "15em" }}>
+                  {documents.map((c, index) => (
+                    <ListGroupItem size="3" key={index + "document"} className="p-0 pl-2" action onClick={() => accessFile(c)}>
+                      <div>
+                        <small className="text-muted">{c[5].value}</small>
+                        <p>{c[10].value}</p>
+                      </div>
+                    </ListGroupItem>
+                  ))}
+                </ListGroup>
+              )}
+              {searching ? (
+                <Spinner animation="border" variant="primary" />
+              ) : (
+                <>
+                  <Button className="btn btn-sm btn-outline-info mt-3" onClick={() => gatherDocuments()}>
+                    Search
+                    <div className="fas fa-search ml-1" />
+                  </Button>
+                  <Button className="btn btn-sm btn-outline-info mt-3 " onClick={() => openDocumentModal()}>
+                    Upload
+                    <div className="fas fa-upload ml-1" />
+                  </Button>
+                </>
+              )}
+            </Col>
+          )}
         </Row>
       </Card.Body>
       <Card.Footer>
@@ -215,11 +226,13 @@ function ContractCards(props) {
           return props.submitAction(editContent);
         }}
       />
-      {sessionStorage.getItem("/bid") >= 3 && props.bidOptions && (
+      {sessionStorage.getItem("/bid") >= 3 && (
         <>
-          <CreateBidModal show={showBidModal} closeModal={closeBidModal} appProps={props.appProps} contractId={contract[0].updatedValue} externalContractCode={contract[6].updatedValue} bidOptions={props.bidOptions} />
+          {bidOptions && (
+            <CreateBidModal show={showBidModal} closeModal={closeBidModal} appProps={props.appProps} contractId={contract[0].updatedValue} externalContractCode={contract[6].updatedValue} bidOptions={bidOptions} />
+          )}
 
-          {props.type === "Bid" && <FinalizeBidModal show={showFinalModal} closeModal={closeFinalModal} appProps={props.appProps} bidOptions={props.bidFinalOptions} contract={contract} />}
+          {props.type === "Bid" && <FinalizeBidModal show={showFinalModal} closeModal={closeFinalModal} appProps={props.appProps} bidOptions={bidFinalOptions} contract={contract} />}
         </>
       )}
     </Card>

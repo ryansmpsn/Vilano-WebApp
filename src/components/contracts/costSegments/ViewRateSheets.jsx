@@ -7,7 +7,6 @@ function ViewRateSheets(props) {
     <>
       {rateSheets.map((segment, index) => (
         <Card className={"mb-3 "} key={index}>
-          {console.log(segment)}
           <Card.Header>
             <h4 className="float-left">
               {segment[1].label}: {segment[1].value}

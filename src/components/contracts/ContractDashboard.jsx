@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Routing from "./Router";
 import Send from "../../libs/send";
 import CountUp from "react-countup";
-import { Card, Nav, NavItem, Row, Col, Badge, ListGroup, ListGroupItem } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Card, Row, Col, Badge, ListGroup, ListGroupItem } from "react-bootstrap";
 import axios from "axios";
 
 class ContractDashboard extends Component {
@@ -18,6 +17,7 @@ class ContractDashboard extends Component {
       contentInputRestrictions: null,
       allContracts: null,
       allEmployees: null,
+      tripDetailOptions: null,
     };
   }
   setContractSearchCode = (e) => {
@@ -40,7 +40,6 @@ class ContractDashboard extends Component {
   };
   tripEditSubmitAction = (editTrip) => {
     this.setState({ isSearching: true });
-
     return Send.post("/Contract/ContractTrip", editTrip, this.props).then((res) => {
       this.setState({ isSearching: false });
     });
@@ -60,15 +59,17 @@ class ContractDashboard extends Component {
     const requestTwo = Send.get("/Contract/Dropdowns/Contract/All");
     const requestThree = Send.post("/Contract/Search", "", this.props);
     const requestFour = Send.get("/Employee/Dropdowns/Employee/All");
+    const requestFive = Send.get("/Contract/Dropdowns/TripDetails/All");
 
     axios
-      .all([requestOne, requestTwo, requestThree, requestFour])
+      .all([requestOne, requestTwo, requestThree, requestFour, requestFive])
       .then(
         axios.spread((...responses) => {
           const responseOne = responses[0];
           const responseTwo = responses[1];
           const responseThree = responses[2];
           const responseFour = responses[3];
+          const responseFive = responses[4];
 
           let contractData = responseOne.data;
           let getSelectOptions = [];
@@ -84,6 +85,7 @@ class ContractDashboard extends Component {
             this.setState({ contentInputRestrictions: responseTwo.data });
             this.setState({ allContracts: responseThree.data });
             this.setState({ allEmployees: responseFour.data });
+            this.setState({ tripDetailOptions: responseFive.data });
           }
         })
       )
@@ -141,21 +143,7 @@ class ContractDashboard extends Component {
             </Card.Body>
           )}
         </Card>
-        {/* 
-        <Nav justify variant="tabs" defaultActiveKey="employee" className="pb-2 w-50 mx-auto my-3 ">
-          <NavItem>
-            <NavLink to="dashboard" activeClassName="text-primary border-top">
-              Contracts
-            </NavLink>
-          </NavItem>
-          {sessionStorage.getItem("/contract/analytics") >= 1 && (
-            <NavItem>
-              <NavLink to="analytics" activeClassName="text-primary border-top">
-                Analytics
-              </NavLink>
-            </NavItem>
-          )}
-        </Nav> */}
+
         <Routing
           props={this.props}
           setContractSearchCode={this.setContractSearchCode}
@@ -165,9 +153,6 @@ class ContractDashboard extends Component {
           tripEditSubmitAction={this.tripEditSubmitAction}
           SearchFunction={(contractSearch) => {
             return this.search(contractSearch);
-          }}
-          showAll={() => {
-            return this.show_all();
           }}
           appProps={this.props}
           contractSearch={this.state.contractSearchCode}
@@ -179,6 +164,7 @@ class ContractDashboard extends Component {
           contentInputRestrictions={this.state.contentInputRestrictions}
           allContracts={this.state.allContracts}
           allEmployees={this.state.allEmployees}
+          tripDetailOptions={this.state.tripDetailOptions}
         />
       </>
     );

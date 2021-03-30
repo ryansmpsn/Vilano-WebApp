@@ -77,8 +77,8 @@ function FinalizeBidModal(props) {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Row className="px-3">
-            <Form.Group as={Col} md="8">
+          <Form.Row className="px-3 justify-content-center">
+            <Form.Group as={Col} md="10">
               <FormLabel>Bid Status: </FormLabel>
               <Select
                 options={props.bidOptions && props.bidOptions[0].options}
@@ -90,7 +90,7 @@ function FinalizeBidModal(props) {
             </Form.Group>
 
             {toggler === 1 && (
-              <Form.Group as={Col} md="8">
+              <Form.Group as={Col} md="10">
                 <FormLabel>Effective Date: </FormLabel>
                 <br />
                 <DatePicker
@@ -108,7 +108,7 @@ function FinalizeBidModal(props) {
             )}
             {toggler === 0 && (
               <>
-                <Form.Group as={Col} md="8">
+                <Form.Group as={Col} md="10">
                   <FormLabel>Bid Loss Type: </FormLabel>
 
                   <Select
@@ -120,7 +120,7 @@ function FinalizeBidModal(props) {
                     }}
                   />
                 </Form.Group>
-                <Form.Group as={Col} md="8">
+                <Form.Group as={Col} md="10">
                   <FormLabel>Reason(s) for losing the bid: </FormLabel>
                   <FormControl
                     as="textarea"
@@ -143,8 +143,7 @@ function FinalizeBidModal(props) {
             <Spinner animation="border" variant="primary" />
           ) : (
             <Button onClick={() => handleSubmit()} variant="outline-primary">
-              {" "}
-              Save{" "}
+              Save
             </Button>
           )}
         </Modal.Footer>

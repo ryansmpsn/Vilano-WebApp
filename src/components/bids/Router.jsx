@@ -1,18 +1,19 @@
 import BidData from "./BidData";
-import BidTripData from "./BidTripData";
 import React, { Component } from "react";
-import BidCostSegmentData from "./BidCostSegmentData";
 import { Route, Routes, Navigate } from "react-router-dom";
+import BidDetails from "./BidDetails";
 
 class Routing extends Component {
   render() {
     return (
       <Routes>
         <Route path="dashboard" element={<BidData {...this.props} />} />
-        <Route path="trips" element={<BidTripData {...this.props} />} />
-        <Route path="ratesheets" element={<BidCostSegmentData {...this.props} />} />
+
+        <Route path="details" element={<BidDetails {...this.props} />} />
+        <Route path="details/:bidId" element={<BidDetails {...this.props} />} />
 
         <Navigate from="/bids" to="/bids/dashboard" />
+        <Navigate from="/bids/details" to="/bids/details/bid" />
       </Routes>
     );
   }
