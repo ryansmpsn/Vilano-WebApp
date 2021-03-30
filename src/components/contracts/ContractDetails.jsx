@@ -16,7 +16,6 @@ function ContractDetails(props) {
   useEffect(() => {
     if (contractId) {
       Send.get("/Contract/" + contractId).then((res) => {
-        console.log(res.data[0]);
         setContract(res.data[0]);
         setIsLoading(false);
       });
@@ -38,7 +37,7 @@ function ContractDetails(props) {
       <EmployeeContracts contract={contract} employeeDropdowns={props.allEmployees} />
       <h3>Trips</h3>
       <hr />
-      <TripData contractProfile={contract} setContract={setContract} {...props} />
+      <TripData contractProfile={contract} trips={contract[26].value} setContract={setContract} selectedContractId={contractId} {...props} />
       <h3>Cost Segments</h3>
       <hr />
       <CostSegmentData details contract={contract} {...props} selectedContractId={contractId} rateSheets={contract[29].value} />

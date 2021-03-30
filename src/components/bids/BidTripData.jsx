@@ -10,33 +10,6 @@ function BidTripData(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [contentInputRestrictions, setContentInputRestrictions] = useState([]);
 
-  function getTripData(x) {
-    if (x !== null) {
-      props.setSelectedBid(x.label);
-      props.setSelectedBidId(x.value);
-      props.getTrips("/Bid/" + x.value);
-    }
-  }
-
-  function addTrip() {
-    setIsLoading(true);
-    Send.get("/Bid/Dropdowns/BidTrip/Cached", props).then((res) => {
-      setContentInputRestrictions(res.data);
-      setIsLoading(false);
-      openModal();
-    });
-  }
-
-  function openModal() {
-    setShowModal(true);
-    window.location.hash = "edit";
-  }
-
-  function closeModal() {
-    window.history.replaceState(null, null, " ");
-    setShowModal(false);
-  }
-
   return (
     <Jumbotron>
       <Container className="container-sm pl-5 pr-5 pt-2">
