@@ -1,8 +1,37 @@
 [
-  { "columnName": "doc_type_name", "inputType": null, "label": null, "updatedValue": "Clearinghouse Results File", "value": null },
-  { "columnName": "doc_type_id", "inputType": null, "label": null, "updatedValue": 29, "value": null }
+  {
+    "contract_id": 676,
+    "contract_trip_id": 12,
+    "vw_contract_trip_details": [
+      {
+        "contract_trip_detail_id": 8,
+        "is_active": 1,
+        "contract_trip_detail_action_id": 6,
+        "contract_trip_detail_action_value": "Load/Unload/Case",
+        "origination_facility_id": 1,
+        "origination_facility_name": "DMU - PPA",
+        "origination_state_name": "",
+        "destination_facility_id": null,
+        "destination_facility_name": "",
+        "destination_state_name": "",
+        "start_time": 521,
+        "end_time": 540,
+        "contract_id": 676,
+        "external_contract_code": "347A2",
+        "contract_trip_id": 12,
+        "trip_number": "2",
+        "cost_segment_value": "A",
+        "frequency_id": 1866,
+        "frequency_value": "K7",
+        "is_peak": 0,
+        "modified_by": 100138,
+        "employee_name": "Ryan Simpson",
+        "last_modified": "2021-03-31 15:40:16",
+        "tableData": { "id": 0 }
+      },
+      { "contract_trip_detail_action_id": 7, "origination_facility_id": 1, "destination_facility_id": 2, "start_time": "0654", "end_time": "0732", "tableData": { "id": 1 } }
+    ]
+  },
+  { "employee_login_id": "139" },
+  { "application": "WebApp" }
 ]
-
-// /FileLoad/Dropdowns/All
-
-// /FileLoad/{document_type_name}

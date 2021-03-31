@@ -1,9 +1,9 @@
 import MaterialTable from "material-table";
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import Select from "react-select";
+import Select, { createFilter } from "react-select";
 import Send from "../../../libs/send";
-
+import MenuList from "../../../libs/OptimizedSelect";
 function UpsertTripDetailModal(props) {
   let { show, closeModal, modalName, tripDetailOptions, tripData, contractDropdowns } = props;
   const [wasModified, setWasModified] = useState(false);
@@ -12,7 +12,7 @@ function UpsertTripDetailModal(props) {
   rowData = rowData.map((content) => Object.fromEntries(content));
 
   let columnData = [
-    { title: "Status", field: "contract_detail_trip_action_id", lookup: createLookup(tripDetailOptions[0].options) },
+    { title: "Status", field: "contract_trip_detail_action_id", lookup: createLookup(tripDetailOptions[0].options) },
     { title: "Origination Facility", field: "origination_facility_id", lookup: createLookup(contractDropdowns[0].options) },
     { title: "Destination Facility", field: "destination_facility_id", lookup: createLookup(contractDropdowns[0].options) },
     { title: "Start Time", field: "start_time", validate: (rowData) => (validateTimeInput(rowData.start_time) ? true : "Invalid Input. Example: 0530") },
@@ -48,6 +48,8 @@ function UpsertTripDetailModal(props) {
     <Select
       placeholder="Origination Facility"
       options={contractDropdowns[0].options}
+      filterOption={createFilter({ ignoreAccents: false })}
+      components={{ MenuList }}
       onChange={(e) => {
         rowProps.onChange(e.value);
       }}
@@ -56,7 +58,9 @@ function UpsertTripDetailModal(props) {
   columnData[2].editComponent = (rowProps) => (
     <Select
       placeholder="Destination Facility"
+      components={{ MenuList }}
       options={contractDropdowns[0].options}
+      filterOption={createFilter({ ignoreAccents: false })}
       onChange={(e) => {
         rowProps.onChange(e.value);
       }}
@@ -65,12 +69,17 @@ function UpsertTripDetailModal(props) {
 
   const [data, setData] = useState(rowData);
 
-  function handleSubmit() {
-    let tripInformation = { contract_id: tripData[0].updatedValue, contract_trip_id: tripData[2].updatedValue, vw_contract_trip_details: data };
+  async function handleSubmit() {
+    let tripInformation = [{ contract_id: tripData[0].updatedValue, contract_trip_id: tripData[2].updatedValue, vw_contract_trip_details: data }];
+    setWasModified(false);
 
-    console.log(rowData);
+    console.log(JSON.stringify(tripInformation));
+
+    Send.post("/Contract/ContractTripDetail", tripInformation).then((res) => {
+      console.log(res);
+    });
   }
-
+  // load unload case onlyhas orgination, n destination
   return (
     <Modal show={show} onHide={closeModal} backdrop={"static"} size="xl">
       <Modal.Header closeButton>
@@ -111,12 +120,12 @@ function UpsertTripDetailModal(props) {
               if (Object.keys(deleteDetail).length > 10) {
                 deleteDetail.is_active = 0;
 
-                // Finish handling an active detail that has been deleted
-                //   // Send.post().then {
-                dataDelete.splice(index, 1);
-                setData([...dataDelete]);
-                resolve();
-                //   // }
+                Send.post("/Contract/ContractTripDetail", deleteDetail).then((res) => {
+                  console.log(res);
+                  dataDelete.splice(index, 1);
+                  setData([...dataDelete]);
+                  resolve();
+                });
               } else {
                 dataDelete.splice(index, 1);
                 setData([...dataDelete]);
