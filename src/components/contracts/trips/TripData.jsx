@@ -48,6 +48,7 @@ function TripData(props) {
             tripTrailers={props.bid ? c[18] : c[20]}
             contractProfile={contractProfile}
             inputRestrictions={contentInputRestrictions}
+            contractDropdowns={props.contentInputRestrictions}
             submitAction={(editTrip) => {
               return props.tripEditSubmitAction(editTrip);
             }}

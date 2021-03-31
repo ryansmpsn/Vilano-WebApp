@@ -37,7 +37,6 @@ function ContractDetails(props) {
       <EmployeeContracts contract={contract} employeeDropdowns={props.allEmployees} />
       <h3>Trips</h3>
       <hr />
-      {console.log(contract)}
       <TripData contractProfile={contract} trips={contract[28].value} setContract={setContract} selectedContractId={contractId} {...props} />
       <h3>Cost Segments</h3>
       <hr />

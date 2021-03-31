@@ -1,107 +1,132 @@
 import MaterialTable from "material-table";
 import React, { useState } from "react";
-import { Modal, FormControl, Button, Form, FormLabel, Row, Col, FormGroup } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import Select from "react-select";
+import Send from "../../../libs/send";
 
 function UpsertTripDetailModal(props) {
-  let { show, closeModal, modalName, tripDetailOptions } = props;
-  const [newTripDetails, setNewTripDetails] = useState([]);
-  const [facilityValue, setFacilityValue] = useState();
-  const [actionValue, setActionValue] = useState();
+  let { show, closeModal, modalName, tripDetailOptions, tripData, contractDropdowns } = props;
+  const [wasModified, setWasModified] = useState(false);
 
-  function createActionLookup() {
-    let actionLookup = {};
-    tripDetailOptions[0].options.forEach((c) => {
-      actionLookup[c.value] = c.label;
-    });
-    return actionLookup;
-  }
+  let rowData = tripData[21].value.map((data) => data.map((content) => [content.columnName, content.value]));
+  rowData = rowData.map((content) => Object.fromEntries(content));
+
   let columnData = [
-    { title: "Facility", field: "facility" },
-    { title: "Time", field: "time", validate: (rowData) => validateTimeInput(rowData.time) },
-    { title: "Action", field: "action", type: "numeric", lookup: createActionLookup() },
+    { title: "Status", field: "contract_detail_trip_action_id", lookup: createLookup(tripDetailOptions[0].options) },
+    { title: "Origination Facility", field: "origination_facility_id", lookup: createLookup(contractDropdowns[0].options) },
+    { title: "Destination Facility", field: "destination_facility_id", lookup: createLookup(contractDropdowns[0].options) },
+    { title: "Start Time", field: "start_time", validate: (rowData) => (validateTimeInput(rowData.start_time) ? true : "Invalid Input. Example: 0530") },
+    { title: "End Time", field: "end_time", validate: (rowData) => (validateTimeInput(rowData.end_time) ? true : "Invalid Input. Example: 0530") },
   ];
-  // Keep for Facility dropdown
-  // columnData[0].editComponent = (rowProps) => (
-  //   <Select
-  
-  //     placeholder="Facility"
-  //     options={tripDetailOptions[0].options}
-  //     value={actionValue}
-  //     onChange={(e) => {
-  //       rowProps.onChange(e.label);
-  //     }}
-  //   />
-  // );
-  columnData[2].editComponent = (rowProps) => (
+
+  function createLookup(options) {
+    let newLookup = {};
+    options.forEach((c) => {
+      newLookup[c.value] = c.label;
+    });
+    return newLookup;
+  }
+
+  function validateTimeInput(e) {
+    const timeRegex = /^([0-3]?[0-9]|2[0-3])[0-5][0-9]$/;
+    if (e) {
+      const valid = e.toString().match(timeRegex);
+      return valid !== null;
+    }
+  }
+
+  columnData[0].editComponent = (rowProps) => (
     <Select
-      placeholder="Action"
+      placeholder="Status"
       options={tripDetailOptions[0].options}
-      value={actionValue}
       onChange={(e) => {
         rowProps.onChange(e.value);
       }}
     />
   );
-  const [data, setData] = useState([
-    { facility: "Facility 1", time: "5:00", action: 6 },
-    { facility: "Facility 2", time: "5:05", action: 7 },
-  ]);
+  columnData[1].editComponent = (rowProps) => (
+    <Select
+      placeholder="Origination Facility"
+      options={contractDropdowns[0].options}
+      onChange={(e) => {
+        rowProps.onChange(e.value);
+      }}
+    />
+  );
+  columnData[2].editComponent = (rowProps) => (
+    <Select
+      placeholder="Destination Facility"
+      options={contractDropdowns[0].options}
+      onChange={(e) => {
+        rowProps.onChange(e.value);
+      }}
+    />
+  );
 
-  // function handleSubmit(e) {
-  //   const form = e.currentTarget;
-  //   if (form.checkValidity() === false) {
-  //     e.preventDefault();
-  //     e.stopPropagation();
-  //   }
-  //   setValidated(true);
+  const [data, setData] = useState(rowData);
 
-  //   if (form.checkValidity() === true) {
-  //     let addNewDetail = newTripDetails;
-  //     addNewDetail.push({ Facility: facilityValue, time: hourValue, action: actionValue.value });
+  function handleSubmit() {
+    let tripInformation = { contract_id: tripData[0].updatedValue, contract_trip_id: tripData[2].updatedValue, vw_contract_trip_details: data };
 
-  //     console.log(addNewDetail);
-  //     setNewTripDetails(addNewDetail);
-  //     e.target.reset();
-  //     setValidated(false);
-  //     setFacilityValue(null);
-  //     setActionValue(null);
-  //     setHourValue(null);
-  //   }
-  // }
-
-  function validateTimeInput(e) {
-    const timeRegex = /^([0-3]?[0-9]|2[0-3]):[0-5][0-9]$/;
-    if (e) {
-      const valid = e.match(timeRegex);
-      return valid !== null;
-    }
+    console.log(rowData);
   }
 
   return (
-    <Modal show={show} onHide={closeModal} backdrop={"static"} size="lg">
+    <Modal show={show} onHide={closeModal} backdrop={"static"} size="xl">
       <Modal.Header closeButton>
         <Modal.Title>{modalName}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <MaterialTable
-          title="Trip Details"
-          columns={columnData}
-          data={data}
-          editable={{
-            onRowAdd: (newData) =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  setData([...data, newData]);
-                  console.log(newData);
-                  resolve();
-                }, 1000);
-              }),
-          }}
-        />
-      </Modal.Body>
+      <MaterialTable
+        title="Trip Details"
+        columns={columnData}
+        data={data}
+        editable={{
+          onRowAdd: (newData) =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                !wasModified && setWasModified(true);
+                setData([...data, newData]);
+
+                resolve();
+              }, 500);
+            }),
+          onRowUpdate: (newData, oldData) =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                !wasModified && setWasModified(true);
+                const dataUpdate = [...data];
+                const index = oldData.tableData.id;
+                dataUpdate[index] = newData;
+                setData([...dataUpdate]);
+
+                resolve();
+              }, 500);
+            }),
+          onRowDelete: (oldData) =>
+            new Promise((resolve, reject) => {
+              const dataDelete = [...data];
+              const index = oldData.tableData.id;
+              let deleteDetail = dataDelete[index];
+
+              if (Object.keys(deleteDetail).length > 10) {
+                deleteDetail.is_active = 0;
+
+                // Finish handling an active detail that has been deleted
+                //   // Send.post().then {
+                dataDelete.splice(index, 1);
+                setData([...dataDelete]);
+                resolve();
+                //   // }
+              } else {
+                dataDelete.splice(index, 1);
+                setData([...dataDelete]);
+                resolve();
+              }
+            }),
+        }}
+      />
       <Modal.Footer>
-        <Button disabled={newTripDetails.length === 0} onClick={() => console.log(newTripDetails)}>
+        <Button disabled={!wasModified} onClick={handleSubmit} variant="outline-primary">
           Save
         </Button>
       </Modal.Footer>

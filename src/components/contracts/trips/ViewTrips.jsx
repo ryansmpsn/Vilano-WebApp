@@ -7,7 +7,7 @@ import { Card, Spinner, Row, Col, OverlayTrigger, Popover, Button } from "react-
 import UpsertTripDetailModal from "./UpsertTripDetailModal";
 
 function ViewTrips(props) {
-  const [tripData] = useState(props.tripData);
+  let { tripData } = props;
   const [showTripModal, setShowTripModal] = useState(false);
   const [showVehicleModal, setShowVehicleModal] = useState(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
@@ -261,7 +261,16 @@ function ViewTrips(props) {
               }}
             />
           )}
-          <UpsertTripDetailModal modalName={`Details for Trip: ${tripData[3].updatedValue}`} show={showDetailsModal} closeModal={closeModal} tripDetailOptions={props.tripDetailOptions} />
+          {props.tripDetailOptions && (
+            <UpsertTripDetailModal
+              modalName={`Details for Trip: ${tripData[3].updatedValue}`}
+              show={showDetailsModal}
+              closeModal={closeModal}
+              tripDetailOptions={props.tripDetailOptions}
+              tripData={tripData}
+              contractDropdowns={props.contractDropdowns}
+            />
+          )}
         </>
       )}
     </Card>
