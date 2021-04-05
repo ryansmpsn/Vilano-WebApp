@@ -1047,6 +1047,7 @@ class CostSegmentData extends Component {
     this.getSelectedContract = this.getSelectedContract.bind(this);
     this.updateRateSheetData = this.updateRateSheetData.bind(this);
     this.setCostSegmentdata = this.setCostSegmentdata.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
   setUnits = (e) => {
     return this.setState({ units: e });
@@ -1162,7 +1163,7 @@ class CostSegmentData extends Component {
       });
     }
     this.setState({ settingData: true });
-    this.setState({ show: true });
+    this.setState({ showModal: true });
   }
   componentWillUnmount() {
     this._isMounted = false;
@@ -1256,7 +1257,7 @@ class CostSegmentData extends Component {
             submitAction={(rateSheet) => {
               return this.costSegmentSubmitAction(rateSheet);
             }}
-            show={this.state.show}
+            show={this.state.showModal}
             closeModal={this.closeModal}
           />
         )}

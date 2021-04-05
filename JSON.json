@@ -1,37 +1,108 @@
 [
-  {
-    "contract_id": 676,
-    "contract_trip_id": 12,
-    "vw_contract_trip_details": [
-      {
-        "contract_trip_detail_id": 8,
-        "is_active": 1,
-        "contract_trip_detail_action_id": 6,
-        "contract_trip_detail_action_value": "Load/Unload/Case",
-        "origination_facility_id": 1,
-        "origination_facility_name": "DMU - PPA",
-        "origination_state_name": "",
-        "destination_facility_id": null,
-        "destination_facility_name": "",
-        "destination_state_name": "",
-        "start_time": 521,
-        "end_time": 540,
-        "contract_id": 676,
-        "external_contract_code": "347A2",
-        "contract_trip_id": 12,
-        "trip_number": "2",
-        "cost_segment_value": "A",
-        "frequency_id": 1866,
-        "frequency_value": "K7",
-        "is_peak": 0,
-        "modified_by": 100138,
-        "employee_name": "Ryan Simpson",
-        "last_modified": "2021-03-31 15:40:16",
-        "tableData": { "id": 0 }
-      },
-      { "contract_trip_detail_action_id": 7, "origination_facility_id": 1, "destination_facility_id": 2, "start_time": "0654", "end_time": "0732", "tableData": { "id": 1 } }
-    ]
-  },
-  { "employee_login_id": "139" },
-  { "application": "WebApp" }
+  [
+    {
+      "contract_id": 676,
+      "contract_trip_id": 12,
+      "vw_contract_trip_details": [
+        {
+          "contract_trip_detail_id": 11,
+          "is_active": 1,
+          "contract_trip_detail_action_id": 6,
+          "contract_trip_detail_action_value": "Load/Unload/Case",
+          "origination_facility_id": 1,
+          "origination_facility_name": "DMU - PPA",
+          "origination_state_name": "",
+          "destination_facility_id": null,
+          "destination_facility_name": "",
+          "destination_state_name": "",
+          "start_time": "521",
+          "end_time": 540,
+          "contract_id": 676,
+          "external_contract_code": "347A2",
+          "contract_trip_id": 12,
+          "trip_number": "2",
+          "cost_segment_value": "A",
+          "frequency_id": 1866,
+          "frequency_value": "K7",
+          "is_peak": 0,
+          "modified_by": 100138,
+          "employee_name": "Ryan Simpson",
+          "last_modified": "2021-04-02 13:57:29",
+          "tableData": { "id": 0 }
+        },
+        {
+          "contract_trip_detail_id": 12,
+          "is_active": 1,
+          "contract_trip_detail_action_id": 7,
+          "contract_trip_detail_action_value": "Drive",
+          "origination_facility_id": 1,
+          "origination_facility_name": "DMU - PPA",
+          "origination_state_name": "",
+          "destination_facility_id": 2,
+          "destination_facility_name": "BAYAMON BRANCH STA",
+          "destination_state_name": "PR",
+          "start_time": 654,
+          "end_time": 732,
+          "contract_id": 676,
+          "external_contract_code": "347A2",
+          "contract_trip_id": 12,
+          "trip_number": "2",
+          "cost_segment_value": "A",
+          "frequency_id": 1866,
+          "frequency_value": "K7",
+          "is_peak": 0,
+          "modified_by": 100138,
+          "employee_name": "Ryan Simpson",
+          "last_modified": "2021-04-01 14:54:14",
+          "tableData": { "id": 1 }
+        }
+      ]
+    }
+  ],
+  [
+    {
+      "contract_id": 676,
+      "contract_trip_id": 12,
+      "vw_contract_trip_details": [
+        {
+          "contract_trip_detail_id": 13,
+          "is_active": 0,
+          "contract_trip_detail_action_id": 6,
+          "contract_trip_detail_action_value": "Load/Unload/Case",
+          "origination_facility_id": 1,
+          "origination_facility_name": "DMU - PPA",
+          "origination_state_name": "",
+          "destination_facility_id": 2,
+          "destination_facility_name": "BAYAMON BRANCH STA",
+          "destination_state_name": "PR",
+          "start_time": 530,
+          "end_time": 530,
+          "contract_id": 676,
+          "external_contract_code": "347A2",
+          "contract_trip_id": 12,
+          "trip_number": "2",
+          "cost_segment_value": "A",
+          "frequency_id": 1866,
+          "frequency_value": "K7",
+          "is_peak": 0,
+          "modified_by": 100138,
+          "employee_name": "Ryan Simpson",
+          "last_modified": "2021-04-01 18:40:39",
+          "tableData": { "id": 2, "editing": "delete" }
+        }
+      ]
+    }
+  ],
+  [
+    {
+      "contract_id": 857,
+      "contract_trip_id": 90,
+      "vw_contract_trip_details": [
+        { "contract_trip_detail_action_id": 6, "origination_facility_id": 1, "start_time": "120", "end_time": "215", "tableData": { "id": 0 } },
+        { "contract_trip_detail_action_id": 7, "origination_facility_id": 1, "destination_facility_id": 24, "start_time": "220", "end_time": "650", "tableData": { "id": 1 } },
+        { "contract_trip_detail_action_id": 6, "origination_facility_id": 24, "destination_facility_id": 216, "start_time": "655", "end_time": "720", "tableData": { "id": 2 } },
+        { "contract_trip_detail_action_id": 7, "origination_facility_id": 216, "destination_facility_id": 2, "start_time": "725", "end_time": "850", "tableData": { "id": 3 } }
+      ]
+    }
+  ]
 ]

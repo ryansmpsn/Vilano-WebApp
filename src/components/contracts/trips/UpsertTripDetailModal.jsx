@@ -26,7 +26,7 @@ function UpsertTripDetailModal(props) {
     });
     return newLookup;
   }
-
+  // end time > 5 minutes from start time
   function validateTimeInput(e) {
     const timeRegex = /^([0-3]?[0-9]|2[0-3])[0-5][0-9]$/;
     if (e) {
@@ -39,8 +39,10 @@ function UpsertTripDetailModal(props) {
     <Select
       placeholder="Status"
       options={tripDetailOptions[0].options}
+      defaultValue={tripDetailOptions[0].options[rowProps.rowData.contract_trip_detail_action_id - 6]}
       onChange={(e) => {
         rowProps.onChange(e.value);
+        console.log(rowProps.rowData);
       }}
     />
   );
@@ -101,26 +103,24 @@ function UpsertTripDetailModal(props) {
             }),
           onRowUpdate: (newData, oldData) =>
             new Promise((resolve, reject) => {
-              setTimeout(() => {
-                !wasModified && setWasModified(true);
-                const dataUpdate = [...data];
-                const index = oldData.tableData.id;
-                dataUpdate[index] = newData;
-                setData([...dataUpdate]);
+              !wasModified && setWasModified(true);
+              const dataUpdate = [...data];
+              const index = oldData.tableData.id;
+              dataUpdate[index] = newData;
+              setData([...dataUpdate]);
 
-                resolve();
-              }, 500);
+              resolve();
             }),
           onRowDelete: (oldData) =>
             new Promise((resolve, reject) => {
               const dataDelete = [...data];
               const index = oldData.tableData.id;
               let deleteDetail = dataDelete[index];
-
               if (Object.keys(deleteDetail).length > 10) {
                 deleteDetail.is_active = 0;
-
-                Send.post("/Contract/ContractTripDetail", deleteDetail).then((res) => {
+                let tripInformation = [{ contract_id: tripData[0].updatedValue, contract_trip_id: tripData[2].updatedValue, vw_contract_trip_details: [deleteDetail] }];
+                console.log(JSON.stringify(tripInformation));
+                Send.post("/Contract/ContractTripDetail", tripInformation).then((res) => {
                   console.log(res);
                   dataDelete.splice(index, 1);
                   setData([...dataDelete]);
