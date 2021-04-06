@@ -44,6 +44,7 @@ function TripData(props) {
             type="Contract"
             index={index}
             tripData={c}
+            bid={props.bid}
             tripVehicles={props.bid ? c[17] : c[19]}
             tripTrailers={props.bid ? c[18] : c[20]}
             contractProfile={contractProfile}

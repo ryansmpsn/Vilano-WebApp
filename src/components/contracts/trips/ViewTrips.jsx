@@ -206,21 +206,22 @@ function ViewTrips(props) {
         {isLoading ? (
           <Spinner animation="border" variant="primary" className="float-right" />
         ) : (
-          <>
-            {sessionStorage.getItem("/contract/trips") >= 3 && (
+          sessionStorage.getItem("/contract/trips") >= 3 && (
+            <>
               <Button onClick={editTrip} className="float-right btn-sm btn-outline-primary">
                 Edit Trip
               </Button>
-            )}
-            {sessionStorage.getItem("/contract/trips") >= 3 && (
+
               <Button onClick={() => openModal("vehicle")} className="float-right btn-sm btn-outline-primary">
                 Edit Vehicles
               </Button>
-            )}
-            <Button onClick={() => openModal("details")} className="float-right btn-sm btn-outline-primary">
-              Trip Details
-            </Button>
-          </>
+              {!props.bid && (
+                <Button onClick={() => openModal("details")} className="float-right btn-sm btn-outline-primary">
+                  Trip Details
+                </Button>
+              )}
+            </>
+          )
         )}
       </Card.Body>
 
@@ -261,7 +262,7 @@ function ViewTrips(props) {
               }}
             />
           )}
-          {props.tripDetailOptions && (
+          {props.tripDetailOptions && !props.bid && (
             <UpsertTripDetailModal
               modalName={`Details for Trip: ${tripData[3].updatedValue}`}
               show={showDetailsModal}
