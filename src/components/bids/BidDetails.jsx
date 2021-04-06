@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import BidCostSegmentData from "./BidCostSegmentData";
-import { useParams } from "react-router";
 import Send from "../../libs/send";
+import { useParams } from "react-router";
 import { Spinner } from "react-bootstrap";
-import ContractCards from "../contracts/ContractCards";
 import TripData from "../contracts/trips/TripData";
+import BidCostSegmentData from "./BidCostSegmentData";
+import ContractCards from "../contracts/ContractCards";
 
 function BidDetails(props) {
   let { bidId } = useParams();
@@ -31,12 +31,12 @@ function BidDetails(props) {
       <h1 className="text-center">{bid[10].value} Details</h1>
       <hr />
       <ContractCards contract={bid} {...props} type="Bid" details />
-
+      {/* 
       <h3>Trips</h3>
       <hr />
       <TripData contractProfile={bid} trips={bid[33].value} setContract={setBid} {...props} bid />
       <h3>Cost Segments</h3>
-      <hr />
+      <hr /> */}
       {/* <BidCostSegmentData details bid={bid} {...props} selectedContractId={bidId} rateSheets={bid[29].value} /> */}
       {/* <h3>Routes</h3>
       <hr />

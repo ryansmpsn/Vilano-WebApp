@@ -14,7 +14,7 @@ export default function Home(props) {
         <Jumbotron>
           <Container className="text-center">
             <h1 variant="h1-responsive">Vilano</h1>
-            <h4 className="text-muted">Alpha V 1.40</h4>
+            <h4 className="text-muted">Alpha V 1.41</h4>
             <h4 className="text-muted">
               <small>Under Development</small>
               {/* {(67543452345).toLocaleString()} */}

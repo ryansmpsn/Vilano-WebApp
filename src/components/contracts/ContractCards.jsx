@@ -22,10 +22,16 @@ function ContractCards(props) {
   const [bidFinalOptions, setBidFinalOptions] = useState(null);
 
   function openModal() {
+    setShowModal(true);
+    window.location.hash = "edit";
+  }
+
+  function openCreateBidModal() {
     Send.get("/Bid/Dropdowns/BidNames/All").then((response) => {
       setBidOptions(response.data);
-      setShowModal(true);
-      window.location.hash = "edit";
+      setShowBidModal(true);
+
+      window.location.hash = "createbid";
     });
   }
 
@@ -48,10 +54,6 @@ function ContractCards(props) {
     setShowModal(false);
   }
 
-  function openBidModal() {
-    setShowBidModal(true);
-    window.location.hash = "createbid";
-  }
   function closeBidModal() {
     window.history.replaceState(null, null, " ");
 
@@ -181,7 +183,7 @@ function ContractCards(props) {
         )}
 
         {props.type === "Contract" && sessionStorage.getItem("/bid") >= 3 && (
-          <Button className="float-right btn-outline-primary" onClick={openBidModal}>
+          <Button className="float-right btn-outline-primary" onClick={openCreateBidModal}>
             Create Bid
           </Button>
         )}

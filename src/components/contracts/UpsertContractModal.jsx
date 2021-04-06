@@ -114,7 +114,8 @@ export default class UpsertContractModal extends React.Component {
             <Row>
               {this.state.editContract.map(
                 (item, index) =>
-                  item.label !== null && (
+                  item.label !== null &&
+                  !Array.isArray(item.value) && (
                     <Col md="6" key={index}>
                       <FormGroup>
                         <FormLabel>
