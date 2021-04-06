@@ -67,11 +67,14 @@ function ContractData(props) {
       <Jumbotron>
         <Row className="justify-content-md-center">
           <Col lg="6">
+            {console.log(document.body)}
             <form onSubmit={handleSearch}>
               <Select
                 autoFocus
                 options={props.selectOptions}
                 isMulti
+                menuPortalTarget={document.body}
+                styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
                 placeholder={"Search for Contracts by ID"}
                 onChange={(x) => {
                   doSetContractSearch(x, "external_contract_code");

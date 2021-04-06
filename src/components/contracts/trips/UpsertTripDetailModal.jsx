@@ -4,8 +4,11 @@ import { Modal, Button } from "react-bootstrap";
 import Select, { createFilter } from "react-select";
 import Send from "../../../libs/send";
 import MenuList from "../../../libs/OptimizedSelect";
+import { useToasts } from "react-toast-notifications";
+
 function UpsertTripDetailModal(props) {
   let { show, closeModal, modalName, tripDetailOptions, tripData, contractDropdowns } = props;
+  const { addToast } = useToasts();
   const [wasModified, setWasModified] = useState(false);
 
   let rowData = tripData[21].value.map((data) => data.map((content) => [content.columnName, content.value]));
@@ -50,6 +53,7 @@ function UpsertTripDetailModal(props) {
     <Select
       placeholder="Origination Facility"
       options={contractDropdowns[0].options}
+      defaultValue={tripDetailOptions[0].options[rowProps.rowData.origination_facility_id]}
       filterOption={createFilter({ ignoreAccents: false })}
       components={{ MenuList }}
       onChange={(e) => {
@@ -62,6 +66,7 @@ function UpsertTripDetailModal(props) {
       placeholder="Destination Facility"
       components={{ MenuList }}
       options={contractDropdowns[0].options}
+      defaultValue={tripDetailOptions[0].options[rowProps.destination_facility_id]}
       filterOption={createFilter({ ignoreAccents: false })}
       onChange={(e) => {
         rowProps.onChange(e.value);
@@ -75,10 +80,12 @@ function UpsertTripDetailModal(props) {
     let tripInformation = [{ contract_id: tripData[0].updatedValue, contract_trip_id: tripData[2].updatedValue, vw_contract_trip_details: data }];
     setWasModified(false);
 
-    console.log(JSON.stringify(tripInformation));
-
     Send.post("/Contract/ContractTripDetail", tripInformation).then((res) => {
-      console.log(res);
+      addToast(`Details for Trip: ${tripData[3].value} on Contract: ${tripData[1].value} saved Successfully.`, {
+        appearance: "success",
+        autoDismiss: true,
+        autoDismissTimeout: 3000,
+      });
     });
   }
   // load unload case onlyhas orgination, n destination
@@ -119,9 +126,15 @@ function UpsertTripDetailModal(props) {
               if (Object.keys(deleteDetail).length > 10) {
                 deleteDetail.is_active = 0;
                 let tripInformation = [{ contract_id: tripData[0].updatedValue, contract_trip_id: tripData[2].updatedValue, vw_contract_trip_details: [deleteDetail] }];
-                console.log(JSON.stringify(tripInformation));
                 Send.post("/Contract/ContractTripDetail", tripInformation).then((res) => {
                   console.log(res);
+
+                  addToast("Detail Removed from Trip.", {
+                    appearance: "success",
+                    autoDismiss: true,
+                    autoDismissTimeout: 3000,
+                  });
+
                   dataDelete.splice(index, 1);
                   setData([...dataDelete]);
                   resolve();

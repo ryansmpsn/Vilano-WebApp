@@ -8,7 +8,6 @@ class Routing extends Component {
     return (
       <Routes>
         <Route path="dashboard" element={<ContractData {...this.props} />} />
-
         <Route path="details" element={<ContractDetails {...this.props} />} />
         <Route path="details/:contractId" element={<ContractDetails {...this.props} />} />
 
