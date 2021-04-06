@@ -15,32 +15,34 @@ function App() {
   const [appData, setAppData] = useState(null);
 
   useEffect(() => {
-    const onLogin = async () => {
-      const requestOne = Send.get("/Report/Roster");
-      const requestTwo = Send.get("/Contract/Ids");
-      const requestThree = Send.get("/Bid/BidIDs");
+    // const onLogin = async () => {
+    //   const requestOne = Send.get("/Report/Roster");
+    //   const requestTwo = Send.get("/Contract/Ids");
+    //   const requestThree = Send.get("/Bid/BidIDs");
 
-      axios
-        .all([requestOne, requestTwo, requestThree])
-        .then(
-          axios.spread((...responses) => {
-            const responseData = { drivers: responses[0].data, contracts: responses[1].data, bids: responses[2].data[0].options };
-            setAppData(responseData);
-          })
-        )
-        .catch((errors) => {
-          // react on errors
-          console.log(errors);
-        });
-    };
+    //   // [requestOne, requestTwo, requestThree]
+    //   axios
+    //     .all()
+    //     .then(
+    //       axios.spread((...responses) => {
+    //         const responseData = { drivers: responses[0].data, contracts: responses[1].data, bids: responses[2].data[0].options };
+    //         setAppData(responseData);
+    //       })
+    //     )
+    //     .catch((errors) => {
+    //       // react on errors
+    //       console.log(errors);
+    //     });
+    // };
     if (!isAuthenticated) {
       sessionStorage.getItem("SessionID") !== null &&
         Send.get("/Loggedin").then((res) => {
           setIsAuthenticated(true);
         });
-    } else {
-      onLogin();
     }
+    //  else {
+    //   onLogin();
+    // }
   }, [isAuthenticated]);
 
   const setSessionData = (data) => {
