@@ -1065,7 +1065,7 @@ class CostSegmentData extends Component {
   costSegmentSubmitAction = (rateSheet) => {
     this.setState({ isLoading: true });
 
-    return Send.post("/Contract/ContractRateSheet", rateSheet, this.props.appProps).then((res) => {
+    return Send.post(`/${this.props.type}/${this.props.type}RateSheet`, rateSheet, this.props.appProps).then((res) => {
       this.setState({ contractCostSegments: res.data[0].pop() });
       this.setState({ contractData: res.data[0] });
       this.setState({ isLoading: false });
@@ -1077,11 +1077,11 @@ class CostSegmentData extends Component {
     if (this.props.contract !== null) {
       this.setState({ isLoading: true });
 
-      Send.get("/Contract/Dropdowns/CostSegment/All", this.props.appProps).then((res) => {
+      Send.get(`/${this.props.type}/Dropdowns/CostSegment/All`, this.props.appProps).then((res) => {
         this.setState({ costSegmentDropdowns: res.data[0].options });
       });
 
-      Send.get("/Contract/" + this.props.selectedContractId + "/RateSheet", this.props.appProps).then((res) => {
+      Send.get(`/${this.props.type}/` + this.props.selectedContractId + "/RateSheet", this.props.appProps).then((res) => {
         this.setState({ contractCostSegments: res.data[0].pop() });
         this.setState({ contractData: res.data[0] });
         this.setState({ isLoading: false });
@@ -1092,14 +1092,14 @@ class CostSegmentData extends Component {
   getSelectedContract() {
     this.setState({ isLoading: true });
 
-    this.props.getTrips("/Contract/" + this.state.contractSearch);
+    this.props.getTrips(`/${this.props.type}/` + this.state.contractSearch);
 
-    Send.get("/Contract/Dropdowns/CostSegment/All", this.props.appProps).then((res) => {
+    Send.get(`/${this.props.type}/Dropdowns/CostSegment/All`, this.props.appProps).then((res) => {
       this.setState({ costSegmentDropdowns: res.data[0].options });
     });
     this.props.setSelectedContractId(this.state.contractSearch);
 
-    Send.get("/Contract/" + this.state.contractSearch + "/RateSheet", this.props.appProps).then((res) => {
+    Send.get(`/${this.props.type}/` + this.state.contractSearch + "/RateSheet", this.props.appProps).then((res) => {
       this.setState({ contractCostSegments: res.data[0].pop() });
       this.setState({ contractData: res.data[0] });
       this.setState({ isLoading: false });
@@ -1186,7 +1186,7 @@ class CostSegmentData extends Component {
               <Col lg="5">
                 <Select
                   options={this.props.selectOptions}
-                  placeholder={"Select a Contract to View Rate Information"}
+                  placeholder={`Select a /${this.props.type}/ to View Rate Information`}
                   onChange={(x) => {
                     this.setState({ rateSheetData: null });
                     this.setState({ costSegmentDropdowns: null });
@@ -1236,12 +1236,12 @@ class CostSegmentData extends Component {
             </Col>
           </Row>
         </Container>
-        {this.props.rateSheets > 0 ? <h5>No cost segments are associated with this contract.</h5> : <ViewRateSheets rateSheets={this.props.rateSheets} />}
+        {this.props.rateSheets.length >= 0 ? <h5>No cost segments are associated with this contract.</h5> : <ViewRateSheets rateSheets={this.props.rateSheets} />}
 
         {this.state.settingData && (
           <UpsertCostSegment
             props={this.props}
-            type={"Contract"}
+            type={this.props.type}
             contractData={this.state.contractData}
             units={this.state.units}
             unitCost={this.state.unitCost}

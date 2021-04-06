@@ -40,7 +40,7 @@ function ContractDetails(props) {
       <TripData contractProfile={contract} trips={contract[28].value} setContract={setContract} selectedContractId={contractId} {...props} />
       <h3>Cost Segments</h3>
       <hr />
-      <CostSegmentData details contract={contract} {...props} selectedContractId={contractId} rateSheets={contract[29].value} />
+      <CostSegmentData details contract={contract} type="Contract" {...props} selectedContractId={contractId} rateSheets={contract[29].value} />
       {/* <h3>Routes</h3>
       <hr />
       <ViewRoutes {...props} /> */}

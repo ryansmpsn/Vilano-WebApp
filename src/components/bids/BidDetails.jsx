@@ -3,8 +3,8 @@ import Send from "../../libs/send";
 import { useParams } from "react-router";
 import { Spinner } from "react-bootstrap";
 import TripData from "../contracts/trips/TripData";
-import BidCostSegmentData from "./BidCostSegmentData";
 import ContractCards from "../contracts/ContractCards";
+import CostSegmentData from "../contracts/costSegments/CostSegmentData";
 
 function BidDetails(props) {
   let { bidId } = useParams();
@@ -37,7 +37,7 @@ function BidDetails(props) {
       <TripData contractProfile={bid} trips={bid[33].value} setContract={setBid} {...props} bid />
       <h3>Cost Segments</h3>
       <hr />
-      {/* <BidCostSegmentData details bid={bid} {...props} selectedContractId={bidId} rateSheets={bid[29].value} /> */}
+      <CostSegmentData details type="Bid" bid={bid} {...props} selectedContractId={bidId} rateSheets={bid[34].value} />
       {/* <h3>Routes</h3>
       <hr />
       <ViewRoutes {...props} /> */}
