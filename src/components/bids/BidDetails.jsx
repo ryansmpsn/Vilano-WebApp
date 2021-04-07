@@ -14,12 +14,13 @@ function BidDetails(props) {
   useEffect(() => {
     if (bidId) {
       Send.get("/Bid/" + bidId).then((res) => {
+        console.log(res);
         setBid(res.data[0]);
         console.log(res.data[0]);
         setIsLoading(false);
       });
     } else {
-      // do something
+      // do something redirect to contract dashboard
       console.log("No ID");
     }
   }, [bidId]);
