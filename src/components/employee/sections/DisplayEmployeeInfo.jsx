@@ -52,7 +52,7 @@ function DisplayEmployeeInfo(props) {
       <Container fluid className="mt-3">
         <Row>
           <Col lg="8">
-            <Card className="cascading-admin-card">
+            <Card className="cascading-admin-card" style={{ minHeight: "20em" }}>
               <div className="admin-up" style={{ marginRight: "10%" }}>
                 <Button className="text-center blue-gradient" block>
                   Profile
@@ -174,7 +174,7 @@ function DisplayEmployeeInfo(props) {
                 <Col lg="6" key={index + "employeeData"} className="mb-2">
                   <Card>
                     <Card.Header>
-                      <Button block className="winter-neva-gradient  text-center">
+                      <Button block className="blue-gradient  text-center">
                         {data.label}
                       </Button>
                     </Card.Header>

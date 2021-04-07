@@ -67,8 +67,8 @@ function BidData(props) {
   }
 
   return (
-    <Jumbotron>
-      <Container className="container-sm pl-5 pr-5 pt-2">
+    <>
+      <Jumbotron>
         <Row className="justify-content-md-center">
           <Col lg="6">
             <form onSubmit={handleSearch}>
@@ -76,6 +76,8 @@ function BidData(props) {
                 autoFocus
                 options={props.selectOptions}
                 isMulti
+                menuPortalTarget={document.body}
+                styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
                 placeholder={"Search for Bids by ID"}
                 onChange={(x) => {
                   doSetBidSearch(x, "bid_name");
@@ -103,8 +105,7 @@ function BidData(props) {
             </form>
           </Col>
         </Row>
-      </Container>
-      <hr />
+      </Jumbotron>
       {tableView ? (
         props.allBids === null ? (
           <Spinner animation="border" variant="primary" />
@@ -133,7 +134,7 @@ function BidData(props) {
                     getTrips={props.getTrips}
                     setSelectedBid={props.setSelectedBid}
                     setSelectedBidId={props.setSelectedBidId}
-                    Contract={c}
+                    contract={c}
                     inputRestrictions={props.contentInputRestrictions}
                     submitAction={(editBid) => {
                       return props.bidEditSubmitAction(editBid);
@@ -281,7 +282,7 @@ function BidData(props) {
           }}
         />
       )}
-    </Jumbotron>
+    </>
   );
 }
 

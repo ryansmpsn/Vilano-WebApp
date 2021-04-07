@@ -9,7 +9,7 @@ class Routing extends Component {
       <Routes>
         <Route path="dashboard" element={<ContractData {...this.props} />} />
         <Route path="details" element={<ContractDetails {...this.props} />} />
-        <Route path="details/:contractId" element={<ContractDetails {...this.props} />} />
+        <Route path="details/:contractId" element={<ContractDetails {...this.props} type="Contract" />} />
 
         <Navigate exact from="/contracts" to="/contracts/dashboard" />
         <Navigate from="/contracts/details" to="/contracts/details/contract" />

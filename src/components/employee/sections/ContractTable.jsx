@@ -71,7 +71,7 @@ function ContractTable(props) {
     <MaterialTable
       columns={columnData}
       data={rows}
-      title="Linked Contracts"
+      title="Linked Employees"
       editable={{
         onRowDelete: (oldData) =>
           new Promise((resolve, reject) => {

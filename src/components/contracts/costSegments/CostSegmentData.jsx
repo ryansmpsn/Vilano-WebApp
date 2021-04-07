@@ -1236,7 +1236,7 @@ class CostSegmentData extends Component {
             </Col>
           </Row>
         </Container>
-        {this.props.rateSheets.length >= 0 ? <h5>No cost segments are associated with this contract.</h5> : <ViewRateSheets rateSheets={this.props.rateSheets} />}
+        {this.props.rateSheets.length === 0 ? <h5>No cost segments are associated with this contract.</h5> : <ViewRateSheets rateSheets={this.props.rateSheets} />}
 
         {this.state.settingData && (
           <UpsertCostSegment

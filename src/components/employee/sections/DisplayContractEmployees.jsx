@@ -61,7 +61,7 @@ function DisplayContractEmployee(props) {
                     <FormCheck
                       key={"employeeContent" + arrayIndex}
                       id={content.columnName}
-                      label={<Card.Text className="m-0">{content.label}</Card.Text>}
+                      label={<Card.Text>{content.label}</Card.Text>}
                       type="checkbox"
                       onChange={() => {
                         var object = [...contractEmployees];
@@ -72,7 +72,7 @@ function DisplayContractEmployee(props) {
                       disabled={props.contracts ? !employee[2].updatedValue : !employee[9].updatedValue}
                     />
                   )) || (
-                    <Card.Text key={"employeeContent" + arrayIndex}>
+                    <Card.Text key={"employeeContent" + arrayIndex} className="pb-3">
                       {content.label}: {content.updatedValue}
                     </Card.Text>
                   ))
@@ -91,7 +91,6 @@ function DisplayContractEmployee(props) {
                   edit
                 </Button>
               ) : (
-                // TODO add remove Button to set active to false
                 <Button className="btn btn-sm float-right" variant="outline-danger" onClick={() => props.removeEmployee(index)} disabled={props.contracts ? !employee[2].updatedValue : !employee[9].updatedValue}>
                   remove
                 </Button>

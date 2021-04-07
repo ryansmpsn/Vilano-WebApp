@@ -12,7 +12,7 @@ function TripData(props) {
 
   function addTrip() {
     setIsLoading(true);
-    props.bid
+    props.type === "Bid"
       ? Send.get("/Bid/Dropdowns/BidTrip/Cached", props).then((res) => {
           setContentInputRestrictions(res.data);
           setIsLoading(false);
@@ -37,6 +37,15 @@ function TripData(props) {
 
   return (
     <>
+      <Row>
+        <Col>
+          {sessionStorage.getItem("/contract/trips") >= 3 && (
+            <Button variant="outline-primary" className="float-right" onClick={addTrip}>
+              Add Trip
+            </Button>
+          )}
+        </Col>
+      </Row>
       {trips.length > 0 ? (
         trips.map((c, index) => (
           <ViewTrips
@@ -44,9 +53,9 @@ function TripData(props) {
             type="Contract"
             index={index}
             tripData={c}
-            bid={props.bid}
-            tripVehicles={props.bid ? c[17] : c[19]}
-            tripTrailers={props.bid ? c[18] : c[20]}
+            bid={props.type === "Bid"}
+            tripVehicles={props.type === "Bid" ? c[17] : c[19]}
+            tripTrailers={props.type === "Bid" ? c[18] : c[20]}
             contractProfile={contractProfile}
             inputRestrictions={contentInputRestrictions}
             contractDropdowns={props.contentInputRestrictions}
@@ -61,15 +70,6 @@ function TripData(props) {
       ) : (
         <h5>No trips are associated with this contract.</h5>
       )}
-      <Row>
-        <Col>
-          {sessionStorage.getItem("/contract/trips") >= 3 && (
-            <Button variant="outline-primary" className="float-right" onClick={addTrip}>
-              Add Trip
-            </Button>
-          )}
-        </Col>
-      </Row>
       {!isLoading && (
         <UpsertTripModal
           modalName={"Create New Trip"}
@@ -83,7 +83,7 @@ function TripData(props) {
             return props.tripEditSubmitAction(editTrip);
           }}
           trip={
-            props.bid
+            props.type === "Bid"
               ? [
                   {
                     columnName: "contract_bid_id",

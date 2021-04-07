@@ -45,7 +45,6 @@ function UpsertTripDetailModal(props) {
       defaultValue={tripDetailOptions[0].options[rowProps.rowData.contract_trip_detail_action_id - 6]}
       onChange={(e) => {
         rowProps.onChange(e.value);
-        console.log(rowProps.rowData);
       }}
     />
   );
@@ -53,7 +52,7 @@ function UpsertTripDetailModal(props) {
     <Select
       placeholder="Origination Facility"
       options={contractDropdowns[0].options}
-      defaultValue={tripDetailOptions[0].options[rowProps.rowData.origination_facility_id]}
+      defaultValue={contractDropdowns[0].options[rowProps.rowData.origination_facility_id - 1]}
       filterOption={createFilter({ ignoreAccents: false })}
       components={{ MenuList }}
       onChange={(e) => {
@@ -66,7 +65,7 @@ function UpsertTripDetailModal(props) {
       placeholder="Destination Facility"
       components={{ MenuList }}
       options={contractDropdowns[0].options}
-      defaultValue={tripDetailOptions[0].options[rowProps.destination_facility_id]}
+      defaultValue={contractDropdowns[0].options[rowProps.destination_facility_id - 1]}
       filterOption={createFilter({ ignoreAccents: false })}
       onChange={(e) => {
         rowProps.onChange(e.value);
@@ -76,6 +75,7 @@ function UpsertTripDetailModal(props) {
 
   const [data, setData] = useState(rowData);
 
+  // Add Trip Detail Code stringified version of hte JSON
   async function handleSubmit() {
     let tripInformation = [{ contract_id: tripData[0].updatedValue, contract_trip_id: tripData[2].updatedValue, vw_contract_trip_details: data }];
     setWasModified(false);

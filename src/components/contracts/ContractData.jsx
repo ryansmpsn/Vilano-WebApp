@@ -67,7 +67,6 @@ function ContractData(props) {
       <Jumbotron>
         <Row className="justify-content-md-center">
           <Col lg="6">
-            {console.log(document.body)}
             <form onSubmit={handleSearch}>
               <Select
                 autoFocus

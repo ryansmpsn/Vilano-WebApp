@@ -71,8 +71,6 @@ class ContractDashboard extends Component {
           const responseFour = responses[3];
           const responseFive = responses[4];
 
-          console.log(responseTwo);
-
           let contractData = responseOne.data;
           let getSelectOptions = [];
           contractData.map((item, index) => {
