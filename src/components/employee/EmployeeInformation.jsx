@@ -143,7 +143,6 @@ function EmployeeInformation(props) {
           </Col>
         </Row>
         <Row className="justify-content-center">
-          {console.log(selectedContracts)}
           <Button className="btn btn-sm " variant="outline-primary" onClick={() => saveContractToEmployee()} disabled={isLoading || employeeData === null || selectedContracts === null}>
             save
           </Button>

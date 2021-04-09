@@ -74,6 +74,7 @@ function App() {
           }}
         >
           <Navigation isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+          {console.log("Hello")}
           <ToastProvider autoDismiss autoDismissTimeout={6000} placement="bottom-right" components={{ Toast: Notification }}>
             <main id="content">
               <Routing isAuthenticated={isAuthenticated} handleLogout={handleLogout} appData={appData} />

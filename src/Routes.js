@@ -12,6 +12,7 @@ import NotFoundPage from "./components/pages/NotFoundPage";
 import ResourcesPage from "./components/pages/ResourcesPage";
 import AxiosTestPage from "./components/pages/AxiosTestPage";
 import ResetPassword from "./components/pages/ResetPassword";
+import AdminDashboard from "./components/admin/AdminDashboard";
 import ContractDashboard from "./components/contracts/ContractDashboard";
 import EmployeeDashboard from "./components/employee/EmployeeDashboard";
 
@@ -36,6 +37,7 @@ class Routing extends React.Component {
             <PrivateRoute path="bids/*" element={<BidDashboard {...this.props} />} />
             <PrivateRoute path="profile" element={<ProfilePage {...this.props} />} />
             <PrivateRoute path="employee/*" element={<EmployeeDashboard {...this.props} />} />
+            <PrivateRoute path="administration/*" element={<AdminDashboard {...this.props} />} />
           </>
         )}
         {/* Catch all unmatched routes */}

@@ -1,6 +1,5 @@
 import React from "react";
-import { Jumbotron, Container, Row, Col, Card, ListGroup, ListGroupItem, ProgressBar, Spinner, Badge } from "react-bootstrap";
-import { Bar, Pie } from "react-chartjs-2";
+import { Jumbotron, Container, Row, Col, Card, ListGroup, ListGroupItem, Spinner, Badge } from "react-bootstrap";
 import CountUp from "react-countup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCity } from "@fortawesome/free-solid-svg-icons";
@@ -14,7 +13,7 @@ export default function Home(props) {
         <Jumbotron>
           <Container className="text-center">
             <h1 variant="h1-responsive">Vilano</h1>
-            <h4 className="text-muted">Alpha V 1.41</h4>
+            <h4 className="text-muted">Alpha V 1.42</h4>
             <h4 className="text-muted">
               <small>Under Development</small>
               {/* {(67543452345).toLocaleString()} */}

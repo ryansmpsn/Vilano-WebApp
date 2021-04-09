@@ -37,11 +37,14 @@ function SideNavAuth(props) {
         </NavLink>
       )}
 
-      {/* 
-      admin section delayed
-
       {sessionStorage.getItem("/admin") >= 2 && (
-      )} */}
+        <NavLink to="/administration" activeClassName="activeClass">
+          <ListGroupItem style={{ borderWidth: "0 0 1px" }} onClick={() => handleMenuToggle()}>
+            <div className="fas fa-shield-alt mr-3" />
+            Administration
+          </ListGroupItem>
+        </NavLink>
+      )}
 
       {sessionStorage.getItem("/axios") >= 2 && (
         <NavLink to="/axios" activeClassName="activeClass">
