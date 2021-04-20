@@ -15,34 +15,32 @@ function App() {
   const [appData, setAppData] = useState(null);
 
   useEffect(() => {
-    // const onLogin = async () => {
-    //   const requestOne = Send.get("/Report/Roster");
-    //   const requestTwo = Send.get("/Contract/Ids");
-    //   const requestThree = Send.get("/Bid/BidIDs");
+    const onLogin = async () => {
+      const requestOne = Send.get("/Report/Roster");
+      const requestTwo = Send.get("/Contract/Ids");
+      const requestThree = Send.get("/Bid/BidIDs");
 
-    //   // [requestOne, requestTwo, requestThree]
-    //   axios
-    //     .all()
-    //     .then(
-    //       axios.spread((...responses) => {
-    //         const responseData = { drivers: responses[0].data, contracts: responses[1].data, bids: responses[2].data[0].options };
-    //         setAppData(responseData);
-    //       })
-    //     )
-    //     .catch((errors) => {
-    //       // react on errors
-    //       console.log(errors);
-    //     });
-    // };
+      axios
+        .all([requestOne, requestTwo, requestThree])
+        .then(
+          axios.spread((...responses) => {
+            const responseData = { drivers: responses[0].data, contracts: responses[1].data, bids: responses[2].data[0].options };
+            setAppData(responseData);
+          })
+        )
+        .catch((errors) => {
+          // react on errors
+          console.log(errors);
+        });
+    };
     if (!isAuthenticated) {
       sessionStorage.getItem("SessionID") !== null &&
         Send.get("/Loggedin").then((res) => {
           setIsAuthenticated(true);
         });
+    } else {
+      onLogin();
     }
-    //  else {
-    //   onLogin();
-    // }
   }, [isAuthenticated]);
 
   const setSessionData = (data) => {
@@ -74,7 +72,6 @@ function App() {
           }}
         >
           <Navigation isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-          {console.log("Hello")}
           <ToastProvider autoDismiss autoDismissTimeout={6000} placement="bottom-right" components={{ Toast: Notification }}>
             <main id="content">
               <Routing isAuthenticated={isAuthenticated} handleLogout={handleLogout} appData={appData} />

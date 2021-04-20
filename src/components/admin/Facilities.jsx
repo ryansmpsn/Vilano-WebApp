@@ -30,6 +30,9 @@ function Facilities(props) {
         setSelectOptions(res.data);
         console.log(res.data);
       });
+      Send.get("/Facility/25").then((res) => {
+        console.log(res);
+      });
     };
     onLoad();
   }, []);
@@ -114,6 +117,7 @@ function Facilities(props) {
               }, 1000);
             }),
           onRowDelete: (oldData) =>
+            // set is active to null
             new Promise((resolve, reject) => {
               setTimeout(() => {
                 const dataDelete = [...data];

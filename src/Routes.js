@@ -31,15 +31,13 @@ class Routing extends React.Component {
         <PrivateRoute path="axios" element={<AxiosTestPage {...this.props} />} />
 
         {/* Seems redundant to check if is authenticated here, but it prevents update during an existing state transision. */}
-        {this.props.isAuthenticated && (
-          <>
-            <PrivateRoute path="contracts/*" element={<ContractDashboard {...this.props} />} />
-            <PrivateRoute path="bids/*" element={<BidDashboard {...this.props} />} />
-            <PrivateRoute path="profile" element={<ProfilePage {...this.props} />} />
-            <PrivateRoute path="employee/*" element={<EmployeeDashboard {...this.props} />} />
-            <PrivateRoute path="administration/*" element={<AdminDashboard {...this.props} />} />
-          </>
-        )}
+
+        <PrivateRoute path="contracts/*" element={<ContractDashboard {...this.props} />} />
+        <PrivateRoute path="bids/*" element={<BidDashboard {...this.props} />} />
+        <PrivateRoute path="profile" element={<ProfilePage {...this.props} />} />
+        <PrivateRoute path="employee/*" element={<EmployeeDashboard {...this.props} />} />
+        <PrivateRoute path="administration/*" element={<AdminDashboard {...this.props} />} />
+
         {/* Catch all unmatched routes */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

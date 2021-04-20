@@ -70,7 +70,7 @@ function EmployeeDashboard(props) {
                   <ListGroupItem>
                     Active Drivers
                     <Badge variant="primary" pill className="float-right">
-                      <CountUp start={0} end={props.appData ? props.appData.drivers.length : 0} duration={5} />
+                      <CountUp start={0} end={props.addData ? props.addData.drivers.length : 0} duration={5} />
                     </Badge>
                   </ListGroupItem>
                 </ListGroup>
@@ -81,6 +81,7 @@ function EmployeeDashboard(props) {
             Employee Management
           </h2>
         </Card.Header>
+        {props.appData && console.log(props.appData.drivers.length)}
       </Card>
       <Nav justify variant="tabs" defaultActiveKey="employee" className="pb-2 w-50 mx-auto my-3 ">
         <NavItem>
@@ -104,7 +105,7 @@ function EmployeeDashboard(props) {
           <Route path="assignment" element={<EmployeeContracts contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
           <Route path="drivers" element={<EmployeeDrivers drivers={props.appData.drivers} />} />
           <Route path=":employeeId" element={<EmployeeInformation contractIds={contractIds} employeeDropdowns={employeeDropdowns} />} />
-          <Navigate from="/employee" to="/employee/drivers" />
+          <Navigate from="/employee" to="/employee/employee" />
         </Routes>
       )}
     </>

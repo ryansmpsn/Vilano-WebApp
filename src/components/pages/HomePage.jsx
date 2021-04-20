@@ -1,11 +1,12 @@
 import React from "react";
 import { Jumbotron, Container, Row, Col, Card, ListGroup, ListGroupItem, Spinner, Badge } from "react-bootstrap";
 import CountUp from "react-countup";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCity } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router";
+import ContractAnalytics from "../contracts/ContractAnalytics";
 
 export default function Home(props) {
   let { appData } = props;
+  let navigate = useNavigate();
 
   return (
     <Row>
@@ -21,38 +22,47 @@ export default function Home(props) {
           </Container>
         </Jumbotron>
 
-        {false &&
-          (props.appData ? (
+        {props.appData ? (
+          <>
             <Row>
               <Col md="4">
                 <Card className="mb-4">
                   <Card.Header>Application Activity</Card.Header>
                   <Card.Body>
                     <ListGroup className="list-group-flush">
-                      <ListGroupItem>
-                        Total Locations
-                        <Badge color="default-color-dark" pill className="float-right">
-                          <CountUp start={0} end={72} duration={5} />
+                      {/* <ListGroupItem>
+                      Total Locations
+                      <Badge variant="default" pill className="float-right">
+                        <CountUp start={0} end={72} duration={5} />
 
-                          <FontAwesomeIcon icon={faCity} className="ml-1" />
-                        </Badge>
-                      </ListGroupItem>
-                      <ListGroupItem>
+                        <FontAwesomeIcon icon={faCity} className="ml-1" />
+                      </Badge>
+                    </ListGroupItem> */}
+                      <ListGroupItem action onClick={() => navigate("/employees")}>
                         Drivers
-                        <Badge color="danger-color" pill className="float-right">
+                        <Badge variant="danger" pill className="float-right">
                           <CountUp start={0} end={appData.drivers.length} duration={3} />
+                          <div className="fa">
+                            <div className="fas fa-user-friends ml-1" />
+                          </div>
                         </Badge>
                       </ListGroupItem>
-                      <ListGroupItem>
+                      <ListGroupItem action onClick={() => navigate("/contracts")}>
                         Contracts
-                        <Badge color="success-color" pill className="float-right">
+                        <Badge variant="success" pill className="float-right">
                           <CountUp start={0} end={appData.contracts.length} duration={3} />
+                          <div className="fa">
+                            <div className="fas fa-file-contract ml-1" />
+                          </div>
                         </Badge>
                       </ListGroupItem>
-                      <ListGroupItem>
+                      <ListGroupItem action onClick={() => navigate("/bids")}>
                         Bids
-                        <Badge color="primary-color" pill className="float-right">
+                        <Badge variant="primary" pill className="float-right">
                           <CountUp start={0} end={appData.bids.length} duration={3} />
+                          <div className="fa">
+                            <div className="fas fa-hand-holding-usd ml-1" />
+                          </div>
                         </Badge>
                       </ListGroupItem>
                     </ListGroup>
@@ -60,9 +70,11 @@ export default function Home(props) {
                 </Card>
               </Col>
             </Row>
-          ) : (
-            <Spinner animation="border" variant="primary" />
-          ))}
+            <ContractAnalytics />
+          </>
+        ) : (
+          <Spinner animation="border" variant="primary" />
+        )}
       </Col>
     </Row>
   );
