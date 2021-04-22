@@ -1,0 +1,35 @@
+[
+  {
+    "contract_id": 857,
+    "contract_trip_id": 89,
+    "vw_contract_trip_details": [
+      {
+        "contract_trip_detail_id": 14,
+        "is_active": 1,
+        "contract_trip_detail_action_id": 6,
+        "contract_trip_detail_action_value": "Load/Unload/Case",
+        "origination_facility_id": 1,
+        "origination_facility_name": "DMU - PPA",
+        "origination_state_name": "",
+        "destination_facility_id": null,
+        "destination_facility_name": "",
+        "destination_state_name": "",
+        "start_time": 123,
+        "end_time": 125,
+        "contract_id": 857,
+        "external_contract_code": "RyanTest",
+        "contract_trip_id": 89,
+        "trip_number": "1",
+        "cost_segment_value": "A",
+        "frequency_id": 995,
+        "frequency_value": "123X",
+        "is_peak": 0,
+        "modified_by": 100138,
+        "employee_name": "Ryan Simpson",
+        "last_modified": "2021-04-06 22:48:41",
+        "tableData": { "id": 0 }
+      },
+      { "contract_trip_detail_action_id": 6, "origination_facility_id": 2, "start_time": "1523", "end_time": "0544", "tableData": { "id": 1 } }
+    ]
+  }
+]
