@@ -37,6 +37,7 @@ function NavBarAuth(props) {
           </IconButton>
         </div>
       </OverlayTrigger>
+
       {sessionStorage.getItem("/profile") >= 3 && (
         <NavLink to="/profile" className="mr-2">
           <Button variant="outline-dark">
@@ -45,6 +46,7 @@ function NavBarAuth(props) {
           </Button>
         </NavLink>
       )}
+
       <NavLink onClick={logOut} to="/">
         <Button variant="outline-dark">
           Logout

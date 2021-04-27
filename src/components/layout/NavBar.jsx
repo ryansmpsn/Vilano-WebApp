@@ -42,7 +42,7 @@ function NavBar(props) {
 
       <Navbar.Toggle onClick={() => setCollapse(!collapse)} />
       <Navbar.Collapse>
-        <Nav className="ml-auto">
+        <Nav className="ml-auto float-right flex-row">
           <NavBarAuth />
         </Nav>
       </Navbar.Collapse>
