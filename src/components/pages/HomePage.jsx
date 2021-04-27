@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import ContractAnalytics from "../contracts/ContractAnalytics";
 
 export default function Home(props) {
-  let { appData } = props;
+  let { appData, isAuthenticated } = props;
   let navigate = useNavigate();
 
   return (
@@ -21,16 +21,16 @@ export default function Home(props) {
             </h4>
           </Container>
         </Jumbotron>
-
-        {props.appData ? (
-          <>
-            <Row>
-              <Col md="4">
-                <Card className="mb-4">
-                  <Card.Header>Application Activity</Card.Header>
-                  <Card.Body>
-                    <ListGroup className="list-group-flush">
-                      {/* <ListGroupItem>
+        {isAuthenticated &&
+          (appData ? (
+            <>
+              <Row>
+                <Col md="4">
+                  <Card className="mb-4">
+                    <Card.Header>Application Activity</Card.Header>
+                    <Card.Body>
+                      <ListGroup className="list-group-flush">
+                        {/* <ListGroupItem>
                       Total Locations
                       <Badge variant="default" pill className="float-right">
                         <CountUp start={0} end={72} duration={5} />
@@ -38,43 +38,43 @@ export default function Home(props) {
                         <FontAwesomeIcon icon={faCity} className="ml-1" />
                       </Badge>
                     </ListGroupItem> */}
-                      <ListGroupItem action onClick={() => navigate("/employees")}>
-                        Drivers
-                        <Badge variant="danger" pill className="float-right">
-                          <CountUp start={0} end={appData.drivers.length} duration={3} />
-                          <div className="fa">
-                            <div className="fas fa-user-friends ml-1" />
-                          </div>
-                        </Badge>
-                      </ListGroupItem>
-                      <ListGroupItem action onClick={() => navigate("/contracts")}>
-                        Contracts
-                        <Badge variant="success" pill className="float-right">
-                          <CountUp start={0} end={appData.contracts.length} duration={3} />
-                          <div className="fa">
-                            <div className="fas fa-file-contract ml-1" />
-                          </div>
-                        </Badge>
-                      </ListGroupItem>
-                      <ListGroupItem action onClick={() => navigate("/bids")}>
-                        Bids
-                        <Badge variant="primary" pill className="float-right">
-                          <CountUp start={0} end={appData.bids.length} duration={3} />
-                          <div className="fa">
-                            <div className="fas fa-hand-holding-usd ml-1" />
-                          </div>
-                        </Badge>
-                      </ListGroupItem>
-                    </ListGroup>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
-            <ContractAnalytics />
-          </>
-        ) : (
-          <Spinner animation="border" variant="primary" />
-        )}
+                        <ListGroupItem action onClick={() => navigate("/employees")}>
+                          Drivers
+                          <Badge variant="danger" pill className="float-right">
+                            <CountUp start={0} end={appData.drivers.length} duration={3} />
+                            <div className="fa">
+                              <div className="fas fa-user-friends ml-1" />
+                            </div>
+                          </Badge>
+                        </ListGroupItem>
+                        <ListGroupItem action onClick={() => navigate("/contracts")}>
+                          Contracts
+                          <Badge variant="success" pill className="float-right">
+                            <CountUp start={0} end={appData.contracts.length} duration={3} />
+                            <div className="fa">
+                              <div className="fas fa-file-contract ml-1" />
+                            </div>
+                          </Badge>
+                        </ListGroupItem>
+                        <ListGroupItem action onClick={() => navigate("/bids")}>
+                          Bids
+                          <Badge variant="primary" pill className="float-right">
+                            <CountUp start={0} end={appData.bids.length} duration={3} />
+                            <div className="fa">
+                              <div className="fas fa-hand-holding-usd ml-1" />
+                            </div>
+                          </Badge>
+                        </ListGroupItem>
+                      </ListGroup>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+              <ContractAnalytics />
+            </>
+          ) : (
+            <Spinner animation="border" variant="primary" />
+          ))}
       </Col>
     </Row>
   );

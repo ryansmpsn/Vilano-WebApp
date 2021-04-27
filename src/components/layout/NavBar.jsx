@@ -28,11 +28,12 @@ const MenuIcon = styled.div.attrs((props) => ({
 
 function NavBar(props) {
   const [collapse, setCollapse] = useState(false);
+  let { toggle, setToggle } = props;
 
   return (
     <Navbar className="navbar fixed-top flexible-navbar" expand="md">
-      <MenuIcon onClick={() => props.setToggle(!props.toggle)} toggle={props.toggle}>
-        <FontAwesomeIcon icon={props.toggle ? faChevronRight : faChevronLeft} />
+      <MenuIcon onClick={() => setToggle(!toggle)} toggle={toggle}>
+        <FontAwesomeIcon icon={toggle ? faChevronRight : faChevronLeft} />
       </MenuIcon>
 
       <NavbarBrand>
@@ -42,7 +43,7 @@ function NavBar(props) {
       <Navbar.Toggle onClick={() => setCollapse(!collapse)} />
       <Navbar.Collapse>
         <Nav className="ml-auto">
-          <NavBarAuth {...props} />
+          <NavBarAuth />
         </Nav>
       </Navbar.Collapse>
     </Navbar>

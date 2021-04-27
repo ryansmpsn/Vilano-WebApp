@@ -3,8 +3,7 @@ import { Route, Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../auth";
 
 function PrivateRoute({ element, ...rest }) {
-  const { session } = useAuth();
-  const { isAuthenticated } = useAuth();
+  const { session, isAuthenticated } = useAuth();
   let location = useLocation();
   let state = { referrer: location };
 

@@ -6,7 +6,7 @@ import { IconButton } from "@material-ui/core";
 import Documents from "../util/Documents";
 
 function NavBarAuth(props) {
-  const { setSession } = useAuth();
+  const { setSession, isAuthenticated } = useAuth();
   const [showDocumentModal, setShowDocumentModal] = useState(false);
 
   const renderTooltip = (props) => (
@@ -27,7 +27,8 @@ function NavBarAuth(props) {
   function closeDocumentModal() {
     setShowDocumentModal(false);
   }
-  return props.isAuthenticated ? (
+
+  return isAuthenticated ? (
     <>
       <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={renderTooltip}>
         <div className="m-3">

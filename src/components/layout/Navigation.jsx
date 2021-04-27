@@ -7,7 +7,7 @@ function Navigation(props) {
 
   return (
     <React.Fragment>
-      <NavBar {...props} toggle={toggle} setToggle={setToggle} />
+      <NavBar toggle={toggle} setToggle={setToggle} />
       <SideNav {...props} toggle={toggle} setToggle={setToggle} />
     </React.Fragment>
   );
