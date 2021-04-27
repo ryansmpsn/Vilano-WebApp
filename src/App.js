@@ -71,11 +71,13 @@ function App() {
             setIsAuthenticated: setIsAuthenticatedData,
           }}
         >
-          <Navigation isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
           <ToastProvider autoDismiss autoDismissTimeout={6000} placement="bottom-right" components={{ Toast: Notification }}>
-            <main id="content">
-              <Routing isAuthenticated={isAuthenticated} handleLogout={handleLogout} appData={appData} />
-            </main>
+            <Navigation isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+            <>
+              <main id="content">
+                <Routing isAuthenticated={isAuthenticated} handleLogout={handleLogout} appData={appData} />
+              </main>
+            </>
           </ToastProvider>
           <Footer />
         </AuthContext.Provider>

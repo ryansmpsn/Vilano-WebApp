@@ -5,12 +5,19 @@ import Send from "../../libs/send";
 import { useToasts } from "react-toast-notifications";
 
 function Documents(props) {
-  let { modalName, showModal, closeModal, endpoint, uploadData, fileTypes } = props;
+  let { modalName, showModal, closeModal, endpoint, uploadData, fileTypeOptions, payroll, payrollOptions } = props;
   const { addToast } = useToasts();
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [isSending, setIsSending] = useState(false);
   const [submissionJson, setSubmissionJson] = useState(null);
+
+  function handleCloseModal() {
+    setSelectedFile(null);
+    setIsSending(false);
+    setSubmissionJson(null);
+    closeModal();
+  }
 
   function onFileTypeUpdate(e) {
     // Gather additional JSON from props and append them to The file type Array.
@@ -18,11 +25,14 @@ function Documents(props) {
       { columnName: "doc_type_name", inputType: null, label: null, updatedValue: null, value: null },
       { columnName: "doc_type_id", inputType: null, label: null, updatedValue: null, value: null },
     ];
-
-    uploadData.forEach((object) => newFileData.push(object));
-    newFileData[0].updatedValue = e.label;
-    newFileData[1].updatedValue = e.value;
-    setSubmissionJson(newFileData);
+    if (uploadData) {
+      uploadData.forEach((object) => newFileData.push(object));
+      newFileData[0].updatedValue = e.label;
+      newFileData[1].updatedValue = e.value;
+      setSubmissionJson(newFileData);
+    } else {
+      setSubmissionJson(newFileData);
+    }
   }
 
   function onFileChange(e) {
@@ -90,9 +100,22 @@ function Documents(props) {
       );
     }
   }
+  let defaultSelect = (
+    <Select
+      autofocus
+      placeholder={"File Description"}
+      options={fileTypeOptions}
+      isDisabled={isSending}
+      onChange={(e) => onFileTypeUpdate(e)}
+      styles={{
+        // Fixes the overlapping problem of the component
+        menu: (provided) => ({ ...provided, zIndex: 9999 }),
+      }}
+    />
+  );
 
   return (
-    <Modal show={showModal} onHide={closeModal} centered backdrop={"static"}>
+    <Modal show={showModal} onHide={handleCloseModal} centered backdrop={"static"}>
       <Modal.Header closeButton>
         <h5>{modalName}</h5>
       </Modal.Header>
@@ -102,18 +125,26 @@ function Documents(props) {
             <Col>
               <Form>
                 <p className="text-muted">Select file type.</p>
+                {payroll ? (
+                  <Row>
+                    <Col>{defaultSelect}</Col>
+                    <Col>
+                      <Select
+                        placeholder="Payroll Processor"
+                        disabled={isSending}
+                        onChange={(x) => console.log(x)}
+                        options={payrollOptions}
+                        styles={{
+                          // Fixes the overlapping problem of the component
+                          menu: (provided) => ({ ...provided, zIndex: 9999 }),
+                        }}
+                      />
+                    </Col>
+                  </Row>
+                ) : (
+                  defaultSelect
+                )}
 
-                <Select
-                  autofocus
-                  placeholder={"File Description"}
-                  options={fileTypes}
-                  isDisabled={isSending}
-                  onChange={(e) => onFileTypeUpdate(e)}
-                  styles={{
-                    // Fixes the overlapping problem of the component
-                    menu: (provided) => ({ ...provided, zIndex: 9999 }),
-                  }}
-                />
                 <p className="text-muted mt-3">Drag and drop file or browse computer to select a file.</p>
                 <div className="input-group my-3">
                   <div className="input-group-prepend">
@@ -132,7 +163,7 @@ function Documents(props) {
             </Col>
           </Row>
           <Row>
-            <Col> {fileData()}</Col>
+            <Col>{fileData()}</Col>
           </Row>
         </Container>
       </Modal.Body>
@@ -142,8 +173,14 @@ function Documents(props) {
           <Spinner animation="border" variant="primary" />
         ) : (
           <Button className="btn-outline-info float-right" onClick={() => onFileUpload()} disabled={!selectedFile | !submissionJson | isSending}>
-            Upload File
-            <div className="fas fa-upload ml-1" />
+            {isSending ? (
+              "Uploading..."
+            ) : (
+              <>
+                <div className="fas fa-upload mr-2" />
+                Upload File
+              </>
+            )}
           </Button>
         )}
       </Modal.Footer>
@@ -172,7 +209,7 @@ function closeDocumentModal() {
    showModal={showDocumentModal}
    closeModal={closeDocumentModal}
    endpoint="/Employee/FileUpload"
-   fileTypes={}
+   fileTypeOptions={}
    uploadData={[
      JSON Required For Endpoint ]}
    modalName="optional" 
