@@ -198,12 +198,13 @@ function ContractCards(props) {
           </Button>
         )}
       </Card.Footer>
+
       {props.type === "Bid" ? (
         <Documents
           showModal={showDocumentModal}
           closeModal={closeDocumentModal}
           endpoint={"/Bid/FileUpload"}
-          fileTypes={props.inputRestrictions && props.inputRestrictions[6].options}
+          fileTypeOptions={props.contentInputRestrictions && props.contentInputRestrictions[6].options}
           uploadData={[{ columnName: "contract_bid_id", inputType: null, label: null, updatedValue: contract[0].updatedValue, value: contract[0].updatedValue }]}
           modalName={"Upload Document to " + contract[10].label + " " + contract[10].value}
         />
@@ -212,7 +213,7 @@ function ContractCards(props) {
           showModal={showDocumentModal}
           closeModal={closeDocumentModal}
           endpoint={"/Contract/FileUpload"}
-          fileTypes={props.inputRestrictions && props.inputRestrictions[4].options}
+          fileTypeOptions={props.contentInputRestrictions && props.contentInputRestrictions[4].options}
           uploadData={[{ columnName: "contract_id", inputType: null, label: null, updatedValue: contract[0].updatedValue, value: contract[0].updatedValue }]}
           modalName={"Upload Document to " + contract[6].label + " " + contract[6].value}
         />

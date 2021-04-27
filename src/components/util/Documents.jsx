@@ -1,21 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Container, Form, Button, Modal, Spinner } from "react-bootstrap";
 import Select from "react-select";
 import Send from "../../libs/send";
 import { useToasts } from "react-toast-notifications";
 
 function Documents(props) {
-  let { modalName, showModal, closeModal, endpoint, uploadData, fileTypeOptions, payroll, payrollOptions } = props;
+  let { modalName, showModal, closeModal, endpoint, uploadData, fileTypeOptions, payroll } = props;
   const { addToast } = useToasts();
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [isSending, setIsSending] = useState(false);
   const [submissionJson, setSubmissionJson] = useState(null);
+  const [payrollOptions, setPayrollOptions] = useState(null);
+  const [selectedProcessor, setSelectedProcessor] = useState(null);
+  useEffect(() => {
+    function onLoad() {
+      Send.get("/FileLoad/Dropdowns/All").then((res) => setPayrollOptions(res.data[1].options));
+    }
+
+    if (payroll) {
+      onLoad();
+    }
+  }, [payroll]);
 
   function handleCloseModal() {
     setSelectedFile(null);
     setIsSending(false);
     setSubmissionJson(null);
+    setSelectedProcessor(null);
     closeModal();
   }
 
@@ -25,14 +37,16 @@ function Documents(props) {
       { columnName: "doc_type_name", inputType: null, label: null, updatedValue: null, value: null },
       { columnName: "doc_type_id", inputType: null, label: null, updatedValue: null, value: null },
     ];
-    if (uploadData) {
-      uploadData.forEach((object) => newFileData.push(object));
-      newFileData[0].updatedValue = e.label;
-      newFileData[1].updatedValue = e.value;
-      setSubmissionJson(newFileData);
-    } else {
-      setSubmissionJson(newFileData);
-    }
+
+    uploadData.forEach((object) => newFileData.push(object));
+    newFileData[0].updatedValue = e.label;
+    newFileData[1].updatedValue = e.value;
+    setSubmissionJson(newFileData);
+  }
+  function onPayrollProcessorUpdate(e) {
+    let newFileData = { columnName: "payroll_name", inputType: null, label: null, updatedValue: e.value, value: e.value };
+
+    setSelectedProcessor(newFileData);
   }
 
   function onFileChange(e) {
@@ -52,11 +66,16 @@ function Documents(props) {
     const formData = new FormData();
 
     // Update the formData object
+
     formData.append("myFile", selectedFile, selectedFile.name);
-    formData.append("json", JSON.stringify(submissionJson));
+    if (payroll) {
+      formData.append(JSON.stringify([...submissionJson, selectedProcessor]));
+    } else {
+      formData.append("json", JSON.stringify(submissionJson));
+    }
     // Details of the upload file
 
-    Send.post(endpoint, formData)
+    Send.post(endpoint + (payroll ? `/${submissionJson[0].updatedValue}` : ""), formData)
       .then((res) => {
         console.log("file uploaded Successfully", res);
         setIsSending(false);
@@ -100,6 +119,7 @@ function Documents(props) {
       );
     }
   }
+
   let defaultSelect = (
     <Select
       autofocus
@@ -113,7 +133,6 @@ function Documents(props) {
       }}
     />
   );
-
   return (
     <Modal show={showModal} onHide={handleCloseModal} centered backdrop={"static"}>
       <Modal.Header closeButton>
@@ -132,7 +151,7 @@ function Documents(props) {
                       <Select
                         placeholder="Payroll Processor"
                         disabled={isSending}
-                        onChange={(x) => console.log(x)}
+                        onChange={(x) => onPayrollProcessorUpdate(x)}
                         options={payrollOptions}
                         styles={{
                           // Fixes the overlapping problem of the component
@@ -172,7 +191,7 @@ function Documents(props) {
         {isSending ? (
           <Spinner animation="border" variant="primary" />
         ) : (
-          <Button className="btn-outline-info float-right" onClick={() => onFileUpload()} disabled={!selectedFile | !submissionJson | isSending}>
+          <Button className="btn-outline-info float-right" onClick={() => onFileUpload()} disabled={!selectedFile | !submissionJson | isSending | (payroll && selectedProcessor === null)}>
             {isSending ? (
               "Uploading..."
             ) : (

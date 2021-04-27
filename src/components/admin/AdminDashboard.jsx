@@ -36,7 +36,7 @@ function AdminDashboard(props) {
         <Card.Header>
           <div className="admin-up">
             <div className="fa">
-              <div className="fas fa-users" />
+              <div className="fas fa-shield-alt" />
             </div>
           </div>
           <h2 className="mb-5 text-center" style={{ marginTop: "-50px" }}>
@@ -59,6 +59,8 @@ function AdminDashboard(props) {
 
       <Routes>
         <Route path="facilities" element={<Facilities />} />
+
+        <Navigate from="/administration" to="/administration/facilities" />
       </Routes>
     </>
   );

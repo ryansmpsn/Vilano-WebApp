@@ -56,18 +56,13 @@ function NavBarAuth(props) {
       <Documents
         showModal={showDocumentModal}
         closeModal={closeDocumentModal}
-        endpoint="/FileUpload"
+        endpoint="/FileLoad/Payroll"
         fileTypeOptions={[
           { value: "hcr", label: "HCR" },
           { value: "dro", label: "DRO" },
           { value: "cds", label: "CDS" },
         ]}
-        payrollOptions={[
-          { value: "1", label: "Option 1" },
-          { value: "2", label: "Option 2" },
-          { value: "3", label: "Option 3" },
-        ]}
-        uploadData={null}
+        uploadData={[]}
         modalName="File Uploader"
         payroll
       />
