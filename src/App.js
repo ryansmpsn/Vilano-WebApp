@@ -19,12 +19,13 @@ function App() {
       const requestOne = Send.get("/Report/Roster");
       const requestTwo = Send.get("/Contract/Ids");
       const requestThree = Send.get("/Bid/BidIDs");
+      const requestFour = Send.post("/Contract/Search", "");
 
       axios
-        .all([requestOne, requestTwo, requestThree])
+        .all([requestOne, requestTwo, requestThree, requestFour])
         .then(
           axios.spread((...responses) => {
-            const responseData = { drivers: responses[0].data, contracts: responses[1].data, bids: responses[2].data[0].options };
+            const responseData = { drivers: responses[0].data, contracts: responses[1].data, bids: responses[2].data[0].options, activeContracts: responses[3].data };
             setAppData(responseData);
           })
         )
@@ -62,6 +63,7 @@ function App() {
 
   class Content extends Component {
     render() {
+      console.log("rendering");
       return (
         <AuthContext.Provider
           value={{

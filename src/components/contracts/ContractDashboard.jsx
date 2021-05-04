@@ -55,37 +55,34 @@ class ContractDashboard extends Component {
   componentDidMount() {
     this._isMounted = true;
 
-    const requestOne = Send.get("/Contract/Ids");
-    const requestTwo = Send.get("/Contract/Dropdowns/Contract/All");
-    const requestThree = Send.post("/Contract/Search", "", this.props);
-    const requestFour = Send.get("/Employee/Dropdowns/Employee/All");
-    const requestFive = Send.get("/Contract/Dropdowns/TripDetails/All");
+    if (this.props.appData) {
+      let contractData = this.props.appData.contracts;
+      let getSelectOptions = [];
+      contractData.map((item, index) => {
+        return getSelectOptions.push({
+          label: item[1].value,
+          value: item[0].value,
+        });
+      });
+
+      if (this._isMounted) {
+        this.setState({ selectOptions: getSelectOptions });
+        this.setState({ allContracts: this.props.appData.activeContracts });
+      }
+    }
+
+    const requestOne = Send.get("/Contract/Dropdowns/Contract/All");
+    const requestTwo = Send.get("/Employee/Dropdowns/Employee/All");
+    const requestThree = Send.get("/Contract/Dropdowns/TripDetails/All");
 
     axios
-      .all([requestOne, requestTwo, requestThree, requestFour, requestFive])
+      .all([requestOne, requestTwo, requestThree])
       .then(
         axios.spread((...responses) => {
-          const responseOne = responses[0];
-          const responseTwo = responses[1];
-          const responseThree = responses[2];
-          const responseFour = responses[3];
-          const responseFive = responses[4];
-
-          let contractData = responseOne.data;
-          let getSelectOptions = [];
-          contractData.map((item, index) => {
-            return getSelectOptions.push({
-              label: item[1].value,
-              value: item[0].value,
-            });
-          });
-
           if (this._isMounted) {
-            this.setState({ selectOptions: getSelectOptions });
-            this.setState({ contentInputRestrictions: responseTwo.data });
-            this.setState({ allContracts: responseThree.data });
-            this.setState({ allEmployees: responseFour.data });
-            this.setState({ tripDetailOptions: responseFive.data });
+            this.setState({ contentInputRestrictions: responses[0].data });
+            this.setState({ allEmployees: responses[1].data });
+            this.setState({ tripDetailOptions: responses[2].data });
           }
         })
       )

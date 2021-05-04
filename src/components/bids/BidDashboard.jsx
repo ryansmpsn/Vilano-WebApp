@@ -57,28 +57,29 @@ class BidDashboard extends Component {
   componentDidMount() {
     this._isMounted = true;
 
-    const requestOne = Send.get("/Bid/BidIDs");
-    const requestTwo = Send.get("/Bid/Dropdowns/Bid/All");
-    const requestThree = Send.post("/Bid/Search", "", this.props);
-    const requestFour = Send.get("/Employee/Dropdowns/Employee/All");
-    const requestFive = Send.get("/Contract/Dropdowns/TripDetails/All");
+    if (this._isMounted) {
+      this.setState({ selectOptions: this.props.appData.bids });
+    }
+
+    const requestOne = Send.get("/Bid/Dropdowns/Bid/All");
+    const requestTwo = Send.post("/Bid/Search", "", this.props);
+    const requestThree = Send.get("/Employee/Dropdowns/Employee/All");
+    const requestFour = Send.get("/Contract/Dropdowns/TripDetails/All");
 
     axios
-      .all([requestOne, requestTwo, requestThree, requestFour, requestFive])
+      .all([requestOne, requestTwo, requestThree, requestFour])
       .then(
         axios.spread((...responses) => {
           const responseOne = responses[0];
           const responseTwo = responses[1];
           const responseThree = responses[2];
           const responseFour = responses[3];
-          const responseFive = responses[4];
 
           if (this._isMounted) {
-            this.setState({ selectOptions: responseOne.data[0].options });
-            this.setState({ contentInputRestrictions: responseTwo.data });
-            this.setState({ allBids: responseThree.data });
-            this.setState({ allEmployees: responseFour.data });
-            this.setState({ tripDetailOptions: responseFive.data });
+            this.setState({ contentInputRestrictions: responseOne.data });
+            this.setState({ allBids: responseTwo.data });
+            this.setState({ allEmployees: responseThree.data });
+            this.setState({ tripDetailOptions: responseFour.data });
           }
         })
       )

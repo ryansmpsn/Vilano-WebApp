@@ -17,7 +17,6 @@ export default function Home(props) {
             <h4 className="text-muted">Alpha V 1.42</h4>
             <h4 className="text-muted">
               <small>Under Development</small>
-              {/* {(67543452345).toLocaleString()} */}
             </h4>
           </Container>
         </Jumbotron>
@@ -30,14 +29,6 @@ export default function Home(props) {
                     <Card.Header>Application Activity</Card.Header>
                     <Card.Body>
                       <ListGroup className="list-group-flush">
-                        {/* <ListGroupItem>
-                      Total Locations
-                      <Badge variant="default" pill className="float-right">
-                        <CountUp start={0} end={72} duration={5} />
-
-                        <FontAwesomeIcon icon={faCity} className="ml-1" />
-                      </Badge>
-                    </ListGroupItem> */}
                         <ListGroupItem action onClick={() => navigate("/employees")}>
                           Drivers
                           <Badge variant="danger" pill className="float-right">

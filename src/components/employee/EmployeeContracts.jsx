@@ -3,7 +3,6 @@ import { Button, Col, Row, Spinner } from "react-bootstrap";
 import Select from "react-select";
 import Send from "../../libs/send";
 import { useToasts } from "react-toast-notifications";
-import DisplayContractEmployee from "./sections/DisplayContractEmployees";
 import ContractTable from "./sections/ContractTable";
 import { Jumbotron } from "react-bootstrap";
 import { useParams } from "react-router";
@@ -178,7 +177,7 @@ function EmployeeContracts(props) {
 
       {isLoading ? (
         <Spinner animation="border" variant="primary" />
-      ) : contractEmployees && contractEmployees.length + allModifiedEmployees.length >= 5 ? (
+      ) : contractEmployees && (contractEmployees.length || allModifiedEmployees.length > 0) ? (
         <ContractTable
           editContract={editContract}
           contractData={contractEmployees}
@@ -188,18 +187,6 @@ function EmployeeContracts(props) {
           setContractEmployees={setAllModifiedEmployees}
           removeRow={removeEmployee}
         />
-      ) : contractEmployees && (contractEmployees.length > 0 || allModifiedEmployees.length > 0) ? (
-        <Row className="justify-content-md-center">
-          <DisplayContractEmployee modified={false} contractEmployees={contractEmployees} employeeDropdowns={props.employeeDropdowns} editContract={editContract} />
-          <DisplayContractEmployee
-            modified
-            employeeDropdowns={props.employeeDropdowns}
-            contractEmployees={allModifiedEmployees}
-            setContractEmployees={setModifiedEmployees}
-            handleRoleSelect={(x, index) => handleRoleSelect(x, index)}
-            removeEmployee={removeEmployee}
-          />
-        </Row>
       ) : (
         <h5>No employees are associated with this contract.</h5>
       )}

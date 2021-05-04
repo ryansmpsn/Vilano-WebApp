@@ -26,10 +26,12 @@ class ContractAnalytics extends Component {
     const barChartOptions = {
       responsive: true,
       maintainAspectRatio: false,
+      dataset: {
+        barPercentage: 1,
+      },
       scales: {
         xAxes: [
           {
-            barPercentage: 1,
             gridLines: {
               display: true,
               color: "rgba(0, 0, 0, 0.1)",
